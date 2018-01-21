@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Newres Al Haider on Newres Al Haider</title>
+    <link>/</link>
+    <description>Recent content in Newres Al Haider on Newres Al Haider</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
+    <lastBuildDate>Thu, 21 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Introduction</title>
+      <link>/post/introduction/</link>
+      <pubDate>Sun, 14 Jan 2018 00:00:00 +0100</pubDate>
+      
+      <guid>/post/introduction/</guid>
+      <description>&lt;p&gt;Welcome to the first post on my blog on which hopefully many will follow. My intention is to write about knowledge representation, reasoning, AI and coding, in an easily digestible but in depth-way.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Legal Regulatory Compliance Within The Financial Domain.</title>
+      <link>/project/legal-banking-compliance/</link>
+      <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/project/legal-banking-compliance/</guid>
+      <description>&lt;p&gt;Regulatory compliance is the goal of an organization to ensure it complies with all the relevant policies, regulations and laws. Failure to comply can have grave consequences for an organization, with huge fines and penalties being imposed. Regulatory pressure has been increasing over the years, with new and more complex regulation being enacted. This is especially true for the financial sector, where in the wake of the financial crisis, new policies and laws where enacted, both internal and external, to prevent a similar crisis happening in the future.&lt;/p&gt;
+
+&lt;p&gt;These new and changing policies and laws give a huge challenge for financial organizations. These issues get compounded by fact that in a global world, internal, national and international regulations create an interwoven set of rules that need to be interpreted and applied on various financial products and services. Ensuring this compliance, is a time and expertise intensive task that often needs to be done manually. Automating these tasks is a huge challenge due to the fact that more traditional techniques are often ill equipped to tackle such an ever changing and complex domain in a way that is transparent to the domain experts and regulators.&lt;/p&gt;
+
+&lt;p&gt;In this project, the goal is to find innovative techniques and solutions to the issue of regulatory compliance in the legal and financial domain.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Smart Industry Software</title>
+      <link>/project/innius/</link>
+      <pubDate>Sat, 30 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/project/innius/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ontology Enabled Clinical Software</title>
+      <link>/project/clinical-semantics/</link>
+      <pubDate>Fri, 29 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/project/clinical-semantics/</guid>
+      <description>&lt;p&gt;The time of clinical health professionals is incredibly valuable. Software can alleviate the burden of physicians, nursers and other health experts and allow them to provide better, more effective health care to patients.&lt;/p&gt;
+
+&lt;p&gt;Creating, maintaining and using software in clinical environments is a difficult process. Not only it is paramount that such software needs to be correct, it has to have an understanding of highly domain specific knowledge about clinical processes in order to provide beneficial support to health professionals.&lt;/p&gt;
+
+&lt;p&gt;Semantic Web technologies, in particular anthologies enable better clinical software. Ontologies allow for a formal and explicit way to model knowledge that is understandable for both clinicians and machines alike.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Semantic Aware Software Analysis</title>
+      <link>/project/semantic-software-analysis/</link>
+      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/project/semantic-software-analysis/</guid>
+      <description>&lt;p&gt;Software bugs and errors have a monumental negative impact on society. Not only can they have huge monetary cost, ranging into billions of dollars annually in the United States alone, but in some cases can even lead to disasters that lead to the loss of life. Preventing such issues from happening requires a large amount of effort in designing and maintaining software.&lt;/p&gt;
+
+&lt;p&gt;However designing and maintaining error free software remains a difficult problem. Not only is software getting more complex, its correct functioning often depends on highly specific domain knowledge of its purpose and its environment. Therefor manually checking the correctness of the software is expensive in both time and available expertise.&lt;/p&gt;
+
+&lt;p&gt;A potential solution that was proposed for this is using machine understandable domain knowledge to help automate software maintenance tasks. Formal ontologies have been proposed and used in various fields to make domain knowledge explicit and usable for both humans and software. In particular during my thesis work, titled &amp;ldquo;An Ontology Based Framework for Specification Mining and Dynamic Program Analysis&amp;rdquo;, the use of ontologies to help understand the working of a running program were successfully explored. In particular it was shown that for a category of bugs, general ontologies such as WordNet, can be used find issues issues from program traces.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Integrating existing large scale medical laboratory data into the semantic web framework</title>
+      <link>/publication/medical-data-semantic/</link>
+      <pubDate>Mon, 27 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/medical-data-semantic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A cross-platform benchmark framework for mobile semantic web reasoning engines</title>
+      <link>/publication/benchmark-framework/</link>
+      <pubDate>Sun, 19 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/benchmark-framework/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A comparison of mobile rule engines for reasoning on semantic web based health data</title>
+      <link>/publication/comparison-mobile-rule-engines/</link>
+      <pubDate>Mon, 11 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/comparison-mobile-rule-engines/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Towards Guideline Compliant Clinical Decision Support System Integration in Smart and Mobile Environments: Formalizing and Using Clinical Guidelines For Diagnosing Sleep Apnea</title>
+      <link>/publication/towards-cdss-mobile/</link>
+      <pubDate>Wed, 18 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/towards-cdss-mobile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Execution Trace Exploration and Analysis using Ontologies</title>
+      <link>/publication/execution-trace-analysis/</link>
+      <pubDate>Tue, 27 Sep 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/execution-trace-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>An Approach for Modeling Dynamic Analysis using Ontologies</title>
+      <link>/publication/approach-da-ontologies/</link>
+      <pubDate>Mon, 12 Jul 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/approach-da-ontologies/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

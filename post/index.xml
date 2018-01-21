@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Newres Al Haider</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on Newres Al Haider</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0100</lastBuildDate>
+    <atom:link href="/post/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Introduction</title>
+      <link>/post/introduction/</link>
+      <pubDate>Sun, 14 Jan 2018 00:00:00 +0100</pubDate>
+      
+      <guid>/post/introduction/</guid>
+      <description>&lt;p&gt;Welcome to the first post on my blog on which hopefully many will follow. My intention is to write about knowledge representation, reasoning, AI and coding, in an easily digestible but in depth-way.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
