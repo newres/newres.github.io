@@ -16,7 +16,7 @@
       <pubDate>Sun, 11 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/interlinked-data/</guid>
-      <description>&lt;p&gt;&lt;em&gt;This article contains ome very minor spoilers for the Blade Runner 2049 movie. If you have not seen it yet, by all means do, it is really good.&lt;/em&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;em&gt;This article contains some very minor spoilers for the Blade Runner 2049 movie. If you have not seen it yet, by all means do, it is really good.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;&amp;ldquo;And blood-black nothingness began to spin&amp;hellip; A system of cells interlinked within cells interlinked within cells interlinked within one stem&amp;hellip; And dreadfully distinct against the dark, a tall white fountain played.&amp;rdquo;&lt;/p&gt;
 
@@ -39,7 +39,7 @@
 &lt;/figure&gt;
 
 
-&lt;p&gt;The above is a quote from a poem &lt;em&gt;Pale Fire&lt;/em&gt;. It occurs in the novel titled &lt;em&gt;Pale Fire&lt;/em&gt; Vladimir Nabokov, and has been recently used in the movie &lt;em&gt;Blade Runner 2049&lt;/em&gt; as part of the Baseline test, a way to test the emotional response of a Replicant. Given the nature of a Blade Runners work, &lt;em&gt;retiring&lt;/em&gt; other Replicants, their creators fear that connections they might make in their lives, would give them emotions that would interfere with their intended purpose.&lt;/p&gt;
+&lt;p&gt;The above is a quote from a poem &lt;em&gt;Pale Fire&lt;/em&gt;. It occurs in the novel titled &lt;em&gt;Pale Fire&lt;/em&gt; by Vladimir Nabokov which has been recently used in the movie &lt;em&gt;Blade Runner 2049&lt;/em&gt;. In the movie it was part of the Baseline test, a way to test the emotional response of a Replicant. The reason they undergo this process is because their creators fear that the connections they might make in their lives would give them emotions that would interfere with their intended purpose.&lt;/p&gt;
 
 
 &lt;figure &gt;
@@ -60,7 +60,7 @@
 &lt;/figure&gt;
 
 
-&lt;p&gt;In life, such connections always surround us. They are not just between people, but in our work, in our beliefs, in our art and in the knowledge we represent.&lt;/p&gt;
+&lt;p&gt;In life, such relationships always surround us. They are not just between people, but in our work, in our beliefs, in our art and in the knowledge we represent.&lt;/p&gt;
 
 &lt;p&gt;Suppose we intend to describe the link between the movie &lt;em&gt;Blade Runner&lt;/em&gt; and the book &lt;em&gt;Pale Fire&lt;/em&gt;. We can summarize this information with a number of facts.&lt;/p&gt;
 
@@ -76,7 +76,7 @@ Pale Fire is written by Vladimir Nabokov.
 
 &lt;p&gt;Although the above recitation of facts is easy to follow, from a knowledge representation perspective one can find some issues with it.&lt;/p&gt;
 
-&lt;p&gt;First the description is imprecise. An example of this is that When talking about Blade Runner as a movie, it is important to define that we are talking about the newer &lt;em&gt;Blade Runner 2049&lt;/em&gt; movie as opposed to the 1982 original titled &lt;em&gt;Blade Runner&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;First the description is imprecise. As the &lt;em&gt;Blade Runner&lt;/em&gt; could refer to the newer &lt;em&gt;Blade Runner 2049&lt;/em&gt; movie as opposed to the 1982 original titled &lt;em&gt;Blade Runner&lt;/em&gt;.&lt;/p&gt;
 
 
 &lt;figure &gt;
@@ -101,9 +101,9 @@ Pale Fire is written by Vladimir Nabokov.
 
 &lt;p&gt;Third, and perhaps most importantly, the above list of facts relies a lot on the users grasp of the English natural language. For a program, it can be surprisingly difficult to understand the relationships such as &amp;ldquo;is a&amp;rdquo;, &amp;ldquo;is based on&amp;rdquo;, &amp;ldquo;named&amp;rdquo;, etc between the various elements in the text.&lt;/p&gt;
 
-&lt;p&gt;These issues seem somewhat nit-picky, as from the text before the summary this information can be derived. However this means that the knowledge in the summary does not stand on its own. If those facts are detailed without the rest of the article, or if the reader of them is a machine, and not a person that can  easily add some context, they might lead them to incorrect or insufficient conclusions. They might get wrong information that the 1982 movie Blade Runner has a character named K, or fail to see the link that poem is contained in the book by the same author. And although in the case of small article on Blade Runner, these issues might seem small, if the knowledge relates to financial, legal or clinical domains, mistakes or omissions can be costly.&lt;/p&gt;
+&lt;p&gt;These issues seem somewhat nit-picky, as this information can be derived from the rest of the article. However this means that the knowledge in the summary does not stand on its own. If those facts are detailed without the rest of the article, or if the reader of them is a machine, and not a person that can easily add some context, they might lead them to incorrect or insufficient conclusions. They might get wrong information that the 1982 movie Blade Runner has a character named K, or fail to see the link that poem is contained in the book by the same author. And although in the case of Blade Runner, these issues might seem small, this is different if the knowledge relates to financial, legal or clinical domains. Here, mistakes or omissions can be costly.&lt;/p&gt;
 
-&lt;p&gt;Having a larger list of more detailed facts can help with the these issues, but to a certain extent they still remain due to the ambiguity of the natural language and the fact that is often very easy, as it is in this case, to skip over implicit details. This is expecially true for the issue of a computer not being able to make (enough) sense of this information.&lt;/p&gt;
+&lt;p&gt;Having a larger list of more detailed facts can help with these issues, but to a certain extent they still remain due to the ambiguity of the natural language. In addition the fact that is often very easy to skip over implicit details. This is especially true for the issue of a computer not being able to make (enough) sense of this information.&lt;/p&gt;
 
 &lt;p&gt;A proposed solution to these issues is &lt;a href=&#34;https://www.w3.org/standards/semanticweb/data&#34; target=&#34;_blank&#34;&gt;Linked Data&lt;/a&gt; and in particular &lt;a href=&#34;https://www.w3.org/standards/techs/rdf#w3c_all&#34; target=&#34;_blank&#34;&gt;Resource Description Framework (RDF)&lt;/a&gt;, with which Linked Data data can be expressed. These technologies allow us to represent the above facts in a more formal and precise way, that can make it both human and machine read- and write-able.&lt;/p&gt;
 
@@ -126,24 +126,24 @@ Pale Fire is written by Vladimir Nabokov.
 &lt;/figure&gt;
 
 
-&lt;p&gt;One of the significant feature of RDF is that requires precise naming. Many elements of are either a &lt;a href=&#34;https://en.wikipedia.org/wiki/International_Resource_Identifier&#34; target=&#34;_blank&#34;&gt;International Resource Identifier (IRI)&lt;/a&gt; or some raw data-types. A good example of the former are URLs such as the link to this website: &lt;a href=&#34;http://www.newresalhaider.com&#34; target=&#34;_blank&#34;&gt;http://www.newresalhaider.com&lt;/a&gt; , that allows one to find a web resource. Examples of the later, are for example a text such as &amp;ldquo;Blade Runner&amp;rdquo; or a number, such as 15.&lt;/p&gt;
+&lt;p&gt;One of the significant feature of RDF is that requires precise naming. Many elements of are either a &lt;a href=&#34;https://en.wikipedia.org/wiki/International_Resource_Identifier&#34; target=&#34;_blank&#34;&gt;International Resource Identifier (IRI)&lt;/a&gt; or some raw data-types. A good example of the former are URLs such as the link to this website: &lt;a href=&#34;http://www.newresalhaider.com&#34; target=&#34;_blank&#34;&gt;http://www.newresalhaider.com&lt;/a&gt; , that allows one to find a web resource. Examples of the later, are texts or numbers, such as &amp;ldquo;Blade Runner&amp;rdquo; or 15 respectively.&lt;/p&gt;
 
-&lt;p&gt;The other significant feature of RDF is that most knowledge is represented as set of facts, where each fact is expressed as subject, predicate object triples. For example the fact &amp;ldquo;&amp;ldquo;Blade Runner is a movie&amp;rdquo; is expressed with the subject &amp;ldquo;Blade Runner&amp;rdquo; the predicate &amp;ldquo;is a&amp;rdquo; and the object &amp;ldquo;movie&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;The other significant feature of RDF is that most knowledge is represented as a set of facts, where each fact is expressed as subject, predicate object triples. For example the fact &amp;ldquo;Blade Runner is a movie&amp;rdquo; is expressed with the subject &amp;ldquo;Blade Runner&amp;rdquo; the predicate &amp;ldquo;is a&amp;rdquo; and the object &amp;ldquo;movie&amp;rdquo;.&lt;/p&gt;
 
 &lt;p&gt;Putting this together in RDF (using the &lt;a href=&#34;https://www.w3.org/TR/turtle/&#34; target=&#34;_blank&#34;&gt;Turtle&lt;/a&gt; notation) you would get a triple such as:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-Turtle&#34;&gt;&amp;lt;http://www.newresalhaider.com/ontologies/bladerunner/blade-runner&amp;gt; &amp;lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/bladerunner/movie&amp;gt;.
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This example is an RDF way of saying &amp;ldquo;Blade Runner is a type of movie&amp;rdquo; or alternatively &amp;ldquo;Blade runner is a movie&amp;rdquo;. This type of representation shows us a couple of benefits. First we are now being more precise as each element in the triple can refer to one specific reasource, for example Blade Runner or Movie, where there IRI makes sure we do not necessarily confuse the term with anything else. Second this also shows off the fact that you can link to resources from different places: the predicate is saying type is from a completely different domain. This allows us to reuse knowledge that has already been defined, as one can expect saying something is of a type of something else, is actually very common when stating facts. This is one of the main strengths of what makes Linked Data so powerful, one can reuse knowledge already stated.&lt;/p&gt;
+&lt;p&gt;This example is an RDF way of saying &amp;ldquo;Blade Runner is a type of movie&amp;rdquo; or alternatively &amp;ldquo;Blade runner is a movie&amp;rdquo;. This type of representation shows us a couple of benefits. First we are now being more precise as each element in the triple can refer to one specific resource, for example Blade Runner or Movie, where there IRI makes sure we do not necessarily confuse the term with anything else. Second this also shows off the fact that you can link to resources from different places: the predicate &amp;ldquo;type&amp;rdquo; is from a completely different domain. This allows us to re-use knowledge that has already been defined. As one can expect saying something is of a &amp;ldquo;type&amp;rdquo;, for example an apple is a type of a fruit, is actually very common. This is one of the main strengths of what makes Linked Data so powerful, one can re-use knowledge already stated.&lt;/p&gt;
 
-&lt;p&gt;There are actually some downsides to the way we written this fact, given the intention of this being able to be human read- and writable. Typing out the full IRI each time can be pretty bothersome, and it does not help the readability either. Thankfully we can define a common prefix we use separately, and just write the last part of the URI in each case. As in this case we define a base prefix and we can refer to subject and object by &amp;ldquo;&amp;lt;#blade-runner&amp;gt;&amp;rdquo; and &amp;ldquo;&amp;lt;#movie&amp;gt;&amp;rdquo; respectively.&lt;/p&gt;
+&lt;p&gt;Typing out the full IRI each time can be pretty bothersome, and it does not help the readability either. Thankfully we can define a common prefix we use separately, and just write the last part of the IRI in each case. In this case we define a base prefix and we refer to subject and object by &amp;ldquo;&amp;lt;#blade-runner&amp;gt;&amp;rdquo; and &amp;ldquo;&amp;lt;#movie&amp;gt;&amp;rdquo; respectively.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-Turtle&#34;&gt;@base &amp;lt;http://www.newresalhaider.com/ontologies/bladerunner&amp;gt; .
 &amp;lt;#blade-runner&amp;gt; &amp;lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&amp;gt; &amp;lt;#movie&amp;gt;.
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;in which case one can refer to subject and object by &amp;ldquo;&amp;lt;#blade-runner&amp;gt;&amp;rdquo; and &amp;ldquo;&amp;lt;#movie&amp;gt;&amp;rdquo; respectively. We can do similar things for things we are linking that have been already defined elsewhere, with a slightly different syntax. In this case declaring the prefix has a short name that we we use while writing:&lt;/p&gt;
+&lt;p&gt;We can do similar things when linking elements that have been already defined elsewhere. In this case we define a prefix to use as an abbreviation while writing:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-Turtle&#34;&gt;@base &amp;lt;http://www.newresalhaider.com/ontologies/bladerunner&amp;gt; .
 @prefix rdf: &amp;lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;gt; .
@@ -151,7 +151,7 @@ Pale Fire is written by Vladimir Nabokov.
 &amp;lt;#blade-runner&amp;gt; rdf:type &amp;lt;#movie&amp;gt;.
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;In practice, &amp;ldquo;rdf:type&amp;rdquo; as a predicate is so common that there is an even simpler notation in this case. We can use &amp;lsquo;a&amp;rsquo; as a predicate, which is in line with what we intend to express with such a fact, that &amp;ldquo;Blade Runner is a movie&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;In practice, &amp;ldquo;rdf:type&amp;rdquo; as a predicate is so common that there is an even simpler notation. We can use &amp;lsquo;a&amp;rsquo; as a predicate, which is in line with what we intend to express: &amp;ldquo;Blade Runner is a movie&amp;rdquo;.&lt;/p&gt;
 
 &lt;p&gt;The resulting RDF facts look as follows (note that the rdf prefix could be omitted here as the &amp;ldquo;a&amp;rdquo; abbreviation does not make it necessary):&lt;/p&gt;
 
@@ -161,7 +161,7 @@ Pale Fire is written by Vladimir Nabokov.
 &amp;lt;#blade-runner&amp;gt; a &amp;lt;#movie&amp;gt;.
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;If we aim to write something that is just a text as a subject, say when referring to the title of a movie we can do that as well:&lt;/p&gt;
+&lt;p&gt;If we aim to write something that is just a text as a subject, say when referring to the title of a movie , we can do that as well:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-Turtle&#34;&gt;@base &amp;lt;http://www.newresalhaider.com/ontologies/bladerunner&amp;gt; .
 @prefix rdf: &amp;lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;gt; .
