@@ -126,7 +126,7 @@ Pale Fire is written by Vladimir Nabokov.
 &lt;/figure&gt;
 
 
-&lt;p&gt;One of the significant feature of RDF is that requires precise naming. Many elements of are either a &lt;a href=&#34;https://en.wikipedia.org/wiki/International_Resource_Identifier&#34; target=&#34;_blank&#34;&gt;International Resource Identifier (IRI)&lt;/a&gt; or some raw data-types. A good example of the former are URLs such as the link to this website: &lt;a href=&#34;http://www.newresalhaider.com&#34; target=&#34;_blank&#34;&gt;http://www.newresalhaider.com&lt;/a&gt; , that allows one to find a web resource. Examples of the later, are texts or numbers, such as &amp;ldquo;Blade Runner&amp;rdquo; or 15 respectively.&lt;/p&gt;
+&lt;p&gt;One significant feature of RDF is that requires precise naming. Many elements of it are either a &lt;a href=&#34;https://en.wikipedia.org/wiki/International_Resource_Identifier&#34; target=&#34;_blank&#34;&gt;International Resource Identifier (IRI)&lt;/a&gt; or some raw data-types. Good examples of the former are URLs, such as the link to this website: &lt;a href=&#34;http://www.newresalhaider.com&#34; target=&#34;_blank&#34;&gt;http://www.newresalhaider.com&lt;/a&gt; , that allows one to find a web resource. Examples of the later, are texts or numbers, such as &amp;ldquo;Blade Runner&amp;rdquo; or 15 respectively.&lt;/p&gt;
 
 &lt;p&gt;The other significant feature of RDF is that most knowledge is represented as a set of facts, where each fact is expressed as subject, predicate object triples. For example the fact &amp;ldquo;Blade Runner is a movie&amp;rdquo; is expressed with the subject &amp;ldquo;Blade Runner&amp;rdquo; the predicate &amp;ldquo;is a&amp;rdquo; and the object &amp;ldquo;movie&amp;rdquo;.&lt;/p&gt;
 
