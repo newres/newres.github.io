@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>/post/art-of-choosing-language/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/post/interlinked-data/</loc>
       <lastmod>2018-02-18T00:00:00+00:00</lastmod>
     </url>
@@ -178,6 +187,16 @@
     
     <url>
     
+      <loc>/tags/art/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/banking/</loc>
       <lastmod>2017-12-31T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -207,6 +226,36 @@
     
     <url>
     
+      <loc>/tags/clojure/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/clojurescript/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/dart/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/dynamic-analysis/</loc>
       <lastmod>2017-12-22T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -227,8 +276,48 @@
     
     <url>
     
+      <loc>/tags/flutter/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/golang/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/haskell/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/health/</loc>
       <lastmod>2017-12-29T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/idris/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -257,8 +346,38 @@
     
     <url>
     
+      <loc>/tags/java/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/javascript/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/knowledge-representation/</loc>
       <lastmod>2018-02-18T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/kotlin/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -317,8 +436,28 @@
     
     <url>
     
+      <loc>/tags/programming-languages/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/project/</loc>
       <lastmod>2017-12-31T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/prolog/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -337,8 +476,28 @@
     
     <url>
     
+      <loc>/tags/python/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/rdf/</loc>
       <lastmod>2018-02-18T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/react-native/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -357,8 +516,28 @@
     
     <url>
     
+      <loc>/tags/rust/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/snomed-ct/</loc>
       <lastmod>2017-12-29T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/scala/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
