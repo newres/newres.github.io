@@ -94,6 +94,20 @@
 &lt;/figure&gt;
 
 
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;/img/post/2018-03/art-of-choosing-language/last-supper-tintoretto.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;The Last Supper (Tintoretto) depicts the same subject but in a Mannerist, proto-Baroque style.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
 &lt;p&gt;Programming languages can be be classified on the different styles, &lt;em&gt;programming paradigms&lt;/em&gt; based on the common elements in the approaches.  Some paradigms include:&lt;/p&gt;
 
 &lt;h3 id=&#34;imperative&#34;&gt;Imperative&lt;/h3&gt;
