@@ -11,6 +11,305 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Spec-stacular Spider-Man</title>
+      <link>/post/spec-stacular-spider-man/</link>
+      <pubDate>Sun, 29 Apr 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/post/spec-stacular-spider-man/</guid>
+      <description>&lt;p&gt;Spider-Man is one of the most iconic heroes of the Marvel universe. Created by Stan Lee and Steve Ditko, Spider-Man is a regular teenager named Peter Parker, who due to being bitten by a radio-active spider, gains abilities such as the proportional strength of a spider, wall crawling and a spider sense to detect upcoming danger. One of the biggest draws of Spider-Man that although he is a superhero and fought various villains from cosmic beings to petty criminals, he also had to deal with regular everyday problems, such as money issues, school life and the pressure of a job.&lt;/p&gt;
+
+
+&lt;figure&gt;
+    
+        &lt;img src=&#34;/img/post/2018-04/spec-stacular-spider-man/spectacular-spider-man.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;The Spectacular Spider-Man © Marvel Entertainment&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;In software there are also everyday problems which one has to tackle before one can defeat the villains of the domain at hand. One of these everyday problems is the issue of data validation. Data validation is the process of ensuring that the elements of the data are correct. This process has to be done in pretty much all domains when working with actual data. Consider the financial domain where a financial product can only be made available if the right requirements are fulfilled in the request. If the request is not written correctly then the request needs to be denied. In the legal and regulatory domains certain information that is required for a law must be fulfilled, otherwise costly corrections or fines can follow. Another good example is the clinical domain, where the a patients data needs to be transferred to an application. Here is it essential that this data fulfills the requirement for requesting a clinical procedure or a medication, as any mistake can lead to huge negative impact on the health of the patient.&lt;/p&gt;
+
+&lt;p&gt;One relatively recent tool that can be used to solve this problem is the &lt;a href=&#34;https://clojure.org/guides/spec&#34; target=&#34;_blank&#34;&gt;clojure.spec&lt;/a&gt; library in the Clojure programming language. IN this article we aim to explain, alongside Spider-Man, how this specs can be used to tackle the data validation problem in a spectacular way. As this library relies on the Clojure language some knowledge of Clojure is needed. In order to make this article understandable to those without such prior expertise we introduce some aspects of Clojure. In particular we focus on two features of it: the way information (data) is represented and the fact that it is a Lisp.&lt;/p&gt;
+
+&lt;p&gt;In Clojure data is represented with relatively few elements that are combined together. Take for example a scenario where we want to a profile of Spider-Man, as taken from the Marvel wiki entry on Spider-Man &lt;a href=&#34;http://marvel.com/universe/Spider-Man_(Peter_Parker)&#34; target=&#34;_blank&#34;&gt;Spider-Man&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The full name of Spider-Man can be represented in text from as a string. Like in many other languages the text is place in between quotation marks.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;&amp;quot;Peter Benjamin Parker&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For the numbers to represent his relative power in the Marvel universe, we use natural numbers (we leave the concepts and issues surrounding very large or floating point numbers out in this article). In case of Spider-Man his durability is 5:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course having just a value of the name and the durability of Spider-Man just floating around makes the representation somewhat incomplete, as they are not attached to the concepts of &amp;ldquo;name&amp;rdquo; or &amp;ldquo;durability&amp;rdquo;. Just like how Spider-Man needs buildings to sling off of, we need are representation for these to link with the values. In Clojure, keywords are often used for this purpose.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;:real-name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;:spider-man-spec.core/name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;::durability
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Keywords are symbolic identifiers. Think of them as symbols, much like one would use a string, but with some special powers attached. They are text that are prefaced by &amp;ldquo;:&amp;ldquo;, as it can be seen in the keyword &lt;code&gt;:real-name&lt;/code&gt;. They have the ability to be namespace-qualified, such as &lt;code&gt;:spider-man-spec.core/name&lt;/code&gt; which indicates that this is the keyword in the &lt;code&gt;spider-man-spec.core&lt;/code&gt; namespace. Finally, when writing internally to the library which uses the namespace, or when aliasing to it, we can just shorten the keyword with &amp;ldquo;::&amp;ldquo;, such as in &lt;code&gt;::durability&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Keywords come with some nice implementation details, such as fast equality checks and some other powers we will show in the future. This makes them the preferred keys in data-structures such as maps. And speaking of maps they allow the description of information in key-value pairs, as written between curly braces in the small example below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;  {::name &amp;quot;Spider-Man&amp;quot;
+   ::real-name &amp;quot;Peter Benjamin Parker&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The curly backets around the pairs express the keys and values in a map in Clojure. In the above example &lt;code&gt;::name&lt;/code&gt; and &lt;code&gt;::real-name&lt;/code&gt; are the key and value pairs for &lt;code&gt;&amp;quot;Spider-Man&amp;quot;&lt;/code&gt; and &lt;code&gt;&amp;quot;Peter Benjamin Parker&amp;quot;&lt;/code&gt; respectively.&lt;/p&gt;
+
+&lt;p&gt;Maps are just one of the ways one can describe a collection of elements. You also have sets, collections in which are element is unique. This can be done with a hashtag and some curly brackets &amp;ldquo;#{}&amp;rdquo;. In the example below we list the current and former affiliations of Spider-Man.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;{::current-affiliations #{&amp;quot;Avengers&amp;quot;}
+ ::former-affiliations #{&amp;quot;Secret Defenders&amp;quot; &amp;quot;New Fantastic Four&amp;quot; &amp;quot;The Outlaws&amp;quot;}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that how sets are used within maps to represent this knowledge. This is actually a common way to represent knowledge in Clojure: you combine all the various data representations directly. This way you can have a list containing maps, with keywords as keys and values that contain maps and strings, where the maps contain numbers, etc. You have these data-structures in pretty much all commonly used programming languages. Where Clojure differs from many is that it does not put (almost any) sugaring or abstraction on top.&lt;/p&gt;
+
+
+&lt;figure&gt;
+    
+        &lt;img src=&#34;/img/post/2018-04/spec-stacular-spider-man/spider-man-swinging.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Spider-Man swinging around the city. © Marvel Studios&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Just as Spider-Man is often at his best when he is just being &amp;ldquo;plain old Spidey&amp;rdquo;, having data represented this way has some nice advantages. The biggest is simplicity. Instead of learning to work with specific wrappers, objects, prototypes, etc on top of this data, that can differ between applications and libraries, it is enough to learn how to handle and manipulate maps, list, sets once. This knowledge can be then reused in any domain, and frees up the attention of the programmer to focus on the domain problem, and not the exact way the data was wrapped up in a library.&lt;/p&gt;
+
+&lt;p&gt;This of course also means that a system, such as clojure.spec, that aims at data validation in Clojure, has to handle the above-mentioned style of composition well. But before we get ahead of ourselves lets finish up by providing the profile of Spider Man.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def spider-man-profile
+  {::name &amp;quot;Spider-Man&amp;quot;
+   ::real-name &amp;quot;Peter Benjamin Parker&amp;quot;
+   ::identity ::secret
+   ::affiliations
+                   {::current-affiliations #{&amp;quot;Avengers&amp;quot;}
+                    ::former-affiliations #{&amp;quot;Secret Defenders&amp;quot; &amp;quot;New Fantastic Four&amp;quot; &amp;quot;The Outlaws&amp;quot;}}
+   ::power-grid {
+                 ::durability 3
+                 ::energy 4
+                 ::fighting 5
+                 ::intelligence 4
+                 ::speed 5
+                 ::strength 4
+                 }
+   }
+  )
+
+
+(def vulture-profile
+  {::name &amp;quot;Vulture&amp;quot;
+   ::real-name &amp;quot;Adrian Toomes&amp;quot;
+   ::identity ::publicly-known
+   ::affiliations
+                   {::current-affiliations {}
+                    ::former-affiliations #{&amp;quot;Sinister Twelve&amp;quot; &amp;quot;Sinister Six&amp;quot;}}
+   ::power-grid {
+                 ::durability 4
+                 ::energy 3
+                 ::fighting 4
+                 ::intelligence 4
+                 ::speed 5
+                 ::strength 3
+                 }
+   }
+  )
+
+(def spider-man-characters [spider-man-profile vulture-profile])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Oh no, our Spider Senses should be tingling. It is the Vulture, that has shown up in our list of Spider-Man characters. In addition we just introduced some new elements in our example, that need some explanation for readers new to Clojure.&lt;/p&gt;
+
+
+&lt;figure&gt;
+    
+        &lt;img src=&#34;/img/post/2018-04/spec-stacular-spider-man/vulture.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Uh oh, the Vulture must be up to no good if he shows up here. © Marvel Studios&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;The first is the use of square brackets [], which indicate a list. This is a collection of elements, in this case of &lt;code&gt;spider-man-profile&lt;/code&gt; and &lt;code&gt;vulture-profile&lt;/code&gt;, that unlike a set, can have multiples of the same element.&lt;/p&gt;
+
+&lt;p&gt;The other new type of element we use is the form of using parentheses along side def as in &lt;code&gt;(def spider-man-characters ...)&lt;/code&gt;. Expressions of these type, called symbolic expressions, or s-expressions for short, are a characteristic of the Lisp family of languages to which Clojure belongs to. In a Lisp, parts of the program are either atoms, such as &lt;code&gt;5&lt;/code&gt;, &lt;code&gt;&amp;quot;Peter Benjamin Parker&amp;quot;&lt;/code&gt;, &lt;code&gt;true&lt;/code&gt;, or an s-expression where the first element between parens is a function and the rest are parameters. For example &lt;code&gt;(+ 1 3)&lt;/code&gt;. While atoms evaluate to themselves, the s-expressions evaluate to a function with the given parameters. In the case of &lt;code&gt;(+ 1 3)&lt;/code&gt; they should evaluate to &lt;code&gt;4&lt;/code&gt;. You can also nest s-expressions, such as &lt;code&gt;(- (+ 1 3) 2)&lt;/code&gt;, which will evaluate to &lt;code&gt;2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You might be thinking, &amp;ldquo;Wait, if everything is either an atom or an s-expression, what kind of villainous things are those strange brackets that one has to use to create a set, list or map!&amp;rdquo;. For all the simplicity in Clojure, it does make use of some syntactical sugar. Lists can be written &lt;code&gt;[spider-man-profile vulture-profile]&lt;/code&gt; as a shorthand for the s-expression &lt;code&gt;(list spider-man-profile vulture-profile)&lt;/code&gt;. Similar functions exist for maps and sets as well.&lt;/p&gt;
+
+&lt;p&gt;Much like Spider-Man, who for all his powers still has to struggle with juggling a school and a job and has to make practical decisions, Clojure has to make them as well. In this case because certain things, such as maps, sets and list are used so often, it uses a shorter syntax for creating them. This does makes the language slightly more complex, but in the author&amp;rsquo;s view, it pays off.&lt;/p&gt;
+
+&lt;p&gt;Another matter of practicality of course is that while we can nest the two profiles directly into a list, we can create variables for them to associate. The &lt;code&gt;def&lt;/code&gt; function does exactly this, and it also ensures they become part of the current namespace. For example, if the current namespace is &lt;code&gt;spider-man-spec.core&lt;/code&gt; then a &lt;code&gt;def&lt;/code&gt; of &lt;code&gt;vulture-profile&lt;/code&gt; can be referred to as &lt;code&gt;spider-man-spec.core/vulture-profile&lt;/code&gt; from other namespaces, and simply &lt;code&gt;vulture-profile&lt;/code&gt; in the current namespace. This allows us to break up the overall data in smaller parts to use.&lt;/p&gt;
+
+&lt;p&gt;Now we finally described the profiles of both Spider-Man and the Vulture, but are they correct? The library of clojure.spec uses the notion of a spec for this. A spec is simply a function on a single parameter that returns a truthy value (in most cases a &lt;code&gt;true&lt;/code&gt; if the spec holds, &lt;code&gt;false&lt;/code&gt; if the spec does not hold).&lt;/p&gt;
+
+&lt;p&gt;In essence this allows for many existing functions to be used as specs. For example the already existing function &lt;code&gt;string?&lt;/code&gt; checks whether a particular value is a string or not.&lt;/p&gt;
+
+&lt;p&gt;In order to check whether a value is valid for a particular spec we can use the &lt;code&gt;s/valid?&lt;/code&gt; function. Here the &lt;code&gt;s&lt;/code&gt; stands the namespace of the spec library &lt;code&gt;clojure.spec.alpha&lt;/code&gt;, so by calling &lt;code&gt;s/valid?&lt;/code&gt; we are calling the &lt;code&gt;valid?&lt;/code&gt; function of this particular namespace.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clj&#34;&gt;(s/valid? string? &amp;quot;Spider-Man&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above function call will checking if &lt;code&gt;&amp;quot;Spider-Man&amp;quot;&lt;/code&gt; is indeed a string, and return &lt;code&gt;true&lt;/code&gt; if it is. On the other hand if we check whether a number is valid for this spec, using &lt;code&gt;(s/valid? string? 6)&lt;/code&gt; we instead get &lt;code&gt;false&lt;/code&gt; returned.&lt;/p&gt;
+
+&lt;p&gt;Another way to use a spec, is to explain why a value is wrong. For example, we can call the function &lt;code&gt;explain-data&lt;/code&gt; on with the spec and an incorrect value, to get a map back with an explanation. The function call:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clj&#34;&gt;(s/explain-data string? 6)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;would result in the map:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clj&#34;&gt;{:val 6 :predicate :clojure.spec.alpha/unknown}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now the above example clearly shows the value on which the spec has failed, but it denotes the predicate as unknown with &lt;code&gt;:clojure.spec.alpha/unknown&lt;/code&gt;. The solution to this is to provide a name for the spec, which the system can use to pin point if things fail. We can register any spec using the function &lt;code&gt;s/def&lt;/code&gt;. For example the functions:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clj&#34;&gt;(s/def ::name string?)
+
+(s/def ::real-name string?)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Will register the two specs under the keys &lt;code&gt;:name&lt;/code&gt; and &lt;code&gt;:real-name&lt;/code&gt; in the current namespace, i.e.: under &lt;code&gt;spider-man-spec.core/name&lt;/code&gt; and &lt;code&gt;spider-man-spec.core/name&lt;/code&gt; respectively.&lt;/p&gt;
+
+&lt;p&gt;Now if we would aim to explain why the spec &lt;code&gt;:real-name&lt;/code&gt;  does not allow the value &lt;code&gt;6&lt;/code&gt;, it would return the explanation:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clj&#34;&gt;{:val 6 :predicate :spider-man-spec.core/real-name}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;where the predicate now identifies the spec that was not fulfilled.&lt;/p&gt;
+
+&lt;p&gt;Specs can also be created in other ways. For example a set of values indicating the correct values can be used as a spec.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clj&#34;&gt;(s/def ::identity #{::secret ::publicly-known})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above code defines a spec for identity as having two possible values: either &lt;code&gt;::secret&lt;/code&gt; or &lt;code&gt;::publicly-known&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Specs can also be defined for collections as well. The specs for current- and former affiliations:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clj&#34;&gt;(s/def ::current-affilications (s/coll-of string? :kind set?))
+
+(s/def ::former-affilications (s/coll-of string? :kind set?))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These specs describe that that both current- and former have to be sets of strings. The affiliations part of a profile is actually map containing both current- and former affiliations. This is defined as the spec:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(s/def ::affiliations (s/keys :req [::current-affiliations] :opt [::former-affiliations]) )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;which makes it requirement for affiliations to contain current-affiliations, but any former affiliations are optional.&lt;/p&gt;
+
+&lt;p&gt;For checking whether Spider-Man has a valid profile we can use the &lt;code&gt;s/valid?&lt;/code&gt; function again. We use the following code to do just that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clj&#34;&gt;    (let [spider-man-affiliations (:spider-man-spec.core/affiliations spider-man-profile)]
+      (s/valid? :spider-man-spec.core/affiliations spider-man-affiliations))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;let&lt;/code&gt; form is new here, but what it essentially does is deconstructing the while &lt;code&gt;spider-man-profile&lt;/code&gt; and associating its affiliations temporarily the &lt;code&gt;spider-man-affiliations&lt;/code&gt;. This allows us to use a shorthand when calling functions, instead of writing out everything in a single line.&lt;/p&gt;
+
+&lt;p&gt;While this value is also valid according to the spec, as the spec and the value we are checking gets more complex, it could also be useful to gather the exact value that has passed the spec. In such cases we can use &lt;code&gt;s/conform&lt;/code&gt; to gather these. The call:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clj&#34;&gt;(s/conform :spider-man-spec.core/affiliations spider-man-affiliations)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Returns the map:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clj&#34;&gt;#:spider-man-spec.core{:current-affiliations #{&amp;quot;Avengers&amp;quot;}, :former-affiliations #{&amp;quot;The Outlaws&amp;quot; &amp;quot;Secret Defenders&amp;quot; &amp;quot;New Fantastic Four&amp;quot;}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that this is a namespaced map, which is a feature that allows us to refer to the keywords inside a map more efficiently, instead of writing them all out in each case.&lt;/p&gt;
+
+&lt;p&gt;The final aspect of each profile, the power grid, is also something that can be given a spec. Each of the powers can only take a whole number value from 1 until 7. We can specify this with the follow spec:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clj&#34;&gt;(s/def ::power-value (s/and pos-int? #(&amp;gt;= % 1) #(&amp;lt;= % 7)))
+
+(s/def ::durability ::power-value )
+(s/def ::energy ::power-value )
+(s/def ::fighting ::power-value )
+(s/def ::intelligence ::power-value )
+(s/def ::speed ::power-value )
+(s/def ::strength ::power-value )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that we use the function &lt;code&gt;s/and&lt;/code&gt; to combine three specs: that the value should be a positive integer, greater than equal to 1 and less or equal to 7. Such a combined spec can then be (re-)used like any other.&lt;/p&gt;
+
+&lt;p&gt;We can combine all the previous specs together to specify a profile:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clj&#34;&gt;(s/def ::profile (s/keys :req [::name ::real-name ::identity ::affiliations ::power-grid] ) )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For this spec, both Spider-Man and Vulture are valid profiles. However, this is a problem, as it does not allow us to differentiate between a hero and a villain. Of course we do not want to get Vulture get into the same places as Spider-Man can. We must fight him, much like Spider-Man, but in our own way: by creating a spec for which the Spider-Man profile is a valid value, but not that of Vulture.&lt;/p&gt;
+
+
+&lt;figure&gt;
+    
+        &lt;img src=&#34;/img/post/2018-04/spec-stacular-spider-man/spider-man-vs-vulture.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Spider-Man vs Vulture © Marvel Entertainment&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;While we can make a separate requirement that only persons with the name &amp;ldquo;Spider-Man&amp;rdquo; can fulfill our new &amp;ldquo;hero-spec&amp;rdquo; this might be too restrictive. Instead we are going to spec an Avenger profile, so Spider-Man and all his friends can join in, while villains such as Vulture are kept out.&lt;/p&gt;
+
+&lt;p&gt;The requirement for an Avenger in our system, is that any-one with the current affiliation of &lt;code&gt;&amp;quot;Avengers&amp;quot;&lt;/code&gt; is an avenger. We can describe this requirement as a spec, using a function defined for this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clj&#34;&gt;(defn is-avenger? [profile]
+  (contains? (::current-affiliations (::affiliations profile) ) &amp;quot;Avengers&amp;quot;)
+  )
+
+(s/def ::avenger-profile (s/and ::profile is-avenger? ) )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we can check whether a profile is a valid Avenger, which will be true for Spider-Man but not for Vulture. Finally, we can get rid of this villain that showed up in our tutorial. In addition, this spec will also make sure that all current members of the Avengers be valid, so Spider-Man can fight freely alongside of them.&lt;/p&gt;
+
+
+&lt;figure&gt;
+    
+        &lt;img src=&#34;/img/post/2018-04/spec-stacular-spider-man/spider-man-avengers.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Our spec answers the question posed in this cover: Spider-Man is indeed an Avenger © Marvel Entertainment&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;So there we have it, a brief look at using the spec library to validate data. There are many things that I have not touched, such as the ability to generate values based on the Spec, other ways to compose a spec, etc.&lt;/p&gt;
+
+&lt;p&gt;Nonetheless I hope this article gives a solid introduction, and maybe an interest to using the spec library, even if one does not have a Clojure or even a heavy programming background. The source code snippets are available at: &lt;a href=&#34;https://github.com/newres/spider-man-spec&#34; target=&#34;_blank&#34;&gt;Spider-Man-Spec&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you have a data validation problem, by all means take a swing at it with the Spec library. I convinced that the results you will get will be nothing short of spectacular.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>The Art of Choosing a Programming Language</title>
       <link>/post/art-of-choosing-language/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
@@ -25,7 +324,7 @@
 &lt;p&gt;As can be expected with many things that people are passionate about, whether viewed as a tool or an art style, coders can bond or argue about programming languages. Like philosophers of old, these discussions can go quite into depth, but to the outsider the arguments made or the sentiments behind them can be quite opaque.&lt;/p&gt;
 
 
-&lt;figure &gt;
+&lt;figure&gt;
     
         &lt;img src=&#34;/img/post/2018-03/art-of-choosing-language/schoolofathens.jpg&#34; alt=&#34;School of Athens by Raphael&#34; /&gt;
     
@@ -58,7 +357,7 @@
 &lt;p&gt;The question of which abstractions need to be utilized is at the heart of why there are so many different programming languages. People have different ideas on what these abstractions might be, what the benefits and drawbacks of applying them are. This is at the heart of why people design and use newer programming languages. In the following sections we go through some of the aspects on these abstractions.&lt;/p&gt;
 
 
-&lt;figure &gt;
+&lt;figure&gt;
     
         &lt;img src=&#34;/img/post/2018-03/art-of-choosing-language/pyramids.jpg&#34; alt=&#34;The Giza Pyramids © Robbster1983&#34; /&gt;
     
@@ -81,7 +380,7 @@
 &lt;p&gt;As mentioned before, there are different opinions on how programs could be constructed. There are various subjects about on which people have opinions about: how the code is organized and how it is executed, among other elements. This is very much similar to how art styles function. For example the same subject can be painted in two differing styles.&lt;/p&gt;
 
 
-&lt;figure &gt;
+&lt;figure&gt;
     
         &lt;img src=&#34;/img/post/2018-03/art-of-choosing-language/last-supper-da-vinci.jpg&#34; /&gt;
     
@@ -95,7 +394,7 @@
 
 
 
-&lt;figure &gt;
+&lt;figure&gt;
     
         &lt;img src=&#34;/img/post/2018-03/art-of-choosing-language/last-supper-tintoretto.jpg&#34; /&gt;
     
@@ -214,7 +513,7 @@
 &lt;p&gt;&amp;ldquo;And blood-black nothingness began to spin&amp;hellip; A system of cells interlinked within cells interlinked within cells interlinked within one stem&amp;hellip; And dreadfully distinct against the dark, a tall white fountain played.&amp;rdquo;&lt;/p&gt;
 
 
-&lt;figure &gt;
+&lt;figure&gt;
     
         &lt;img src=&#34;/img/post/interlinked-data/palefire.jpg&#34; alt=&#34;Cover of the novel Pale Fire © Berkley Medallion&#34; /&gt;
     
@@ -235,7 +534,7 @@
 &lt;p&gt;The above is a quote from the poem &lt;em&gt;Pale Fire&lt;/em&gt;. It occurs in the novel titled &lt;em&gt;Pale Fire&lt;/em&gt; by Vladimir Nabokov which has been recently used in the movie &lt;em&gt;Blade Runner 2049&lt;/em&gt;. In the movie it was part of the Baseline test, a way to test the emotional response of a Replicant. The reason they undergo this process is because their creators fear that the connections they might make in their lives would give them emotions that would interfere with their intended purpose.&lt;/p&gt;
 
 
-&lt;figure &gt;
+&lt;figure&gt;
     
         &lt;img src=&#34;/img/post/interlinked-data/bladerunner2049.png&#34; alt=&#34;Poster for the movie © Columbia Pictures&#34; /&gt;
     
@@ -272,7 +571,7 @@ Pale Fire is written by Vladimir Nabokov.
 &lt;p&gt;First the description is imprecise. As the &lt;em&gt;Blade Runner&lt;/em&gt; could refer to the newer &lt;em&gt;Blade Runner 2049&lt;/em&gt; movie as opposed to the 1982 original titled &lt;em&gt;Blade Runner&lt;/em&gt;.&lt;/p&gt;
 
 
-&lt;figure &gt;
+&lt;figure&gt;
     
         &lt;img src=&#34;/img/post/interlinked-data/bladerunner.jpg&#34; alt=&#34;Blade Runner movie poster © 1982 The Ladd Company&#34; /&gt;
     
@@ -301,7 +600,7 @@ Pale Fire is written by Vladimir Nabokov.
 &lt;p&gt;A proposed solution to these issues is &lt;a href=&#34;https://www.w3.org/standards/semanticweb/data&#34; target=&#34;_blank&#34;&gt;Linked Data&lt;/a&gt; and in particular &lt;a href=&#34;https://www.w3.org/standards/techs/rdf#w3c_all&#34; target=&#34;_blank&#34;&gt;Resource Description Framework (RDF)&lt;/a&gt;, with which Linked Data data can be expressed. These technologies allow us to represent the above facts in a more formal and precise way, that can make it both human and machine read- and write-able.&lt;/p&gt;
 
 
-&lt;figure &gt;
+&lt;figure&gt;
     
         &lt;img src=&#34;/img/post/interlinked-data/rdf.png&#34; alt=&#34;Logo of RDF © W3C&#34; /&gt;
     
@@ -398,7 +697,7 @@ Pale Fire is written by Vladimir Nabokov.
       <description>&lt;p&gt;In the Star Trek episode &amp;ldquo;The Trouble with Tribbles&amp;rdquo; the crew of the starship Enterprise encounters creatures called Tribbles. They are cute, simple creatures of mysterious origin that seem harmless at first but when they multiply the pose a big problem for the ship and the crew.&lt;/p&gt;
 
 
-&lt;figure &gt;
+&lt;figure&gt;
     
         &lt;img src=&#34;/img/post/trouble-with-triples/tribbles.jpg&#34; alt=&#34;Tribbles © 1967 Paramount Pictures&#34; /&gt;
     
