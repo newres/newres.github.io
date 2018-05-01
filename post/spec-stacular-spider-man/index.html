@@ -250,7 +250,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    13 min read
+    14 min read
   </span>
   
 
@@ -327,9 +327,9 @@
 
 <p>One relatively recent tool that can be used to solve this problem is the <a href="https://clojure.org/guides/spec" target="_blank">clojure.spec</a> library in the Clojure programming language. In this article we aim to explain, alongside Spider-Man, how these specs can be used to tackle the data validation problem in a spectacular way. As this library relies on the Clojure language some knowledge of Clojure is needed. In order to make this article understandable to those without such prior expertise we introduce some aspects of Clojure. In particular we focus on two features of it: the way information (data) is represented and the fact that it is a Lisp.</p>
 
-<p>In Clojure data is represented with relatively few elements that are combined together. Take for example a scenario where we want to create a profile of Spider-Man, as taken from the Marvel wiki entry on Spider-Man <a href="http://marvel.com/universe/Spider-Man_(Peter_Parker)" target="_blank">Spider-Man</a>.</p>
+<p>In Clojure data is represented with relatively few elements that are combined together. Take for example a scenario where we want to create a profile of Spider-Man, as taken from the Marvel wiki entry on <a href="http://marvel.com/universe/Spider-Man_(Peter_Parker)" target="_blank">Spider-Man</a>.</p>
 
-<p>The full name of Spider-Man can be represented in text form as a string. Like in many other languages the text is place in between quotation marks.</p>
+<p>The full name of Spider-Man can be represented in text form as a string. Like in many other languages the text is placed in between quotation marks.</p>
 
 <pre><code class="language-clojure">&quot;Peter Benjamin Parker&quot;
 </code></pre>
@@ -350,7 +350,7 @@
 <pre><code class="language-clojure">::durability
 </code></pre>
 
-<p>Keywords are symbolic identifiers. Think of them as symbols, much like one would use a string, but with some special powers attached. They are text prefaced by &ldquo;:&ldquo;, as it can be seen in the keyword <code>:real-name</code>. They have the ability to be namespace-qualified, such as <code>:spider-man-spec.core/name</code> which indicates that this is the keyword in the <code>spider-man-spec.core</code> namespace. Finally, when writing internally to the library which uses the namespace, or when aliasing to it, we can just shorten the keyword with &ldquo;::&ldquo;, such as in <code>::durability</code>.</p>
+<p>Keywords are symbolic identifiers. Think of them as symbols, much like one would use a string, but with some special powers attached. They are text prefaced by &ldquo;:&ldquo;, as it can be seen in the keyword <code>:real-name</code>. They have the ability to be namespace-qualified, such as <code>:spider-man-spec.core/name</code> which indicates that this is the keyword in the <code>spider-man-spec.core</code> namespace. Namespaces are what allows us to modularize our data and code, by grouping them under together a single identifier. In our case this is <code>spider-man-spec.core</code>. This namespacing ensures that our definition of the concepts of &ldquo;name&rdquo;, &ldquo;real-name&rdquo;, &ldquo;durability&rdquo; can remain distinct from any other use of similar concepts. Finally, when writing internally to the library which uses the namespace, or when aliasing to it, we can just shorten the keyword with &ldquo;::&ldquo;, such as in <code>::durability</code>.</p>
 
 <p>Keywords come with some nice implementation details, such as fast equality checks and some other powers we will show in the future. This makes them the preferred keys in data-structures such as maps. And speaking of maps they allow the description of information in key-value pairs, as written between curly braces in the small example below.</p>
 
@@ -360,7 +360,7 @@
 
 <p>The curly backets around the pairs express the keys and values in a map in Clojure. In the above example <code>::name</code> and <code>::real-name</code> are the key and value pairs for <code>&quot;Spider-Man&quot;</code> and <code>&quot;Peter Benjamin Parker&quot;</code> respectively.</p>
 
-<p>Maps are just one of the ways one can describe a collection of elements. You also have sets, collections in which are element is unique. This can be done with a hashtag and some curly brackets &ldquo;#{}&rdquo;. In the example below we list the current and former affiliations of Spider-Man.</p>
+<p>Maps are just one of the ways one can describe a collection of elements. You also have sets, collections in which each element is unique. This can be done with a hashtag and some curly brackets &ldquo;#{}&rdquo;. In the example below we list the current and former affiliations of Spider-Man.</p>
 
 <pre><code class="language-clojure">{::current-affiliations #{&quot;Avengers&quot;}
  ::former-affiliations #{&quot;Secret Defenders&quot; &quot;New Fantastic Four&quot; &quot;The Outlaws&quot;}}
@@ -426,7 +426,7 @@
 (def spider-man-characters [spider-man-profile vulture-profile])
 </code></pre>
 
-<p>Oh no, our Spider Senses should be tingling. It is the Vulture, that has shown up in our list of Spider-Man characters. In addition we just introduced some new elements in our example that need some explanation for readers new to Clojure.</p>
+<p>Oh no, our Spider Senses should be tingling. It is Vulture, that has shown up in our list of Spider-Man characters. In addition we just introduced some new elements in our example that need some explanation for readers new to Clojure.</p>
 
 
 <figure>
@@ -435,7 +435,7 @@
     
     
     <figcaption>
-        <h4>Uh oh, the Vulture must be up to no good if he shows up here. © Marvel Studios</h4>
+        <h4>Uh oh, Vulture must be up to no good if he shows up here. © Marvel Studios</h4>
         
     </figcaption>
     

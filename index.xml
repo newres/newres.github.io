@@ -36,9 +36,9 @@
 
 &lt;p&gt;One relatively recent tool that can be used to solve this problem is the &lt;a href=&#34;https://clojure.org/guides/spec&#34; target=&#34;_blank&#34;&gt;clojure.spec&lt;/a&gt; library in the Clojure programming language. In this article we aim to explain, alongside Spider-Man, how these specs can be used to tackle the data validation problem in a spectacular way. As this library relies on the Clojure language some knowledge of Clojure is needed. In order to make this article understandable to those without such prior expertise we introduce some aspects of Clojure. In particular we focus on two features of it: the way information (data) is represented and the fact that it is a Lisp.&lt;/p&gt;
 
-&lt;p&gt;In Clojure data is represented with relatively few elements that are combined together. Take for example a scenario where we want to create a profile of Spider-Man, as taken from the Marvel wiki entry on Spider-Man &lt;a href=&#34;http://marvel.com/universe/Spider-Man_(Peter_Parker)&#34; target=&#34;_blank&#34;&gt;Spider-Man&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In Clojure data is represented with relatively few elements that are combined together. Take for example a scenario where we want to create a profile of Spider-Man, as taken from the Marvel wiki entry on &lt;a href=&#34;http://marvel.com/universe/Spider-Man_(Peter_Parker)&#34; target=&#34;_blank&#34;&gt;Spider-Man&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;The full name of Spider-Man can be represented in text form as a string. Like in many other languages the text is place in between quotation marks.&lt;/p&gt;
+&lt;p&gt;The full name of Spider-Man can be represented in text form as a string. Like in many other languages the text is placed in between quotation marks.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;&amp;quot;Peter Benjamin Parker&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
@@ -59,7 +59,7 @@
 &lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;::durability
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Keywords are symbolic identifiers. Think of them as symbols, much like one would use a string, but with some special powers attached. They are text prefaced by &amp;ldquo;:&amp;ldquo;, as it can be seen in the keyword &lt;code&gt;:real-name&lt;/code&gt;. They have the ability to be namespace-qualified, such as &lt;code&gt;:spider-man-spec.core/name&lt;/code&gt; which indicates that this is the keyword in the &lt;code&gt;spider-man-spec.core&lt;/code&gt; namespace. Finally, when writing internally to the library which uses the namespace, or when aliasing to it, we can just shorten the keyword with &amp;ldquo;::&amp;ldquo;, such as in &lt;code&gt;::durability&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Keywords are symbolic identifiers. Think of them as symbols, much like one would use a string, but with some special powers attached. They are text prefaced by &amp;ldquo;:&amp;ldquo;, as it can be seen in the keyword &lt;code&gt;:real-name&lt;/code&gt;. They have the ability to be namespace-qualified, such as &lt;code&gt;:spider-man-spec.core/name&lt;/code&gt; which indicates that this is the keyword in the &lt;code&gt;spider-man-spec.core&lt;/code&gt; namespace. Namespaces are what allows us to modularize our data and code, by grouping them under together a single identifier. In our case this is &lt;code&gt;spider-man-spec.core&lt;/code&gt;. This namespacing ensures that our definition of the concepts of &amp;ldquo;name&amp;rdquo;, &amp;ldquo;real-name&amp;rdquo;, &amp;ldquo;durability&amp;rdquo; can remain distinct from any other use of similar concepts. Finally, when writing internally to the library which uses the namespace, or when aliasing to it, we can just shorten the keyword with &amp;ldquo;::&amp;ldquo;, such as in &lt;code&gt;::durability&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Keywords come with some nice implementation details, such as fast equality checks and some other powers we will show in the future. This makes them the preferred keys in data-structures such as maps. And speaking of maps they allow the description of information in key-value pairs, as written between curly braces in the small example below.&lt;/p&gt;
 
@@ -69,7 +69,7 @@
 
 &lt;p&gt;The curly backets around the pairs express the keys and values in a map in Clojure. In the above example &lt;code&gt;::name&lt;/code&gt; and &lt;code&gt;::real-name&lt;/code&gt; are the key and value pairs for &lt;code&gt;&amp;quot;Spider-Man&amp;quot;&lt;/code&gt; and &lt;code&gt;&amp;quot;Peter Benjamin Parker&amp;quot;&lt;/code&gt; respectively.&lt;/p&gt;
 
-&lt;p&gt;Maps are just one of the ways one can describe a collection of elements. You also have sets, collections in which are element is unique. This can be done with a hashtag and some curly brackets &amp;ldquo;#{}&amp;rdquo;. In the example below we list the current and former affiliations of Spider-Man.&lt;/p&gt;
+&lt;p&gt;Maps are just one of the ways one can describe a collection of elements. You also have sets, collections in which each element is unique. This can be done with a hashtag and some curly brackets &amp;ldquo;#{}&amp;rdquo;. In the example below we list the current and former affiliations of Spider-Man.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;{::current-affiliations #{&amp;quot;Avengers&amp;quot;}
  ::former-affiliations #{&amp;quot;Secret Defenders&amp;quot; &amp;quot;New Fantastic Four&amp;quot; &amp;quot;The Outlaws&amp;quot;}}
@@ -135,7 +135,7 @@
 (def spider-man-characters [spider-man-profile vulture-profile])
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Oh no, our Spider Senses should be tingling. It is the Vulture, that has shown up in our list of Spider-Man characters. In addition we just introduced some new elements in our example that need some explanation for readers new to Clojure.&lt;/p&gt;
+&lt;p&gt;Oh no, our Spider Senses should be tingling. It is Vulture, that has shown up in our list of Spider-Man characters. In addition we just introduced some new elements in our example that need some explanation for readers new to Clojure.&lt;/p&gt;
 
 
 &lt;figure&gt;
@@ -144,7 +144,7 @@
     
     
     &lt;figcaption&gt;
-        &lt;h4&gt;Uh oh, the Vulture must be up to no good if he shows up here. © Marvel Studios&lt;/h4&gt;
+        &lt;h4&gt;Uh oh, Vulture must be up to no good if he shows up here. © Marvel Studios&lt;/h4&gt;
         
     &lt;/figcaption&gt;
     
