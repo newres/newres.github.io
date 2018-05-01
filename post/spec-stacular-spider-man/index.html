@@ -84,7 +84,7 @@
   
   <meta property="article:published_time" content="2018-04-29T00:00:00&#43;02:00">
   
-  <meta property="article:modified_time" content="2018-04-29T00:00:00&#43;02:00">
+  <meta property="article:modified_time" content="2018-05-01T00:00:00&#43;02:00">
   
 
   
@@ -237,8 +237,10 @@
 
   <span class="article-date">
     
+        Last updated on
+    
     <time datetime="2018-04-29 00:00:00 &#43;0200 CEST" itemprop="datePublished dateModified">
-      29 Apr, 2018
+      1 May, 2018
     </time>
   </span>
   <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
@@ -323,11 +325,11 @@
 
 <p>In software there are also everyday problems which one has to tackle before one can defeat the villains of the domain at hand. One of these everyday problems is the issue of data validation. Data validation is the process of ensuring that the elements of the data are correct. This process has to be done in pretty much all domains when working with actual data. Consider the financial domain where a financial product can only be made available if the right requirements are fulfilled in the request. If the request is not written correctly then the request needs to be denied. In the legal and regulatory domains certain information that is required for a law must be fulfilled, otherwise costly corrections or fines can follow. Another good example is the clinical domain, where the a patients data needs to be transferred to an application. Here is it essential that this data fulfills the requirement for requesting a clinical procedure or a medication, as any mistake can lead to huge negative impact on the health of the patient.</p>
 
-<p>One relatively recent tool that can be used to solve this problem is the <a href="https://clojure.org/guides/spec" target="_blank">clojure.spec</a> library in the Clojure programming language. IN this article we aim to explain, alongside Spider-Man, how this specs can be used to tackle the data validation problem in a spectacular way. As this library relies on the Clojure language some knowledge of Clojure is needed. In order to make this article understandable to those without such prior expertise we introduce some aspects of Clojure. In particular we focus on two features of it: the way information (data) is represented and the fact that it is a Lisp.</p>
+<p>One relatively recent tool that can be used to solve this problem is the <a href="https://clojure.org/guides/spec" target="_blank">clojure.spec</a> library in the Clojure programming language. In this article we aim to explain, alongside Spider-Man, how these specs can be used to tackle the data validation problem in a spectacular way. As this library relies on the Clojure language some knowledge of Clojure is needed. In order to make this article understandable to those without such prior expertise we introduce some aspects of Clojure. In particular we focus on two features of it: the way information (data) is represented and the fact that it is a Lisp.</p>
 
-<p>In Clojure data is represented with relatively few elements that are combined together. Take for example a scenario where we want to a profile of Spider-Man, as taken from the Marvel wiki entry on Spider-Man <a href="http://marvel.com/universe/Spider-Man_(Peter_Parker)" target="_blank">Spider-Man</a>.</p>
+<p>In Clojure data is represented with relatively few elements that are combined together. Take for example a scenario where we want to create a profile of Spider-Man, as taken from the Marvel wiki entry on Spider-Man <a href="http://marvel.com/universe/Spider-Man_(Peter_Parker)" target="_blank">Spider-Man</a>.</p>
 
-<p>The full name of Spider-Man can be represented in text from as a string. Like in many other languages the text is place in between quotation marks.</p>
+<p>The full name of Spider-Man can be represented in text form as a string. Like in many other languages the text is place in between quotation marks.</p>
 
 <pre><code class="language-clojure">&quot;Peter Benjamin Parker&quot;
 </code></pre>
@@ -337,7 +339,7 @@
 <pre><code class="language-clojure">5
 </code></pre>
 
-<p>Of course having just a value of the name and the durability of Spider-Man just floating around makes the representation somewhat incomplete, as they are not attached to the concepts of &ldquo;name&rdquo; or &ldquo;durability&rdquo;. Just like how Spider-Man needs buildings to sling off of, we need are representation for these to link with the values. In Clojure, keywords are often used for this purpose.</p>
+<p>Of course having just a value of the name and the durability of Spider-Man just floating around makes the representation somewhat incomplete, as they are not attached to the concepts of &ldquo;name&rdquo; or &ldquo;durability&rdquo;. Just like how Spider-Man needs buildings to sling off of, we need a representation that links the values with what they represent. In Clojure, keywords are often used for this purpose.</p>
 
 <pre><code class="language-clojure">:real-name
 </code></pre>
@@ -348,7 +350,7 @@
 <pre><code class="language-clojure">::durability
 </code></pre>
 
-<p>Keywords are symbolic identifiers. Think of them as symbols, much like one would use a string, but with some special powers attached. They are text that are prefaced by &ldquo;:&ldquo;, as it can be seen in the keyword <code>:real-name</code>. They have the ability to be namespace-qualified, such as <code>:spider-man-spec.core/name</code> which indicates that this is the keyword in the <code>spider-man-spec.core</code> namespace. Finally, when writing internally to the library which uses the namespace, or when aliasing to it, we can just shorten the keyword with &ldquo;::&ldquo;, such as in <code>::durability</code>.</p>
+<p>Keywords are symbolic identifiers. Think of them as symbols, much like one would use a string, but with some special powers attached. They are text prefaced by &ldquo;:&ldquo;, as it can be seen in the keyword <code>:real-name</code>. They have the ability to be namespace-qualified, such as <code>:spider-man-spec.core/name</code> which indicates that this is the keyword in the <code>spider-man-spec.core</code> namespace. Finally, when writing internally to the library which uses the namespace, or when aliasing to it, we can just shorten the keyword with &ldquo;::&ldquo;, such as in <code>::durability</code>.</p>
 
 <p>Keywords come with some nice implementation details, such as fast equality checks and some other powers we will show in the future. This makes them the preferred keys in data-structures such as maps. And speaking of maps they allow the description of information in key-value pairs, as written between curly braces in the small example below.</p>
 
@@ -424,7 +426,7 @@
 (def spider-man-characters [spider-man-profile vulture-profile])
 </code></pre>
 
-<p>Oh no, our Spider Senses should be tingling. It is the Vulture, that has shown up in our list of Spider-Man characters. In addition we just introduced some new elements in our example, that need some explanation for readers new to Clojure.</p>
+<p>Oh no, our Spider Senses should be tingling. It is the Vulture, that has shown up in our list of Spider-Man characters. In addition we just introduced some new elements in our example that need some explanation for readers new to Clojure.</p>
 
 
 <figure>
@@ -478,7 +480,7 @@
 (s/def ::real-name string?)
 </code></pre>
 
-<p>Will register the two specs under the keys <code>:name</code> and <code>:real-name</code> in the current namespace, i.e.: under <code>spider-man-spec.core/name</code> and <code>spider-man-spec.core/name</code> respectively.</p>
+<p>will register the two specs under the keys <code>:name</code> and <code>:real-name</code> in the current namespace, i.e.: under <code>spider-man-spec.core/name</code> and <code>spider-man-spec.core/name</code> respectively.</p>
 
 <p>Now if we would aim to explain why the spec <code>:real-name</code>  does not allow the value <code>6</code>, it would return the explanation:</p>
 
@@ -594,7 +596,7 @@
 
 <p>Nonetheless I hope this article gives a solid introduction, and maybe an interest to using the spec library, even if one does not have a Clojure or even a heavy programming background. The source code snippets are available at: <a href="https://github.com/newres/spider-man-spec" target="_blank">Spider-Man-Spec</a>.</p>
 
-<p>If you have a data validation problem, by all means take a swing at it with the Spec library. I convinced that the results you will get will be nothing short of spectacular.</p>
+<p>If you have a data validation problem, by all means take a swing at it with the Spec library. I am convinced that the results you will get will be nothing short of spectacular.</p>
 
     </div>
 
