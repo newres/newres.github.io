@@ -251,7 +251,7 @@
 (s/def ::strength ::power-value )
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Note that we use the function &lt;code&gt;s/and&lt;/code&gt; to combine three specs: that the value should be a positive integer, greater than equal to 1 and less or equal to 7. Such a combined spec can then be (re-)used like any other.&lt;/p&gt;
+&lt;p&gt;Note that we use the function &lt;code&gt;s/and&lt;/code&gt; to combine three specs: that the value should be a positive integer, greater than or equal to 1 and less or equal to 7. Such a combined spec can then be (re-)used like any other.&lt;/p&gt;
 
 &lt;p&gt;We can combine all the previous specs together to specify a profile:&lt;/p&gt;
 
