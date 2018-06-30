@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Clojure on Newres Al Haider</title>
+    <link>/tags/clojure/</link>
+    <description>Recent content in Clojure on Newres Al Haider</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
+    <lastBuildDate>Sun, 29 Apr 2018 00:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Spec-stacular Spider-Man</title>
+      <link>/post/spec-stacular-spider-man/</link>
+      <pubDate>Sun, 29 Apr 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/post/spec-stacular-spider-man/</guid>
+      <description>Spider-Man is one of the most iconic heroes of the Marvel universe. Created by Stan Lee and Steve Ditko, Spider-Man is a regular teenager named Peter Parker, who due to being bitten by a radio-active spider, gains abilities such as the proportional strength of a spider, wall crawling and a spider sense to detect upcoming danger. One of the biggest draws of Spider-Man that although he is a superhero and fought various villains from cosmic beings to petty criminals, he also had to deal with regular everyday problems, such as money issues, school life and the pressure of a job.</description>
+    </item>
+    
+    <item>
+      <title>The Art of Choosing a Programming Language</title>
+      <link>/post/art-of-choosing-language/</link>
+      <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
+      
+      <guid>/post/art-of-choosing-language/</guid>
+      <description>Programmers, like professionals in other fields, are passionate about their tools. One of the main elements in the toolbox of coders are programming languages. They allow their users to express solutions through code to tackle a large variety of problems in many domains.
+Programming is also an art, as described in the article by Donald Knuth titled Computer Programming as an Art and in certain aspects of programming languages can be seen as art styles.</description>
+    </item>
+    
+  </channel>
+</rss>

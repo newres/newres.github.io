@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Archeology on Newres Al Haider</title>
+    <link>/tags/archeology/</link>
+    <description>Recent content in Archeology on Newres Al Haider</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
+    <lastBuildDate>Sat, 30 Jun 2018 00:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="/tags/archeology/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Excavating a Common Treasure</title>
+      <link>/post/common-treasure/</link>
+      <pubDate>Sat, 30 Jun 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/post/common-treasure/</guid>
+      <description>History is full of legends of ancient treasures and powerful artifacts, lost to time or hidden by purpose, that would bring glory, power and riches to their discoverer.
+  A winged bull depicted on an on archaeological artifact from the Assyrian empire between 1400 and 1200 BC. Cylinder Seal with Winged Bull - Walters Art Museum Licensed under CC0.   Although the history of software development is much shorter than the history of mankind, nonetheless there already exists artifacts, that have near mythological status when it comes to software development, yet often go hidden underneath the surface.</description>
+    </item>
+    
+  </channel>
+</rss>

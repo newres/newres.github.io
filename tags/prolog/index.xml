@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Prolog on Newres Al Haider</title>
+    <link>/tags/prolog/</link>
+    <description>Recent content in Prolog on Newres Al Haider</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
+    <lastBuildDate>Sun, 18 Mar 2018 00:00:00 +0100</lastBuildDate>
+    
+	<atom:link href="/tags/prolog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The Art of Choosing a Programming Language</title>
+      <link>/post/art-of-choosing-language/</link>
+      <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
+      
+      <guid>/post/art-of-choosing-language/</guid>
+      <description>Programmers, like professionals in other fields, are passionate about their tools. One of the main elements in the toolbox of coders are programming languages. They allow their users to express solutions through code to tackle a large variety of problems in many domains.
+Programming is also an art, as described in the article by Donald Knuth titled Computer Programming as an Art and in certain aspects of programming languages can be seen as art styles.</description>
+    </item>
+    
+  </channel>
+</rss>

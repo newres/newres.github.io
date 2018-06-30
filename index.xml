@@ -11,6 +11,269 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Excavating a Common Treasure</title>
+      <link>/post/common-treasure/</link>
+      <pubDate>Sat, 30 Jun 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/post/common-treasure/</guid>
+      <description>&lt;p&gt;History is full of legends of ancient treasures and powerful artifacts, lost to time or hidden by purpose, that would bring glory, power and riches to their discoverer.&lt;/p&gt;
+
+
+&lt;figure&gt;
+    
+        &lt;img src=&#34;/img/post/2018-06/common-treasure/winged-bull.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;A winged bull depicted on an on archaeological artifact from the Assyrian empire between 1400 and 1200 BC. Cylinder Seal with Winged Bull - Walters Art Museum Licensed under CC0.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Although the history of software development is much shorter than the history of mankind, nonetheless there already exists artifacts, that have near mythological status when it comes to software development, yet often go hidden underneath the surface. One of these is the language of Common Lisp and the way one develops with it.&lt;/p&gt;
+
+&lt;p&gt;Common Lisp is a language originally from the early 80s, and was a standardization of many dialects of the Lisp programming language, which explains both the Common and Lisp part of the name. Lisp itself is one of the oldest general purpose programming languages, first specified in 1958. From Lisp many ideas that we consider common in other languages were popularized, such as conditionals (the &lt;code&gt;if and else&lt;/code&gt; structure the), notion of functions as first class elements, and many others (see this &lt;a href=&#34;http://www.paulgraham.com/diff.html&#34; target=&#34;_blank&#34;&gt;article&lt;/a&gt; on more of these ideas). Common Lisp is also often &lt;a href=&#34;http://www.gigamonkeys.com/book/introduction-why-lisp.html&#34; target=&#34;_blank&#34;&gt;mentioned&lt;/a&gt; as an amazing and fun language to learn, which makes unearthing it the subject for this article.&lt;/p&gt;
+
+&lt;p&gt;As the myth goes it gives the user untold levels of productivity and joy of development, which alone makes it worth looking into. One other big advantage is that this Common Lisp used to be the language of A.I. research. There is lots of code out there for systems on the subject of knowledge representation, reasoning and planning. Given the resurgence of fields such as a &lt;a href=&#34;https://www.w3.org/standards/semanticweb/&#34; target=&#34;_blank&#34;&gt;Semantic Web&lt;/a&gt;, such tools can be invaluable, whether it is learning from them or using them directly. In this post, I aim to find out a very small portion of the riches we can dig up using Common Lisp, and to share this experience with the reader.&lt;/p&gt;
+
+
+&lt;figure&gt;
+    
+        &lt;img src=&#34;/img/post/2018-06/common-treasure/seal.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Cylinder Seals were common objects that were used to designate ownership in ancient Mesopotamia. Although describing to a different notion of &amp;#39;common&amp;#39; these show remarkable of craftsmanship that we hope to introduce ourselves to in Common Lisp. Cylinder Seal with Two Heroes and a Tree - Walters Art Museum Licensed under CC0.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;To add as a disclamer, I do have experience with a similar language, &lt;a href=&#34;https://clojure.org/&#34; target=&#34;_blank&#34;&gt;Clojure&lt;/a&gt; that I use in my day-to-day programming, as well as with &lt;a href=&#34;https://www.gnu.org/software/emacs/&#34; target=&#34;_blank&#34;&gt;Emacs&lt;/a&gt; (namely &lt;a href=&#34;http://spacemacs.org/&#34; target=&#34;_blank&#34;&gt;Spacemacs&lt;/a&gt;), so I probably have some head start in using and editing the language. Nonethess I aim to make this introduction accessible to readers without such knowledge.&lt;/p&gt;
+
+&lt;p&gt;With any treasure hunt, preparation is often key. As we are unfamiliar with the language itself it is good to read guides and tutorials to prepare. The guide to selecting the right equipment for our adventure is the &lt;a href=&#34;https://lispcookbook.github.io/cl-cookbook/getting-started.html&#34; target=&#34;_blank&#34;&gt;cl-cookbook&lt;/a&gt;, which describes how to get started with Common Lisp.&lt;/p&gt;
+
+&lt;p&gt;Common Lisp is a language with multiple implementations. As recommended by our guide we are using &lt;a href=&#34;http://www.sbcl.org/&#34; target=&#34;_blank&#34;&gt;Steel Bank Common Lisp (SBCL)&lt;/a&gt; as distribution and using &lt;a href=&#34;https://github.com/roswell/roswell/wiki&#34; target=&#34;_blank&#34;&gt;Roswell&lt;/a&gt; to manage it. Alternatively a more straightforward install is &lt;a href=&#34;https://portacle.github.io/&#34; target=&#34;_blank&#34;&gt;Portacle&lt;/a&gt; that could be used.&lt;/p&gt;
+
+&lt;p&gt;Next is testing wheter our implementation is working. We run the Read–Eval–Print Loop (REPL), which in the case of Roswell can be done with the command &lt;code&gt;ros run&lt;/code&gt;. What the REPL allows us to do is interactively develop our code, by reading our input, evaluating it and printing the results. This is one of the many features in programming that originated with Lisp, but has since made its way to many other languages.&lt;/p&gt;
+
+&lt;p&gt;Now the question is how we should write Common Lisp. One really nice resource for quickly familiarizing with new languages is Learn X in Y minutes, who also has a nice &lt;a href=&#34;https://learnxinyminutes.com/docs/common-lisp/&#34; target=&#34;_blank&#34;&gt;introduction to Common Lisp&lt;/a&gt;. One of the most striking features of a Lisp, is the syntax of it. Elements are either atoms, that evaluate to themselves, such as the number &lt;code&gt;4&lt;/code&gt; or s-expressions, such as &lt;code&gt;(+ 3 2)&lt;/code&gt;. Atoms, evaluate to themselves, so if we write &lt;code&gt;4&lt;/code&gt; in the REPL, we get &lt;code&gt;4&lt;/code&gt; returned back. For s-expressions they are in the form of &lt;code&gt;(function param1 param2 ...)&lt;/code&gt;, so in the case of &lt;code&gt;(+ 3 2)&lt;/code&gt; this will evaluate to &lt;code&gt;5&lt;/code&gt;. One can of course nest these forms, for example &lt;code&gt;(+ 3 (+ 3 2))&lt;/code&gt; will result in &lt;code&gt;8&lt;/code&gt;. In addition to functions there are macros available creating completely different forms to be translated into code. We will see some examples of this later in the article.&lt;/p&gt;
+
+&lt;p&gt;With the REPL now working it is time to set up a project where we can write down all the code we need for our digging. According to our cookbook tutorial we can do this from the REPL, by getting &lt;a href=&#34;https://github.com/fukamachi/cl-project&#34; target=&#34;_blank&#34;&gt;cl-project&lt;/a&gt;, and using it .&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(ql:quickload &amp;quot;cl-project&amp;quot;)
+(cl-project:make-project #P&amp;quot;./common-treasure&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will give us the outline of project in the &lt;code&gt;common-treasure&lt;/code&gt; directory. The files generated include a readme, systems for the project itself as well as tests and ofcourse some skeletons for a test and a package itself respectively.&lt;/p&gt;
+
+&lt;p&gt;First we are going to start off figuring out the package itself. Like in many other languages, functionality can be grouped together units, in this case packages. The generated file outline looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(defpackage common-treasure
+  (:use :cl))
+(in-package :common-treasure)
+
+;; blah blah blah.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;From the looks of it, it says to us that it defines a package named &lt;code&gt;common-treasure&lt;/code&gt; using &lt;code&gt;:cl&lt;/code&gt;, which I assume is another package. There is also a call to &lt;code&gt;in-package&lt;/code&gt; which looks like is there to ensure that everything else that follows is also in this package. Finally the &lt;code&gt;;; blah blah blah.&lt;/code&gt; portion looks like a comment, something to describe functionality with, but nothing to be executed.&lt;/p&gt;
+
+&lt;p&gt;Now in order to see if everthing is working correctly lets load this package. Instead of using the REPL from the command line, we are using it directly from out editor, in this case an &lt;a href=&#34;https://www.gnu.org/software/emacs/&#34; target=&#34;_blank&#34;&gt;Emacs&lt;/a&gt; distribution named &lt;a href=&#34;http://spacemacs.org/&#34; target=&#34;_blank&#34;&gt;Spacemacs&lt;/a&gt;. Without going into much detail about Emacs it can be described as a highly configurable editor for pretty much any programming language out there. &lt;a href=&#34;https://common-lisp.net/project/slime/&#34; target=&#34;_blank&#34;&gt;SLIME: The Superior Lisp Interaction Mode for Emacs&lt;/a&gt; ensures that our interaction with the REPL and the various language features go much more smoothly by integrating it with our editor of choice.&lt;/p&gt;
+
+&lt;p&gt;Emacs is incredibly configurable, which is where Spacemacs comes in. It provides a set of curated configurations named layers, that make setting up the configuration for a particular language a breeze. We just enable the &lt;a href=&#34;https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/common-lisp#install&#34; target=&#34;_blank&#34;&gt;common-lisp layer&lt;/a&gt; of Spacemacs in the configuration file, add a small piece of let Emacs known of our common lisp distribution (see link), and we are good to go.&lt;/p&gt;
+
+&lt;p&gt;One really nice feature of Spacemacs is that commands can be executed and discovered by pressing the spacebar as the leader followed by some other combinations (this is where the distribution gets its name). For example, the process of starting SLIME can be done by navigating to a common lisp source file, such as that above, and pressing the keys &lt;code&gt;space m &#39;&lt;/code&gt; in succession. Note that this requires the use of &lt;a href=&#34;https://en.wikipedia.org/wiki/Vi&#34; target=&#34;_blank&#34;&gt;vi&lt;/a&gt;-mode which is a whole another topic for discussion, but a more emacs like mode with a different leading key also exist. To keep things clear, regardless whichever mode or even emacs distribution one uses, I will try to name the command, and not the key combination whenever possible&lt;/p&gt;
+
+&lt;p&gt;With everything setup now we can start our treasure hunt a bit more in earnest by starting SLIME. We are greeted by the message &amp;ldquo;Connected. Hack and be merry!&amp;rdquo; as well as a REPL in a window. Lets start to dig around by figuring out what exactly all the elements do. We can use the command &lt;code&gt;slime-describe-symbol&lt;/code&gt; to get some more information about &lt;code&gt;defpackage&lt;/code&gt; and what it does. This brings up some documentation on &lt;code&gt;defpackage&lt;/code&gt;. It shows us that this is a macro, as well as the various options one can use with it. A macro, without going into too much detail, is essentially a way to convert forms into different ones before evaluating them. We can get a bit more info on the workings by calling the command &lt;code&gt;slime-hyperspec-lookup&lt;/code&gt;. This takes us to the &lt;a href=&#34;http://www.lispworks.com/documentation/HyperSpec/Front/&#34; target=&#34;_blank&#34;&gt;Common Lisp Hyperspec&lt;/a&gt; with more detailed docs. The pages for &lt;a href=&#34;http://www.lispworks.com/documentation/HyperSpec/Body/m_defpkg.htm&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;defpackage&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;http://www.lispworks.com/documentation/HyperSpec/Body/m_in_pkg.htm&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;inpackage&lt;/code&gt;&lt;/a&gt; more or less confirm their use is as we expected.&lt;/p&gt;
+
+&lt;p&gt;Now it is time to start writing some new code. We remove the comments and create a function named &lt;code&gt;hello-treasure&lt;/code&gt;, that should just print the text &amp;ldquo;Hello Treasure&amp;rdquo;. We add the following to our file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(defun hello-treasure ()
+  (print &amp;quot;Hello Treasure!&amp;quot;)
+  )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;in place of the comments, and we run the command &lt;code&gt;slime-complile-and-load-file&lt;/code&gt;. Compilation succeeds, but when we aim to call the function  &lt;code&gt;(common-treasure:hello-treasure)&lt;/code&gt; get an error when trying to call the function, saying &amp;ldquo;The symbol &amp;ldquo;HELLO TREASURE&amp;rdquo; is not external to the &amp;ldquo;COMMON TREASURE&amp;rdquo; package.&amp;ldquo;. This due to the fact that we did not declare the function external in the &lt;code&gt;defpackage&lt;/code&gt; package declaration.&lt;/p&gt;
+
+&lt;p&gt;What is really interesting is that although we have this issue, instead of just failing, the SLIME REPL presents us with a number of options. For example we can  &lt;code&gt;0: [Continue] Use symbol anyway.&lt;/code&gt;, &lt;code&gt;1: [Retry] Retry SLIME REPL evaluation request.&lt;/code&gt;, &lt;code&gt;2: [*Abort] Return to SLIME&#39;s top level.&lt;/code&gt;. In this case we can just abort, and modify the package declaration, but it is interesting to be offered all these options.&lt;/p&gt;
+
+&lt;p&gt;By adding &lt;code&gt;(:export :hello-treasure)&lt;/code&gt; to the &lt;code&gt;defpackage&lt;/code&gt; macro, we can do another call and it indeed returns &amp;ldquo;Hello Treasure!&amp;rdquo; in the REPL.&lt;/p&gt;
+
+&lt;p&gt;Now that we got the basics down we would like to have a slightly bigger example in which we make use of an existing library. While digging around for the software languages and libraries of the past is often the matter of some searching, reading, coding and a bit of trial and error, digging around in the world is process governed by various regulations and laws. This is especially true in cities with long history, where a regular building site can easily unearth archaeological finds.&lt;/p&gt;
+
+
+&lt;figure&gt;
+    
+        &lt;img src=&#34;/img/post/2018-06/common-treasure/excavation-city.png&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Digging in the certain urban areas can easily lead to excavations done before any subsequent work is done. Romano-Celtic temple excavated in London - Public Domain&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;In particular, there are often a set of regulations that specify whether one can dig in areas of archaeological interests. As an example we use a portion the rules given by the municipality of Utrecht, as described on a &lt;a href=&#34;https://www.utrecht.nl/fileadmin/uploads/documenten/9.digitaalloket/REO/archeologische-waardenkaart-2009.pdf&#34; target=&#34;_blank&#34;&gt;map&lt;/a&gt; of Utrecht and surrounding areas (in Dutch).&lt;/p&gt;
+
+&lt;p&gt;These regulations can be summarized by a number of rules, based on two conditions: the type of area and the size of the area that is to be disturbed.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;If the area is of high archeological value, then a permit is required no matter what the size of the area is to be disturbed.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If the area is of high archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 100m&lt;sup&gt;2&lt;/sup&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If the area if of archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 1000m&lt;sup&gt;2&lt;/sup&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Such regulations can be encoded into a regular function that returns a true or false to the question &amp;ldquo;Is the a permit required?&amp;rdquo; based on two parameters, the size of the area and the type of the area. However this could be more complicated and harder to maintain if the set of regulations, along with conditions and outcomes, become more complex.&lt;/p&gt;
+
+&lt;p&gt;There are various approaches to deal with this issue. One of these is to encode the facts on which our answer relies into a knowledge base, and have a general mechanism, a way to do inferencing, to derive new knowledge from existing facts. Such an approach can make it easier to use and maintain such a system.&lt;/p&gt;
+
+&lt;p&gt;For this article we are going to implement such an approach using &lt;a href=&#34;http://lisa.sourceforge.net/&#34; target=&#34;_blank&#34;&gt;LISA&lt;/a&gt;. This is a production rule system, in which the knowledge base is encoded in a set of facts, and rules are uses as a way to derive new knowledge. It is easy to see how such a system would be a good fit for our problem: our domain restrictions are already formulated as a set of rules. It would also allow us to use some existing libraries, to see more of what Common Lisp has to offer.&lt;/p&gt;
+
+&lt;p&gt;To start off, first we need to add a dependency to LISA into our system. One of the files created by cl-project is an &lt;a href=&#34;https://common-lisp.net/project/asdf/?&#34; target=&#34;_blank&#34;&gt;asdf&lt;/a&gt; file that describes how to build the software we are creating. Here we can add the dependency on Lisa, resulting in the following file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#|
+  This file is a part of common-treasure project.
+|#
+
+(defsystem &amp;quot;common-treasure&amp;quot;
+  :version &amp;quot;0.1.0&amp;quot;
+  :author &amp;quot;&amp;quot;
+  :license &amp;quot;&amp;quot;
+  :depends-on (&amp;quot;lisa&amp;quot;) ;; Here we add the dependency on LISA.
+  :components ((:module &amp;quot;src&amp;quot;
+                :components
+                ((:file &amp;quot;common-treasure&amp;quot;))))
+  :description &amp;quot;&amp;quot;
+  :long-description
+  #.(read-file-string
+     (subpathname *load-pathname* &amp;quot;README.markdown&amp;quot;))
+  :in-order-to ((test-op (test-op &amp;quot;common-treasure-test&amp;quot;))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we just need to make sure the dependencies needed are actually downloaded and available. For this we use &lt;a href=&#34;https://www.quicklisp.org/beta/&#34; target=&#34;_blank&#34;&gt;quicklisp&lt;/a&gt; which is the library manager Common Lisp. By using the command &lt;code&gt;(ql:quickload &amp;quot;common-treasure&amp;quot;)&lt;/code&gt; we can get all the dependencies for our system, which in this case consists of just LISA.&lt;/p&gt;
+
+&lt;p&gt;Now in order to translate our example scenario, we look at some of the examples that are available for LISA. A typical system consists of a knowledge base, in which facts are defined as &lt;a href=&#34;http://www.aiai.ed.ac.uk/~jeff/clos-guide.html&#34; target=&#34;_blank&#34;&gt;Common Lisp Object System (CLOS)&lt;/a&gt; objects and rules to manipulate such instances as inference method.&lt;/p&gt;
+
+&lt;p&gt;CLOS is a way in which Common Lisp can do object-oriented programming, and LISA co-opts this as a way to represent facts in the knowledge base. Without going into detail on object-oriented programming theory, this allows one to, define classes, create instances of those classes and define methods that make use of those classes (see this &lt;a href=&#34;http://www.aiai.ed.ac.uk/~jeff/clos-guide.html&#34; target=&#34;_blank&#34;&gt;nice intro on Common Lisp Object System (CLOS)&lt;/a&gt; for its general use).&lt;/p&gt;
+
+&lt;p&gt;In the context of LISA, these allow us to represent classes of facts, specific instances of facts, and methods that can be used with those facts. For example we can represent the type of facts in our domain with two classes of objects: one that represents &amp;ldquo;area&amp;rdquo; and one that wheter &amp;ldquo;a permit is required&amp;rdquo;. In Common Lisp these can be defined with the &lt;code&gt;defclass&lt;/code&gt; macro. So for our example the following would be a call for permission requirement:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(defclass permit-required ()
+  ()
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In case of the area, we need to represent two facts about it: what the archaeological type of it is, and what the size of the area is disturbed. Such elements of the classes are described in CLOS using slots. There are many possible options that are available to describe a slot, in particular &lt;code&gt;:initarg&lt;/code&gt; describes the name of the slot, &lt;code&gt;:initform&lt;/code&gt; the default value it is given initially, and &lt;code&gt;:accessor&lt;/code&gt; can be used to define a function for accessing the slot value.&lt;/p&gt;
+
+&lt;p&gt;Putting this together gives us the following class for representing the area:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(defclass area ()
+  ((archeological-type :initarg :archeological-type :initform &amp;quot;&amp;quot; :accessor :archeological-type)
+   (size-disturbed :initarg :size-disturbed :initform 0.0 :accessor :size-disturbed)
+    ))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now that we figured out how represent facts, we need to encode the rules of our domain into our system. We can do this with 3 rules that describe what to do in the cases of &lt;code&gt;high archeological value&lt;/code&gt;, &lt;code&gt;high archeological expectation&lt;/code&gt; and &lt;code&gt;archeological expectation&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The rules themselves are written up in the form of the conditions that have to be true, the antecedent, followed by an arrow &lt;code&gt;=&amp;gt;&lt;/code&gt; sign, and the facts or actions that need to be derived, the consequent. In the case of LISA, and in many other rule based definitions, the antecedent and the consequent are also called Left Hand Side (LHS) and Right Hand Side (RHS), as they are respectively on the left and right hand side of the arrow. What exactly can be put into the LHS and RHS is dependent on the language, but one standard way they are used is in the LHS the conditions are described based on the facts that could be in the knowledge base, and on the RHS facts are added in the knowledge based on the meaning of the rule. For example for one of our rules, if the know the fact that our area is of high archaeological value (LHS), we can derive the fact that we need a permit (RHS).&lt;/p&gt;
+
+&lt;p&gt;Describing our three rules this way in LISA looks as follows, using the &lt;code&gt;defule&lt;/code&gt; macro:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;;; If the area is of high archeological value, then a permit is required no matter what the size of the area is to be disturbed.
+(defrule high-value () (area (archeological-type &amp;quot;high-value&amp;quot;)) =&amp;gt; (assert ((make-instance &#39;permit-required))))
+
+;; If the area is of high archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 100m&amp;lt;sup&amp;gt;2&amp;lt;/sup&amp;gt;.
+(defrule high-expectation () (area (archeological-type &amp;quot;high-expectation&amp;quot;) (&amp;gt; size-disturbed 100))  =&amp;gt; (assert ((make-instance &#39;permit-required))))
+
+;; If the area if of archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 1000m&amp;lt;sup&amp;gt;2&amp;lt;/sup&amp;gt;.
+(defrule expectation () (area (archeological-type &amp;quot;expectation&amp;quot;) (&amp;gt; size-disturbed 1000))  =&amp;gt; (assert ((make-instance &#39;permit-required))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The rules are reasonably straightforward, in that they require the condition matching in the knowledge base, before they assert an instance of the &lt;code&gt;permit-required&lt;/code&gt; fact into the knowledge base.&lt;/p&gt;
+
+&lt;p&gt;These together already describe the domain, but for this article we also show how things work with two examples. In one scenario we assert that we have an area with &lt;code&gt;high-value&lt;/code&gt; archaeological type and a to be disturbed are with the size of 2000m&lt;sup&gt;2&lt;/sup&gt;. In this case we would need a permit, due to our &lt;code&gt;high-value&lt;/code&gt; rule. In the second scenario, the area is of &lt;code&gt;high-expectation&lt;/code&gt; but the size of the area disturbed is only 10m&lt;sup&gt;2&lt;/sup&gt;. In this case none our rules will fire, and no &lt;code&gt;permit-required&lt;/code&gt; fact instance is put into the knowledge base.&lt;/p&gt;
+
+&lt;p&gt;Executing the system is just a matter of adding these facts in the knowledge base and letting the system run. In LISA adding a fact can be done using &lt;code&gt;assert&lt;/code&gt; similarly to what the RHS of the rules are doing. To actually run the system, unsurprisingly, the function &lt;code&gt;run&lt;/code&gt; can be called to run the system. To see what facts are in the knowledge base the function &lt;code&gt;facts&lt;/code&gt; prints them out for us to see. To tie things together, we make sure that the knowledge base is reset before we execute anything using &lt;code&gt;reset&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Below is the full example implementation that we put together:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(defpackage common-treasure
+  )
+
+(in-package :lisa-user)
+
+(reset)
+
+(defclass area ()
+  ((archeological-type :initarg :archeological-type :initform &amp;quot;&amp;quot; :accessor :archeological-type)
+   (size-disturbed :initarg :size-disturbed :initform 0.0 :accessor :size-disturbed)
+    ))
+
+(defclass permit-required ()
+  ()
+)
+
+;; If the area is of high archeological value, then a permit is required no matter what the size of the area is to be disturbed.
+(defrule high-value () (area (archeological-type &amp;quot;high-value&amp;quot;)) =&amp;gt; (assert ((make-instance &#39;permit-required))))
+
+;; If the area is of high archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 100m&amp;lt;sup&amp;gt;2&amp;lt;/sup&amp;gt;.
+(defrule high-expectation () (area (archeological-type &amp;quot;high-expectation&amp;quot;) (&amp;gt; size-disturbed 100))  =&amp;gt; (assert ((make-instance &#39;permit-required))))
+
+;; If the area if of archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 1000m&amp;lt;sup&amp;gt;2&amp;lt;/sup&amp;gt;.
+(defrule expectation () (area (archeological-type &amp;quot;expectation&amp;quot;) (&amp;gt; size-disturbed 1000))  =&amp;gt; (assert ((make-instance &#39;permit-required))))
+
+;;Test fact 1
+;; (assert ((make-instance &#39;area :archeological-type &amp;quot;high-value&amp;quot; :size-disturbed 2000)))
+
+;;Test fact 2
+(assert ((make-instance &#39;area :archeological-type &amp;quot;high-expectation&amp;quot; :size-disturbed 10)))
+
+(facts)
+
+(run)
+
+(facts)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that here the &lt;code&gt;fact 1&lt;/code&gt; is commented out, to test the assert of &lt;code&gt;fact 2&lt;/code&gt;, so that running the other scenario is just a matter of commenting and un-commenting the relevant lines.&lt;/p&gt;
+
+&lt;p&gt;For the first scenario, with fact 1, the output of our initial program is as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[package common-treasure]#&amp;lt;INITIAL-FACT ; id 0 {1002669853}&amp;gt;
+#&amp;lt;AREA ; id 1 {1002745373}&amp;gt;
+For a total of 2 facts.
+#&amp;lt;INITIAL-FACT ; id 0 {1002669853}&amp;gt;
+#&amp;lt;AREA ; id 1 {1002745373}&amp;gt;
+#&amp;lt;PERMIT-REQUIRED ; id 2 {100283A363}&amp;gt;
+For a total of 3 facts.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that we print out our facts twice, once before the run and once after, but it shows that now the permit requirement was derived.&lt;/p&gt;
+
+&lt;p&gt;For the case of using &lt;code&gt;fact 2&lt;/code&gt; , we get the following output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[package common-treasure].#&amp;lt;INITIAL-FACT ; id 0 {1004D40AB3}&amp;gt;
+#&amp;lt;AREA ; id 1 {10020107C3}&amp;gt;
+For a total of 2 facts.
+#&amp;lt;INITIAL-FACT ; id 0 {1004D40AB3}&amp;gt;
+#&amp;lt;AREA ; id 1 {10020107C3}&amp;gt;
+For a total of 2 facts.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This shows that our fact base did not change due to our running the inference system.&lt;/p&gt;
+
+&lt;p&gt;So there we have it, a bit of a peek of what can be done with Common Lisp. I have to say the language and its various features are quite a bit daunting, as I feel I have only scratched the surface of what is possible, with both interacting with the language as well as with A.I. tools such as LISA. That said digging into the language and seeing how it can handle a small, but also relevant scenario, felt like a worthwhile journey, and that is an experience always worth treasuring.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Spec-stacular Spider-Man</title>
       <link>/post/spec-stacular-spider-man/</link>
       <pubDate>Sun, 29 Apr 2018 00:00:00 +0200</pubDate>
@@ -828,15 +1091,6 @@ Pale Fire is written by Vladimir Nabokov.
       <pubDate>Tue, 27 Sep 2011 00:00:00 +0000</pubDate>
       
       <guid>/publication/execution-trace-analysis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>An Approach for Modeling Dynamic Analysis using Ontologies</title>
-      <link>/publication/approach-da-ontologies/</link>
-      <pubDate>Mon, 12 Jul 2010 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/approach-da-ontologies/</guid>
       <description></description>
     </item>
     

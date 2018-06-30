@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reasoning on Newres Al Haider</title>
+    <link>/tags/reasoning/</link>
+    <description>Recent content in Reasoning on Newres Al Haider</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
+    <lastBuildDate>Sat, 30 Jun 2018 00:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="/tags/reasoning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Excavating a Common Treasure</title>
+      <link>/post/common-treasure/</link>
+      <pubDate>Sat, 30 Jun 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/post/common-treasure/</guid>
+      <description>History is full of legends of ancient treasures and powerful artifacts, lost to time or hidden by purpose, that would bring glory, power and riches to their discoverer.
+  A winged bull depicted on an on archaeological artifact from the Assyrian empire between 1400 and 1200 BC. Cylinder Seal with Winged Bull - Walters Art Museum Licensed under CC0.   Although the history of software development is much shorter than the history of mankind, nonetheless there already exists artifacts, that have near mythological status when it comes to software development, yet often go hidden underneath the surface.</description>
+    </item>
+    
+    <item>
+      <title>Data Interlinked</title>
+      <link>/post/interlinked-data/</link>
+      <pubDate>Sun, 18 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/interlinked-data/</guid>
+      <description>This article contains some very minor spoilers for the Blade Runner 2049 movie. If you have not seen it yet, by all means do, it is really good.
+&amp;ldquo;And blood-black nothingness began to spin&amp;hellip; A system of cells interlinked within cells interlinked within cells interlinked within one stem&amp;hellip; And dreadfully distinct against the dark, a tall white fountain played.&amp;rdquo;
+  Pale Fire by Vladimir Nabokov  Cover of the novel Pale Fire © Berkley Medallion   The above is a quote from the poem Pale Fire.</description>
+    </item>
+    
+    <item>
+      <title>The Trouble with Triples</title>
+      <link>/post/trouble-with-triples/</link>
+      <pubDate>Sun, 28 Jan 2018 00:00:00 +0100</pubDate>
+      
+      <guid>/post/trouble-with-triples/</guid>
+      <description>In the Star Trek episode &amp;ldquo;The Trouble with Tribbles&amp;rdquo; the crew of the starship Enterprise encounters creatures called Tribbles. They are cute, simple creatures of mysterious origin that seem harmless at first but when they multiply the pose a big problem for the ship and the crew.
+  Tribbles  Tribbles © 1967 Paramount Pictures   Representing and reasoning with knowledge have surprisingly similar problems. A single fact on its own is a relatively straightforward affair.</description>
+    </item>
+    
+    <item>
+      <title>Introduction</title>
+      <link>/post/introduction/</link>
+      <pubDate>Sun, 14 Jan 2018 00:00:00 +0100</pubDate>
+      
+      <guid>/post/introduction/</guid>
+      <description>Welcome to the first post on my blog on which hopefully many will follow. My intention is to write about knowledge representation, reasoning, AI and coding, in an easily digestible but in depth-way.</description>
+    </item>
+    
+  </channel>
+</rss>

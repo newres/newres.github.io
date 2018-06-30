@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Program traces on Newres Al Haider</title>
+    <link>/tags/program-traces/</link>
+    <description>Recent content in Program traces on Newres Al Haider</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
+    <lastBuildDate>Fri, 22 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/program-traces/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Semantic Aware Software Analysis</title>
+      <link>/project/semantic-software-analysis/</link>
+      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/project/semantic-software-analysis/</guid>
+      <description>Software bugs and errors have a monumental negative impact on society. Not only can they have huge monetary cost, ranging into billions of dollars annually in the United States alone, but in some cases can even lead to disasters that lead to the loss of life. Preventing such issues from happening requires a large amount of effort in designing and maintaining software.
+However designing and maintaining error free software remains a difficult problem.</description>
+    </item>
+    
+  </channel>
+</rss>
