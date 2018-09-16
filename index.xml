@@ -94,14 +94,13 @@
 
 &lt;p&gt;Of course this means that in addition to facts we also need some data for the context, in which we store the base and other prefixes and to what they map to, to be able to fully build an equivalent Linked Data representation. The context will be a map of the relevant prefixes as keys, as well as nil for the base prefix. For the above example this means that the below example will describe the context needed to resolve all the full URIs:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;   {nil &amp;quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;quot;
-    :rdf &amp;quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;quot;}
-    ```
-    
-Putting everything together, to have a full Linked Data graph we need a context and a set of facts, so the overall structure will be a map where these are both defined:
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;{nil &amp;quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;quot;
+:rdf &amp;quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
 
-```clojure 
-  {::aes/context
+&lt;p&gt;Putting everything together, to have a full Linked Data graph we need a context and a set of facts, so the overall structure will be a map where these are both defined:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;  {::aes/context
    {nil &amp;quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;quot;
     :rdf &amp;quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;quot;}
    ::aes/facts

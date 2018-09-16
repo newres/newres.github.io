@@ -385,14 +385,13 @@ One of such stories is the tale of the Fox and the Stork. There are many version
 
 <p>Of course this means that in addition to facts we also need some data for the context, in which we store the base and other prefixes and to what they map to, to be able to fully build an equivalent Linked Data representation. The context will be a map of the relevant prefixes as keys, as well as nil for the base prefix. For the above example this means that the below example will describe the context needed to resolve all the full URIs:</p>
 
-<pre><code class="language-clojure">   {nil &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&quot;
-    :rdf &quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;}
-    ```
-    
-Putting everything together, to have a full Linked Data graph we need a context and a set of facts, so the overall structure will be a map where these are both defined:
+<pre><code class="language-clojure">{nil &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&quot;
+:rdf &quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;}
+</code></pre>
 
-```clojure 
-  {::aes/context
+<p>Putting everything together, to have a full Linked Data graph we need a context and a set of facts, so the overall structure will be a map where these are both defined:</p>
+
+<pre><code class="language-clojure">  {::aes/context
    {nil &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&quot;
     :rdf &quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;}
    ::aes/facts
