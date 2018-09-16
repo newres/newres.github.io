@@ -31,6 +31,15 @@
     </item>
     
     <item>
+      <title>Aesopica</title>
+      <link>/tags/aesopica/</link>
+      <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/tags/aesopica/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Archeology</title>
       <link>/tags/archeology/</link>
       <pubDate>Sat, 30 Jun 2018 00:00:00 +0200</pubDate>
@@ -69,7 +78,7 @@
     <item>
       <title>Clojure</title>
       <link>/tags/clojure/</link>
-      <pubDate>Sun, 05 Aug 2018 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
       <guid>/tags/clojure/</guid>
       <description></description>
@@ -213,7 +222,7 @@
     <item>
       <title>Knowledge graph</title>
       <link>/tags/knowledge-graph/</link>
-      <pubDate>Sun, 05 Aug 2018 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
       <guid>/tags/knowledge-graph/</guid>
       <description></description>
@@ -222,7 +231,7 @@
     <item>
       <title>Knowledge representation</title>
       <link>/tags/knowledge-representation/</link>
-      <pubDate>Sun, 05 Aug 2018 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
       <guid>/tags/knowledge-representation/</guid>
       <description></description>
@@ -249,7 +258,7 @@
     <item>
       <title>Linked Data</title>
       <link>/tags/linked-data/</link>
-      <pubDate>Sun, 05 Aug 2018 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
       <guid>/tags/linked-data/</guid>
       <description></description>
@@ -303,7 +312,7 @@
     <item>
       <title>RDF</title>
       <link>/tags/rdf/</link>
-      <pubDate>Sun, 05 Aug 2018 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
       <guid>/tags/rdf/</guid>
       <description></description>
@@ -375,7 +384,7 @@
     <item>
       <title>Semantic Web</title>
       <link>/tags/semantic-web/</link>
-      <pubDate>Sun, 05 Aug 2018 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
       <guid>/tags/semantic-web/</guid>
       <description></description>

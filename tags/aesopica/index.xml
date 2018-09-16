@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>RDF on Newres Al Haider</title>
-    <link>/tags/rdf/</link>
-    <description>Recent content in RDF on Newres Al Haider</description>
+    <title>Aesopica on Newres Al Haider</title>
+    <link>/tags/aesopica/</link>
+    <description>Recent content in Aesopica on Newres Al Haider</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
     <lastBuildDate>Mon, 10 Sep 2018 00:00:00 +0200</lastBuildDate>
     
-	<atom:link href="/tags/rdf/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/aesopica/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,17 +20,6 @@
       <guid>/post/aesopica-1/</guid>
       <description>The stories of attributed to Aesop, called Aesop&amp;rsquo;s Fables or the Aesopica, are an ancient collection of stories that have been passed down to modern day. Of diverse origins they cover a wide variety of themes. Although originally intended for an adult audience, in later times were often used for the education of children.
 One of such stories is the tale of the Fox and the Stork. There are many version of this fable, but the overall outline is generally as follows:</description>
-    </item>
-    
-    <item>
-      <title>Data Interlinked</title>
-      <link>/post/interlinked-data/</link>
-      <pubDate>Sun, 18 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/interlinked-data/</guid>
-      <description>This article contains some very minor spoilers for the Blade Runner 2049 movie. If you have not seen it yet, by all means do, it is really good.
-&amp;ldquo;And blood-black nothingness began to spin&amp;hellip; A system of cells interlinked within cells interlinked within cells interlinked within one stem&amp;hellip; And dreadfully distinct against the dark, a tall white fountain played.&amp;rdquo;
-  Pale Fire by Vladimir Nabokov  Cover of the novel Pale Fire © Berkley Medallion   The above is a quote from the poem Pale Fire.</description>
     </item>
     
   </channel>
