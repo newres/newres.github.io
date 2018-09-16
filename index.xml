@@ -16,9 +16,11 @@
       <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
       <guid>/post/aesopica-1/</guid>
-      <description>&lt;p&gt;The stories of attributed to Aesop, called Aesop&amp;rsquo;s Fables or the Aesopica, are an ancient collection of stories that have been passed down to modern day. Of diverse origins they cover a wide variety of themes. Although originally intended for an adult audience, in later times were often used for the education of children.&lt;/p&gt;
+      <description>
 
-&lt;p&gt;One of such stories is the tale of the Fox and the Stork. There are many version of this fable, but the overall outline is generally as follows:&lt;/p&gt;
+&lt;p&gt;The stories called Aesop&amp;rsquo;s Fables or the Aesopica, are an ancient collection of stories that have been passed down to modern day. These stories are of diverse origins they cover a wide variety of themes. Although originally intended for an adult audience, in later times were often used for the education of children.&lt;/p&gt;
+
+&lt;p&gt;One of such stories is the tale of the Fox and the Stork. There are many versions of this fable, but the overall outline is generally as follows:&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&amp;ldquo;The fox invited the stork to dinner. At the dinner soup was served from a shallow plate, that the fox could eat but the hungry stork could not even taste. In turn the stork invited the fox to a dinner. Dinner was served in a narrow mouthed jug filled with crumbled food. This time the fox could not reach the food, while the stork ate.&amp;rdquo;&lt;/p&gt;
@@ -43,7 +45,7 @@
 &lt;/figure&gt;
 
 
-&lt;p&gt;The intention of stories such as this, as well as text in general, is to convey meaning. However, in addition to humans, a new audience for text has come to light in recent years: machines. To facilitate this new audience a set of technologies has been developed to convey the meaning in text in a precise and unambiguous way that is easily understandable for both humans and machines alike. Many of these new methods fall under the umbrella of the &lt;a href=&#34;https://www.w3.org/standards/semanticweb/&#34; target=&#34;_blank&#34;&gt;Semantic Web&lt;/a&gt;. The goal of the Semantic Web is to create to create a web of data where the meaning of the information is both human and machine understandable.&lt;/p&gt;
+&lt;p&gt;The intention of stories such as these, as well as text in general, is to convey meaning. However, in addition to humans, a new audience for text has come to light in recent years: machines. To facilitate this new audience a set of technologies has been developed to convey the meaning of text in a precise and unambiguous way that is easily understandable for both humans and machines alike. Many of these new methods fall under the umbrella of the &lt;a href=&#34;https://www.w3.org/standards/semanticweb/&#34; target=&#34;_blank&#34;&gt;Semantic Web&lt;/a&gt;. The goal of the Semantic Web is to create a web of data where the meaning of the information is both human and machine understandable.&lt;/p&gt;
 
 &lt;p&gt;One of the cornerstone technologies in conveying information for this purpose is &lt;a href=&#34;https://www.w3.org/standards/semanticweb/data&#34; target=&#34;_blank&#34;&gt;Linked Data&lt;/a&gt;, and in particular the &lt;a href=&#34;https://www.w3.org/RDF/&#34; target=&#34;_blank&#34;&gt;Resource Description Framework (RDF)&lt;/a&gt; standard that defines how this Linked Data can be expressed. I have written a &lt;a href=&#34;https://www.newresalhaider.com/post/interlinked-data/&#34; target=&#34;_blank&#34;&gt;short introduction to Linked Data&lt;/a&gt; before but to summarize: it allows for the expressing information as a set of facts. These facts have the form of subject, predicate, object triples. A set of these facts is often called a knowledge base, or in an alternative view this can also been seen as a knowledge graph where the facts define the nodes and edges.&lt;/p&gt;
 
@@ -80,13 +82,55 @@
 
 &lt;p&gt;To use the data manipulation capabilities of Clojure to enable the Semantic Web, seems like a natural combination. Some previous works also aimed at exploring this area, notably &lt;a href=&#34;https://github.com/ontodev/edn-ld&#34; target=&#34;_blank&#34;&gt;EDN-LD&lt;/a&gt; which gives a convention and a library for working with Linked Data.&lt;/p&gt;
 
-&lt;p&gt;In article we will also explore how we can use Clojure to interact with Linked Data. In our case we will focus on the creation Linked Data from a Clojure environment and we might take different conventions compared to previous work, so we start with a fresh implementation.&lt;/p&gt;
+&lt;p&gt;In this article we will also explore how we can use Clojure to interact with Linked Data. In our case we will focus on the creation Linked Data from a Clojure environment and we might take different conventions compared to previous work, so we start with a fresh implementation.&lt;/p&gt;
 
-&lt;p&gt;In Clojure information is directly represented as data, as opposed to it being encapsulated into various other abstractions such as objects. A large subset of elements data in Clojure is also a data format called &lt;a href=&#34;https://github.com/edn-format/edn&#34; target=&#34;_blank&#34;&gt;the Extensible Data Notation (EDN)&lt;/a&gt;. The built-in elements in this notation are nil, booleans, strings, characters, symbols, keywords, integers, floating-point numbers, lists, vectors, maps and sets. The meaning behind most of these elements is relatively straightforward, so we only give a brief summary of them here and some examples.&lt;/p&gt;
+&lt;p&gt;In Clojure, information is directly represented as data, as opposed to it being encapsulated into various other abstractions such as objects. A large subset of elements data in Clojure is also a data format called &lt;a href=&#34;https://github.com/edn-format/edn&#34; target=&#34;_blank&#34;&gt;the Extensible Data Notation (EDN)&lt;/a&gt;. The built-in elements in this notation are nil, booleans, strings, characters, symbols, keywords, integers, floating-point numbers, lists, vectors, maps and sets. The meaning behind most of these elements is relatively straightforward, so we only give a brief summary of them here and some examples.&lt;/p&gt;
 
-&lt;p&gt;An empty or non-existent element is represeted by &lt;code&gt;nil&lt;/code&gt;, a boolean value can be &lt;code&gt;true&lt;/code&gt; or &lt;code&gt;false&lt;/code&gt;. Strings are written in double quotes, for example: &lt;code&gt;&amp;quot;This sentence is a string.&amp;quot;&lt;/code&gt;. Characters representing single characters, and are preceded by a backslash, for example &lt;code&gt;\c&lt;/code&gt; or &lt;code&gt;\newline&lt;/code&gt;. Symbols are representing identifiers, written by a set of characters (with a few additional rules). Examples of identifiers are for example &lt;code&gt;foo&lt;/code&gt;, &lt;code&gt;clojure.core&lt;/code&gt;, &lt;code&gt;clojure.string/split&lt;/code&gt;. As some of these examples show, in Clojure they are used, among other things to refer to modules and functions. Another interesting feature, as the &lt;code&gt;clojure.string/split&lt;/code&gt; example shows, is that they can be namespaced which helps to organize symbols and avoid name collisions. Keywords are very similar to symbols but they are identifiers that refer to themselves. They are constructed much like symbols, but with a leading &lt;code&gt;:&lt;/code&gt;. Examples of keywords are &lt;code&gt;:fruit&lt;/code&gt; or &lt;code&gt;:company.persons/name&lt;/code&gt;. Integers and floating point numbers are used, as expected, to write numbers &lt;code&gt;3&lt;/code&gt; or &lt;code&gt;4.5&lt;/code&gt; for example.&lt;/p&gt;
+&lt;h5 id=&#34;nil&#34;&gt;Nil&lt;/h5&gt;
 
-&lt;p&gt;All these elements described above can be put in collections. Lists are a sequence of values enclosed in &lt;code&gt;()&lt;/code&gt;, for example &lt;code&gt;(2 &amp;quot;A string.&amp;quot; false)&lt;/code&gt;. Vectors are a sequence of values enclosed in &lt;code&gt;[]&lt;/code&gt;, for example &lt;code&gt;[true nil :company/name]&lt;/code&gt;. which are designed for random access of its elements. Sets are collections of unique values enclosed in &lt;code&gt;#{}&lt;/code&gt;, such as &lt;code&gt;#{:fruit 2}&lt;/code&gt;. Finally maps are key value pairs, enclosed in curly braces &lt;code&gt;{}&lt;/code&gt;, for example &lt;code&gt;{:name &amp;quot;John Smith&amp;quot;, :age 4}&lt;/code&gt;, where each key is unique. Of course collections can also nested any type of collection.&lt;/p&gt;
+&lt;p&gt;An empty or non-existent element is represented by &lt;code&gt;nil&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h5 id=&#34;booleans&#34;&gt;Booleans&lt;/h5&gt;
+
+&lt;p&gt;A boolean value can be &lt;code&gt;true&lt;/code&gt; or &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h5 id=&#34;strings&#34;&gt;Strings&lt;/h5&gt;
+
+&lt;p&gt;Strings are written in double quotes, for example: &lt;code&gt;&amp;quot;This sentence is a string.&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h5 id=&#34;characters&#34;&gt;Characters&lt;/h5&gt;
+
+&lt;p&gt;Characters representing single characters, and are preceded by a backslash, for example &lt;code&gt;\c&lt;/code&gt; or &lt;code&gt;\newline&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h5 id=&#34;symbols&#34;&gt;Symbols&lt;/h5&gt;
+
+&lt;p&gt;Symbols are representing identifiers, written by a set of characters (with a few additional rules). Examples of identifiers are for example &lt;code&gt;foo&lt;/code&gt;, &lt;code&gt;clojure.core&lt;/code&gt;, &lt;code&gt;clojure.string/split&lt;/code&gt;. As some of these examples show, in Clojure they are used, among other things to refer to modules and functions. Another interesting feature, as the &lt;code&gt;clojure.string/split&lt;/code&gt; example shows, is that they can be namespaced which helps to organize symbols and avoid name collisions.&lt;/p&gt;
+
+&lt;h5 id=&#34;keywords&#34;&gt;Keywords&lt;/h5&gt;
+
+&lt;p&gt;Keywords are very similar to symbols but they are identifiers that refer to themselves. They are constructed much like symbols, but with a leading &lt;code&gt;:&lt;/code&gt;. Examples of keywords are &lt;code&gt;:fruit&lt;/code&gt; or &lt;code&gt;:company.persons/name&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h5 id=&#34;integers-and-floats&#34;&gt;Integers and Floats&lt;/h5&gt;
+
+&lt;p&gt;Integers and floats (floating point numbers) are used, as expected, to write numbers &lt;code&gt;3&lt;/code&gt; or &lt;code&gt;4.5&lt;/code&gt; for example.&lt;/p&gt;
+
+&lt;p&gt;All these elements described above can be put in collections.&lt;/p&gt;
+
+&lt;h5 id=&#34;lists&#34;&gt;Lists&lt;/h5&gt;
+
+&lt;p&gt;Lists are a sequence of values enclosed in &lt;code&gt;()&lt;/code&gt;, for example &lt;code&gt;(2 &amp;quot;A string.&amp;quot; false)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h5 id=&#34;vectors&#34;&gt;Vectors&lt;/h5&gt;
+
+&lt;p&gt;Vectors are a sequence of values enclosed in &lt;code&gt;[]&lt;/code&gt;, for example &lt;code&gt;[true nil :company/name]&lt;/code&gt;. which are designed for random access of its elements.&lt;/p&gt;
+
+&lt;h5 id=&#34;sets&#34;&gt;Sets&lt;/h5&gt;
+
+&lt;p&gt;Sets are collections of unique values enclosed in &lt;code&gt;#{}&lt;/code&gt;, such as &lt;code&gt;#{:fruit 2}&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h5 id=&#34;maps&#34;&gt;Maps&lt;/h5&gt;
+
+&lt;p&gt;Finally maps are key value pairs, enclosed in curly braces &lt;code&gt;{}&lt;/code&gt;, for example &lt;code&gt;{:name &amp;quot;John Smith&amp;quot;, :age 4}&lt;/code&gt;, where each key is unique. Of course collections can also nested any type of collection.&lt;/p&gt;
 
 &lt;p&gt;Using this notation elements of EDN, we can build an EDN based version of the story of the Fox and the Stork, using some conventions.&lt;/p&gt;
 

@@ -17,8 +17,8 @@
       
     
   
-  <meta name="description" content="The stories of attributed to Aesop, called Aesop&rsquo;s Fables or the Aesopica, are an ancient collection of stories that have been passed down to modern day. Of diverse origins they cover a wide variety of themes. Although originally intended for an adult audience, in later times were often used for the education of children.
-One of such stories is the tale of the Fox and the Stork. There are many version of this fable, but the overall outline is generally as follows:">
+  <meta name="description" content="The stories called Aesop&rsquo;s Fables or the Aesopica, are an ancient collection of stories that have been passed down to modern day. These stories are of diverse origins they cover a wide variety of themes. Although originally intended for an adult audience, in later times were often used for the education of children.
+One of such stories is the tale of the Fox and the Stork. There are many versions of this fable, but the overall outline is generally as follows:">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/aesopica-1/">
@@ -80,8 +80,8 @@ One of such stories is the tale of the Fox and the Stork. There are many version
   <meta property="og:site_name" content="Newres Al Haider">
   <meta property="og:url" content="/post/aesopica-1/">
   <meta property="og:title" content="Aesopica: part 1 | Newres Al Haider">
-  <meta property="og:description" content="The stories of attributed to Aesop, called Aesop&rsquo;s Fables or the Aesopica, are an ancient collection of stories that have been passed down to modern day. Of diverse origins they cover a wide variety of themes. Although originally intended for an adult audience, in later times were often used for the education of children.
-One of such stories is the tale of the Fox and the Stork. There are many version of this fable, but the overall outline is generally as follows:">
+  <meta property="og:description" content="The stories called Aesop&rsquo;s Fables or the Aesopica, are an ancient collection of stories that have been passed down to modern day. These stories are of diverse origins they cover a wide variety of themes. Although originally intended for an adult audience, in later times were often used for the education of children.
+One of such stories is the tale of the Fox and the Stork. There are many versions of this fable, but the overall outline is generally as follows:">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2018-09-10T00:00:00&#43;02:00">
@@ -307,9 +307,11 @@ One of such stories is the tale of the Fox and the Stork. There are many version
 
 
     <div class="article-style" itemprop="articleBody">
-      <p>The stories of attributed to Aesop, called Aesop&rsquo;s Fables or the Aesopica, are an ancient collection of stories that have been passed down to modern day. Of diverse origins they cover a wide variety of themes. Although originally intended for an adult audience, in later times were often used for the education of children.</p>
+      
 
-<p>One of such stories is the tale of the Fox and the Stork. There are many version of this fable, but the overall outline is generally as follows:</p>
+<p>The stories called Aesop&rsquo;s Fables or the Aesopica, are an ancient collection of stories that have been passed down to modern day. These stories are of diverse origins they cover a wide variety of themes. Although originally intended for an adult audience, in later times were often used for the education of children.</p>
+
+<p>One of such stories is the tale of the Fox and the Stork. There are many versions of this fable, but the overall outline is generally as follows:</p>
 
 <blockquote>
 <p>&ldquo;The fox invited the stork to dinner. At the dinner soup was served from a shallow plate, that the fox could eat but the hungry stork could not even taste. In turn the stork invited the fox to a dinner. Dinner was served in a narrow mouthed jug filled with crumbled food. This time the fox could not reach the food, while the stork ate.&rdquo;</p>
@@ -334,7 +336,7 @@ One of such stories is the tale of the Fox and the Stork. There are many version
 </figure>
 
 
-<p>The intention of stories such as this, as well as text in general, is to convey meaning. However, in addition to humans, a new audience for text has come to light in recent years: machines. To facilitate this new audience a set of technologies has been developed to convey the meaning in text in a precise and unambiguous way that is easily understandable for both humans and machines alike. Many of these new methods fall under the umbrella of the <a href="https://www.w3.org/standards/semanticweb/" target="_blank">Semantic Web</a>. The goal of the Semantic Web is to create to create a web of data where the meaning of the information is both human and machine understandable.</p>
+<p>The intention of stories such as these, as well as text in general, is to convey meaning. However, in addition to humans, a new audience for text has come to light in recent years: machines. To facilitate this new audience a set of technologies has been developed to convey the meaning of text in a precise and unambiguous way that is easily understandable for both humans and machines alike. Many of these new methods fall under the umbrella of the <a href="https://www.w3.org/standards/semanticweb/" target="_blank">Semantic Web</a>. The goal of the Semantic Web is to create a web of data where the meaning of the information is both human and machine understandable.</p>
 
 <p>One of the cornerstone technologies in conveying information for this purpose is <a href="https://www.w3.org/standards/semanticweb/data" target="_blank">Linked Data</a>, and in particular the <a href="https://www.w3.org/RDF/" target="_blank">Resource Description Framework (RDF)</a> standard that defines how this Linked Data can be expressed. I have written a <a href="https://www.newresalhaider.com/post/interlinked-data/" target="_blank">short introduction to Linked Data</a> before but to summarize: it allows for the expressing information as a set of facts. These facts have the form of subject, predicate, object triples. A set of these facts is often called a knowledge base, or in an alternative view this can also been seen as a knowledge graph where the facts define the nodes and edges.</p>
 
@@ -371,13 +373,55 @@ One of such stories is the tale of the Fox and the Stork. There are many version
 
 <p>To use the data manipulation capabilities of Clojure to enable the Semantic Web, seems like a natural combination. Some previous works also aimed at exploring this area, notably <a href="https://github.com/ontodev/edn-ld" target="_blank">EDN-LD</a> which gives a convention and a library for working with Linked Data.</p>
 
-<p>In article we will also explore how we can use Clojure to interact with Linked Data. In our case we will focus on the creation Linked Data from a Clojure environment and we might take different conventions compared to previous work, so we start with a fresh implementation.</p>
+<p>In this article we will also explore how we can use Clojure to interact with Linked Data. In our case we will focus on the creation Linked Data from a Clojure environment and we might take different conventions compared to previous work, so we start with a fresh implementation.</p>
 
-<p>In Clojure information is directly represented as data, as opposed to it being encapsulated into various other abstractions such as objects. A large subset of elements data in Clojure is also a data format called <a href="https://github.com/edn-format/edn" target="_blank">the Extensible Data Notation (EDN)</a>. The built-in elements in this notation are nil, booleans, strings, characters, symbols, keywords, integers, floating-point numbers, lists, vectors, maps and sets. The meaning behind most of these elements is relatively straightforward, so we only give a brief summary of them here and some examples.</p>
+<p>In Clojure, information is directly represented as data, as opposed to it being encapsulated into various other abstractions such as objects. A large subset of elements data in Clojure is also a data format called <a href="https://github.com/edn-format/edn" target="_blank">the Extensible Data Notation (EDN)</a>. The built-in elements in this notation are nil, booleans, strings, characters, symbols, keywords, integers, floating-point numbers, lists, vectors, maps and sets. The meaning behind most of these elements is relatively straightforward, so we only give a brief summary of them here and some examples.</p>
 
-<p>An empty or non-existent element is represeted by <code>nil</code>, a boolean value can be <code>true</code> or <code>false</code>. Strings are written in double quotes, for example: <code>&quot;This sentence is a string.&quot;</code>. Characters representing single characters, and are preceded by a backslash, for example <code>\c</code> or <code>\newline</code>. Symbols are representing identifiers, written by a set of characters (with a few additional rules). Examples of identifiers are for example <code>foo</code>, <code>clojure.core</code>, <code>clojure.string/split</code>. As some of these examples show, in Clojure they are used, among other things to refer to modules and functions. Another interesting feature, as the <code>clojure.string/split</code> example shows, is that they can be namespaced which helps to organize symbols and avoid name collisions. Keywords are very similar to symbols but they are identifiers that refer to themselves. They are constructed much like symbols, but with a leading <code>:</code>. Examples of keywords are <code>:fruit</code> or <code>:company.persons/name</code>. Integers and floating point numbers are used, as expected, to write numbers <code>3</code> or <code>4.5</code> for example.</p>
+<h5 id="nil">Nil</h5>
 
-<p>All these elements described above can be put in collections. Lists are a sequence of values enclosed in <code>()</code>, for example <code>(2 &quot;A string.&quot; false)</code>. Vectors are a sequence of values enclosed in <code>[]</code>, for example <code>[true nil :company/name]</code>. which are designed for random access of its elements. Sets are collections of unique values enclosed in <code>#{}</code>, such as <code>#{:fruit 2}</code>. Finally maps are key value pairs, enclosed in curly braces <code>{}</code>, for example <code>{:name &quot;John Smith&quot;, :age 4}</code>, where each key is unique. Of course collections can also nested any type of collection.</p>
+<p>An empty or non-existent element is represented by <code>nil</code>.</p>
+
+<h5 id="booleans">Booleans</h5>
+
+<p>A boolean value can be <code>true</code> or <code>false</code>.</p>
+
+<h5 id="strings">Strings</h5>
+
+<p>Strings are written in double quotes, for example: <code>&quot;This sentence is a string.&quot;</code>.</p>
+
+<h5 id="characters">Characters</h5>
+
+<p>Characters representing single characters, and are preceded by a backslash, for example <code>\c</code> or <code>\newline</code>.</p>
+
+<h5 id="symbols">Symbols</h5>
+
+<p>Symbols are representing identifiers, written by a set of characters (with a few additional rules). Examples of identifiers are for example <code>foo</code>, <code>clojure.core</code>, <code>clojure.string/split</code>. As some of these examples show, in Clojure they are used, among other things to refer to modules and functions. Another interesting feature, as the <code>clojure.string/split</code> example shows, is that they can be namespaced which helps to organize symbols and avoid name collisions.</p>
+
+<h5 id="keywords">Keywords</h5>
+
+<p>Keywords are very similar to symbols but they are identifiers that refer to themselves. They are constructed much like symbols, but with a leading <code>:</code>. Examples of keywords are <code>:fruit</code> or <code>:company.persons/name</code>.</p>
+
+<h5 id="integers-and-floats">Integers and Floats</h5>
+
+<p>Integers and floats (floating point numbers) are used, as expected, to write numbers <code>3</code> or <code>4.5</code> for example.</p>
+
+<p>All these elements described above can be put in collections.</p>
+
+<h5 id="lists">Lists</h5>
+
+<p>Lists are a sequence of values enclosed in <code>()</code>, for example <code>(2 &quot;A string.&quot; false)</code>.</p>
+
+<h5 id="vectors">Vectors</h5>
+
+<p>Vectors are a sequence of values enclosed in <code>[]</code>, for example <code>[true nil :company/name]</code>. which are designed for random access of its elements.</p>
+
+<h5 id="sets">Sets</h5>
+
+<p>Sets are collections of unique values enclosed in <code>#{}</code>, such as <code>#{:fruit 2}</code>.</p>
+
+<h5 id="maps">Maps</h5>
+
+<p>Finally maps are key value pairs, enclosed in curly braces <code>{}</code>, for example <code>{:name &quot;John Smith&quot;, :age 4}</code>, where each key is unique. Of course collections can also nested any type of collection.</p>
 
 <p>Using this notation elements of EDN, we can build an EDN based version of the story of the Fox and the Stork, using some conventions.</p>
 
