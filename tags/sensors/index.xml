@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sensors on Newres Al Haider</title>
-    <link>/tags/sensors/</link>
+    <link>https://www.newresalhaider.com/tags/sensors/</link>
     <description>Recent content in Sensors on Newres Al Haider</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
     <lastBuildDate>Sat, 30 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/sensors/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.newresalhaider.com/tags/sensors/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Smart Industry Software</title>
-      <link>/project/innius/</link>
+      <link>https://www.newresalhaider.com/project/innius/</link>
       <pubDate>Sat, 30 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/project/innius/</guid>
+      <guid>https://www.newresalhaider.com/project/innius/</guid>
       <description></description>
     </item>
     

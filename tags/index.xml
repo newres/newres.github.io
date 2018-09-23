@@ -2,436 +2,436 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Newres Al Haider</title>
-    <link>/tags/</link>
+    <link>https://www.newresalhaider.com/tags/</link>
     <description>Recent content in Tags on Newres Al Haider</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
     <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.newresalhaider.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Content tagged as &#39;Law&#39;</title>
-      <link>/tags/academic/</link>
+      <link>https://www.newresalhaider.com/tags/academic/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/academic/</guid>
+      <guid>https://www.newresalhaider.com/tags/academic/</guid>
       <description>Here is a list of all the content that has been tagged as Law.</description>
     </item>
     
     <item>
       <title>AI</title>
-      <link>/tags/ai/</link>
+      <link>https://www.newresalhaider.com/tags/ai/</link>
       <pubDate>Sun, 14 Jan 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/ai/</guid>
+      <guid>https://www.newresalhaider.com/tags/ai/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Aesopica</title>
-      <link>/tags/aesopica/</link>
+      <link>https://www.newresalhaider.com/tags/aesopica/</link>
       <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/aesopica/</guid>
+      <guid>https://www.newresalhaider.com/tags/aesopica/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Archeology</title>
-      <link>/tags/archeology/</link>
+      <link>https://www.newresalhaider.com/tags/archeology/</link>
       <pubDate>Sat, 30 Jun 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/archeology/</guid>
+      <guid>https://www.newresalhaider.com/tags/archeology/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Art</title>
-      <link>/tags/art/</link>
+      <link>https://www.newresalhaider.com/tags/art/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/art/</guid>
+      <guid>https://www.newresalhaider.com/tags/art/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Banking</title>
-      <link>/tags/banking/</link>
+      <link>https://www.newresalhaider.com/tags/banking/</link>
       <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/banking/</guid>
+      <guid>https://www.newresalhaider.com/tags/banking/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Clinical</title>
-      <link>/tags/clinical/</link>
+      <link>https://www.newresalhaider.com/tags/clinical/</link>
       <pubDate>Fri, 29 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/clinical/</guid>
+      <guid>https://www.newresalhaider.com/tags/clinical/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Clojure</title>
-      <link>/tags/clojure/</link>
+      <link>https://www.newresalhaider.com/tags/clojure/</link>
       <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/clojure/</guid>
+      <guid>https://www.newresalhaider.com/tags/clojure/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Clojure.spec</title>
-      <link>/tags/clojure.spec/</link>
+      <link>https://www.newresalhaider.com/tags/clojure.spec/</link>
       <pubDate>Sun, 29 Apr 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/clojure.spec/</guid>
+      <guid>https://www.newresalhaider.com/tags/clojure.spec/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ClojureScript</title>
-      <link>/tags/clojurescript/</link>
+      <link>https://www.newresalhaider.com/tags/clojurescript/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/clojurescript/</guid>
+      <guid>https://www.newresalhaider.com/tags/clojurescript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Common Lisp</title>
-      <link>/tags/common-lisp/</link>
+      <link>https://www.newresalhaider.com/tags/common-lisp/</link>
       <pubDate>Sat, 30 Jun 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/common-lisp/</guid>
+      <guid>https://www.newresalhaider.com/tags/common-lisp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dart</title>
-      <link>/tags/dart/</link>
+      <link>https://www.newresalhaider.com/tags/dart/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/dart/</guid>
+      <guid>https://www.newresalhaider.com/tags/dart/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dynamic analysis</title>
-      <link>/tags/dynamic-analysis/</link>
+      <link>https://www.newresalhaider.com/tags/dynamic-analysis/</link>
       <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/dynamic-analysis/</guid>
+      <guid>https://www.newresalhaider.com/tags/dynamic-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>FinTech</title>
-      <link>/tags/fintech/</link>
+      <link>https://www.newresalhaider.com/tags/fintech/</link>
       <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/fintech/</guid>
+      <guid>https://www.newresalhaider.com/tags/fintech/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Flutter</title>
-      <link>/tags/flutter/</link>
+      <link>https://www.newresalhaider.com/tags/flutter/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/flutter/</guid>
+      <guid>https://www.newresalhaider.com/tags/flutter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Golang</title>
-      <link>/tags/golang/</link>
+      <link>https://www.newresalhaider.com/tags/golang/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/golang/</guid>
+      <guid>https://www.newresalhaider.com/tags/golang/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Haskell</title>
-      <link>/tags/haskell/</link>
+      <link>https://www.newresalhaider.com/tags/haskell/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/haskell/</guid>
+      <guid>https://www.newresalhaider.com/tags/haskell/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Health</title>
-      <link>/tags/health/</link>
+      <link>https://www.newresalhaider.com/tags/health/</link>
       <pubDate>Fri, 29 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/health/</guid>
+      <guid>https://www.newresalhaider.com/tags/health/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Idris</title>
-      <link>/tags/idris/</link>
+      <link>https://www.newresalhaider.com/tags/idris/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/idris/</guid>
+      <guid>https://www.newresalhaider.com/tags/idris/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Industrial</title>
-      <link>/tags/industrial/</link>
+      <link>https://www.newresalhaider.com/tags/industrial/</link>
       <pubDate>Sat, 30 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/industrial/</guid>
+      <guid>https://www.newresalhaider.com/tags/industrial/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Introduction</title>
-      <link>/tags/introduction/</link>
+      <link>https://www.newresalhaider.com/tags/introduction/</link>
       <pubDate>Sun, 14 Jan 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/introduction/</guid>
+      <guid>https://www.newresalhaider.com/tags/introduction/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Java</title>
-      <link>/tags/java/</link>
+      <link>https://www.newresalhaider.com/tags/java/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/java/</guid>
+      <guid>https://www.newresalhaider.com/tags/java/</guid>
       <description></description>
     </item>
     
     <item>
       <title>JavaScript</title>
-      <link>/tags/javascript/</link>
+      <link>https://www.newresalhaider.com/tags/javascript/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/javascript/</guid>
+      <guid>https://www.newresalhaider.com/tags/javascript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Knowledge graph</title>
-      <link>/tags/knowledge-graph/</link>
+      <link>https://www.newresalhaider.com/tags/knowledge-graph/</link>
       <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/knowledge-graph/</guid>
+      <guid>https://www.newresalhaider.com/tags/knowledge-graph/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Knowledge representation</title>
-      <link>/tags/knowledge-representation/</link>
+      <link>https://www.newresalhaider.com/tags/knowledge-representation/</link>
       <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/knowledge-representation/</guid>
+      <guid>https://www.newresalhaider.com/tags/knowledge-representation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kotlin</title>
-      <link>/tags/kotlin/</link>
+      <link>https://www.newresalhaider.com/tags/kotlin/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/kotlin/</guid>
+      <guid>https://www.newresalhaider.com/tags/kotlin/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Law</title>
-      <link>/tags/law/</link>
+      <link>https://www.newresalhaider.com/tags/law/</link>
       <pubDate>Sat, 30 Jun 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/law/</guid>
+      <guid>https://www.newresalhaider.com/tags/law/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linked Data</title>
-      <link>/tags/linked-data/</link>
+      <link>https://www.newresalhaider.com/tags/linked-data/</link>
       <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/linked-data/</guid>
+      <guid>https://www.newresalhaider.com/tags/linked-data/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Program analysis</title>
-      <link>/tags/program-analysis/</link>
+      <link>https://www.newresalhaider.com/tags/program-analysis/</link>
       <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/program-analysis/</guid>
+      <guid>https://www.newresalhaider.com/tags/program-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Program traces</title>
-      <link>/tags/program-traces/</link>
+      <link>https://www.newresalhaider.com/tags/program-traces/</link>
       <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/program-traces/</guid>
+      <guid>https://www.newresalhaider.com/tags/program-traces/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Programming languages</title>
-      <link>/tags/programming-languages/</link>
+      <link>https://www.newresalhaider.com/tags/programming-languages/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/programming-languages/</guid>
+      <guid>https://www.newresalhaider.com/tags/programming-languages/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Prolog</title>
-      <link>/tags/prolog/</link>
+      <link>https://www.newresalhaider.com/tags/prolog/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/prolog/</guid>
+      <guid>https://www.newresalhaider.com/tags/prolog/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>/tags/python/</link>
+      <link>https://www.newresalhaider.com/tags/python/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/python/</guid>
+      <guid>https://www.newresalhaider.com/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>RDF</title>
-      <link>/tags/rdf/</link>
+      <link>https://www.newresalhaider.com/tags/rdf/</link>
       <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/rdf/</guid>
+      <guid>https://www.newresalhaider.com/tags/rdf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>React Native</title>
-      <link>/tags/react-native/</link>
+      <link>https://www.newresalhaider.com/tags/react-native/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/react-native/</guid>
+      <guid>https://www.newresalhaider.com/tags/react-native/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Reasoning</title>
-      <link>/tags/reasoning/</link>
+      <link>https://www.newresalhaider.com/tags/reasoning/</link>
       <pubDate>Sat, 30 Jun 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/reasoning/</guid>
+      <guid>https://www.newresalhaider.com/tags/reasoning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rules</title>
-      <link>/tags/rules/</link>
+      <link>https://www.newresalhaider.com/tags/rules/</link>
       <pubDate>Sat, 30 Jun 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/rules/</guid>
+      <guid>https://www.newresalhaider.com/tags/rules/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rules engine</title>
-      <link>/tags/rules-engine/</link>
+      <link>https://www.newresalhaider.com/tags/rules-engine/</link>
       <pubDate>Sat, 30 Jun 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/rules-engine/</guid>
+      <guid>https://www.newresalhaider.com/tags/rules-engine/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rust</title>
-      <link>/tags/rust/</link>
+      <link>https://www.newresalhaider.com/tags/rust/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/rust/</guid>
+      <guid>https://www.newresalhaider.com/tags/rust/</guid>
       <description></description>
     </item>
     
     <item>
       <title>SNOMED CT</title>
-      <link>/tags/snomed-ct/</link>
+      <link>https://www.newresalhaider.com/tags/snomed-ct/</link>
       <pubDate>Fri, 29 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/snomed-ct/</guid>
+      <guid>https://www.newresalhaider.com/tags/snomed-ct/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Scala</title>
-      <link>/tags/scala/</link>
+      <link>https://www.newresalhaider.com/tags/scala/</link>
       <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
       
-      <guid>/tags/scala/</guid>
+      <guid>https://www.newresalhaider.com/tags/scala/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Semantic Web</title>
-      <link>/tags/semantic-web/</link>
+      <link>https://www.newresalhaider.com/tags/semantic-web/</link>
       <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/semantic-web/</guid>
+      <guid>https://www.newresalhaider.com/tags/semantic-web/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sensors</title>
-      <link>/tags/sensors/</link>
+      <link>https://www.newresalhaider.com/tags/sensors/</link>
       <pubDate>Sat, 30 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/sensors/</guid>
+      <guid>https://www.newresalhaider.com/tags/sensors/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Software</title>
-      <link>/tags/software/</link>
+      <link>https://www.newresalhaider.com/tags/software/</link>
       <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/software/</guid>
+      <guid>https://www.newresalhaider.com/tags/software/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Software contracts</title>
-      <link>/tags/software-contracts/</link>
+      <link>https://www.newresalhaider.com/tags/software-contracts/</link>
       <pubDate>Sun, 29 Apr 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/software-contracts/</guid>
+      <guid>https://www.newresalhaider.com/tags/software-contracts/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Specs</title>
-      <link>/tags/specs/</link>
+      <link>https://www.newresalhaider.com/tags/specs/</link>
       <pubDate>Sun, 29 Apr 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tags/specs/</guid>
+      <guid>https://www.newresalhaider.com/tags/specs/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Triples</title>
-      <link>/tags/triples/</link>
+      <link>https://www.newresalhaider.com/tags/triples/</link>
       <pubDate>Sun, 18 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/triples/</guid>
+      <guid>https://www.newresalhaider.com/tags/triples/</guid>
       <description></description>
     </item>
     

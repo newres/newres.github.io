@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Newres Al Haider</title>
-    <link>/categories/</link>
+    <link>https://www.newresalhaider.com/categories/</link>
     <description>Recent content in Categories on Newres Al Haider</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
     
-	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.newresalhaider.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

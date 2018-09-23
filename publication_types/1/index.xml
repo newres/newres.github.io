@@ -2,67 +2,67 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>1 on Newres Al Haider</title>
-    <link>/publication_types/1/</link>
+    <link>https://www.newresalhaider.com/publication_types/1/</link>
     <description>Recent content in 1 on Newres Al Haider</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
     <lastBuildDate>Mon, 27 Oct 2014 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/publication_types/1/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.newresalhaider.com/publication_types/1/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Integrating existing large scale medical laboratory data into the semantic web framework</title>
-      <link>/publication/medical-data-semantic/</link>
+      <link>https://www.newresalhaider.com/publication/medical-data-semantic/</link>
       <pubDate>Mon, 27 Oct 2014 00:00:00 +0000</pubDate>
       
-      <guid>/publication/medical-data-semantic/</guid>
+      <guid>https://www.newresalhaider.com/publication/medical-data-semantic/</guid>
       <description></description>
     </item>
     
     <item>
       <title>A cross-platform benchmark framework for mobile semantic web reasoning engines</title>
-      <link>/publication/benchmark-framework/</link>
+      <link>https://www.newresalhaider.com/publication/benchmark-framework/</link>
       <pubDate>Sun, 19 Oct 2014 00:00:00 +0000</pubDate>
       
-      <guid>/publication/benchmark-framework/</guid>
+      <guid>https://www.newresalhaider.com/publication/benchmark-framework/</guid>
       <description></description>
     </item>
     
     <item>
       <title>A comparison of mobile rule engines for reasoning on semantic web based health data</title>
-      <link>/publication/comparison-mobile-rule-engines/</link>
+      <link>https://www.newresalhaider.com/publication/comparison-mobile-rule-engines/</link>
       <pubDate>Mon, 11 Aug 2014 00:00:00 +0000</pubDate>
       
-      <guid>/publication/comparison-mobile-rule-engines/</guid>
+      <guid>https://www.newresalhaider.com/publication/comparison-mobile-rule-engines/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Towards Guideline Compliant Clinical Decision Support System Integration in Smart and Mobile Environments: Formalizing and Using Clinical Guidelines For Diagnosing Sleep Apnea</title>
-      <link>/publication/towards-cdss-mobile/</link>
+      <link>https://www.newresalhaider.com/publication/towards-cdss-mobile/</link>
       <pubDate>Wed, 18 Jun 2014 00:00:00 +0000</pubDate>
       
-      <guid>/publication/towards-cdss-mobile/</guid>
+      <guid>https://www.newresalhaider.com/publication/towards-cdss-mobile/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Execution Trace Exploration and Analysis using Ontologies</title>
-      <link>/publication/execution-trace-analysis/</link>
+      <link>https://www.newresalhaider.com/publication/execution-trace-analysis/</link>
       <pubDate>Tue, 27 Sep 2011 00:00:00 +0000</pubDate>
       
-      <guid>/publication/execution-trace-analysis/</guid>
+      <guid>https://www.newresalhaider.com/publication/execution-trace-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>An Approach for Modeling Dynamic Analysis using Ontologies</title>
-      <link>/publication/approach-da-ontologies/</link>
+      <link>https://www.newresalhaider.com/publication/approach-da-ontologies/</link>
       <pubDate>Mon, 12 Jul 2010 00:00:00 +0000</pubDate>
       
-      <guid>/publication/approach-da-ontologies/</guid>
+      <guid>https://www.newresalhaider.com/publication/approach-da-ontologies/</guid>
       <description></description>
     </item>
     
