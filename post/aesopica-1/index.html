@@ -353,28 +353,28 @@ One of such stories is the tale of the Fox and the Stork. There are many version
 
 <p>In a Linked Data representation the story of Fox and the Stork would look something like this:</p>
 
-<pre><code class="language-rdf">@base &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork&gt; .
+<pre><code class="language-rdf">@base &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt; .
 @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
 
-&lt;#fox&gt; rdf:type &lt;#animal&gt;.
-&lt;#stork&gt; rdf:type &lt;#animal&gt;.
-&lt;#fox&gt; &lt;#gives-invitation&gt; &lt;#invitation1&gt;.
-&lt;#invitation1&gt; &lt;#has-invited&gt; &lt;#stork&gt;.
-&lt;#invitation1&gt; &lt;#has-food&gt; &lt;#soup&gt;.
-&lt;#invitation1&gt; &lt;#serves-using&gt; &lt;#shallow-plate&gt;.
-&lt;#stork&gt; &lt;#gives-invitation&gt; &lt;#invitation2&gt;.
-&lt;#invitation2&gt; &lt;#has-invited&gt; &lt;#fox&gt;.
-&lt;#invitation2&gt; &lt;#has-food&gt; &lt;#crumbled-food&gt;.
-&lt;#invitation2&gt; &lt;#serves-using&gt; &lt;#narrow-mouthed-jug&gt;.
-&lt;#fox&gt; &lt;#can-eat-food-served-using&gt; &lt;#shallow-plate&gt;.
-&lt;#fox&gt; &lt;#can-not-eat-food-served-using&gt; &lt;#narrow-mouthed-jug&gt;.
-&lt;#stork&gt; &lt;#can-eat-food-served-using&gt; &lt;#narrow-mouthed-jug&gt;.
-&lt;#stork&gt; &lt;#can-not-eat-food-served-using&gt; &lt;#shallow-plate&gt;.
+&lt;fox&gt; rdf:type &lt;animal&gt;.
+&lt;stork&gt; rdf:type &lt;animal&gt;.
+&lt;fox&gt; &lt;gives-invitation&gt; &lt;invitation1&gt;.
+&lt;invitation1&gt; &lt;has-invited&gt; &lt;stork&gt;.
+&lt;invitation1&gt; &lt;has-food&gt; &lt;soup&gt;.
+&lt;invitation1&gt; &lt;serves-using&gt; &lt;shallow-plate&gt;.
+&lt;stork&gt; &lt;gives-invitation&gt; &lt;invitation2&gt;.
+&lt;invitation2&gt; &lt;has-invited&gt; &lt;fox&gt;.
+&lt;invitation2&gt; &lt;has-food&gt; &lt;crumbled-food&gt;.
+&lt;invitation2&gt; &lt;serves-using&gt; &lt;narrow-mouthed-jug&gt;.
+&lt;fox&gt; &lt;can-eat-food-served-using&gt; &lt;shallow-plate&gt;.
+&lt;fox&gt; &lt;can-not-eat-food-served-using&gt; &lt;narrow-mouthed-jug&gt;.
+&lt;stork&gt; &lt;can-eat-food-served-using&gt; &lt;narrow-mouthed-jug&gt;.
+&lt;stork&gt; &lt;can-not-eat-food-served-using&gt; &lt;shallow-plate&gt;.
 </code></pre>
 
 <p>This is in the <a href="https://www.w3.org/TR/turtle/" target="_blank">Turtle syntax</a> of RDF. There are other types of syntax are available to represent Linked Data, for example in JSON form as <a href="https://www.w3.org/TR/json-ld/" target="_blank">JSON-LD</a>.</p>
 
-<p>To summarize a bit of what this Linked Data format does in this scenario, is that it uses <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier" target="_blank">Uniform Resource Identifiers (URIs)</a> to define the subjects, predicates and objects of each fact. This allows to precisely and unambiguously define and link the meaning between these elements. For example, the fact that the fox is a type of animal could be expressed by the triple with the full URIs: <code>http://www.newresalhaider.com/ontologies/aesop/foxstork#fox http://www.w3.org/1999/02/22-rdf-syntax-ns#type http://www.newresalhaider.com/ontologies/aesop/foxstork#animal .</code> Due to the fact that writing the full URIs can be quite cumbersome, the Turtle syntax uses two kinds of shorthands to help out. In this case one can define a base URI for the current document, <a href="http://www.newresalhaider.com/ontologies/aesop/foxstork" target="_blank">http://www.newresalhaider.com/ontologies/aesop/foxstork</a>, as well as prefixes for other namespeaces, such as <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#" target="_blank">http://www.w3.org/1999/02/22-rdf-syntax-ns#</a>, with which the writing of each fact that would begin with these URI fragments could be shortened.</p>
+<p>To summarize a bit of what this Linked Data format does in this scenario, is that it uses <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier" target="_blank">Uniform Resource Identifiers (URIs)</a> to define the subjects, predicates and objects of each fact. This allows to precisely and unambiguously define and link the meaning between these elements. For example, the fact that the fox is a type of animal could be expressed by the triple with the full URIs: <code>http://www.newresalhaider.com/ontologies/aesop/foxstork/fox http://www.w3.org/1999/02/22-rdf-syntax-ns#type http://www.newresalhaider.com/ontologies/aesop/foxstork/animal .</code> Due to the fact that writing the full URIs can be quite cumbersome, the Turtle syntax uses two kinds of shorthands to help out. In this case one can define a base URI for the current document, <a href="http://www.newresalhaider.com/ontologies/aesop/foxstork" target="_blank">http://www.newresalhaider.com/ontologies/aesop/foxstork</a>, as well as prefixes for other namespeaces, such as <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#" target="_blank">http://www.w3.org/1999/02/22-rdf-syntax-ns#</a>, with which the writing of each fact that would begin with these URI fragments could be shortened.</p>
 
 <p>When everything put together this format still describes the original story, albeit restructured into separate facts.</p>
 

@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
-    <lastBuildDate>Mon, 10 Sep 2018 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 14 Sep 2018 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://www.newresalhaider.com/tags/knowledge-graph/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Aesopica: part 2</title>
+      <link>https://www.newresalhaider.com/post/aesopica-2/</link>
+      <pubDate>Fri, 14 Sep 2018 00:00:00 +0200</pubDate>
+      
+      <guid>https://www.newresalhaider.com/post/aesopica-2/</guid>
+      <description>This article is the second part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&amp;rsquo;s stories. Part one can be found on this site where we reprsted basic elements of the Fox and the Stork story. In this article we examine how literal values can be represented, using Clojure, in Linked Data.
+As mentioned in the previous article the story of the Fox and the Stork is about the fox who invited the stork for a dinner.</description>
+    </item>
     
     <item>
       <title>Aesopica: part 1</title>

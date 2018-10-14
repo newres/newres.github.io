@@ -11,6 +11,85 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Aesopica: part 2</title>
+      <link>https://www.newresalhaider.com/post/aesopica-2/</link>
+      <pubDate>Fri, 14 Sep 2018 00:00:00 +0200</pubDate>
+      
+      <guid>https://www.newresalhaider.com/post/aesopica-2/</guid>
+      <description>&lt;p&gt;This article is the second part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&amp;rsquo;s stories. Part one can be found &lt;a href=&#34;https://www.newresalhaider.com/post/aesopica-1/&#34; target=&#34;_blank&#34;&gt;on this site&lt;/a&gt; where we reprsted basic elements of the Fox and the Stork story. In this article we examine how literal values can be represented, using Clojure, in Linked Data.&lt;/p&gt;
+
+&lt;p&gt;As mentioned in the previous article the story of the Fox and the Stork is about the fox who invited the stork for a dinner. At the dinner soup was served from a shallow plate that the fox could eat but the stork could not. In return, the stork invited the fox to a dinner, where the food was served in a narrow mouthed jug. This time the fox could not reach the food, while the stork at it happily.&lt;/p&gt;
+
+&lt;p&gt;Elements of this story can be represented as &lt;a href=&#34;https://www.w3.org/standards/semanticweb/data&#34; target=&#34;_blank&#34;&gt;Linked Data&lt;/a&gt;, and in particular the &lt;a href=&#34;https://www.w3.org/RDF/&#34; target=&#34;_blank&#34;&gt;Resource Description Framework (RDF)&lt;/a&gt; that allows for a precise retelling of the story that is understandable to both humans and machines alike.&lt;/p&gt;
+
+&lt;p&gt;For example, the part of the Linked Data we generated in the previous article is as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-rdf&#34;&gt;@base &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;gt; .
+@prefix rdf: &amp;lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;gt; .
+
+&amp;lt;fox&amp;gt; rdf:type &amp;lt;animal&amp;gt;.
+&amp;lt;stork&amp;gt; rdf:type &amp;lt;animal&amp;gt;.
+&amp;lt;fox&amp;gt; &amp;lt;gives-invitation&amp;gt; &amp;lt;invitation1&amp;gt;.
+&amp;lt;invitation1&amp;gt; &amp;lt;has-invited&amp;gt; &amp;lt;stork&amp;gt;.
+&amp;lt;invitation1&amp;gt; &amp;lt;has-food&amp;gt; &amp;lt;soup&amp;gt;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;which details the elements of the story that the fox invites the stork, where soup is served. Elements that might be implicitly obvious to a human reader, but not to a program, that the fox and the stork are animals, are also represented in this fragment. These elements are describes as a set of facts, where each fact is a triple in the form of a subject, predicate and object. Each part of these facts in this example are represented as a &lt;a href=&#34;https://en.wikipedia.org/wiki/Uniform_Resource_Identifier&#34; target=&#34;_blank&#34;&gt;Uniform Resource Identifier (URI)&lt;/a&gt;, which are shortened with prefixes (i.e. &lt;code&gt;&amp;quot;rdf&amp;quot;&lt;/code&gt;) or the base URI (i.e. &lt;code&gt;&amp;lt;fox&amp;gt;&lt;/code&gt; is a shorthand for &lt;code&gt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&lt;/code&gt; ).&lt;/p&gt;
+
+&lt;p&gt;Now suppose we want to expand on the elements of this story. For example, we want to give the fox and the stork a name, an age, describe their personalities, give a time for the dinners, etc. For many of these elements we want to simply use value as objects in the representations. For example the number &lt;code&gt;2&lt;/code&gt; as a representative of the age of the fox. In such scenarios we do not use URIs in the facts but &lt;a href=&#34;https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal&#34; target=&#34;_blank&#34;&gt;Literals&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Literals can be used to denote numbers, strings, dates and other such elements. In the Linked Data representation below we describe various attributes of the fox, the stork and the dinner with such literals.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-rdf&#34;&gt;@base &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;gt; .
+  @prefix rdf: &amp;lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;gt; .
+  @prefix foaf: &amp;lt;http://xmlns.com/foaf/0.1/&amp;gt; .
+  @prefix xsd: &amp;lt;http://www.w3.org/2001/XMLSchema#&amp;gt;.
+
+  &amp;lt;fox&amp;gt; rdf:type &amp;lt;animal&amp;gt;.
+  &amp;lt;fox&amp;gt; foaf:name &amp;quot;vo&amp;quot;.
+  &amp;lt;fox&amp;gt; foaf:age 2.
+  &amp;lt;fox&amp;gt; &amp;lt;is-cunning&amp;gt; true.
+  &amp;lt;stork&amp;gt; rdf:type &amp;lt;animal&amp;gt;.
+  &amp;lt;stork&amp;gt; foaf:name &amp;quot;ooi&amp;quot;.
+  &amp;lt;stork&amp;gt; foaf:age 13.
+  &amp;lt;stork&amp;gt; &amp;lt;is-cunning&amp;gt; true.
+  &amp;lt;dinner1&amp;gt; &amp;lt;has-date&amp;gt; &amp;quot;2006-06-30T20:00:00&amp;quot;^^xsd:dateTime
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As one can see in this example, representing literals is very similar to other objects. For example &lt;code&gt;&amp;quot;vo&amp;quot;&lt;/code&gt; in the triple &lt;code&gt;&amp;lt;fox&amp;gt; foaf:name &amp;quot;vo&amp;quot;&lt;/code&gt; represents the name of the fox. Literals such as &lt;code&gt;2&lt;/code&gt; or &lt;code&gt;true&lt;/code&gt; describe the age, and whether the fox is cunning, respectively. These are called the lexical forms of the literals and while they also have explic types (e.g. &lt;code&gt;http://www.w3.org/2001/XMLSchema#string&lt;/code&gt; or simply &lt;code&gt;xsd:string&lt;/code&gt; when using prefixes ), these types of literals are so common that writing the types explicitly is not required.&lt;/p&gt;
+
+&lt;p&gt;The slightly more complicated case is the definition of the time of the dinner shown by &lt;code&gt;&amp;quot;2006-06-30T20:00:00&amp;quot;^^xsd:dateTime&lt;/code&gt; that shows off custom types for literals, or when we would like to give the type explicitly. Here the addition of the &lt;code&gt;^^xsd:dateTime&lt;/code&gt; is an URI (with a prefix) describing how lexical form, i.e. &amp;ldquo;2006-06-30T20:00:00&amp;rdquo; exactly maps to a particular value. This allows for easier interpretation of such literal values for machines.&lt;/p&gt;
+
+&lt;p&gt;As in the previous article, we aim to use the data representation and manipulation capabilities of Clojure to represent the above-mentioned fragment. Again, for the basic cases, such as strings, numbers, etc, we can be pretty straightforward and only use the lexical form, i.e. &lt;code&gt;&amp;quot;vo&amp;quot;&lt;/code&gt;, &lt;code&gt;2&lt;/code&gt; or &lt;code&gt;true&lt;/code&gt; in or representations. For the cases where we also want to specify a custom datatype, we use a map such as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;{:value &amp;quot;2006-06-30T20:00:00&amp;quot; :type :xsd/dateTime}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;where the keys &lt;code&gt;:value&lt;/code&gt; and &lt;code&gt;:type&lt;/code&gt; are representing the lexical form and datatype respectively. To full Clojure version of this example can be found below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;  {::aes/context
+   {nil &amp;quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;quot;
+    :rdf &amp;quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;quot;
+    :foaf &amp;quot;http://xmlns.com/foaf/0.1/&amp;quot;
+    :xsd &amp;quot;http://www.w3.org/2001/XMLSchema#&amp;quot;}
+   ::aes/facts
+   #{[:fox :rdf/type :animal]
+     [:fox :foaf/name &amp;quot;vo&amp;quot;]
+     [:fox :foaf/age 2]
+     [:fox :is-cunning true]
+     [:fox :has-weight 6.8]
+     [:stork :rdf/type :animal]
+     [:stork :foaf/name &amp;quot;ooi&amp;quot;]
+     [:stork :foaf/age 13]
+     [:stork :is-cunning true]
+     [:dinner1 :has-date {:value &amp;quot;2006-06-30T20:00:00&amp;quot; :type :xsd/dateTime}]}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course given that this story is centuries old, it is unlikely that the dinner took place at &lt;code&gt;2006-06-30T20:00:00&lt;/code&gt;. As always care must be taken when taking things literally.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Aesopica: part 1</title>
       <link>https://www.newresalhaider.com/post/aesopica-1/</link>
       <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
@@ -51,28 +130,28 @@
 
 &lt;p&gt;In a Linked Data representation the story of Fox and the Stork would look something like this:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-rdf&#34;&gt;@base &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork&amp;gt; .
+&lt;pre&gt;&lt;code class=&#34;language-rdf&#34;&gt;@base &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;gt; .
 @prefix rdf: &amp;lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;gt; .
 
-&amp;lt;#fox&amp;gt; rdf:type &amp;lt;#animal&amp;gt;.
-&amp;lt;#stork&amp;gt; rdf:type &amp;lt;#animal&amp;gt;.
-&amp;lt;#fox&amp;gt; &amp;lt;#gives-invitation&amp;gt; &amp;lt;#invitation1&amp;gt;.
-&amp;lt;#invitation1&amp;gt; &amp;lt;#has-invited&amp;gt; &amp;lt;#stork&amp;gt;.
-&amp;lt;#invitation1&amp;gt; &amp;lt;#has-food&amp;gt; &amp;lt;#soup&amp;gt;.
-&amp;lt;#invitation1&amp;gt; &amp;lt;#serves-using&amp;gt; &amp;lt;#shallow-plate&amp;gt;.
-&amp;lt;#stork&amp;gt; &amp;lt;#gives-invitation&amp;gt; &amp;lt;#invitation2&amp;gt;.
-&amp;lt;#invitation2&amp;gt; &amp;lt;#has-invited&amp;gt; &amp;lt;#fox&amp;gt;.
-&amp;lt;#invitation2&amp;gt; &amp;lt;#has-food&amp;gt; &amp;lt;#crumbled-food&amp;gt;.
-&amp;lt;#invitation2&amp;gt; &amp;lt;#serves-using&amp;gt; &amp;lt;#narrow-mouthed-jug&amp;gt;.
-&amp;lt;#fox&amp;gt; &amp;lt;#can-eat-food-served-using&amp;gt; &amp;lt;#shallow-plate&amp;gt;.
-&amp;lt;#fox&amp;gt; &amp;lt;#can-not-eat-food-served-using&amp;gt; &amp;lt;#narrow-mouthed-jug&amp;gt;.
-&amp;lt;#stork&amp;gt; &amp;lt;#can-eat-food-served-using&amp;gt; &amp;lt;#narrow-mouthed-jug&amp;gt;.
-&amp;lt;#stork&amp;gt; &amp;lt;#can-not-eat-food-served-using&amp;gt; &amp;lt;#shallow-plate&amp;gt;.
+&amp;lt;fox&amp;gt; rdf:type &amp;lt;animal&amp;gt;.
+&amp;lt;stork&amp;gt; rdf:type &amp;lt;animal&amp;gt;.
+&amp;lt;fox&amp;gt; &amp;lt;gives-invitation&amp;gt; &amp;lt;invitation1&amp;gt;.
+&amp;lt;invitation1&amp;gt; &amp;lt;has-invited&amp;gt; &amp;lt;stork&amp;gt;.
+&amp;lt;invitation1&amp;gt; &amp;lt;has-food&amp;gt; &amp;lt;soup&amp;gt;.
+&amp;lt;invitation1&amp;gt; &amp;lt;serves-using&amp;gt; &amp;lt;shallow-plate&amp;gt;.
+&amp;lt;stork&amp;gt; &amp;lt;gives-invitation&amp;gt; &amp;lt;invitation2&amp;gt;.
+&amp;lt;invitation2&amp;gt; &amp;lt;has-invited&amp;gt; &amp;lt;fox&amp;gt;.
+&amp;lt;invitation2&amp;gt; &amp;lt;has-food&amp;gt; &amp;lt;crumbled-food&amp;gt;.
+&amp;lt;invitation2&amp;gt; &amp;lt;serves-using&amp;gt; &amp;lt;narrow-mouthed-jug&amp;gt;.
+&amp;lt;fox&amp;gt; &amp;lt;can-eat-food-served-using&amp;gt; &amp;lt;shallow-plate&amp;gt;.
+&amp;lt;fox&amp;gt; &amp;lt;can-not-eat-food-served-using&amp;gt; &amp;lt;narrow-mouthed-jug&amp;gt;.
+&amp;lt;stork&amp;gt; &amp;lt;can-eat-food-served-using&amp;gt; &amp;lt;narrow-mouthed-jug&amp;gt;.
+&amp;lt;stork&amp;gt; &amp;lt;can-not-eat-food-served-using&amp;gt; &amp;lt;shallow-plate&amp;gt;.
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This is in the &lt;a href=&#34;https://www.w3.org/TR/turtle/&#34; target=&#34;_blank&#34;&gt;Turtle syntax&lt;/a&gt; of RDF. There are other types of syntax are available to represent Linked Data, for example in JSON form as &lt;a href=&#34;https://www.w3.org/TR/json-ld/&#34; target=&#34;_blank&#34;&gt;JSON-LD&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;To summarize a bit of what this Linked Data format does in this scenario, is that it uses &lt;a href=&#34;https://en.wikipedia.org/wiki/Uniform_Resource_Identifier&#34; target=&#34;_blank&#34;&gt;Uniform Resource Identifiers (URIs)&lt;/a&gt; to define the subjects, predicates and objects of each fact. This allows to precisely and unambiguously define and link the meaning between these elements. For example, the fact that the fox is a type of animal could be expressed by the triple with the full URIs: &lt;code&gt;http://www.newresalhaider.com/ontologies/aesop/foxstork#fox http://www.w3.org/1999/02/22-rdf-syntax-ns#type http://www.newresalhaider.com/ontologies/aesop/foxstork#animal .&lt;/code&gt; Due to the fact that writing the full URIs can be quite cumbersome, the Turtle syntax uses two kinds of shorthands to help out. In this case one can define a base URI for the current document, &lt;a href=&#34;http://www.newresalhaider.com/ontologies/aesop/foxstork&#34; target=&#34;_blank&#34;&gt;http://www.newresalhaider.com/ontologies/aesop/foxstork&lt;/a&gt;, as well as prefixes for other namespeaces, such as &lt;a href=&#34;http://www.w3.org/1999/02/22-rdf-syntax-ns#&#34; target=&#34;_blank&#34;&gt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&lt;/a&gt;, with which the writing of each fact that would begin with these URI fragments could be shortened.&lt;/p&gt;
+&lt;p&gt;To summarize a bit of what this Linked Data format does in this scenario, is that it uses &lt;a href=&#34;https://en.wikipedia.org/wiki/Uniform_Resource_Identifier&#34; target=&#34;_blank&#34;&gt;Uniform Resource Identifiers (URIs)&lt;/a&gt; to define the subjects, predicates and objects of each fact. This allows to precisely and unambiguously define and link the meaning between these elements. For example, the fact that the fox is a type of animal could be expressed by the triple with the full URIs: &lt;code&gt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox http://www.w3.org/1999/02/22-rdf-syntax-ns#type http://www.newresalhaider.com/ontologies/aesop/foxstork/animal .&lt;/code&gt; Due to the fact that writing the full URIs can be quite cumbersome, the Turtle syntax uses two kinds of shorthands to help out. In this case one can define a base URI for the current document, &lt;a href=&#34;http://www.newresalhaider.com/ontologies/aesop/foxstork&#34; target=&#34;_blank&#34;&gt;http://www.newresalhaider.com/ontologies/aesop/foxstork&lt;/a&gt;, as well as prefixes for other namespeaces, such as &lt;a href=&#34;http://www.w3.org/1999/02/22-rdf-syntax-ns#&#34; target=&#34;_blank&#34;&gt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&lt;/a&gt;, with which the writing of each fact that would begin with these URI fragments could be shortened.&lt;/p&gt;
 
 &lt;p&gt;When everything put together this format still describes the original story, albeit restructured into separate facts.&lt;/p&gt;
 
@@ -1247,15 +1326,6 @@ Pale Fire is written by Vladimir Nabokov.
       <pubDate>Mon, 11 Aug 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.newresalhaider.com/publication/comparison-mobile-rule-engines/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Towards Guideline Compliant Clinical Decision Support System Integration in Smart and Mobile Environments: Formalizing and Using Clinical Guidelines For Diagnosing Sleep Apnea</title>
-      <link>https://www.newresalhaider.com/publication/towards-cdss-mobile/</link>
-      <pubDate>Wed, 18 Jun 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.newresalhaider.com/publication/towards-cdss-mobile/</guid>
       <description></description>
     </item>
     
