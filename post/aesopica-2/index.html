@@ -17,7 +17,7 @@
       
     
   
-  <meta name="description" content="This article is the second part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&rsquo;s stories. Part one can be found on this site where we reprsted basic elements of the Fox and the Stork story. In this article we examine how literal values can be represented, using Clojure, in Linked Data.
+  <meta name="description" content="This article is the second part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&rsquo;s stories. Part one can be found on this site where we formalised the basic elements of the Fox and the Stork story. In this article we examine how literal values can be represented, using Clojure, in Linked Data.
 As mentioned in the previous article the story of the Fox and the Stork is about the fox who invited the stork for a dinner.">
 
   
@@ -82,7 +82,7 @@ As mentioned in the previous article the story of the Fox and the Stork is about
   <meta property="og:site_name" content="Newres Al Haider">
   <meta property="og:url" content="https://www.newresalhaider.com/post/aesopica-2/">
   <meta property="og:title" content="Aesopica: part 2 | Newres Al Haider">
-  <meta property="og:description" content="This article is the second part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&rsquo;s stories. Part one can be found on this site where we reprsted basic elements of the Fox and the Stork story. In this article we examine how literal values can be represented, using Clojure, in Linked Data.
+  <meta property="og:description" content="This article is the second part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&rsquo;s stories. Part one can be found on this site where we formalised the basic elements of the Fox and the Stork story. In this article we examine how literal values can be represented, using Clojure, in Linked Data.
 As mentioned in the previous article the story of the Fox and the Stork is about the fox who invited the stork for a dinner."><meta property="og:image" content="https://www.newresalhaider.com/img/post/2018-09/aesopica-1/foxandstork-header.png">
   <meta property="og:locale" content="en-us">
   
@@ -318,9 +318,9 @@ As mentioned in the previous article the story of the Fox and the Stork is about
 
 
     <div class="article-style" itemprop="articleBody">
-      <p>This article is the second part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&rsquo;s stories. Part one can be found <a href="https://www.newresalhaider.com/post/aesopica-1/" target="_blank">on this site</a> where we reprsted basic elements of the Fox and the Stork story. In this article we examine how literal values can be represented, using Clojure, in Linked Data.</p>
+      <p>This article is the second part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&rsquo;s stories. Part one can be found <a href="https://www.newresalhaider.com/post/aesopica-1/" target="_blank">on this site</a> where we formalised the basic elements of the Fox and the Stork story. In this article we examine how literal values can be represented, using Clojure, in Linked Data.</p>
 
-<p>As mentioned in the previous article the story of the Fox and the Stork is about the fox who invited the stork for a dinner. At the dinner soup was served from a shallow plate that the fox could eat but the stork could not. In return, the stork invited the fox to a dinner, where the food was served in a narrow mouthed jug. This time the fox could not reach the food, while the stork at it happily.</p>
+<p>As mentioned in the previous article the story of the Fox and the Stork is about the fox who invited the stork for a dinner. At the dinner soup was served from a shallow plate that the fox could eat but the stork could not. In return, the stork invited the fox to a dinner, where the food was served in a narrow mouthed jug. This time the fox could not reach the food, while the stork ate it happily.</p>
 
 <p>Elements of this story can be represented as <a href="https://www.w3.org/standards/semanticweb/data" target="_blank">Linked Data</a>, and in particular the <a href="https://www.w3.org/RDF/" target="_blank">Resource Description Framework (RDF)</a> that allows for a precise retelling of the story that is understandable to both humans and machines alike.</p>
 
@@ -358,7 +358,7 @@ As mentioned in the previous article the story of the Fox and the Stork is about
   &lt;dinner1&gt; &lt;has-date&gt; &quot;2006-06-30T20:00:00&quot;^^xsd:dateTime
 </code></pre>
 
-<p>As one can see in this example, representing literals is very similar to other objects. For example <code>&quot;vo&quot;</code> in the triple <code>&lt;fox&gt; foaf:name &quot;vo&quot;</code> represents the name of the fox. Literals such as <code>2</code> or <code>true</code> describe the age, and whether the fox is cunning, respectively. These are called the lexical forms of the literals and while they also have explic types (e.g. <code>http://www.w3.org/2001/XMLSchema#string</code> or simply <code>xsd:string</code> when using prefixes ), these types of literals are so common that writing the types explicitly is not required.</p>
+<p>As one can see in this example, representing literals is very similar to other objects. For example <code>&quot;vo&quot;</code> in the triple <code>&lt;fox&gt; foaf:name &quot;vo&quot;</code> represents the name of the fox. Note that the base of <code>foaf</code> in <code>foaf:name</code> and <code>foaf:age</code> refers to the &lsquo;Friend of a Friend&rsquo; ontology, that allows us to use the common terminology of this ontology to describe facts about the fox and the stork.  Literals such as <code>2</code> or <code>true</code> describe the age, and whether the fox is cunning, respectively. These are called the lexical forms of the literals and while they also have explicit types (e.g. <code>http://www.w3.org/2001/XMLSchema#string</code> or simply <code>xsd:string</code> when using prefixes ), these types of literals are so common that writing the types explicitly is not required.</p>
 
 <p>The slightly more complicated case is the definition of the time of the dinner shown by <code>&quot;2006-06-30T20:00:00&quot;^^xsd:dateTime</code> that shows off custom types for literals, or when we would like to give the type explicitly. Here the addition of the <code>^^xsd:dateTime</code> is an URI (with a prefix) describing how lexical form, i.e. &ldquo;2006-06-30T20:00:00&rdquo; exactly maps to a particular value. This allows for easier interpretation of such literal values for machines.</p>
 

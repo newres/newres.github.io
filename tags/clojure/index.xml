@@ -18,7 +18,7 @@
       <pubDate>Fri, 14 Sep 2018 00:00:00 +0200</pubDate>
       
       <guid>https://www.newresalhaider.com/post/aesopica-2/</guid>
-      <description>This article is the second part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&amp;rsquo;s stories. Part one can be found on this site where we reprsted basic elements of the Fox and the Stork story. In this article we examine how literal values can be represented, using Clojure, in Linked Data.
+      <description>This article is the second part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&amp;rsquo;s stories. Part one can be found on this site where we formalised the basic elements of the Fox and the Stork story. In this article we examine how literal values can be represented, using Clojure, in Linked Data.
 As mentioned in the previous article the story of the Fox and the Stork is about the fox who invited the stork for a dinner.</description>
     </item>
     
