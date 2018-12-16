@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
-    <lastBuildDate>Fri, 14 Sep 2018 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 04 Dec 2018 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://www.newresalhaider.com/tags/aesopica/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Aesopica: part 3</title>
+      <link>https://www.newresalhaider.com/post/aesopica-3/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0100</pubDate>
+      
+      <guid>https://www.newresalhaider.com/post/aesopica-3/</guid>
+      <description>This article is the third part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&amp;rsquo;s stories. In part one the basic elements of &amp;ldquo;The Fox and the Stork&amp;rdquo; story were formalised as Linked Data in Clojure, while in part two we investigated how various literal values can be described. In this article we examine how information about facts themselves, such as meta-information, can be described with Linked Data.</description>
+    </item>
     
     <item>
       <title>Aesopica: part 2</title>

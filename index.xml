@@ -11,6 +11,100 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Aesopica: part 3</title>
+      <link>https://www.newresalhaider.com/post/aesopica-3/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0100</pubDate>
+      
+      <guid>https://www.newresalhaider.com/post/aesopica-3/</guid>
+      <description>&lt;p&gt;This article is the third part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&amp;rsquo;s stories. In &lt;a href=&#34;https://www.newresalhaider.com/post/aesopica-1/&#34; target=&#34;_blank&#34;&gt;part one&lt;/a&gt; the basic elements of &amp;ldquo;The Fox and the Stork&amp;rdquo; story were formalised as Linked Data in Clojure, while in &lt;a href=&#34;https://www.newresalhaider.com/post/aesopica-2/&#34; target=&#34;_blank&#34;&gt;part two&lt;/a&gt; we investigated how various literal values can be described. In this article we examine how information about facts themselves, such as meta-information, can be described with Linked Data. As always, the functionality detailed in these articles can be found in the &lt;a href=&#34;https://github.com/newres/aesopica&#34; target=&#34;_blank&#34;&gt;Aesopica&lt;/a&gt; library for using Clojure to write Linked Data.&lt;/p&gt;
+
+&lt;p&gt;In Linked Data, facts are represented as triples of subjects, predicates and objects. For example, when representing the story of the &amp;ldquo;The Fox and the Stork&amp;rdquo; one fact that we want to represent is &amp;ldquo;The Fox gives an invitation.&amp;rdquo; In this fact &amp;ldquo;The Fox&amp;rdquo; is the subject, the &amp;ldquo;gives an&amp;rdquo; is the predicate and &amp;ldquo;an invitation&amp;rdquo; is the object. Of course, as we mentioned in our previous articles, one of the strengths of Linked Data is that the elements are more precisely defined than just their natural language representations in a sentence. A Uniform Resource Identifier (&lt;a href=&#34;https://www.w3.org/wiki/URI&#34; target=&#34;_blank&#34;&gt;URI&lt;/a&gt;) is used to more formally identify these elements. This would make the previous fact to be written as follows, using the Turtle notation of RDF:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-rdf&#34;&gt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When making using a base prefix for &lt;code&gt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&lt;/code&gt; this could be shortened as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-rdf&#34;&gt;@base &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;gt; .
+&amp;lt;fox&amp;gt; &amp;lt;gives-invitation&amp;gt; &amp;lt;invitation1&amp;gt;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Using our Clojure based notation, that was introduced in the previous articles, we could write this same fact as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;  {::aes/context
+   {nil &amp;quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;quot;}
+   ::aes/facts
+   #{[:fox :gives-invitation :invitation1]
+     }}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above-mentioned fact is just one out of many needed to represent the full story of &amp;ldquo;The Fox and the Stork&amp;rdquo;. In most cases a multitude of facts is required to represent the required knowledge. A set of facts, each consisting of subjects, predicates and objects, form a knowledge graph which provides us with a very general, but precise, way to represent knowledge.&lt;/p&gt;
+
+&lt;p&gt;However there are scenarios when we want to represent knowledge about the facts themselves. One way Linked Data/RDF facilities this is the use of the &amp;ldquo;named graphs&amp;rdquo;. Named graphs allows us to associate an identifier (a &lt;a href=&#34;Uniform Resource Identifier&#34; target=&#34;_blank&#34;&gt;URI&lt;/a&gt;) with a fact, or a set of facts. This essentially gives a name to a graph in the knowledge base, hence the notion of &amp;ldquo;named graphs&amp;rdquo;. Such an identifier can then be used as a way to add information about the facts with which it is associated.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://www.w3.org/TR/n-quads/&#34; target=&#34;_blank&#34;&gt;NQUADS&lt;/a&gt; syntax for RDF illustrates one way such named graphs can be represented. In this representation all the elements of the fact: the subject, predicate, object and optionally a graph-name, are written out fully, separated by spaces and concluding with a dot (&lt;code&gt;.&lt;/code&gt;) .&lt;/p&gt;
+
+&lt;p&gt;To take a single fact as an example, here follows a NQUADS format representation that details that &amp;ldquo;for the first invitation the Stork has been invited&amp;rdquo;, and this fact is part of the &amp;ldquo;first dinner&amp;rdquo; named graph:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-rdf&#34;&gt;&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&amp;gt; .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For this fact there are four elements to be represented, hence we can refer to these elements together as a quad, versus the notion of a triple for facts just consisting of a subject, predicate and object. As mentioned previously, URIs are used to precisely identify each element:  &lt;code&gt;&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&amp;gt;&lt;/code&gt; is the subject, &lt;code&gt;&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&amp;gt;&lt;/code&gt; is the predicate and &lt;code&gt;&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&amp;gt;&lt;/code&gt; is the object respectively. In addition the graph is identified by the URI &lt;code&gt;&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The big benefit of using such identifiers as names for the graphs is that they themselves can be part of facts. For example if we want to express that the facts contained inside the &amp;ldquo;first dinner&amp;rdquo; graph occur before the facts of the &amp;ldquo;second dinner&amp;rdquo; graph, we can use the fact:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-rdf&#34;&gt;&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&amp;gt; &amp;lt;http://www.w3.org/2006/time#before&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&amp;gt; .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that this fact itself is not part of any named graph. In a knowledge base of facts this would make it a part of the &amp;ldquo;default graph&amp;rdquo;. A default graph is a graph without any particular name. This makes the mixing of &amp;ldquo;regular&amp;rdquo; facts, where each fact consists of a triple, and facts in explicit named graphs, where each fact is a quad, possible in a single knowledge base.&lt;/p&gt;
+
+&lt;p&gt;An example of a sightly expanded version using of &amp;ldquo;The Fox and the Stork&amp;rdquo;&amp;rdquo; story using named graphs in the NQUADS format can be therefor be as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-rdf&#34;&gt;&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&amp;gt; &amp;lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&amp;gt; .
+&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&amp;gt; &amp;lt;http://www.w3.org/2006/time#before&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&amp;gt; .
+&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&amp;gt; &amp;lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&amp;gt; .
+&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&amp;gt; .
+&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/crumbled-food&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&amp;gt; .
+&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&amp;gt; .
+&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&amp;gt; .
+&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&amp;gt; .
+&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&amp;gt; .
+&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/soup&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&amp;gt; .
+&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/shallow-plate&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&amp;gt; .
+&amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&amp;gt; &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&amp;gt; .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now that we introduced the concept of &amp;ldquo;named graphs&amp;rdquo; we now want introduce a way to represent them in the Clojure representation of Linked Data. Similarly on how in NQUADS the triples are extended to quads to indicate the name of the graph, we extend our &lt;a href=&#34;https://www.newresalhaider.com/post/aesopica-1/&#34; target=&#34;_blank&#34;&gt;previously introduced Clojure syntax&lt;/a&gt; to be able to use quads for facts, as opposed to just triples. Similarly to NQUADS the, optional, fourth element of each fact represents the named graph identifier. Any regular triple based fact is part of the default graph in the knowledge base, similarly to the NQUAD representation.&lt;/p&gt;
+
+&lt;p&gt;The resulting Clojure representation of above-mentioned Linked Data story can be written as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def fox-and-stork-named-graph-edn
+  {::aes/context
+   {nil &amp;quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;quot;
+    :rdf &amp;quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;quot;
+    :time &amp;quot;http://www.w3.org/2006/time#&amp;quot;}
+   ::aes/facts
+   #{[:fox :rdf/type :animal]
+     [:stork :rdf/type :animal]
+     [:fox :gives-invitation :invitation1 :dinner1]
+     [:invitation1 :has-invited :stork :dinner1]
+     [:invitation1 :has-food :soup :dinner1]
+     [:invitation1 :serves-using :shallow-plate :dinner1]
+     [:stork :gives-invitation :invitation2 :dinner2]
+     [:invitation2 :has-invited :fox :dinner2]
+     [:invitation2 :has-food :crumbled-food :dinner2]
+     [:invitation2 :serves-using :narrow-mouthed-jug :dinner2]
+     [:invitation1 :serves-using :narrow-mouthed-jug :dinner2]
+     [:dinner1 :time/before :dinner2]}})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The main difference between the Clojure representation and NQUADS is that the Clojure representation uses prefixes and NQUADS uses full URIs written out each time. This is a deliberate design choice in syntax from both perspectives. In NQUADS this allows the format to represent each fact on a single line, without the need for a lookup based on context for the full URI of elements. In the Clojure representation the prefixes allow for a much more compact fact representation that makes for easier reading and writing by human users.&lt;/p&gt;
+
+&lt;p&gt;There are a number of other formats for writing Linked Data, some of which support named graphs. &lt;a href=&#34;https://www.w3.org/TR/trig/&#34; target=&#34;_blank&#34;&gt;TriG&lt;/a&gt; for example is an extension of the Turtle format used in previous articles in this series. &lt;a href=&#34;https://json-ld.org/&#34; target=&#34;_blank&#34;&gt;JSON-LD&lt;/a&gt; is also a very commonly used format for Linked Data that also supports named graphs. With the introduction of the Clojure way of writing Linked Data in this series, it makes sense to enable translating Linked Data into these formats for compatibility and reaching a wider audience. The facts on how to achieve this will be detailed in another article.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Aesopica: part 2</title>
       <link>https://www.newresalhaider.com/post/aesopica-2/</link>
       <pubDate>Fri, 14 Sep 2018 00:00:00 +0200</pubDate>
@@ -1317,15 +1411,6 @@ Pale Fire is written by Vladimir Nabokov.
       <pubDate>Sun, 19 Oct 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.newresalhaider.com/publication/benchmark-framework/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>A comparison of mobile rule engines for reasoning on semantic web based health data</title>
-      <link>https://www.newresalhaider.com/publication/comparison-mobile-rule-engines/</link>
-      <pubDate>Mon, 11 Aug 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.newresalhaider.com/publication/comparison-mobile-rule-engines/</guid>
       <description></description>
     </item>
     
