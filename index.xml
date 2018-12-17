@@ -11,7 +11,7 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Aesopica: part 3</title>
+      <title>Aesopica, Part 3</title>
       <link>https://www.newresalhaider.com/post/aesopica-3/</link>
       <pubDate>Tue, 04 Dec 2018 00:00:00 +0100</pubDate>
       
@@ -40,7 +40,7 @@
 
 &lt;p&gt;The above-mentioned fact is just one out of many needed to represent the full story of &amp;ldquo;The Fox and the Stork&amp;rdquo;. In most cases a multitude of facts is required to represent the required knowledge. A set of facts, each consisting of subjects, predicates and objects, form a knowledge graph which provides us with a very general, but precise, way to represent knowledge.&lt;/p&gt;
 
-&lt;p&gt;However there are scenarios when we want to represent knowledge about the facts themselves. One way Linked Data/RDF facilities this is the use of the &amp;ldquo;named graphs&amp;rdquo;. Named graphs allows us to associate an identifier (a &lt;a href=&#34;Uniform Resource Identifier&#34; target=&#34;_blank&#34;&gt;URI&lt;/a&gt;) with a fact, or a set of facts. This essentially gives a name to a graph in the knowledge base, hence the notion of &amp;ldquo;named graphs&amp;rdquo;. Such an identifier can then be used as a way to add information about the facts with which it is associated.&lt;/p&gt;
+&lt;p&gt;However there are scenarios when we want to represent knowledge about the facts themselves. One way Linked Data/RDF facilitates this is the use of the &amp;ldquo;named graphs&amp;rdquo;. Named graphs allows us to associate an identifier (a &lt;a href=&#34;Uniform Resource Identifier&#34; target=&#34;_blank&#34;&gt;URI&lt;/a&gt;) with a fact, or a set of facts. This essentially gives a name to a graph in the knowledge base, hence the notion of &amp;ldquo;named graphs&amp;rdquo;. Such an identifier can then be used as a way to add information about the facts with which it is associated.&lt;/p&gt;
 
 &lt;p&gt;The &lt;a href=&#34;https://www.w3.org/TR/n-quads/&#34; target=&#34;_blank&#34;&gt;NQUADS&lt;/a&gt; syntax for RDF illustrates one way such named graphs can be represented. In this representation all the elements of the fact: the subject, predicate, object and optionally a graph-name, are written out fully, separated by spaces and concluding with a dot (&lt;code&gt;.&lt;/code&gt;) .&lt;/p&gt;
 
@@ -105,7 +105,7 @@
     </item>
     
     <item>
-      <title>Aesopica: part 2</title>
+      <title>Aesopica, Part 2</title>
       <link>https://www.newresalhaider.com/post/aesopica-2/</link>
       <pubDate>Fri, 14 Sep 2018 00:00:00 +0200</pubDate>
       
@@ -184,7 +184,7 @@
     </item>
     
     <item>
-      <title>Aesopica: part 1</title>
+      <title>Aesopica, Part 1</title>
       <link>https://www.newresalhaider.com/post/aesopica-1/</link>
       <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       
