@@ -7,13 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
-    <lastBuildDate>Tue, 04 Dec 2018 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 18 Dec 2018 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://www.newresalhaider.com/tags/knowledge-representation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Aesopica, Part 3</title>
+      <title>Aesopica, Part 4: Basic Conversion to Other Formats</title>
+      <link>https://www.newresalhaider.com/post/aesopica-4/</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0100</pubDate>
+      
+      <guid>https://www.newresalhaider.com/post/aesopica-4/</guid>
+      <description>This article is the fourth part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&amp;rsquo;s stories. The topic of this article is to describe how to do some basic conversions from our Clojure representation of Linked Data, to some of the other formats, such as Turtle, NQUADS or JSON-LD.
+In previous articles of this series, we created a Clojure based syntax for defining Linked Data.</description>
+    </item>
+    
+    <item>
+      <title>Aesopica, Part 3: Named Graphs</title>
       <link>https://www.newresalhaider.com/post/aesopica-3/</link>
       <pubDate>Tue, 04 Dec 2018 00:00:00 +0100</pubDate>
       
@@ -22,7 +32,7 @@
     </item>
     
     <item>
-      <title>Aesopica, Part 2</title>
+      <title>Aesopica, Part 2: Literal Values</title>
       <link>https://www.newresalhaider.com/post/aesopica-2/</link>
       <pubDate>Fri, 14 Sep 2018 00:00:00 +0200</pubDate>
       
@@ -31,7 +41,7 @@
     </item>
     
     <item>
-      <title>Aesopica, Part 1</title>
+      <title>Aesopica, Part 1: General Introduction</title>
       <link>https://www.newresalhaider.com/post/aesopica-1/</link>
       <pubDate>Mon, 10 Sep 2018 00:00:00 +0200</pubDate>
       

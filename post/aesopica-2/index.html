@@ -80,7 +80,7 @@
   
   <meta property="og:site_name" content="Newres Al Haider">
   <meta property="og:url" content="https://www.newresalhaider.com/post/aesopica-2/">
-  <meta property="og:title" content="Aesopica, Part 2 | Newres Al Haider">
+  <meta property="og:title" content="Aesopica, Part 2: Literal Values | Newres Al Haider">
   <meta property="og:description" content="This article is the second part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&rsquo;s stories. Part one can be found on this site where the basic elements of the Fox and the Stork story were formalised. In this article we examine how literal values can be represented, using Clojure, in Linked Data. The code to enable the functionality described in these articles can be found in the Aesopica library for using Clojure to write Linked Data."><meta property="og:image" content="https://www.newresalhaider.com/img/post/2018-09/aesopica-1/foxandstork-header.png">
   <meta property="og:locale" content="en-us">
   
@@ -91,7 +91,7 @@
 
   
 
-  <title>Aesopica, Part 2 | Newres Al Haider</title>
+  <title>Aesopica, Part 2: Literal Values | Newres Al Haider</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
@@ -240,7 +240,7 @@
 
 
   <div class="article-container">
-    <h1 itemprop="name">Aesopica, Part 2</h1>
+    <h1 itemprop="name">Aesopica, Part 2: Literal Values</h1>
 
     
 
@@ -274,7 +274,7 @@
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Aesopica%2c%20Part%202&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-2%2f"
+         href="https://twitter.com/intent/tweet?text=Aesopica%2c%20Part%202%3a%20Literal%20Values&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-2%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-twitter"></i>
       </a>
@@ -288,21 +288,21 @@
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-2%2f&amp;title=Aesopica%2c%20Part%202"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-2%2f&amp;title=Aesopica%2c%20Part%202%3a%20Literal%20Values"
          target="_blank" rel="noopener">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-2%2f&amp;title=Aesopica%2c%20Part%202"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-2%2f&amp;title=Aesopica%2c%20Part%202%3a%20Literal%20Values"
          target="_blank" rel="noopener">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=Aesopica%2c%20Part%202&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-2%2f">
+         href="mailto:?subject=Aesopica%2c%20Part%202%3a%20Literal%20Values&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-2%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -362,10 +362,10 @@
 
 <p>As in the previous article, we aim to use the data representation and manipulation capabilities of Clojure to represent the above-mentioned fragment. Again, for the basic cases, such as strings, numbers, etc, we can be pretty straightforward and only use the lexical form, i.e. <code>&quot;vo&quot;</code>, <code>2</code> or <code>true</code> in or representations. For the cases where we also want to specify a custom datatype, we use a map such as:</p>
 
-<pre><code class="language-clojure">{:value &quot;2006-06-30T20:00:00&quot; :type :xsd/dateTime}
+<pre><code class="language-clojure">{::aes/value &quot;2006-06-30T20:00:00&quot; ::aes/type :xsd/dateTime}
 </code></pre>
 
-<p>where the keys <code>:value</code> and <code>:type</code> are representing the lexical form and datatype respectively. To full Clojure version of this example can be found below:</p>
+<p>where the keys <code>::aes/value</code> and <code>::aes/type</code> are representing the lexical form and datatype respectively. Note that <code>aes</code> in these keywords, and other refers, to the core namespace of the <a href="https://github.com/newres/aesopica" target="_blank">Aesopica</a> library implementing this data representation. To full Clojure version of this example can be found below:</p>
 
 <pre><code class="language-clojure">  {::aes/context
    {nil &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&quot;
@@ -382,7 +382,7 @@
      [:stork :foaf/name &quot;ooi&quot;]
      [:stork :foaf/age 13]
      [:stork :is-cunning true]
-     [:dinner1 :has-date {:value &quot;2006-06-30T20:00:00&quot; :type :xsd/dateTime}]}}
+     [:dinner1 :has-date {::aes/value &quot;2006-06-30T20:00:00&quot; ::aes/type :xsd/dateTime}]}}
 </code></pre>
 
 <p>Of course given that this story is centuries old, it is unlikely that the dinner took place at <code>2006-06-30T20:00:00</code>. As always care must be taken when taking things literally.</p>
@@ -406,7 +406,7 @@
   
   <a class="btn btn-primary btn-outline" href="/tags/knowledge-graph">knowledge graph</a>
   
-  <a class="btn btn-primary btn-outline" href="/tags/aesopica">aesopica</a>
+  <a class="btn btn-primary btn-outline" href="/tags/aesopica">Aesopica</a>
   
 </div>
 
@@ -420,7 +420,7 @@
       <h3>Related</h3>
       <ul>
         
-        <li><a href="/post/aesopica-1/">Aesopica, Part 1</a></li>
+        <li><a href="/post/aesopica-1/">Aesopica, Part 1: General Introduction</a></li>
         
         <li><a href="/post/interlinked-data/">Data Interlinked</a></li>
         

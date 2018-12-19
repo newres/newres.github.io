@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.40.2" />
+  <meta name="author" content="Newres Al Haider">
+
+  
+  
+  
+  
+    
+      
+    
+  
+  <meta name="description" content="This article is the fourth part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&rsquo;s stories. The topic of this article is to describe how to do some basic conversions from our Clojure representation of Linked Data, to some of the other formats, such as Turtle, NQUADS or JSON-LD.
+In previous articles of this series, we created a Clojure based syntax for defining Linked Data.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://www.newresalhaider.com/post/aesopica-4/">
+
+  
+
+
+  
+
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+  
+  
+  
+    
+  
+  
+    
+    
+      
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+      
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+  <link rel="stylesheet" href="/css/post.css">
+  
+
+  
+
+  
+  <link rel="alternate" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
+  <link rel="feed" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://www.newresalhaider.com/post/aesopica-4/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@newresa">
+  <meta property="twitter:creator" content="@newresa">
+  
+  <meta property="og:site_name" content="Newres Al Haider">
+  <meta property="og:url" content="https://www.newresalhaider.com/post/aesopica-4/">
+  <meta property="og:title" content="Aesopica, Part 4: Basic Conversion to Other Formats | Newres Al Haider">
+  <meta property="og:description" content="This article is the fourth part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&rsquo;s stories. The topic of this article is to describe how to do some basic conversions from our Clojure representation of Linked Data, to some of the other formats, such as Turtle, NQUADS or JSON-LD.
+In previous articles of this series, we created a Clojure based syntax for defining Linked Data."><meta property="og:image" content="https://www.newresalhaider.com/img/post/2018-09/aesopica-1/foxandstork-header.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2018-12-18T00:00:00&#43;01:00">
+  
+  <meta property="article:modified_time" content="2018-12-18T00:00:00&#43;01:00">
+  
+
+  
+
+  <title>Aesopica, Part 4: Basic Conversion to Other Formats | Newres Al Haider</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">Newres Al Haider</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#publications_selected">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+<div class="article-header">
+  
+  
+    <img src="/img//post/2018-09/aesopica-1/foxandstork-header.png" class="article-banner" itemprop="image">
+  
+
+  <span class="article-header-caption">Fountain depicting the Fox and the Stork. Image credit: <a href="https://commons.wikimedia.org/w/index.php?curid=25764300" target="_blank"><strong>Jordiferrer</strong></a></span>
+</div>
+
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Aesopica, Part 4: Basic Conversion to Other Formats</h1>
+
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2018-12-18 00:00:00 &#43;0100 CET" itemprop="datePublished dateModified">
+      18 Dec, 2018
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Aesopica%2c%20Part%204%3a%20Basic%20Conversion%20to%20Other%20Formats&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-4%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-4%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-4%2f&amp;title=Aesopica%2c%20Part%204%3a%20Basic%20Conversion%20to%20Other%20Formats"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-4%2f&amp;title=Aesopica%2c%20Part%204%3a%20Basic%20Conversion%20to%20Other%20Formats"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Aesopica%2c%20Part%204%3a%20Basic%20Conversion%20to%20Other%20Formats&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-4%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <p>This article is the fourth part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&rsquo;s stories. The topic of this article is to describe how to do some basic conversions from our Clojure representation of Linked Data, to some of the other formats, such as <a href="https://www.w3.org/TR/turtle/" target="_blank">Turtle</a>, <a href="https://www.w3.org/TR/n-quads/" target="_blank">NQUADS</a> or <a href="https://json-ld.org/" target="_blank">JSON-LD</a>.</p>
+
+<p>In previous articles of this series, we created a Clojure based syntax for defining Linked Data. In order to make this syntax a viable member of the Linked Data ecosystem, it is important to provide conversion functionality to other Linked Data formats. This allows for the user of the associated <a href="https://github.com/newres/aesopica" target="_blank">Aesopica</a> library, to create and use Linked Data in a Clojure based environment, and convert it, when needed, to other formats. In order to implement this functionality we made use of Clojure&rsquo;s Java interop and the <a href="https://jena.apache.org/" target="_blank">Apache Jena</a>, and made it available in the <a href="https://github.com/newres/aesopica" target="_blank">Aesopica</a> library.</p>
+
+<p>To start off we begin with the basic example of &ldquo;The Fox and The Stork&rdquo; story that we introduced <a href="https://www.newresalhaider.com/post/aesopica-1/" target="_blank">initially</a>. The Clojure representation of this is as follows:</p>
+
+<pre><code class="language-clojure">(def fox-and-stork-edn
+  {::aes/context
+   {nil &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&quot;
+    :rdf &quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;}
+   ::aes/facts
+   #{[:fox :rdf/type :animal]
+     [:stork :rdf/type :animal]
+     [:fox :gives-invitation :invitation1]
+     [:invitation1 :has-invited :stork]
+     [:invitation1 :has-food :soup]
+     [:invitation1 :serves-using :shallow-plate]
+     [:stork :gives-invitation :invitation2]
+     [:invitation2 :has-invited :fox]
+     [:invitation2 :has-food :crumbled-food]
+     [:invitation2 :serves-using :narrow-mouthed-jug]
+     [:fox :can-eat-food-served-using :shallow-plate]
+     [:fox :can-not-eat-food-served-using :narrow-mouthed-jug]
+     [:stork :can-eat-food-served-using :narrow-mouthed-jug]
+     [:stork :can-not-eat-food-served-using :shallow-plate]}})
+</code></pre>
+
+<p>The full details of this representation are explained in our previous work. Here we only briefly summarize its main elements. The above mentioned example defines a knowledge base containing a set of facts that describe the &ldquo;The Fox and The Stork&rdquo; story. Each fact is a triple of a subject, predicate and object. These elements are all represented by an <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier" target="_blank">URI</a>, but for human readability and use as well as ease of use in Clojure, they are identified by (namespaced) keywords. The context map, containing the keywords for the namespaces used, allows us to transform the namespaced keywords into full URIs when required. Of course there are more elements possible in Linked Data/RDF and in this representation as well, such as <a href="https://www.newresalhaider.com/post/aesopica-1/" target="_blank">literal values</a>, but this summary should suffice for this article.</p>
+
+<p>Now in order to explain how this conversion is done, assuming no familiarity with Clojure or a similar language, two new concepts are required.</p>
+
+<p>First, it is important to note that in the above example we bind the &ldquo;The Fox and The Stork&rdquo;, Linked Data representation to the <code>fox-and-stork-edn</code> variable. Although this is not a necessity for creating the knowledge base, it allows us to reuse this definition from inside the code and in this article as well, without explicitly writing out the full representation each time.</p>
+
+<p>The second concept that we make use is how Clojure functions are called to be executed. In Clojure invoking a function has the general form of <code>(function-name param1 param2 ...)</code>. For example lets assume that the function for translation from our Clojure representation to Turtle is represented by <code>conv/convert-to-turtle</code>. Here <code>conv</code> is a shorthand for Aesopica&rsquo;s conversion namespace. Given this, the call to translate to a Turtle string representation of the Linked Data can be invoked by:</p>
+
+<pre><code class="language-clj">(conv/convert-to-turtle fox-and-stork-edn)
+</code></pre>
+
+<p>The resulting string representation shows the same Linked Data knowledge base in Turtle syntax:</p>
+
+<pre><code class="language-rdf">&quot;@base &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+
+&lt;fox&gt; rdf:type &lt;animal&gt;.
+&lt;stork&gt; rdf:type &lt;animal&gt;.
+&lt;fox&gt; &lt;gives-invitation&gt; &lt;invitation1&gt;.
+&lt;invitation1&gt; &lt;has-invited&gt; &lt;stork&gt;.
+&lt;invitation1&gt; &lt;has-food&gt; &lt;soup&gt;.
+&lt;invitation1&gt; &lt;serves-using&gt; &lt;shallow-plate&gt;.
+&lt;stork&gt; &lt;gives-invitation&gt; &lt;invitation2&gt;.
+&lt;invitation2&gt; &lt;has-invited&gt; &lt;fox&gt;.
+&lt;invitation2&gt; &lt;has-food&gt; &lt;crumbled-food&gt;.
+&lt;invitation2&gt; &lt;serves-using&gt; &lt;narrow-mouthed-jug&gt;.
+&lt;fox&gt; &lt;can-eat-food-served-using&gt; &lt;shallow-plate&gt;.
+&lt;fox&gt; &lt;can-not-eat-food-served-using&gt; &lt;narrow-mouthed-jug&gt;.
+&lt;stork&gt; &lt;can-eat-food-served-using&gt; &lt;narrow-mouthed-jug&gt;.
+&lt;stork&gt; &lt;can-not-eat-food-served-using&gt; &lt;shallow-plate&gt;.&quot;
+</code></pre>
+
+<p>This representation has a similar form to our Clojure based notation. A set of facts is represented and prefixes and/or a base prefix is used, to enable easy reading and writing of the triples.</p>
+
+<p>Now let us look at some other formats and conversions.</p>
+
+<p><a href="https://www.w3.org/TR/trig/" target="_blank">TriG</a> is an extension of the Turtle format for enabling &ldquo;named graphs&rdquo;. Now this is a topic of <a href="https://www.newresalhaider.com/post/aesopica-3/" target="_blank">a previous article</a> but here it is suffice to say that by associating a set of facts with a specific graph, we enable the easy adding of metadata to these facts. To show this conversion, we use an example that uses this notion:</p>
+
+<pre><code class="language-clojure">(def fox-and-stork-named-graph-edn
+  {::aes/context
+   {nil &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&quot;
+    :rdf &quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;
+    :time &quot;http://www.w3.org/2006/time#&quot;}
+   ::aes/facts
+   #{[:fox :rdf/type :animal]
+     [:stork :rdf/type :animal]
+     [:fox :gives-invitation :invitation1 :dinner1]
+     [:invitation1 :has-invited :stork :dinner1]
+     [:invitation1 :has-food :soup :dinner1]
+     [:invitation1 :serves-using :shallow-plate :dinner1]
+     [:stork :gives-invitation :invitation2 :dinner2]
+     [:invitation2 :has-invited :fox :dinner2]
+     [:invitation2 :has-food :crumbled-food :dinner2]
+     [:invitation2 :serves-using :narrow-mouthed-jug :dinner2]
+     [:invitation1 :serves-using :narrow-mouthed-jug :dinner2]
+     [:dinner1 :time/before :dinner2]}})
+</code></pre>
+
+<p>As one can see, here we simply extend our triple based representation of facts to include either triples or quads. In a quad the last element is the graph name identifier of the graph the fact is a member of.</p>
+
+<p>Translating this representation to TriG can be done by:</p>
+
+<pre><code class="language-clojure">(conv/convert-to-trig fox-and-stork-named-graph-edn)
+</code></pre>
+
+<p>Which results in the following string representation that is TriG formatted:</p>
+
+<pre><code class="language-rdf">{ &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt;
+        &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&gt; .
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt;
+        &lt;http://www.w3.org/2006/time#before&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt; .
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt;
+        &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&gt; .
+}
+
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt; {
+    &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt;
+            &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&gt; ;
+            &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/crumbled-food&gt; ;
+            &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt; .
+    &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt;
+            &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt; .
+    &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt;
+            &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&gt; .
+}
+
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt; {
+    &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt;
+            &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; .
+    &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt;
+            &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/soup&gt; ;
+            &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/shallow-plate&gt; ;
+            &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt; .
+}
+
+</code></pre>
+
+<p>There are a number of differences in representation from the above TriG output to he Clojure representation, but also from the previous Turtle output. Probably one of the most apparent is that in this output no prefixes are used: URIs are all written out fully. Both Turtle and TriG are flexible in whether they abbreviate URIs with prefixes or not. This is completely left up to the author, on in this case the specific way the conversion has been implemented. Another difference is how graphs are identified. Instead of using a quad like formatting for denoting the graph to which each fact belongs to they are grouped together. For example in the form of: <code>&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt; { ... }</code>, all the facts inside the curly braces belong to the <code>&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</code> graph. Finally a somewhat similar construction is used to abbreviate a group of triples that all use the same object. Instead of writing each fact out fully, &ldquo;predicate-lists&rdquo; are used to match a single subject with a series subject and object pairs. This is quite a nice feature, and something similar is definitely on the list of future improvements to the Clojure notation, although care must be taken that such shorthands can make the definition a bit more complex.</p>
+
+<p>Speaking of complexity, an interesting format created with the purpose of being very simple is <a href="https://www.w3.org/TR/n-quads/" target="_blank">NQUADS</a>. This is a straightfoward, line based syntax where each fact is represented by a single line. It is actually an extension of the <a href="https://www.w3.org/TR/n-triples/" target="_blank">N-Triples</a> format, with support added for handling named graphs. The conversion of our named graph example using the function invocation:</p>
+
+<pre><code class="language-clojure">(conv/convert-to-nquads fox-and-stork-named-graph-edn)
+</code></pre>
+
+<p>would give us the following example:</p>
+
+<pre><code class="language-rdf">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&gt; .
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt; &lt;http://www.w3.org/2006/time#before&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt; .
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&gt; .
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt; .
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/crumbled-food&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt; .
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt; .
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt; .
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt; .
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt; .
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/soup&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt; .
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/shallow-plate&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt; .
+&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt; .
+</code></pre>
+
+<p>As one can see this format does not use prefixes: each fact is a triple or a quad on a single line ending with a dot, with each element URI written out fully. This way of writing facts is similar to the Clojure based notation, with main change that the Clojure notation does use prefixes for URI abbreviation. This simplicity contrasts with the flexibility of the Turtle format, which can be more terse, but more complex to parse and generate. This also shows that a separate <a href="https://www.w3.org/TR/n-triples/" target="_blank">N-Triples</a> converter is not really needed. As long as the original knowledge bases does not use any named-graphs the result will be the same as with N-Triples.</p>
+
+<p>The final format that we aim to convert to is <a href="https://json-ld.org/" target="_blank">JSON-LD</a>. This is a format based on the JavaScript Object Notation <a href="https://www.json.org/" target="_blank">JSON</a>, which allows for very easy interoperability with JSON based tools.</p>
+
+<p>Converting can be done with the following invocation:</p>
+
+<pre><code class="language-clojure">(conv/convert-to-json-ld fox-and-stork-named-graph-edn)
+</code></pre>
+
+<p>resulting in the following JSON representation:</p>
+
+<pre><code class="language-json">{
+  &quot;@graph&quot; : [ {
+    &quot;@graph&quot; : [ {
+      &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&quot;,
+      &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&quot; : {
+        &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&quot;
+      }
+    }, {
+      &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&quot;,
+      &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&quot; : {
+        &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/soup&quot;
+      },
+      &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&quot; : {
+        &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&quot;
+      },
+      &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&quot; : {
+        &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/shallow-plate&quot;
+      }
+    } ],
+    &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&quot;,
+    &quot;http://www.w3.org/2006/time#before&quot; : {
+      &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&quot;
+    }
+  }, {
+    &quot;@graph&quot; : [ {
+      &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&quot;,
+      &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&quot; : {
+        &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&quot;
+      }
+    }, {
+      &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&quot;,
+      &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&quot; : {
+        &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/crumbled-food&quot;
+      },
+      &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&quot; : {
+        &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&quot;
+      },
+      &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&quot; : {
+        &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&quot;
+      }
+    }, {
+      &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&quot;,
+      &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&quot; : {
+        &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&quot;
+      }
+    } ],
+    &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&quot;
+  }, {
+    &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&quot;,
+    &quot;@type&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&quot;
+  }, {
+    &quot;@id&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&quot;,
+    &quot;@type&quot; : &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&quot;
+  } ]
+}
+</code></pre>
+
+<p>The biggest benefit of this format is the compatibility with JSON based tools and techniques. Regular JSON parsers, encoders and other tooling will just work, giving the format a very wide reach. Similarly to this our Clojure based approach uses <a href="https://github.com/edn-format/edn" target="_blank">EDN</a> as its basis. This is a subset of Clojure, notably its notation of data values, and is used by <a href="https://www.datomic.com/" target="_blank">Datomic</a> and others as a data transfer format.</p>
+
+<p>To summarize, we have seen how converting Linked Data from the Clojure representation to various other formats using the <a href="https://github.com/newres/aesopica" target="_blank">Aesopica</a> library is just a function invocation away. We have also looked at some of the differences between various syntaxes, notably the benefits that they provide: Turtle/TriG offers a lot of flexibity and shorthands for reading and writing, N-Quads simplicity of notation, and JSON-LD compatibility with an existing and well used standard. The Clojure representation is aimed creating a new, and hopefully interesting blend. It makes use of prefixes for easy reading and writing by human users, similarly to what is possible in Turtle. It has the simplicity of fact representation as triples and quads, like in N-Quads. Finally it uses a common, albeit not nearly as widespread, standard  a basis so it can make use of EDN based tooling.</p>
+
+<p>One interesting element, that the Turtle and Trig formats provide, is various short-hands for reading and writing. We believe this is a very useful feature, but of course the trade-offs of the shorthands versus the simplicity of notation must be taken into account. The format of which such shorthand will take shape, is therefor the topic for another article.</p>
+
+<p>Note that previous articles in this series can be also be found on this site:</p>
+
+<ul>
+<li><a href="https://www.newresalhaider.com/post/aesopica-1/" target="_blank">Part 1, General Introduction</a> covers the basic elements of Linked Data/RDF along with their representation in Clojure. It also introduces &ldquo;The Fox and the Stork&rdquo; formalised using Linked Data.</li>
+<li><a href="https://www.newresalhaider.com/post/aesopica-2/" target="_blank">Part 2, Literal Values</a> describes how literal values can be represented.</li>
+<li><a href="https://www.newresalhaider.com/post/aesopica-3/" target="_blank">Part 3, Named Graphs</a> describes the notion of representing, and naming, graphs, which allows for representing information about facts and graphs themselves.</li>
+</ul>
+
+<p>As always, the functionality detailed in these articles can be found in the <a href="https://github.com/newres/aesopica" target="_blank">Aesopica</a> library for using Clojure to write Linked Data.</p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/clojure">Clojure</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/linked-data">Linked Data</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/rdf">RDF</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/semantic-web">Semantic Web</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/knowledge-representation">knowledge representation</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/knowledge-graph">knowledge graph</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/aesopica">Aesopica</a>
+  
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/post/aesopica-3/">Aesopica, Part 3: Named Graphs</a></li>
+        
+        <li><a href="/post/aesopica-2/">Aesopica, Part 2: Literal Values</a></li>
+        
+        <li><a href="/post/aesopica-1/">Aesopica, Part 1: General Introduction</a></li>
+        
+        <li><a href="/post/interlinked-data/">Data Interlinked</a></li>
+        
+        <li><a href="/post/spec-stacular-spider-man/">Spec-stacular Spider-Man</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2017 Newres Al Haider &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js"></script>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML" integrity="sha512-tOav5w1OjvsSJzePRtt2uQPFwBoHt1VZcUq8l8nm5284LEKE9FSJBQryzMBzHxY5P0zRdNqEcpLIRVYFNgu1jw==" crossorigin="anonymous"></script>
+    
+    
+
+  </body>
+</html>
+
