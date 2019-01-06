@@ -2,7 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/post/aesopica-4/</loc>
@@ -10,7 +9,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -20,7 +18,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/post/aesopica-2/</loc>
@@ -28,7 +25,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -38,7 +34,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/post/common-treasure/</loc>
@@ -46,7 +41,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -56,7 +50,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/post/art-of-choosing-language/</loc>
@@ -64,7 +57,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -74,7 +66,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/post/trouble-with-triples/</loc>
@@ -82,7 +73,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -92,7 +82,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/project/legal-banking-compliance/</loc>
@@ -100,7 +89,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -110,7 +98,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/project/clinical-semantics/</loc>
@@ -118,7 +105,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -128,7 +114,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/tags/academic/</loc>
@@ -136,7 +121,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -146,7 +130,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/talk/</loc>
@@ -154,7 +137,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -164,7 +146,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/publication/medical-data-semantic/</loc>
@@ -172,7 +153,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -182,7 +162,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/publication/comparison-mobile-rule-engines/</loc>
@@ -190,7 +169,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -200,7 +178,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/publication/execution-trace-analysis/</loc>
@@ -209,7 +186,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/publication/approach-da-ontologies/</loc>
@@ -217,7 +193,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -228,7 +203,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/tags/ai/</loc>
@@ -237,7 +211,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -248,37 +221,6 @@
     
   
     
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/archeology/</loc>
-      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/art/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/banking/</loc>
-      <lastmod>2017-12-31T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
     <url>
     
       <loc>https://www.newresalhaider.com/categories/</loc>
@@ -286,17 +228,6 @@
     </url>
     
   
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/clinical/</loc>
-      <lastmod>2017-12-29T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
     
     <url>
     
@@ -307,17 +238,6 @@
     
   
     
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/clojure.spec/</loc>
-      <lastmod>2018-05-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
     <url>
     
       <loc>https://www.newresalhaider.com/tags/clojurescript/</loc>
@@ -326,7 +246,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -337,7 +256,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/tags/dart/</loc>
@@ -346,17 +264,6 @@
     </url>
     
   
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/dynamic-analysis/</loc>
-      <lastmod>2017-12-22T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
     
     <url>
     
@@ -367,7 +274,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/tags/flutter/</loc>
@@ -376,7 +282,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -387,7 +292,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/tags/haskell/</loc>
@@ -396,17 +300,6 @@
     </url>
     
   
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/health/</loc>
-      <lastmod>2017-12-29T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
     
     <url>
     
@@ -417,27 +310,6 @@
     
   
     
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/industrial/</loc>
-      <lastmod>2017-12-30T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/introduction/</loc>
-      <lastmod>2018-01-14T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
     <url>
     
       <loc>https://www.newresalhaider.com/tags/java/</loc>
@@ -446,7 +318,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -457,27 +328,6 @@
     
   
     
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/knowledge-graph/</loc>
-      <lastmod>2018-12-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/knowledge-representation/</loc>
-      <lastmod>2018-12-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
     <url>
     
       <loc>https://www.newresalhaider.com/tags/kotlin/</loc>
@@ -486,17 +336,6 @@
     </url>
     
   
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/law/</loc>
-      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
     
     <url>
     
@@ -507,7 +346,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/</loc>
@@ -516,37 +354,6 @@
     </url>
     
   
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/program-analysis/</loc>
-      <lastmod>2017-12-22T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/program-traces/</loc>
-      <lastmod>2017-12-22T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/programming-languages/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
     
     <url>
     
@@ -557,7 +364,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/tags/prolog/</loc>
@@ -566,7 +372,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -577,7 +382,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/tags/python/</loc>
@@ -586,7 +390,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -597,7 +400,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/tags/react-native/</loc>
@@ -606,37 +408,6 @@
     </url>
     
   
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/reasoning/</loc>
-      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/rules/</loc>
-      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/rules-engine/</loc>
-      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
     
     <url>
     
@@ -647,7 +418,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/tags/snomed-ct/</loc>
@@ -656,7 +426,6 @@
     </url>
     
   
-    
     
     <url>
     
@@ -667,7 +436,6 @@
     
   
     
-    
     <url>
     
       <loc>https://www.newresalhaider.com/tags/semantic-web/</loc>
@@ -676,47 +444,6 @@
     </url>
     
   
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/sensors/</loc>
-      <lastmod>2017-12-30T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/software/</loc>
-      <lastmod>2017-12-22T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/software-contracts/</loc>
-      <lastmod>2018-05-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/specs/</loc>
-      <lastmod>2018-05-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
     
     <url>
     
@@ -727,6 +454,203 @@
     
   
     
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/archeology/</loc>
+      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/art/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/banking/</loc>
+      <lastmod>2017-12-31T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/clinical/</loc>
+      <lastmod>2017-12-29T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/clojure.spec/</loc>
+      <lastmod>2018-05-01T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/dynamic-analysis/</loc>
+      <lastmod>2017-12-22T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/health/</loc>
+      <lastmod>2017-12-29T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/industrial/</loc>
+      <lastmod>2017-12-30T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/introduction/</loc>
+      <lastmod>2018-01-14T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/knowledge-graph/</loc>
+      <lastmod>2018-12-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/knowledge-representation/</loc>
+      <lastmod>2018-12-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/law/</loc>
+      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/program-analysis/</loc>
+      <lastmod>2017-12-22T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/program-traces/</loc>
+      <lastmod>2017-12-22T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/programming-languages/</loc>
+      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/reasoning/</loc>
+      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/rules/</loc>
+      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/rules-engine/</loc>
+      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/sensors/</loc>
+      <lastmod>2017-12-30T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/software/</loc>
+      <lastmod>2017-12-22T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/software-contracts/</loc>
+      <lastmod>2018-05-01T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/specs/</loc>
+      <lastmod>2018-05-01T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
     
     <url>
     
