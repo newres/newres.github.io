@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.2.0">
+  <meta name="generator" content="Hugo 0.52" />
+  <meta name="author" content="Newres Al Haider">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="Introducing the Prolog programming language through Quark&#39;s explanation for using the Third Rule of Acquisition to acquire peace at the lowest price. 
+">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://www.newresalhaider.com/post/prolog-price-of-peace/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#EF525B">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+  <link rel="stylesheet" href="/css/post.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
+  <link rel="feed" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://www.newresalhaider.com/post/prolog-price-of-peace/">
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@newresa">
+  <meta property="twitter:creator" content="@newresa">
+  
+  <meta property="og:site_name" content="Newres Al Haider">
+  <meta property="og:url" content="https://www.newresalhaider.com/post/prolog-price-of-peace/">
+  <meta property="og:title" content="Prolog and the Price of Peace | Newres Al Haider">
+  <meta property="og:description" content="Introducing the Prolog programming language through Quark&#39;s explanation for using the Third Rule of Acquisition to acquire peace at the lowest price. 
+"><meta property="og:image" content="https://www.newresalhaider.com/post/prolog-price-of-peace/featured.jpg">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-01-12T00:00:00&#43;01:00">
+  
+  <meta property="article:modified_time" content="2018-01-12T00:00:00&#43;01:00">
+  
+
+  
+
+  
+
+  <title>Prolog and the Price of Peace | Newres Al Haider</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Newres Al Haider</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#publications_selected">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Prolog and the Price of Peace</h1>
+
+  
+
+  
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+  
+
+  <span class="article-date">
+    
+        Last updated on
+    
+    <meta content="2019-01-12 00:00:00 &#43;0100 CET" itemprop="datePublished">
+    <time datetime="2018-01-12 00:00:00 &#43;0100 CET" itemprop="dateModified">
+      12 Jan, 2018
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Prolog%20and%20the%20Price%20of%20Peace&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprolog-price-of-peace%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprolog-price-of-peace%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprolog-price-of-peace%2f&amp;title=Prolog%20and%20the%20Price%20of%20Peace"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprolog-price-of-peace%2f&amp;title=Prolog%20and%20the%20Price%20of%20Peace"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Prolog%20and%20the%20Price%20of%20Peace&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprolog-price-of-peace%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      <p>The use of logic is a common element in Science Fiction. In the Star Trek universe <a href="https://en.wikipedia.org/wiki/Vulcan_(Star_Trek)" target="_blank">Vulcans</a> are a species that is famously known for aiming to live by logic and reason. Because of this they are often considered masters of these subjects. Yet there was a case in an episode of the Star Trek show <a href="http://memory-alpha.wikia.com/wiki/The_Maquis,_Part_II_(episode)" target="_blank">Deep Space 9</a>, where <a href="https://en.wikipedia.org/wiki/Quark_(Star_Trek)" target="_blank">Quark</a>, a <a href="https://en.wikipedia.org/wiki/Ferengi" target="_blank">Ferengi</a>, was able to convince Sakonna, a Vulcan, of the error of her logic and reasoning.</p>
+
+<p>For this Quark made use of Ferengi philosophy, namely the Third Rule of Acquisition. The Rules of Acquisition are a series of proverbs and guidelines that govern Ferengi society, and notably their business dealings that take a prominent place in their lives. The Third Rule of Acquisition states that &ldquo;Never spend more for an acquisition than you have to.&rdquo; By applying this rule to the situation in the episode Quark was able make it clear to Sakonna that the best time broker a peace agreement would be &ldquo;right now&rdquo;, as the price of peace is at an all time low.</p>
+
+
+
+
+<figure>
+
+<img src="featured.jpg" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Quark explaining the Third Rule of Acquisition to Sakonna</h4>
+  <p>
+    
+    
+    Copyright CBS Corporation
+    
+  </p> 
+</figcaption>
+
+</figure>
+
+<p>Much like with Ferengi society, various rules and regulations play a prominent role in our lives and dealings with each other. So much so, that navigating the various rules to their logical conclusion, whether in the realm of law, finance and other domains, is often a difficult process. Thankfully there are tools and techniques to help us. The programming language Prolog, in particular, can be a very helpful in dealing with various rules and logical problems. This article aims to provide a brief introduction to this language using by using it to show how Quark&rsquo;s reasoning can be implemented within a computer program.</p>
+
+<p>Prolog is a logic programming language, originally created in the 1970s, but with many modern implementations such as <a href="http://www.swi-prolog.org/" target="_blank">SWI-Prolog</a>. With logic programming programs are written and solved using some variation of a formal logic. Using such logic, information about the problem and its domain is first declared. Then the user can pose queries about the problem domain, which the programming language aims to answer through reasoning with the available information. This style of programming contrasts with the more common, imperative, paradigm. Instead of telling the computer how to solve the problem, we can declare information about the problem and let the computer, through the use of logic, solve it for us.</p>
+
+<p>In order to show how Prolog works, we aim to use it to represent the same problem and reasoning that Quark used to convince Sakonna. To do this first lets examine the situation depicted the episode a bit more closely. In the episode the Maquis are a group that are at odds Cardassian colonists both living the Demilitarized Zone. Tensions were escalating as the Cardassian colonists were recently supplied in secret with weapons by the Cardassian Union. As a result Sakonna, along with other members of the Maquis, aimed at acquiring more weapons of their own. Even after it was found that the Cardassian Union was behind weapon supplies, Sakonna still aimed at gathering more, as a way to ensure peace. Quark pointed out the flaws in the logic of her argument, given the Third Rule of Acquisition: &ldquo;Never spend more for an acquisition than you have to.&rdquo; If the goal of Sakonna is truly to acquire peace, than it is the perfect time to be negotiating with the Cardassian colonists. With the flow of the smuggled in weapons having stopped, and both sides already having weapons, neither the Maquis nor the Cardassian colonists have any advantage. By aiming to acquire weapons still, they would only escalate the conflict, and making peace more costly in the long run.</p>
+
+<p>To express this scenario with Prolog, we are going to introduce some elements of this language first (for a bit more through introduction see the excellent <a href="http://www.learnprolognow.org/" target="_blank">Learn Prolog Now!</a> available online). There are three basic elements to a Prolog program: facts, rules and queries.</p>
+
+<p>Facts are elements that have been stated to hold. For example the following statement:</p>
+
+<pre><code class="language-prolog">advantage(cardassians).
+</code></pre>
+
+<p>can be used to denote that the advantage is held by the Cardassians colonists.</p>
+
+<p>Rules are a way for Prolog to infer new information from the knowledge that already exists. For example if we aim to state that &ldquo;if the Cardassian colonists have the advantage the price of peace is high&rdquo; in Prolog we would have the rule:</p>
+
+<pre><code class="language-prolog">priceOfPeace(high) :- advantage(cardassians).
+</code></pre>
+
+<p>There are two parts to writing such rules in Prolog: the body and the head. The body of the rule is in this case <code>advantage(cardassians)</code> while the head is <code>priceOfPeace(high)</code>. In Prolog if the body of the rule holds true, than it can be concluded that the head is true as well. This exactly matches to what we aim to express: if the Prolog program knows that the Cardassian colonists hold the advantage, than it can conclude that the price of peace is high.</p>
+
+<p>Facts and rules together form the knowledge base that can describe a domain. In this case the domain is the situation between the Cardassian colonists and the Maquis. The final piece, queries, allows us to examine this knowledge base and ask questions on what Prolog can infer from this knowledge. For the above example we could query whether the price of peace is indeed high, which should follow directly from the semantics of the rules and facts that we have described.</p>
+
+<p>Given that we load in the knowledge base consisting of the above-mentioned fact and rule, the query:</p>
+
+<pre><code class="language-prolog">?-  priceOfPeace(high).
+</code></pre>
+
+<p>that asks whether the price of peace is high, will return <code>true</code> indicating that this is indeed the case. Instead if we ask whether the price of peace is low, using the query:</p>
+
+<pre><code class="language-prolog">?-  priceOfPeace(low).
+</code></pre>
+
+<p>the result will be<code>false</code> indicating this is not the case.</p>
+
+<p>We can also ask more open ended questions using variables. Variables are written by starting with a capitalized letter (or an underscore), such as <code>X</code>. These variables could be used to write queries with unknowns. The query:</p>
+
+<pre><code class="language-prolog">?-  priceOfPeace(X).
+</code></pre>
+
+<p>will give us the result:</p>
+
+<pre><code class="language-prolog">X = high
+</code></pre>
+
+<p>Which again is what would directly follow from the facts and the rules. What Prolog does with variables is to try to &ldquo;unify&rdquo; them with known values that match (or other variables). In this case from the knowledge base we have given it, it is unifies it with the value of <code>high</code>.</p>
+
+<p>From the basic elements of facts, rules and queries Prolog is able to represent and answer problems in many domains. This is also shows off the feature of a logical programming language, such as Prolog, that make it different compared to many other programming languages. Instead of telling the program what to do, the program becomes a description of the domain, over which queries are answered to solve the overall goal.</p>
+
+<p>Beyond the above basics, Prolog has many features to support the description of more complicated domains. Here we only list a few that helps us to convey our translation of Quark&rsquo;s reasoning into Prolog.</p>
+
+<p>One such feature is the use variables within the rules themselves. The rule</p>
+
+<pre><code class="language-prolog">acquirePeace(X) :- priceOfPeace(X).
+</code></pre>
+
+<p>indicates that the price of acquiring peace depends on the price of peace.</p>
+
+<p>The rule</p>
+
+<pre><code class="language-prolog">priceOfPeace(low)  :- advantage(cardassians), advantage(maquis).
+</code></pre>
+
+<p>shows off the logical operator <strong>and</strong>, meaning that the price of peace is low if both the Cardassians and the Maquis have the advantage.</p>
+
+<p>The rule</p>
+
+<pre><code class="language-prolog">priceOfPeace(low)  :- \+ advantage(cardassians), \+ advantage(maquis).
+</code></pre>
+
+<p>shows off the logical <strong>not</strong>, denoted by the &lsquo;+&rsquo; symbol, which states that the price of peace is also low if neither the Cardassians nor the Maquis have the advantage.</p>
+
+<p>Finally, much like in other languages, comments for the code can also be written. This is done by prefacing a line with &ldquo;%%&rdquo;.</p>
+
+<p>Now if we put every element together to use Prolog to describe Quarks scenario, a possible knowledge base is as follows:</p>
+
+<pre><code class="language-prolog">%% Rules
+acquirePeace(X)  :- priceOfPeace(X).
+
+priceOfPeace(low)  :- \+ advantage(cardassians), \+ advantage(maquis).
+priceOfPeace(low)  :- advantage(cardassians), advantage(maquis).
+priceOfPeace(high) :- advantage(cardassians).
+priceOfPeace(low) :- advantage(maquis).
+
+
+advantage(cardassians)  :- weapons(cardassians), \+ weapons(maquis).
+advantage(maquis)  :- \+ weapons(cardassians), weapons(maquis).
+
+%% Facts
+weapons(cardassians).
+weapons(maquis).
+</code></pre>
+
+<p>In the overall knowledge base, the logic of Quark&rsquo;s reasoning is broken down into a number of rules and a pair of facts.</p>
+
+<p>The rules state that advantage of either side, the Cardassians settlers or the Maquis, is decided by one side having weapons while the other side has not. The price of peace is in turn dependent on who has the advantage. In this formalisation the price of peace is only high if Cardassians have the advantage. Finally the price of acquiring peace is dependent solely on the price of peace.</p>
+
+<p>The facts for this scenario is that both the Cardassian settlers and the Maquis have weapons.</p>
+
+<p>With this knowledge base describing Quark&rsquo;s reasoning process the query to see for what price we can aquire peace:</p>
+
+<pre><code class="language-prolog">?-  acquirePeace(X).
+</code></pre>
+
+<p>will indeed return</p>
+
+<pre><code class="language-prolog">X = low
+</code></pre>
+
+<p>indicating that acquiring peace can be done at a low price.</p>
+
+<p>Going a bit beyond this query, if we would further want to test the logic of Quark&rsquo;s scenario, we can also inquire about other information.</p>
+
+<p>For example if we would ask for the price of peace:</p>
+
+<pre><code class="language-prolog">?-  priceOfPeace(X).
+</code></pre>
+
+<p>we would also unsurprisingly get</p>
+
+<pre><code class="language-prolog">X = low
+</code></pre>
+
+<p>as with the rules defined in our knowledge base these values are intertwined.</p>
+
+<p>We can also ask for who has the advantage:</p>
+
+<pre><code class="language-prolog">?-  advantage(X).
+</code></pre>
+
+<p>which will return:</p>
+
+<pre><code class="language-prolog">false.
+</code></pre>
+
+<p>which is completely in line with the scenario that noone has the advantage.</p>
+
+<p>We can also ask who has weapons, the query of:</p>
+
+<pre><code class="language-prolog">?-  weapons(X).
+</code></pre>
+
+<p>gives us the answer</p>
+
+<pre><code class="language-prolog">X = cardassians
+</code></pre>
+
+<p>&hellip; but wait, this can not be right! Did we not state in the knowledge base that both the Cardassian colonists and the Maquis have weapons? Prolog can actually return mutliple answers, if they exist. In <a href="http://www.swi-prolog.org/" target="_blank">SWI-Prolog</a> this can be done by pressing semicolon (<code>;</code>) after an answer, in which case another answers is returned, if it exists or simply false otherwise. By pressing <code>;</code> once after the first answer we will see a total output such as:</p>
+
+<pre><code class="language-prolog">X = cardassians ;
+X = maquis.
+</code></pre>
+
+<p>Hopefully Sakonna would also be quite convinced with the logic of Prolog, but just to be absolutely sure, lets examine some scenario&rsquo;s where the facts of the scenario are changed. In such cases the rules should still be applied in ways that we would expect.</p>
+
+<p>Suppose that our only fact now is that only the cardassians colonists have weapons, while rules remain the same. Giving the query for knowing the price of acquiring peace:</p>
+
+<pre><code class="language-prolog">?-  acquirePeace(X).
+</code></pre>
+
+<p>will now return:</p>
+
+<pre><code class="language-prolog">X = high 
+</code></pre>
+
+<p>Hopefully, much like Quark&rsquo;s application of the Third Rule of Acquisition, this intro would have been enough to convince Sakonna of the logic of purchasing peace at the lowest possible price. Similarly, I hope that as a reader, this article gave some insight to the usefulness of Prolog in such scenarios. Next time, you are dealing with a problem domain, that would easily match to a similar scenario of rules, facts and queries, give Prolog a try. It is, after all, a very logical choice.</p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/reasoning/">reasoning</a>
+  
+  <a class="badge badge-light" href="/tags/rules/">rules</a>
+  
+  <a class="badge badge-light" href="/tags/knowledge-representation/">knowledge representation</a>
+  
+  <a class="badge badge-light" href="/tags/prolog/">Prolog</a>
+  
+  <a class="badge badge-light" href="/tags/law/">law</a>
+  
+  <a class="badge badge-light" href="/tags/regtech/">RegTech</a>
+  
+  <a class="badge badge-light" href="/tags/star-trek/">Star Trek</a>
+  
+  <a class="badge badge-light" href="/tags/deep-space-9/">Deep Space 9</a>
+  
+</div>
+
+
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/portrait.png" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Newres Al Haider</a></h5>
+    <h6 class="card-subtitle">Postdoctoral Researcher and Software Engineer</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:newresjob@gmail.com" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/newresa" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://scholar.google.nl/citations?user=b4MxbOEAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/newres" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/post/common-treasure/">Excavating a Common Treasure</a></li>
+        
+        <li><a href="/post/interlinked-data/">Data Interlinked</a></li>
+        
+        <li><a href="/post/trouble-with-triples/">The Trouble with Triples</a></li>
+        
+        <li><a href="/post/introduction/">Introduction</a></li>
+        
+        <li><a href="/post/aesopica-4/">Aesopica, Part 4: Basic Conversion to Other Formats</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2017 Newres Al Haider &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/prolog.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.d037ee5294b166a79dec317c58aea9cc.js"></script>
+
+    
+
+  </body>
+</html>
+
