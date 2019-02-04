@@ -13,7 +13,7 @@
     <item>
       <title>Prolog and the Price of Peace</title>
       <link>https://www.newresalhaider.com/post/prolog-price-of-peace/</link>
-      <pubDate>Sat, 12 Jan 2019 00:00:00 +0100</pubDate>
+      <pubDate>Fri, 01 Feb 2019 00:00:00 +0100</pubDate>
       
       <guid>https://www.newresalhaider.com/post/prolog-price-of-peace/</guid>
       <description>&lt;p&gt;The use of logic is a common element in Science Fiction. In the Star Trek universe &lt;a href=&#34;https://en.wikipedia.org/wiki/Vulcan_(Star_Trek)&#34; target=&#34;_blank&#34;&gt;Vulcans&lt;/a&gt; are a species that is famously known for aiming to live by logic and reason. Because of this they are often considered masters of these subjects. Yet there was a case in an episode of the Star Trek show &lt;a href=&#34;http://memory-alpha.wikia.com/wiki/The_Maquis,_Part_II_(episode)&#34; target=&#34;_blank&#34;&gt;Deep Space 9&lt;/a&gt;, where &lt;a href=&#34;https://en.wikipedia.org/wiki/Quark_(Star_Trek)&#34; target=&#34;_blank&#34;&gt;Quark&lt;/a&gt;, a &lt;a href=&#34;https://en.wikipedia.org/wiki/Ferengi&#34; target=&#34;_blank&#34;&gt;Ferengi&lt;/a&gt;, was able to convince Sakonna, a Vulcan, of the error of her logic and reasoning.&lt;/p&gt;
@@ -75,7 +75,7 @@
 &lt;pre&gt;&lt;code class=&#34;language-prolog&#34;&gt;?-  priceOfPeace(low).
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;the result will be&lt;code&gt;false&lt;/code&gt; indicating this is not the case.&lt;/p&gt;
+&lt;p&gt;the result will be &lt;code&gt;false&lt;/code&gt; indicating this is not the case.&lt;/p&gt;
 
 &lt;p&gt;We can also ask more open ended questions using variables. Variables are written by starting with a capitalized letter (or an underscore), such as &lt;code&gt;X&lt;/code&gt;. These variables could be used to write queries with unknowns. The query:&lt;/p&gt;
 
@@ -87,7 +87,7 @@
 &lt;pre&gt;&lt;code class=&#34;language-prolog&#34;&gt;X = high
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Which again is what would directly follow from the facts and the rules. What Prolog does with variables is to try to &amp;ldquo;unify&amp;rdquo; them with known values that match (or other variables). In this case from the knowledge base we have given it, it is unifies it with the value of &lt;code&gt;high&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Which again is what would directly follow from the facts and the rules. What Prolog does with variables is to try to &amp;ldquo;unify&amp;rdquo; them with known values that match (or other variables). In this case from the knowledge base we have given it, it unifies it with the value of &lt;code&gt;high&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;From the basic elements of facts, rules and queries Prolog is able to represent and answer problems in many domains. This is also shows off the feature of a logical programming language, such as Prolog, that make it different compared to many other programming languages. Instead of telling the program what to do, the program becomes a description of the domain, over which queries are answered to solve the overall goal.&lt;/p&gt;
 
