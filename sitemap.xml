@@ -4,6 +4,14 @@
     
     <url>
     
+      <loc>https://www.newresalhaider.com/post/exploring-the-deep-1/</loc>
+      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>https://www.newresalhaider.com/post/prolog-price-of-peace/</loc>
       <lastmod>2019-02-04T00:00:00+01:00</lastmod>
     </url>
@@ -214,7 +222,7 @@
     <url>
     
       <loc>https://www.newresalhaider.com/tags/ai/</loc>
-      <lastmod>2018-01-14T00:00:00+01:00</lastmod>
+      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -536,6 +544,15 @@
     
     <url>
     
+      <loc>https://www.newresalhaider.com/tags/deep-learning/</loc>
+      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>https://www.newresalhaider.com/tags/dynamic-analysis/</loc>
       <lastmod>2017-12-22T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -591,6 +608,15 @@
     <url>
     
       <loc>https://www.newresalhaider.com/tags/law/</loc>
+      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/machine-learning/</loc>
       <lastmod>2019-02-04T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>

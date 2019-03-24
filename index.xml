@@ -11,6 +11,128 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Exploring the Deep, Part 1: Introduction</title>
+      <link>https://www.newresalhaider.com/post/exploring-the-deep-1/</link>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://www.newresalhaider.com/post/exploring-the-deep-1/</guid>
+      <description>
+
+&lt;p&gt;Deep Learning, is a field within Artificial Intelligence (AI), has got quite a lot of attention lately, due to some truly impressive results in recent years. From recognizing objects in images with accuracy that rivals humans, to generating realistic looking texts, to even &lt;a href=&#34;https://deepmind.com/blog/alphastar-mastering-real-time-strategy-game-starcraft-ii/&#34; target=&#34;_blank&#34;&gt;beating professional players in Starcraft 2&lt;/a&gt; some truly groundbreaking applications are done with these techniques.&lt;/p&gt;
+
+&lt;p&gt;As someone whose AI background is more &lt;a href=&#34;https://en.wikipedia.org/wiki/Symbolic_artificial_intelligence&#34; target=&#34;_blank&#34;&gt;Symbolic Artifical Intelligence&lt;/a&gt;, but is anxious to learn, it is a good time as any to explore this field. Thankfully there are some excellent books and tutorials out there in this field to get a nice start.&lt;/p&gt;
+
+&lt;p&gt;One book in this area that has caught my attention recently is &lt;a href=&#34;https://d2l.ai/index.html&#34; target=&#34;_blank&#34;&gt;Dive into Deep Learning&lt;/a&gt;, which seems to have a nice overview of the field, while being very practical at the same time. I aim to work through the book and share my notes, summary and experiences on this journey in a series of articles. My goal is to write these articles for a bit more broader audience than the book itself. My hope is that even those with less exposure to the field than me could follow along, and if a topic piques their interest, they too can use the book for a more detailed reference point.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://d2l.ai/chapter_introduction/intro.html&#34; target=&#34;_blank&#34;&gt;first chapter&lt;/a&gt; that I aim to go over is the introduction to the book as well as Machine Learning in general. As Deep Learning (DL), is a form of Machine Learning (ML), an intro/refresher on the topic of Machine Learning is a natural start.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-is-machine-learning&#34;&gt;What is Machine Learning?&lt;/h2&gt;
+
+&lt;p&gt;In most scenarios, programs are written in way where the programmer gives precise information about the problem and/or how to solve it. For example in &lt;a href=&#34;https://en.wikipedia.org/wiki/Imperative_programming&#34; target=&#34;_blank&#34;&gt;imperative programming&lt;/a&gt; the program is essentially a list of statements that command the computer what to do. Even in the many forms of &lt;a href=&#34;https://en.wikipedia.org/wiki/Declarative_programming&#34; target=&#34;_blank&#34;&gt;declarative programming&lt;/a&gt;, such as &lt;a href=&#34;https://en.wikipedia.org/wiki/Functional_programming&#34; target=&#34;_blank&#34;&gt;functional-&lt;/a&gt; or &lt;a href=&#34;https://en.wikipedia.org/wiki/Logic_programming&#34; target=&#34;_blank&#34;&gt;logic programming&lt;/a&gt;, providing the solution is done by explicit descriptions by the coder. The coder would describe the entirety of the problem with mathematical functions or with logical axioms respectively.&lt;/p&gt;
+
+&lt;p&gt;However there are scenarios where such paradigms are not adequate. Take for example a case where we where have set of photos of cats and dogs. Suppose we want need to write a program that given a photo can recognize the species and breed of the animal depicted. Generally it is difficult to even begin formulating such a problem in terms of the usual programming paradigms. Usually any handwritten solution we can come up with will be very brittle: it will often fail to recognize the right kind of pet from the photo, or it would only be correct for a very limited set of photos.&lt;/p&gt;
+
+&lt;p&gt;An alternative way to solve this problem is by letting the computer learn what kind of pet is in the photo. The computer can use a set of labelled examples where the kind of animal and breed is already known and given alongside the photo. In such cases we start with an initial, perhaps even random, model that can make this prediction. Such a model will be pretty bad at the start, otherwise the problem would be solved from the start. Then we use the labelled data to update this model. The hope is that the new model will be better at classifying animals. The intention is to keep adding data and improving the model until we decide that our model is good enough to solve our pet classification problem.&lt;/p&gt;
+
+&lt;p&gt;This learning from previous experiences by the machine to solve a problem is denoted as &lt;em&gt;machine learning&lt;/em&gt;.&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;featured.png&#34;  /&gt;
+  &lt;figcaption&gt;
+      &lt;h4&gt;The recognition of dogs and cats, along with their breeds, is actually an interesting research problem in machine learning. This is due to the subtle differences between breeds making the problem difficult for computers. These images are from the &lt;a href =&#34;http://www.robots.ox.ac.uk/~vgg/data/pets/&#34;&gt; The Oxford-IIIT Pet Dataset&lt;/a&gt; that can be used to help evaluate techniques aiming to tackle this issue. The images of this dataset are licensed under &lt;a href =&#34;https://creativecommons.org/licenses/by/4.0/&#34;&gt; Creative Commons Attribution-ShareAlike 4.0 International License.&lt;/a&gt; Copyright of the images is with their original owner.&lt;/h4&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;There are a large number of forms of machine learning, of which deep learning is only a particular branch, but there are common elements among the various techniques.&lt;/p&gt;
+
+&lt;h2 id=&#34;elements-of-machine-learning&#34;&gt;Elements of Machine Learning&lt;/h2&gt;
+
+&lt;h3 id=&#34;data&#34;&gt;Data&lt;/h3&gt;
+
+&lt;p&gt;Data is the example information from which the machine learning aims to learn. In the previous scenario, the data is the labelled photo of pets.&lt;/p&gt;
+
+&lt;h3 id=&#34;model&#34;&gt;Model&lt;/h3&gt;
+
+&lt;p&gt;The model designates the whole process of using the data and transforming it into the goal of machine learning. In our example the model would be the full process that can take a given photo and transform it into a prediction with regards to the pet depicted.&lt;/p&gt;
+
+&lt;h3 id=&#34;objective-function&#34;&gt;Objective Function&lt;/h3&gt;
+
+&lt;p&gt;The objective function denotes how good, or bad, our model currently is. As mentioned before, the reason we perform machine learning is that we aim to let the computer learn how to solve a problem. The objective function is allow us to measure the quality of our current solution, so it can be assessed whether the machine learning is progressing towards an acceptable solution.&lt;/p&gt;
+
+&lt;h3 id=&#34;optimization-algorithm&#34;&gt;Optimization Algorithm&lt;/h3&gt;
+
+&lt;p&gt;The optimization algorithm that describes the process of moving from one model to a better one. This allows for the learning to happen by moving from one model to a one that better solves the problem.&lt;/p&gt;
+
+&lt;h2 id=&#34;kinds-of-machine-learning&#34;&gt;Kinds of Machine Learning&lt;/h2&gt;
+
+&lt;p&gt;Machine learning is a large field with a wide variety of techniques and potential problems to solve. Generally techniques are differentiated by the data they input and output, as well as the specific type of problem they target.&lt;/p&gt;
+
+&lt;h3 id=&#34;supervised-learning&#34;&gt;Supervised Learning&lt;/h3&gt;
+
+&lt;p&gt;Supervised learning aims to predict targets given some input data. A good example of this is our previous scenario where we were trying to predict what type of pet is in a photo. If we have a number of photos for which we know what kind of animal is depicted in them (i.e. labeled data), we could perform such supervised learning.&lt;/p&gt;
+
+&lt;p&gt;Various kinds of supervised learning can be further subdivided based on what kind of target we aim to predict. Some common types of supervised learning are:&lt;/p&gt;
+
+&lt;h4 id=&#34;classification&#34;&gt;Classification&lt;/h4&gt;
+
+&lt;p&gt;The above example is actually called a &lt;em&gt;classification&lt;/em&gt; scenario. In general, classification problems are those where given an example, we aim to find to what particular class that example belongs to. While in the example we described the classes as the species and the breeds of pets, many other types of classes can be used depending on the problem we aim to solve.&lt;/p&gt;
+
+&lt;h4 id=&#34;tagging&#34;&gt;Tagging&lt;/h4&gt;
+
+&lt;p&gt;Consider a scenario where there could be more than one pet in the photo and we want to recognize each of them. Predicting in such cases is called &lt;em&gt;tagging&lt;/em&gt;. The main difference between classification and tagging, is that with tagging multiple classes need to be recognized at once (e.g.: the photo can have both a dog and a cat ). This in contrast with classification, where the classes are exclusive (e.g.: dog or a cat).&lt;/p&gt;
+
+&lt;h4 id=&#34;regression&#34;&gt;Regression&lt;/h4&gt;
+
+&lt;p&gt;The case where we want to predict a (real valued) number, for example the weight of the pet depicted in the photo, is called a &lt;em&gt;regression&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;search-and-ranking&#34;&gt;Search and Ranking&lt;/h4&gt;
+
+&lt;p&gt;Search and ranking is a scenario where we want to figure out an order between various items. For example suppose that we want to figure out popularity rankings between various breeds of dogs and cats.&lt;/p&gt;
+
+&lt;h3 id=&#34;unsupervised-learning&#34;&gt;Unsupervised Learning&lt;/h3&gt;
+
+&lt;p&gt;In cases with supervised learning, a set of examples for which the result is already known must be available, and preferably in large quantity. However such information can be scarce, or simply unavailable, in many scenarios.&lt;/p&gt;
+
+&lt;p&gt;Even in such cases there is a wealth of information that can still be learned from the data through machine learning. Some example techniques include:&lt;/p&gt;
+
+&lt;h4 id=&#34;clustering&#34;&gt;Clustering&lt;/h4&gt;
+
+&lt;p&gt;With the absence of clearly labelled categories given to us, we can still want to group the data into categories. This process is called &lt;em&gt;clustering&lt;/em&gt;. For example suppose we have a set of photos depicting all sort of pets, without any labels. Here we could still aim to group similar pets into clusters.&lt;/p&gt;
+
+&lt;h4 id=&#34;data-generation-synthesis&#34;&gt;Data Generation/Synthesis&lt;/h4&gt;
+
+&lt;p&gt;Given a set of data, we can also aim to synthesize data that is similar to the given data. For example if we have a large set of dog photos we can also aim to generate a photo of a, non-existent, dog.&lt;/p&gt;
+
+&lt;h3 id=&#34;reinforcement-learning&#34;&gt;Reinforcement Learning&lt;/h3&gt;
+
+&lt;p&gt;The final group of machine learning techniques that we go over in this article are those where the learning process is interacting with the environment. In reinforcement learning the main goal is to figure out what kind of action needs to be taken in a particular situation. As an example, take a scenario where you want to teach a robot dog to play football.&lt;/p&gt;
+
+&lt;p&gt;There process of reinforcement learning is as follows. The agent interacts with the environment through actions and observes the environment reacting to those actions. Based on the environment the agent may get rewards, either positive or negative. The rewards, together with the observations, guide the selection of subsequent actions. There is a cycle of actions, leading to observations and potentially rewards, and then again to actions. This cycle can then be repeated possibly indefinitely or until some goal is reached.&lt;/p&gt;
+
+&lt;p&gt;To make this description a bit more concrete, lets take our example scenario of letting a robot dog learn football. Here the agent is the decision making process of the robot dog. The environment itself is a playing field with other robots and a ball, where the observations are the sensor data of this environment, such as the vision of the robot. Rewards could be given for taking control of the ball, making a successful pass and of course scoring. Negative rewards can be given for the robot missing a pass, walking off field and other undesirable actions.&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;aibosfootball.jpg&#34;  /&gt;
+  &lt;figcaption&gt;
+      &lt;h4&gt;Teaching four legged robots, such as the &lt;a href =&#34;https://us.aibo.com/&#34;&gt; AIBO robot dogs&lt;/a&gt;, to play football is one of the leagues that is part of the &lt;a href=&#34;https://www.robocup.org/&#34;&gt;RoboCup&lt;/a&gt; competition aimed at promoting robotics and AI research. This photo depicts the &lt;a href= &#34;https://www.engineering.unsw.edu.au/computer-science-engineering/help-resources/students/student-projects/robocup&#34; rUNSWift&lt;/a&gt; team in a four-legged league game from RoboCup 2006 in Breman, Germany. &lt;a href =&#34;https://en.wikipedia.org/wiki/RoboCup#/media/File:RUNSWift_AIBOS.jpg&#34;&gt;Public Domain Photo by Brad Hall&lt;/a&gt;&lt;/h4&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Reinforcement learning as a whole can be pretty complex with lots of variables based on can be known about the environment, state or actions. Subcategories of reinforcement are generally based on the given restrictions with these variables.&lt;/p&gt;
+
+&lt;h2 id=&#34;towards-deep-learning&#34;&gt;Towards Deep Learning&lt;/h2&gt;
+
+&lt;p&gt;The above is a general introduction to machine learning, so the question arises how deep learning fits into the picture. Machine learning as a field has quite a bit of history with many of its techniques being laid out in the previous century. A number of such techniques, such as &lt;a href=&#34;https://en.wikipedia.org/wiki/Neural_network&#34; target=&#34;_blank&#34;&gt;Neural Networks&lt;/a&gt; initially showed great promise but research and applications on them were languishing due to the lack data and large amount of processing power to enable such techniques. In recent years this has changed, alongside with some important advances, that led to deep learning techniques being one of the most effective approaches for various machine learning applications.&lt;/p&gt;
+
+&lt;p&gt;In addition the availability of frameworks for deep learning, such as &lt;a href=&#34;https://mxnet.apache.org/&#34; target=&#34;_blank&#34;&gt;MXNet&lt;/a&gt;, which we will use in our learning process, means that the field is very inviting for new users and applications.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;This was a quick rundown of the first chapter. The book actually goes into much more detail, with some previews of techniques and extensive references, for the interested reader. If you have any remarks or suggestions for this series of articles please let me know! I am quite anxious for the next part when I hope to plunge deep into some coding with &lt;a href=&#34;https://mxnet.apache.org/&#34; target=&#34;_blank&#34;&gt;MXNet&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Prolog and the Price of Peace</title>
       <link>https://www.newresalhaider.com/post/prolog-price-of-peace/</link>
       <pubDate>Fri, 01 Feb 2019 00:00:00 +0100</pubDate>
@@ -1855,20 +1977,6 @@ Pale Fire is written by Vladimir Nabokov.
 &lt;p&gt;Creating, maintaining and using software in clinical environments is a difficult process. Not only it is paramount that such software needs to be correct, it has to have an understanding of highly domain specific knowledge about clinical processes in order to provide beneficial support to health professionals.&lt;/p&gt;
 
 &lt;p&gt;Semantic Web technologies, in particular anthologies enable better clinical software. Ontologies allow for a formal and explicit way to model knowledge that is understandable for both clinicians and machines alike.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Semantic Aware Software Analysis</title>
-      <link>https://www.newresalhaider.com/project/semantic-software-analysis/</link>
-      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.newresalhaider.com/project/semantic-software-analysis/</guid>
-      <description>&lt;p&gt;Software bugs and errors have a monumental negative impact on society. Not only can they have huge monetary cost, ranging into billions of dollars annually in the United States alone, but in some cases can even lead to disasters that lead to the loss of life. Preventing such issues from happening requires a large amount of effort in designing and maintaining software.&lt;/p&gt;
-
-&lt;p&gt;However designing and maintaining error free software remains a difficult problem. Not only is software getting more complex, its correct functioning often depends on highly specific domain knowledge of its purpose and its environment. Therefor manually checking the correctness of the software is expensive in both time and available expertise.&lt;/p&gt;
-
-&lt;p&gt;A potential solution that was proposed for this is using machine understandable domain knowledge to help automate software maintenance tasks. Formal ontologies have been proposed and used in various fields to make domain knowledge explicit and usable for both humans and software. In particular during my thesis work, titled &amp;ldquo;An Ontology Based Framework for Specification Mining and Dynamic Program Analysis&amp;rdquo;, the use of ontologies to help understand the working of a running program were successfully explored. In particular it was shown that for a category of bugs, general ontologies such as WordNet, can be used find issues issues from program traces.&lt;/p&gt;
 </description>
     </item>
     
