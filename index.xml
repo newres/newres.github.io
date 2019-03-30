@@ -18,11 +18,11 @@
       <guid>https://www.newresalhaider.com/post/exploring-the-deep-1/</guid>
       <description>
 
-&lt;p&gt;Deep Learning, is a field within Artificial Intelligence (AI), has got quite a lot of attention lately, due to some truly impressive results in recent years. From recognizing objects in images with accuracy that rivals humans, to generating realistic looking texts, to even &lt;a href=&#34;https://deepmind.com/blog/alphastar-mastering-real-time-strategy-game-starcraft-ii/&#34; target=&#34;_blank&#34;&gt;beating professional players in Starcraft 2&lt;/a&gt; some truly groundbreaking applications are done with these techniques.&lt;/p&gt;
+&lt;p&gt;Deep Learning is a field within Artificial Intelligence (AI) that has got quite a lot of attention lately, due to some truly impressive results in recent years. From recognizing objects in images with accuracy that rivals humans, to generating realistic looking texts, to even &lt;a href=&#34;https://deepmind.com/blog/alphastar-mastering-real-time-strategy-game-starcraft-ii/&#34; target=&#34;_blank&#34;&gt;beating professional players in Starcraft 2&lt;/a&gt;, some truly groundbreaking applications are done with Deep Learning techniques.&lt;/p&gt;
 
-&lt;p&gt;As someone whose AI background is more &lt;a href=&#34;https://en.wikipedia.org/wiki/Symbolic_artificial_intelligence&#34; target=&#34;_blank&#34;&gt;Symbolic Artifical Intelligence&lt;/a&gt;, but is anxious to learn, it is a good time as any to explore this field. Thankfully there are some excellent books and tutorials out there in this field to get a nice start.&lt;/p&gt;
+&lt;p&gt;As someone whose AI background is more &lt;a href=&#34;https://en.wikipedia.org/wiki/Symbolic_artificial_intelligence&#34; target=&#34;_blank&#34;&gt;Symbolic Artifical Intelligence&lt;/a&gt;, but is anxious to learn, it is a good time as any to explore this field. Thankfully there are some excellent books and tutorials out there to get a nice start.&lt;/p&gt;
 
-&lt;p&gt;One book in this area that has caught my attention recently is &lt;a href=&#34;https://d2l.ai/index.html&#34; target=&#34;_blank&#34;&gt;Dive into Deep Learning&lt;/a&gt;, which seems to have a nice overview of the field, while being very practical at the same time. I aim to work through the book and share my notes, summary and experiences on this journey in a series of articles. My goal is to write these articles for a bit more broader audience than the book itself. My hope is that even those with less exposure to the field than me could follow along, and if a topic piques their interest, they too can use the book for a more detailed reference point.&lt;/p&gt;
+&lt;p&gt;One book that has caught my attention is &lt;a href=&#34;https://d2l.ai/index.html&#34; target=&#34;_blank&#34;&gt;Dive into Deep Learning&lt;/a&gt;, which seems to have a nice overview of the field, while being very practical at the same time. I aim to work through the book and share my notes, summaries and experiences on this journey in a series of articles. My goal is to write these articles for a bit more broader audience than the book itself. I hope that even those with less exposure to the field than me could follow along, and if a topic piques their interest, they can use the book for a more detailed reference point.&lt;/p&gt;
 
 &lt;p&gt;The &lt;a href=&#34;https://d2l.ai/chapter_introduction/intro.html&#34; target=&#34;_blank&#34;&gt;first chapter&lt;/a&gt; that I aim to go over is the introduction to the book as well as Machine Learning in general. As Deep Learning (DL), is a form of Machine Learning (ML), an intro/refresher on the topic of Machine Learning is a natural start.&lt;/p&gt;
 
@@ -30,9 +30,9 @@
 
 &lt;p&gt;In most scenarios, programs are written in way where the programmer gives precise information about the problem and/or how to solve it. For example in &lt;a href=&#34;https://en.wikipedia.org/wiki/Imperative_programming&#34; target=&#34;_blank&#34;&gt;imperative programming&lt;/a&gt; the program is essentially a list of statements that command the computer what to do. Even in the many forms of &lt;a href=&#34;https://en.wikipedia.org/wiki/Declarative_programming&#34; target=&#34;_blank&#34;&gt;declarative programming&lt;/a&gt;, such as &lt;a href=&#34;https://en.wikipedia.org/wiki/Functional_programming&#34; target=&#34;_blank&#34;&gt;functional-&lt;/a&gt; or &lt;a href=&#34;https://en.wikipedia.org/wiki/Logic_programming&#34; target=&#34;_blank&#34;&gt;logic programming&lt;/a&gt;, providing the solution is done by explicit descriptions by the coder. The coder would describe the entirety of the problem with mathematical functions or with logical axioms respectively.&lt;/p&gt;
 
-&lt;p&gt;However there are scenarios where such paradigms are not adequate. Take for example a case where we where have set of photos of cats and dogs. Suppose we want need to write a program that given a photo can recognize the species and breed of the animal depicted. Generally it is difficult to even begin formulating such a problem in terms of the usual programming paradigms. Usually any handwritten solution we can come up with will be very brittle: it will often fail to recognize the right kind of pet from the photo, or it would only be correct for a very limited set of photos.&lt;/p&gt;
+&lt;p&gt;However there are scenarios where such paradigms are not adequate. Take for example a case where we where have set of photos of cats and dogs. Suppose we want need to write a program that, given a photo, can recognize the species and breed of the animal depicted. Generally it is difficult to even begin formulating such a problem in terms of the usual programming paradigms. Usually any handwritten solution we can come up with will be very brittle: it will often fail to recognize the right kind of pet from the photo, or it would only be correct for a very limited set of photos.&lt;/p&gt;
 
-&lt;p&gt;An alternative way to solve this problem is by letting the computer learn what kind of pet is in the photo. The computer can use a set of labelled examples where the kind of animal and breed is already known and given alongside the photo. In such cases we start with an initial, perhaps even random, model that can make this prediction. Such a model will be pretty bad at the start, otherwise the problem would be solved from the start. Then we use the labelled data to update this model. The hope is that the new model will be better at classifying animals. The intention is to keep adding data and improving the model until we decide that our model is good enough to solve our pet classification problem.&lt;/p&gt;
+&lt;p&gt;An alternative way to solve this problem is by letting the computer learn what kind of pet is in the photo. The computer can use a set of labelled examples where the kind of animal and breed is already known and given alongside the photo. In such cases we start with an initial, perhaps even random, model that can make this prediction. Such a model will likely be pretty bad at the start, otherwise the problem would already be solved. Then we use the labelled data to update this model. The hope is that the new model will be better at classifying animals. The intention is to keep adding data and improving the model until we decide that our model is good enough to solve our pet classification problem.&lt;/p&gt;
 
 &lt;p&gt;This learning from previous experiences by the machine to solve a problem is denoted as &lt;em&gt;machine learning&lt;/em&gt;.&lt;/p&gt;
 
@@ -49,15 +49,15 @@
 
 &lt;h3 id=&#34;data&#34;&gt;Data&lt;/h3&gt;
 
-&lt;p&gt;Data is the example information from which the machine learning aims to learn. In the previous scenario, the data is the labelled photo of pets.&lt;/p&gt;
+&lt;p&gt;Data is the example information from which the machine learning aims to learn. In the previous scenario, the data is the labelled photos of pets.&lt;/p&gt;
 
 &lt;h3 id=&#34;model&#34;&gt;Model&lt;/h3&gt;
 
-&lt;p&gt;The model designates the whole process of using the data and transforming it into the goal of machine learning. In our example the model would be the full process that can take a given photo and transform it into a prediction with regards to the pet depicted.&lt;/p&gt;
+&lt;p&gt;The model designates the whole process of using the data and transforming it into the goal of machine learning. In our example the model would be the full process that can take a given photo and transform it into a prediction of the pet depicted.&lt;/p&gt;
 
 &lt;h3 id=&#34;objective-function&#34;&gt;Objective Function&lt;/h3&gt;
 
-&lt;p&gt;The objective function denotes how good, or bad, our model currently is. As mentioned before, the reason we perform machine learning is that we aim to let the computer learn how to solve a problem. The objective function is allow us to measure the quality of our current solution, so it can be assessed whether the machine learning is progressing towards an acceptable solution.&lt;/p&gt;
+&lt;p&gt;The objective function denotes how good, or bad, our model currently is. As mentioned before, the reason we perform machine learning is that we aim to let the computer learn how to solve a problem. The objective function allow us to measure the quality of our current solution, so it can be assessed whether the machine learning is progressing towards an acceptable solution.&lt;/p&gt;
 
 &lt;h3 id=&#34;optimization-algorithm&#34;&gt;Optimization Algorithm&lt;/h3&gt;
 
@@ -91,7 +91,7 @@
 
 &lt;h3 id=&#34;unsupervised-learning&#34;&gt;Unsupervised Learning&lt;/h3&gt;
 
-&lt;p&gt;In cases with supervised learning, a set of examples for which the result is already known must be available, and preferably in large quantity. However such information can be scarce, or simply unavailable, in many scenarios.&lt;/p&gt;
+&lt;p&gt;In cases with supervised learning, a set of examples for which the result is already known must be available. Often large quantities of such information is required to get accurate results. However such information can be scarce, or simply unavailable.&lt;/p&gt;
 
 &lt;p&gt;Even in such cases there is a wealth of information that can still be learned from the data through machine learning. Some example techniques include:&lt;/p&gt;
 
@@ -109,7 +109,7 @@
 
 &lt;p&gt;There process of reinforcement learning is as follows. The agent interacts with the environment through actions and observes the environment reacting to those actions. Based on the environment the agent may get rewards, either positive or negative. The rewards, together with the observations, guide the selection of subsequent actions. There is a cycle of actions, leading to observations and potentially rewards, and then again to actions. This cycle can then be repeated possibly indefinitely or until some goal is reached.&lt;/p&gt;
 
-&lt;p&gt;To make this description a bit more concrete, lets take our example scenario of letting a robot dog learn football. Here the agent is the decision making process of the robot dog. The environment itself is a playing field with other robots and a ball, where the observations are the sensor data of this environment, such as the vision of the robot. Rewards could be given for taking control of the ball, making a successful pass and of course scoring. Negative rewards can be given for the robot missing a pass, walking off field and other undesirable actions.&lt;/p&gt;
+&lt;p&gt;To make this description a bit more concrete, lets take our example scenario of letting a robot dog learn football. Here the agent is the decision making process of the robot dog. The environment itself is a playing field with other robots and a ball. The observations are the sensor data of this environment, such as the vision of the robot. Rewards could be given for taking control of the ball, making a successful pass and of course scoring. Negative rewards can be given for the robot missing a pass, walking off field and other undesirable actions.&lt;/p&gt;
 
 &lt;figure&gt;
   &lt;img src=&#34;aibosfootball.jpg&#34;  /&gt;
