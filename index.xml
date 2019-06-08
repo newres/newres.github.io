@@ -11,6 +11,67 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Aesopica, Part 5: Blank Nodes</title>
+      <link>https://www.newresalhaider.com/post/aesopica-5/</link>
+      <pubDate>Sat, 08 Jun 2019 00:00:00 +0200</pubDate>
+      
+      <guid>https://www.newresalhaider.com/post/aesopica-5/</guid>
+      <description>&lt;p&gt;This article is the fifth part of a series, examining the use of the Clojure language for representing Linked Data, using examples from Aesop&amp;rsquo;s stories. The topic of this article is to explain the somewhat contentious subject of blank nodes.&lt;/p&gt;
+
+&lt;p&gt;One of the strengths of &lt;a href=&#34;https://www.w3.org/RDF/&#34; target=&#34;_blank&#34;&gt;RDF&lt;/a&gt; as a graph representation format is the way resources are named. Through the use of &lt;a href=&#34;https://en.wikipedia.org/wiki/Uniform_Resource_Identifier&#34; target=&#34;_blank&#34;&gt;Uniform Resource Identifiers (URIs)&lt;/a&gt; every element of the graph can be uniquely identified. With such generic and powerful facilities for naming it can easily represent information in any domain. For example on &lt;a href=&#34;https://schema.org/&#34; target=&#34;_blank&#34;&gt;schema.org&lt;/a&gt; elements have been defined for the notion of a &lt;a href=&#34;http://schema.org/MedicalCondition&#34; target=&#34;_blank&#34;&gt;medical condition (http://schema.org/MedicalCondition)&lt;/a&gt;, &lt;a href=&#34;http://schema.org/employee&#34; target=&#34;_blank&#34;&gt;employee (http://schema.org/employee)&lt;/a&gt; and &lt;a href=&#34;http://schema.org/BankAccount&#34; target=&#34;_blank&#34;&gt;bank account (http://schema.org/BankAccount)&lt;/a&gt;, just to name a few. In particular the namespacing part of the URI, e.g.: &lt;a href=&#34;http://schema.org/&#34; target=&#34;_blank&#34;&gt;http://schema.org/&lt;/a&gt; for &lt;a href=&#34;http://schema.org/employee&#34; target=&#34;_blank&#34;&gt;http://schema.org/employee&lt;/a&gt; , helps to ensure that concepts can be uniquely named, even in scenarios with multiple definitions of the same concept.&lt;/p&gt;
+
+&lt;p&gt;Blank nodes go against this notion of making everything explicitly named. In fact  an alternative name for blank nodes are anonymous resources. Instead of giving a resource an explicit name with a URI  a placeholder is used. This indicates the existence of the resource, but does not tie it together with a namespaced name. In the Turtle syntax for RDF we can use a label prefixed by &lt;code&gt;_:&lt;/code&gt; to indicate a blank node. For example, the following RDF graph states that the fox and the stork both give out an invitation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-rdf&#34;&gt;@base &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;gt; .
+
+&amp;lt;#fox&amp;gt; &amp;lt;#gives-invitation&amp;gt; _:invitation1.
+&amp;lt;#stork&amp;gt; &amp;lt;#gives-invitation&amp;gt; _:invitation2.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Due to the invitations having different names we can expect them to be different resources, However the exact names of these resources do not matter. For example the RDF triples below have arguably the same meaning:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-rdf&#34;&gt;@base &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;gt; .
+
+&amp;lt;#fox&amp;gt; &amp;lt;#gives-invitation&amp;gt; _:abc.
+&amp;lt;#stork&amp;gt; &amp;lt;#gives-invitation&amp;gt; _:xyz.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is important to reiterate that the blank nodes are not resource identifiers such as URIs. They are also only local in scope: an &lt;code&gt;_:invitation1&lt;/code&gt; in one graph and a &lt;code&gt;_:invitation1&lt;/code&gt; in another are not referring to the same thing. Even resources used in the similar places in different graphs are not the same. For example the &lt;code&gt;_:abc&lt;/code&gt; and the  &lt;code&gt;_:invitation1&lt;/code&gt; used in the above graphs, while expressing the same meaning, are not the same resource.&lt;/p&gt;
+
+&lt;p&gt;The above features are both the strength and the weakness of using anonymous resources. We are not required to use a specific named identifier, but this makes referring to resources and comparing them more difficult.&lt;/p&gt;
+
+&lt;p&gt;There are number of scenarios where such anonymous resources can be useful. For example, when representing complex structures not easily expressed in triples where we would need &amp;ldquo;placeholder nodes&amp;rdquo; in the graph but do not particularly care about its naming. In other cases we want to hide some information, and blank nodes could be used as placeholders for named resources. A good overview of the various uses of Blank Nodes can be found in the paper: &lt;a href=&#34;https://link.springer.com/chapter/10.1007/978-3-642-25073-6_27&#34; target=&#34;_blank&#34;&gt;On Blank Nodes&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;With the above description of blank nodes, we also want to provide something similar in our Clojure based RDF representation as well. As we are using keywords to represent URIs in our Clojure representation (i.e. :fox and :rdf/type), a natural element to differentiate them is to use symbols for blank nodes. Symbols are created in Clojure by prefixing it with &lt;code&gt;&#39;&lt;/code&gt;. For example in the Clojure based RDF representation we use blank nodes for representing invitations:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def fox-and-stork-blank-node-edn
+  {::aes/context
+   {nil &amp;quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;quot;
+    :rdf &amp;quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;quot;}
+   ::aes/facts
+   #{[:fox :rdf/type :animal]
+     [:stork :rdf/type :animal]
+     [:fox :gives-invitation &#39;invitation1]
+     [&#39;invitation1 :has-invited :stork]
+     [&#39;invitation1 :has-food :soup]
+     [&#39;invitation1 :serves-using :shallow-plate]
+     [:stork :gives-invitation &#39;invitation2]
+     [&#39;invitation2 :has-invited :fox]
+     [&#39;invitation2 :has-food :crumbled-food]
+     [&#39;invitation2 :serves-using :narrow-mouthed-jug]
+     [:fox :can-eat-food-served-using :shallow-plate]
+     [:fox :can-not-eat-food-served-using :narrow-mouthed-jug]
+     [:stork :can-eat-food-served-using :narrow-mouthed-jug]
+     [:stork :can-not-eat-food-served-using :shallow-plate]}})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above is our version of the Fox and the Stork story that we previously explored in this series of articles The main difference is that two blank nodes are used:  &lt;code&gt;&#39;invitation1&lt;/code&gt; and &lt;code&gt;&#39;invitation2&lt;/code&gt;, instead of named resources. Perhaps the story teller might want to hide some details of their invitations.&lt;/p&gt;
+
+&lt;p&gt;As with all the previous features in this series of articles, blank nodes been implemented in our implementation of this syntax in the &lt;a href=&#34;https://github.com/newres/aesopica&#34; target=&#34;_blank&#34;&gt;Aesopica&lt;/a&gt; library for using Clojure to write Linked Data. Hiding details with blank nodes, even in Clojure, is now just one library away.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Exploring the Deep, Part 1: Introduction</title>
       <link>https://www.newresalhaider.com/post/exploring-the-deep-1/</link>
       <pubDate>Mon, 04 Feb 2019 00:00:00 +0100</pubDate>
@@ -1964,20 +2025,6 @@ Pale Fire is written by Vladimir Nabokov.
       
       <guid>https://www.newresalhaider.com/project/innius/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Ontology Enabled Clinical Software</title>
-      <link>https://www.newresalhaider.com/project/clinical-semantics/</link>
-      <pubDate>Fri, 29 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.newresalhaider.com/project/clinical-semantics/</guid>
-      <description>&lt;p&gt;The time of clinical health professionals is incredibly valuable. Software can alleviate the burden of physicians, nursers and other health experts and allow them to provide better, more effective health care to patients.&lt;/p&gt;
-
-&lt;p&gt;Creating, maintaining and using software in clinical environments is a difficult process. Not only it is paramount that such software needs to be correct, it has to have an understanding of highly domain specific knowledge about clinical processes in order to provide beneficial support to health professionals.&lt;/p&gt;
-
-&lt;p&gt;Semantic Web technologies, in particular anthologies enable better clinical software. Ontologies allow for a formal and explicit way to model knowledge that is understandable for both clinicians and machines alike.&lt;/p&gt;
-</description>
     </item>
     
   </channel>

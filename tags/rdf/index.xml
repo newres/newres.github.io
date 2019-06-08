@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Newres Al Haider</copyright>
-    <lastBuildDate>Tue, 18 Dec 2018 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 08 Jun 2019 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://www.newresalhaider.com/tags/rdf/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Aesopica, Part 5: Blank Nodes</title>
+      <link>https://www.newresalhaider.com/post/aesopica-5/</link>
+      <pubDate>Sat, 08 Jun 2019 00:00:00 +0200</pubDate>
+      
+      <guid>https://www.newresalhaider.com/post/aesopica-5/</guid>
+      <description>This article is the fifth part of a series, examining the use of the Clojure language for representing Linked Data, using examples from Aesop&amp;rsquo;s stories. The topic of this article is to explain the somewhat contentious subject of blank nodes.
+One of the strengths of RDF as a graph representation format is the way resources are named. Through the use of Uniform Resource Identifiers (URIs) every element of the graph can be uniquely identified.</description>
+    </item>
     
     <item>
       <title>Aesopica, Part 4: Basic Conversion to Other Formats</title>
