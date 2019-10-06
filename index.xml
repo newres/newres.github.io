@@ -11,6 +11,15 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Solving Financial Regulatory Compliance Using Software Contracts</title>
+      <link>https://www.newresalhaider.com/publication/solving-compliance-software-contracts/</link>
+      <pubDate>Wed, 11 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.newresalhaider.com/publication/solving-compliance-software-contracts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Aesopica, Part 5: Blank Nodes</title>
       <link>https://www.newresalhaider.com/post/aesopica-5/</link>
       <pubDate>Sat, 08 Jun 2019 00:00:00 +0200</pubDate>
@@ -20,7 +29,7 @@
 
 &lt;p&gt;One of the strengths of &lt;a href=&#34;https://www.w3.org/RDF/&#34; target=&#34;_blank&#34;&gt;RDF&lt;/a&gt; as a graph representation format is the way resources are named. Through the use of &lt;a href=&#34;https://en.wikipedia.org/wiki/Uniform_Resource_Identifier&#34; target=&#34;_blank&#34;&gt;Uniform Resource Identifiers (URIs)&lt;/a&gt; every element of the graph can be uniquely identified. With such generic and powerful facilities for naming it can easily represent information in any domain. For example on &lt;a href=&#34;https://schema.org/&#34; target=&#34;_blank&#34;&gt;schema.org&lt;/a&gt; elements have been defined for the notion of a &lt;a href=&#34;http://schema.org/MedicalCondition&#34; target=&#34;_blank&#34;&gt;medical condition (http://schema.org/MedicalCondition)&lt;/a&gt;, &lt;a href=&#34;http://schema.org/employee&#34; target=&#34;_blank&#34;&gt;employee (http://schema.org/employee)&lt;/a&gt; and &lt;a href=&#34;http://schema.org/BankAccount&#34; target=&#34;_blank&#34;&gt;bank account (http://schema.org/BankAccount)&lt;/a&gt;, just to name a few. In particular the namespacing part of the URI, e.g.: &lt;a href=&#34;http://schema.org/&#34; target=&#34;_blank&#34;&gt;http://schema.org/&lt;/a&gt; for &lt;a href=&#34;http://schema.org/employee&#34; target=&#34;_blank&#34;&gt;http://schema.org/employee&lt;/a&gt; , helps to ensure that concepts can be uniquely named, even in scenarios with multiple definitions of the same concept.&lt;/p&gt;
 
-&lt;p&gt;Blank nodes go against this notion of making everything explicitly named. In fact  an alternative name for blank nodes are anonymous resources. Instead of giving a resource an explicit name with a URI  a placeholder is used. This indicates the existence of the resource, but does not tie it together with a namespaced name. In the Turtle syntax for RDF we can use a label prefixed by &lt;code&gt;_:&lt;/code&gt; to indicate a blank node. For example, the following RDF graph states that the fox and the stork both give out an invitation.&lt;/p&gt;
+&lt;p&gt;Blank nodes go against this notion of making everything explicitly named. In fact an alternative name for a blank node is &amp;ldquo;an anonymous resource&amp;rdquo;&amp;ldquo;. Instead of giving a resource an explicit name with a URI a placeholder is used. This indicates the existence of the resource, but does not tie it together with a namespaced name. In the Turtle syntax for RDF we can use a label prefixed by &lt;code&gt;_:&lt;/code&gt; to indicate a blank node. For example, the following RDF graph states that the fox and the stork both give out an invitation.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-rdf&#34;&gt;@base &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;gt; .
 
@@ -28,7 +37,7 @@
 &amp;lt;#stork&amp;gt; &amp;lt;#gives-invitation&amp;gt; _:invitation2.
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Due to the invitations having different names we can expect them to be different resources, However the exact names of these resources do not matter. For example the RDF triples below have arguably the same meaning:&lt;/p&gt;
+&lt;p&gt;Due to the invitations having different names we can expect them to be different resources. However the exact names of these resources do not matter. For example the RDF triples below have arguably the same meaning:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-rdf&#34;&gt;@base &amp;lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&amp;gt; .
 
@@ -65,7 +74,7 @@
      [:stork :can-not-eat-food-served-using :shallow-plate]}})
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The above is our version of the Fox and the Stork story that we previously explored in this series of articles The main difference is that two blank nodes are used:  &lt;code&gt;&#39;invitation1&lt;/code&gt; and &lt;code&gt;&#39;invitation2&lt;/code&gt;, instead of named resources. Perhaps the story teller might want to hide some details of their invitations.&lt;/p&gt;
+&lt;p&gt;The above is our version of &amp;ldquo;The Fox and the Stork&amp;rdquo; story that we previously explored in this series of articles The main difference is that two blank nodes are used:  &lt;code&gt;&#39;invitation1&lt;/code&gt; and &lt;code&gt;&#39;invitation2&lt;/code&gt;, instead of named resources. Perhaps the story teller might want to hide some details of their invitations.&lt;/p&gt;
 
 &lt;p&gt;As with all the previous features in this series of articles, blank nodes been implemented in our implementation of this syntax in the &lt;a href=&#34;https://github.com/newres/aesopica&#34; target=&#34;_blank&#34;&gt;Aesopica&lt;/a&gt; library for using Clojure to write Linked Data. Hiding details with blank nodes, even in Clojure, is now just one library away.&lt;/p&gt;
 </description>
@@ -2016,15 +2025,6 @@ Pale Fire is written by Vladimir Nabokov.
 
 &lt;p&gt;In this project, the goal is to find innovative techniques and solutions to the issue of regulatory compliance in the legal and financial domain.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Smart Industry Software</title>
-      <link>https://www.newresalhaider.com/project/innius/</link>
-      <pubDate>Sat, 30 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.newresalhaider.com/project/innius/</guid>
-      <description></description>
     </item>
     
   </channel>

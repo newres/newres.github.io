@@ -15,11 +15,10 @@
   
     
   
-  <meta name="description" content="A way to represent Linked Data using Clojure, with an example based on Aesop&#39;s stories, Part 5: Blank Nodes.
-">
+  <meta name="description" content="Ensuring compliance with various laws and regulations is of utmost priority for financial institutions. Traditional methods in this area have been shown to be inefficient. Manual processing does not scale well. Automated efforts are hindered due to the lack of formalization of domain knowledge and problems of integrating such knowledge into software systems. In this work we propose an approach to tackle these issues by encoding them into software contracts using a Controlled Natural Language. In particular, we encode a portion of the Money Market Statistical Reporting (MMSR) regulations into contracts specified by the clojure.spec framework. We show how various features of a contract framework, in particular clojure.spec, can help to tackle issues that occur when dealing with compliance: validation with explanations and test data generation. We benchmark our proposed solution and show that this approach can effectively solve compliance issues in this particular use case.">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://www.newresalhaider.com/post/aesopica-5/">
+  <link rel="alternate" hreflang="en-us" href="https://www.newresalhaider.com/publication/solving-compliance-software-contracts/">
 
   
 
@@ -93,15 +92,10 @@
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="https://www.newresalhaider.com/post/aesopica-5/">
+  <link rel="canonical" href="https://www.newresalhaider.com/publication/solving-compliance-software-contracts/">
 
   
 
-  
-  
-  
-  
-  
   
   
 
@@ -116,22 +110,21 @@
   <meta property="twitter:creator" content="@newresa">
   
   <meta property="og:site_name" content="Newres Al Haider">
-  <meta property="og:url" content="https://www.newresalhaider.com/post/aesopica-5/">
-  <meta property="og:title" content="Aesopica, Part 5: Blank Nodes | Newres Al Haider">
-  <meta property="og:description" content="A way to represent Linked Data using Clojure, with an example based on Aesop&#39;s stories, Part 5: Blank Nodes.
-"><meta property="og:image" content="https://www.newresalhaider.com/media/post/2018/aesopica/featured.png">
+  <meta property="og:url" content="https://www.newresalhaider.com/publication/solving-compliance-software-contracts/">
+  <meta property="og:title" content="Solving Financial Regulatory Compliance Using Software Contracts | Newres Al Haider">
+  <meta property="og:description" content="Ensuring compliance with various laws and regulations is of utmost priority for financial institutions. Traditional methods in this area have been shown to be inefficient. Manual processing does not scale well. Automated efforts are hindered due to the lack of formalization of domain knowledge and problems of integrating such knowledge into software systems. In this work we propose an approach to tackle these issues by encoding them into software contracts using a Controlled Natural Language. In particular, we encode a portion of the Money Market Statistical Reporting (MMSR) regulations into contracts specified by the clojure.spec framework. We show how various features of a contract framework, in particular clojure.spec, can help to tackle issues that occur when dealing with compliance: validation with explanations and test data generation. We benchmark our proposed solution and show that this approach can effectively solve compliance issues in this particular use case."><meta property="og:image" content="https://www.newresalhaider.com/img/headers/law-wide.png">
   <meta property="og:locale" content="en-us">
   
-  <meta property="article:published_time" content="2019-06-08T00:00:00&#43;02:00">
+  <meta property="article:published_time" content="2019-09-11T00:00:00&#43;00:00">
   
-  <meta property="article:modified_time" content="2019-10-06T00:00:00&#43;02:00">
-  
-
+  <meta property="article:modified_time" content="2019-09-11T00:00:00&#43;00:00">
   
 
   
 
-  <title>Aesopica, Part 5: Blank Nodes | Newres Al Haider</title>
+  
+
+  <title>Solving Financial Regulatory Compliance Using Software Contracts | Newres Al Haider</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
@@ -306,19 +299,13 @@
   </div>
 </nav>
 
-
-<article class="article" itemscope itemtype="http://schema.org/Article">
+<div class="pub" itemscope itemtype="http://schema.org/CreativeWork">
 
   
 
 
 
 
-
-    
-    
-    
-    
 
 
 
@@ -333,10 +320,10 @@
 <div class="article-header">
   
   
-  <img src="/img/post/2018/aesopica/foxandstork-header.png" class="article-banner" itemprop="image" alt="">
+  <img src="/img/headers/law-wide.png" class="article-banner" itemprop="image" alt="">
   
 
-  <span class="article-header-caption">Fountain depicting the Fox and the Stork. Image credit: <a href="https://commons.wikimedia.org/w/index.php?curid=25764300" target="_blank"><strong>Jordiferrer</strong></a></span>
+  <span class="article-header-caption">Law</span>
 </div>
 
 
@@ -348,7 +335,7 @@
   
   
 <div class="article-container pt-3">
-  <h1 itemprop="name">Aesopica, Part 5: Blank Nodes</h1>
+  <h1 itemprop="name">Solving Financial Regulatory Compliance Using Software Contracts</h1>
 
   
 
@@ -359,29 +346,32 @@
 
   
   
-  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Newres Al Haider">
-  </span>
+  
+  <div>
+    <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+      <span itemprop="name">Newres Al Haider</span>
+    </span>, 
+    <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+      <span itemprop="name">Dilhan Thilakarathne</span>
+    </span>, 
+    <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+      <span itemprop="name">Joost Bosman</span>
+    </span>
+    
+  </div>
   
 
   <span class="article-date">
     
-        Last updated on
-    
-    <meta content="2019-06-08 00:00:00 &#43;0200 CEST" itemprop="datePublished">
-    <time datetime="2019-10-06 00:00:00 &#43;0200 CEST" itemprop="dateModified">
-      6 Oct, 2019
+    <meta content="2019-09-11 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2019-09-11 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      11 Sep, 2019
     </time>
   </span>
   <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Newres Al Haider">
   </span>
 
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    4 min read
-  </span>
   
 
   
@@ -395,35 +385,35 @@
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Aesopica%2c%20Part%205%3a%20Blank%20Nodes&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-5%2f"
+         href="https://twitter.com/intent/tweet?text=Solving%20Financial%20Regulatory%20Compliance%20Using%20Software%20Contracts&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpublication%2fsolving-compliance-software-contracts%2f"
          target="_blank" rel="noopener">
         <i class="fab fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-5%2f"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.newresalhaider.com%2fpublication%2fsolving-compliance-software-contracts%2f"
          target="_blank" rel="noopener">
         <i class="fab fa-facebook-f"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-5%2f&amp;title=Aesopica%2c%20Part%205%3a%20Blank%20Nodes"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpublication%2fsolving-compliance-software-contracts%2f&amp;title=Solving%20Financial%20Regulatory%20Compliance%20Using%20Software%20Contracts"
          target="_blank" rel="noopener">
         <i class="fab fa-linkedin-in"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-5%2f&amp;title=Aesopica%2c%20Part%205%3a%20Blank%20Nodes"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpublication%2fsolving-compliance-software-contracts%2f&amp;title=Solving%20Financial%20Regulatory%20Compliance%20Using%20Software%20Contracts"
          target="_blank" rel="noopener">
         <i class="fab fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=Aesopica%2c%20Part%205%3a%20Blank%20Nodes&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2faesopica-5%2f">
+         href="mailto:?subject=Solving%20Financial%20Regulatory%20Compliance%20Using%20Software%20Contracts&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpublication%2fsolving-compliance-software-contracts%2f">
         <i class="fas fa-envelope"></i>
       </a>
     </li>
@@ -443,6 +433,15 @@
 
 
 
+
+
+
+
+
+
+
+<div class="btn-links mb-3">
+  
   
 
 
@@ -451,6 +450,38 @@
 
 
 
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1" href="https://arxiv.org/pdf/1909.08965" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1" href="/project/legal-banking-compliance/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+</div>
 
 
   
@@ -460,88 +491,70 @@
 
   <div class="article-container">
 
-    <div class="article-style" itemprop="articleBody">
-      <p>This article is the fifth part of a series, examining the use of the Clojure language for representing Linked Data, using examples from Aesop&rsquo;s stories. The topic of this article is to explain the somewhat contentious subject of blank nodes.</p>
+    
+    <h3>Abstract</h3>
+    <p class="pub-abstract" itemprop="text">Ensuring compliance with various laws and regulations is of utmost priority for financial institutions. Traditional methods in this area have been shown to be inefficient. Manual processing does not scale well. Automated efforts are hindered due to the lack of formalization of domain knowledge and problems of integrating such knowledge into software systems. In this work we propose an approach to tackle these issues by encoding them into software contracts using a Controlled Natural Language. In particular, we encode a portion of the Money Market Statistical Reporting (MMSR) regulations into contracts specified by the clojure.spec framework. We show how various features of a contract framework, in particular clojure.spec, can help to tackle issues that occur when dealing with compliance: validation with explanations and test data generation. We benchmark our proposed solution and show that this approach can effectively solve compliance issues in this particular use case.</p>
+    
 
-<p>One of the strengths of <a href="https://www.w3.org/RDF/" target="_blank">RDF</a> as a graph representation format is the way resources are named. Through the use of <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier" target="_blank">Uniform Resource Identifiers (URIs)</a> every element of the graph can be uniquely identified. With such generic and powerful facilities for naming it can easily represent information in any domain. For example on <a href="https://schema.org/" target="_blank">schema.org</a> elements have been defined for the notion of a <a href="http://schema.org/MedicalCondition" target="_blank">medical condition (http://schema.org/MedicalCondition)</a>, <a href="http://schema.org/employee" target="_blank">employee (http://schema.org/employee)</a> and <a href="http://schema.org/BankAccount" target="_blank">bank account (http://schema.org/BankAccount)</a>, just to name a few. In particular the namespacing part of the URI, e.g.: <a href="http://schema.org/" target="_blank">http://schema.org/</a> for <a href="http://schema.org/employee" target="_blank">http://schema.org/employee</a> , helps to ensure that concepts can be uniquely named, even in scenarios with multiple definitions of the same concept.</p>
-
-<p>Blank nodes go against this notion of making everything explicitly named. In fact an alternative name for a blank node is &ldquo;an anonymous resource&rdquo;&ldquo;. Instead of giving a resource an explicit name with a URI a placeholder is used. This indicates the existence of the resource, but does not tie it together with a namespaced name. In the Turtle syntax for RDF we can use a label prefixed by <code>_:</code> to indicate a blank node. For example, the following RDF graph states that the fox and the stork both give out an invitation.</p>
-
-<pre><code class="language-rdf">@base &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt; .
-
-&lt;#fox&gt; &lt;#gives-invitation&gt; _:invitation1.
-&lt;#stork&gt; &lt;#gives-invitation&gt; _:invitation2.
-</code></pre>
-
-<p>Due to the invitations having different names we can expect them to be different resources. However the exact names of these resources do not matter. For example the RDF triples below have arguably the same meaning:</p>
-
-<pre><code class="language-rdf">@base &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt; .
-
-&lt;#fox&gt; &lt;#gives-invitation&gt; _:abc.
-&lt;#stork&gt; &lt;#gives-invitation&gt; _:xyz.
-</code></pre>
-
-<p>It is important to reiterate that the blank nodes are not resource identifiers such as URIs. They are also only local in scope: an <code>_:invitation1</code> in one graph and a <code>_:invitation1</code> in another are not referring to the same thing. Even resources used in the similar places in different graphs are not the same. For example the <code>_:abc</code> and the  <code>_:invitation1</code> used in the above graphs, while expressing the same meaning, are not the same resource.</p>
-
-<p>The above features are both the strength and the weakness of using anonymous resources. We are not required to use a specific named identifier, but this makes referring to resources and comparing them more difficult.</p>
-
-<p>There are number of scenarios where such anonymous resources can be useful. For example, when representing complex structures not easily expressed in triples where we would need &ldquo;placeholder nodes&rdquo; in the graph but do not particularly care about its naming. In other cases we want to hide some information, and blank nodes could be used as placeholders for named resources. A good overview of the various uses of Blank Nodes can be found in the paper: <a href="https://link.springer.com/chapter/10.1007/978-3-642-25073-6_27" target="_blank">On Blank Nodes</a>.</p>
-
-<p>With the above description of blank nodes, we also want to provide something similar in our Clojure based RDF representation as well. As we are using keywords to represent URIs in our Clojure representation (i.e. :fox and :rdf/type), a natural element to differentiate them is to use symbols for blank nodes. Symbols are created in Clojure by prefixing it with <code>'</code>. For example in the Clojure based RDF representation we use blank nodes for representing invitations:</p>
-
-<pre><code class="language-clojure">(def fox-and-stork-blank-node-edn
-  {::aes/context
-   {nil &quot;http://www.newresalhaider.com/ontologies/aesop/foxstork/&quot;
-    :rdf &quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;}
-   ::aes/facts
-   #{[:fox :rdf/type :animal]
-     [:stork :rdf/type :animal]
-     [:fox :gives-invitation 'invitation1]
-     ['invitation1 :has-invited :stork]
-     ['invitation1 :has-food :soup]
-     ['invitation1 :serves-using :shallow-plate]
-     [:stork :gives-invitation 'invitation2]
-     ['invitation2 :has-invited :fox]
-     ['invitation2 :has-food :crumbled-food]
-     ['invitation2 :serves-using :narrow-mouthed-jug]
-     [:fox :can-eat-food-served-using :shallow-plate]
-     [:fox :can-not-eat-food-served-using :narrow-mouthed-jug]
-     [:stork :can-eat-food-served-using :narrow-mouthed-jug]
-     [:stork :can-not-eat-food-served-using :shallow-plate]}})
-</code></pre>
-
-<p>The above is our version of &ldquo;The Fox and the Stork&rdquo; story that we previously explored in this series of articles The main difference is that two blank nodes are used:  <code>'invitation1</code> and <code>'invitation2</code>, instead of named resources. Perhaps the story teller might want to hide some details of their invitations.</p>
-
-<p>As with all the previous features in this series of articles, blank nodes been implemented in our implementation of this syntax in the <a href="https://github.com/newres/aesopica" target="_blank">Aesopica</a> library for using Clojure to write Linked Data. Hiding details with blank nodes, even in Clojure, is now just one library away.</p>
-
+    
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-12 col-md-3 pub-row-heading">Type</div>
+          <div class="col-12 col-md-9">
+            
+            <a href="/publication/#1">
+              Conference proceedings
+            </a>
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
     </div>
+    <div class="d-md-none space-below"></div>
+    
+
+    
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-12 col-md-3 pub-row-heading">Publication</div>
+          <div class="col-12 col-md-9">22ND INTERNATIONAL CONFERENCE ON APPLICATIONS OF DECLARATIVE PROGRAMMING AND KNOWLEDGE MANAGEMENT</div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="d-md-none space-below"></div>
+    
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-12 col-md-3 pub-row-heading">Date</div>
+          <div class="col-12 col-md-9" itemprop="datePublished">
+            September, 2019
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="d-sm-none space-below"></div>
+
+    <div class="space-below"></div>
+
+    <div class="article-style"></div>
+
+    
 
     
 
 
-<div class="article-tags">
-  
-  <a class="badge badge-light" href="/tags/clojure/">Clojure</a>
-  
-  <a class="badge badge-light" href="/tags/linked-data/">Linked Data</a>
-  
-  <a class="badge badge-light" href="/tags/rdf/">RDF</a>
-  
-  <a class="badge badge-light" href="/tags/semantic-web/">Semantic Web</a>
-  
-  <a class="badge badge-light" href="/tags/knowledge-representation/">knowledge representation</a>
-  
-  <a class="badge badge-light" href="/tags/knowledge-graph/">knowledge graph</a>
-  
-  <a class="badge badge-light" href="/tags/aesopica/">Aesopica</a>
-  
-</div>
 
-
-
-    
-
-
+  
 
 
 
@@ -627,34 +640,10 @@
 
 
 
-    
-    
-    <div class="article-widget">
-      <div class="hr-light"></div>
-      <h3>Related</h3>
-      <ul>
-        
-        <li><a href="/post/aesopica-4/">Aesopica, Part 4: Basic Conversion to Other Formats</a></li>
-        
-        <li><a href="/post/aesopica-3/">Aesopica, Part 3: Named Graphs</a></li>
-        
-        <li><a href="/post/aesopica-2/">Aesopica, Part 2: Literal Values</a></li>
-        
-        <li><a href="/post/aesopica-1/">Aesopica, Part 1: General Introduction</a></li>
-        
-        <li><a href="/post/interlinked-data/">Data Interlinked</a></li>
-        
-      </ul>
-    </div>
-    
-
-    
-
-    
-
-
   </div>
-</article>
+</div>
+
+
 
 <div class="container">
   <footer class="site-footer">
