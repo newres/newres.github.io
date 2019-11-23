@@ -20,6 +20,112 @@
     </item>
     
     <item>
+      <title>The Probable Mystery Machine</title>
+      <link>https://www.newresalhaider.com/post/probable-mystery-machine/</link>
+      <pubDate>Thu, 04 Jul 2019 00:00:00 +0200</pubDate>
+      
+      <guid>https://www.newresalhaider.com/post/probable-mystery-machine/</guid>
+      <description>&lt;p&gt;Scooby Doo is mystery horror cartoon series in which a group of teenagers named Fred, Daphne, Velma and Shaggy alongside the titular Great Dane named Scooby-Doo, ride around in their van named &amp;ldquo;The Mystery Machine&amp;rdquo; solving mysteries. The episodes of the show generally follow a set structure. First their van tends to break down near a place apparently haunted by a ghost or another supernatural creature. They would offer to solve the mystery behind the existence of the monster and start looking for clues. The monster tries to scare them away while they find various pieces of evidence relating to it, all pointing to the fact that the monster is not real. At a certain point the creature starts to chase them until they can trap or otherwise incapacitate it. Finally they figure out that the monster is person in a costume who put the mystery in place to scare people away for some (financial) reason, and who would have gotten away with it &amp;ldquo;if not for them meddling kids&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;While having a van named The Mystery Machine can help solving mysteries, we can turn our computer into a mystery solving machine as well. We can represent possible stories in a Scooby Doo episode using some logical facts (e.g. a each adventure has a monster in it) as well as probabilities (e.g. there is a 40% chance a monster will be a ghost). In particular, we can use a probabilistic logic programming language, namely &lt;a href=&#34;https://dtai.cs.kuleuven.be/problog/&#34; target=&#34;_blank&#34;&gt;ProbLog&lt;/a&gt; to guide us through a scenario of a Scooby Doo story.&lt;/p&gt;
+
+&lt;p&gt;First let&amp;rsquo;s start off with a basic scenario on how a Scooby Doo adventure starts. In general there is usually some sort of an issue why the group must stop during their travels. Although there are many possible causes for this in the cartoon, here we represent three of them. Either they get a flat tire, they unexpectedly run out of gas, or there is some engine trouble that they have to deal with. For each of these scenarios there is a probability with which they happen. This probability we assume is 40% for a flat tire, 30% for being unexpectedly out of gas, and 60% for having an engine trouble. These are the probabilistic facts in our scenario, as each of these facts have a probability attached to them with which they occur. If any of these facts hold, it will lead to an adventure. This type of knowledge we can represent as a rule. Finally, we aim to query this scenario for the probability that an adventure will occur.&lt;/p&gt;
+
+&lt;p&gt;In ProbLog the above scenario can be represented as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-prolog&#34;&gt;% Probabilistic facts:
+0.4::flat_tire.
+0.3::out_of_gas.
+0.6::engine_trouble.
+
+% Rules:
+adventure_start :- flat_tire.
+adventure_start :- out_of_gas.
+adventure_start :- engine_trouble.
+
+% Queries:.
+query(adventure_start).
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As one can see, a ProbLog program is a combination of probabilistic facts, rules and queries (with comments in lines following &lt;code&gt;%&lt;/code&gt;). Probabilistic facts represent the facts of the domain with an attached probability between 0 and 1. Rules are deterministic rules (i.e. they have no probabilities attached) that show the system how new facts can be inferred from existing ones. Finally queries allow us to ask the program questions, such as the probabilities for a certain fact occuring. These program elements are similar to those employed in &lt;a href=&#34;https://www.newresalhaider.com/post/prolog-price-of-peace/&#34; target=&#34;_blank&#34;&gt;Prolog&lt;/a&gt;, where a program consists of facts, rules and queries, with the main difference that there are probabilities attached to each fact.&lt;/p&gt;
+
+&lt;p&gt;We can use infer new facts from these probabilistic facts using rules. For example, if we want to infer the probability of an adventure the query: &lt;code&gt;query(adventure).&lt;/code&gt; will return the probability &lt;code&gt;0.832&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now we can make our Scooby Doo scenario a bit more complex. Suppose the group starts an adventure, after their van stopped working somehow, and they quickly realize that there is a mystery in the area. The location of this mystery is either an abandoned mansion, a local museum, an old theme park, or a nearby farm. We set the probabilities for each of these locations occurring at &lt;code&gt;0.3&lt;/code&gt; for the abandoned mansion, &lt;code&gt;0.3&lt;/code&gt; for a local museum, &lt;code&gt;0,2&lt;/code&gt; for an old theme park and &lt;code&gt;0.2&lt;/code&gt; for the nearby farm. We also assume that there is only one mystery location in each adventure.&lt;/p&gt;
+
+&lt;p&gt;In order to express the requirements for the adventure locations succinctly, we make use of a feature called annotated disjunctions. This allows for a more readable way to state that only one of the stated choices holds true, with a given probability. Below is the ProbLog program extended to include this information.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% Probabilistic facts:
+0.4::flat_tire.
+0.3::out_of_gas.
+0.6::engine_trouble.
+
+0.3::monster_location(abandoned_mansion); 0.3::monster_location(local_museum); 0.2::monster_location(old_theme_park); 0.2::monster_location(nearby_farm).
+
+% Rules:
+adventure_start :- flat_tire.
+adventure_start :- out_of_gas.
+adventure_start :- engine_trouble.
+
+adventure :- monster_location(X), adventure_start.
+two_locations :- monster_location(X), monster_location(Y), X \== Y.
+
+
+
+% Queries:.
+query(two_locations).
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are two other new concepts that we showcase here. One is using variables, notably the &lt;code&gt;X&lt;/code&gt; in &lt;code&gt;monster_location(X)&lt;/code&gt;, which helps to express that the values used for this variable all express the monster&amp;rsquo;s location. The other is the use of restrictions in the use &lt;code&gt;two_locations&lt;/code&gt; to showcase that the probability for two monster locations occurring at once is 0. There are number of &lt;a href=&#34;https://problog.readthedocs.io/en/latest/prolog.html&#34; target=&#34;_blank&#34;&gt;built-ins&lt;/a&gt; that one can use for defining Problog models. In this case we use to define a rule to express that the &lt;code&gt;two_locations&lt;/code&gt; fact should be derived if there are two distinct monster locations. Given the example above, due to the use of an annotated disjunction for defining the monster location, the query &lt;code&gt;query(two_locations).&lt;/code&gt; will correctly probability of 0 for the chance of two monster locations at the same time.&lt;/p&gt;
+
+&lt;p&gt;The final ingredient for a Scooby Doo story that we represent in this article is the monster. There are five types of monsters that can occur: a Mummy, a Zombie, a Ghost, a Swamp Monster and a Headless Horseman.  The chance at which these monsters occur is dependent on the current location. In the stories that we represent only 1 monster can occur in an adventure.&lt;/p&gt;
+
+&lt;p&gt;Such cases can also be represented with annotated disjunctions, but they are now used as the head (which is the left hand side portion of the rule, with the &lt;code&gt;:-&lt;/code&gt; sign separating the two sides). This allows us to express the conditions, i.e. the monster locations, that is required for these facts. See our final example for the probabilities of monsters given the locations:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-prolog&#34;&gt;% Probabilistic facts:
+0.4::flat_tire.
+0.3::out_of_gas.
+0.6::engine_trouble.
+
+0.3::monster_location(abandoned_mansion); 0.3::monster_location(local_museum); 0.2::monster_location(old_theme_park); 0.2::monster_location(nearby_farm).
+
+
+% Rules:
+adventure_start :- flat_tire.
+adventure_start :- out_of_gas.
+adventure_start :- engine_trouble.
+
+0.4::monster(ghost); 0.4::monster(vampire); 0.2::monster(zombie) :- monster_location(abandoned_mansion).
+0.5::monster(mummy); 0.2::monster(headless_horseman); 0.3::monster(ghost) :- monster_location(local_museum).
+0.5::monster(zombie); 0.4::monster(ghost); 0.1::monster(mummy) :- monster_location(old_theme_park).
+0.4::monster(ghost); 0.2::monster(zombie); 0.2::monster(headless_horseman); 0.2::monster(vampire) :- monster_location(nearby_farm).
+
+adventure :- monster_location(X), monster(Y), adventure_start.
+any_monster_location :- monster_location(X).
+any_monster :- monster(X).
+two_locations :- monster_location(X), monster_location(Y), X \== Y.
+two_monsters :- monster(X), monster(Y), X \== Y.
+vampire_after_flat_tire :- monster(vampire), flat_tire.
+
+
+% Queries:.
+query(adventure_start).
+query(any_monster_location).
+query(any_monster).
+query(adventure).
+query(two_locations).
+query(two_monsters).
+query(monster(ghost)).
+query(vampire_after_flat_tire).
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this example we also show a number of interesting facts that we might want to be able to query. The probability that an adventure starts is 0.832. Given that the probability for a monster location and a monster existing is 1 in both cases, and adventure requires only an &amp;ldquo;adventure start&amp;rdquo;, a &amp;ldquo;monster&amp;rdquo; and its &amp;ldquo;location&amp;rdquo;, the probability for an adventure happening is also 0.832. As mentioned before, due to the annotated disjunctions the probability of having two monsters or two locations is 0. We can also query for facts such as the probability of a monster occuring, which is inferred based on both the conditional probability given the monster location and the probability of the monster location itself. For example the probability of the monster being a ghost is 0.37. Finally we can calculate the probabilities for any particular scenario that we create, such as the probability of having the monster be a vampire after having a flat tire: 0.064.&lt;/p&gt;
+
+&lt;p&gt;As one can see many spooky scenarios can be explored with ProbLog. Here we only taken a quick peek for representing a small portion of Scooby Doo stories, but these can also be applied to other domains, be it reasoning in the legal, financial, health and other fields. So do not be scared off and give it a try for any domain modelling you might encounter involving probabilities!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Aesopica, Part 5: Blank Nodes</title>
       <link>https://www.newresalhaider.com/post/aesopica-5/</link>
       <pubDate>Sat, 08 Jun 2019 00:00:00 +0200</pubDate>
@@ -2010,20 +2116,6 @@ Pale Fire is written by Vladimir Nabokov.
       
       <guid>https://www.newresalhaider.com/post/introduction/</guid>
       <description>&lt;p&gt;Welcome to the first post on my blog on which hopefully many will follow. My intention is to write about knowledge representation, reasoning, AI and coding, in an easily digestible but in depth-way.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Legal Regulatory Compliance Within The Financial Domain.</title>
-      <link>https://www.newresalhaider.com/project/legal-banking-compliance/</link>
-      <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.newresalhaider.com/project/legal-banking-compliance/</guid>
-      <description>&lt;p&gt;Regulatory compliance is the goal of an organization to ensure it complies with all the relevant policies, regulations and laws. Failure to comply can have grave consequences for an organization, with huge fines and penalties being imposed. Regulatory pressure has been increasing over the years, with new and more complex regulation being enacted. This is especially true for the financial sector, where in the wake of the financial crisis, new policies and laws where enacted, both internal and external, to prevent a similar crisis happening in the future.&lt;/p&gt;
-
-&lt;p&gt;These new and changing policies and laws give a huge challenge for financial organizations. These issues get compounded by fact that in a global world, internal, national and international regulations create an interwoven set of rules that need to be interpreted and applied on various financial products and services. Ensuring this compliance, is a time and expertise intensive task that often needs to be done manually. Automating these tasks is a huge challenge due to the fact that more traditional techniques are often ill equipped to tackle such an ever changing and complex domain in a way that is transparent to the domain experts and regulators.&lt;/p&gt;
-
-&lt;p&gt;In this project, the goal is to find innovative techniques and solutions to the issue of regulatory compliance in the legal and financial domain.&lt;/p&gt;
 </description>
     </item>
     

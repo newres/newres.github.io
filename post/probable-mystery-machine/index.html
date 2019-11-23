@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.2.0">
+  <meta name="generator" content="Hugo 0.52" />
+  <meta name="author" content="Newres Al Haider">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="Solving the mysteries of Scooby Doo with probabilistic logic programming.
+">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://www.newresalhaider.com/post/probable-mystery-machine/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#EF525B">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+  <link rel="stylesheet" href="/css/post.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
+  <link rel="feed" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://www.newresalhaider.com/post/probable-mystery-machine/">
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@newresa">
+  <meta property="twitter:creator" content="@newresa">
+  
+  <meta property="og:site_name" content="Newres Al Haider">
+  <meta property="og:url" content="https://www.newresalhaider.com/post/probable-mystery-machine/">
+  <meta property="og:title" content="The Probable Mystery Machine | Newres Al Haider">
+  <meta property="og:description" content="Solving the mysteries of Scooby Doo with probabilistic logic programming.
+"><meta property="og:image" content="https://www.newresalhaider.com/post/probable-mystery-machine/featured.jpg">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-07-04T00:00:00&#43;02:00">
+  
+  <meta property="article:modified_time" content="2019-07-04T00:00:00&#43;02:00">
+  
+
+  
+
+  
+
+  <title>The Probable Mystery Machine | Newres Al Haider</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Newres Al Haider</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#publications_selected">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="article-header d-xl-none">
+  <div class="featured-image" style="background-image: url('/post/probable-mystery-machine/featured_hub98c8313a3fd8c186ac82721e39c77bb_19432_800x0_resize_q75_box.jpg');"></div>
+  <span class="article-header-caption">The Mystery Machine: the iconic van from the Scooby Doo cartoon. © Hannah-Barbara - Warner Bros.</span>
+</div>
+
+
+<div class="container-fluid split-header d-none d-xl-block">
+  <div class="row">
+    <div class="col-6">
+      <div class="split-header-content">
+        <h1 itemprop="name">The Probable Mystery Machine</h1>
+
+        
+
+        
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2019-07-04 00:00:00 &#43;0200 CEST" itemprop="datePublished">
+    <time datetime="2019-07-04 00:00:00 &#43;0200 CEST" itemprop="dateModified">
+      4 Jul, 2019
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+
+</div>
+
+
+        
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=The%20Probable%20Mystery%20Machine&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprobable-mystery-machine%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprobable-mystery-machine%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprobable-mystery-machine%2f&amp;title=The%20Probable%20Mystery%20Machine"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprobable-mystery-machine%2f&amp;title=The%20Probable%20Mystery%20Machine"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=The%20Probable%20Mystery%20Machine&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprobable-mystery-machine%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="split-header-image">
+        <img src="/post/probable-mystery-machine/featured_hub98c8313a3fd8c186ac82721e39c77bb_19432_680x500_fill_q90_box_smart1.jpg" itemprop="image" alt="">
+        <span class="article-header-caption">The Mystery Machine: the iconic van from the Scooby Doo cartoon. © Hannah-Barbara - Warner Bros.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="article-container d-xl-none">
+  <h1 itemprop="name">The Probable Mystery Machine</h1>
+
+  
+
+  
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2019-07-04 00:00:00 &#43;0200 CEST" itemprop="datePublished">
+    <time datetime="2019-07-04 00:00:00 &#43;0200 CEST" itemprop="dateModified">
+      4 Jul, 2019
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=The%20Probable%20Mystery%20Machine&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprobable-mystery-machine%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprobable-mystery-machine%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprobable-mystery-machine%2f&amp;title=The%20Probable%20Mystery%20Machine"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprobable-mystery-machine%2f&amp;title=The%20Probable%20Mystery%20Machine"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=The%20Probable%20Mystery%20Machine&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fprobable-mystery-machine%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      <p>Scooby Doo is mystery horror cartoon series in which a group of teenagers named Fred, Daphne, Velma and Shaggy alongside the titular Great Dane named Scooby-Doo, ride around in their van named &ldquo;The Mystery Machine&rdquo; solving mysteries. The episodes of the show generally follow a set structure. First their van tends to break down near a place apparently haunted by a ghost or another supernatural creature. They would offer to solve the mystery behind the existence of the monster and start looking for clues. The monster tries to scare them away while they find various pieces of evidence relating to it, all pointing to the fact that the monster is not real. At a certain point the creature starts to chase them until they can trap or otherwise incapacitate it. Finally they figure out that the monster is person in a costume who put the mystery in place to scare people away for some (financial) reason, and who would have gotten away with it &ldquo;if not for them meddling kids&rdquo;.</p>
+
+<p>While having a van named The Mystery Machine can help solving mysteries, we can turn our computer into a mystery solving machine as well. We can represent possible stories in a Scooby Doo episode using some logical facts (e.g. a each adventure has a monster in it) as well as probabilities (e.g. there is a 40% chance a monster will be a ghost). In particular, we can use a probabilistic logic programming language, namely <a href="https://dtai.cs.kuleuven.be/problog/" target="_blank">ProbLog</a> to guide us through a scenario of a Scooby Doo story.</p>
+
+<p>First let&rsquo;s start off with a basic scenario on how a Scooby Doo adventure starts. In general there is usually some sort of an issue why the group must stop during their travels. Although there are many possible causes for this in the cartoon, here we represent three of them. Either they get a flat tire, they unexpectedly run out of gas, or there is some engine trouble that they have to deal with. For each of these scenarios there is a probability with which they happen. This probability we assume is 40% for a flat tire, 30% for being unexpectedly out of gas, and 60% for having an engine trouble. These are the probabilistic facts in our scenario, as each of these facts have a probability attached to them with which they occur. If any of these facts hold, it will lead to an adventure. This type of knowledge we can represent as a rule. Finally, we aim to query this scenario for the probability that an adventure will occur.</p>
+
+<p>In ProbLog the above scenario can be represented as follows:</p>
+
+<pre><code class="language-prolog">% Probabilistic facts:
+0.4::flat_tire.
+0.3::out_of_gas.
+0.6::engine_trouble.
+
+% Rules:
+adventure_start :- flat_tire.
+adventure_start :- out_of_gas.
+adventure_start :- engine_trouble.
+
+% Queries:.
+query(adventure_start).
+</code></pre>
+
+<p>As one can see, a ProbLog program is a combination of probabilistic facts, rules and queries (with comments in lines following <code>%</code>). Probabilistic facts represent the facts of the domain with an attached probability between 0 and 1. Rules are deterministic rules (i.e. they have no probabilities attached) that show the system how new facts can be inferred from existing ones. Finally queries allow us to ask the program questions, such as the probabilities for a certain fact occuring. These program elements are similar to those employed in <a href="https://www.newresalhaider.com/post/prolog-price-of-peace/" target="_blank">Prolog</a>, where a program consists of facts, rules and queries, with the main difference that there are probabilities attached to each fact.</p>
+
+<p>We can use infer new facts from these probabilistic facts using rules. For example, if we want to infer the probability of an adventure the query: <code>query(adventure).</code> will return the probability <code>0.832</code>.</p>
+
+<p>Now we can make our Scooby Doo scenario a bit more complex. Suppose the group starts an adventure, after their van stopped working somehow, and they quickly realize that there is a mystery in the area. The location of this mystery is either an abandoned mansion, a local museum, an old theme park, or a nearby farm. We set the probabilities for each of these locations occurring at <code>0.3</code> for the abandoned mansion, <code>0.3</code> for a local museum, <code>0,2</code> for an old theme park and <code>0.2</code> for the nearby farm. We also assume that there is only one mystery location in each adventure.</p>
+
+<p>In order to express the requirements for the adventure locations succinctly, we make use of a feature called annotated disjunctions. This allows for a more readable way to state that only one of the stated choices holds true, with a given probability. Below is the ProbLog program extended to include this information.</p>
+
+<pre><code>% Probabilistic facts:
+0.4::flat_tire.
+0.3::out_of_gas.
+0.6::engine_trouble.
+
+0.3::monster_location(abandoned_mansion); 0.3::monster_location(local_museum); 0.2::monster_location(old_theme_park); 0.2::monster_location(nearby_farm).
+
+% Rules:
+adventure_start :- flat_tire.
+adventure_start :- out_of_gas.
+adventure_start :- engine_trouble.
+
+adventure :- monster_location(X), adventure_start.
+two_locations :- monster_location(X), monster_location(Y), X \== Y.
+
+
+
+% Queries:.
+query(two_locations).
+</code></pre>
+
+<p>There are two other new concepts that we showcase here. One is using variables, notably the <code>X</code> in <code>monster_location(X)</code>, which helps to express that the values used for this variable all express the monster&rsquo;s location. The other is the use of restrictions in the use <code>two_locations</code> to showcase that the probability for two monster locations occurring at once is 0. There are number of <a href="https://problog.readthedocs.io/en/latest/prolog.html" target="_blank">built-ins</a> that one can use for defining Problog models. In this case we use to define a rule to express that the <code>two_locations</code> fact should be derived if there are two distinct monster locations. Given the example above, due to the use of an annotated disjunction for defining the monster location, the query <code>query(two_locations).</code> will correctly probability of 0 for the chance of two monster locations at the same time.</p>
+
+<p>The final ingredient for a Scooby Doo story that we represent in this article is the monster. There are five types of monsters that can occur: a Mummy, a Zombie, a Ghost, a Swamp Monster and a Headless Horseman.  The chance at which these monsters occur is dependent on the current location. In the stories that we represent only 1 monster can occur in an adventure.</p>
+
+<p>Such cases can also be represented with annotated disjunctions, but they are now used as the head (which is the left hand side portion of the rule, with the <code>:-</code> sign separating the two sides). This allows us to express the conditions, i.e. the monster locations, that is required for these facts. See our final example for the probabilities of monsters given the locations:</p>
+
+<pre><code class="language-prolog">% Probabilistic facts:
+0.4::flat_tire.
+0.3::out_of_gas.
+0.6::engine_trouble.
+
+0.3::monster_location(abandoned_mansion); 0.3::monster_location(local_museum); 0.2::monster_location(old_theme_park); 0.2::monster_location(nearby_farm).
+
+
+% Rules:
+adventure_start :- flat_tire.
+adventure_start :- out_of_gas.
+adventure_start :- engine_trouble.
+
+0.4::monster(ghost); 0.4::monster(vampire); 0.2::monster(zombie) :- monster_location(abandoned_mansion).
+0.5::monster(mummy); 0.2::monster(headless_horseman); 0.3::monster(ghost) :- monster_location(local_museum).
+0.5::monster(zombie); 0.4::monster(ghost); 0.1::monster(mummy) :- monster_location(old_theme_park).
+0.4::monster(ghost); 0.2::monster(zombie); 0.2::monster(headless_horseman); 0.2::monster(vampire) :- monster_location(nearby_farm).
+
+adventure :- monster_location(X), monster(Y), adventure_start.
+any_monster_location :- monster_location(X).
+any_monster :- monster(X).
+two_locations :- monster_location(X), monster_location(Y), X \== Y.
+two_monsters :- monster(X), monster(Y), X \== Y.
+vampire_after_flat_tire :- monster(vampire), flat_tire.
+
+
+% Queries:.
+query(adventure_start).
+query(any_monster_location).
+query(any_monster).
+query(adventure).
+query(two_locations).
+query(two_monsters).
+query(monster(ghost)).
+query(vampire_after_flat_tire).
+</code></pre>
+
+<p>In this example we also show a number of interesting facts that we might want to be able to query. The probability that an adventure starts is 0.832. Given that the probability for a monster location and a monster existing is 1 in both cases, and adventure requires only an &ldquo;adventure start&rdquo;, a &ldquo;monster&rdquo; and its &ldquo;location&rdquo;, the probability for an adventure happening is also 0.832. As mentioned before, due to the annotated disjunctions the probability of having two monsters or two locations is 0. We can also query for facts such as the probability of a monster occuring, which is inferred based on both the conditional probability given the monster location and the probability of the monster location itself. For example the probability of the monster being a ghost is 0.37. Finally we can calculate the probabilities for any particular scenario that we create, such as the probability of having the monster be a vampire after having a flat tire: 0.064.</p>
+
+<p>As one can see many spooky scenarios can be explored with ProbLog. Here we only taken a quick peek for representing a small portion of Scooby Doo stories, but these can also be applied to other domains, be it reasoning in the legal, financial, health and other fields. So do not be scared off and give it a try for any domain modelling you might encounter involving probabilities!</p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/ai/">AI</a>
+  
+  <a class="badge badge-light" href="/tags/prolog/">Prolog</a>
+  
+  <a class="badge badge-light" href="/tags/probabilistic-programming/">probabilistic programming</a>
+  
+  <a class="badge badge-light" href="/tags/problog/">Problog</a>
+  
+</div>
+
+
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/portrait.png" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Newres Al Haider</a></h5>
+    <h6 class="card-subtitle">Postdoctoral Researcher and Software Engineer</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:newresjob@gmail.com" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/newresa" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://scholar.google.nl/citations?user=b4MxbOEAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/newres" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/post/exploring-the-deep-1/">Exploring the Deep, Part 1: Introduction</a></li>
+        
+        <li><a href="/post/prolog-price-of-peace/">Prolog and the Price of Peace</a></li>
+        
+        <li><a href="/post/art-of-choosing-language/">The Art of Choosing a Programming Language</a></li>
+        
+        <li><a href="/post/introduction/">Introduction</a></li>
+        
+        <li><a href="/project/legal-banking-compliance/">Legal Regulatory Compliance Within The Financial Domain.</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2017 Newres Al Haider &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/prolog.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.d037ee5294b166a79dec317c58aea9cc.js"></script>
+
+    
+
+  </body>
+</html>
+

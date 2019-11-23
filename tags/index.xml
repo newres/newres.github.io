@@ -24,7 +24,7 @@
     <item>
       <title>AI</title>
       <link>https://www.newresalhaider.com/tags/ai/</link>
-      <pubDate>Mon, 04 Feb 2019 00:00:00 +0100</pubDate>
+      <pubDate>Thu, 04 Jul 2019 00:00:00 +0200</pubDate>
       
       <guid>https://www.newresalhaider.com/tags/ai/</guid>
       <description></description>
@@ -166,9 +166,18 @@
     </item>
     
     <item>
+      <title>Problog</title>
+      <link>https://www.newresalhaider.com/tags/problog/</link>
+      <pubDate>Thu, 04 Jul 2019 00:00:00 +0200</pubDate>
+      
+      <guid>https://www.newresalhaider.com/tags/problog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Prolog</title>
       <link>https://www.newresalhaider.com/tags/prolog/</link>
-      <pubDate>Fri, 01 Feb 2019 00:00:00 +0100</pubDate>
+      <pubDate>Thu, 04 Jul 2019 00:00:00 +0200</pubDate>
       
       <guid>https://www.newresalhaider.com/tags/prolog/</guid>
       <description></description>
@@ -378,6 +387,15 @@
       <pubDate>Mon, 04 Feb 2019 00:00:00 +0100</pubDate>
       
       <guid>https://www.newresalhaider.com/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>probabilistic programming</title>
+      <link>https://www.newresalhaider.com/tags/probabilistic-programming/</link>
+      <pubDate>Thu, 04 Jul 2019 00:00:00 +0200</pubDate>
+      
+      <guid>https://www.newresalhaider.com/tags/probabilistic-programming/</guid>
       <description></description>
     </item>
     
