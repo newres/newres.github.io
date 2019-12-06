@@ -11,18 +11,9 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Solving Financial Regulatory Compliance Using Software Contracts</title>
-      <link>https://www.newresalhaider.com/publication/solving-compliance-software-contracts/</link>
-      <pubDate>Wed, 11 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.newresalhaider.com/publication/solving-compliance-software-contracts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>The Probable Mystery Machine</title>
       <link>https://www.newresalhaider.com/post/probable-mystery-machine/</link>
-      <pubDate>Thu, 04 Jul 2019 00:00:00 +0200</pubDate>
+      <pubDate>Fri, 06 Dec 2019 00:00:00 +0100</pubDate>
       
       <guid>https://www.newresalhaider.com/post/probable-mystery-machine/</guid>
       <description>&lt;p&gt;Scooby Doo is mystery horror cartoon series in which a group of teenagers named Fred, Daphne, Velma and Shaggy alongside the titular Great Dane named Scooby-Doo, ride around in their van named &amp;ldquo;The Mystery Machine&amp;rdquo; solving mysteries. The episodes of the show generally follow a set structure. First their van tends to break down near a place apparently haunted by a ghost or another supernatural creature. They would offer to solve the mystery behind the existence of the monster and start looking for clues. The monster tries to scare them away while they find various pieces of evidence relating to it, all pointing to the fact that the monster is not real. At a certain point the creature starts to chase them until they can trap or otherwise incapacitate it. Finally they figure out that the monster is person in a costume who put the mystery in place to scare people away for some (financial) reason, and who would have gotten away with it &amp;ldquo;if not for them meddling kids&amp;rdquo;.&lt;/p&gt;
@@ -123,6 +114,15 @@ query(vampire_after_flat_tire).
 
 &lt;p&gt;As one can see many spooky scenarios can be explored with ProbLog. Here we only taken a quick peek for representing a small portion of Scooby Doo stories, but these can also be applied to other domains, be it reasoning in the legal, financial, health and other fields. So do not be scared off and give it a try for any domain modelling you might encounter involving probabilities!&lt;/p&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Solving Financial Regulatory Compliance Using Software Contracts</title>
+      <link>https://www.newresalhaider.com/publication/solving-compliance-software-contracts/</link>
+      <pubDate>Wed, 11 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.newresalhaider.com/publication/solving-compliance-software-contracts/</guid>
+      <description></description>
     </item>
     
     <item>
