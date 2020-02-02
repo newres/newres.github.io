@@ -24,7 +24,7 @@
     <item>
       <title>AI</title>
       <link>https://www.newresalhaider.com/tags/ai/</link>
-      <pubDate>Fri, 06 Dec 2019 00:00:00 +0100</pubDate>
+      <pubDate>Sun, 02 Feb 2020 00:00:00 +0100</pubDate>
       
       <guid>https://www.newresalhaider.com/tags/ai/</guid>
       <description></description>
@@ -258,7 +258,7 @@
     <item>
       <title>Star Trek</title>
       <link>https://www.newresalhaider.com/tags/star-trek/</link>
-      <pubDate>Fri, 01 Feb 2019 00:00:00 +0100</pubDate>
+      <pubDate>Sun, 02 Feb 2020 00:00:00 +0100</pubDate>
       
       <guid>https://www.newresalhaider.com/tags/star-trek/</guid>
       <description></description>
@@ -301,11 +301,29 @@
     </item>
     
     <item>
+      <title>clojure</title>
+      <link>https://www.newresalhaider.com/tags/clojure/</link>
+      <pubDate>Sat, 08 Jun 2019 00:00:00 +0200</pubDate>
+      
+      <guid>https://www.newresalhaider.com/tags/clojure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>clojure.spec</title>
       <link>https://www.newresalhaider.com/tags/clojure.spec/</link>
       <pubDate>Sun, 29 Apr 2018 00:00:00 +0200</pubDate>
       
       <guid>https://www.newresalhaider.com/tags/clojure.spec/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>core.logic</title>
+      <link>https://www.newresalhaider.com/tags/core.logic/</link>
+      <pubDate>Sun, 02 Feb 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://www.newresalhaider.com/tags/core.logic/</guid>
       <description></description>
     </item>
     
@@ -355,6 +373,15 @@
     </item>
     
     <item>
+      <title>kanren</title>
+      <link>https://www.newresalhaider.com/tags/kanren/</link>
+      <pubDate>Sun, 02 Feb 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://www.newresalhaider.com/tags/kanren/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>knowledge graph</title>
       <link>https://www.newresalhaider.com/tags/knowledge-graph/</link>
       <pubDate>Sat, 08 Jun 2019 00:00:00 +0200</pubDate>
@@ -378,6 +405,15 @@
       <pubDate>Fri, 01 Feb 2019 00:00:00 +0100</pubDate>
       
       <guid>https://www.newresalhaider.com/tags/law/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>logic programming</title>
+      <link>https://www.newresalhaider.com/tags/logic-programming/</link>
+      <pubDate>Sun, 02 Feb 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://www.newresalhaider.com/tags/logic-programming/</guid>
       <description></description>
     </item>
     

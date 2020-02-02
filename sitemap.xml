@@ -4,6 +4,14 @@
     
     <url>
     
+      <loc>https://www.newresalhaider.com/post/darmok-core-logic/</loc>
+      <lastmod>2019-02-02T00:00:00+01:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>https://www.newresalhaider.com/post/probable-mystery-machine/</loc>
       <lastmod>2019-12-06T00:00:00+01:00</lastmod>
     </url>
@@ -246,7 +254,7 @@
     <url>
     
       <loc>https://www.newresalhaider.com/tags/ai/</loc>
-      <lastmod>2019-12-06T00:00:00+01:00</lastmod>
+      <lastmod>2019-02-02T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -515,7 +523,7 @@
     <url>
     
       <loc>https://www.newresalhaider.com/tags/star-trek/</loc>
-      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
+      <lastmod>2019-02-02T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -568,8 +576,26 @@
     
     <url>
     
+      <loc>https://www.newresalhaider.com/tags/clojure/</loc>
+      <lastmod>2019-10-06T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>https://www.newresalhaider.com/tags/clojure.spec/</loc>
       <lastmod>2018-05-01T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/core.logic/</loc>
+      <lastmod>2019-02-02T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -622,6 +648,15 @@
     
     <url>
     
+      <loc>https://www.newresalhaider.com/tags/kanren/</loc>
+      <lastmod>2019-02-02T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>https://www.newresalhaider.com/tags/knowledge-graph/</loc>
       <lastmod>2019-10-06T00:00:00+02:00</lastmod>
       <priority>0</priority>
@@ -642,6 +677,15 @@
     
       <loc>https://www.newresalhaider.com/tags/law/</loc>
       <lastmod>2019-02-04T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/logic-programming/</loc>
+      <lastmod>2019-02-02T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
