@@ -573,9 +573,9 @@
 
 <p>A popular implementation of miniKanren is the <a href="https://github.com/clojure/core.logic" target="_blank">core.logic</a> library of the <a href="https://clojure.org/" target="_blank">Clojure</a> programming language. In this article we aim to introduce miniKanren/core.logic by encoding story elements of the Darmok episode of Star Trek: TNG (some spoilers for the episode will follow).</p>
 
-<p>The episode is based around the fact that the Federation and the Tamarian people aim to establish successful first contact with each other. From the Federation, the crew of the starship Enterprise are sent to the planet El-Adrel where a Tamarian ship awaits them. Unfortunately attempts for communication fail from both sides and lead to some dangerous situations. The difficulty of communication arises from the fact that Tamarians communicate exclusively through allegory. This means that it is not just enough to decipher the words used in the Tamarian language, but the crew of the Enterprise must also understand the myths and historical events to which these allegories refer to. Within the episode multiple allegories are used by the Tamarians, such as with the phrase &ldquo;Darmok and Jalad at Tanagra&rdquo;, that utterly baffle the crew at first. However through shared dangers and cooperation understanding eventually comes. In the end successful first contact is made by the captain of the Enterprise, Picard and the captain of the Tamarian ship, Darmok. This is captured by the newly coined allegory for first contact in the Tamarian language: &ldquo;Picard and Dathon at El-Adrel&rdquo;.</p>
+<p>The episode is based around the fact that the Federation and the Tamarian people aim to establish successful first contact with each other. From the Federation, the crew of the starship Enterprise are sent to the planet El-Adrel where a Tamarian ship awaits them. Unfortunately attempts at communication fail from both sides and lead to some dangerous situations. The difficulty of communication arises from the fact that Tamarians communicate exclusively through allegory. This means that it is not enough to just decipher the words and grammar used in the Tamarian language, but the crew of the Enterprise must also understand the myths and historical events to which these allegories refer to. Within the episode multiple allegories are used by the Tamarians, such as with the phrase &ldquo;Darmok and Jalad at Tanagra&rdquo;, that utterly baffle the crew at first. However due to shared dangers and cooperation by the captain of the Enterprise, Picard, and the captain of the Tamarian ship, Darmok, they start to understand each other. In the end a successful first contact is made. This is captured by the newly coined allegory for first contact in the Tamarian language: &ldquo;Picard and Dathon at El-Adrel&rdquo;.</p>
 
-<p>In this article we will use core.logic to write a logic program to represent the allegories used in the Darmok episode, and to generate templates of the Darmok story through a sequence of allegories. A logic program is a bit different than programs most people are used to. Instead of giving precise instructions to the computer one instead writes a goal, or a group of goals, that provide some logical restrictions on what one intends to achieve. With these goals the logic programming system can find the right answers. Note that the source for the code used this article can be found <a href="https://github.com/newres/darmok-core-logic" target="_blank">here</a> in case you want to experiment along while reading this article.</p>
+<p>In this article we will use core.logic to write a logic program to represent the allegories used in the Darmok episode and to generate templates of the Darmok story through a sequence of allegories. A logic program is a bit different than the programs most people are used to. Instead of giving precise instructions to the computer one instead writes a goal, or a group of goals, that provide some logical restrictions on what one intends to achieve. With these goals the logic programming system can find the right answers. Note that the source for the code used this article can be found <a href="https://github.com/newres/darmok-core-logic" target="_blank">here</a> in case you want to experiment along while reading this article.</p>
 
 <p>Let&rsquo;s start off with a small logic program that can translate the Tamarian allegory that represents cooperation, the phrase &ldquo;Darmok and Jalad at Tanagra&rdquo;. We aim to translate this allegory to an equivalent allegory based on a human myth, as well as the English translation for it: &ldquo;cooperation&rdquo;.</p>
 
@@ -589,9 +589,9 @@
 
 <p>First lets decipher the above definition. For people, unfamiliar with Clojure, the form <code>(defn cooperation [tam hum eng] ... )</code> defines a function named <code>cooperation</code> with the parameters <code>tam hum eng</code>. The part with <code>(l/conde ... )</code> is a shorthand for <code>(core.logic/conde ... )</code>; we will use <code>l</code> as the abbreviation for the <code>core.logic</code> namespace in the rest of this article. This <code>l/conde</code> part functions as a way to connect various goals together. It creates a disjunction (elements separated by OR) of separate vectors of goals which it considers as conjunction (elements separated by AND). For people a bit familiar with boolean logic this a way to write a <a href="https://en.wikipedia.org/wiki/Disjunctive_normal_form" target="_blank">Disjunctive Normal Form</a>. To give a very simplified example the form <code>(l/conde [A B] [C] )</code> with the goals <code>A, B, C</code> can be seen as a way to find the case where <code>(A 'AND' B) 'OR' C</code> holds. In the previous example <code>l/conde</code> is called on a single vector of elements <code>[(l/== [tam] [&quot;Darmok and Jalad at Tanagra.&quot;]) (l/== [hum] [&quot;Gilgamesh and Ekidu at Uruk.&quot;]) (l/== [eng] [&quot;cooperation&quot;])]</code>, meaning that this function wants each of the goals: <code>(l/== [tam] [&quot;Darmok and Jalad at Tanagra.&quot;])</code> AND <code>(l/== [hum] [&quot;Gilgamesh and Ekidu at Uruk.&quot;])</code> AND <code>(l/== [eng] [&quot;cooperation&quot;])</code> fulfilled.</p>
 
-<p>So now we know that this function takes three parameters and wants to ensure that the three goals all have to be met. But what do the goals themselves mean? They all have a similar structure using the equality in core logic, <code>l/==</code>, which aims to unify the elements. Unification is a core part of a logic programming system and it is used to constrain elements to the same possible values. For the first example <code>(l/== [tam] [&quot;Darmok and Jalad at Tanagra.&quot;])</code>, the unification aims to ensure that the variable <code>tam</code> has the value of the string <code>&quot;Darmok and Jalad at Tanagra.&quot;</code>, which can be seen as the Tamarian phrase for cooperation. The other goals do this unification for the human mythology equivalent: <code>&quot;Gilgamesh and Ekidu at Uruk.&quot;</code> of this allegory, as well for the English word <code>&quot;cooperation&quot;</code>, for the variables <code>hum</code> and <code>eng</code>, respectively.</p>
+<p>So now we know that this function takes three parameters and wants to ensure that the three goals all have to be met. But what do the goals themselves mean? They all have a similar structure in that they are using the equality in core.logic, <code>l/==</code>, to unify elements. Unification is a core part of a logic programming system and it is used to constrain elements to the same possible values. For the first example <code>(l/== [tam] [&quot;Darmok and Jalad at Tanagra.&quot;])</code>, the unification aims to ensure that the variable <code>tam</code> has the value of the string <code>&quot;Darmok and Jalad at Tanagra.&quot;</code>, which can be seen as the Tamarian phrase for cooperation. The other goals do this unification for the human mythology equivalent: <code>&quot;Gilgamesh and Ekidu at Uruk.&quot;</code> of this allegory, as well for the English word <code>&quot;cooperation&quot;</code>, for the variables <code>hum</code> and <code>eng</code>, respectively.</p>
 
-<p>We have now given an anatomy of this logic program that does unification on phrases relating to cooperation, but how do we use it? For this we need two things, a set of logic variables and a way to tell the system to run the logic program. The function <code>l\run*</code> does exactly that, which for the given set of parameters try to find all examples for which the goals are fulfilled.</p>
+<p>We have now given an anatomy of this logic program that does unification on phrases relating to cooperation, but how do we use it? For this we need two things: a set of logic variables and a way to tell the system to run the logic program. The function <code>l\run*</code> does exactly that, which for the given set of parameters tries to find all examples where the goals are fulfilled.</p>
 
 <p>So if we evaluate the following code:</p>
 
@@ -604,20 +604,20 @@
 <pre><code>([&quot;Darmok and Jalad at Tanagra.&quot; &quot;Gilgamesh and Ekidu at Uruk.&quot; &quot;cooperation&quot;])
 </code></pre>
 
-<p>What <code>l\run*</code> is doing is taking a given list of logic variables, and tries to list all the possible values these variables can take. Here it only lists a single possible set of values for the variables <code>tam</code>, <code>hum</code> and <code>eng</code>. This should not be surprising as there is only exactly one way each of the variables <code>tam</code>, <code>hum</code>, and <code>eng</code> can be fulfilled by the &ldquo;cooperation&rdquo; goal based on the definition we gave above.  The variable <code>tam</code> gets unified with the string value <code>&quot;Darmok and Jalad at Tanagra.&quot;</code>, <code>hum</code> with <code>&quot;Gilgamesh and Ekidu at Uruk.&quot;</code> and <code>eng</code> with <code>&quot;cooperation&quot;</code>.</p>
+<p>What <code>l\run*</code> is doing is taking a given list of logic variables and tries to list all the possible values these variables can take. Here it only lists a single possible set of values for the variables <code>tam</code>, <code>hum</code> and <code>eng</code>. This should not be surprising as there is only exactly one way each of the variables <code>tam</code>, <code>hum</code>, and <code>eng</code> can be fulfilled by the &ldquo;cooperation&rdquo; goal based on the definition we gave above.  The variable <code>tam</code> gets unified with the string value <code>&quot;Darmok and Jalad at Tanagra.&quot;</code>, <code>hum</code> with <code>&quot;Gilgamesh and Ekidu at Uruk.&quot;</code> and <code>eng</code> with <code>&quot;cooperation&quot;</code>.</p>
 
-<p>In the previous case we used only &lsquo;fresh&rsquo; logic variables (variables that have no constraints placed upon their possible values yet), but instead we can also use a specific value in our goal instead. In the following example we only have two variables. Instead of a variable for first parameter used in the cooperation goal we give the string <code>&quot;Darmok and Jalad at Tanagra.&quot;</code> already:</p>
+<p>In the previous case we used only &lsquo;fresh&rsquo; logic variables (variables that have no constraints placed upon their possible values yet), but instead we can also use a specific value in our goal instead. In the following example we only have two variables. Instead of a variable for first parameter used in the cooperation goal we give the string `&ldquo;Darmok and Jalad at Tanagra.&rdquo; as follows:</p>
 
 <pre><code>(l/run* [hum eng]
         (cooperation &quot;Darmok and Jalad at Tanagra.&quot; hum eng))
 </code></pre>
 
-<p>which gives the following result:</p>
+<p>which gives the result:</p>
 
 <pre><code>([&quot;Gilgamesh and Ekidu at Uruk.&quot; &quot;cooperation&quot;])
 </code></pre>
 
-<p>There are only two variables listed in the answer, as there are only two variables given for run to check in our initial case. Otherwise the answer is exactly what we would expect, as there are only one possible way these variables can be bound in our logic program.</p>
+<p>There are only two variables listed in the answer, as there are only two variables given for <code>l/run*</code> to check in our initial case. Otherwise the answer is exactly what we would expect as there is only one possible way these variables can be bound in our logic program.</p>
 
 <p>Now lets try a run where there are no possible valid answers, giving the word <code>&quot;challenge&quot;</code> as a parameter:</p>
 
@@ -629,7 +629,7 @@
 
 <p>Given we got the basics of logic programs covered, lets expand our example into something more complex.</p>
 
-<p>Instead of one single allegory, we now define five of them based on the various allegories used in the Darmok episode. The functions representing these goals are all named after the English word translation: <code>failure</code>, <code>common-enemy</code>, <code>cooperation</code>, <code>successful-cooperation</code> and <code>successful-first-contact</code>. They all follow the same structure as the <code>cooperation</code> allegory we previously examined in detail. In addition we also define a function for representing any allegory, aptly named <code>allegory</code>, that is a goal that can be fulfilled by any of the allegories named above.</p>
+<p>Instead of one single allegory, we now define five of them based on the various allegories used in the Darmok episode. The functions representing these goals are all named after the English word translation: <code>failure</code>, <code>common-enemy</code>, <code>cooperation</code>, <code>successful-cooperation</code> and <code>successful-first-contact</code>. They all follow the same structure as the <code>cooperation</code> allegory we previously examined in detail. In addition we also define a function for representing any allegory, aptly named <code>allegory</code>. This is a goal that can be fulfilled by any of the allegories named above.</p>
 
 <pre><code class="language-clojure">(defn failure [tam hum eng]
   (l/conde [(l/== [tam] [&quot;Shaka, when the walls fell.&quot;])
@@ -666,7 +666,7 @@
 
 <p>There should not be any very surprising elements in this part, but we give two quick observations before continuing.</p>
 
-<p>First, the human equivalent for Tamarian allegories are based on the Gilgamesh story, which is also explicitly mentioned in the episode and provides a way for Caption Picard to connect with the Tamarian Captain Dathon. The only exception to this <code>&quot;Picard and Dathon at El-Adrel.&quot;</code> which is an allegory coined at the end of the episode as a term for first contact between cultures, and can be seen as a historical event from a human perspective as well.</p>
+<p>First, the human equivalent for Tamarian allegories are based on the Gilgamesh story, which is also explicitly mentioned in the episode, that provides a way for captain Picard to connect with the Tamarian captain Dathon. The only exception to this is <code>&quot;Picard and Dathon at El-Adrel.&quot;</code> which is an allegory coined at the end of the episode as a term for first contact between cultures. It seems fitting to use this as an allegory from a human perspective as well.</p>
 
 <p>Second, to reiterate how <code>l/conde</code> works with choices, we remark that each of the named allegories in the <code>allegory</code> function are in their own vector (indicated by each goal inside their own <code>[]</code> brackets). This indicates that any of <code>failure</code>, <code>common-enemy</code>, <code>cooperation</code>, <code>successful-cooperation</code> or <code>successful-first-contact</code> can fulfill the goal of <code>allegory</code>.</p>
 
@@ -691,7 +691,9 @@
   &quot;successful-first-contact&quot;])
 </code></pre>
 
-<p>This shows five possible answers because, as mentioned, any of the above allegories can fulfill the given goal. By default <code>l/run*</code> will list all possible answers for a given logic program, which is a very powerful feature for exhaustively searching for solutions to a given problem. However this list can be large, and even infinite! In such scenarios there is a way to limit the answers to a certain number when search: by using <code>l/run</code> directly followed by the number of answers we want returned.</p>
+<p>This shows five possible answers because, as mentioned, any of the above allegories can fulfill the given goal.</p>
+
+<p>By default <code>l/run*</code> will list all possible answers for a given logic program, which is a very powerful feature for exhaustively searching for all the solutions to a given problem. However this list can be large, and even infinite! In such scenarios there is a way to limit the answers to a certain number when searching by using <code>l/run</code> (note the lack of the <code>*</code> character) directly followed by the number of answers we want returned.</p>
 
 <p>For example, the call:</p>
 
@@ -707,7 +709,7 @@
  [&quot;Beast at Tanagra.&quot; &quot;Bull of Heaven.&quot; &quot;common-enemy&quot;])
 </code></pre>
 
-<p>Now as we are getting a bit more familiar with the allegories in this example, we do not want to write out all three versions of each allegory each time. We can do this by defining a new goal <code>allegory-short</code> that succeeds for any phrase that identifies one of the 5 allegories:</p>
+<p>Now as we are getting a bit more familiar with the allegories in this example, we do not want to write out all three versions of each allegory each time. We can do this by defining a new goal <code>allegory-short</code> that succeeds for any phrase that identifies one of the five allegories:</p>
 
 <pre><code>(defn allegory-tam [tam]
   (l/fresh [x y]
@@ -727,7 +729,7 @@
            [(allegory-eng x)]))
 </code></pre>
 
-<p>The <code>allegory-short</code> function was defined by writing out the three scenarios by which a phrase could be part of an allegory: it is either the Tamarian allegory, the Human allegory or the English translation. The only new structure we use here from core.logic is <code>l/fresh</code> which lets us introduce new (fresh) logic variables which have no binding as of yet. When using the various forms of <code>l/run</code> the parameters for the function are automatically given as fresh variables, but this function allows us to create then inside other parts of the logic program as well.</p>
+<p>The <code>allegory-short</code> function was defined by writing out the three scenarios by which a phrase could be part of an allegory: it is either the Tamarian allegory, the Human allegory or the English translation. The only new structure we use here from core.logic is <code>l/fresh</code> which lets us introduce new (fresh) logic variables which have no binding as of yet. When using the various forms of <code>l/run</code> the parameters for the function are automatically given as fresh variables, but this function allows us to create them inside other parts of the logic program as well.</p>
 
 <p>Now if we want to list, for example, five possible phrases that form part of an allegory we can call:</p>
 
@@ -743,9 +745,9 @@
  &quot;failure&quot;)
 </code></pre>
 
-<p>With all the functions for logic programming we built up, lets try our hand at creating a logic program that generates a variants the Darmok story, expressed through a sequence of allegories. In this scenario, much like in the episode any phrase, Tamarian or Human allegory or their English equivalent, could be used to describe parts of the story. In essence we can represent the story as a list of phrases, for example: (&ldquo;failure&rdquo;, &ldquo;Beast at Tanagra.&rdquo; &ldquo;Darmok and Jalad at Tanagra.&rdquo; &ldquo;successful-first-contact&rdquo; ).</p>
+<p>With all the functions for logic programming we built up, lets try our hand at creating a logic program that generates variants of the Darmok story expressed through a sequence of allegories. In this scenario, much like in the episode any phrase, a Tamarian- or Human allegory or their English equivalent, could be used to describe parts of the story. In essence we can represent the story as a list of phrases, for example: (&ldquo;failure&rdquo;, &ldquo;Beast at Tanagra.&rdquo; &ldquo;Darmok and Jalad at Tanagra.&rdquo; &ldquo;successful-first-contact&rdquo; ).</p>
 
-<p>We could put many restrictions on the order of the phrases but for the sake of brevity, we just want to ensure that each story starts with a phrase for <code>failure</code> and ends with a phrase for <code>successful-first-contact</code> much like the structure of the actual episode. In addition let&rsquo;s assume our stories are only five phrases long.</p>
+<p>We could put many restrictions on the order of the phrases, but for the sake of brevity we just want to ensure that each story starts with a phrase for <code>failure</code> and ends with a phrase for <code>successful-first-contact</code> much like the structure of the actual episode. In addition let&rsquo;s assume our stories are only five phrases long.</p>
 
 <p>We can now define logic program to generate such stories as follows:</p>
 
@@ -770,7 +772,7 @@
                      (successful-first-contact-any x5)])))
 </code></pre>
 
-<p>Every construct we used to build these functions should be familiar. We just needed to define two special versions of our goals for the shorthand version of allegories: one for failure and one for successful first contact.</p>
+<p>Every construct we used to build these functions should be familiar based on the previous examples. We just needed to define two special versions of our goals for the shorthand version of allegories: one for failure and one for successful first contact.</p>
 
 <p>For example if we want five solutions that fulfill all the criteria for such stories we can call the following code:</p>
 
@@ -826,7 +828,7 @@
                      (l/everyg allegory-short middle)]))))
 </code></pre>
 
-<p>Without going too in-depth on every part of this function, what it does is programmatically create n-number of fresh variables based on the given parameter. It than unifies these with the parameters of a run execution inside the function and returns them. For example, six stories of four elements can be requested by the call:</p>
+<p>Without going too in-depth on every part of this function, it programmatically creates n-number of fresh variables based on the given parameter. It then unifies these with the parameters of a run execution inside the function and returns them. For example, six stories of four elements can be requested by the call:</p>
 
 <pre><code class="language-clojure">(n-element-story 4 6)
 </code></pre>
@@ -859,9 +861,9 @@
   &quot;Picard and Dathon at El-Adrel.&quot;))
 </code></pre>
 
-<p>There you have it, a very quick overview of using core.logic for logic programming. If you would like to experiment further the code used in this article is <a href="https://github.com/newres/darmok-core-logic" target="_blank">available</a>. Here we only scratched the surface of what is possible in a logic programming environments such as core.logic. Feel free to check it out, or any other <a href="http://minikanren.org/#implementations" target="_blank">miniKanren implementation available in your language</a>.</p>
+<p>There you have it, a very quick overview of using core.logic for logic programming. If you would like to experiment further the code used in this article is <a href="https://github.com/newres/darmok-core-logic" target="_blank">available</a>. Here we only scratched the surface of what is possible in a logic programming environment such as core.logic. Feel free to check it out, or any other <a href="http://minikanren.org/#implementations" target="_blank">miniKanren implementation available in your language</a>.</p>
 
-<p>I hope that, much like the Darmok episode, this article has expanded your horizons on communicating. Logic programming is a very interesting, and often underutilized programming paradigm, and core.logic/miniKanren is a great system to get started with it. I hope that this, perhaps first, contact with Logic Programming or core.logic aids you in your future endeavors.</p>
+<p>I hope that, much like the Darmok episode, this article has expanded your horizons on communicating. Logic programming is a very interesting, and often underutilized programming paradigm. The core.logic/miniKanren logic programming language is a great system to get started with it. I hope that this, perhaps first, contact with Logic Programming or core.logic aids you in your future endeavors.</p>
 
     </div>
 
