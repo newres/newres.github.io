@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.2.0">
+  <meta name="generator" content="Hugo 0.52" />
+  <meta name="author" content="Newres Al Haider">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="Enhance your organizing and planning with Cyborg Org-mode.
+">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://www.newresalhaider.com/post/cyborg-mode/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#EF525B">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+  <link rel="stylesheet" href="/css/post.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
+  <link rel="feed" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://www.newresalhaider.com/post/cyborg-mode/">
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@newresa">
+  <meta property="twitter:creator" content="@newresa">
+  
+  <meta property="og:site_name" content="Newres Al Haider">
+  <meta property="og:url" content="https://www.newresalhaider.com/post/cyborg-mode/">
+  <meta property="og:title" content="CybOrg Mode | Newres Al Haider">
+  <meta property="og:description" content="Enhance your organizing and planning with Cyborg Org-mode.
+"><meta property="og:image" content="https://www.newresalhaider.com/post/cyborg-mode/featured.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2020-06-01T00:00:00&#43;02:00">
+  
+  <meta property="article:modified_time" content="2020-06-01T00:00:00&#43;02:00">
+  
+
+  
+
+  
+
+  <title>CybOrg Mode | Newres Al Haider</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Newres Al Haider</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#publications_selected">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="article-header d-xl-none">
+  <div class="featured-image" style="background-image: url('/post/cyborg-mode/featured_hu38a9900b2b4f820100f5f673e23cb320_6015073_800x0_resize_box_2.png');"></div>
+  <span class="article-header-caption">The hero Cyborg on the cover of Cyborg #1 (September 2015) comic book. Art by Ivan Reis. Copyright DC Comics, Inc</span>
+</div>
+
+
+<div class="container-fluid split-header d-none d-xl-block">
+  <div class="row">
+    <div class="col-6">
+      <div class="split-header-content">
+        <h1 itemprop="name">CybOrg Mode</h1>
+
+        
+
+        
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2020-06-01 00:00:00 &#43;0200 CEST" itemprop="datePublished">
+    <time datetime="2020-06-01 00:00:00 &#43;0200 CEST" itemprop="dateModified">
+      1 Jun, 2020
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+
+</div>
+
+
+        
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=CybOrg%20Mode&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcyborg-mode%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcyborg-mode%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcyborg-mode%2f&amp;title=CybOrg%20Mode"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcyborg-mode%2f&amp;title=CybOrg%20Mode"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=CybOrg%20Mode&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcyborg-mode%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="split-header-image">
+        <img src="/post/cyborg-mode/featured_hu38a9900b2b4f820100f5f673e23cb320_6015073_680x500_fill_q90_box_smart1_2.png" itemprop="image" alt="">
+        <span class="article-header-caption">The hero Cyborg on the cover of Cyborg #1 (September 2015) comic book. Art by Ivan Reis. Copyright DC Comics, Inc</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="article-container d-xl-none">
+  <h1 itemprop="name">CybOrg Mode</h1>
+
+  
+
+  
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2020-06-01 00:00:00 &#43;0200 CEST" itemprop="datePublished">
+    <time datetime="2020-06-01 00:00:00 &#43;0200 CEST" itemprop="dateModified">
+      1 Jun, 2020
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=CybOrg%20Mode&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcyborg-mode%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcyborg-mode%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcyborg-mode%2f&amp;title=CybOrg%20Mode"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcyborg-mode%2f&amp;title=CybOrg%20Mode"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=CybOrg%20Mode&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcyborg-mode%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      <p>Human beings enhanced by machine parts, often called <a href="https://en.wikipedia.org/wiki/Cyborg" target="_blank">cyborgs</a>, are a staple of the science-fiction and comic books. The, very aptly named, hero <a href="https://en.wikipedia.org/wiki/Cyborg_(comics)" target="_blank">Cyborg</a>, is a good example of this. Due to advanced mechanical modifications he not only has greatly increased strength and the ability to fly, but he is able to interface directly with computer systems to organize and plan ahead. These skills make him an important member of many superhero teams such as the <a href="https://en.wikipedia.org/wiki/Justice_League" target="_blank">Justice League</a> and <a href="https://en.wikipedia.org/wiki/Teen_Titans" target="_blank">Teen Titans</a>.</p>
+
+<p>Thankfully for us, even without any of the cybernetic implants that Cyborg has, there exists some great tools to help organize, document and plan ahead. One of such tools is called <a href="https://orgmode.org/" target="_blank">Org-mode</a>. Org-mode, also denoted as Org mode or even more simply as Org, is a system for organizing notes, plans, authoring documents and many other tasks. One of its main benefits is that although specialized tools exist to help create and edit Org documents, all Org documents are <a href="https://en.wikipedia.org/wiki/Plain_text" target="_blank">plain text</a> files. This means that the format is very portable and can be used and edited on any platform which can edit text files. In this article we give a brief introduction to Org mode with an example based on the hero Cyborg.</p>
+
+<p>Org documents can be outlined with a tree structure using headlines. Suppose that we want to describe various information about Cyborg, such as his biography, his powers, his relationships and his schedule. For each of these we can use an asterisk (<code>*</code>) symbol followed by some text to create a headline in the document as follows:</p>
+
+<pre><code class="language-org">* Biography
+* Powers
+* Relationships
+* Cyborg's Schedule
+</code></pre>
+
+<p>We can add nested headlines by increasing the number of asterisks in front of a section name. For example, if we want to create two headlines under relationships detailing Cyborgs team affiliations, as well as his villains, we can do that:</p>
+
+<pre><code class="language-org">* Biography
+* Powers
+* Relationships
+** Team Affiliations
+** Villains
+* Cyborg's Schedule
+</code></pre>
+
+<p>Of course while headlines can help us structure a document, text is an integral part of it. A simple biography can be shown as one would expect:</p>
+
+<pre><code class="language-org">* Biography
+Vic Stone was a high school athlete when a tragic accident nearly killed him and destroyed most of this body. His father, Dr. Silas Stone, used his scientific knowledge and advanced technology to save his life by augmenting him with machine parts.
+Living now as a cyborg, a being with both organic and machine parts, he is now has super strength, increased durability and a control over advanced technology and weaponry.
+Although he continues to struggle with his newfound status as both man and machine, he uses his newfound powers as a superhero.
+* Powers
+* Relationships
+** Team Affiliations
+** Villains
+* Cyborg's Schedule
+</code></pre>
+
+<p>We can also create lists in the document. For example we can give an unordered list of Cyborg&rsquo;s powers such as super strength and instant weaponary by prefacing each item on a new line by a hyphen (<code>-</code>):</p>
+
+<pre><code class="language-org">* Biography
+Vic Stone was a high school athlete when a tragic accident nearly killed him and destroyed most of this body. His father, Dr. Silas Stone, used his scientific
+knowledge and advanced technology to save his life by augmenting him with machine parts.
+Living now as a cyborg, a being with both organic and machine parts, he is now has super strength, increased durability and a control over advanced technology and weaponry.
+Although he continues to struggle with his newfound status as both man and machine, he uses his newfound powers as a superhero.
+* Powers
+- super strength
+- advanced technology,
+- instant weaponry
+- genius-level intellect
+- control over technology
+- computer hacking
+- durability
+- teleportation
+* Relationships
+** Team Affiliations
+** Villains
+* Cyborg's Schedule
+</code></pre>
+
+<p>Note that the document is now getting larger and the parts of what we want to focus on to show here, the powers, can get lost in the other information. One of the strengths of Org-mode that even though it can be viewed and edited as plain text, there exists quite a bit of tooling to help navigate, edit and make use of the described structures. The editor <a href="https://www.gnu.org/software/emacs/" target="_blank">emacs</a> and its various flavours such as <a href="https://www.spacemacs.org/" target="_blank">spacemacs</a> that I personally use have excellent features for these tasks. However other editors such as <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> have <a href="https://github.com/vscode-org-mode/vscode-org-mode" target="_blank">plugins</a> to support Org-mode as well.</p>
+
+<p>One of the basic features to help such editors provide is to fold headlines under which we do not want to see all the content in detail and unfold it for those that we do. In the following animation we show how this can be done on a portion of a more extended version of the Cyborg document:</p>
+
+
+
+
+<figure>
+
+<img src="/img/post/2020/cyborg-mode/foldingheadlines.gif" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Folding and unfolding headlines in Org document using Spacemacs</h4>
+  
+</figcaption>
+
+</figure>
+
+<p>The above image shows how the <a href="https://www.spacemacs.org/" target="_blank">spacemacs</a> editor handles Org documents. By simply pressing tab on headlines we can fold (i.e. not show the underlying content) and unfold (i.e. showing the underlying content) them as we please and directing our attention to parts of the document we want to view and edit. It also shows how editor support uses the underlying structure for additional visualizations, such as on the level of headlines, even though the underlying document is still plaintext.</p>
+
+<p>Expanding on our example we can describe the Team Affiliations and the Villains as lists as well. For the list of Team Affiliations we will use an ordered list, which can be done by using a number followed by a dot, e.g.: <code>1. 2.</code> for the list indicators.  Note for brevity we now only show the new/relevant portions of the full Org document in the examples as opposed to the whole.</p>
+
+<pre><code class="language-org">* Relationships
+** Team Affiliations
+1. Justice League
+2. Teen Titans
+3. Doom Patrol
+** Villains
+- Lex Luthor
+- Deathstroke
+</code></pre>
+
+<p>Another interesting feature in Org documents are TODO items. Any headline can be made a TODO in them by prefacing it with TODO. For example in a headline of Cyborg&rsquo;s schedule we can put two TODO items for things Cyborg wants to do at some point: attend a Justice League Meeting and Upgrading Equipment.</p>
+
+<p>There are various ways such TODO items could be used similarly to folding or unfolding headlines.  In emacs/spacemacs such actions, and many others relating to various aspects of an Org document, can be done by commands. For example the command <code>org-show-todo-tree</code> can take ensure that all the headlines are folded as much as possible and only the TODO headlines are unfolded. Similarly the command <code>org-todo</code> cycles between not marking the headline with a TODO, marking it with a TODO or marking it with DONE denoted that the item has been completed.</p>
+
+
+
+
+<figure>
+
+<img src="/img/post/2020/cyborg-mode/toggletododate.gif" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Toggling using the command the command <code>org-todo</code> for headlines in Org document using Spacemacs</h4>
+  
+</figcaption>
+
+</figure>
+
+<p>The above image shows how the command <code>org-todo</code> can cycle between the TODO states of the Justice League Meeting headline. In addition, it also shows a few other features.</p>
+
+<p>First is the associating a date with the TODO item, in particular when it is scheduled. By toggling the TODO to DONE, our editor uses the current time to mark when the task was finished. This allows for a nice way to create a checklist of the things that have to be done and marking them off.</p>
+
+<p>Another aspect is the use of markup around &lsquo;must&rsquo; and &lsquo;Lex Luthor&rsquo;. Enclosing a phrase with an underscore underlines the phrase while enclosing it between asterisks (*) makes it bold. Markups for italicizing (enclosing it between slashes (/)), code fragments and others also exist.</p>
+
+<p>The full list of TODO items in Cyborg&rsquo;s schedule is as follows.</p>
+
+<pre><code class="language-org">*** TODO Justice League Meeting
+    SCHEDULED: &lt;2024-08-02&gt;
+    Something _must_ be done about *Lex Luthor*. He seems to be planning an attack on /Metropolis/ with the help of *Deathstroke*. 
+*** TODO Upgrade Equipment
+    SCHEDULED: &lt;2024-06-01&gt;
+    Enhance arm cannon.
+</code></pre>
+
+<p>One of the most interesting features of Org mode that we will cover in this article is the ability to embed fragment of code in an Org document that can be executed in the right environment. In Cyborg&rsquo;s schedule one of the upcoming items is to enhance his arm cannon. In order to prepare for this, and to illustrate our code embedding, a simple Weapon Damage calculator application was written in Python:</p>
+
+<pre><code class="language-python">  arm_cannon = {&quot;name&quot;: &quot;Arm Cannon&quot;, &quot;power&quot;: 8}
+  reinforced_door = {&quot;name&quot;: &quot;Reinforced Door&quot;, &quot;armor&quot;: 3}
+
+  def wdc(weapon, target):
+    damage = weapon[&quot;power&quot;] - target[&quot;armor&quot;]
+    if damage&lt;0:
+      return 0
+    else: 
+      return damage
+
+  damage_done = wdc(arm_cannon, reinforced_door)
+  print(&quot;Using the weapon &quot; + arm_cannon[&quot;name&quot;] + &quot; with &quot; + str(arm_cannon[&quot;power&quot;]) + &quot; power,&quot;)
+  print(&quot;against the target &quot; + reinforced_door[&quot;name&quot;] + &quot; with &quot; + str(reinforced_door[&quot;armor&quot;]) + &quot; armor,&quot;)
+  print(&quot;results in &quot; + str(damage_done) + &quot; damage.&quot;)
+</code></pre>
+
+<p>This code aims to use features of Cyborg&rsquo;s arm cannon to calculate damage on the target and to write these features out along with the resulting damage.</p>
+
+<p>We can embed this code fragment by using the property system to give this fragment a name and denote some other attributes. This property system is essentially a key-value system in Org mode that is used for all types information represented with key-value pairs. For example the following two properties describe the title and description of the Org document:</p>
+
+<pre><code class="language-org">#+title: Cyborg Agenda
+#+description: An introduction to org mode by creating an org document for information on the superhero Cyborg.
+</code></pre>
+
+<p>For the code we want to embed we want set the properties on how we name this fragment, where the source begins and ends, what language it is and what should be done with the results. This looks as follows within the Org document:</p>
+
+<pre><code class="language-org">* Weapon Damage Calculator
+#+NAME: wdc
+#+BEGIN_SRC python :results output
+  arm_cannon = {&quot;name&quot;: &quot;Arm Cannon&quot;, &quot;power&quot;: 8}
+  reinforced_door = {&quot;name&quot;: &quot;Reinforced Door&quot;, &quot;armor&quot;: 3}
+
+  def wdc(weapon, target):
+    damage = weapon[&quot;power&quot;] - target[&quot;armor&quot;]
+    if damage&lt;0:
+      return 0
+    else: 
+      return damage
+
+  damage_done = wdc(arm_cannon, reinforced_door)
+  print(&quot;Using the weapon &quot; + arm_cannon[&quot;name&quot;] + &quot; with &quot; + str(arm_cannon[&quot;power&quot;]) + &quot; power,&quot;)
+  print(&quot;against the target &quot; + reinforced_door[&quot;name&quot;] + &quot; with &quot; + str(reinforced_door[&quot;armor&quot;]) + &quot; armor,&quot;)
+  print(&quot;results in &quot; + str(damage_done) + &quot; damage.&quot;)
+#+END_SRC
+#+RESULTS: wdc
+</code></pre>
+
+<p>This embeds the weapon damage calculator as a source fragment named wdc, while also setting up where the results will be show in the document. Now if we execute the command <code>org-babel-execute-src-block</code> we can see the results directly within the document:</p>
+
+
+
+
+<figure>
+
+<img src="/img/post/2020/cyborg-mode/executingcode.gif" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Executing the source block to see the results directly within the Org document</h4>
+  
+</figcaption>
+
+</figure>
+
+<p>That is it for this tutorial, hopefully I have given a glimpse of what Org mode can do, and gives you some idea on how it can enhance your organizing, planning and note taking. Here I have not even touched on many other great features such as authoring documents and converting to other formats, using it as a spreadsheet system and many more. For further resources on this tool take a look at the official <a href="https://orgmode.org/" target="_blank">Org mode website</a>, as well the <a href="https://www.youtube.com/watch?v=PVsSOmUB7ic" target="_blank">excellent video tutorial</a> by GDQuest on using the Spacemacs editor with Org mode. The Org document that was built up can also be found in its entirety at a <a href="https://github.com/newres/cyborg-mode/" target="_blank">github repository</a> along with some extra documentation.</p>
+
+<p>Hopefully you have enjoyed the article and if you want to enhance yourself with one of the best note taking and planning tools around give Org mode a shot.</p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/org-mode/">Org-mode</a>
+  
+  <a class="badge badge-light" href="/tags/org/">org</a>
+  
+  <a class="badge badge-light" href="/tags/dc/">DC</a>
+  
+  <a class="badge badge-light" href="/tags/cyborg/">Cyborg</a>
+  
+  <a class="badge badge-light" href="/tags/emacs/">emacs</a>
+  
+  <a class="badge badge-light" href="/tags/spacemacs/">spacemacs</a>
+  
+  <a class="badge badge-light" href="/tags/dsl/">DSL</a>
+  
+</div>
+
+
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/portrait.png" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Newres Al Haider</a></h5>
+    <h6 class="card-subtitle">Postdoctoral Researcher and Software Engineer</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:newresjob@gmail.com" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/newresa" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://scholar.google.nl/citations?user=b4MxbOEAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/newres" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2017 Newres Al Haider &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/prolog.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.d037ee5294b166a79dec317c58aea9cc.js"></script>
+
+    
+
+  </body>
+</html>
+

@@ -4,6 +4,14 @@
     
     <url>
     
+      <loc>https://www.newresalhaider.com/post/cyborg-mode/</loc>
+      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>https://www.newresalhaider.com/post/darmok-core-logic/</loc>
       <lastmod>2019-02-02T00:00:00+01:00</lastmod>
     </url>
@@ -306,6 +314,33 @@
     
     <url>
     
+      <loc>https://www.newresalhaider.com/tags/cyborg/</loc>
+      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/dc/</loc>
+      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/dsl/</loc>
+      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>https://www.newresalhaider.com/tags/dart/</loc>
       <lastmod>2018-03-18T00:00:00+01:00</lastmod>
       <priority>0</priority>
@@ -407,6 +442,15 @@
     
       <loc>https://www.newresalhaider.com/</loc>
       <lastmod>2017-12-21T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/org-mode/</loc>
+      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -621,6 +665,15 @@
     
     <url>
     
+      <loc>https://www.newresalhaider.com/tags/emacs/</loc>
+      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>https://www.newresalhaider.com/tags/health/</loc>
       <lastmod>2017-12-29T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -695,6 +748,15 @@
     
       <loc>https://www.newresalhaider.com/tags/machine-learning/</loc>
       <lastmod>2019-02-04T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/org/</loc>
+      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -794,6 +856,15 @@
     
       <loc>https://www.newresalhaider.com/tags/software-contracts/</loc>
       <lastmod>2018-05-01T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/spacemacs/</loc>
+      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
     

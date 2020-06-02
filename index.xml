@@ -11,6 +11,212 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>CybOrg Mode</title>
+      <link>https://www.newresalhaider.com/post/cyborg-mode/</link>
+      <pubDate>Mon, 01 Jun 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://www.newresalhaider.com/post/cyborg-mode/</guid>
+      <description>&lt;p&gt;Human beings enhanced by machine parts, often called &lt;a href=&#34;https://en.wikipedia.org/wiki/Cyborg&#34; target=&#34;_blank&#34;&gt;cyborgs&lt;/a&gt;, are a staple of the science-fiction and comic books. The, very aptly named, hero &lt;a href=&#34;https://en.wikipedia.org/wiki/Cyborg_(comics)&#34; target=&#34;_blank&#34;&gt;Cyborg&lt;/a&gt;, is a good example of this. Due to advanced mechanical modifications he not only has greatly increased strength and the ability to fly, but he is able to interface directly with computer systems to organize and plan ahead. These skills make him an important member of many superhero teams such as the &lt;a href=&#34;https://en.wikipedia.org/wiki/Justice_League&#34; target=&#34;_blank&#34;&gt;Justice League&lt;/a&gt; and &lt;a href=&#34;https://en.wikipedia.org/wiki/Teen_Titans&#34; target=&#34;_blank&#34;&gt;Teen Titans&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Thankfully for us, even without any of the cybernetic implants that Cyborg has, there exists some great tools to help organize, document and plan ahead. One of such tools is called &lt;a href=&#34;https://orgmode.org/&#34; target=&#34;_blank&#34;&gt;Org-mode&lt;/a&gt;. Org-mode, also denoted as Org mode or even more simply as Org, is a system for organizing notes, plans, authoring documents and many other tasks. One of its main benefits is that although specialized tools exist to help create and edit Org documents, all Org documents are &lt;a href=&#34;https://en.wikipedia.org/wiki/Plain_text&#34; target=&#34;_blank&#34;&gt;plain text&lt;/a&gt; files. This means that the format is very portable and can be used and edited on any platform which can edit text files. In this article we give a brief introduction to Org mode with an example based on the hero Cyborg.&lt;/p&gt;
+
+&lt;p&gt;Org documents can be outlined with a tree structure using headlines. Suppose that we want to describe various information about Cyborg, such as his biography, his powers, his relationships and his schedule. For each of these we can use an asterisk (&lt;code&gt;*&lt;/code&gt;) symbol followed by some text to create a headline in the document as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-org&#34;&gt;* Biography
+* Powers
+* Relationships
+* Cyborg&#39;s Schedule
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can add nested headlines by increasing the number of asterisks in front of a section name. For example, if we want to create two headlines under relationships detailing Cyborgs team affiliations, as well as his villains, we can do that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-org&#34;&gt;* Biography
+* Powers
+* Relationships
+** Team Affiliations
+** Villains
+* Cyborg&#39;s Schedule
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course while headlines can help us structure a document, text is an integral part of it. A simple biography can be shown as one would expect:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-org&#34;&gt;* Biography
+Vic Stone was a high school athlete when a tragic accident nearly killed him and destroyed most of this body. His father, Dr. Silas Stone, used his scientific knowledge and advanced technology to save his life by augmenting him with machine parts.
+Living now as a cyborg, a being with both organic and machine parts, he is now has super strength, increased durability and a control over advanced technology and weaponry.
+Although he continues to struggle with his newfound status as both man and machine, he uses his newfound powers as a superhero.
+* Powers
+* Relationships
+** Team Affiliations
+** Villains
+* Cyborg&#39;s Schedule
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can also create lists in the document. For example we can give an unordered list of Cyborg&amp;rsquo;s powers such as super strength and instant weaponary by prefacing each item on a new line by a hyphen (&lt;code&gt;-&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-org&#34;&gt;* Biography
+Vic Stone was a high school athlete when a tragic accident nearly killed him and destroyed most of this body. His father, Dr. Silas Stone, used his scientific
+knowledge and advanced technology to save his life by augmenting him with machine parts.
+Living now as a cyborg, a being with both organic and machine parts, he is now has super strength, increased durability and a control over advanced technology and weaponry.
+Although he continues to struggle with his newfound status as both man and machine, he uses his newfound powers as a superhero.
+* Powers
+- super strength
+- advanced technology,
+- instant weaponry
+- genius-level intellect
+- control over technology
+- computer hacking
+- durability
+- teleportation
+* Relationships
+** Team Affiliations
+** Villains
+* Cyborg&#39;s Schedule
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that the document is now getting larger and the parts of what we want to focus on to show here, the powers, can get lost in the other information. One of the strengths of Org-mode that even though it can be viewed and edited as plain text, there exists quite a bit of tooling to help navigate, edit and make use of the described structures. The editor &lt;a href=&#34;https://www.gnu.org/software/emacs/&#34; target=&#34;_blank&#34;&gt;emacs&lt;/a&gt; and its various flavours such as &lt;a href=&#34;https://www.spacemacs.org/&#34; target=&#34;_blank&#34;&gt;spacemacs&lt;/a&gt; that I personally use have excellent features for these tasks. However other editors such as &lt;a href=&#34;https://code.visualstudio.com/&#34; target=&#34;_blank&#34;&gt;Visual Studio Code&lt;/a&gt; have &lt;a href=&#34;https://github.com/vscode-org-mode/vscode-org-mode&#34; target=&#34;_blank&#34;&gt;plugins&lt;/a&gt; to support Org-mode as well.&lt;/p&gt;
+
+&lt;p&gt;One of the basic features to help such editors provide is to fold headlines under which we do not want to see all the content in detail and unfold it for those that we do. In the following animation we show how this can be done on a portion of a more extended version of the Cyborg document:&lt;/p&gt;
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;https://www.newresalhaider.com/img/post/2020/cyborg-mode/foldingheadlines.gif&#34; /&gt;
+
+
+
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; &gt;
+  &lt;h4&gt;Folding and unfolding headlines in Org document using Spacemacs&lt;/h4&gt;
+  
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;The above image shows how the &lt;a href=&#34;https://www.spacemacs.org/&#34; target=&#34;_blank&#34;&gt;spacemacs&lt;/a&gt; editor handles Org documents. By simply pressing tab on headlines we can fold (i.e. not show the underlying content) and unfold (i.e. showing the underlying content) them as we please and directing our attention to parts of the document we want to view and edit. It also shows how editor support uses the underlying structure for additional visualizations, such as on the level of headlines, even though the underlying document is still plaintext.&lt;/p&gt;
+
+&lt;p&gt;Expanding on our example we can describe the Team Affiliations and the Villains as lists as well. For the list of Team Affiliations we will use an ordered list, which can be done by using a number followed by a dot, e.g.: &lt;code&gt;1. 2.&lt;/code&gt; for the list indicators.  Note for brevity we now only show the new/relevant portions of the full Org document in the examples as opposed to the whole.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-org&#34;&gt;* Relationships
+** Team Affiliations
+1. Justice League
+2. Teen Titans
+3. Doom Patrol
+** Villains
+- Lex Luthor
+- Deathstroke
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Another interesting feature in Org documents are TODO items. Any headline can be made a TODO in them by prefacing it with TODO. For example in a headline of Cyborg&amp;rsquo;s schedule we can put two TODO items for things Cyborg wants to do at some point: attend a Justice League Meeting and Upgrading Equipment.&lt;/p&gt;
+
+&lt;p&gt;There are various ways such TODO items could be used similarly to folding or unfolding headlines.  In emacs/spacemacs such actions, and many others relating to various aspects of an Org document, can be done by commands. For example the command &lt;code&gt;org-show-todo-tree&lt;/code&gt; can take ensure that all the headlines are folded as much as possible and only the TODO headlines are unfolded. Similarly the command &lt;code&gt;org-todo&lt;/code&gt; cycles between not marking the headline with a TODO, marking it with a TODO or marking it with DONE denoted that the item has been completed.&lt;/p&gt;
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;https://www.newresalhaider.com/img/post/2020/cyborg-mode/toggletododate.gif&#34; /&gt;
+
+
+
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; &gt;
+  &lt;h4&gt;Toggling using the command the command &lt;code&gt;org-todo&lt;/code&gt; for headlines in Org document using Spacemacs&lt;/h4&gt;
+  
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;The above image shows how the command &lt;code&gt;org-todo&lt;/code&gt; can cycle between the TODO states of the Justice League Meeting headline. In addition, it also shows a few other features.&lt;/p&gt;
+
+&lt;p&gt;First is the associating a date with the TODO item, in particular when it is scheduled. By toggling the TODO to DONE, our editor uses the current time to mark when the task was finished. This allows for a nice way to create a checklist of the things that have to be done and marking them off.&lt;/p&gt;
+
+&lt;p&gt;Another aspect is the use of markup around &amp;lsquo;must&amp;rsquo; and &amp;lsquo;Lex Luthor&amp;rsquo;. Enclosing a phrase with an underscore underlines the phrase while enclosing it between asterisks (*) makes it bold. Markups for italicizing (enclosing it between slashes (/)), code fragments and others also exist.&lt;/p&gt;
+
+&lt;p&gt;The full list of TODO items in Cyborg&amp;rsquo;s schedule is as follows.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-org&#34;&gt;*** TODO Justice League Meeting
+    SCHEDULED: &amp;lt;2024-08-02&amp;gt;
+    Something _must_ be done about *Lex Luthor*. He seems to be planning an attack on /Metropolis/ with the help of *Deathstroke*. 
+*** TODO Upgrade Equipment
+    SCHEDULED: &amp;lt;2024-06-01&amp;gt;
+    Enhance arm cannon.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One of the most interesting features of Org mode that we will cover in this article is the ability to embed fragment of code in an Org document that can be executed in the right environment. In Cyborg&amp;rsquo;s schedule one of the upcoming items is to enhance his arm cannon. In order to prepare for this, and to illustrate our code embedding, a simple Weapon Damage calculator application was written in Python:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;  arm_cannon = {&amp;quot;name&amp;quot;: &amp;quot;Arm Cannon&amp;quot;, &amp;quot;power&amp;quot;: 8}
+  reinforced_door = {&amp;quot;name&amp;quot;: &amp;quot;Reinforced Door&amp;quot;, &amp;quot;armor&amp;quot;: 3}
+
+  def wdc(weapon, target):
+    damage = weapon[&amp;quot;power&amp;quot;] - target[&amp;quot;armor&amp;quot;]
+    if damage&amp;lt;0:
+      return 0
+    else: 
+      return damage
+
+  damage_done = wdc(arm_cannon, reinforced_door)
+  print(&amp;quot;Using the weapon &amp;quot; + arm_cannon[&amp;quot;name&amp;quot;] + &amp;quot; with &amp;quot; + str(arm_cannon[&amp;quot;power&amp;quot;]) + &amp;quot; power,&amp;quot;)
+  print(&amp;quot;against the target &amp;quot; + reinforced_door[&amp;quot;name&amp;quot;] + &amp;quot; with &amp;quot; + str(reinforced_door[&amp;quot;armor&amp;quot;]) + &amp;quot; armor,&amp;quot;)
+  print(&amp;quot;results in &amp;quot; + str(damage_done) + &amp;quot; damage.&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This code aims to use features of Cyborg&amp;rsquo;s arm cannon to calculate damage on the target and to write these features out along with the resulting damage.&lt;/p&gt;
+
+&lt;p&gt;We can embed this code fragment by using the property system to give this fragment a name and denote some other attributes. This property system is essentially a key-value system in Org mode that is used for all types information represented with key-value pairs. For example the following two properties describe the title and description of the Org document:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-org&#34;&gt;#+title: Cyborg Agenda
+#+description: An introduction to org mode by creating an org document for information on the superhero Cyborg.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For the code we want to embed we want set the properties on how we name this fragment, where the source begins and ends, what language it is and what should be done with the results. This looks as follows within the Org document:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-org&#34;&gt;* Weapon Damage Calculator
+#+NAME: wdc
+#+BEGIN_SRC python :results output
+  arm_cannon = {&amp;quot;name&amp;quot;: &amp;quot;Arm Cannon&amp;quot;, &amp;quot;power&amp;quot;: 8}
+  reinforced_door = {&amp;quot;name&amp;quot;: &amp;quot;Reinforced Door&amp;quot;, &amp;quot;armor&amp;quot;: 3}
+
+  def wdc(weapon, target):
+    damage = weapon[&amp;quot;power&amp;quot;] - target[&amp;quot;armor&amp;quot;]
+    if damage&amp;lt;0:
+      return 0
+    else: 
+      return damage
+
+  damage_done = wdc(arm_cannon, reinforced_door)
+  print(&amp;quot;Using the weapon &amp;quot; + arm_cannon[&amp;quot;name&amp;quot;] + &amp;quot; with &amp;quot; + str(arm_cannon[&amp;quot;power&amp;quot;]) + &amp;quot; power,&amp;quot;)
+  print(&amp;quot;against the target &amp;quot; + reinforced_door[&amp;quot;name&amp;quot;] + &amp;quot; with &amp;quot; + str(reinforced_door[&amp;quot;armor&amp;quot;]) + &amp;quot; armor,&amp;quot;)
+  print(&amp;quot;results in &amp;quot; + str(damage_done) + &amp;quot; damage.&amp;quot;)
+#+END_SRC
+#+RESULTS: wdc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This embeds the weapon damage calculator as a source fragment named wdc, while also setting up where the results will be show in the document. Now if we execute the command &lt;code&gt;org-babel-execute-src-block&lt;/code&gt; we can see the results directly within the document:&lt;/p&gt;
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;https://www.newresalhaider.com/img/post/2020/cyborg-mode/executingcode.gif&#34; /&gt;
+
+
+
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; &gt;
+  &lt;h4&gt;Executing the source block to see the results directly within the Org document&lt;/h4&gt;
+  
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;That is it for this tutorial, hopefully I have given a glimpse of what Org mode can do, and gives you some idea on how it can enhance your organizing, planning and note taking. Here I have not even touched on many other great features such as authoring documents and converting to other formats, using it as a spreadsheet system and many more. For further resources on this tool take a look at the official &lt;a href=&#34;https://orgmode.org/&#34; target=&#34;_blank&#34;&gt;Org mode website&lt;/a&gt;, as well the &lt;a href=&#34;https://www.youtube.com/watch?v=PVsSOmUB7ic&#34; target=&#34;_blank&#34;&gt;excellent video tutorial&lt;/a&gt; by GDQuest on using the Spacemacs editor with Org mode. The Org document that was built up can also be found in its entirety at a &lt;a href=&#34;https://github.com/newres/cyborg-mode/&#34; target=&#34;_blank&#34;&gt;github repository&lt;/a&gt; along with some extra documentation.&lt;/p&gt;
+
+&lt;p&gt;Hopefully you have enjoyed the article and if you want to enhance yourself with one of the best note taking and planning tools around give Org mode a shot.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Darmok in core.logic</title>
       <link>https://www.newresalhaider.com/post/darmok-core-logic/</link>
       <pubDate>Sun, 02 Feb 2020 00:00:00 +0100</pubDate>
@@ -2373,45 +2579,6 @@ Pale Fire is written by Vladimir Nabokov.
 &lt;p&gt;Hopefully I could show a glimpse of the possibilities the &lt;a href=&#34;https://www.w3.org/standards/semanticweb/&#34; target=&#34;_blank&#34;&gt;Semantic Web&lt;/a&gt; for which Linked Data forms the basis, with this example. Of course the above is just scratching the surface of what it can be done with RDF, Linked Data. With each addition, our set of facts could grow. One could go beyond a single movie and build a document of poems that are references in movies, or a knowledge base of the Blade Runner franchise. It might be easier than one expects, due to the fact that knowledge, much like people are&amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;Interlinked.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>The Trouble with Triples</title>
-      <link>https://www.newresalhaider.com/post/trouble-with-triples/</link>
-      <pubDate>Sun, 28 Jan 2018 00:00:00 +0100</pubDate>
-      
-      <guid>https://www.newresalhaider.com/post/trouble-with-triples/</guid>
-      <description>&lt;p&gt;In the Star Trek episode &amp;ldquo;The Trouble with Tribbles&amp;rdquo; the crew of the starship Enterprise encounters creatures called Tribbles. They are cute, simple creatures of mysterious origin that seem harmless at first but when they multiply the pose a big problem for the ship and the crew.&lt;/p&gt;
-
-
-
-
-&lt;figure&gt;
-
-&lt;img src=&#34;https://www.newresalhaider.com/img/post/2018/trouble-with-triples/tribbles.jpg&#34; alt=&#34;Tribbles © 1967 Paramount Pictures&#34; /&gt;
-
-
-
-&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; &gt;
-  &lt;h4&gt;Tribbles&lt;/h4&gt;
-  &lt;p&gt;
-    Tribbles © 1967 Paramount Pictures
-    
-    
-    
-  &lt;/p&gt; 
-&lt;/figcaption&gt;
-
-&lt;/figure&gt;
-
-&lt;p&gt;Representing and reasoning with knowledge have surprisingly similar problems. A single fact on its own is a relatively straightforward affair. A fact, such as &lt;strong&gt;&amp;ldquo;Tribbles are cute&amp;rdquo;&lt;/strong&gt; can be represented with only three parts of a triple: a subject &lt;strong&gt;Tribbles&lt;/strong&gt;, a predicate &lt;strong&gt;are&lt;/strong&gt; and an object &lt;strong&gt;cute&lt;/strong&gt;. Things can get quite a bit more difficult when there are more facts/triples: &lt;strong&gt;&amp;ldquo;Tribbles are round&amp;rdquo;&lt;/strong&gt;, &lt;strong&gt;&amp;ldquo;Tribbles are furry&amp;rdquo;&lt;/strong&gt;, &lt;strong&gt;&amp;ldquo;Tribbles originate from Iota Geminorum IV&amp;rdquo;&lt;/strong&gt;, and other millions of facts that one could have about such a species. This is especially true when one takes into the account that the fact that knowledge can be interlinked &lt;strong&gt;&amp;ldquo;Iota Geminorum IV is a planet&amp;rdquo;&lt;/strong&gt;,  &lt;strong&gt;&amp;ldquo;Iota Geminorum IV is also known as Fafniri&amp;rdquo;&lt;/strong&gt;, &lt;strong&gt;&amp;ldquo;Iota Geminorum IV is also known as Tribble Prime&amp;rdquo;&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;This makes representing and reasoning with facts a non-trivial process. A system that holds all this knowledge should be able to answer a query such as &lt;strong&gt;&amp;ldquo;Do Tribbles originate from Fafniri?&amp;rdquo;&lt;/strong&gt; with a yes, based on the facts &lt;strong&gt;&amp;ldquo;Tribbles originate from Iota Geminorum IV&amp;rdquo;&lt;/strong&gt;, &lt;strong&gt;&amp;ldquo;Iota Geminorum IV is a planet&amp;rdquo;&lt;/strong&gt; and &lt;strong&gt;&amp;ldquo;Iota Geminorum IV is also known as Fafniri&amp;rdquo;&lt;/strong&gt;, even in the context of millions of other triples.&lt;/p&gt;
-
-&lt;p&gt;Another interesting issue with representing facts is the context of the information. To us the viewers, and initially to the crew of the Enterprise, Tribbles look like harmless and adorable creatures. To the Klingons they are an ecological menace and their mortal enemies. How such &amp;ldquo;knowledge about knowledge&amp;rdquo; is represented and used is often a challenging problem.&lt;/p&gt;
-
-&lt;p&gt;Various technologies have been proposed to deal with the above-mentioned issues. &lt;a href=&#34;https://www.w3.org/standards/semanticweb/&#34; target=&#34;_blank&#34;&gt;The Semantic Web technologies&lt;/a&gt; of &lt;a href=&#34;https://www.w3.org/standards/semanticweb/data&#34; target=&#34;_blank&#34;&gt;Linked Data&lt;/a&gt; and &lt;a href=&#34;https://www.w3.org/standards/techs/owl#w3c_all&#34; target=&#34;_blank&#34;&gt;Ontologies&lt;/a&gt; in particular have been designed around solving many of these problems. Nonetheless there is room for improvement. In the future I hope to be able to explain how these techniques can be utilized and perhaps lessen the pain points that currently surround (the use of) them.&lt;/p&gt;
 </description>
     </item>
     
