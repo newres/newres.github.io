@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.2.0">
+  <meta name="generator" content="Hugo 0.52" />
+  <meta name="author" content="Newres Al Haider">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="An introduction to creating mobile applications with Flutter and Dart, by creating an app for reading and navigating &#34;Mediations&#34; by Marcus Aurelius.
+">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://www.newresalhaider.com/post/meditations/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#EF525B">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+  <link rel="stylesheet" href="/css/post.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
+  <link rel="feed" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://www.newresalhaider.com/post/meditations/">
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@newresa">
+  <meta property="twitter:creator" content="@newresa">
+  
+  <meta property="og:site_name" content="Newres Al Haider">
+  <meta property="og:url" content="https://www.newresalhaider.com/post/meditations/">
+  <meta property="og:title" content="Meditations in your Pocket | Newres Al Haider">
+  <meta property="og:description" content="An introduction to creating mobile applications with Flutter and Dart, by creating an app for reading and navigating &#34;Mediations&#34; by Marcus Aurelius.
+"><meta property="og:image" content="https://www.newresalhaider.com/post/meditations/featured.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2020-12-28T00:00:00&#43;01:00">
+  
+  <meta property="article:modified_time" content="2020-12-28T00:00:00&#43;01:00">
+  
+
+  
+
+  
+
+  <title>Meditations in your Pocket | Newres Al Haider</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Newres Al Haider</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#publications_selected">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="article-header d-xl-none">
+  <div class="featured-image" style="background-image: url('/post/meditations/featured_hu39e3bf4744e485d373a7226927f81683_597102_800x0_resize_box_2.png');"></div>
+  <span class="article-header-caption">Marcus Aurelius, author of Meditations. Photograph by Pierre-Selim Copyright <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank">CC BY-SA 3.0</a></span>
+</div>
+
+
+<div class="container-fluid split-header d-none d-xl-block">
+  <div class="row">
+    <div class="col-6">
+      <div class="split-header-content">
+        <h1 itemprop="name">Meditations in your Pocket</h1>
+
+        
+
+        
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2020-12-28 00:00:00 &#43;0100 CET" itemprop="datePublished">
+    <time datetime="2020-12-28 00:00:00 &#43;0100 CET" itemprop="dateModified">
+      28 Dec, 2020
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    21 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+
+</div>
+
+
+        
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Meditations%20in%20your%20Pocket&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fmeditations%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fmeditations%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fmeditations%2f&amp;title=Meditations%20in%20your%20Pocket"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fmeditations%2f&amp;title=Meditations%20in%20your%20Pocket"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Meditations%20in%20your%20Pocket&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fmeditations%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="split-header-image">
+        <img src="/post/meditations/featured_hu39e3bf4744e485d373a7226927f81683_597102_680x500_fill_q90_box_smart1_2.png" itemprop="image" alt="">
+        <span class="article-header-caption">Marcus Aurelius, author of Meditations. Photograph by Pierre-Selim Copyright <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank">CC BY-SA 3.0</a></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="article-container d-xl-none">
+  <h1 itemprop="name">Meditations in your Pocket</h1>
+
+  
+
+  
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2020-12-28 00:00:00 &#43;0100 CET" itemprop="datePublished">
+    <time datetime="2020-12-28 00:00:00 &#43;0100 CET" itemprop="dateModified">
+      28 Dec, 2020
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Newres Al Haider">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    21 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Meditations%20in%20your%20Pocket&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fmeditations%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fmeditations%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fmeditations%2f&amp;title=Meditations%20in%20your%20Pocket"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fmeditations%2f&amp;title=Meditations%20in%20your%20Pocket"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Meditations%20in%20your%20Pocket&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fmeditations%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      <p><a href="https://en.wikipedia.org/wiki/Meditations" target="_blank">Meditations</a> are a series of notes that the Roman emperor <a href="https://en.wikipedia.org/wiki/Marcus_Aurelius" target="_blank">Marcus Aurelius</a>
+wrote for guidance and self-improvement. While it is likely that the emperor wrote them purely for his own benefit, they have been published after his death and contain elements of <a href="https://en.wikipedia.org/wiki/Stoicism" target="_blank">Stoic philosophy</a> that many people have consulted since.</p>
+
+<p>One way achieve a bit of self-improvement, coding-wise, is to pick a small project to do with a new set of tools. In particular, I have found the <a href="https://flutter.dev/" target="_blank">Flutter</a> framework for creating mobile apps very interesting. Unfortunately I did not have the opportunity to do more than just running the given sample apps previously. To bring a change to this I thought it would be a nice small project to create a small app for browsing the text of &ldquo;Meditations&rdquo; in Flutter. I aim to show what I have built in this article, organize my thoughts, and hopefully help others unfamiliar with Flutter to get a small glimpse of what it can do.</p>
+
+<p>The full code of the application built is <a href="https://github.com/newres/meditations" target="_blank">available</a>, but to give preview of what we are building, here is an animation of the functionality of the app:</p>
+
+
+
+
+<figure>
+
+<img src="/img/post/2020/meditations/meditationsapp.gif" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Navigating the text of Meditations in the app running on an Android emulator.</h4>
+  
+</figcaption>
+
+</figure>
+
+<p>If one wants to follow along by running the code, or have a similar project in mind is, the first step is to install <a href="https://flutter.dev/" target="_blank">Flutter</a>. There are quite a few dependencies needed for mobile development, but thankfully there is some excellent <a href="https://flutter.dev/docs" target="_blank">documentation</a> available on how to get started from the official Flutter site. For code editing I highly recommend <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> with the Flutter plugin, but other options are also <a href="https://flutter.dev/docs/get-started/editor?tab=androidstudio" target="_blank">available</a>.</p>
+
+<p>If everything is installed correctly the <code>flutter</code> command line tool will be available. For this project I intended to create an Android app, but the framework allows for app development for iOS (Apple) phones, as well as desktop and web targets. For Android development, aside from the development toolchain, it is probably good idea to have either an emulator or a device for Android development setup and connected, so one can see the result of the code up and running. In fact, on of the biggest draws of the Flutter framework is <a href="https://flutter.dev/docs/development/tools/hot-reload" target="_blank">Hot Reload</a>, which allows on to make changes and quickly see the results in the running app, without reinstalling everything from scratch.</p>
+
+<p>To get started with a fresh project, the command <code>flutter create</code> will create a directory with all the necessary files in the directory of our choosing, while <code>flutter run</code> will ensure that the project is run on the emulator or connected device for testing, debugging and seeing our work. For the &ldquo;Meditations&rdquo; app, we could start by creating a new project named <code>Meditations</code> and making changes from there on.</p>
+
+<p>The default generated project will create a bunch of files and directories required for the running app, with a very small example application that has a single button and a screen that shows how many times that button has been pressed (see the <a href="https://flutter.dev/docs/get-started/test-drive?tab=terminal" target="_blank">test drive</a> part of the Flutter docs). The core part are the files <code>main.dart</code> and <code>widget_test.dart</code>, in the <code>lib</code> and <code>test</code> directories respectively. The former is responsible for defining and running the app, while the later exists for testing the functionality.</p>
+
+<p>In order to get the Meditations app up and running, we have four files in total. Similarly to the default project we have a <code>main.dart</code> and a <code>widget_test.dart</code> for defining and testing our app, but with different contents. In addition, we also have a <code>meditations.dart</code> file where we define how to search and navigate the text of the Meditations, as well as the file <code>meditations_test.dart</code> to test this search and navigation functionality.</p>
+
+<p>Although we do not have to go full <a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank">Test Driven Development (TDD)</a> for such a small demo application, it is a good idea and practice to start off writing some tests to define what behavior we want to show.</p>
+
+<p>We first start describing our application by walking through (some of) the contents of <code>meditations_test.dart</code>. It also gives us an opportunity to ease us into the <a href="https://dart.dev/" target="_blank">Dart language</a> of the Flutter framework in case if the reader is unfamiliar with it. It would be too much for this short article to fully explain the Dart language, for which there are some excellent <a href="https://dart.dev/guides" target="_blank">guides</a>, but hope I can make the functionality clear enough, even for readers completely new to it.</p>
+
+<pre><code class="language-dart">import 'package:meditations/mediations.dart';
+import 'package:test/test.dart';
+</code></pre>
+
+<p>The first portion is importing elements that we are going to test, to be defined in the <code>mediations.dart</code> file, and functionality for defining tests, which is in the <code>test</code> package.</p>
+
+<p>Next up are the tests that are in the <code>main</code> method. As in some other languages, the main method is where the app execution starts. In the case of testing, the tests within the &lsquo;main&rsquo; method are executed. The tests themselves contain information about the purpose of the test, the returned value (or values) of the functionality under test and the expected value of what we believe should be returned.</p>
+
+<p>Below are some examples of such tests:</p>
+
+<pre><code class="language-dart">  test('Checking the existance of a Book that exists.', () {
+    expect(Meditations.existBook(0), true);
+  });
+
+  test('Checking the existance of a Book that can not exist.', () {
+    expect(Meditations.existBook(-1), false);
+  });
+
+  test('Checking the existance of a Book that does not exist.', () {
+    expect(Meditations.existBook(40), false);
+  });
+
+  test('Checking the existance of a Book Section that exists.', () {
+    expect(Meditations.existBookSection(0, 1), true);
+  });
+
+  test('Checking the existance of a Book Section that can not exist.', () {
+    expect(Meditations.existBookSection(0, -10), false);
+  });
+
+  test('Checking the existance of a Book Section in a non-existent Book.', () {
+    expect(Meditations.existBookSection(40, 0), false);
+  });
+
+  test(
+      'Checking the existance of a Book Section that does not exist in an existing Book.',
+      () {
+    expect(Meditations.existBookSection(0, 40), false);
+  });
+</code></pre>
+
+<p>In order to understand what these tests want to achieve, first we need to dive deeper about what functionality that is implemented in <code>Meditations.dart</code> that is under test. The purpose of it is to easily find a particular part in the text of &lsquo;Meditations&rsquo;. &lsquo;Meditations&rsquo; itself is divided into a total of 12 Books, each with multiple Sections of text. Instead of showing the full text of the book on a single screen we want to make the user able to navigate between the text of each of these sections.</p>
+
+<p>Part of implementing this navigation process requires having the ability to check, for a given book number, whether that book exists. As in Dart indexes start at 0, the method <code>existBook</code> should return <code>true</code> for any integer number between 0 and 11, and false otherwise. Later on we will show how we will turn the book and section numbers back to 1-indexed ones in the UI of the app. Similarly to checking the existence of a book, we want to able to check if a specific section in a specific book exists, which the method <code>existBookSection</code> should provide.</p>
+
+<p>Of course the functionality should not end here. In particular we also want to be able to get the text of the first and last sections of Meditations. In order to keep the return of these search results simple in our app, we also return the book and section numbers (0-indexed) along with the text where possible as well (even though for the first section, we should already know the book and section numbers).</p>
+
+<p>As Dart is an object oriented language, we create a specific object of the class <code>BookSectionText</code> to hold these elements (more on the definition of this class a bit later).</p>
+
+<pre><code class="language-dart">  test('Getting the first part of Meditations returns Book 1, Section 1.', () {
+    BookSectionText bst = Meditations.getFirst();
+    var firstText = Meditations.book1.first;
+    var expectedBookNr = 0;
+    var expectedSectionNr = 0;
+    expect(bst.bookNr, expectedBookNr);
+    expect(bst.sectionNr, expectedSectionNr);
+    expect(bst.text, firstText);
+  });
+
+  test(
+      'Getting the last part of Meditations returns last Section of the last Book.',
+      () {
+    BookSectionText bst = Meditations.getLast();
+    var lastText = Meditations.books.last.last;
+    var expectedBookNr = Meditations.books.length - 1;
+    var expectedSectionNr = Meditations.books.last.length - 1;
+    expect(bst.bookNr, expectedBookNr);
+    expect(bst.sectionNr, expectedSectionNr);
+    expect(bst.text, lastText);
+  });
+</code></pre>
+
+<p>The final set of tests we are going over are for the methods for finding the previous section or the next one. This seems generally a straightforward thing to do, when moving to the previous or next section in the same book. However for convenience we also want to move to the next, or previous, book if the previous or next section in the current book is unavailable. So the functions for <code>nextSection</code> and <code>previousSection</code> has to have this &lsquo;roll-over&rsquo; functionality included to make their use in the UI that we are going to build handy. However even with roll-over, there are cases when we ran out of sections to show (e.g.: when wanting to get the next section after the last one). In this case we use an object of the class <code>NoSuchBookSection</code> to indicate this.</p>
+
+<p>Below are some tests for the <code>nextSection</code> and <code>previousSection</code> functionality:</p>
+
+<pre><code class="language-dart">  test('Getting the next Section of a Book.', () {
+    BookSectionText bst = Meditations.getNextSection(11, 3);
+    var expectedBookNr = 11;
+    var expectedSectionNr = 4;
+    var expectedText = Meditations.books[expectedBookNr][expectedSectionNr];
+    expect(bst.bookNr, expectedBookNr);
+    expect(bst.sectionNr, expectedSectionNr);
+    expect(bst.text, expectedText);
+  });
+
+  test('Getting the next Section of a Book when not available.', () {
+    BookSectionSearchResult bst = Meditations.getNextSection(12, 30);
+    expect(bst is NoSuchBookSection, true);
+  });
+
+  test('Getting the next Section in the next Book', () {
+    BookSectionText bst = Meditations.getNextSection(0, 16);
+    var expectedBookNr = 1;
+    var expectedSectionNr = 0;
+    var expectedText = Meditations.books[expectedBookNr][expectedSectionNr];
+    expect(bst.bookNr, expectedBookNr);
+    expect(bst.sectionNr, expectedSectionNr);
+    expect(bst.text, expectedText);
+  });
+
+  test('Getting the previous Section of a Book.', () {
+    BookSectionText bst = Meditations.getPreviousSection(0, 3);
+    var expectedBookNr = 0;
+    var expectedSectionNr = 2;
+    var expectedText = Meditations.books[expectedBookNr][expectedSectionNr];
+    expect(bst.bookNr, expectedBookNr);
+    expect(bst.sectionNr, expectedSectionNr);
+    expect(bst.text, expectedText);
+  });
+
+  test('Getting the previous Section of a Book when not available.', () {
+    BookSectionSearchResult bst = Meditations.getPreviousSection(0, 0);
+    expect(bst is NoSuchBookSection, true);
+  });
+
+  test('Getting the previous Section in the previous Book', () {
+    BookSectionText bst = Meditations.getPreviousSection(1, 0);
+    var expectedBookNr = 0;
+    var expectedSectionNr = 16;
+    var expectedText = Meditations.books[expectedBookNr][expectedSectionNr];
+    expect(bst.bookNr, expectedBookNr);
+    expect(bst.sectionNr, expectedSectionNr);
+    expect(bst.text, expectedText);
+  });
+}
+</code></pre>
+
+<p>Now that we got the tests for the core functionality of navigating the text of Meditations done we will go over the actual implementation of want we aim to test in the file &lsquo;meditations.dart&rsquo;.</p>
+
+<p>First off are the class definitions for the classes that we mentioned above:</p>
+
+<pre><code class="language-dart">class BookSectionSearchResult {}
+
+// This represents the result of search, which results in a text with the attached book and section number.
+class BookSectionText extends BookSectionSearchResult {
+  int bookNr;
+  int sectionNr;
+  String text;
+}
+
+// This represent the result of a search, in which case no section is found.
+class NoSuchBookSection extends BookSectionSearchResult {}
+</code></pre>
+
+<p>If the reader is familiar with an object oriented language, the definitions should be reasonably straightforward. The search results are represented by two types of classes that we used in our tests. An instance of a class <code>NoSuchBookSection</code> represents that no valid text could be returned and an instance <code>BookSectionText</code> represents the search results that returned the text of a specific section and book/section numbers. These are both subclasses of the class <code>BookSectionSearchResult</code> which allows us easily define the return type of the methods <code>getPreviousSection</code> and <code>getNextSection</code>.</p>
+
+<p>Also note that the code here contains single line comments which are denoted after a <code>//</code> in Dart.</p>
+
+<p>Next up is the definition of <code>Meditations</code> class that describes the text of Meditations by Marcus Aurelius and how to access them.</p>
+
+<p>It starts with the snippet:</p>
+
+<pre><code class="language-dart">class Meditations {
+  static final book1 = [
+    '''I. Of my grandfather Verus I have learned to be gentle and meek, ... 
+    // End of snippet. 
+</code></pre>
+
+<p>Writing the full text of the representation is too much for this article. Even in the <a href="https://github.com/newres/meditations" target="_blank">code of this demo app</a> we only represent the full text of the first and last books in detail.</p>
+
+<p>However we can say we represent the text as a list of books, where each book is itself a list of sections which are represented by the text of these sections.</p>
+
+<p>In Dart, we can represent a list as a set of items in between square brackets <code>[]</code> such as follows:</p>
+
+<pre><code class="language-dart">  static final books = [
+    book1,
+    book2,
+    book3,
+    book4,
+    book5,
+    book6,
+    book7,
+    book8,
+    book9,
+    book10,
+    book11,
+    book12
+  ];
+</code></pre>
+
+<p>The other interesting part is that we use the keywords <code>static</code> and <code>final</code>. The <code>static</code> keyword indicates that the variables are class-wide, as the text in these books would be same for any instance of the <code>Meditations</code> class. The <code>final</code> keyword indicates that we do not intend to change these variables once they are defined, as the text of Meditations will not be changing in our app.</p>
+
+<p>The final piece of our <code>Meditations</code> class are methods for accessing and navigating the texts that we described previously in our tests, such as <code>getFirst</code>, <code>getLast</code>, <code>getPreviousSection</code> and <code>getNextSection</code>. Hopefully following them should be reasonably straightforward given the comments and our tests. The only additional thing to note that these methods are also marked as <code>static</code>. As the <code>Meditations</code> class does not contain any variables that would change per instance, every one of these methods could be made available at a class level (e.g. it could be called as <code>Meditations.getNextSection(11, 3)</code>).</p>
+
+<p>See the text of these methods below:</p>
+
+<pre><code class="language-dart">// We assume that there is always at least one book in the list of books and at least one section in each book with a text.
+
+  // Checks if the book with given book number exists.
+  static bool existBook(int bookNr) {
+    if (bookNr &lt; 0 || bookNr &gt; books.length - 1) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  // Checks if the section with given book and section numbers exists.
+  static bool existBookSection(int bookNr, int sectionNr) {
+    if (!existBook(bookNr)) {
+      return false;
+    } else {
+      var selectedBook = books[bookNr];
+      if (sectionNr &lt; 0 || sectionNr &gt; selectedBook.length - 1) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
+
+  // Returns the length of a book, in the number of sections.
+  static int bookLength(int bookNr) {
+    if (!existBook(bookNr)) {
+      return 0;
+    } else {
+      var selectedBook = books[bookNr];
+      return selectedBook.length;
+    }
+  }
+
+  // Returns the search result for a given book and section number.
+  static BookSectionSearchResult getText(int bookNr, int sectionNr) {
+    if (!existBookSection(bookNr, sectionNr)) {
+      return NoSuchBookSection();
+    } else {
+      var bst = new BookSectionText();
+      bst.bookNr = bookNr;
+      bst.sectionNr = sectionNr;
+      bst.text = books[bookNr][sectionNr];
+      return bst;
+    }
+  }
+
+  // Returns the first section.
+  static BookSectionSearchResult getFirst() {
+    var selectedBook = books[0];
+    if (selectedBook == null) {
+      return NoSuchBookSection();
+    }
+    var selectedSection = selectedBook[0];
+    if (selectedSection == null) {
+      return NoSuchBookSection();
+    } else {
+      var bst = new BookSectionText();
+      bst.bookNr = 0;
+      bst.sectionNr = 0;
+      bst.text = selectedSection;
+      return bst;
+    }
+  }
+
+  // Returns the last section.
+  static BookSectionSearchResult getLast() {
+    var selectedBook = books.last;
+    if (selectedBook == null) {
+      return NoSuchBookSection();
+    }
+    var selectedSection = selectedBook.last;
+    if (selectedSection == null) {
+      return NoSuchBookSection();
+    } else {
+      var bst = new BookSectionText();
+      bst.bookNr = Meditations.books.length - 1;
+      bst.sectionNr = Meditations.books.last.length - 1;
+      bst.text = selectedSection;
+      return bst;
+    }
+  }
+
+  // Given a book- and a section number, gets the next section.
+  static BookSectionSearchResult getNextSection(int bookNr, int sectionNr) {
+    //Get the next section in the current book
+    var nextSection = getText(bookNr, sectionNr + 1);
+    //If it exits return it
+    if (!(nextSection is NoSuchBookSection)) {
+      return nextSection;
+    } else {
+      //Otherwise get the first section of the next book
+      return getText(bookNr + 1, 0);
+    }
+  }
+
+  // Given a book- and a section number, gets the previous section.
+  static BookSectionSearchResult getPreviousSection(int bookNr, int sectionNr) {
+    //Get the previous section in the current book
+    var previousSection = getText(bookNr, sectionNr - 1);
+    //If it exits return it
+    if (!(previousSection is NoSuchBookSection)) {
+      return previousSection;
+    } else {
+      //Otherwise get the last section of the previous book
+      var previousBookNr = bookNr - 1;
+      return getText(previousBookNr, bookLength(previousBookNr) - 1);
+    }
+  }
+}
+</code></pre>
+
+<p>We have now covered two of the four main files responsible for the functionality of our app, notably the functionality to navigate the text of Meditations and the tests for them. The purpose of the other two is to create the app using this functionality for navigating the text with the Flutter framework (<code>main.dart</code>) and the tests for the app (<code>widget_test.dart</code>).</p>
+
+<p>Let us start with the test first. One of the nice features of the Flutter framework is that it has one can test the full app nearly as easily than any other Dart code.</p>
+
+<p>First we start importing the functionality for testing as well as our main app we aim to test:</p>
+
+<pre><code class="language-dart">import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:meditations/main.dart';
+</code></pre>
+
+<p>Next up is the main method with the functionality that we aim to test. This functionality is similar to the functionality that we have shown previously of our app, seen here again below:</p>
+
+
+
+
+<figure>
+
+<img src="/img/post/2020/meditations/meditationsapp.gif" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Navigating the text of Meditations in the app running on an Android emulator.</h4>
+  
+</figcaption>
+
+</figure>
+
+<p>In particular when we are navigating the text of Meditations, we tap the icons for first, previous, next and last in the bottom navigation bar.</p>
+
+<p>On the screen not only do we navigate to the right text, we also show a description of which book and which section we are currently reading.
+We use this information to create a navigation test, as once the right icon has been tapped, we should be able to predict and check the book and section numbers that should now show on screen.</p>
+
+<p>The test is all tied together with the Testing functionality of Flutter to setting up the widgets (the elements of interaction) of the app for testing, checking the redraws and the output of it (more documentation on testing Flutter widgets can be found in the <a href="https://flutter.dev/docs/cookbook/testing/widget/introduction" target="_blank">Flutter documentation</a>). The code of this for the app can be seen as below.</p>
+
+<pre><code class="language-dart">void main() {
+  testWidgets('Bottom navigation smoke test', (WidgetTester tester) async {
+    // Build the app and trigger a frame.
+    await tester.pumpWidget(MyApp());
+
+    // Verify that the title shows Book 1 and Section 1.
+    expect(find.text('Meditations Book 1 Section 1'), findsOneWidget);
+
+    // Tap the icon for next and trigger a frame.
+    await tester.tap(find.byIcon(Icons.navigate_next));
+    await tester.pump();
+
+    // Verify that the title has changed correctly.
+    expect(find.text('Meditations Book 1 Section 2'), findsOneWidget);
+    expect(find.text('Meditations Book 1 Section 1'), findsNothing);
+
+    // Tap the icon for last and trigger a frame.
+    await tester.tap(find.byIcon(Icons.last_page));
+    await tester.pump();
+
+    // Verify that the title has changed correctly.
+    expect(find.text('Meditations Book 12 Section 26'), findsOneWidget);
+    expect(find.text('Meditations Book 1 Section 2'), findsNothing);
+
+    // Tap the icon for previous and trigger a frame.
+    await tester.tap(find.byIcon(Icons.navigate_before));
+    await tester.pump();
+
+    // Verify that the title has changed correctly.
+    expect(find.text('Meditations Book 12 Section 25'), findsOneWidget);
+    expect(find.text('Meditations Book 12 Section 26'), findsNothing);
+
+    // Tap the icon for first and trigger a frame.
+    await tester.tap(find.byIcon(Icons.first_page));
+    await tester.pump();
+
+    // Verify that the title has changed correctly.
+    expect(find.text('Meditations Book 1 Section 1'), findsOneWidget);
+    expect(find.text('Meditations Book 12 Section 25'), findsNothing);
+  });
+}
+</code></pre>
+
+<p>Now all that remains is to show how the actual app is put together. We will go through the code of it here, found in <code>main.dart</code>, step by step, to describe how everything fits together.</p>
+
+<p>First we start with the imports of the widget library we are using as well as our implementation of accessing the text of Meditations.</p>
+
+<pre><code class="language-dart">import 'package:flutter/material.dart';
+import 'mediations.dart';
+</code></pre>
+
+<p>Next is, the very short main method, that ensures the app we are building is run when requested.</p>
+
+<pre><code class="language-dart">void main() {
+  // The main method runs the app that was described
+  runApp(MyApp());
+}
+</code></pre>
+
+<p>As mentioned in our description of the test the app consists of a tree of <a href="https://flutter.dev/docs/development/ui/widgets-intro" target="_blank">widgets</a> (elements of interaction), the root of which we identify with <code>MyApp</code> in the code. This MyApp widget is the one that gets run by the main method seen above.</p>
+
+<p>The widgets themselves have properties that contain the elements that the widget is using, for example the title of the app, the theme of the app, the other widgets it uses such as a widget for a home page. The main job of the widget is to implement a specific build function that describes how these various elements fit together. In the case of <code>MyApp</code> we are creating a <a href="https://api.flutter.dev/flutter/material/MaterialApp-class.html" target="_blank">MaterialApp</a> customized to our specific needs. This includes a home page for navigating the text of Mediations, as well as a theme that uses a color (hopefully) close enough to <a href="https://en.wikipedia.org/wiki/Tyrian_purple" target="_blank">Imperial purple</a>.</p>
+
+<pre><code class="language-dart">class MyApp extends StatelessWidget {
+  // The app consists of a tree of widgets, of which this is the root.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Meditations',
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: MyHomePage(title: 'Meditations'),
+    );
+  }
+}
+</code></pre>
+
+<p>The previous Widget does not carry an internal, mutable, state directly in itself (hence why it is an extension of a <a href="https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html" target="_blank">StatelessWidget</a>). However, as one can deduce from our tests, we want to keep information such as the current book and section number around, and display these.</p>
+
+<p>In order to get this done, we use an extension of <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html" target="_blank">StatefulWidget</a> named <code>MyHomePage</code> which carries the state. The state itself contains the elements of book number, section number and the text to be shown on page. In addition there are methods for manipulating the state and showing it.</p>
+
+<p>For setting the state, we make use of all the functionality we built in <code>meditations.dart</code> to search for the next (or previous, first, last) section and change the state accordingly. Each of these state setting methods are inside a call to <code>setState</code> which makes the Flutter framework be aware of the state changes, and if required it can redraw the relevant widgets to show these changes.</p>
+
+<p>The methods for showing the state are reasonably straightforward. we mostly use these to translate the internally 0-indexed book- and section numbers into 1 indexed ones to match the actual numbers for the Meditations.</p>
+
+<p>The final part is making sure there are widgets for showing the state and interacting with the state. As one can see in the animation of the screen, as well is in the test, we have a section showing the current section and page number, a text area that scrolls showing the current section and a bottom navigation bar to change the current section.</p>
+
+<p>The code for all of this, when put together, can be seen below:</p>
+
+<pre><code class="language-dart">class MyHomePage extends StatefulWidget {
+  // The homepage of the app, which also creates and holds the state.
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() =&gt; _MyHomePageState();
+}
+
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  // The variables used to describe the state.
+  int _bookNr = 0;
+  int _sectionNr = 0;
+  String _text = (Meditations.getFirst() as BookSectionText).text;
+
+  // Functions to show the state variables on the screen.
+  String getShowText() {
+    return _text;
+  }
+
+  int getShowBookNr() {
+    // The screen should book and section numbers starting with 1 instead of 0.
+    return _bookNr + 1;
+  }
+
+  int getShowSectionNr() {
+    return _sectionNr + 1;
+  }
+
+  // Functions to navigate the text of Meditations and update the state based on UI interaction.
+  void _first() {
+    // The call to setState makes the Flutter framework aware of the state changes.
+    // It will ensure that the build method below will be rerun.
+    setState(() {
+      BookSectionSearchResult result = Meditations.getFirst();
+      if (result is BookSectionText) {
+        _text = result.text;
+        _bookNr = result.bookNr;
+        _sectionNr = result.sectionNr;
+      }
+    });
+  }
+
+  void _previous() {
+    setState(() {
+      BookSectionSearchResult result =
+          Meditations.getPreviousSection(_bookNr, _sectionNr);
+      if (result is BookSectionText) {
+        _text = result.text;
+        _bookNr = result.bookNr;
+        _sectionNr = result.sectionNr;
+      }
+    });
+  }
+
+  void _next() {
+    setState(() {
+      BookSectionSearchResult result =
+          Meditations.getNextSection(_bookNr, _sectionNr);
+      if (result is BookSectionText) {
+        _text = result.text;
+        _bookNr = result.bookNr;
+        _sectionNr = result.sectionNr;
+      }
+    });
+  }
+
+  void _last() {
+    setState(() {
+      BookSectionSearchResult result = Meditations.getLast();
+      if (result is BookSectionText) {
+        _text = result.text;
+        _bookNr = result.bookNr;
+        _sectionNr = result.sectionNr;
+      }
+    });
+  }
+
+  // Handles the action of the bottom navigation bar on screen.
+  void _onBottomNavTapped(int index) {
+    setState(() {
+      switch (index) {
+        case 0:
+          {
+            _first();
+          }
+          break;
+
+        case 1:
+          {
+            _previous();
+          }
+          break;
+
+        case 2:
+          {
+            _next();
+          }
+          break;
+
+        case 3:
+          {
+            _last();
+          }
+          break;
+
+        default:
+          {
+            _first();
+          }
+          break;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // This method is rerun every time setState is called.
+    // It contains a nested widget with a app bar on top, a scrollable text area in the middle, and a navigation bar at the bottom.
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+            '${widget.title} Book ${getShowBookNr()} Section ${getShowSectionNr()}'),
+      ),
+      body: Center(
+        child: Column(
+          children: &lt;Widget&gt;[
+            new Expanded(
+                flex: 1,
+                child: SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(getShowText())))),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: const &lt;BottomNavigationBarItem&gt;[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.first_page),
+            label: 'First',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.navigate_before),
+            label: 'Previous',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.navigate_next),
+            label: 'Next',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.last_page),
+            label: 'Last',
+          ),
+        ],
+        onTap: _onBottomNavTapped,
+      ),
+    );
+  }
+}
+</code></pre>
+
+<p>This is pretty much the full description of the Meditations app. As one can see, a small application can be built up from relatively small amount of code. My experience with the Flutter framework was very pleasant: most things are not pretty straightforward to do, I like the emphasis on getting tests up and running straight from the box and the large set of widgets get the UI up and running pretty quickly. My biggest pain point was the setup of the whole Android tool-chain itself. Although there were some additional features to the Dart language (such as the upcoming, at the time of this writing, <a href="https://dart.dev/null-safety" target="_blank">Null Safety</a>) the language is easy to pick up and become productive with.</p>
+
+<p>Of course there are tons of possible extensions to the app. Aside from including the full text of Meditations, one can improve upon the navigation, add features such as bookmarking, random section selection and more. Refactoring and extending the app so it could load in other advice/text in similar format is also a possibility.</p>
+
+<p>Hopefully this article and code was clear enough to follow and my thought process came over clearly. The project has definitely increased my interest in using Dart/Flutter in another project and felt like good practice. Hopefully your next project, perhaps made with Flutter, will be similarly enjoyable and enriching to do!</p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/history/">history</a>
+  
+  <a class="badge badge-light" href="/tags/philosophy/">philosophy</a>
+  
+  <a class="badge badge-light" href="/tags/android/">android</a>
+  
+  <a class="badge badge-light" href="/tags/dart/">Dart</a>
+  
+  <a class="badge badge-light" href="/tags/flutter/">Flutter</a>
+  
+  <a class="badge badge-light" href="/tags/app-development/">app development</a>
+  
+</div>
+
+
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/portrait.png" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Newres Al Haider</a></h5>
+    <h6 class="card-subtitle">Postdoctoral Researcher and Software Engineer</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:newresjob@gmail.com" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/newresa" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://scholar.google.nl/citations?user=b4MxbOEAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/newres" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/post/art-of-choosing-language/">The Art of Choosing a Programming Language</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2017 Newres Al Haider &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/prolog.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dart.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.d037ee5294b166a79dec317c58aea9cc.js"></script>
+
+    
+
+  </body>
+</html>
+

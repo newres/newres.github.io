@@ -11,6 +11,648 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Meditations in your Pocket</title>
+      <link>https://www.newresalhaider.com/post/meditations/</link>
+      <pubDate>Mon, 28 Dec 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://www.newresalhaider.com/post/meditations/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Meditations&#34; target=&#34;_blank&#34;&gt;Meditations&lt;/a&gt; are a series of notes that the Roman emperor &lt;a href=&#34;https://en.wikipedia.org/wiki/Marcus_Aurelius&#34; target=&#34;_blank&#34;&gt;Marcus Aurelius&lt;/a&gt;
+wrote for guidance and self-improvement. While it is likely that the emperor wrote them purely for his own benefit, they have been published after his death and contain elements of &lt;a href=&#34;https://en.wikipedia.org/wiki/Stoicism&#34; target=&#34;_blank&#34;&gt;Stoic philosophy&lt;/a&gt; that many people have consulted since.&lt;/p&gt;
+
+&lt;p&gt;One way achieve a bit of self-improvement, coding-wise, is to pick a small project to do with a new set of tools. In particular, I have found the &lt;a href=&#34;https://flutter.dev/&#34; target=&#34;_blank&#34;&gt;Flutter&lt;/a&gt; framework for creating mobile apps very interesting. Unfortunately I did not have the opportunity to do more than just running the given sample apps previously. To bring a change to this I thought it would be a nice small project to create a small app for browsing the text of &amp;ldquo;Meditations&amp;rdquo; in Flutter. I aim to show what I have built in this article, organize my thoughts, and hopefully help others unfamiliar with Flutter to get a small glimpse of what it can do.&lt;/p&gt;
+
+&lt;p&gt;The full code of the application built is &lt;a href=&#34;https://github.com/newres/meditations&#34; target=&#34;_blank&#34;&gt;available&lt;/a&gt;, but to give preview of what we are building, here is an animation of the functionality of the app:&lt;/p&gt;
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;https://www.newresalhaider.com/img/post/2020/meditations/meditationsapp.gif&#34; /&gt;
+
+
+
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; &gt;
+  &lt;h4&gt;Navigating the text of Meditations in the app running on an Android emulator.&lt;/h4&gt;
+  
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;If one wants to follow along by running the code, or have a similar project in mind is, the first step is to install &lt;a href=&#34;https://flutter.dev/&#34; target=&#34;_blank&#34;&gt;Flutter&lt;/a&gt;. There are quite a few dependencies needed for mobile development, but thankfully there is some excellent &lt;a href=&#34;https://flutter.dev/docs&#34; target=&#34;_blank&#34;&gt;documentation&lt;/a&gt; available on how to get started from the official Flutter site. For code editing I highly recommend &lt;a href=&#34;https://code.visualstudio.com/&#34; target=&#34;_blank&#34;&gt;Visual Studio Code&lt;/a&gt; with the Flutter plugin, but other options are also &lt;a href=&#34;https://flutter.dev/docs/get-started/editor?tab=androidstudio&#34; target=&#34;_blank&#34;&gt;available&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If everything is installed correctly the &lt;code&gt;flutter&lt;/code&gt; command line tool will be available. For this project I intended to create an Android app, but the framework allows for app development for iOS (Apple) phones, as well as desktop and web targets. For Android development, aside from the development toolchain, it is probably good idea to have either an emulator or a device for Android development setup and connected, so one can see the result of the code up and running. In fact, on of the biggest draws of the Flutter framework is &lt;a href=&#34;https://flutter.dev/docs/development/tools/hot-reload&#34; target=&#34;_blank&#34;&gt;Hot Reload&lt;/a&gt;, which allows on to make changes and quickly see the results in the running app, without reinstalling everything from scratch.&lt;/p&gt;
+
+&lt;p&gt;To get started with a fresh project, the command &lt;code&gt;flutter create&lt;/code&gt; will create a directory with all the necessary files in the directory of our choosing, while &lt;code&gt;flutter run&lt;/code&gt; will ensure that the project is run on the emulator or connected device for testing, debugging and seeing our work. For the &amp;ldquo;Meditations&amp;rdquo; app, we could start by creating a new project named &lt;code&gt;Meditations&lt;/code&gt; and making changes from there on.&lt;/p&gt;
+
+&lt;p&gt;The default generated project will create a bunch of files and directories required for the running app, with a very small example application that has a single button and a screen that shows how many times that button has been pressed (see the &lt;a href=&#34;https://flutter.dev/docs/get-started/test-drive?tab=terminal&#34; target=&#34;_blank&#34;&gt;test drive&lt;/a&gt; part of the Flutter docs). The core part are the files &lt;code&gt;main.dart&lt;/code&gt; and &lt;code&gt;widget_test.dart&lt;/code&gt;, in the &lt;code&gt;lib&lt;/code&gt; and &lt;code&gt;test&lt;/code&gt; directories respectively. The former is responsible for defining and running the app, while the later exists for testing the functionality.&lt;/p&gt;
+
+&lt;p&gt;In order to get the Meditations app up and running, we have four files in total. Similarly to the default project we have a &lt;code&gt;main.dart&lt;/code&gt; and a &lt;code&gt;widget_test.dart&lt;/code&gt; for defining and testing our app, but with different contents. In addition, we also have a &lt;code&gt;meditations.dart&lt;/code&gt; file where we define how to search and navigate the text of the Meditations, as well as the file &lt;code&gt;meditations_test.dart&lt;/code&gt; to test this search and navigation functionality.&lt;/p&gt;
+
+&lt;p&gt;Although we do not have to go full &lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34; target=&#34;_blank&#34;&gt;Test Driven Development (TDD)&lt;/a&gt; for such a small demo application, it is a good idea and practice to start off writing some tests to define what behavior we want to show.&lt;/p&gt;
+
+&lt;p&gt;We first start describing our application by walking through (some of) the contents of &lt;code&gt;meditations_test.dart&lt;/code&gt;. It also gives us an opportunity to ease us into the &lt;a href=&#34;https://dart.dev/&#34; target=&#34;_blank&#34;&gt;Dart language&lt;/a&gt; of the Flutter framework in case if the reader is unfamiliar with it. It would be too much for this short article to fully explain the Dart language, for which there are some excellent &lt;a href=&#34;https://dart.dev/guides&#34; target=&#34;_blank&#34;&gt;guides&lt;/a&gt;, but hope I can make the functionality clear enough, even for readers completely new to it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;import &#39;package:meditations/mediations.dart&#39;;
+import &#39;package:test/test.dart&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first portion is importing elements that we are going to test, to be defined in the &lt;code&gt;mediations.dart&lt;/code&gt; file, and functionality for defining tests, which is in the &lt;code&gt;test&lt;/code&gt; package.&lt;/p&gt;
+
+&lt;p&gt;Next up are the tests that are in the &lt;code&gt;main&lt;/code&gt; method. As in some other languages, the main method is where the app execution starts. In the case of testing, the tests within the &amp;lsquo;main&amp;rsquo; method are executed. The tests themselves contain information about the purpose of the test, the returned value (or values) of the functionality under test and the expected value of what we believe should be returned.&lt;/p&gt;
+
+&lt;p&gt;Below are some examples of such tests:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;  test(&#39;Checking the existance of a Book that exists.&#39;, () {
+    expect(Meditations.existBook(0), true);
+  });
+
+  test(&#39;Checking the existance of a Book that can not exist.&#39;, () {
+    expect(Meditations.existBook(-1), false);
+  });
+
+  test(&#39;Checking the existance of a Book that does not exist.&#39;, () {
+    expect(Meditations.existBook(40), false);
+  });
+
+  test(&#39;Checking the existance of a Book Section that exists.&#39;, () {
+    expect(Meditations.existBookSection(0, 1), true);
+  });
+
+  test(&#39;Checking the existance of a Book Section that can not exist.&#39;, () {
+    expect(Meditations.existBookSection(0, -10), false);
+  });
+
+  test(&#39;Checking the existance of a Book Section in a non-existent Book.&#39;, () {
+    expect(Meditations.existBookSection(40, 0), false);
+  });
+
+  test(
+      &#39;Checking the existance of a Book Section that does not exist in an existing Book.&#39;,
+      () {
+    expect(Meditations.existBookSection(0, 40), false);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In order to understand what these tests want to achieve, first we need to dive deeper about what functionality that is implemented in &lt;code&gt;Meditations.dart&lt;/code&gt; that is under test. The purpose of it is to easily find a particular part in the text of &amp;lsquo;Meditations&amp;rsquo;. &amp;lsquo;Meditations&amp;rsquo; itself is divided into a total of 12 Books, each with multiple Sections of text. Instead of showing the full text of the book on a single screen we want to make the user able to navigate between the text of each of these sections.&lt;/p&gt;
+
+&lt;p&gt;Part of implementing this navigation process requires having the ability to check, for a given book number, whether that book exists. As in Dart indexes start at 0, the method &lt;code&gt;existBook&lt;/code&gt; should return &lt;code&gt;true&lt;/code&gt; for any integer number between 0 and 11, and false otherwise. Later on we will show how we will turn the book and section numbers back to 1-indexed ones in the UI of the app. Similarly to checking the existence of a book, we want to able to check if a specific section in a specific book exists, which the method &lt;code&gt;existBookSection&lt;/code&gt; should provide.&lt;/p&gt;
+
+&lt;p&gt;Of course the functionality should not end here. In particular we also want to be able to get the text of the first and last sections of Meditations. In order to keep the return of these search results simple in our app, we also return the book and section numbers (0-indexed) along with the text where possible as well (even though for the first section, we should already know the book and section numbers).&lt;/p&gt;
+
+&lt;p&gt;As Dart is an object oriented language, we create a specific object of the class &lt;code&gt;BookSectionText&lt;/code&gt; to hold these elements (more on the definition of this class a bit later).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;  test(&#39;Getting the first part of Meditations returns Book 1, Section 1.&#39;, () {
+    BookSectionText bst = Meditations.getFirst();
+    var firstText = Meditations.book1.first;
+    var expectedBookNr = 0;
+    var expectedSectionNr = 0;
+    expect(bst.bookNr, expectedBookNr);
+    expect(bst.sectionNr, expectedSectionNr);
+    expect(bst.text, firstText);
+  });
+
+  test(
+      &#39;Getting the last part of Meditations returns last Section of the last Book.&#39;,
+      () {
+    BookSectionText bst = Meditations.getLast();
+    var lastText = Meditations.books.last.last;
+    var expectedBookNr = Meditations.books.length - 1;
+    var expectedSectionNr = Meditations.books.last.length - 1;
+    expect(bst.bookNr, expectedBookNr);
+    expect(bst.sectionNr, expectedSectionNr);
+    expect(bst.text, lastText);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The final set of tests we are going over are for the methods for finding the previous section or the next one. This seems generally a straightforward thing to do, when moving to the previous or next section in the same book. However for convenience we also want to move to the next, or previous, book if the previous or next section in the current book is unavailable. So the functions for &lt;code&gt;nextSection&lt;/code&gt; and &lt;code&gt;previousSection&lt;/code&gt; has to have this &amp;lsquo;roll-over&amp;rsquo; functionality included to make their use in the UI that we are going to build handy. However even with roll-over, there are cases when we ran out of sections to show (e.g.: when wanting to get the next section after the last one). In this case we use an object of the class &lt;code&gt;NoSuchBookSection&lt;/code&gt; to indicate this.&lt;/p&gt;
+
+&lt;p&gt;Below are some tests for the &lt;code&gt;nextSection&lt;/code&gt; and &lt;code&gt;previousSection&lt;/code&gt; functionality:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;  test(&#39;Getting the next Section of a Book.&#39;, () {
+    BookSectionText bst = Meditations.getNextSection(11, 3);
+    var expectedBookNr = 11;
+    var expectedSectionNr = 4;
+    var expectedText = Meditations.books[expectedBookNr][expectedSectionNr];
+    expect(bst.bookNr, expectedBookNr);
+    expect(bst.sectionNr, expectedSectionNr);
+    expect(bst.text, expectedText);
+  });
+
+  test(&#39;Getting the next Section of a Book when not available.&#39;, () {
+    BookSectionSearchResult bst = Meditations.getNextSection(12, 30);
+    expect(bst is NoSuchBookSection, true);
+  });
+
+  test(&#39;Getting the next Section in the next Book&#39;, () {
+    BookSectionText bst = Meditations.getNextSection(0, 16);
+    var expectedBookNr = 1;
+    var expectedSectionNr = 0;
+    var expectedText = Meditations.books[expectedBookNr][expectedSectionNr];
+    expect(bst.bookNr, expectedBookNr);
+    expect(bst.sectionNr, expectedSectionNr);
+    expect(bst.text, expectedText);
+  });
+
+  test(&#39;Getting the previous Section of a Book.&#39;, () {
+    BookSectionText bst = Meditations.getPreviousSection(0, 3);
+    var expectedBookNr = 0;
+    var expectedSectionNr = 2;
+    var expectedText = Meditations.books[expectedBookNr][expectedSectionNr];
+    expect(bst.bookNr, expectedBookNr);
+    expect(bst.sectionNr, expectedSectionNr);
+    expect(bst.text, expectedText);
+  });
+
+  test(&#39;Getting the previous Section of a Book when not available.&#39;, () {
+    BookSectionSearchResult bst = Meditations.getPreviousSection(0, 0);
+    expect(bst is NoSuchBookSection, true);
+  });
+
+  test(&#39;Getting the previous Section in the previous Book&#39;, () {
+    BookSectionText bst = Meditations.getPreviousSection(1, 0);
+    var expectedBookNr = 0;
+    var expectedSectionNr = 16;
+    var expectedText = Meditations.books[expectedBookNr][expectedSectionNr];
+    expect(bst.bookNr, expectedBookNr);
+    expect(bst.sectionNr, expectedSectionNr);
+    expect(bst.text, expectedText);
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now that we got the tests for the core functionality of navigating the text of Meditations done we will go over the actual implementation of want we aim to test in the file &amp;lsquo;meditations.dart&amp;rsquo;.&lt;/p&gt;
+
+&lt;p&gt;First off are the class definitions for the classes that we mentioned above:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;class BookSectionSearchResult {}
+
+// This represents the result of search, which results in a text with the attached book and section number.
+class BookSectionText extends BookSectionSearchResult {
+  int bookNr;
+  int sectionNr;
+  String text;
+}
+
+// This represent the result of a search, in which case no section is found.
+class NoSuchBookSection extends BookSectionSearchResult {}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If the reader is familiar with an object oriented language, the definitions should be reasonably straightforward. The search results are represented by two types of classes that we used in our tests. An instance of a class &lt;code&gt;NoSuchBookSection&lt;/code&gt; represents that no valid text could be returned and an instance &lt;code&gt;BookSectionText&lt;/code&gt; represents the search results that returned the text of a specific section and book/section numbers. These are both subclasses of the class &lt;code&gt;BookSectionSearchResult&lt;/code&gt; which allows us easily define the return type of the methods &lt;code&gt;getPreviousSection&lt;/code&gt; and &lt;code&gt;getNextSection&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Also note that the code here contains single line comments which are denoted after a &lt;code&gt;//&lt;/code&gt; in Dart.&lt;/p&gt;
+
+&lt;p&gt;Next up is the definition of &lt;code&gt;Meditations&lt;/code&gt; class that describes the text of Meditations by Marcus Aurelius and how to access them.&lt;/p&gt;
+
+&lt;p&gt;It starts with the snippet:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;class Meditations {
+  static final book1 = [
+    &#39;&#39;&#39;I. Of my grandfather Verus I have learned to be gentle and meek, ... 
+    // End of snippet. 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Writing the full text of the representation is too much for this article. Even in the &lt;a href=&#34;https://github.com/newres/meditations&#34; target=&#34;_blank&#34;&gt;code of this demo app&lt;/a&gt; we only represent the full text of the first and last books in detail.&lt;/p&gt;
+
+&lt;p&gt;However we can say we represent the text as a list of books, where each book is itself a list of sections which are represented by the text of these sections.&lt;/p&gt;
+
+&lt;p&gt;In Dart, we can represent a list as a set of items in between square brackets &lt;code&gt;[]&lt;/code&gt; such as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;  static final books = [
+    book1,
+    book2,
+    book3,
+    book4,
+    book5,
+    book6,
+    book7,
+    book8,
+    book9,
+    book10,
+    book11,
+    book12
+  ];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The other interesting part is that we use the keywords &lt;code&gt;static&lt;/code&gt; and &lt;code&gt;final&lt;/code&gt;. The &lt;code&gt;static&lt;/code&gt; keyword indicates that the variables are class-wide, as the text in these books would be same for any instance of the &lt;code&gt;Meditations&lt;/code&gt; class. The &lt;code&gt;final&lt;/code&gt; keyword indicates that we do not intend to change these variables once they are defined, as the text of Meditations will not be changing in our app.&lt;/p&gt;
+
+&lt;p&gt;The final piece of our &lt;code&gt;Meditations&lt;/code&gt; class are methods for accessing and navigating the texts that we described previously in our tests, such as &lt;code&gt;getFirst&lt;/code&gt;, &lt;code&gt;getLast&lt;/code&gt;, &lt;code&gt;getPreviousSection&lt;/code&gt; and &lt;code&gt;getNextSection&lt;/code&gt;. Hopefully following them should be reasonably straightforward given the comments and our tests. The only additional thing to note that these methods are also marked as &lt;code&gt;static&lt;/code&gt;. As the &lt;code&gt;Meditations&lt;/code&gt; class does not contain any variables that would change per instance, every one of these methods could be made available at a class level (e.g. it could be called as &lt;code&gt;Meditations.getNextSection(11, 3)&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;See the text of these methods below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;// We assume that there is always at least one book in the list of books and at least one section in each book with a text.
+
+  // Checks if the book with given book number exists.
+  static bool existBook(int bookNr) {
+    if (bookNr &amp;lt; 0 || bookNr &amp;gt; books.length - 1) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  // Checks if the section with given book and section numbers exists.
+  static bool existBookSection(int bookNr, int sectionNr) {
+    if (!existBook(bookNr)) {
+      return false;
+    } else {
+      var selectedBook = books[bookNr];
+      if (sectionNr &amp;lt; 0 || sectionNr &amp;gt; selectedBook.length - 1) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
+
+  // Returns the length of a book, in the number of sections.
+  static int bookLength(int bookNr) {
+    if (!existBook(bookNr)) {
+      return 0;
+    } else {
+      var selectedBook = books[bookNr];
+      return selectedBook.length;
+    }
+  }
+
+  // Returns the search result for a given book and section number.
+  static BookSectionSearchResult getText(int bookNr, int sectionNr) {
+    if (!existBookSection(bookNr, sectionNr)) {
+      return NoSuchBookSection();
+    } else {
+      var bst = new BookSectionText();
+      bst.bookNr = bookNr;
+      bst.sectionNr = sectionNr;
+      bst.text = books[bookNr][sectionNr];
+      return bst;
+    }
+  }
+
+  // Returns the first section.
+  static BookSectionSearchResult getFirst() {
+    var selectedBook = books[0];
+    if (selectedBook == null) {
+      return NoSuchBookSection();
+    }
+    var selectedSection = selectedBook[0];
+    if (selectedSection == null) {
+      return NoSuchBookSection();
+    } else {
+      var bst = new BookSectionText();
+      bst.bookNr = 0;
+      bst.sectionNr = 0;
+      bst.text = selectedSection;
+      return bst;
+    }
+  }
+
+  // Returns the last section.
+  static BookSectionSearchResult getLast() {
+    var selectedBook = books.last;
+    if (selectedBook == null) {
+      return NoSuchBookSection();
+    }
+    var selectedSection = selectedBook.last;
+    if (selectedSection == null) {
+      return NoSuchBookSection();
+    } else {
+      var bst = new BookSectionText();
+      bst.bookNr = Meditations.books.length - 1;
+      bst.sectionNr = Meditations.books.last.length - 1;
+      bst.text = selectedSection;
+      return bst;
+    }
+  }
+
+  // Given a book- and a section number, gets the next section.
+  static BookSectionSearchResult getNextSection(int bookNr, int sectionNr) {
+    //Get the next section in the current book
+    var nextSection = getText(bookNr, sectionNr + 1);
+    //If it exits return it
+    if (!(nextSection is NoSuchBookSection)) {
+      return nextSection;
+    } else {
+      //Otherwise get the first section of the next book
+      return getText(bookNr + 1, 0);
+    }
+  }
+
+  // Given a book- and a section number, gets the previous section.
+  static BookSectionSearchResult getPreviousSection(int bookNr, int sectionNr) {
+    //Get the previous section in the current book
+    var previousSection = getText(bookNr, sectionNr - 1);
+    //If it exits return it
+    if (!(previousSection is NoSuchBookSection)) {
+      return previousSection;
+    } else {
+      //Otherwise get the last section of the previous book
+      var previousBookNr = bookNr - 1;
+      return getText(previousBookNr, bookLength(previousBookNr) - 1);
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We have now covered two of the four main files responsible for the functionality of our app, notably the functionality to navigate the text of Meditations and the tests for them. The purpose of the other two is to create the app using this functionality for navigating the text with the Flutter framework (&lt;code&gt;main.dart&lt;/code&gt;) and the tests for the app (&lt;code&gt;widget_test.dart&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Let us start with the test first. One of the nice features of the Flutter framework is that it has one can test the full app nearly as easily than any other Dart code.&lt;/p&gt;
+
+&lt;p&gt;First we start importing the functionality for testing as well as our main app we aim to test:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;import &#39;package:flutter/material.dart&#39;;
+import &#39;package:flutter_test/flutter_test.dart&#39;;
+import &#39;package:meditations/main.dart&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next up is the main method with the functionality that we aim to test. This functionality is similar to the functionality that we have shown previously of our app, seen here again below:&lt;/p&gt;
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;https://www.newresalhaider.com/img/post/2020/meditations/meditationsapp.gif&#34; /&gt;
+
+
+
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; &gt;
+  &lt;h4&gt;Navigating the text of Meditations in the app running on an Android emulator.&lt;/h4&gt;
+  
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;In particular when we are navigating the text of Meditations, we tap the icons for first, previous, next and last in the bottom navigation bar.&lt;/p&gt;
+
+&lt;p&gt;On the screen not only do we navigate to the right text, we also show a description of which book and which section we are currently reading.
+We use this information to create a navigation test, as once the right icon has been tapped, we should be able to predict and check the book and section numbers that should now show on screen.&lt;/p&gt;
+
+&lt;p&gt;The test is all tied together with the Testing functionality of Flutter to setting up the widgets (the elements of interaction) of the app for testing, checking the redraws and the output of it (more documentation on testing Flutter widgets can be found in the &lt;a href=&#34;https://flutter.dev/docs/cookbook/testing/widget/introduction&#34; target=&#34;_blank&#34;&gt;Flutter documentation&lt;/a&gt;). The code of this for the app can be seen as below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;void main() {
+  testWidgets(&#39;Bottom navigation smoke test&#39;, (WidgetTester tester) async {
+    // Build the app and trigger a frame.
+    await tester.pumpWidget(MyApp());
+
+    // Verify that the title shows Book 1 and Section 1.
+    expect(find.text(&#39;Meditations Book 1 Section 1&#39;), findsOneWidget);
+
+    // Tap the icon for next and trigger a frame.
+    await tester.tap(find.byIcon(Icons.navigate_next));
+    await tester.pump();
+
+    // Verify that the title has changed correctly.
+    expect(find.text(&#39;Meditations Book 1 Section 2&#39;), findsOneWidget);
+    expect(find.text(&#39;Meditations Book 1 Section 1&#39;), findsNothing);
+
+    // Tap the icon for last and trigger a frame.
+    await tester.tap(find.byIcon(Icons.last_page));
+    await tester.pump();
+
+    // Verify that the title has changed correctly.
+    expect(find.text(&#39;Meditations Book 12 Section 26&#39;), findsOneWidget);
+    expect(find.text(&#39;Meditations Book 1 Section 2&#39;), findsNothing);
+
+    // Tap the icon for previous and trigger a frame.
+    await tester.tap(find.byIcon(Icons.navigate_before));
+    await tester.pump();
+
+    // Verify that the title has changed correctly.
+    expect(find.text(&#39;Meditations Book 12 Section 25&#39;), findsOneWidget);
+    expect(find.text(&#39;Meditations Book 12 Section 26&#39;), findsNothing);
+
+    // Tap the icon for first and trigger a frame.
+    await tester.tap(find.byIcon(Icons.first_page));
+    await tester.pump();
+
+    // Verify that the title has changed correctly.
+    expect(find.text(&#39;Meditations Book 1 Section 1&#39;), findsOneWidget);
+    expect(find.text(&#39;Meditations Book 12 Section 25&#39;), findsNothing);
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now all that remains is to show how the actual app is put together. We will go through the code of it here, found in &lt;code&gt;main.dart&lt;/code&gt;, step by step, to describe how everything fits together.&lt;/p&gt;
+
+&lt;p&gt;First we start with the imports of the widget library we are using as well as our implementation of accessing the text of Meditations.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;import &#39;package:flutter/material.dart&#39;;
+import &#39;mediations.dart&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next is, the very short main method, that ensures the app we are building is run when requested.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;void main() {
+  // The main method runs the app that was described
+  runApp(MyApp());
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As mentioned in our description of the test the app consists of a tree of &lt;a href=&#34;https://flutter.dev/docs/development/ui/widgets-intro&#34; target=&#34;_blank&#34;&gt;widgets&lt;/a&gt; (elements of interaction), the root of which we identify with &lt;code&gt;MyApp&lt;/code&gt; in the code. This MyApp widget is the one that gets run by the main method seen above.&lt;/p&gt;
+
+&lt;p&gt;The widgets themselves have properties that contain the elements that the widget is using, for example the title of the app, the theme of the app, the other widgets it uses such as a widget for a home page. The main job of the widget is to implement a specific build function that describes how these various elements fit together. In the case of &lt;code&gt;MyApp&lt;/code&gt; we are creating a &lt;a href=&#34;https://api.flutter.dev/flutter/material/MaterialApp-class.html&#34; target=&#34;_blank&#34;&gt;MaterialApp&lt;/a&gt; customized to our specific needs. This includes a home page for navigating the text of Mediations, as well as a theme that uses a color (hopefully) close enough to &lt;a href=&#34;https://en.wikipedia.org/wiki/Tyrian_purple&#34; target=&#34;_blank&#34;&gt;Imperial purple&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;class MyApp extends StatelessWidget {
+  // The app consists of a tree of widgets, of which this is the root.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;Meditations&#39;,
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: MyHomePage(title: &#39;Meditations&#39;),
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The previous Widget does not carry an internal, mutable, state directly in itself (hence why it is an extension of a &lt;a href=&#34;https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html&#34; target=&#34;_blank&#34;&gt;StatelessWidget&lt;/a&gt;). However, as one can deduce from our tests, we want to keep information such as the current book and section number around, and display these.&lt;/p&gt;
+
+&lt;p&gt;In order to get this done, we use an extension of &lt;a href=&#34;https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html&#34; target=&#34;_blank&#34;&gt;StatefulWidget&lt;/a&gt; named &lt;code&gt;MyHomePage&lt;/code&gt; which carries the state. The state itself contains the elements of book number, section number and the text to be shown on page. In addition there are methods for manipulating the state and showing it.&lt;/p&gt;
+
+&lt;p&gt;For setting the state, we make use of all the functionality we built in &lt;code&gt;meditations.dart&lt;/code&gt; to search for the next (or previous, first, last) section and change the state accordingly. Each of these state setting methods are inside a call to &lt;code&gt;setState&lt;/code&gt; which makes the Flutter framework be aware of the state changes, and if required it can redraw the relevant widgets to show these changes.&lt;/p&gt;
+
+&lt;p&gt;The methods for showing the state are reasonably straightforward. we mostly use these to translate the internally 0-indexed book- and section numbers into 1 indexed ones to match the actual numbers for the Meditations.&lt;/p&gt;
+
+&lt;p&gt;The final part is making sure there are widgets for showing the state and interacting with the state. As one can see in the animation of the screen, as well is in the test, we have a section showing the current section and page number, a text area that scrolls showing the current section and a bottom navigation bar to change the current section.&lt;/p&gt;
+
+&lt;p&gt;The code for all of this, when put together, can be seen below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dart&#34;&gt;class MyHomePage extends StatefulWidget {
+  // The homepage of the app, which also creates and holds the state.
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() =&amp;gt; _MyHomePageState();
+}
+
+class _MyHomePageState extends State&amp;lt;MyHomePage&amp;gt; {
+  // The variables used to describe the state.
+  int _bookNr = 0;
+  int _sectionNr = 0;
+  String _text = (Meditations.getFirst() as BookSectionText).text;
+
+  // Functions to show the state variables on the screen.
+  String getShowText() {
+    return _text;
+  }
+
+  int getShowBookNr() {
+    // The screen should book and section numbers starting with 1 instead of 0.
+    return _bookNr + 1;
+  }
+
+  int getShowSectionNr() {
+    return _sectionNr + 1;
+  }
+
+  // Functions to navigate the text of Meditations and update the state based on UI interaction.
+  void _first() {
+    // The call to setState makes the Flutter framework aware of the state changes.
+    // It will ensure that the build method below will be rerun.
+    setState(() {
+      BookSectionSearchResult result = Meditations.getFirst();
+      if (result is BookSectionText) {
+        _text = result.text;
+        _bookNr = result.bookNr;
+        _sectionNr = result.sectionNr;
+      }
+    });
+  }
+
+  void _previous() {
+    setState(() {
+      BookSectionSearchResult result =
+          Meditations.getPreviousSection(_bookNr, _sectionNr);
+      if (result is BookSectionText) {
+        _text = result.text;
+        _bookNr = result.bookNr;
+        _sectionNr = result.sectionNr;
+      }
+    });
+  }
+
+  void _next() {
+    setState(() {
+      BookSectionSearchResult result =
+          Meditations.getNextSection(_bookNr, _sectionNr);
+      if (result is BookSectionText) {
+        _text = result.text;
+        _bookNr = result.bookNr;
+        _sectionNr = result.sectionNr;
+      }
+    });
+  }
+
+  void _last() {
+    setState(() {
+      BookSectionSearchResult result = Meditations.getLast();
+      if (result is BookSectionText) {
+        _text = result.text;
+        _bookNr = result.bookNr;
+        _sectionNr = result.sectionNr;
+      }
+    });
+  }
+
+  // Handles the action of the bottom navigation bar on screen.
+  void _onBottomNavTapped(int index) {
+    setState(() {
+      switch (index) {
+        case 0:
+          {
+            _first();
+          }
+          break;
+
+        case 1:
+          {
+            _previous();
+          }
+          break;
+
+        case 2:
+          {
+            _next();
+          }
+          break;
+
+        case 3:
+          {
+            _last();
+          }
+          break;
+
+        default:
+          {
+            _first();
+          }
+          break;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // This method is rerun every time setState is called.
+    // It contains a nested widget with a app bar on top, a scrollable text area in the middle, and a navigation bar at the bottom.
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+            &#39;${widget.title} Book ${getShowBookNr()} Section ${getShowSectionNr()}&#39;),
+      ),
+      body: Center(
+        child: Column(
+          children: &amp;lt;Widget&amp;gt;[
+            new Expanded(
+                flex: 1,
+                child: SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(getShowText())))),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: const &amp;lt;BottomNavigationBarItem&amp;gt;[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.first_page),
+            label: &#39;First&#39;,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.navigate_before),
+            label: &#39;Previous&#39;,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.navigate_next),
+            label: &#39;Next&#39;,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.last_page),
+            label: &#39;Last&#39;,
+          ),
+        ],
+        onTap: _onBottomNavTapped,
+      ),
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is pretty much the full description of the Meditations app. As one can see, a small application can be built up from relatively small amount of code. My experience with the Flutter framework was very pleasant: most things are not pretty straightforward to do, I like the emphasis on getting tests up and running straight from the box and the large set of widgets get the UI up and running pretty quickly. My biggest pain point was the setup of the whole Android tool-chain itself. Although there were some additional features to the Dart language (such as the upcoming, at the time of this writing, &lt;a href=&#34;https://dart.dev/null-safety&#34; target=&#34;_blank&#34;&gt;Null Safety&lt;/a&gt;) the language is easy to pick up and become productive with.&lt;/p&gt;
+
+&lt;p&gt;Of course there are tons of possible extensions to the app. Aside from including the full text of Meditations, one can improve upon the navigation, add features such as bookmarking, random section selection and more. Refactoring and extending the app so it could load in other advice/text in similar format is also a possibility.&lt;/p&gt;
+
+&lt;p&gt;Hopefully this article and code was clear enough to follow and my thought process came over clearly. The project has definitely increased my interest in using Dart/Flutter in another project and felt like good practice. Hopefully your next project, perhaps made with Flutter, will be similarly enjoyable and enriching to do!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>To Curry in League of Legends</title>
       <link>https://www.newresalhaider.com/post/curry-lol/</link>
       <pubDate>Sat, 04 Jul 2020 00:00:00 +0200</pubDate>
@@ -2593,207 +3235,6 @@ For a total of 2 facts.
 &lt;p&gt;Nonetheless I hope this article gives a solid introduction, and maybe an interest to using the spec library, even if one does not have a Clojure or even a heavy programming background. The source code snippets are available at: &lt;a href=&#34;https://github.com/newres/spider-man-spec&#34; target=&#34;_blank&#34;&gt;Spider-Man-Spec&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you have a data validation problem, by all means take a swing at it with the Spec library. I am convinced that the results you will get will be nothing short of spectacular.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>The Art of Choosing a Programming Language</title>
-      <link>https://www.newresalhaider.com/post/art-of-choosing-language/</link>
-      <pubDate>Sun, 18 Mar 2018 00:00:00 +0100</pubDate>
-      
-      <guid>https://www.newresalhaider.com/post/art-of-choosing-language/</guid>
-      <description>
-
-&lt;p&gt;Programmers, like professionals in other fields, are passionate about their tools. One of the main elements in the toolbox of coders are programming languages. They allow their users to express solutions through code to tackle a large variety of problems in many domains.&lt;/p&gt;
-
-&lt;p&gt;Programming is also an art, as described in the article by Donald Knuth titled &lt;a href=&#34;http://www.paulgraham.com/knuth.html&#34; target=&#34;_blank&#34;&gt;Computer Programming as an Art&lt;/a&gt; and in certain aspects of programming languages can be seen as art styles.&lt;/p&gt;
-
-&lt;p&gt;As can be expected with many things that people are passionate about, whether viewed as a tool or an art style, coders can bond or argue about programming languages. Like philosophers of old, these discussions can go quite into depth, but to the outsider the arguments made or the sentiments behind them can be quite opaque.&lt;/p&gt;
-
-
-
-
-&lt;figure&gt;
-
-&lt;img src=&#34;https://www.newresalhaider.com/img/post/2018/art-of-choosing-language/schoolofathens.jpg&#34; alt=&#34;School of Athens by Raphael&#34; /&gt;
-
-
-
-&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; &gt;
-  &lt;h4&gt;If programming languages existed back then, I am sure they would be a hotly argued topic.&lt;/h4&gt;
-  &lt;p&gt;
-    School of Athens by Raphael
-    
-    
-    
-  &lt;/p&gt; 
-&lt;/figcaption&gt;
-
-&lt;/figure&gt;
-
-&lt;p&gt;Here I hope to shed some light to the casual observer on what makes programmers passionate about these languages and why some prefer one over the other. Such analysis can be quite subjective, and very much dependent on the writers experiences and preferences, but I will try my best to give an impartial overview.&lt;/p&gt;
-
-&lt;p&gt;In theory many general purpose programming languages are capable of doing the same things. The most commonly used programming languages are Turing complete, meaning that they can all simulate the workings of any Turing machine. Without getting into the full description of what a Turing machine is, for the reader unfamiliar with the concept, this means that any of the languages can express programs for similar tasks.&lt;/p&gt;
-
-&lt;p&gt;There are thousands of programming languages. Some older, and going back to the 50s, 60s and 70s and with considerable use still. Others have been released as recently as the last 10 years, and have gained considerable following. Given as I have mentioned that theoretically all these languages can do the same things, one could wonder why new languages are designed.&lt;/p&gt;
-
-&lt;h2 id=&#34;history&#34;&gt;History&lt;/h2&gt;
-
-&lt;p&gt;Historically, the original computers were instructed by a pure machine language, for example 0s and 1s. Writing programs this way can be tedious and error prone, and the results code can be very difficult to read. This is one of reasons why assembly languages were created. These are languages that are still very much tied into the instruction set of a particular machine, but in a more human readable form, where symbolic names are given for machine instructions. These would be then translated to the pure machine language, to instruct the machine.&lt;/p&gt;
-
-&lt;p&gt;While reading and writing programs becomes easier this way, using assembly languages still has disadvantages. First, these languages are still very much tied to the hardware. Different instruction architectures can mean that a program for the same goal would have to be written differently for each architecture. Second, for many the instructions that one has to write this way are still very low level. The argument is made that with a better set of abstractions over assembly, programs can be written in a better way. A program written with such abstractions could be translated, compiled, to the required machine code specific for the required architecture.&lt;/p&gt;
-
-&lt;p&gt;The question of which abstractions need to be utilized is at the heart of why there are so many different programming languages. People have different ideas on what these abstractions might be, what the benefits and drawbacks of applying them are. This is at the heart of why people design and use newer programming languages. In the following sections we go through some of the aspects on these abstractions.&lt;/p&gt;
-
-
-
-
-&lt;figure&gt;
-
-&lt;img src=&#34;https://www.newresalhaider.com/img/post/2018/art-of-choosing-language/pyramids.jpg&#34; alt=&#34;The Giza Pyramids © Robbster1983&#34; /&gt;
-
-
-
-&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; &gt;
-  &lt;h4&gt;Much like with ancients wonders of next to a modern city, with programming languages old also gives rise to the new, and often co-exists with it .&lt;/h4&gt;
-  &lt;p&gt;
-    The Giza Pyramids © Robbster1983
-    
-    
-    
-  &lt;/p&gt; 
-&lt;/figcaption&gt;
-
-&lt;/figure&gt;
-
-&lt;h2 id=&#34;paradigms-and-style&#34;&gt;Paradigms and Style&lt;/h2&gt;
-
-&lt;p&gt;As mentioned before, there are different opinions on how programs could be constructed. There are various subjects about on which people have opinions about: how the code is organized and how it is executed, among other elements. This is very much similar to how art styles function. For example the same subject can be painted in two differing styles.&lt;/p&gt;
-
-
-
-
-&lt;figure&gt;
-
-&lt;img src=&#34;https://www.newresalhaider.com/img/post/2018/art-of-choosing-language/last-supper-da-vinci.jpg&#34; /&gt;
-
-
-
-&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; &gt;
-  &lt;h4&gt;The Last Supper (Leonardo da Vinci) one of the most famous Renaissance style paintings.&lt;/h4&gt;
-  
-&lt;/figcaption&gt;
-
-&lt;/figure&gt;
-
-
-
-
-&lt;figure&gt;
-
-&lt;img src=&#34;https://www.newresalhaider.com/img/post/2018/art-of-choosing-language/last-supper-tintoretto.jpg&#34; /&gt;
-
-
-
-&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; &gt;
-  &lt;h4&gt;The Last Supper (Tintoretto) depicts the same subject but in a Mannerist, proto-Baroque style.&lt;/h4&gt;
-  
-&lt;/figcaption&gt;
-
-&lt;/figure&gt;
-
-&lt;p&gt;Programming languages can be be classified on the different styles, &lt;em&gt;programming paradigms&lt;/em&gt; based on the common elements in the approaches.  Some paradigms include:&lt;/p&gt;
-
-&lt;h3 id=&#34;imperative&#34;&gt;Imperative&lt;/h3&gt;
-
-&lt;p&gt;Imperative code can be seen as a set of commands for the computer to perform. This type of paradigm matches very strongly with how computer hardware is working, as nearly all computer hardware is designed the execute machine language, which is in itself is written in imperative style.&lt;/p&gt;
-
-&lt;h3 id=&#34;procedural&#34;&gt;Procedural&lt;/h3&gt;
-
-&lt;p&gt;One of the ways one can structure a program is to group together a series of commands. These groups, &lt;em&gt;procedures&lt;/em&gt;, can then be called, used or reused as a single entity.&lt;/p&gt;
-
-&lt;h3 id=&#34;object-oriented&#34;&gt;Object-Oriented&lt;/h3&gt;
-
-&lt;p&gt;Object oriented code uses the notion of &lt;em&gt;objects&lt;/em&gt; to organize code. An object is an encapsulation of related state and behavior. For example, consider a software that needs to represent a vehicle. The elements of the state that describe the object, such as &lt;em&gt;colour&lt;/em&gt; and &lt;em&gt;make&lt;/em&gt;, are called attributes.  Various functionality related to the object, such as calculating the price of the car, are called methods. These concepts allow reuse, as the objects for a car and a motorcycle can share functionality.&lt;/p&gt;
-
-&lt;h3 id=&#34;declarative&#34;&gt;Declarative&lt;/h3&gt;
-
-&lt;p&gt;In declarative programming, one describes, or more aptly declares what the problem is as opposed to detailing the steps on how to solve it. This contrasts with imperative programming, where one gives the instructions on how to solve it directly.&lt;/p&gt;
-
-&lt;h3 id=&#34;functional&#34;&gt;Functional&lt;/h3&gt;
-
-&lt;p&gt;Functional programming is one form of declarative programming where programs are constructed using &lt;em&gt;functions&lt;/em&gt;, which are analogous and inspired by to mathematical functions. The intention is that these functions are ideally side effect free: their output is dependent solely on their input. This can make code easier to understand and allows for easier use of code written this way.&lt;/p&gt;
-
-&lt;h3 id=&#34;logic&#34;&gt;Logic&lt;/h3&gt;
-
-&lt;p&gt;The logic paradigm is based around expressing code as a set of logical axioms. These axioms can then be used as a from of knowledge base to derive new knowledge and query. The programs themselves then can be posed as a query in this system. For example, if the knowledge is defined with the axioms &amp;ldquo;Tweety is a bird&amp;rdquo; and &amp;ldquo;Birds are animals&amp;rdquo;, the system should be able to answer the queries: &amp;ldquo;Is Tweety and animal?&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;A language can focus on supporting a particular paradigm heavily or have a strong preference for it. For example &lt;a href=&#34;https://www.haskell.org/&#34; target=&#34;_blank&#34;&gt;Haskell&lt;/a&gt; or &lt;a href=&#34;https://clojure.org/&#34; target=&#34;_blank&#34;&gt;Clojure&lt;/a&gt; lean quite heavily on the functional paradigm, while &lt;a href=&#34;http://www.swi-prolog.org/&#34; target=&#34;_blank&#34;&gt;Prolog&lt;/a&gt; is one of the main logic programming languages. Others, provide an explicit merge of various methodologies, such as &lt;a href=&#34;https://www.scala-lang.org/&#34; target=&#34;_blank&#34;&gt;Scala&lt;/a&gt; that combines elements of object orientation and functional programming.&lt;/p&gt;
-
-&lt;p&gt;Preference for a particular language can go beyond the programming paradigms used. Syntax, the structure of how code is written, can matter quite a bit for person&amp;rsquo;s view on a particular language. For example &lt;a href=&#34;https://www.python.org/&#34; target=&#34;_blank&#34;&gt;Python&lt;/a&gt; uses indentation for managing the control flow of the code, as opposed to symbols in other languages.&lt;/p&gt;
-
-&lt;p&gt;Such preference can go even beyond the actual code itself to the tools one uses to write. While any text editor for editing text can often suffice, people can have differing expectations with regards to integrated development environments (IDEs) or other tools to edit and analyze the code. The lack or existence of specific tooling can also be a factor when deciding between languages.&lt;/p&gt;
-
-&lt;h2 id=&#34;available-code-and-libraries&#34;&gt;Available Code and Libraries&lt;/h2&gt;
-
-&lt;p&gt;Most coding is done with a particular purpose in mind, and it is rarely the case that the programmer can build everything from the ground up for such a task. In order to build interesting programs, one has to utilize existing knowledge, much like someone would utilize knowledge in a library to come to new insights.&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;https://www.newresalhaider.com/img/post/2018/art-of-choosing-language/bibliotheca-alexandrina.jpg&#34;  /&gt;
-  &lt;figcaption&gt;
-      &lt;h4&gt;The Bibliotheca Alexandrina. Photo © Carsten Whimster licensed under &lt;a href =&#34;https://creativecommons.org/licenses/by/3.0/&#34;&gt; CC BY 3.0 &lt;/a&gt;.&lt;/h4&gt;
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;Existing code can be used as a foundation from which the program can be built. Roughly speaking existing code comes in three main forms. It is either being part of the language (often called the standard library of the language), some external libraries extending the language for a particular purpose, or an existing code base of the application that one can improve upon.&lt;/p&gt;
-
-&lt;p&gt;The standard library contains various functionality included with the language itself. For example ways of manipulating files, various connection protocols, support for certain file formats, etc. Of course it is very much helpful if particular support for a certain feature that aims to use is already available with the language itself. This means less code to write and connect. On the other hand there is also some tension with regards to including too many features in the standard library, especially if certain parts of it become outdated, which enlarges the language and makes it more unwieldy.&lt;/p&gt;
-
-&lt;p&gt;The external libraries that one can use in a language can also influence the choice of a language. Certain languages have a lot of library support for specific tasks. For example &lt;a href=&#34;https://www.python.org/&#34; target=&#34;_blank&#34;&gt;Python&lt;/a&gt; has a large and active following in the Data Science community. Other languages have a lot of support for many different tasks simply due their age and user base such as &lt;a href=&#34;https://www.java.com/en/&#34; target=&#34;_blank&#34;&gt;Java&lt;/a&gt;. By using libraries one does not need to implement certain features from scratch but can reuse existing work and focus on their specific problem at hand.&lt;/p&gt;
-
-&lt;p&gt;Finally, not all development starts from scratch, often one has to make additions or improvement to an existing program, in which case the choice of the language has already been made. While a rewrite of the code can often be tempting, linking between two code programming languages is not always trivial. It is often a good idea to continue with an existing language.&lt;/p&gt;
-
-&lt;p&gt;There are some exceptions to this as some languages have been designed with the ground up to inter-operate with other languages. A good example of this is &lt;a href=&#34;https://clojure.org/&#34; target=&#34;_blank&#34;&gt;Clojure&lt;/a&gt; has great interop with &lt;a href=&#34;https://www.java.com/en/&#34; target=&#34;_blank&#34;&gt;Java&lt;/a&gt; and/or &lt;a href=&#34;https://en.wikipedia.org/wiki/JavaScript&#34; target=&#34;_blank&#34;&gt;JavaScript&lt;/a&gt;. This allows it to leverage existing libraries already written, and makes it much more attractive to use.&lt;/p&gt;
-
-&lt;h2 id=&#34;existing-knowledge&#34;&gt;Existing Knowledge&lt;/h2&gt;
-
-&lt;p&gt;Writing code is rarely trivial, and neither is learning new programming languages. Although previous experience helps, especially when dealing with languages with known paradigms, due to slight or large differences it can take a while to get used to the new language and libraries. With constantly looming deadlines and pressure to deliver, it can make sense to minimize the work that needs to be done. It is perfectly valid to work with a language that one already knows.&lt;/p&gt;
-
-&lt;h2 id=&#34;curiosity&#34;&gt;Curiosity&lt;/h2&gt;
-
-&lt;p&gt;On the other hand learning a new language, especially in a new paradigm or other innovative features, can be quite interesting. It not only allows for work on existing code written in the new language but it also gives insights in how to program which is beneficial as a programmer in general no matter what language he is using.&lt;/p&gt;
-
-&lt;h2 id=&#34;speed&#34;&gt;Speed&lt;/h2&gt;
-
-&lt;p&gt;As mentioned earlier, commonly used programming languages are abstractions over machine code that can do more of less the same thing computationally. What abstractions are used however can influence the speed of executing the program, as well as the time of translating the code in the programming language to machine code.&lt;/p&gt;
-
-&lt;p&gt;A common abstraction that can influence the speed of executing the program is how memory is managed. During the running of a program certain information needs to be stored. A way to do this is to allocate space in the computers memory, keep it around while needed and remove it afterwards. This latter portion, can be quite difficult to manage manually, as if one does it prematurely the program might crash or have other bugs. Not removing it would fill the memory with garbage, which makes the program use up more and more memory till it crashes.&lt;/p&gt;
-
-&lt;p&gt;A solution to these problems is automatic garbage collection: a way for the computer to automatically manage and clean up memory. While this is a good solution in many cases, this process comes with an overhead, and can be unpredictable when the time and resource consuming cleanup happens. In most cases this overhead is trivial to pay for eliminating a whole suite of potential bugs. However in certain scenarios, such as real-time high performance games, it could be too much to pay.&lt;/p&gt;
-
-&lt;p&gt;The other issue of speed, translating the code from the programming language to machine code, can also be a consideration. Development requires making changes to code and checking whether the changes work. If the process of getting feedback takes a long time, due to these translations, it can destroy a programmers productivity. &lt;a href=&#34;https://golang.org/&#34; target=&#34;_blank&#34;&gt;Golang&lt;/a&gt; is a language that is explicitly designed for fast compilation.&lt;/p&gt;
-
-&lt;h2 id=&#34;safety&#34;&gt;Safety&lt;/h2&gt;
-
-&lt;p&gt;Safety is in many cases the flip side to the speed argument. Certain abstractions cost you in speed but provide you with safety in return. Different languages tend to make different trade-offs with this regard. For example one of the relatively new languages, &lt;a href=&#34;https://www.rust-lang.org/en-US/&#34; target=&#34;_blank&#34;&gt;Rust&lt;/a&gt; aims at focus on zero cost abstractions: abstractions with little to no run-time performance penalty.&lt;/p&gt;
-
-&lt;p&gt;One contentious aspect of safety is the use of type systems. Types allow the coder to specify various categories, such as numbers, persons, cars, etc as well as their requirements to be fulfilled within the context of the program. Types can be checked both statically, before the system is run, or dynamically, during the running of the program. Some people swear by very expressive type systems: where types can specify very detailed features of the things the program wants to represent. This then can be used for checking code for correctness, both before and during the running of a program, as well as documentation. On the other hand type checking is not free: it can make translating the compilation into machine code a much slower process. Some people also consider the writing and checking of types themselves very cumbersome during initial development, where quick iteration can be slowed down by specifying detailed types.&lt;/p&gt;
-
-&lt;p&gt;There is a whole spectrum of possible stances with regards to type systems. For example, certain languages such as &lt;a href=&#34;https://www.haskell.org/&#34; target=&#34;_blank&#34;&gt;Haskell&lt;/a&gt; and &lt;a href=&#34;https://www.idris-lang.org/&#34; target=&#34;_blank&#34;&gt;Idris&lt;/a&gt; are designed from the ground up with very expressive type systems that are statically checked. Others, for example &lt;a href=&#34;https://www.dartlang.org/&#34; target=&#34;_blank&#34;&gt;Dart&lt;/a&gt; which started off as having optional types but adds mandatory types in the latest iteration to help with tooling, take a more balanced approach. &lt;a href=&#34;https://golang.org/&#34; target=&#34;_blank&#34;&gt;Golang&lt;/a&gt; explicitly has a static, but minimalist, type system that allows for fast compilation.  There are also languages, such as &lt;a href=&#34;https://clojure.org/&#34; target=&#34;_blank&#34;&gt;Clojure&lt;/a&gt; that instead of static types, use contract systems to ensure safety at run-time and allow for documentation and testing.&lt;/p&gt;
-
-&lt;h2 id=&#34;deployment&#34;&gt;Deployment&lt;/h2&gt;
-
-&lt;p&gt;While most general purpose programming languages can be made to run in all environments, they are not always available. In certain environments, such as mobile or on the web, only specific languages are supported. For example on Android &lt;a href=&#34;https://www.java.com/en/&#34; target=&#34;_blank&#34;&gt;Java&lt;/a&gt; and &lt;a href=&#34;https://www.java.com/en/&#34; target=&#34;_blank&#34;&gt;Kotlin&lt;/a&gt; are officially supported, while on the web &lt;a href=&#34;https://en.wikipedia.org/wiki/JavaScript&#34; target=&#34;_blank&#34;&gt;JavaScript&lt;/a&gt; is the current Lingua Franca of the web. This means that it can be quite a herculean effort to make other languages work in such environments, and going with the most supported option is easier.&lt;/p&gt;
-
-&lt;p&gt;The way certain languages can get around on this hindrance is by using the more commonly supported language as the target to translate into. For example &lt;a href=&#34;https://clojurescript.org/&#34; target=&#34;_blank&#34;&gt;ClojureScript&lt;/a&gt; compiles into &lt;a href=&#34;https://en.wikipedia.org/wiki/JavaScript&#34; target=&#34;_blank&#34;&gt;JavaScript&lt;/a&gt;. And in some cases, other developers have made the effort to get frameworks up and running that allow the use of a different language, such as the use of &lt;a href=&#34;https://facebook.github.io/react-native/&#34; target=&#34;_blank&#34;&gt;React Native&lt;/a&gt; and &lt;a href=&#34;https://flutter.io/&#34; target=&#34;_blank&#34;&gt;Flutter&lt;/a&gt; that allow the use of &lt;a href=&#34;https://en.wikipedia.org/wiki/JavaScript&#34; target=&#34;_blank&#34;&gt;JavaScript&lt;/a&gt; and &lt;a href=&#34;https://www.dartlang.org/&#34; target=&#34;_blank&#34;&gt;Dart&lt;/a&gt; respectively to develop mobile applications.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-team-and-beyond&#34;&gt;The Team and Beyond&lt;/h2&gt;
-
-&lt;p&gt;One final aspect of choosing a programming language, which can be surprisingly significant, is which language is beneficial to the team, as opposed to an individual developer. Different teams bring different expertise to the table, and while most professionals are often quite willing and able to use a new language if it is most suited to the task at hand, this can still be a cost that might be better spent on developing the application. From an employers perspective it can also often be beneficial to stick to more commonly used languages as it can be easier to find future employees versed in the language used. On the other hand, there are many professionals that would be quite willing to jump on the chance of using the latest programming languages, in which case the choice for a newer or more niche language can be a competitive advantage from a recruiting perspective.&lt;/p&gt;
-
-&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;I hope this article gave some insight on why programmers pick and argue about programming languages. Despite all the various differences and arguments it is also very important to note, that great software has been written in many different languages, that is both excellent code and solves important problems. And while picking the right tool for the job is an important, it can be just an aspect of the art of solving problems with code.&lt;/p&gt;
 </description>
     </item>
     

@@ -4,6 +4,14 @@
     
     <url>
     
+      <loc>https://www.newresalhaider.com/post/meditations/</loc>
+      <lastmod>2020-12-28T00:00:00+01:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>https://www.newresalhaider.com/post/curry-lol/</loc>
       <lastmod>2020-07-04T00:00:00+02:00</lastmod>
     </url>
@@ -350,7 +358,7 @@
     <url>
     
       <loc>https://www.newresalhaider.com/tags/dart/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <lastmod>2020-12-28T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -377,7 +385,7 @@
     <url>
     
       <loc>https://www.newresalhaider.com/tags/flutter/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+      <lastmod>2020-12-28T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -601,6 +609,24 @@
     
     <url>
     
+      <loc>https://www.newresalhaider.com/tags/android/</loc>
+      <lastmod>2020-12-28T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/app-development/</loc>
+      <lastmod>2020-12-28T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>https://www.newresalhaider.com/tags/archeology/</loc>
       <lastmod>2018-06-30T00:00:00+02:00</lastmod>
       <priority>0</priority>
@@ -718,6 +744,15 @@
     
     <url>
     
+      <loc>https://www.newresalhaider.com/tags/history/</loc>
+      <lastmod>2020-12-28T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>https://www.newresalhaider.com/tags/industrial/</loc>
       <lastmod>2017-12-30T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -792,6 +827,15 @@
     
       <loc>https://www.newresalhaider.com/tags/org/</loc>
       <lastmod>2020-06-01T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.newresalhaider.com/tags/philosophy/</loc>
+      <lastmod>2020-12-28T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
