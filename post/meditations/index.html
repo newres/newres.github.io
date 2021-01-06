@@ -15,7 +15,7 @@
   
     
   
-  <meta name="description" content="An introduction to creating mobile applications with Flutter and Dart, by creating an app for reading and navigating &#34;Mediations&#34; by Marcus Aurelius.
+  <meta name="description" content="An introduction to the Flutter framework for creating applications, by building an app for reading &#34;Mediations&#34; by Marcus Aurelius.
 ">
 
   
@@ -115,13 +115,13 @@
   <meta property="og:site_name" content="Newres Al Haider">
   <meta property="og:url" content="https://www.newresalhaider.com/post/meditations/">
   <meta property="og:title" content="Meditations in your Pocket | Newres Al Haider">
-  <meta property="og:description" content="An introduction to creating mobile applications with Flutter and Dart, by creating an app for reading and navigating &#34;Mediations&#34; by Marcus Aurelius.
+  <meta property="og:description" content="An introduction to the Flutter framework for creating applications, by building an app for reading &#34;Mediations&#34; by Marcus Aurelius.
 "><meta property="og:image" content="https://www.newresalhaider.com/post/meditations/featured.png">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2020-12-28T00:00:00&#43;01:00">
   
-  <meta property="article:modified_time" content="2020-12-28T00:00:00&#43;01:00">
+  <meta property="article:modified_time" content="2021-01-05T00:00:00&#43;01:00">
   
 
   
@@ -355,9 +355,11 @@
 
   <span class="article-date">
     
+        Last updated on
+    
     <meta content="2020-12-28 00:00:00 &#43;0100 CET" itemprop="datePublished">
-    <time datetime="2020-12-28 00:00:00 &#43;0100 CET" itemprop="dateModified">
-      28 Dec, 2020
+    <time datetime="2021-01-05 00:00:00 &#43;0100 CET" itemprop="dateModified">
+      5 Jan, 2021
     </time>
   </span>
   <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
@@ -470,9 +472,11 @@
 
   <span class="article-date">
     
+        Last updated on
+    
     <meta content="2020-12-28 00:00:00 &#43;0100 CET" itemprop="datePublished">
-    <time datetime="2020-12-28 00:00:00 &#43;0100 CET" itemprop="dateModified">
-      28 Dec, 2020
+    <time datetime="2021-01-05 00:00:00 &#43;0100 CET" itemprop="dateModified">
+      5 Jan, 2021
     </time>
   </span>
   <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
@@ -566,9 +570,9 @@
       <p><a href="https://en.wikipedia.org/wiki/Meditations" target="_blank">Meditations</a> are a series of notes that the Roman emperor <a href="https://en.wikipedia.org/wiki/Marcus_Aurelius" target="_blank">Marcus Aurelius</a>
 wrote for guidance and self-improvement. While it is likely that the emperor wrote them purely for his own benefit, they have been published after his death and contain elements of <a href="https://en.wikipedia.org/wiki/Stoicism" target="_blank">Stoic philosophy</a> that many people have consulted since.</p>
 
-<p>One way achieve a bit of self-improvement, coding-wise, is to pick a small project to do with a new set of tools. In particular, I have found the <a href="https://flutter.dev/" target="_blank">Flutter</a> framework for creating mobile apps very interesting. Unfortunately I did not have the opportunity to do more than just running the given sample apps previously. To bring a change to this I thought it would be a nice small project to create a small app for browsing the text of &ldquo;Meditations&rdquo; in Flutter. I aim to show what I have built in this article, organize my thoughts, and hopefully help others unfamiliar with Flutter to get a small glimpse of what it can do.</p>
+<p>One way achieve a bit of self-improvement, coding-wise, is to pick a small project to do with a new set of tools. In particular, I have found the <a href="https://flutter.dev/" target="_blank">Flutter</a> framework for creating mobile apps very interesting. Unfortunately I did not have the opportunity to explore Flutter much beyond running some <a href="https://flutter.github.io/samples/#" target="_blank">sample apps</a> previously. To bring a change to this I thought it would be a nice small project to create a small app for browsing the text of &ldquo;Meditations&rdquo; in Flutter. I aim to show what I have built in this article, organize my thoughts, and hopefully help others unfamiliar with Flutter to get a small glimpse of what it can do.</p>
 
-<p>The full code of the application built is <a href="https://github.com/newres/meditations" target="_blank">available</a>, but to give preview of what we are building, here is an animation of the functionality of the app:</p>
+<p>To give a preview of the implemented functionality, here is an animation of the functionality of the app:</p>
 
 
 
@@ -586,19 +590,19 @@ wrote for guidance and self-improvement. While it is likely that the emperor wro
 
 </figure>
 
-<p>If one wants to follow along by running the code, or have a similar project in mind is, the first step is to install <a href="https://flutter.dev/" target="_blank">Flutter</a>. There are quite a few dependencies needed for mobile development, but thankfully there is some excellent <a href="https://flutter.dev/docs" target="_blank">documentation</a> available on how to get started from the official Flutter site. For code editing I highly recommend <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> with the Flutter plugin, but other options are also <a href="https://flutter.dev/docs/get-started/editor?tab=androidstudio" target="_blank">available</a>.</p>
+<p>The full code of the application presented in this article is <a href="https://github.com/newres/meditations" target="_blank">available</a> to explore. If one wants to follow along by running the code, or has a similar project in mind, the first step is to install <a href="https://flutter.dev/" target="_blank">Flutter</a>. There are quite a few dependencies needed for mobile development, but thankfully there is some excellent <a href="https://flutter.dev/docs" target="_blank">documentation</a> available on how to get started from the official Flutter site. For code editing I highly recommend <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> with the Flutter plugin, but other options are also <a href="https://flutter.dev/docs/get-started/editor?tab=androidstudio" target="_blank">available</a>.</p>
 
-<p>If everything is installed correctly the <code>flutter</code> command line tool will be available. For this project I intended to create an Android app, but the framework allows for app development for iOS (Apple) phones, as well as desktop and web targets. For Android development, aside from the development toolchain, it is probably good idea to have either an emulator or a device for Android development setup and connected, so one can see the result of the code up and running. In fact, on of the biggest draws of the Flutter framework is <a href="https://flutter.dev/docs/development/tools/hot-reload" target="_blank">Hot Reload</a>, which allows on to make changes and quickly see the results in the running app, without reinstalling everything from scratch.</p>
+<p>If everything is installed correctly the <code>flutter</code> command line tool will be available. For this project I intended to create an Android app, but the framework allows for app development for iOS (Apple) phones, as well as desktop and web targets. For Android development, aside from the development toolchain, it is probably good idea to have either an emulator or a device for Android development setup and connected. This allows us to the result of the code up and running. In fact, on of the biggest draws of the Flutter framework is <a href="https://flutter.dev/docs/development/tools/hot-reload" target="_blank">Hot Reload</a>, which allows on to make changes and quickly see the results in the running app, without reinstalling everything from scratch.</p>
 
-<p>To get started with a fresh project, the command <code>flutter create</code> will create a directory with all the necessary files in the directory of our choosing, while <code>flutter run</code> will ensure that the project is run on the emulator or connected device for testing, debugging and seeing our work. For the &ldquo;Meditations&rdquo; app, we could start by creating a new project named <code>Meditations</code> and making changes from there on.</p>
+<p>To get started with a fresh project, the command <code>flutter create</code> will create a directory with all the necessary files, while <code>flutter run</code> will ensure that the project is run on the emulator or connected device for testing, debugging and seeing our work. For the &ldquo;Meditations&rdquo; app, we could start by creating a new project named <code>Meditations</code> and making changes from there on.</p>
 
-<p>The default generated project will create a bunch of files and directories required for the running app, with a very small example application that has a single button and a screen that shows how many times that button has been pressed (see the <a href="https://flutter.dev/docs/get-started/test-drive?tab=terminal" target="_blank">test drive</a> part of the Flutter docs). The core part are the files <code>main.dart</code> and <code>widget_test.dart</code>, in the <code>lib</code> and <code>test</code> directories respectively. The former is responsible for defining and running the app, while the later exists for testing the functionality.</p>
+<p>The default generated project will create a bunch of files and directories required for an example app, which is a very small application that has a single button and a screen that shows how many times that button has been pressed (see the <a href="https://flutter.dev/docs/get-started/test-drive?tab=terminal" target="_blank">test drive</a> part of the Flutter docs). The core part are the files <code>main.dart</code> and <code>widget_test.dart</code>, in the <code>lib</code> and <code>test</code> directories respectively. The former is responsible for defining and running the app, while the later exists for testing the functionality.</p>
 
-<p>In order to get the Meditations app up and running, we have four files in total. Similarly to the default project we have a <code>main.dart</code> and a <code>widget_test.dart</code> for defining and testing our app, but with different contents. In addition, we also have a <code>meditations.dart</code> file where we define how to search and navigate the text of the Meditations, as well as the file <code>meditations_test.dart</code> to test this search and navigation functionality.</p>
+<p>In order to get the Meditations app up and running, we will have four files in total. Similarly to the default project we have a <code>main.dart</code> and a <code>widget_test.dart</code> for defining and testing our app, but with different contents. In addition, we also have a <code>meditations.dart</code> file where we define how to search and navigate the text of the Meditations, as well as the file <code>meditations_test.dart</code> to test this search and navigation functionality.</p>
 
 <p>Although we do not have to go full <a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank">Test Driven Development (TDD)</a> for such a small demo application, it is a good idea and practice to start off writing some tests to define what behavior we want to show.</p>
 
-<p>We first start describing our application by walking through (some of) the contents of <code>meditations_test.dart</code>. It also gives us an opportunity to ease us into the <a href="https://dart.dev/" target="_blank">Dart language</a> of the Flutter framework in case if the reader is unfamiliar with it. It would be too much for this short article to fully explain the Dart language, for which there are some excellent <a href="https://dart.dev/guides" target="_blank">guides</a>, but hope I can make the functionality clear enough, even for readers completely new to it.</p>
+<p>We first start describing our application by walking through (some of) the contents of <code>meditations_test.dart</code>. It also gives us an opportunity to ease us into the <a href="https://dart.dev/" target="_blank">Dart language</a> that the Flutter framework uses, in case if the reader is unfamiliar with it. It would be too much for this short article to fully explain the Dart language, for which there are some excellent <a href="https://dart.dev/guides" target="_blank">guides</a>, but I hope I can make the functionality clear enough, even for readers completely new to it.</p>
 
 <pre><code class="language-dart">import 'package:meditations/mediations.dart';
 import 'package:test/test.dart';
@@ -641,11 +645,11 @@ import 'package:test/test.dart';
   });
 </code></pre>
 
-<p>In order to understand what these tests want to achieve, first we need to dive deeper about what functionality that is implemented in <code>Meditations.dart</code> that is under test. The purpose of it is to easily find a particular part in the text of &lsquo;Meditations&rsquo;. &lsquo;Meditations&rsquo; itself is divided into a total of 12 Books, each with multiple Sections of text. Instead of showing the full text of the book on a single screen we want to make the user able to navigate between the text of each of these sections.</p>
+<p>In order to understand what these tests want to achieve, first we need to dive deeper about what functionality that is implemented in <code>Meditations.dart</code> which we intend to test. The purpose of it is to easily find a particular part in the text of &lsquo;Meditations&rsquo;. &lsquo;Meditations&rsquo; itself is divided into a total of 12 books, each with multiple sections of text. Instead of showing the full text of all books on a single screen we want to make the user able to navigate between the text of each of these sections.</p>
 
-<p>Part of implementing this navigation process requires having the ability to check, for a given book number, whether that book exists. As in Dart indexes start at 0, the method <code>existBook</code> should return <code>true</code> for any integer number between 0 and 11, and false otherwise. Later on we will show how we will turn the book and section numbers back to 1-indexed ones in the UI of the app. Similarly to checking the existence of a book, we want to able to check if a specific section in a specific book exists, which the method <code>existBookSection</code> should provide.</p>
+<p>Part of implementing this navigation process requires having the ability to check, for a given book number, whether that book exists. As in Dart indexes start at 0, the method <code>existBook</code> should return <code>true</code> for any integer from 0 to 11, and false otherwise. Later on we will show how we will turn the book and section numbers back to 1-indexed ones in the UI of the app. Similarly to checking the existence of a book, we want to able to check if a specific section in a specific book exists, which the method <code>existBookSection</code> should provide.</p>
 
-<p>Of course the functionality should not end here. In particular we also want to be able to get the text of the first and last sections of Meditations. In order to keep the return of these search results simple in our app, we also return the book and section numbers (0-indexed) along with the text where possible as well (even though for the first section, we should already know the book and section numbers).</p>
+<p>Of course the functionality should not end here. In particular we also want to be able to get the text of the first and last sections of Meditations. In order to keep the return of these search results simple, we also return the book and section numbers (0-indexed) along with the text where possible as well, even though for the first section, we should already know the book and section numbers.</p>
 
 <p>As Dart is an object oriented language, we create a specific object of the class <code>BookSectionText</code> to hold these elements (more on the definition of this class a bit later).</p>
 
@@ -672,7 +676,7 @@ import 'package:test/test.dart';
   });
 </code></pre>
 
-<p>The final set of tests we are going over are for the methods for finding the previous section or the next one. This seems generally a straightforward thing to do, when moving to the previous or next section in the same book. However for convenience we also want to move to the next, or previous, book if the previous or next section in the current book is unavailable. So the functions for <code>nextSection</code> and <code>previousSection</code> has to have this &lsquo;roll-over&rsquo; functionality included to make their use in the UI that we are going to build handy. However even with roll-over, there are cases when we ran out of sections to show (e.g.: when wanting to get the next section after the last one). In this case we use an object of the class <code>NoSuchBookSection</code> to indicate this.</p>
+<p>The final set of tests we are going over are for the methods for finding the previous section and the next one. This seems generally a straightforward thing to do, when moving to the previous or next section in the same book. However for convenience we also want to move to the next, or previous, book if the these are unavailable in the current book, but exist in another one. So the functions for <code>nextSection</code> and <code>previousSection</code> has to have this &lsquo;roll-over&rsquo; functionality included which will make for a nicer user interface. However even with roll-over, there are cases when we ran out of sections to show (e.g.: when wanting to get the next section after the last one). In this case we use an object of the class <code>NoSuchBookSection</code> to indicate this.</p>
 
 <p>Below are some tests for the <code>nextSection</code> and <code>previousSection</code> functionality:</p>
 
@@ -728,7 +732,7 @@ import 'package:test/test.dart';
 }
 </code></pre>
 
-<p>Now that we got the tests for the core functionality of navigating the text of Meditations done we will go over the actual implementation of want we aim to test in the file &lsquo;meditations.dart&rsquo;.</p>
+<p>Now that we got the tests for the core functionality of navigating the text of Meditations done. Next we will go over the actual implementation of what we aim to test in the file <code>meditations.dart</code>.</p>
 
 <p>First off are the class definitions for the classes that we mentioned above:</p>
 
@@ -745,11 +749,11 @@ class BookSectionText extends BookSectionSearchResult {
 class NoSuchBookSection extends BookSectionSearchResult {}
 </code></pre>
 
-<p>If the reader is familiar with an object oriented language, the definitions should be reasonably straightforward. The search results are represented by two types of classes that we used in our tests. An instance of a class <code>NoSuchBookSection</code> represents that no valid text could be returned and an instance <code>BookSectionText</code> represents the search results that returned the text of a specific section and book/section numbers. These are both subclasses of the class <code>BookSectionSearchResult</code> which allows us easily define the return type of the methods <code>getPreviousSection</code> and <code>getNextSection</code>.</p>
+<p>If the reader is familiar with an object oriented language, the definitions should be reasonably straightforward. The search results are represented by two types of classes that we used in our tests. An instance of a class <code>NoSuchBookSection</code> represents that no valid text could be returned and an instance <code>BookSectionText</code> represents the search results that returned the text of a specific section and its book/section numbers. These are both subclasses of the class <code>BookSectionSearchResult</code> which allows us easily define the return type of the methods <code>getPreviousSection</code> and <code>getNextSection</code>.</p>
 
 <p>Also note that the code here contains single line comments which are denoted after a <code>//</code> in Dart.</p>
 
-<p>Next up is the definition of <code>Meditations</code> class that describes the text of Meditations by Marcus Aurelius and how to access them.</p>
+<p>Next up is the definition of the <code>Meditations</code> class that describes the text of Meditations by Marcus Aurelius and how to access them.</p>
 
 <p>It starts with the snippet:</p>
 
@@ -759,11 +763,11 @@ class NoSuchBookSection extends BookSectionSearchResult {}
     // End of snippet. 
 </code></pre>
 
-<p>Writing the full text of the representation is too much for this article. Even in the <a href="https://github.com/newres/meditations" target="_blank">code of this demo app</a> we only represent the full text of the first and last books in detail.</p>
+<p>Of course quoting the full text of the representation is too much for this article. Even in the <a href="https://github.com/newres/meditations" target="_blank">code of this demo app</a> we only represent the full text of the first and last books in detail at the moment, although the structure to implement every section exists.</p>
 
 <p>However we can say we represent the text as a list of books, where each book is itself a list of sections which are represented by the text of these sections.</p>
 
-<p>In Dart, we can represent a list as a set of items in between square brackets <code>[]</code> such as follows:</p>
+<p>In Dart, we can represent a list as a set of items in between square brackets, i.e. <code>[]</code>, such as follows:</p>
 
 <pre><code class="language-dart">  static final books = [
     book1,
@@ -902,9 +906,9 @@ class NoSuchBookSection extends BookSectionSearchResult {}
 
 <p>We have now covered two of the four main files responsible for the functionality of our app, notably the functionality to navigate the text of Meditations and the tests for them. The purpose of the other two is to create the app using this functionality for navigating the text with the Flutter framework (<code>main.dart</code>) and the tests for the app (<code>widget_test.dart</code>).</p>
 
-<p>Let us start with the test first. One of the nice features of the Flutter framework is that it has one can test the full app nearly as easily than any other Dart code.</p>
+<p>Let us start with the test first. One of the nice features of the Flutter framework is that one can test the full app nearly as easily than any other Dart code.</p>
 
-<p>First we start importing the functionality for testing as well as our main app we aim to test:</p>
+<p>First we start importing the functionality for testing, as well as our main app that we aim to test:</p>
 
 <pre><code class="language-dart">import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -931,10 +935,10 @@ import 'package:meditations/main.dart';
 
 <p>In particular when we are navigating the text of Meditations, we tap the icons for first, previous, next and last in the bottom navigation bar.</p>
 
-<p>On the screen not only do we navigate to the right text, we also show a description of which book and which section we are currently reading.
-We use this information to create a navigation test, as once the right icon has been tapped, we should be able to predict and check the book and section numbers that should now show on screen.</p>
+<p>On the screen we not only navigate to the right text, but we also show the number of the book and section of the text that we are currently reading.
+We use this information to create a navigation test, as once the right icon has been tapped, we should be able to predict and check the book and section numbers that should now be on screen.</p>
 
-<p>The test is all tied together with the Testing functionality of Flutter to setting up the widgets (the elements of interaction) of the app for testing, checking the redraws and the output of it (more documentation on testing Flutter widgets can be found in the <a href="https://flutter.dev/docs/cookbook/testing/widget/introduction" target="_blank">Flutter documentation</a>). The code of this for the app can be seen as below.</p>
+<p>The test is all tied together with the test functionality of Flutter for setting up the widgets (the elements of interaction) of the app for testing, redrawing the elements after a (simulated) interaction and checking them (more documentation on testing Flutter widgets can be found in the <a href="https://flutter.dev/docs/cookbook/testing/widget/introduction" target="_blank">Flutter documentation</a>). The code of this for the app can be seen as below.</p>
 
 <pre><code class="language-dart">void main() {
   testWidgets('Bottom navigation smoke test', (WidgetTester tester) async {
@@ -979,7 +983,7 @@ We use this information to create a navigation test, as once the right icon has 
 }
 </code></pre>
 
-<p>Now all that remains is to show how the actual app is put together. We will go through the code of it here, found in <code>main.dart</code>, step by step, to describe how everything fits together.</p>
+<p>Now all that remains is to show how the actual app is put together. We will go through the code of it here, found in <code>main.dart</code>, step by step.</p>
 
 <p>First we start with the imports of the widget library we are using as well as our implementation of accessing the text of Meditations.</p>
 
@@ -995,9 +999,9 @@ import 'mediations.dart';
 }
 </code></pre>
 
-<p>As mentioned in our description of the test the app consists of a tree of <a href="https://flutter.dev/docs/development/ui/widgets-intro" target="_blank">widgets</a> (elements of interaction), the root of which we identify with <code>MyApp</code> in the code. This MyApp widget is the one that gets run by the main method seen above.</p>
+<p>As mentioned in our description of the test, this app consists of a tree of <a href="https://flutter.dev/docs/development/ui/widgets-intro" target="_blank">widgets</a> (elements of interaction), the root of which we identify with <code>MyApp</code> in the code. This MyApp widget is the one that gets run by the main method seen above.</p>
 
-<p>The widgets themselves have properties that contain the elements that the widget is using, for example the title of the app, the theme of the app, the other widgets it uses such as a widget for a home page. The main job of the widget is to implement a specific build function that describes how these various elements fit together. In the case of <code>MyApp</code> we are creating a <a href="https://api.flutter.dev/flutter/material/MaterialApp-class.html" target="_blank">MaterialApp</a> customized to our specific needs. This includes a home page for navigating the text of Mediations, as well as a theme that uses a color (hopefully) close enough to <a href="https://en.wikipedia.org/wiki/Tyrian_purple" target="_blank">Imperial purple</a>.</p>
+<p>The widgets themselves have properties that contain the elements that the widget is using. For example the title of the app, the theme of the app and the other widgets it uses such as a widget for a home page. The main job of the widget is to implement a specific build function that describes how these various elements fit together. In the case of <code>MyApp</code> we are creating a <a href="https://api.flutter.dev/flutter/material/MaterialApp-class.html" target="_blank">MaterialApp</a> customized to our specific needs. This includes a home page for navigating the text of Mediations, as well as a theme that uses a color (hopefully) close enough to <a href="https://en.wikipedia.org/wiki/Tyrian_purple" target="_blank">Imperial purple</a>.</p>
 
 <pre><code class="language-dart">class MyApp extends StatelessWidget {
   // The app consists of a tree of widgets, of which this is the root.
@@ -1015,13 +1019,13 @@ import 'mediations.dart';
 }
 </code></pre>
 
-<p>The previous Widget does not carry an internal, mutable, state directly in itself (hence why it is an extension of a <a href="https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html" target="_blank">StatelessWidget</a>). However, as one can deduce from our tests, we want to keep information such as the current book and section number around, and display these.</p>
+<p>The previous Widget does not carry an internal, mutable, state directly in itself (hence why it is an extension of a <a href="https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html" target="_blank">StatelessWidget</a>). However, as one can deduce from our tests, we want to keep information such as the current book and section number around and display these.</p>
 
-<p>In order to get this done, we use an extension of <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html" target="_blank">StatefulWidget</a> named <code>MyHomePage</code> which carries the state. The state itself contains the elements of book number, section number and the text to be shown on page. In addition there are methods for manipulating the state and showing it.</p>
+<p>In order to get this done, we use an extension of <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html" target="_blank">StatefulWidget</a> named <code>MyHomePage</code> which carries the state. The state itself contains the elements of book number, section number and the text to be shown on page. In addition, there are methods for manipulating the state and showing it.</p>
 
-<p>For setting the state, we make use of all the functionality we built in <code>meditations.dart</code> to search for the next (or previous, first, last) section and change the state accordingly. Each of these state setting methods are inside a call to <code>setState</code> which makes the Flutter framework be aware of the state changes, and if required it can redraw the relevant widgets to show these changes.</p>
+<p>For setting the state, we make use of all the functionality we built in <code>meditations.dart</code> to search for the next (or previous, first, last) section and change the state accordingly. Each of these state setting methods are inside a call to <code>setState</code> which makes the Flutter framework be aware of the state changes and, if required, it can redraw the relevant widgets to show these changes.</p>
 
-<p>The methods for showing the state are reasonably straightforward. we mostly use these to translate the internally 0-indexed book- and section numbers into 1 indexed ones to match the actual numbers for the Meditations.</p>
+<p>The methods for showing the state are reasonably straightforward. we mostly use these to translate the internally 0-indexed book- and section numbers into 1 indexed ones to match the actual numbers used in Meditations (albeit not with Roman Numerals though that would be a nice future feature for the app).</p>
 
 <p>The final part is making sure there are widgets for showing the state and interacting with the state. As one can see in the animation of the screen, as well is in the test, we have a section showing the current section and page number, a text area that scrolls showing the current section and a bottom navigation bar to change the current section.</p>
 
@@ -1191,7 +1195,7 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
 }
 </code></pre>
 
-<p>This is pretty much the full description of the Meditations app. As one can see, a small application can be built up from relatively small amount of code. My experience with the Flutter framework was very pleasant: most things are not pretty straightforward to do, I like the emphasis on getting tests up and running straight from the box and the large set of widgets get the UI up and running pretty quickly. My biggest pain point was the setup of the whole Android tool-chain itself. Although there were some additional features to the Dart language (such as the upcoming, at the time of this writing, <a href="https://dart.dev/null-safety" target="_blank">Null Safety</a>) the language is easy to pick up and become productive with.</p>
+<p>This is pretty much the full description of the Meditations app. It shows how a small application can be built up and structured. My experience with the Flutter framework was very pleasant. Most things I wanted to do were pretty straightforward and there is a large amount of documentation for the framework and setup. I like the emphasis on getting tests up and running straight from the box and the large set of pre-made widgets help a lot with getting a workable UI going very quickly. My biggest pain point was the setup of the whole Android tool-chain itself. Although there were some additional features to the Dart language (such as the upcoming, at the time of this writing, <a href="https://dart.dev/null-safety" target="_blank">Null Safety</a>) the language is easy to pick up and become productive with.</p>
 
 <p>Of course there are tons of possible extensions to the app. Aside from including the full text of Meditations, one can improve upon the navigation, add features such as bookmarking, random section selection and more. Refactoring and extending the app so it could load in other advice/text in similar format is also a possibility.</p>
 
@@ -1208,13 +1212,15 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
   
   <a class="badge badge-light" href="/tags/philosophy/">philosophy</a>
   
-  <a class="badge badge-light" href="/tags/android/">android</a>
+  <a class="badge badge-light" href="/tags/mobile/">mobile</a>
   
   <a class="badge badge-light" href="/tags/dart/">Dart</a>
   
   <a class="badge badge-light" href="/tags/flutter/">Flutter</a>
   
   <a class="badge badge-light" href="/tags/app-development/">app development</a>
+  
+  <a class="badge badge-light" href="/tags/android/">Android</a>
   
 </div>
 
@@ -1410,6 +1416,8 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>
         
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dart.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/smalltalk.min.js"></script>
         
       
 
