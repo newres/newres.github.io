@@ -13,6 +13,15 @@
     
     
     <item>
+      <title>The Pharo Prince of Bel-Air</title>
+      <link>https://www.newresalhaider.com/post/pharo-prince/</link>
+      <pubDate>Sun, 24 Jan 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://www.newresalhaider.com/post/pharo-prince/</guid>
+      <description>Recently I have been aiming to explore the Pharo programming language. The close combination between the language and the Integrated Development Environment (IDE), makes it quite unlike most other languages that I have encountered. You can, for example, inspect every program element in a visual environment, even on a currently running program. While exploring, I spent much time using the Playground feature, where you easily start executing, and interacting with, small snippets of code.</description>
+    </item>
+    
+    <item>
       <title>Meditations in your Pocket</title>
       <link>https://www.newresalhaider.com/post/meditations/</link>
       <pubDate>Mon, 28 Dec 2020 00:00:00 +0100</pubDate>
