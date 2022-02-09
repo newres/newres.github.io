@@ -1,1027 +1,271 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
+
 <head>
-
   <meta charset="utf-8">
+  <title>Newres Al Haider</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Source Themes Academic 3.2.0">
-  <meta name="generator" content="Hugo 0.52" />
-  <meta name="author" content="Newres Al Haider">
-
-  
-  
-  
-  
-    
-  
-  <meta name="description" content="Discovering the benefits of Common Lisp by figuring out what can one dig up.
-">
-
-  
-  <link rel="alternate" hreflang="en-us" href="https://www.newresalhaider.com/post/common-treasure/">
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-  
-  <meta name="theme-color" content="#EF525B">
-  
-
-  
-  
-  
-  
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
-
-    
-    
-    
-      
-    
-    
-      
-      
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
-      
-    
-
-    
-
-    
-
-  
-
-  
-  
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
-  
-
-  <link rel="stylesheet" href="/styles.css">
-  
-  <link rel="stylesheet" href="/css/post.css">
-  
-
-  
-  
-  
-
-  
-  <link rel="alternate" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
-  <link rel="feed" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
-  
-
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="icon" type="image/png" href="/img/icon.png">
-  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
-
-  <link rel="canonical" href="https://www.newresalhaider.com/post/common-treasure/">
-
-  
-
-  
-  
-  
-  
-
-  
-  
-  
-    
-  
-  <meta property="twitter:card" content="summary_large_image">
-  
-  <meta property="twitter:site" content="@newresa">
-  <meta property="twitter:creator" content="@newresa">
-  
-  <meta property="og:site_name" content="Newres Al Haider">
-  <meta property="og:url" content="https://www.newresalhaider.com/post/common-treasure/">
-  <meta property="og:title" content="Excavating a Common Treasure | Newres Al Haider">
-  <meta property="og:description" content="Discovering the benefits of Common Lisp by figuring out what can one dig up.
-"><meta property="og:image" content="https://www.newresalhaider.com/post/common-treasure/featured.jpg">
-  <meta property="og:locale" content="en-us">
-  
-  <meta property="article:published_time" content="2018-06-30T00:00:00&#43;02:00">
-  
-  <meta property="article:modified_time" content="2018-06-30T00:00:00&#43;02:00">
-  
-
-  
-
-  
-
-  <title>Excavating a Common Treasure | Newres Al Haider</title>
-
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+  <link href="https:&#x2F;&#x2F;www.newresalhaider.com/style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.newresalhaider.com/scripts/menu.js"></script>
 </head>
-<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
-  <aside class="search-results" id="search">
-  <div class="container">
-    <section class="search-header">
 
-      <div class="row no-gutters justify-content-between mb-3">
-        <div class="col-6">
-          <h1>Search</h1>
-        </div>
-        <div class="col-6 col-search-close">
-          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
-        </div>
-      </div>
+<body class="has-navbar-fixed-top">
 
-      <div id="search-box">
-        
-        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
-        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
-        
-      </div>
-
-    </section>
-    <section class="section-search-results">
-
-      <div id="search-hits">
-        
-      </div>
-
-    </section>
-  </div>
-</aside>
-
-
-<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
-  <div class="container">
-
-    
-      <a class="navbar-brand" href="/">Newres Al Haider</a>
-      
-      <button type="button" class="navbar-toggler" data-toggle="collapse"
-              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span><i class="fas fa-bars"></i></span>
-      </button>
-      
-
-    
-    <div class="collapse navbar-collapse" id="navbar">
-
-      
-      
-      <ul class="navbar-nav ml-auto">
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#about">
-            
-            <span>Home</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#posts">
-            
-            <span>Posts</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#projects">
-            
-            <span>Projects</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#publications_selected">
-            
-            <span>Publications</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#contact">
-            
-            <span>Contact</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-      
-
-        
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
-        </li>
-        
-
-        
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
-        </li>
-        
-
-      </ul>
-
+    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="title is-3">
+                Newres Al Haider
+            </h1>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="NavbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
     </div>
-  </div>
+    <div id="NavbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/">
+                <h2 class="subtitle is-5">
+                    Home
+                </h2>
+            </a>
+            <a class="navbar-item" href="/post/">
+                <h2 class="subtitle is-5">
+                    Posts
+                </h2>
+            </a>
+            <a class="navbar-item" href="/project/">
+                <h2 class="subtitle is-5">
+                    Projects
+                </h2>
+            </a>
+            <a class="navbar-item" href="/publication/">
+                <h2 class="subtitle is-5">
+                    Publications
+                </h2>
+            </a>
+        </div>
+    </div>
 </nav>
-
-
-<article class="article" itemscope itemtype="http://schema.org/Article">
-
-  
-
-
-
-
-
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+    Excavating a Common Treasure
+</h1>
+<p class="subtitle"><strong>2018-06-30</strong></p>
+<p>History is full of legends of ancient treasures and powerful artifacts, lost to time or hidden by purpose, that would bring glory, power and riches to their discoverer.</p>
+<figure class=centeredfig>
+    <img src=winged-bull.jpg>
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-  
-  
-<div class="article-container pt-3">
-  <h1 itemprop="name">Excavating a Common Treasure</h1>
-
-  
-
-  
-    
-
-<div class="article-metadata">
-
-  
-  
-  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Newres Al Haider">
-  </span>
-  
-
-  <span class="article-date">
-    
-    <meta content="2018-06-30 00:00:00 &#43;0200 CEST" itemprop="datePublished">
-    <time datetime="2018-06-30 00:00:00 &#43;0200 CEST" itemprop="dateModified">
-      30 Jun, 2018
-    </time>
-  </span>
-  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Newres Al Haider">
-  </span>
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    17 min read
-  </span>
-  
-
-  
-  
-
-  
-
-  
-  
-<div class="share-box" aria-hidden="true">
-  <ul class="share">
-    <li>
-      <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Excavating%20a%20Common%20Treasure&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcommon-treasure%2f"
-         target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </li>
-    <li>
-      <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcommon-treasure%2f"
-         target="_blank" rel="noopener">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-    </li>
-    <li>
-      <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcommon-treasure%2f&amp;title=Excavating%20a%20Common%20Treasure"
-         target="_blank" rel="noopener">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-    </li>
-    <li>
-      <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcommon-treasure%2f&amp;title=Excavating%20a%20Common%20Treasure"
-         target="_blank" rel="noopener">
-        <i class="fab fa-weibo"></i>
-      </a>
-    </li>
-    <li>
-      <a class="email"
-         href="mailto:?subject=Excavating%20a%20Common%20Treasure&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fcommon-treasure%2f">
-        <i class="fas fa-envelope"></i>
-      </a>
-    </li>
-  </ul>
-</div>
-
-
-  
-
-</div>
-
-    
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-  
-</div>
-
-
-
-  <div class="article-container">
-
-    <div class="article-style" itemprop="articleBody">
-      <p>History is full of legends of ancient treasures and powerful artifacts, lost to time or hidden by purpose, that would bring glory, power and riches to their discoverer.</p>
-
-
-
-
-<figure>
-
-<img src="/img/post/2018/common-treasure/winged-bull.jpg" />
-
-
-
-<figcaption data-pre="Figure " data-post=":" >
-  <h4>A winged bull depicted on an on archaeological artifact from the Assyrian empire between 1400 and 1200 BC. Cylinder Seal with Winged Bull - Walters Art Museum Licensed under CC0.</h4>
-  
-</figcaption>
-
+    <figcaption>
+        
+        <h4>A winged bull depicted on an on archaeological artifact from the Assyrian empire between 1400 and 1200 BC. Cylinder Seal with Winged Bull - Walters Art Museum Licensed under CC0.</h4>
+        
+        
+    </figcaption>
 </figure>
-
+<!-- {{< figure src="/img/post/2018/common-treasure/winged-bull.jpg" title="A winged bull depicted on an on archaeological artifact from the Assyrian empire between 1400 and 1200 BC. Cylinder Seal with Winged Bull - Walters Art Museum Licensed under CC0." >}} -->
 <p>Although the history of software development is much shorter than the history of mankind, there already exists artifacts that have near mythological status when it comes to software development, yet often go hidden underneath the surface. One of these is the language of Common Lisp.</p>
-
-<p>Common Lisp is a language originally from the early 80s, and was a standardization of many dialects of the Lisp programming language, which explains both the Common and Lisp part of the name. Lisp itself is one of the oldest general purpose programming languages, first specified in 1958. From Lisp many ideas that we consider common in other languages were popularized, such as conditionals (the <code>if and else</code> structure), notion of functions as first class elements, and many others (see this <a href="http://www.paulgraham.com/diff.html" target="_blank">article</a> on more of these ideas). Common Lisp is also often <a href="http://www.gigamonkeys.com/book/introduction-why-lisp.html" target="_blank">mentioned</a> as an amazing and fun language to learn, which makes it the clear-cut choice for this article.</p>
-
-<p>As the story goes it gives the user untold levels of productivity and joy of development. One other big advantage is that Common Lisp used to be the language of A.I. research. There is lots of existing code out there for systems on the subject of knowledge representation, reasoning and planning. Given the resurgence of fields such as a <a href="https://www.w3.org/standards/semanticweb/" target="_blank">Semantic Web</a> that make use of such A.I. systems, learning from such tools and techniques, or even using them directly, can be invaluable. In this post, I aim to find out a very small portion of the riches we can dig up using Common Lisp, and to share this experience with the reader.</p>
-
-
-
-
-<figure>
-
-<img src="/img/post/2018/common-treasure/seal.jpg" />
-
-
-
-<figcaption data-pre="Figure " data-post=":" >
-  <h4>Cylinder Seals were common objects that were used to designate ownership in ancient Mesopotamia. Although describing to a different notion of &lsquo;common&rsquo; these show remarkable of craftsmanship that we hope to introduce ourselves to in Common Lisp. Cylinder Seal with Two Heroes and a Tree - Walters Art Museum Licensed under CC0.</h4>
-  
-</figcaption>
-
+<p>Common Lisp is a language originally from the early 80s, and was a standardization of many dialects of the Lisp programming language, which explains both the Common and Lisp part of the name. Lisp itself is one of the oldest general purpose programming languages, first specified in 1958. From Lisp many ideas that we consider common in other languages were popularized, such as conditionals (the <code>if and else</code> structure), notion of functions as first class elements, and many others (see this <a href="http://www.paulgraham.com/diff.html">article</a> on more of these ideas). Common Lisp is also often <a href="http://www.gigamonkeys.com/book/introduction-why-lisp.html">mentioned</a> as an amazing and fun language to learn, which makes it the clear-cut choice for this article.</p>
+<p>As the story goes it gives the user untold levels of productivity and joy of development. One other big advantage is that Common Lisp used to be the language of A.I. research. There is lots of existing code out there for systems on the subject of knowledge representation, reasoning and planning. Given the resurgence of fields such as a <a href="https://www.w3.org/standards/semanticweb/">Semantic Web</a> that make use of such A.I. systems, learning from such tools and techniques, or even using them directly, can be invaluable. In this post, I aim to find out a very small portion of the riches we can dig up using Common Lisp, and to share this experience with the reader. </p>
+<figure class=centeredfig>
+    <img src=seal.jpg>
+    
+    <figcaption>
+        
+        <h4>Cylinder Seals were common objects that were used to designate ownership in ancient Mesopotamia. Although describing to a different notion of &#x27;common&#x27; these show remarkable of craftsmanship that we hope to introduce ourselves to in Common Lisp. Cylinder Seal with Two Heroes and a Tree - Walters Art Museum Licensed under CC0.</h4>
+        
+        
+    </figcaption>
 </figure>
-
-<p>To add as a disclamer, I do have experience with a similar language, <a href="https://clojure.org/" target="_blank">Clojure</a> that I use in my day-to-day programming, as well as with <a href="https://www.gnu.org/software/emacs/" target="_blank">Emacs</a> (namely <a href="http://spacemacs.org/" target="_blank">Spacemacs</a>), so I probably have some head start in using and editing the language. Nonethess I aim to make this introduction accessible to readers without such knowledge.</p>
-
-<p>With any treasure hunt, preparation is often key. As we are unfamiliar with the language itself it is good to read guides and tutorials to prepare. The guide to selecting the right equipment for our adventure is the <a href="https://lispcookbook.github.io/cl-cookbook/getting-started.html" target="_blank">cl-cookbook</a>, which describes how to get started with Common Lisp.</p>
-
-<p>Common Lisp is a language with multiple implementations. As recommended by our guide we are using <a href="http://www.sbcl.org/" target="_blank">Steel Bank Common Lisp (SBCL)</a> as distribution and using <a href="https://github.com/roswell/roswell/wiki" target="_blank">Roswell</a> to manage it. Alternatively a more straightforward install is <a href="https://portacle.github.io/" target="_blank">Portacle</a> that could be used.</p>
-
-<p>Next is testing whether our implementation is working. We run the Read–Eval–Print Loop (REPL), which in the case of Roswell can be done with the command <code>ros run</code>. What the REPL allows us to do is interactively develop our code by reading our input, evaluating it and printing the results. This is one of the many features in programming that originated with Lisp, but has since made its way to many other languages.</p>
-
-<p>Now the question is how we should write Common Lisp. One really nice resource for quickly familiarizing with new languages is Learn X in Y minutes, which also has a nice <a href="https://learnxinyminutes.com/docs/common-lisp/" target="_blank">introduction to Common Lisp</a>. One of the most striking features of a Lisp, is the syntax of it. Elements are either atoms, that evaluate to themselves, such as the number <code>4</code> or s-expressions which are a list of expressions in brackets, such as <code>(+ 3 2)</code>. Atoms evaluate to themselves, so if we write <code>4</code> in the REPL, we get <code>4</code> returned back. For s-expressions they are in the form of <code>(function param1 param2 ...)</code>, so in the case of <code>(+ 3 2)</code> this will evaluate to <code>5</code>. One can of course nest these forms, for example <code>(+ 3 (+ 3 2))</code> will result in <code>8</code>. In addition to functions there are macros available creating completely different forms to be translated into code. We will see some examples of this later in the article.</p>
-
-<p>With the REPL now working it is time to set up a project where we can write down all the code we need for our digging. According to our cookbook tutorial we can do this from the REPL, by getting <a href="https://github.com/fukamachi/cl-project" target="_blank">cl-project</a>, and using it.</p>
-
-<pre><code>(ql:quickload &quot;cl-project&quot;)
-(cl-project:make-project #P&quot;./common-treasure&quot;)
-</code></pre>
-
+<!-- {{< figure src="/img/post/2018/common-treasure/seal.jpg" title="Cylinder Seals were common objects that were used to designate ownership in ancient Mesopotamia. Although describing to a different notion of 'common' these show remarkable of craftsmanship that we hope to introduce ourselves to in Common Lisp. Cylinder Seal with Two Heroes and a Tree - Walters Art Museum Licensed under CC0." >}} -->
+<p>To add as a disclamer, I do have experience with a similar language, <a href="https://clojure.org/">Clojure</a> that I use in my day-to-day programming, as well as with <a href="https://www.gnu.org/software/emacs/">Emacs</a> (namely <a href="http://spacemacs.org/">Spacemacs</a>), so I probably have some head start in using and editing the language. Nonethess I aim to make this introduction accessible to readers without such knowledge. </p>
+<p>With any treasure hunt, preparation is often key. As we are unfamiliar with the language itself it is good to read guides and tutorials to prepare. The guide to selecting the right equipment for our adventure is the <a href="https://lispcookbook.github.io/cl-cookbook/getting-started.html">cl-cookbook</a>, which describes how to get started with Common Lisp.</p>
+<p>Common Lisp is a language with multiple implementations. As recommended by our guide we are using <a href="http://www.sbcl.org/">Steel Bank Common Lisp (SBCL)</a> as distribution and using <a href="https://github.com/roswell/roswell/wiki">Roswell</a> to manage it. Alternatively a more straightforward install is <a href="https://portacle.github.io/">Portacle</a> that could be used.</p>
+<p>Next is testing whether our implementation is working. We run the Read–Eval–Print Loop (REPL), which in the case of Roswell can be done with the command <code>ros run</code>. What the REPL allows us to do is interactively develop our code by reading our input, evaluating it and printing the results. This is one of the many features in programming that originated with Lisp, but has since made its way to many other languages. </p>
+<p>Now the question is how we should write Common Lisp. One really nice resource for quickly familiarizing with new languages is Learn X in Y minutes, which also has a nice <a href="https://learnxinyminutes.com/docs/common-lisp/">introduction to Common Lisp</a>. One of the most striking features of a Lisp, is the syntax of it. Elements are either atoms, that evaluate to themselves, such as the number <code>4</code> or s-expressions which are a list of expressions in brackets, such as <code>(+ 3 2)</code>. Atoms evaluate to themselves, so if we write <code>4</code> in the REPL, we get <code>4</code> returned back. For s-expressions they are in the form of <code>(function param1 param2 ...)</code>, so in the case of <code>(+ 3 2)</code> this will evaluate to <code>5</code>. One can of course nest these forms, for example <code>(+ 3 (+ 3 2))</code> will result in <code>8</code>. In addition to functions there are macros available creating completely different forms to be translated into code. We will see some examples of this later in the article.</p>
+<p>With the REPL now working it is time to set up a project where we can write down all the code we need for our digging. According to our cookbook tutorial we can do this from the REPL, by getting <a href="https://github.com/fukamachi/cl-project">cl-project</a>, and using it. </p>
+<pre data-lang="lisp" style="background-color:#2b303b;color:#c0c5ce;" class="language-lisp "><code class="language-lisp" data-lang="lisp"><span>(ql:quickload &quot;</span><span style="color:#a3be8c;">cl-project</span><span>&quot;)
+</span><span>(cl-project:make-project </span><span style="color:#d08770;">#P&quot;./common-treasure&quot;</span><span>)
+</span></code></pre>
 <p>This will give us the outline of project in the <code>common-treasure</code> directory. The files generated include a readme, systems for the project itself as well as tests and of course some skeletons for a test and a package itself respectively.</p>
-
 <p>First we are going to start off figuring out the package itself. Like in many other languages, functionality can be grouped together units, in this case packages. The generated file outline looks like this:</p>
-
-<pre><code>(defpackage common-treasure
-  (:use :cl))
-(in-package :common-treasure)
-
-;; blah blah blah.
-</code></pre>
-
+<pre data-lang="lisp" style="background-color:#2b303b;color:#c0c5ce;" class="language-lisp "><code class="language-lisp" data-lang="lisp"><span>(</span><span style="color:#96b5b4;">defpackage</span><span> common-treasure
+</span><span>  (:use :cl))
+</span><span>(</span><span style="color:#96b5b4;">in-package</span><span> :common-treasure)
+</span><span>
+</span><span style="color:#65737e;">;; blah blah blah.
+</span></code></pre>
 <p>From the looks of it, it says to us that it defines a package named <code>common-treasure</code> using <code>:cl</code>, which I assume is another package. There is also a call to <code>in-package</code> which looks like is there to ensure that everything else that follows is also in this package. Finally the <code>;; blah blah blah.</code> portion looks like a comment, something to describe functionality with, but nothing to be executed.</p>
-
-<p>Now in order to see if everything is working correctly let&rsquo;s load this package. Instead of using the REPL from the command line, we are using it directly from our editor, in this case an <a href="https://www.gnu.org/software/emacs/" target="_blank">Emacs</a> distribution named <a href="http://spacemacs.org/" target="_blank">Spacemacs</a>. Without going into much detail about Emacs it can be described as a highly configurable editor for pretty much any programming language out there. <a href="https://common-lisp.net/project/slime/" target="_blank">SLIME: The Superior Lisp Interaction Mode for Emacs</a> ensures that our interaction with the REPL and the various language features go much more smoothly by integrating it with our editor of choice.</p>
-
-<p>Emacs is incredibly configurable, which is where Spacemacs comes in. It provides a set of curated configurations named layers, that make setting up the configuration for a particular language a breeze. We just enable the <a href="https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/common-lisp#install" target="_blank">common-lisp layer</a> of Spacemacs in the configuration file, add a small piece to let Emacs know of our Common Lisp distribution (see link), and we are good to go.</p>
-
+<p>Now in order to see if everything is working correctly let's load this package. Instead of using the REPL from the command line, we are using it directly from our editor, in this case an <a href="https://www.gnu.org/software/emacs/">Emacs</a> distribution named <a href="http://spacemacs.org/">Spacemacs</a>. Without going into much detail about Emacs it can be described as a highly configurable editor for pretty much any programming language out there. <a href="https://common-lisp.net/project/slime/">SLIME: The Superior Lisp Interaction Mode for Emacs</a> ensures that our interaction with the REPL and the various language features go much more smoothly by integrating it with our editor of choice. </p>
+<p>Emacs is incredibly configurable, which is where Spacemacs comes in. It provides a set of curated configurations named layers, that make setting up the configuration for a particular language a breeze. We just enable the <a href="https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/common-lisp#install">common-lisp layer</a> of Spacemacs in the configuration file, add a small piece to let Emacs know of our Common Lisp distribution (see link), and we are good to go.</p>
 <!-- One really nice feature of Spacemacs is that commands can be executed and discovered by pressing the spacebar as the leader followed by some other combinations (this is where the distribution gets its name). For example, the process of starting SLIME can be done by navigating to a common lisp source file, such as that above, and pressing the keys `space m '` in succession. Note that this requires the use of [vi](https://en.wikipedia.org/wiki/Vi)-mode which is a whole another topic for discussion, but a more emacs like mode with a different leading key also exist. To keep things clear, regardless whichever mode or even emacs distribution one uses, I will try to name the command, and not the key combination whenever possible -->
-
-<p>With everything setup now we can start our treasure hunt a bit more in earnest by starting SLIME. We are greeted by the message &ldquo;Connected. Hack and be merry!&rdquo; as well as a REPL in a window. Lets start to dig around by figuring out what exactly all the elements do. We can use the command <code>slime-describe-symbol</code> to get some more information about <code>defpackage</code> and what it does. This brings up some documentation on <code>defpackage</code>. It shows us that this is a macro, as well as the various options one can use with it. A macro, without going into too much detail, is essentially a way to convert forms into different ones before evaluating them. We can get a bit more info on the workings by calling the command <code>slime-hyperspec-lookup</code>. This takes us to the <a href="http://www.lispworks.com/documentation/HyperSpec/Front/" target="_blank">Common Lisp Hyperspec</a> with more detailed docs. The pages for <a href="http://www.lispworks.com/documentation/HyperSpec/Body/m_defpkg.htm" target="_blank"><code>defpackage</code></a> and <a href="http://www.lispworks.com/documentation/HyperSpec/Body/m_in_pkg.htm" target="_blank"><code>inpackage</code></a> more or less confirm their use is as we expected.</p>
-
-<p>Now it is time to start writing some new code. We remove the comments and create a function named <code>hello-treasure</code>, that should just print the text &ldquo;Hello Treasure&rdquo;. We add the following to our file:</p>
-
-<pre><code>(defun hello-treasure ()
-  (print &quot;Hello Treasure!&quot;)
-  )
-</code></pre>
-
-<p>in place of the comments, and we run the command <code>slime-complile-and-load-file</code>. Compilation succeeds, but when we aim to call the function  <code>(common-treasure:hello-treasure)</code> get an error when trying to call the function, saying &ldquo;The symbol &ldquo;HELLO TREASURE&rdquo; is not external to the &ldquo;COMMON TREASURE&rdquo; package.&ldquo;. This due to the fact that we did not declare the function external in the <code>defpackage</code> package declaration.</p>
-
+<p>With everything setup now we can start our treasure hunt a bit more in earnest by starting SLIME. We are greeted by the message &quot;Connected. Hack and be merry!&quot; as well as a REPL in a window. Lets start to dig around by figuring out what exactly all the elements do. We can use the command <code>slime-describe-symbol</code> to get some more information about <code>defpackage</code> and what it does. This brings up some documentation on <code>defpackage</code>. It shows us that this is a macro, as well as the various options one can use with it. A macro, without going into too much detail, is essentially a way to convert forms into different ones before evaluating them. We can get a bit more info on the workings by calling the command <code>slime-hyperspec-lookup</code>. This takes us to the <a href="http://www.lispworks.com/documentation/HyperSpec/Front/">Common Lisp Hyperspec</a> with more detailed docs. The pages for <a href="http://www.lispworks.com/documentation/HyperSpec/Body/m_defpkg.htm"><code>defpackage</code></a> and <a href="http://www.lispworks.com/documentation/HyperSpec/Body/m_in_pkg.htm"><code>inpackage</code></a> more or less confirm their use is as we expected.</p>
+<p>Now it is time to start writing some new code. We remove the comments and create a function named <code>hello-treasure</code>, that should just print the text &quot;Hello Treasure&quot;. We add the following to our file:</p>
+<pre data-lang="lisp" style="background-color:#2b303b;color:#c0c5ce;" class="language-lisp "><code class="language-lisp" data-lang="lisp"><span>(</span><span style="color:#b48ead;">defun </span><span style="color:#8fa1b3;">hello-treasure </span><span>()
+</span><span>  (</span><span style="color:#96b5b4;">print </span><span>&quot;</span><span style="color:#a3be8c;">Hello Treasure!</span><span>&quot;)
+</span><span>  )
+</span></code></pre>
+<p>in place of the comments, and we run the command <code>slime-complile-and-load-file</code>. Compilation succeeds, but when we aim to call the function  <code>(common-treasure:hello-treasure)</code> get an error when trying to call the function, saying &quot;The symbol &quot;HELLO TREASURE&quot; is not external to the &quot;COMMON TREASURE&quot; package.&quot;. This due to the fact that we did not declare the function external in the <code>defpackage</code> package declaration. </p>
 <p>What is really interesting is that, although we have this issue, instead of just failing the SLIME REPL presents us with a number of options. For example we can  <code>0: [Continue] Use symbol anyway.</code>, <code>1: [Retry] Retry SLIME REPL evaluation request.</code>, <code>2: [*Abort] Return to SLIME's top level.</code>. In this case we can just abort, and modify the package declaration, but it is interesting to be offered all these options.</p>
-
-<p>By adding <code>(:export :hello-treasure)</code> to the <code>defpackage</code> macro, we can do another call and it indeed returns &ldquo;Hello Treasure!&rdquo; in the REPL.</p>
-
+<p>By adding <code>(:export :hello-treasure)</code> to the <code>defpackage</code> macro, we can do another call and it indeed returns &quot;Hello Treasure!&quot; in the REPL.</p>
 <p>Now that we got the basics down we would like to have a slightly bigger example in which we make use of an existing library. While digging around for the software languages and libraries of the past is often the matter of some searching, reading, coding and a bit of trial and error. Digging around in the world is process governed by various regulations and laws. This is especially true in cities with long history, where a regular building site can easily unearth archaeological finds.</p>
-
-
-
-
-<figure>
-
-<img src="/img/post/2018/common-treasure/excavation-city.png" />
-
-
-
-<figcaption data-pre="Figure " data-post=":" >
-  <h4>Digging in the certain urban areas can easily lead to excavations done before any subsequent work is done. Romano-Celtic temple excavated in London.</h4>
-  
-</figcaption>
-
+<figure class=centeredfig>
+    <img src=excavation-city.png>
+    
+    <figcaption>
+        
+        <h4>Digging in the certain urban areas can easily lead to excavations done before any subsequent work is done. Romano-Celtic temple excavated in London.</h4>
+        
+        
+    </figcaption>
 </figure>
-
-<p>In particular, there are often a set of regulations that specify whether one can dig in areas of archaeological interests. As an example we use a portion of the rules by the municipality of Utrecht, as described on a <a href="https://www.utrecht.nl/fileadmin/uploads/documenten/9.digitaalloket/REO/archeologische-waardenkaart-2009.pdf" target="_blank">map</a> of Utrecht and surrounding areas (in Dutch).</p>
-
-<p>These regulations can be summarized by a number of rules, based on two conditions: the type of area and the size of the area that is to be disturbed.</p>
-
+<!-- {{< figure src="/img/post/2018/common-treasure/excavation-city.png" title="Digging in the certain urban areas can easily lead to excavations done before any subsequent work is done. Romano-Celtic temple excavated in London." >}} -->
+<p>In particular, there are often a set of regulations that specify whether one can dig in areas of archaeological interests. As an example we use a portion of the rules by the municipality of Utrecht, as described on a <a href="https://www.utrecht.nl/fileadmin/uploads/documenten/9.digitaalloket/REO/archeologische-waardenkaart-2009.pdf">map</a> of Utrecht and surrounding areas (in Dutch).</p>
+<p>These regulations can be summarized by a number of rules, based on two conditions: the type of area and the size of the area that is to be disturbed. </p>
 <ul>
-<li><p>If the area is of high archeological value, then a permit is required no matter what the size of the area is to be disturbed.</p></li>
-
-<li><p>If the area is of high archeological expectation, then a permit is required when the size of the area that is to be disturbed is larger than 100m<sup>2</sup>.</p></li>
-
-<li><p>If the area is of archeological expectation, then a permit is required when the size of the area that is to be disturbed is larger than 1000m<sup>2</sup>.</p></li>
+<li>
+<p>If the area is of high archeological value, then a permit is required no matter what the size of the area is to be disturbed.</p>
+</li>
+<li>
+<p>If the area is of high archeological expectation, then a permit is required when the size of the area that is to be disturbed is larger than 100m<sup>2</sup>.</p>
+</li>
+<li>
+<p>If the area is of archeological expectation, then a permit is required when the size of the area that is to be disturbed is larger than 1000m<sup>2</sup>.</p>
+</li>
 </ul>
-
-<p>Such regulations can be encoded into a regular function that returns a true or false to the question &ldquo;Is the a permit required?&rdquo; based on two parameters, the size of the area and the type of the area. However this could be more complicated and harder to maintain if the set of regulations, along with conditions and outcomes, become more complex.</p>
-
+<p>Such regulations can be encoded into a regular function that returns a true or false to the question &quot;Is the a permit required?&quot; based on two parameters, the size of the area and the type of the area. However this could be more complicated and harder to maintain if the set of regulations, along with conditions and outcomes, become more complex.</p>
 <p>There are various approaches to deal with this issue. One of these is to encode the facts on which our answer relies into a knowledge base, and have a general mechanism to derive new knowledge from existing facts. This later process is often denoted as inferring or reasoning to derive new knowledge. Such an approach can make it easier to use and maintain such a system.</p>
-
-<p>For this article we are going to implement such an approach using <a href="http://lisa.sourceforge.net/" target="_blank">LISA</a>. This is a production rule system, in which the knowledge base is encoded in a set of facts, and rules are uses as a way to derive new knowledge. It is easy to see how such a system would be a good fit for our problem: our domain restrictions are already formulated as a set of rules. It would also allow us to use some existing libraries, to see more of what Common Lisp has to offer.</p>
-
-<p>To start off, first we need to add a dependency to LISA into our system. One of the files created by cl-project is an <a href="https://common-lisp.net/project/asdf/?" target="_blank">asdf</a> file that describes how to build the software we are creating. Here we can add the dependency on Lisa, resulting in the following file:</p>
-
-<pre><code>#|
-  This file is a part of common-treasure project.
-|#
-
-(defsystem &quot;common-treasure&quot;
-  :version &quot;0.1.0&quot;
-  :author &quot;&quot;
-  :license &quot;&quot;
-  :depends-on (&quot;lisa&quot;) ;; Here we add the dependency on LISA.
-  :components ((:module &quot;src&quot;
-                :components
-                ((:file &quot;common-treasure&quot;))))
-  :description &quot;&quot;
-  :long-description
-  #.(read-file-string
-     (subpathname *load-pathname* &quot;README.markdown&quot;))
-  :in-order-to ((test-op (test-op &quot;common-treasure-test&quot;))))
-</code></pre>
-
-<p>Now we just need to make sure the dependencies needed are actually downloaded and available. For this we use <a href="https://www.quicklisp.org/beta/" target="_blank">quicklisp</a> which is the library manager Common Lisp. By using the command <code>(ql:quickload &quot;common-treasure&quot;)</code> we can get all the dependencies for our system, which in this case consists of just LISA.</p>
-
-<p>Now in order to translate our example scenario, we look at some of the examples that are available for LISA. A typical system consists of a knowledge base, in which facts are defined as <a href="http://www.aiai.ed.ac.uk/~jeff/clos-guide.html" target="_blank">Common Lisp Object System (CLOS)</a> objects and rules to manipulate such instances as the reasoning method.</p>
-
-<p>CLOS is a way in which Common Lisp can do object-oriented programming, and LISA co-opts this as a way to represent facts in the knowledge base. Without going into detail on object-oriented programming theory, this allows one to, define classes, create instances of those classes and define methods that make use of those classes (see this <a href="http://www.aiai.ed.ac.uk/~jeff/clos-guide.html" target="_blank">nice intro on Common Lisp Object System (CLOS)</a> for its general use).</p>
-
-<p>In the context of LISA, these allow us to represent classes of facts, specific instances of facts, and methods that can be used with those facts. For example we can represent the type of facts in our domain with two classes of objects: one that represents &ldquo;area&rdquo; and one that whether &ldquo;a permit is required&rdquo;. In Common Lisp these can be defined with the <code>defclass</code> macro. So for our example the following would be a call for permission requirement:</p>
-
-<pre><code>(defclass permit-required ()
-  ()
-)
-</code></pre>
-
+<p>For this article we are going to implement such an approach using <a href="http://lisa.sourceforge.net/">LISA</a>. This is a production rule system, in which the knowledge base is encoded in a set of facts, and rules are uses as a way to derive new knowledge. It is easy to see how such a system would be a good fit for our problem: our domain restrictions are already formulated as a set of rules. It would also allow us to use some existing libraries, to see more of what Common Lisp has to offer.</p>
+<p>To start off, first we need to add a dependency to LISA into our system. One of the files created by cl-project is an <a href="https://common-lisp.net/project/asdf/?">asdf</a> file that describes how to build the software we are creating. Here we can add the dependency on Lisa, resulting in the following file:</p>
+<pre data-lang="lisp" style="background-color:#2b303b;color:#c0c5ce;" class="language-lisp "><code class="language-lisp" data-lang="lisp"><span style="color:#65737e;">#|
+</span><span style="color:#65737e;">  This file is a part of common-treasure project.
+</span><span style="color:#65737e;">|#
+</span><span>
+</span><span>(defsystem &quot;</span><span style="color:#a3be8c;">common-treasure</span><span>&quot;
+</span><span>  :version &quot;</span><span style="color:#a3be8c;">0.1.0</span><span>&quot;
+</span><span>  :author &quot;&quot;
+</span><span>  :license &quot;&quot;
+</span><span>  :depends-on (&quot;</span><span style="color:#a3be8c;">lisa</span><span>&quot;) </span><span style="color:#65737e;">;; Here we add the dependency on LISA.
+</span><span>  :components ((:module &quot;</span><span style="color:#a3be8c;">src</span><span>&quot;
+</span><span>                :components
+</span><span>                ((:file &quot;</span><span style="color:#a3be8c;">common-treasure</span><span>&quot;))))
+</span><span>  :description &quot;&quot;
+</span><span>  :long-description
+</span><span>  </span><span style="color:#d08770;">#.</span><span>(</span><span style="color:#96b5b4;">read</span><span>-file-</span><span style="color:#96b5b4;">string
+</span><span>     (subpathname *</span><span style="color:#bf616a;">load-pathname</span><span>* &quot;</span><span style="color:#a3be8c;">README.markdown</span><span>&quot;))
+</span><span>  :in-order-</span><span style="color:#b48ead;">to </span><span>((test-op (test-op &quot;</span><span style="color:#a3be8c;">common-treasure-test</span><span>&quot;))))
+</span></code></pre>
+<p>Now we just need to make sure the dependencies needed are actually downloaded and available. For this we use <a href="https://www.quicklisp.org/beta/">quicklisp</a> which is the library manager Common Lisp. By using the command <code>(ql:quickload &quot;common-treasure&quot;)</code> we can get all the dependencies for our system, which in this case consists of just LISA.</p>
+<p>Now in order to translate our example scenario, we look at some of the examples that are available for LISA. A typical system consists of a knowledge base, in which facts are defined as <a href="http://www.aiai.ed.ac.uk/%7Ejeff/clos-guide.html">Common Lisp Object System (CLOS)</a> objects and rules to manipulate such instances as the reasoning method. </p>
+<p>CLOS is a way in which Common Lisp can do object-oriented programming, and LISA co-opts this as a way to represent facts in the knowledge base. Without going into detail on object-oriented programming theory, this allows one to, define classes, create instances of those classes and define methods that make use of those classes (see this <a href="http://www.aiai.ed.ac.uk/%7Ejeff/clos-guide.html">nice intro on Common Lisp Object System (CLOS)</a> for its general use). </p>
+<p>In the context of LISA, these allow us to represent classes of facts, specific instances of facts, and methods that can be used with those facts. For example we can represent the type of facts in our domain with two classes of objects: one that represents &quot;area&quot; and one that whether &quot;a permit is required&quot;. In Common Lisp these can be defined with the <code>defclass</code> macro. So for our example the following would be a call for permission requirement:</p>
+<pre data-lang="lisp" style="background-color:#2b303b;color:#c0c5ce;" class="language-lisp "><code class="language-lisp" data-lang="lisp"><span>(</span><span style="color:#96b5b4;">defclass</span><span> permit-required ()
+</span><span>  ()
+</span><span>)
+</span></code></pre>
 <p>In case of the area, we need to represent two facts about it: what the archaeological type of it is, and what size of the area is disturbed. Such elements of the classes are described in CLOS using slots. There are many possible options that are available to describe a slot:</p>
-
 <ul>
 <li><code>:initarg</code> describes the name of the slot.</li>
 <li><code>:initform</code> is the default value it is given initially.</li>
 <li><code>:accessor</code> can be used to define a function for accessing the slot value.</li>
 </ul>
-
 <p>Putting this together gives us the following class for representing the area:</p>
-
-<pre><code>(defclass area ()
-  ((archeological-type :initarg :archeological-type :initform &quot;&quot; :accessor :archeological-type)
-   (size-disturbed :initarg :size-disturbed :initform 0.0 :accessor :size-disturbed)
-    ))
-</code></pre>
-
-<p>Now that we figured out how represent facts, we need to encode the rules of our domain into our system. We can do this with 3 rules that describe what to do in the cases of <code>high archeological value</code>, <code>high archeological expectation</code> and <code>archeological expectation</code></p>
-
+<pre data-lang="lisp" style="background-color:#2b303b;color:#c0c5ce;" class="language-lisp "><code class="language-lisp" data-lang="lisp"><span>(</span><span style="color:#96b5b4;">defclass</span><span> area ()
+</span><span>  ((archeological-type :initarg :archeological-type :initform &quot;&quot; :accessor :archeological-type)
+</span><span>   (size-disturbed :initarg :size-disturbed :initform </span><span style="color:#d08770;">0.0</span><span> :accessor :size-disturbed)
+</span><span>    ))
+</span></code></pre>
+<p>Now that we figured out how represent facts, we need to encode the rules of our domain into our system. We can do this with 3 rules that describe what to do in the cases of <code>high archeological value</code>, <code>high archeological expectation</code> and <code>archeological expectation</code> </p>
 <p>The rules themselves described with three parts:</p>
-
 <ul>
-<li>The antecedent, which is the set of conditions that have to be true.</li>
+<li>The antecedent, which is the set of conditions that have to be true. </li>
 <li>The arrow sign <code>=&gt;</code> .</li>
-<li>The consequent, which contains the facts that need to be derived or any actions that we want to perform.</li>
+<li>The consequent, which contains the facts that need to be derived or any actions that we want to perform. </li>
 </ul>
-
-<p>In the case of LISA, and in many other rule based definitions, the antecedent and the consequent are also called Left Hand Side (LHS) and Right Hand Side (RHS), as they are respectively on the left and right hand side of the arrow. What exactly can be put into the LHS and RHS is dependent on the language for the rule definitions, but one standard way they are used is in the LHS the conditions are described based on the facts that could be in the knowledge base, and on the RHS facts are added in the knowledge based on the meaning of the rule. For example for one of our rules, if the know the fact that our area is of high archaeological value (LHS), we can derive the fact that we need a permit (RHS).</p>
-
+<p>In the case of LISA, and in many other rule based definitions, the antecedent and the consequent are also called Left Hand Side (LHS) and Right Hand Side (RHS), as they are respectively on the left and right hand side of the arrow. What exactly can be put into the LHS and RHS is dependent on the language for the rule definitions, but one standard way they are used is in the LHS the conditions are described based on the facts that could be in the knowledge base, and on the RHS facts are added in the knowledge based on the meaning of the rule. For example for one of our rules, if the know the fact that our area is of high archaeological value (LHS), we can derive the fact that we need a permit (RHS). </p>
 <p>Describing our three rules this way in LISA looks as follows, using the <code>defrule</code> macro:</p>
-
-<pre><code>;; If the area is of high archeological value, then a permit is required no matter what the size of the area is to be disturbed.
-(defrule high-value () (area (archeological-type &quot;high-value&quot;)) =&gt; (assert ((make-instance 'permit-required))))
-
-;; If the area is of high archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 100m&lt;sup&gt;2&lt;/sup&gt;.
-(defrule high-expectation () (area (archeological-type &quot;high-expectation&quot;) (&gt; size-disturbed 100))  =&gt; (assert ((make-instance 'permit-required))))
-
-;; If the area if of archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 1000m&lt;sup&gt;2&lt;/sup&gt;.
-(defrule expectation () (area (archeological-type &quot;expectation&quot;) (&gt; size-disturbed 1000))  =&gt; (assert ((make-instance 'permit-required))))
-</code></pre>
-
-<p>The rules are reasonably straightforward, in that they require the condition matching in the knowledge base, before they assert an instance of the <code>permit-required</code> fact into the knowledge base.</p>
-
+<pre data-lang="lisp" style="background-color:#2b303b;color:#c0c5ce;" class="language-lisp "><code class="language-lisp" data-lang="lisp"><span style="color:#65737e;">;; If the area is of high archeological value, then a permit is required no matter what the size of the area is to be disturbed.
+</span><span>(defrule high-value () (area (archeological-type &quot;</span><span style="color:#a3be8c;">high-value</span><span>&quot;)) =&gt; (</span><span style="color:#96b5b4;">assert </span><span>((</span><span style="color:#96b5b4;">make-instance</span><span> &#39;permit-required))))
+</span><span>
+</span><span style="color:#65737e;">;; If the area is of high archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 100m&lt;sup&gt;2&lt;/sup&gt;.
+</span><span>(defrule high-expectation () (area (archeological-type &quot;</span><span style="color:#a3be8c;">high-expectation</span><span>&quot;) (&gt; size-disturbed </span><span style="color:#d08770;">100</span><span>))  =&gt; (</span><span style="color:#96b5b4;">assert </span><span>((</span><span style="color:#96b5b4;">make-instance</span><span> &#39;permit-required))))
+</span><span>
+</span><span style="color:#65737e;">;; If the area if of archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 1000m&lt;sup&gt;2&lt;/sup&gt;.
+</span><span>(defrule expectation () (area (archeological-type &quot;</span><span style="color:#a3be8c;">expectation</span><span>&quot;) (&gt; size-disturbed </span><span style="color:#d08770;">1000</span><span>))  =&gt; (</span><span style="color:#96b5b4;">assert </span><span>((</span><span style="color:#96b5b4;">make-instance</span><span> &#39;permit-required))))
+</span></code></pre>
+<p>The rules are reasonably straightforward, in that they require the condition matching in the knowledge base, before they assert an instance of the <code>permit-required</code> fact into the knowledge base. </p>
 <p>These together already describe the domain, but for this article we also show how things work with two examples. In one scenario we assert that we have an area with <code>high-value</code> archaeological type and a to be disturbed are with the size of 2000m<sup>2</sup>. In this case we would need a permit, due to our <code>high-value</code> rule. In the second scenario, the area is of <code>high-expectation</code> but the size of the area disturbed is only 10m<sup>2</sup>. In this case none our rules will fire, and no <code>permit-required</code> fact instance is put into the knowledge base.</p>
-
-<p>Executing the system is just a matter of adding these facts in the knowledge base and letting the system run. In LISA adding a fact can be done using <code>assert</code> similarly to what the RHS of the rules are doing. To actually run the system, unsurprisingly, the function <code>run</code> can be called. To see what facts are in the knowledge base the function <code>facts</code> prints them out for us to see. To tie things together, we make sure that the knowledge base is reset before we execute anything using <code>reset</code>.</p>
-
+<p>Executing the system is just a matter of adding these facts in the knowledge base and letting the system run. In LISA adding a fact can be done using <code>assert</code> similarly to what the RHS of the rules are doing. To actually run the system, unsurprisingly, the function <code>run</code> can be called. To see what facts are in the knowledge base the function <code>facts</code> prints them out for us to see. To tie things together, we make sure that the knowledge base is reset before we execute anything using <code>reset</code>. </p>
 <p>Below is the full example implementation that we put together:</p>
-
-<pre><code>(defpackage common-treasure
-  )
-
-(in-package :lisa-user)
-
-(reset)
-
-(defclass area ()
-  ((archeological-type :initarg :archeological-type :initform &quot;&quot; :accessor :archeological-type)
-   (size-disturbed :initarg :size-disturbed :initform 0.0 :accessor :size-disturbed)
-    ))
-
-(defclass permit-required ()
-  ()
-)
-
-;; If the area is of high archeological value, then a permit is required no matter what the size of the area is to be disturbed.
-(defrule high-value () (area (archeological-type &quot;high-value&quot;)) =&gt; (assert ((make-instance 'permit-required))))
-
-;; If the area is of high archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 100m&lt;sup&gt;2&lt;/sup&gt;.
-(defrule high-expectation () (area (archeological-type &quot;high-expectation&quot;) (&gt; size-disturbed 100))  =&gt; (assert ((make-instance 'permit-required))))
-
-;; If the area if of archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 1000m&lt;sup&gt;2&lt;/sup&gt;.
-(defrule expectation () (area (archeological-type &quot;expectation&quot;) (&gt; size-disturbed 1000))  =&gt; (assert ((make-instance 'permit-required))))
-
-;;Test fact 1
-;; (assert ((make-instance 'area :archeological-type &quot;high-value&quot; :size-disturbed 2000)))
-
-;;Test fact 2
-(assert ((make-instance 'area :archeological-type &quot;high-expectation&quot; :size-disturbed 10)))
-
-(facts)
-
-(run)
-
-(facts)
-</code></pre>
-
-<p>Note that here the <code>fact 1</code> is commented out, to test the assert of <code>fact 2</code>, so that running the other scenario is just a matter of commenting and un-commenting the relevant lines.</p>
-
+<pre data-lang="lisp" style="background-color:#2b303b;color:#c0c5ce;" class="language-lisp "><code class="language-lisp" data-lang="lisp"><span>(</span><span style="color:#96b5b4;">defpackage</span><span> common-treasure
+</span><span>  )
+</span><span>
+</span><span>(</span><span style="color:#96b5b4;">in-package</span><span> :lisa-user)
+</span><span>
+</span><span>(reset)
+</span><span>
+</span><span>(</span><span style="color:#96b5b4;">defclass</span><span> area ()
+</span><span>  ((archeological-type :initarg :archeological-type :initform &quot;&quot; :accessor :archeological-type)
+</span><span>   (size-disturbed :initarg :size-disturbed :initform </span><span style="color:#d08770;">0.0</span><span> :accessor :size-disturbed)
+</span><span>    ))
+</span><span>
+</span><span>(</span><span style="color:#96b5b4;">defclass</span><span> permit-required ()
+</span><span>  ()
+</span><span>)
+</span><span>
+</span><span style="color:#65737e;">;; If the area is of high archeological value, then a permit is required no matter what the size of the area is to be disturbed.
+</span><span>(defrule high-value () (area (archeological-type &quot;</span><span style="color:#a3be8c;">high-value</span><span>&quot;)) =&gt; (</span><span style="color:#96b5b4;">assert </span><span>((</span><span style="color:#96b5b4;">make-instance</span><span> &#39;permit-required))))
+</span><span>
+</span><span style="color:#65737e;">;; If the area is of high archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 100m&lt;sup&gt;2&lt;/sup&gt;.
+</span><span>(defrule high-expectation () (area (archeological-type &quot;</span><span style="color:#a3be8c;">high-expectation</span><span>&quot;) (&gt; size-disturbed </span><span style="color:#d08770;">100</span><span>))  =&gt; (</span><span style="color:#96b5b4;">assert </span><span>((</span><span style="color:#96b5b4;">make-instance</span><span> &#39;permit-required))))
+</span><span>
+</span><span style="color:#65737e;">;; If the area if of archeological expectation, that a permit is required when the size of the area that is to be disturbed is larger than 1000m&lt;sup&gt;2&lt;/sup&gt;.
+</span><span>(defrule expectation () (area (archeological-type &quot;</span><span style="color:#a3be8c;">expectation</span><span>&quot;) (&gt; size-disturbed </span><span style="color:#d08770;">1000</span><span>))  =&gt; (</span><span style="color:#96b5b4;">assert </span><span>((</span><span style="color:#96b5b4;">make-instance</span><span> &#39;permit-required))))
+</span><span>
+</span><span style="color:#65737e;">;;Test fact 1
+</span><span style="color:#65737e;">;; (assert ((make-instance &#39;area :archeological-type &quot;high-value&quot; :size-disturbed 2000)))
+</span><span>
+</span><span style="color:#65737e;">;;Test fact 2
+</span><span>(</span><span style="color:#96b5b4;">assert </span><span>((</span><span style="color:#96b5b4;">make-instance</span><span> &#39;area :archeological-type &quot;</span><span style="color:#a3be8c;">high-expectation</span><span>&quot; :size-disturbed </span><span style="color:#d08770;">10</span><span>)))
+</span><span>
+</span><span>(facts)
+</span><span>
+</span><span>(run)
+</span><span>
+</span><span>(facts)
+</span></code></pre>
+<p>Note that here the <code>fact 1</code> is commented out, to test the assert of <code>fact 2</code>, so that running the other scenario is just a matter of commenting and un-commenting the relevant lines. </p>
 <p>For the first scenario, with fact 1, the output of our initial program is as follows:</p>
-
-<pre><code>[package common-treasure]#&lt;INITIAL-FACT ; id 0 {1002669853}&gt;
-#&lt;AREA ; id 1 {1002745373}&gt;
-For a total of 2 facts.
-#&lt;INITIAL-FACT ; id 0 {1002669853}&gt;
-#&lt;AREA ; id 1 {1002745373}&gt;
-#&lt;PERMIT-REQUIRED ; id 2 {100283A363}&gt;
-For a total of 3 facts.
-</code></pre>
-
+<pre data-lang="lisp" style="background-color:#2b303b;color:#c0c5ce;" class="language-lisp "><code class="language-lisp" data-lang="lisp"><span>[package common-treasure]#&lt;INITIAL-FACT </span><span style="color:#65737e;">; id 0 {1002669853}&gt;
+</span><span>#&lt;AREA </span><span style="color:#65737e;">; id 1 {1002745373}&gt;
+</span><span>For a total of 2 facts.
+</span><span>#&lt;INITIAL-FACT </span><span style="color:#65737e;">; id 0 {1002669853}&gt;
+</span><span>#&lt;AREA </span><span style="color:#65737e;">; id 1 {1002745373}&gt;
+</span><span>#&lt;PERMIT-REQUIRED </span><span style="color:#65737e;">; id 2 {100283A363}&gt;
+</span><span>For a total of 3 facts.
+</span></code></pre>
 <p>Note that we print out our facts twice, once before the run and once after, but it shows that now the permit requirement was derived.</p>
-
 <p>For the case of using <code>fact 2</code> , we get the following output:</p>
-
-<pre><code>[package common-treasure].#&lt;INITIAL-FACT ; id 0 {1004D40AB3}&gt;
-#&lt;AREA ; id 1 {10020107C3}&gt;
-For a total of 2 facts.
-#&lt;INITIAL-FACT ; id 0 {1004D40AB3}&gt;
-#&lt;AREA ; id 1 {10020107C3}&gt;
-For a total of 2 facts.
-</code></pre>
-
+<pre data-lang="lisp" style="background-color:#2b303b;color:#c0c5ce;" class="language-lisp "><code class="language-lisp" data-lang="lisp"><span>[package common-treasure].#&lt;INITIAL-FACT </span><span style="color:#65737e;">; id 0 {1004D40AB3}&gt;
+</span><span>#&lt;AREA </span><span style="color:#65737e;">; id 1 {10020107C3}&gt;
+</span><span>For a total of 2 facts.
+</span><span>#&lt;INITIAL-FACT </span><span style="color:#65737e;">; id 0 {1004D40AB3}&gt;
+</span><span>#&lt;AREA </span><span style="color:#65737e;">; id 1 {10020107C3}&gt;
+</span><span>For a total of 2 facts.
+</span></code></pre>
 <p>This shows that our fact base did not change due to our running the reasoning system.</p>
-
 <p>So there we have it, a bit of a peek of what can be done with Common Lisp. I have to say the language and its various features are quite a bit daunting, as I feel I have only scratched the surface of what is possible, with both interacting with the language as well as with A.I. tools such as LISA. That said digging into the language and seeing how it can handle a small, but also relevant scenario, felt like a worthwhile journey, and that is an experience always worth treasuring.</p>
 
+
     </div>
+  </section>
+</body>
 
-    
-
-
-<div class="article-tags">
-  
-  <a class="badge badge-light" href="/tags/common-lisp/">Common Lisp</a>
-  
-  <a class="badge badge-light" href="/tags/reasoning/">reasoning</a>
-  
-  <a class="badge badge-light" href="/tags/rules/">rules</a>
-  
-  <a class="badge badge-light" href="/tags/rules-engine/">rules engine</a>
-  
-  <a class="badge badge-light" href="/tags/knowledge-representation/">knowledge representation</a>
-  
-  <a class="badge badge-light" href="/tags/archeology/">archeology</a>
-  
-  <a class="badge badge-light" href="/tags/law/">law</a>
-  
-</div>
-
-
-
-    
-
-
-
-
-
-
-<div class="media author-card" itemscope itemtype="http://schema.org/Person">
-  
-  <img class="portrait mr-3" src="/img/portrait.png" itemprop="image" alt="Avatar">
-  
-  <div class="media-body">
-    <h5 class="card-title" itemprop="name"><a href="/">Newres Al Haider</a></h5>
-    <h6 class="card-subtitle">Postdoctoral Researcher and Software Engineer</h6>
-    
-    <ul class="network-icon" aria-hidden="true">
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-      <li>
-        <a itemprop="sameAs" href="mailto:newresjob@gmail.com" >
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <a itemprop="sameAs" href="https://twitter.com/newresa" target="_blank" rel="noopener">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-      
-      
-      
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <a itemprop="sameAs" href="https://scholar.google.nl/citations?user=b4MxbOEAAAAJ&amp;hl=en" target="_blank" rel="noopener">
-          <i class="ai ai-google-scholar"></i>
-        </a>
-      </li>
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <a itemprop="sameAs" href="https://github.com/newres" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i>
-        </a>
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-
-
-
-    
-    
-    <div class="article-widget">
-      <div class="hr-light"></div>
-      <h3>Related</h3>
-      <ul>
-        
-        <li><a href="/post/interlinked-data/">Data Interlinked</a></li>
-        
-        <li><a href="/post/trouble-with-triples/">The Trouble with Triples</a></li>
-        
-        <li><a href="/post/introduction/">Introduction</a></li>
-        
-        <li><a href="/post/spec-stacular-spider-man/">Spec-stacular Spider-Man</a></li>
-        
-        <li><a href="/project/legal-banking-compliance/">Legal Regulatory Compliance Within The Financial Domain.</a></li>
-        
-      </ul>
-    </div>
-    
-
-    
-
-    
-
-
-  </div>
-</article>
-
-<div class="container">
-  <footer class="site-footer">
-  
-
-  <p class="powered-by">
-    &copy; 2017 Newres Al Haider &middot; 
-
-    Powered by the
-    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
-    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
-
-    
-    <span class="float-right" aria-hidden="true">
-      <a href="#" id="back_to_top">
-        <span class="button_icon">
-          <i class="fas fa-chevron-up fa-2x"></i>
-        </span>
-      </a>
-    </span>
-    
-  </p>
-</footer>
-
-</div>
-
-
-<div id="modal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cite</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <pre><code class="tex hljs"></code></pre>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
-          <i class="fas fa-copy"></i> Copy
-        </a>
-        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
-          <i class="fas fa-download"></i> Download
-        </a>
-        <div id="modal-error"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-    
-    
-    <script src="/js/mathjax-config.js"></script>
-    
-
-    
-    
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
-
-      
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
-        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js"></script>
-        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
-        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/prolog.min.js"></script>
-        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>
-        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dart.min.js"></script>
-        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/smalltalk.min.js"></script>
-        
-      
-
-      
-      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
-      
-    
-
-    
-    
-
-    
-    
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-    
-
-    
-    
-    <script>
-      const search_index_filename = "/index.json";
-      const i18n = {
-        'placeholder': "Search...",
-        'results': "results found",
-        'no_results': "No results found"
-      };
-      const content_type = {
-        'post': "Posts",
-        'project': "Projects",
-        'publication' : "Publications",
-        'talk' : "Talks"
-        };
-    </script>
-    
-
-    
-    
-
-    
-    
-    <script id="search-hit-fuse-template" type="text/x-template">
-      <div class="search-hit" id="summary-{{key}}">
-      <div class="search-hit-content">
-        <div class="search-hit-name">
-          <a href="{{relpermalink}}">{{title}}</a>
-          <div class="article-metadata search-hit-type">{{type}}</div>
-          <p class="search-hit-description">{{snippet}}</p>
-        </div>
-      </div>
-      </div>
-    </script>
-    
-
-    
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
-    
-
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    <script src="/js/academic.min.d037ee5294b166a79dec317c58aea9cc.js"></script>
-
-    
-
-  </body>
 </html>
-

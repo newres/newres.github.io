@@ -1,1171 +1,301 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
+
 <head>
-
   <meta charset="utf-8">
+  <title>Newres Al Haider</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Source Themes Academic 3.2.0">
-  <meta name="generator" content="Hugo 0.52" />
-  <meta name="author" content="Newres Al Haider">
-
-  
-  
-  
-  
-    
-  
-  <meta name="description" content="A tutorial to logic programming using miniKanren and core.logic by representing and using the allegory based Tamarian language from the Start Trek Next-Generation Episode Darmok.
-">
-
-  
-  <link rel="alternate" hreflang="en-us" href="https://www.newresalhaider.com/post/darmok-core-logic/">
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-  
-  <meta name="theme-color" content="#EF525B">
-  
-
-  
-  
-  
-  
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
-
-    
-    
-    
-      
-    
-    
-      
-      
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
-      
-    
-
-    
-
-    
-
-  
-
-  
-  
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
-  
-
-  <link rel="stylesheet" href="/styles.css">
-  
-  <link rel="stylesheet" href="/css/post.css">
-  
-
-  
-  
-  
-
-  
-  <link rel="alternate" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
-  <link rel="feed" href="https://www.newresalhaider.com/index.xml" type="application/rss+xml" title="Newres Al Haider">
-  
-
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="icon" type="image/png" href="/img/icon.png">
-  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
-
-  <link rel="canonical" href="https://www.newresalhaider.com/post/darmok-core-logic/">
-
-  
-
-  
-  
-  
-  
-
-  
-  
-  
-    
-  
-  <meta property="twitter:card" content="summary_large_image">
-  
-  <meta property="twitter:site" content="@newresa">
-  <meta property="twitter:creator" content="@newresa">
-  
-  <meta property="og:site_name" content="Newres Al Haider">
-  <meta property="og:url" content="https://www.newresalhaider.com/post/darmok-core-logic/">
-  <meta property="og:title" content="Darmok in core.logic | Newres Al Haider">
-  <meta property="og:description" content="A tutorial to logic programming using miniKanren and core.logic by representing and using the allegory based Tamarian language from the Start Trek Next-Generation Episode Darmok.
-"><meta property="og:image" content="https://www.newresalhaider.com/post/darmok-core-logic/featured.jpg">
-  <meta property="og:locale" content="en-us">
-  
-  <meta property="article:published_time" content="2020-02-02T00:00:00&#43;01:00">
-  
-  <meta property="article:modified_time" content="2019-02-02T00:00:00&#43;01:00">
-  
-
-  
-
-  
-
-  <title>Darmok in core.logic | Newres Al Haider</title>
-
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+  <link href="https:&#x2F;&#x2F;www.newresalhaider.com/style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.newresalhaider.com/scripts/menu.js"></script>
 </head>
-<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
-  <aside class="search-results" id="search">
-  <div class="container">
-    <section class="search-header">
 
-      <div class="row no-gutters justify-content-between mb-3">
-        <div class="col-6">
-          <h1>Search</h1>
-        </div>
-        <div class="col-6 col-search-close">
-          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
-        </div>
-      </div>
+<body class="has-navbar-fixed-top">
 
-      <div id="search-box">
-        
-        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
-        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
-        
-      </div>
-
-    </section>
-    <section class="section-search-results">
-
-      <div id="search-hits">
-        
-      </div>
-
-    </section>
-  </div>
-</aside>
-
-
-<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
-  <div class="container">
-
-    
-      <a class="navbar-brand" href="/">Newres Al Haider</a>
-      
-      <button type="button" class="navbar-toggler" data-toggle="collapse"
-              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span><i class="fas fa-bars"></i></span>
-      </button>
-      
-
-    
-    <div class="collapse navbar-collapse" id="navbar">
-
-      
-      
-      <ul class="navbar-nav ml-auto">
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#about">
-            
-            <span>Home</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#posts">
-            
-            <span>Posts</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#projects">
-            
-            <span>Projects</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#publications_selected">
-            
-            <span>Publications</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#contact">
-            
-            <span>Contact</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-      
-
-        
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
-        </li>
-        
-
-        
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
-        </li>
-        
-
-      </ul>
-
+    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="title is-3">
+                Newres Al Haider
+            </h1>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="NavbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
     </div>
-  </div>
+    <div id="NavbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/">
+                <h2 class="subtitle is-5">
+                    Home
+                </h2>
+            </a>
+            <a class="navbar-item" href="/post/">
+                <h2 class="subtitle is-5">
+                    Posts
+                </h2>
+            </a>
+            <a class="navbar-item" href="/project/">
+                <h2 class="subtitle is-5">
+                    Projects
+                </h2>
+            </a>
+            <a class="navbar-item" href="/publication/">
+                <h2 class="subtitle is-5">
+                    Publications
+                </h2>
+            </a>
+        </div>
+    </div>
 </nav>
-
-
-<article class="article" itemscope itemtype="http://schema.org/Article">
-
-  
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="article-header d-xl-none">
-  <div class="featured-image" style="background-image: url('/post/darmok-core-logic/featured_hud161fc3927326e77aa165837bb52817b_107581_800x0_resize_q75_box.jpg');"></div>
-  <span class="article-header-caption">Picard and Dathon uniting against a common foe in the Star Trek TNG Episode: Darmok. Copyright CBS Corporation</span>
-</div>
-
-
-<div class="container-fluid split-header d-none d-xl-block">
-  <div class="row">
-    <div class="col-6">
-      <div class="split-header-content">
-        <h1 itemprop="name">Darmok in core.logic</h1>
-
-        
-
-        
-
-<div class="article-metadata">
-
-  
-  
-  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Newres Al Haider">
-  </span>
-  
-
-  <span class="article-date">
-    
-        Last updated on
-    
-    <meta content="2020-02-02 00:00:00 &#43;0100 CET" itemprop="datePublished">
-    <time datetime="2019-02-02 00:00:00 &#43;0100 CET" itemprop="dateModified">
-      2 Feb, 2019
-    </time>
-  </span>
-  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Newres Al Haider">
-  </span>
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    15 min read
-  </span>
-  
-
-  
-  
-
-  
-
-  
-
-</div>
-
-
-        
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-        
-<div class="share-box" aria-hidden="true">
-  <ul class="share">
-    <li>
-      <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Darmok%20in%20core.logic&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fdarmok-core-logic%2f"
-         target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </li>
-    <li>
-      <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fdarmok-core-logic%2f"
-         target="_blank" rel="noopener">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-    </li>
-    <li>
-      <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fdarmok-core-logic%2f&amp;title=Darmok%20in%20core.logic"
-         target="_blank" rel="noopener">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-    </li>
-    <li>
-      <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fdarmok-core-logic%2f&amp;title=Darmok%20in%20core.logic"
-         target="_blank" rel="noopener">
-        <i class="fab fa-weibo"></i>
-      </a>
-    </li>
-    <li>
-      <a class="email"
-         href="mailto:?subject=Darmok%20in%20core.logic&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fdarmok-core-logic%2f">
-        <i class="fas fa-envelope"></i>
-      </a>
-    </li>
-  </ul>
-</div>
-
-
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="split-header-image">
-        <img src="/post/darmok-core-logic/featured_hud161fc3927326e77aa165837bb52817b_107581_680x500_fill_q90_box_smart1.jpg" itemprop="image" alt="">
-        <span class="article-header-caption">Picard and Dathon uniting against a common foe in the Star Trek TNG Episode: Darmok. Copyright CBS Corporation</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="article-container d-xl-none">
-  <h1 itemprop="name">Darmok in core.logic</h1>
-
-  
-
-  
-
-<div class="article-metadata">
-
-  
-  
-  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Newres Al Haider">
-  </span>
-  
-
-  <span class="article-date">
-    
-        Last updated on
-    
-    <meta content="2020-02-02 00:00:00 &#43;0100 CET" itemprop="datePublished">
-    <time datetime="2019-02-02 00:00:00 &#43;0100 CET" itemprop="dateModified">
-      2 Feb, 2019
-    </time>
-  </span>
-  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Newres Al Haider">
-  </span>
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    15 min read
-  </span>
-  
-
-  
-  
-
-  
-
-  
-  
-<div class="share-box" aria-hidden="true">
-  <ul class="share">
-    <li>
-      <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Darmok%20in%20core.logic&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fdarmok-core-logic%2f"
-         target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </li>
-    <li>
-      <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fdarmok-core-logic%2f"
-         target="_blank" rel="noopener">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-    </li>
-    <li>
-      <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fdarmok-core-logic%2f&amp;title=Darmok%20in%20core.logic"
-         target="_blank" rel="noopener">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-    </li>
-    <li>
-      <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fdarmok-core-logic%2f&amp;title=Darmok%20in%20core.logic"
-         target="_blank" rel="noopener">
-        <i class="fab fa-weibo"></i>
-      </a>
-    </li>
-    <li>
-      <a class="email"
-         href="mailto:?subject=Darmok%20in%20core.logic&amp;body=https%3a%2f%2fwww.newresalhaider.com%2fpost%2fdarmok-core-logic%2f">
-        <i class="fas fa-envelope"></i>
-      </a>
-    </li>
-  </ul>
-</div>
-
-
-  
-
-</div>
-
-
-  
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-</div>
-
-
-
-  <div class="article-container">
-
-    <div class="article-style" itemprop="articleBody">
-      <p>One of the greatest Star Trek episodes is titled <a href="https://en.wikipedia.org/wiki/Darmok" target="_blank">Darmok</a> in <a href="https://en.wikipedia.org/wiki/Star_Trek:_The_Next_Generation" target="_blank">Star Trek: The Next Generation</a>.  It has the hallmarks of a great Star Trek: TNG episode: a first contact between two civilizations and a dilemma that is not solved by violence but by thinking and understanding.</p>
-
-<p>One of the nicest logic programming languages is <a href="http://minikanren.org/" target="_blank">miniKanren</a>. This is due to the fact that it is a small, relatively easy to understand <a href="https://en.wikipedia.org/wiki/Logic_programming" target="_blank">Logic Programming (LP)</a> language and has implementations in many programming languages. This later feature allows for logic programming features to be used in many different environments, as a logic programming <a href="https://en.wikipedia.org/wiki/Domain-specific_language" target="_blank">Domain-Specific language (DSL)</a>.</p>
-
-<p>A popular implementation of miniKanren is the <a href="https://github.com/clojure/core.logic" target="_blank">core.logic</a> library of the <a href="https://clojure.org/" target="_blank">Clojure</a> programming language. In this article we aim to introduce miniKanren/core.logic by encoding story elements of the Darmok episode of Star Trek: TNG (some spoilers for the episode will follow).</p>
-
-<p>The episode is based around the fact that the Federation and the Tamarian people aim to establish successful first contact with each other. From the Federation, the crew of the starship Enterprise are sent to the planet El-Adrel where a Tamarian ship awaits them. Unfortunately attempts at communication fail from both sides and lead to some dangerous situations. The difficulty of communication arises from the fact that Tamarians communicate exclusively through allegory. This means that it is not enough to just decipher the words and grammar used in the Tamarian language, but the crew of the Enterprise must also understand the myths and historical events to which these allegories refer to. Within the episode multiple allegories are used by the Tamarians, such as with the phrase &ldquo;Darmok and Jalad at Tanagra&rdquo;, that utterly baffle the crew at first. However due to shared dangers and cooperation by the captain of the Enterprise, Picard, and the captain of the Tamarian ship, Darmok, they start to understand each other. In the end a successful first contact is made. This is captured by the newly coined allegory for first contact in the Tamarian language: &ldquo;Picard and Dathon at El-Adrel&rdquo;.</p>
-
-<p>In this article we will use core.logic to write a logic program to represent the allegories used in the Darmok episode and to generate templates of the Darmok story through a sequence of allegories. A logic program is a bit different than the programs most people are used to. Instead of giving precise instructions to the computer one instead writes a goal, or a group of goals, that provide some logical restrictions on what one intends to achieve. With these goals the logic programming system can find the right answers. Note that the source for the code used this article can be found <a href="https://github.com/newres/darmok-core-logic" target="_blank">here</a> in case you want to experiment along while reading this article.</p>
-
-<p>Let&rsquo;s start off with a small logic program that can translate the Tamarian allegory that represents cooperation, the phrase &ldquo;Darmok and Jalad at Tanagra&rdquo;. We aim to translate this allegory to an equivalent allegory based on a human myth, as well as the English translation for it: &ldquo;cooperation&rdquo;.</p>
-
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+    Darmok in core.logic
+</h1>
+<p class="subtitle"><strong>2020-02-02</strong></p>
+<p>One of the greatest Star Trek episodes is titled <a href="https://en.wikipedia.org/wiki/Darmok">Darmok</a> in <a href="https://en.wikipedia.org/wiki/Star_Trek:_The_Next_Generation">Star Trek: The Next Generation</a>.  It has the hallmarks of a great Star Trek: TNG episode: a first contact between two civilizations and a dilemma that is not solved by violence but by thinking and understanding.</p>
+<p>One of the nicest logic programming languages is <a href="http://minikanren.org/">miniKanren</a>. This is due to the fact that it is a small, relatively easy to understand <a href="https://en.wikipedia.org/wiki/Logic_programming">Logic Programming (LP)</a> language and has implementations in many programming languages. This later feature allows for logic programming features to be used in many different environments, as a logic programming <a href="https://en.wikipedia.org/wiki/Domain-specific_language">Domain-Specific language (DSL)</a>. </p>
+<p>A popular implementation of miniKanren is the <a href="https://github.com/clojure/core.logic">core.logic</a> library of the <a href="https://clojure.org/">Clojure</a> programming language. In this article we aim to introduce miniKanren/core.logic by encoding story elements of the Darmok episode of Star Trek: TNG (some spoilers for the episode will follow). </p>
+<p>The episode is based around the fact that the Federation and the Tamarian people aim to establish successful first contact with each other. From the Federation, the crew of the starship Enterprise are sent to the planet El-Adrel where a Tamarian ship awaits them. Unfortunately attempts at communication fail from both sides and lead to some dangerous situations. The difficulty of communication arises from the fact that Tamarians communicate exclusively through allegory. This means that it is not enough to just decipher the words and grammar used in the Tamarian language, but the crew of the Enterprise must also understand the myths and historical events to which these allegories refer to. Within the episode multiple allegories are used by the Tamarians, such as with the phrase &quot;Darmok and Jalad at Tanagra&quot;, that utterly baffle the crew at first. However due to shared dangers and cooperation by the captain of the Enterprise, Picard, and the captain of the Tamarian ship, Darmok, they start to understand each other. In the end a successful first contact is made. This is captured by the newly coined allegory for first contact in the Tamarian language: &quot;Picard and Dathon at El-Adrel&quot;.</p>
+<p>In this article we will use core.logic to write a logic program to represent the allegories used in the Darmok episode and to generate templates of the Darmok story through a sequence of allegories. A logic program is a bit different than the programs most people are used to. Instead of giving precise instructions to the computer one instead writes a goal, or a group of goals, that provide some logical restrictions on what one intends to achieve. With these goals the logic programming system can find the right answers. Note that the source for the code used this article can be found <a href="https://github.com/newres/darmok-core-logic">here</a> in case you want to experiment along while reading this article.</p>
+<p>Let's start off with a small logic program that can translate the Tamarian allegory that represents cooperation, the phrase &quot;Darmok and Jalad at Tanagra&quot;. We aim to translate this allegory to an equivalent allegory based on a human myth, as well as the English translation for it: &quot;cooperation&quot;. </p>
 <p>In order to do this we give the Clojure definition of this goal as a logic program, then explain each element of it and how to use it.</p>
-
-<pre><code class="language-clojure">(defn cooperation [tam hum eng]
-  (l/conde [(l/== [tam] [&quot;Darmok and Jalad at Tanagra.&quot;])
-            (l/== [hum] [&quot;Gilgamesh and Ekidu at Uruk.&quot;])
-            (l/== [eng] [&quot;cooperation&quot;])]))
-</code></pre>
-
-<p>First lets decipher the above definition. For people, unfamiliar with Clojure, the form <code>(defn cooperation [tam hum eng] ... )</code> defines a function named <code>cooperation</code> with the parameters <code>tam hum eng</code>. The part with <code>(l/conde ... )</code> is a shorthand for <code>(core.logic/conde ... )</code>; we will use <code>l</code> as the abbreviation for the <code>core.logic</code> namespace in the rest of this article. This <code>l/conde</code> part functions as a way to connect various goals together. It creates a disjunction (elements separated by OR) of separate vectors of goals which it considers as conjunction (elements separated by AND). For people a bit familiar with boolean logic this a way to write a <a href="https://en.wikipedia.org/wiki/Disjunctive_normal_form" target="_blank">Disjunctive Normal Form</a>. To give a very simplified example the form <code>(l/conde [A B] [C] )</code> with the goals <code>A, B, C</code> can be seen as a way to find the case where <code>(A 'AND' B) 'OR' C</code> holds. In the previous example <code>l/conde</code> is called on a single vector of elements <code>[(l/== [tam] [&quot;Darmok and Jalad at Tanagra.&quot;]) (l/== [hum] [&quot;Gilgamesh and Ekidu at Uruk.&quot;]) (l/== [eng] [&quot;cooperation&quot;])]</code>, meaning that this function wants each of the goals: <code>(l/== [tam] [&quot;Darmok and Jalad at Tanagra.&quot;])</code> AND <code>(l/== [hum] [&quot;Gilgamesh and Ekidu at Uruk.&quot;])</code> AND <code>(l/== [eng] [&quot;cooperation&quot;])</code> fulfilled.</p>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">cooperation </span><span>[tam hum eng]
+</span><span>  (</span><span style="color:#bf616a;">l/conde </span><span>[(</span><span style="color:#bf616a;">l/== </span><span>[tam] [&quot;</span><span style="color:#a3be8c;">Darmok and Jalad at Tanagra.</span><span>&quot;])
+</span><span>            (</span><span style="color:#bf616a;">l/== </span><span>[hum] [&quot;</span><span style="color:#a3be8c;">Gilgamesh and Ekidu at Uruk.</span><span>&quot;])
+</span><span>            (</span><span style="color:#bf616a;">l/== </span><span>[eng] [&quot;</span><span style="color:#a3be8c;">cooperation</span><span>&quot;])]))
+</span></code></pre>
+<p>First lets decipher the above definition. For people, unfamiliar with Clojure, the form <code>(defn cooperation [tam hum eng] ... )</code> defines a function named <code>cooperation</code> with the parameters <code>tam hum eng</code>. The part with <code>(l/conde ... )</code> is a shorthand for <code>(core.logic/conde ... )</code>; we will use <code>l</code> as the abbreviation for the <code>core.logic</code> namespace in the rest of this article. This <code>l/conde</code> part functions as a way to connect various goals together. It creates a disjunction (elements separated by OR) of separate vectors of goals which it considers as conjunction (elements separated by AND). For people a bit familiar with boolean logic this a way to write a <a href="https://en.wikipedia.org/wiki/Disjunctive_normal_form">Disjunctive Normal Form</a>. To give a very simplified example the form <code>(l/conde [A B] [C] )</code> with the goals <code>A, B, C</code> can be seen as a way to find the case where <code>(A 'AND' B) 'OR' C</code> holds. In the previous example <code>l/conde</code> is called on a single vector of elements <code>[(l/== [tam] [&quot;Darmok and Jalad at Tanagra.&quot;]) (l/== [hum] [&quot;Gilgamesh and Ekidu at Uruk.&quot;]) (l/== [eng] [&quot;cooperation&quot;])]</code>, meaning that this function wants each of the goals: <code>(l/== [tam] [&quot;Darmok and Jalad at Tanagra.&quot;])</code> AND <code>(l/== [hum] [&quot;Gilgamesh and Ekidu at Uruk.&quot;])</code> AND <code> (l/== [eng] [&quot;cooperation&quot;])</code> fulfilled. </p>
 <p>So now we know that this function takes three parameters and wants to ensure that the three goals all have to be met. But what do the goals themselves mean? They all have a similar structure in that they are using the equality in core.logic, <code>l/==</code>, to unify elements. Unification is a core part of a logic programming system and it is used to constrain elements to the same possible values. For the first example <code>(l/== [tam] [&quot;Darmok and Jalad at Tanagra.&quot;])</code>, the unification aims to ensure that the variable <code>tam</code> has the value of the string <code>&quot;Darmok and Jalad at Tanagra.&quot;</code>, which can be seen as the Tamarian phrase for cooperation. The other goals do this unification for the human mythology equivalent: <code>&quot;Gilgamesh and Ekidu at Uruk.&quot;</code> of this allegory, as well for the English word <code>&quot;cooperation&quot;</code>, for the variables <code>hum</code> and <code>eng</code>, respectively.</p>
-
 <p>We have now given an anatomy of this logic program that does unification on phrases relating to cooperation, but how do we use it? For this we need two things: a set of logic variables and a way to tell the system to run the logic program. The function <code>l\run*</code> does exactly that, which for the given set of parameters tries to find all examples where the goals are fulfilled.</p>
-
 <p>So if we evaluate the following code:</p>
-
-<pre><code>(l/run* [tam hum eng]
-        (cooperation tam hum eng))
-</code></pre>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">l/run* </span><span>[tam hum eng]
+</span><span>        (</span><span style="color:#bf616a;">cooperation</span><span> tam hum eng))
+</span></code></pre>
 <p>we get the following:</p>
-
-<pre><code>([&quot;Darmok and Jalad at Tanagra.&quot; &quot;Gilgamesh and Ekidu at Uruk.&quot; &quot;cooperation&quot;])
-</code></pre>
-
-<p>What <code>l\run*</code> is doing is taking a given list of logic variables and tries to list all the possible values these variables can take. Here it only lists a single possible set of values for the variables <code>tam</code>, <code>hum</code> and <code>eng</code>. This should not be surprising as there is only exactly one way each of the variables <code>tam</code>, <code>hum</code>, and <code>eng</code> can be fulfilled by the &ldquo;cooperation&rdquo; goal based on the definition we gave above.  The variable <code>tam</code> gets unified with the string value <code>&quot;Darmok and Jalad at Tanagra.&quot;</code>, <code>hum</code> with <code>&quot;Gilgamesh and Ekidu at Uruk.&quot;</code> and <code>eng</code> with <code>&quot;cooperation&quot;</code>.</p>
-
-<p>In the previous case we used only &lsquo;fresh&rsquo; logic variables (variables that have no constraints placed upon their possible values yet), but instead we can also use a specific value in our goal instead. In the following example we only have two variables. Instead of a variable for first parameter used in the cooperation goal we give the string `&ldquo;Darmok and Jalad at Tanagra.&rdquo; as follows:</p>
-
-<pre><code>(l/run* [hum eng]
-        (cooperation &quot;Darmok and Jalad at Tanagra.&quot; hum eng))
-</code></pre>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>([&quot;</span><span style="color:#a3be8c;">Darmok and Jalad at Tanagra.</span><span>&quot; &quot;</span><span style="color:#a3be8c;">Gilgamesh and Ekidu at Uruk.</span><span>&quot; &quot;</span><span style="color:#a3be8c;">cooperation</span><span>&quot;])
+</span></code></pre>
+<p>What <code>l\run*</code> is doing is taking a given list of logic variables and tries to list all the possible values these variables can take. Here it only lists a single possible set of values for the variables <code>tam</code>, <code>hum</code> and <code>eng</code>. This should not be surprising as there is only exactly one way each of the variables <code>tam</code>, <code>hum</code>, and <code>eng</code> can be fulfilled by the &quot;cooperation&quot; goal based on the definition we gave above.  The variable <code>tam</code> gets unified with the string value <code>&quot;Darmok and Jalad at Tanagra.&quot;</code>, <code>hum</code> with <code>&quot;Gilgamesh and Ekidu at Uruk.&quot;</code> and <code>eng</code> with <code>&quot;cooperation&quot;</code>.</p>
+<p>In the previous case we used only 'fresh' logic variables (variables that have no constraints placed upon their possible values yet), but instead we can also use a specific value in our goal instead. In the following example we only have two variables. Instead of a variable for first parameter used in the cooperation goal we give the string `&quot;Darmok and Jalad at Tanagra.&quot; as follows:</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">l/run* </span><span>[hum eng]
+</span><span>        (</span><span style="color:#bf616a;">cooperation </span><span>&quot;</span><span style="color:#a3be8c;">Darmok and Jalad at Tanagra.</span><span>&quot; hum eng))
+</span></code></pre>
 <p>which gives the result:</p>
-
-<pre><code>([&quot;Gilgamesh and Ekidu at Uruk.&quot; &quot;cooperation&quot;])
-</code></pre>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>([&quot;</span><span style="color:#a3be8c;">Gilgamesh and Ekidu at Uruk.</span><span>&quot; &quot;</span><span style="color:#a3be8c;">cooperation</span><span>&quot;])
+</span></code></pre>
 <p>There are only two variables listed in the answer, as there are only two variables given for <code>l/run*</code> to check in our initial case. Otherwise the answer is exactly what we would expect as there is only one possible way these variables can be bound in our logic program.</p>
-
 <p>Now lets try a run where there are no possible valid answers, giving the word <code>&quot;challenge&quot;</code> as a parameter:</p>
-
-<pre><code>(l/run* [tam hum eng]
-        (cooperation tam hum &quot;challenge&quot;))
-</code></pre>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">l/run* </span><span>[tam hum eng]
+</span><span>        (</span><span style="color:#bf616a;">cooperation</span><span> tam hum &quot;</span><span style="color:#a3be8c;">challenge</span><span>&quot;))
+</span></code></pre>
 <p>This returns an empty list of answers: <code>()</code>, as there are no ways to unify the word <code>&quot;challenge&quot;</code> inside the goal of cooperation.</p>
-
 <p>Given we got the basics of logic programs covered, lets expand our example into something more complex.</p>
-
 <p>Instead of one single allegory, we now define five of them based on the various allegories used in the Darmok episode. The functions representing these goals are all named after the English word translation: <code>failure</code>, <code>common-enemy</code>, <code>cooperation</code>, <code>successful-cooperation</code> and <code>successful-first-contact</code>. They all follow the same structure as the <code>cooperation</code> allegory we previously examined in detail. In addition we also define a function for representing any allegory, aptly named <code>allegory</code>. This is a goal that can be fulfilled by any of the allegories named above.</p>
-
-<pre><code class="language-clojure">(defn failure [tam hum eng]
-  (l/conde [(l/== [tam] [&quot;Shaka, when the walls fell.&quot;])
-            (l/== [hum] [&quot;Gilgamesh, his plant eaten by a snake.&quot;])
-            (l/== [eng] [&quot;failure&quot;])]))
-
-(defn common-enemy [tam hum eng]
-  (l/conde [(l/== [tam] [&quot;Beast at Tanagra.&quot;])
-            (l/== [hum] [&quot;Bull of Heaven.&quot;])
-            (l/== [eng] [&quot;common-enemy&quot;])]))
-
-(defn cooperation [tam hum eng]
-  (l/conde [(l/== [tam] [&quot;Darmok and Jalad at Tanagra.&quot;])
-            (l/== [hum] [&quot;Gilgamesh and Ekidu at Uruk.&quot;])
-            (l/== [eng] [&quot;cooperation&quot;])]))
-
-(defn successful-cooperation [tam hum eng]
-  (l/conde [(l/== [tam] [&quot;Darmok and Jalad on the ocean.&quot;])
-            (l/== [hum] [&quot;Gilgamesh and Ekidu, after the Bull's defeat.&quot;])
-            (l/== [eng] [&quot;successful-cooperation&quot;])]))
-
-(defn successful-first-contact [tam hum eng]
-  (l/conde [(l/== [tam] [&quot;Picard and Dathon at El-Adrel.&quot;])
-            (l/== [hum] [&quot;Picard and Dathon at El-Adrel.&quot;])
-            (l/== [eng] [&quot;successful-first-contact&quot;])]))
-
-(defn allegory [tam hum eng]
-  (l/conde [(failure tam hum eng)]
-           [(common-enemy tam hum eng)]
-           [(cooperation tam hum eng)]
-           [(successful-cooperation tam hum eng)]
-           [(successful-first-contact tam hum eng)]))
-</code></pre>
-
-<p>There should not be any very surprising elements in this part, but we give two quick observations before continuing.</p>
-
-<p>First, the human equivalent for Tamarian allegories are based on the Gilgamesh story, which is also explicitly mentioned in the episode, that provides a way for captain Picard to connect with the Tamarian captain Dathon. The only exception to this is <code>&quot;Picard and Dathon at El-Adrel.&quot;</code> which is an allegory coined at the end of the episode as a term for first contact between cultures. It seems fitting to use this as an allegory from a human perspective as well.</p>
-
-<p>Second, to reiterate how <code>l/conde</code> works with choices, we remark that each of the named allegories in the <code>allegory</code> function are in their own vector (indicated by each goal inside their own <code>[]</code> brackets). This indicates that any of <code>failure</code>, <code>common-enemy</code>, <code>cooperation</code>, <code>successful-cooperation</code> or <code>successful-first-contact</code> can fulfill the goal of <code>allegory</code>.</p>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">failure </span><span>[tam hum eng]
+</span><span>  (</span><span style="color:#bf616a;">l/conde </span><span>[(</span><span style="color:#bf616a;">l/== </span><span>[tam] [&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;])
+</span><span>            (</span><span style="color:#bf616a;">l/== </span><span>[hum] [&quot;</span><span style="color:#a3be8c;">Gilgamesh, his plant eaten by a snake.</span><span>&quot;])
+</span><span>            (</span><span style="color:#bf616a;">l/== </span><span>[eng] [&quot;</span><span style="color:#a3be8c;">failure</span><span>&quot;])]))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">common-enemy </span><span>[tam hum eng]
+</span><span>  (</span><span style="color:#bf616a;">l/conde </span><span>[(</span><span style="color:#bf616a;">l/== </span><span>[tam] [&quot;</span><span style="color:#a3be8c;">Beast at Tanagra.</span><span>&quot;])
+</span><span>            (</span><span style="color:#bf616a;">l/== </span><span>[hum] [&quot;</span><span style="color:#a3be8c;">Bull of Heaven.</span><span>&quot;])
+</span><span>            (</span><span style="color:#bf616a;">l/== </span><span>[eng] [&quot;</span><span style="color:#a3be8c;">common-enemy</span><span>&quot;])]))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">cooperation </span><span>[tam hum eng]
+</span><span>  (</span><span style="color:#bf616a;">l/conde </span><span>[(</span><span style="color:#bf616a;">l/== </span><span>[tam] [&quot;</span><span style="color:#a3be8c;">Darmok and Jalad at Tanagra.</span><span>&quot;])
+</span><span>            (</span><span style="color:#bf616a;">l/== </span><span>[hum] [&quot;</span><span style="color:#a3be8c;">Gilgamesh and Ekidu at Uruk.</span><span>&quot;])
+</span><span>            (</span><span style="color:#bf616a;">l/== </span><span>[eng] [&quot;</span><span style="color:#a3be8c;">cooperation</span><span>&quot;])]))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">successful-cooperation </span><span>[tam hum eng]
+</span><span>  (</span><span style="color:#bf616a;">l/conde </span><span>[(</span><span style="color:#bf616a;">l/== </span><span>[tam] [&quot;</span><span style="color:#a3be8c;">Darmok and Jalad on the ocean.</span><span>&quot;])
+</span><span>            (</span><span style="color:#bf616a;">l/== </span><span>[hum] [&quot;</span><span style="color:#a3be8c;">Gilgamesh and Ekidu, after the Bull&#39;s defeat.</span><span>&quot;])
+</span><span>            (</span><span style="color:#bf616a;">l/== </span><span>[eng] [&quot;</span><span style="color:#a3be8c;">successful-cooperation</span><span>&quot;])]))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">successful-first-contact </span><span>[tam hum eng]
+</span><span>  (</span><span style="color:#bf616a;">l/conde </span><span>[(</span><span style="color:#bf616a;">l/== </span><span>[tam] [&quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;])
+</span><span>            (</span><span style="color:#bf616a;">l/== </span><span>[hum] [&quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;])
+</span><span>            (</span><span style="color:#bf616a;">l/== </span><span>[eng] [&quot;</span><span style="color:#a3be8c;">successful-first-contact</span><span>&quot;])]))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">allegory </span><span>[tam hum eng]
+</span><span>  (</span><span style="color:#bf616a;">l/conde </span><span>[(</span><span style="color:#bf616a;">failure</span><span> tam hum eng)]
+</span><span>           [(</span><span style="color:#bf616a;">common-enemy</span><span> tam hum eng)]
+</span><span>           [(</span><span style="color:#bf616a;">cooperation</span><span> tam hum eng)]
+</span><span>           [(</span><span style="color:#bf616a;">successful-cooperation</span><span> tam hum eng)]
+</span><span>           [(</span><span style="color:#bf616a;">successful-first-contact</span><span> tam hum eng)]))
+</span></code></pre>
+<p>There should not be any very surprising elements in this part, but we give two quick observations before continuing. </p>
+<p>First, the human equivalent for Tamarian allegories are based on the Gilgamesh story, which is also explicitly mentioned in the episode, that provides a way for captain Picard to connect with the Tamarian captain Dathon. The only exception to this is <code>&quot;Picard and Dathon at El-Adrel.&quot;</code> which is an allegory coined at the end of the episode as a term for first contact between cultures. It seems fitting to use this as an allegory from a human perspective as well. </p>
+<p>Second, to reiterate how <code>l/conde</code> works with choices, we remark that each of the named allegories in the <code>allegory</code> function are in their own vector (indicated by each goal inside their own <code>[]</code> brackets). This indicates that any of <code>failure</code>, <code>common-enemy</code>, <code>cooperation</code>, <code>successful-cooperation</code> or <code>successful-first-contact</code> can fulfill the goal of <code>allegory</code>. </p>
 <p>We can test this later notion by running a short logic program for finding all possible allegories:</p>
-
-<pre><code>(l/run* [tam hum eng]
-        (allegory tam hum eng))
-</code></pre>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">l/run* </span><span>[tam hum eng]
+</span><span>        (</span><span style="color:#bf616a;">allegory</span><span> tam hum eng))
+</span></code></pre>
 <p>which returns:</p>
-
-<pre><code>([&quot;Shaka, when the walls fell.&quot;
-  &quot;Gilgamesh, his plant eaten by a snake.&quot;
-  &quot;failure&quot;]
- [&quot;Beast at Tanagra.&quot; &quot;Bull of Heaven.&quot; &quot;common-enemy&quot;]
- [&quot;Darmok and Jalad at Tanagra.&quot; &quot;Gilgamesh and Ekidu at Uruk.&quot; &quot;cooperation&quot;]
- [&quot;Darmok and Jalad on the ocean.&quot;
-  &quot;Gilgamesh and Ekidu, after the Bull's defeat.&quot;
-  &quot;successful-cooperation&quot;]
- [&quot;Picard and Dathon at El-Adrel.&quot;
-  &quot;Picard and Dathon at El-Adrel.&quot;
-  &quot;successful-first-contact&quot;])
-</code></pre>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>([&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Gilgamesh, his plant eaten by a snake.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">failure</span><span>&quot;]
+</span><span> [&quot;</span><span style="color:#a3be8c;">Beast at Tanagra.</span><span>&quot; &quot;</span><span style="color:#a3be8c;">Bull of Heaven.</span><span>&quot; &quot;</span><span style="color:#a3be8c;">common-enemy</span><span>&quot;]
+</span><span> [&quot;</span><span style="color:#a3be8c;">Darmok and Jalad at Tanagra.</span><span>&quot; &quot;</span><span style="color:#a3be8c;">Gilgamesh and Ekidu at Uruk.</span><span>&quot; &quot;</span><span style="color:#a3be8c;">cooperation</span><span>&quot;]
+</span><span> [&quot;</span><span style="color:#a3be8c;">Darmok and Jalad on the ocean.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Gilgamesh and Ekidu, after the Bull&#39;s defeat.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">successful-cooperation</span><span>&quot;]
+</span><span> [&quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">successful-first-contact</span><span>&quot;])
+</span></code></pre>
 <p>This shows five possible answers because, as mentioned, any of the above allegories can fulfill the given goal.</p>
-
-<p>By default <code>l/run*</code> will list all possible answers for a given logic program, which is a very powerful feature for exhaustively searching for all the solutions to a given problem. However this list can be large, and even infinite! In such scenarios there is a way to limit the answers to a certain number when searching by using <code>l/run</code> (note the lack of the <code>*</code> character) directly followed by the number of answers we want returned.</p>
-
+<p>By default <code>l/run*</code> will list all possible answers for a given logic program, which is a very powerful feature for exhaustively searching for all the solutions to a given problem. However this list can be large, and even infinite! In such scenarios there is a way to limit the answers to a certain number when searching by using <code>l/run</code> (note the lack of the <code>*</code> character) directly followed by the number of answers we want returned. </p>
 <p>For example, the call:</p>
-
-<pre><code>(l/run 2 [tam hum eng]
-       (allegory tam hum eng))
-</code></pre>
-
-<p>will return only two possible answers:</p>
-
-<pre><code>([&quot;Shaka, when the walls fell.&quot;
-  &quot;Gilgamesh, his plant eaten by a snake.&quot;
-  &quot;failure&quot;]
- [&quot;Beast at Tanagra.&quot; &quot;Bull of Heaven.&quot; &quot;common-enemy&quot;])
-</code></pre>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">l/run </span><span style="color:#d08770;">2 </span><span>[tam hum eng]
+</span><span>       (</span><span style="color:#bf616a;">allegory</span><span> tam hum eng))
+</span></code></pre>
+<p>will return only two possible answers: </p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>([&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Gilgamesh, his plant eaten by a snake.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">failure</span><span>&quot;]
+</span><span> [&quot;</span><span style="color:#a3be8c;">Beast at Tanagra.</span><span>&quot; &quot;</span><span style="color:#a3be8c;">Bull of Heaven.</span><span>&quot; &quot;</span><span style="color:#a3be8c;">common-enemy</span><span>&quot;])
+</span></code></pre>
 <p>Now as we are getting a bit more familiar with the allegories in this example, we do not want to write out all three versions of each allegory each time. We can do this by defining a new goal <code>allegory-short</code> that succeeds for any phrase that identifies one of the five allegories:</p>
-
-<pre><code>(defn allegory-tam [tam]
-  (l/fresh [x y]
-           (allegory tam x y)))
-
-(defn allegory-hum [hum]
-  (l/fresh [x y]
-           (allegory x hum y)))
-
-(defn allegory-eng [eng]
-  (l/fresh [x y]
-           (allegory x y eng)))
-
-(defn allegory-short [x]
-  (l/conde [(allegory-tam x)]
-           [(allegory-hum x)]
-           [(allegory-eng x)]))
-</code></pre>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">allegory-tam </span><span>[tam]
+</span><span>  (</span><span style="color:#bf616a;">l/fresh </span><span>[x y]
+</span><span>           (</span><span style="color:#bf616a;">allegory</span><span> tam x y)))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">allegory-hum </span><span>[hum]
+</span><span>  (</span><span style="color:#bf616a;">l/fresh </span><span>[x y]
+</span><span>           (</span><span style="color:#bf616a;">allegory</span><span> x hum y)))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">allegory-eng </span><span>[eng]
+</span><span>  (</span><span style="color:#bf616a;">l/fresh </span><span>[x y]
+</span><span>           (</span><span style="color:#bf616a;">allegory</span><span> x y eng)))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">allegory-short </span><span>[x]
+</span><span>  (</span><span style="color:#bf616a;">l/conde </span><span>[(</span><span style="color:#bf616a;">allegory-tam</span><span> x)]
+</span><span>           [(</span><span style="color:#bf616a;">allegory-hum</span><span> x)]
+</span><span>           [(</span><span style="color:#bf616a;">allegory-eng</span><span> x)]))
+</span></code></pre>
 <p>The <code>allegory-short</code> function was defined by writing out the three scenarios by which a phrase could be part of an allegory: it is either the Tamarian allegory, the Human allegory or the English translation. The only new structure we use here from core.logic is <code>l/fresh</code> which lets us introduce new (fresh) logic variables which have no binding as of yet. When using the various forms of <code>l/run</code> the parameters for the function are automatically given as fresh variables, but this function allows us to create them inside other parts of the logic program as well.</p>
-
 <p>Now if we want to list, for example, five possible phrases that form part of an allegory we can call:</p>
-
-<pre><code class="language-(l/run">       (allegory-short x))
-</code></pre>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">l/run </span><span style="color:#d08770;">5 </span><span>[x]
+</span><span>       (</span><span style="color:#bf616a;">allegory-short</span><span> x))
+</span></code></pre>
 <p>which will return five of the possible terms that are used as part of allegories.</p>
-
-<pre><code>(&quot;Shaka, when the walls fell.&quot;
- &quot;Beast at Tanagra.&quot;
- &quot;Darmok and Jalad at Tanagra.&quot;
- &quot;Gilgamesh, his plant eaten by a snake.&quot;
- &quot;failure&quot;)
-</code></pre>
-
-<p>With all the functions for logic programming we built up, lets try our hand at creating a logic program that generates variants of the Darmok story expressed through a sequence of allegories. In this scenario, much like in the episode any phrase, a Tamarian- or Human allegory or their English equivalent, could be used to describe parts of the story. In essence we can represent the story as a list of phrases, for example: (&ldquo;failure&rdquo;, &ldquo;Beast at Tanagra.&rdquo; &ldquo;Darmok and Jalad at Tanagra.&rdquo; &ldquo;successful-first-contact&rdquo; ).</p>
-
-<p>We could put many restrictions on the order of the phrases, but for the sake of brevity we just want to ensure that each story starts with a phrase for <code>failure</code> and ends with a phrase for <code>successful-first-contact</code> much like the structure of the actual episode. In addition let&rsquo;s assume our stories are only five phrases long.</p>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span> &quot;</span><span style="color:#a3be8c;">Beast at Tanagra.</span><span>&quot;
+</span><span> &quot;</span><span style="color:#a3be8c;">Darmok and Jalad at Tanagra.</span><span>&quot;
+</span><span> &quot;</span><span style="color:#a3be8c;">Gilgamesh, his plant eaten by a snake.</span><span>&quot;
+</span><span> &quot;</span><span style="color:#a3be8c;">failure</span><span>&quot;)
+</span></code></pre>
+<p>With all the functions for logic programming we built up, lets try our hand at creating a logic program that generates variants of the Darmok story expressed through a sequence of allegories. In this scenario, much like in the episode any phrase, a Tamarian- or Human allegory or their English equivalent, could be used to describe parts of the story. In essence we can represent the story as a list of phrases, for example: (&quot;failure&quot;, &quot;Beast at Tanagra.&quot; &quot;Darmok and Jalad at Tanagra.&quot; &quot;successful-first-contact&quot; ). </p>
+<p>We could put many restrictions on the order of the phrases, but for the sake of brevity we just want to ensure that each story starts with a phrase for <code>failure</code> and ends with a phrase for <code>successful-first-contact</code> much like the structure of the actual episode. In addition let's assume our stories are only five phrases long. </p>
 <p>We can now define logic program to generate such stories as follows:</p>
-
-<pre><code>(defn failure-any [x]
-  (l/fresh [a1 a2 a3]
-           (l/conde [(failure x a1 a2)]
-                    [(failure a1 x a2)]
-                    [(failure a1 a2 x)])))
-
-(defn successful-first-contact-any [x]
-  (l/fresh [a1 a2 a3]
-           (l/conde [(successful-first-contact x a1 a2)]
-                    [(successful-first-contact a1 x a2)]
-                    [(successful-first-contact a1 a2 x)])))
-
-(defn five-element-story [x1, x2, x3, x4, x5]
-  (l/fresh [a1 a2 a3]
-           (l/conde [(failure-any x1)
-                     (allegory-short x2)
-                     (allegory-short x3)
-                     (allegory-short x4)
-                     (successful-first-contact-any x5)])))
-</code></pre>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">failure-any </span><span>[x]
+</span><span>  (</span><span style="color:#bf616a;">l/fresh </span><span>[a1 a2 a3]
+</span><span>           (</span><span style="color:#bf616a;">l/conde </span><span>[(</span><span style="color:#bf616a;">failure</span><span> x a1 a2)]
+</span><span>                    [(</span><span style="color:#bf616a;">failure</span><span> a1 x a2)]
+</span><span>                    [(</span><span style="color:#bf616a;">failure</span><span> a1 a2 x)])))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">successful-first-contact-any </span><span>[x]
+</span><span>  (</span><span style="color:#bf616a;">l/fresh </span><span>[a1 a2 a3]
+</span><span>           (</span><span style="color:#bf616a;">l/conde </span><span>[(</span><span style="color:#bf616a;">successful-first-contact</span><span> x a1 a2)]
+</span><span>                    [(</span><span style="color:#bf616a;">successful-first-contact</span><span> a1 x a2)]
+</span><span>                    [(</span><span style="color:#bf616a;">successful-first-contact</span><span> a1 a2 x)])))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">five-element-story </span><span>[x1</span><span style="color:#65737e;">,</span><span> x2</span><span style="color:#65737e;">,</span><span> x3</span><span style="color:#65737e;">,</span><span> x4</span><span style="color:#65737e;">,</span><span> x5]
+</span><span>  (</span><span style="color:#bf616a;">l/fresh </span><span>[a1 a2 a3]
+</span><span>           (</span><span style="color:#bf616a;">l/conde </span><span>[(</span><span style="color:#bf616a;">failure-any</span><span> x1)
+</span><span>                     (</span><span style="color:#bf616a;">allegory-short</span><span> x2)
+</span><span>                     (</span><span style="color:#bf616a;">allegory-short</span><span> x3)
+</span><span>                     (</span><span style="color:#bf616a;">allegory-short</span><span> x4)
+</span><span>                     (</span><span style="color:#bf616a;">successful-first-contact-any</span><span> x5)])))
+</span></code></pre>
 <p>Every construct we used to build these functions should be familiar based on the previous examples. We just needed to define two special versions of our goals for the shorthand version of allegories: one for failure and one for successful first contact.</p>
-
-<p>For example if we want five solutions that fulfill all the criteria for such stories we can call the following code:</p>
-
-<pre><code>(l/run 5 [x1 x2 x3 x4 x5]
-       (five-element-story x1 x2 x3 x4 x5))
-</code></pre>
-
+<p>For example if we want five solutions that fulfill all the criteria for such stories we can call the following code: </p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">l/run </span><span style="color:#d08770;">5 </span><span>[x1 x2 x3 x4 x5]
+</span><span>       (</span><span style="color:#bf616a;">five-element-story</span><span> x1 x2 x3 x4 x5))
+</span></code></pre>
 <p>which for example could return:</p>
-
-<pre><code>([&quot;Shaka, when the walls fell.&quot;
-  &quot;Shaka, when the walls fell.&quot;
-  &quot;Shaka, when the walls fell.&quot;
-  &quot;Shaka, when the walls fell.&quot;
-  &quot;Picard and Dathon at El-Adrel.&quot;]
- [&quot;Shaka, when the walls fell.&quot;
-  &quot;Shaka, when the walls fell.&quot;
-  &quot;Shaka, when the walls fell.&quot;
-  &quot;Shaka, when the walls fell.&quot;
-  &quot;Picard and Dathon at El-Adrel.&quot;]
- [&quot;Shaka, when the walls fell.&quot;
-  &quot;Shaka, when the walls fell.&quot;
-  &quot;Shaka, when the walls fell.&quot;
-  &quot;Shaka, when the walls fell.&quot;
-  &quot;successful-first-contact&quot;]
- [&quot;Shaka, when the walls fell.&quot;
-  &quot;Shaka, when the walls fell.&quot;
-  &quot;Shaka, when the walls fell.&quot;
-  &quot;Beast at Tanagra.&quot;
-  &quot;Picard and Dathon at El-Adrel.&quot;]
- [&quot;Shaka, when the walls fell.&quot;
-  &quot;Shaka, when the walls fell.&quot;
-  &quot;Shaka, when the walls fell.&quot;
-  &quot;Beast at Tanagra.&quot;
-  &quot;Picard and Dathon at El-Adrel.&quot;])
-</code></pre>
-
-<p>As one can see the logic program will exhaustively go through all the possible ways the goals can fulfilled and list them up to limit given as a parameter for <code>l/run</code>. The results are not necessarily unique if there are multiple ways to fulfill the goals. This can be seen in the first and second answers as the phrase &ldquo;Picard and Dathon at El-Adrel.&rdquo; is both the Tamarian and Human allegory for successful first contact.</p>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>([&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;]
+</span><span> [&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;]
+</span><span> [&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">successful-first-contact</span><span>&quot;]
+</span><span> [&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Beast at Tanagra.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;]
+</span><span> [&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Beast at Tanagra.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;])
+</span></code></pre>
+<p>As one can see the logic program will exhaustively go through all the possible ways the goals can fulfilled and list them up to limit given as a parameter for <code>l/run</code>. The results are not necessarily unique if there are multiple ways to fulfill the goals. This can be seen in the first and second answers as the phrase &quot;Picard and Dathon at El-Adrel.&quot; is both the Tamarian and Human allegory for successful first contact. </p>
 <p>The above restrictions allow for a lot of the same allegories used within the story. For this, one can define new restrictions and further fine tune the story generation. For example, one can create restrictions on the number of duplicate phrases used, or could ensure that there is more diversity in the phrase type (Tamarian, Human, English) is used. Declaring new restrictions, combining them with existing ones and using the same mechanism to derive any number of answers is one of the core strengths of a logic programming system such as core.logic.</p>
-
 <p>As a final example to show how logic programming can be embedded into a (regular) program, we create a logic program inside a regular Clojure function that creates n-number of stories of a given length. Take a quick look at the following code:</p>
-
-<pre><code class="language-clojure">(defn n-element-story [nr-of-elements stories]
-  (let [vars (repeatedly nr-of-elements l/lvar)
-        first-var (first vars)
-        middle (drop-last (rest vars))
-        last-var (last vars)]
-    (l/run stories [q]
-           (l/conde [(l/== q vars)
-                     (l/distincto q)
-                     (failure-any first-var)
-                     (successful-first-contact-any last-var)
-                     (l/everyg allegory-short middle)]))))
-</code></pre>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">n-element-story </span><span>[nr-of-elements stories]
+</span><span>  (</span><span style="color:#bf616a;">let </span><span>[vars (</span><span style="color:#bf616a;">repeatedly</span><span> nr-of-elements l/lvar)
+</span><span>        first-var (</span><span style="color:#bf616a;">first</span><span> vars)
+</span><span>        middle (</span><span style="color:#bf616a;">drop-last </span><span>(</span><span style="color:#bf616a;">rest</span><span> vars))
+</span><span>        last-var (</span><span style="color:#bf616a;">last</span><span> vars)]
+</span><span>    (</span><span style="color:#bf616a;">l/run</span><span> stories [q]
+</span><span>           (</span><span style="color:#bf616a;">l/conde </span><span>[(</span><span style="color:#bf616a;">l/==</span><span> q vars)
+</span><span>                     (</span><span style="color:#bf616a;">l/distincto</span><span> q)
+</span><span>                     (</span><span style="color:#bf616a;">failure-any</span><span> first-var)
+</span><span>                     (</span><span style="color:#bf616a;">successful-first-contact-any</span><span> last-var)
+</span><span>                     (</span><span style="color:#bf616a;">l/everyg</span><span> allegory-short middle)]))))
+</span></code></pre>
 <p>Without going too in-depth on every part of this function, it programmatically creates n-number of fresh variables based on the given parameter. It then unifies these with the parameters of a run execution inside the function and returns them. For example, six stories of four elements can be requested by the call:</p>
-
-<pre><code class="language-clojure">(n-element-story 4 6)
-</code></pre>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">n-element-story </span><span style="color:#d08770;">4 6</span><span>)
+</span></code></pre>
 <p>which will result in the stories:</p>
-
-<pre><code class="language-clojure">((&quot;Shaka, when the walls fell.&quot;
-  &quot;Beast at Tanagra.&quot;
-  &quot;Darmok and Jalad at Tanagra.&quot;
-  &quot;Picard and Dathon at El-Adrel.&quot;)
- (&quot;Shaka, when the walls fell.&quot;
-  &quot;Beast at Tanagra.&quot;
-  &quot;Darmok and Jalad on the ocean.&quot;
-  &quot;Picard and Dathon at El-Adrel.&quot;)
- (&quot;Shaka, when the walls fell.&quot;
-  &quot;Beast at Tanagra.&quot;
-  &quot;Gilgamesh, his plant eaten by a snake.&quot;
-  &quot;Picard and Dathon at El-Adrel.&quot;)
- (&quot;Shaka, when the walls fell.&quot;
-  &quot;Beast at Tanagra.&quot;
-  &quot;failure&quot;
-  &quot;Picard and Dathon at El-Adrel.&quot;)
- (&quot;Shaka, when the walls fell.&quot;
-  &quot;Beast at Tanagra.&quot;
-  &quot;Bull of Heaven.&quot;
-  &quot;Picard and Dathon at El-Adrel.&quot;)
- (&quot;Shaka, when the walls fell.&quot;
-  &quot;Darmok and Jalad at Tanagra.&quot;
-  &quot;Beast at Tanagra.&quot;
-  &quot;Picard and Dathon at El-Adrel.&quot;))
-</code></pre>
-
-<p>There you have it, a very quick overview of using core.logic for logic programming. If you would like to experiment further the code used in this article is <a href="https://github.com/newres/darmok-core-logic" target="_blank">available</a>. Here we only scratched the surface of what is possible in a logic programming environment such as core.logic. Feel free to check it out, or any other <a href="http://minikanren.org/#implementations" target="_blank">miniKanren implementation available in your language</a>.</p>
-
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>((&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Beast at Tanagra.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Darmok and Jalad at Tanagra.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;)
+</span><span> (&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Beast at Tanagra.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Darmok and Jalad on the ocean.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;)
+</span><span> (&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Beast at Tanagra.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Gilgamesh, his plant eaten by a snake.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;)
+</span><span> (&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Beast at Tanagra.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">failure</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;)
+</span><span> (&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Beast at Tanagra.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Bull of Heaven.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;)
+</span><span> (&quot;</span><span style="color:#a3be8c;">Shaka, when the walls fell.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Darmok and Jalad at Tanagra.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Beast at Tanagra.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">Picard and Dathon at El-Adrel.</span><span>&quot;))
+</span></code></pre>
+<p>There you have it, a very quick overview of using core.logic for logic programming. If you would like to experiment further the code used in this article is <a href="https://github.com/newres/darmok-core-logic">available</a>. Here we only scratched the surface of what is possible in a logic programming environment such as core.logic. Feel free to check it out, or any other <a href="http://minikanren.org/#implementations">miniKanren implementation available in your language</a>.</p>
 <p>I hope that, much like the Darmok episode, this article has expanded your horizons on communicating. Logic programming is a very interesting, and often underutilized programming paradigm. The core.logic/miniKanren logic programming language is a great system to get started with it. I hope that this, perhaps first, contact with Logic Programming or core.logic aids you in your future endeavors.</p>
 
+
     </div>
+  </section>
+</body>
 
-    
-
-
-<div class="article-tags">
-  
-  <a class="badge badge-light" href="/tags/ai/">AI</a>
-  
-  <a class="badge badge-light" href="/tags/logic-programming/">logic programming</a>
-  
-  <a class="badge badge-light" href="/tags/core.logic/">core.logic</a>
-  
-  <a class="badge badge-light" href="/tags/kanren/">kanren</a>
-  
-  <a class="badge badge-light" href="/tags/clojure/">clojure</a>
-  
-  <a class="badge badge-light" href="/tags/star-trek/">Star Trek</a>
-  
-</div>
-
-
-
-    
-
-
-
-
-
-
-<div class="media author-card" itemscope itemtype="http://schema.org/Person">
-  
-  <img class="portrait mr-3" src="/img/portrait.png" itemprop="image" alt="Avatar">
-  
-  <div class="media-body">
-    <h5 class="card-title" itemprop="name"><a href="/">Newres Al Haider</a></h5>
-    <h6 class="card-subtitle">Postdoctoral Researcher and Software Engineer</h6>
-    
-    <ul class="network-icon" aria-hidden="true">
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-      <li>
-        <a itemprop="sameAs" href="mailto:newresjob@gmail.com" >
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <a itemprop="sameAs" href="https://twitter.com/newresa" target="_blank" rel="noopener">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-      
-      
-      
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <a itemprop="sameAs" href="https://scholar.google.nl/citations?user=b4MxbOEAAAAJ&amp;hl=en" target="_blank" rel="noopener">
-          <i class="ai ai-google-scholar"></i>
-        </a>
-      </li>
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <a itemprop="sameAs" href="https://github.com/newres" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i>
-        </a>
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-
-
-
-    
-    
-    <div class="article-widget">
-      <div class="hr-light"></div>
-      <h3>Related</h3>
-      <ul>
-        
-        <li><a href="/post/probable-mystery-machine/">The Probable Mystery Machine</a></li>
-        
-        <li><a href="/post/exploring-the-deep-1/">Exploring the Deep, Part 1: Introduction</a></li>
-        
-        <li><a href="/post/prolog-price-of-peace/">Prolog and the Price of Peace</a></li>
-        
-        <li><a href="/post/introduction/">Introduction</a></li>
-        
-        <li><a href="/project/legal-banking-compliance/">Legal Regulatory Compliance Within The Financial Domain.</a></li>
-        
-      </ul>
-    </div>
-    
-
-    
-
-    
-
-
-  </div>
-</article>
-
-<div class="container">
-  <footer class="site-footer">
-  
-
-  <p class="powered-by">
-    &copy; 2017 Newres Al Haider &middot; 
-
-    Powered by the
-    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
-    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
-
-    
-    <span class="float-right" aria-hidden="true">
-      <a href="#" id="back_to_top">
-        <span class="button_icon">
-          <i class="fas fa-chevron-up fa-2x"></i>
-        </span>
-      </a>
-    </span>
-    
-  </p>
-</footer>
-
-</div>
-
-
-<div id="modal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cite</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <pre><code class="tex hljs"></code></pre>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
-          <i class="fas fa-copy"></i> Copy
-        </a>
-        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
-          <i class="fas fa-download"></i> Download
-        </a>
-        <div id="modal-error"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-    
-    
-    <script src="/js/mathjax-config.js"></script>
-    
-
-    
-    
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
-
-      
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
-        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js"></script>
-        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
-        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/prolog.min.js"></script>
-        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>
-        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dart.min.js"></script>
-        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/smalltalk.min.js"></script>
-        
-      
-
-      
-      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
-      
-    
-
-    
-    
-
-    
-    
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-    
-
-    
-    
-    <script>
-      const search_index_filename = "/index.json";
-      const i18n = {
-        'placeholder': "Search...",
-        'results': "results found",
-        'no_results': "No results found"
-      };
-      const content_type = {
-        'post': "Posts",
-        'project': "Projects",
-        'publication' : "Publications",
-        'talk' : "Talks"
-        };
-    </script>
-    
-
-    
-    
-
-    
-    
-    <script id="search-hit-fuse-template" type="text/x-template">
-      <div class="search-hit" id="summary-{{key}}">
-      <div class="search-hit-content">
-        <div class="search-hit-name">
-          <a href="{{relpermalink}}">{{title}}</a>
-          <div class="article-metadata search-hit-type">{{type}}</div>
-          <p class="search-hit-description">{{snippet}}</p>
-        </div>
-      </div>
-      </div>
-    </script>
-    
-
-    
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
-    
-
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    <script src="/js/academic.min.d037ee5294b166a79dec317c58aea9cc.js"></script>
-
-    
-
-  </body>
 </html>
-

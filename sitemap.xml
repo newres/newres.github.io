@@ -1,1022 +1,154 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/post/pharo-prince/</loc>
-      <lastmod>2021-01-24T00:00:00+01:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/post/meditations/</loc>
-      <lastmod>2021-01-06T00:00:00+01:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/post/curry-lol/</loc>
-      <lastmod>2020-07-04T00:00:00+02:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/post/cyborg-mode/</loc>
-      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/post/darmok-core-logic/</loc>
-      <lastmod>2019-02-02T00:00:00+01:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/post/probable-mystery-machine/</loc>
-      <lastmod>2019-12-06T00:00:00+01:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/publication/solving-compliance-software-contracts/</loc>
-      <lastmod>2019-09-11T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/post/aesopica-5/</loc>
-      <lastmod>2019-10-06T00:00:00+02:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/post/exploring-the-deep-1/</loc>
-      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/post/prolog-price-of-peace/</loc>
-      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/post/aesopica-4/</loc>
-      <lastmod>2018-12-18T00:00:00+01:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/post/aesopica-3/</loc>
-      <lastmod>2018-12-04T00:00:00+01:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/post/aesopica-2/</loc>
-      <lastmod>2018-09-14T00:00:00+02:00</lastmod>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://www.newresalhaider.com/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/2018/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/2019/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/2020/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/2021/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/2022/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/aesopica-1/</loc>
+        <lastmod>2018-09-10</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/aesopica-2/</loc>
+        <lastmod>2018-09-14</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/aesopica-3/</loc>
+        <lastmod>2018-12-04</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/aesopica-4/</loc>
+        <lastmod>2018-12-18</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/aesopica-5/</loc>
+        <lastmod>2019-10-06</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/art-of-choosing-language/</loc>
+        <lastmod>2018-03-18</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/common-treasure/</loc>
+        <lastmod>2018-06-30</lastmod>
     </url>
-    
-  
-    
     <url>
-    
-      <loc>https://www.newresalhaider.com/post/aesopica-1/</loc>
-      <lastmod>2018-09-10T00:00:00+02:00</lastmod>
+        <loc>https://www.newresalhaider.com/post/curry-lol/</loc>
+        <lastmod>2020-07-04</lastmod>
     </url>
-    
-  
-    
     <url>
-    
-      <loc>https://www.newresalhaider.com/post/common-treasure/</loc>
-      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
+        <loc>https://www.newresalhaider.com/post/cyborg-mode/</loc>
+        <lastmod>2020-06-01</lastmod>
     </url>
-    
-  
-    
     <url>
-    
-      <loc>https://www.newresalhaider.com/post/spec-stacular-spider-man/</loc>
-      <lastmod>2018-05-01T00:00:00+02:00</lastmod>
+        <loc>https://www.newresalhaider.com/post/darmok-core-logic/</loc>
+        <lastmod>2019-02-02</lastmod>
     </url>
-    
-  
-    
     <url>
-    
-      <loc>https://www.newresalhaider.com/post/art-of-choosing-language/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
+        <loc>https://www.newresalhaider.com/post/dodd/</loc>
+        <lastmod>2022-02-01</lastmod>
     </url>
-    
-  
-    
     <url>
-    
-      <loc>https://www.newresalhaider.com/post/interlinked-data/</loc>
-      <lastmod>2018-02-18T00:00:00+00:00</lastmod>
+        <loc>https://www.newresalhaider.com/post/exploring-the-deep/</loc>
+        <lastmod>2019-02-04</lastmod>
     </url>
-    
-  
-    
     <url>
-    
-      <loc>https://www.newresalhaider.com/post/trouble-with-triples/</loc>
-      <lastmod>2018-01-28T00:00:00+01:00</lastmod>
+        <loc>https://www.newresalhaider.com/post/interlinked-data/</loc>
+        <lastmod>2018-02-18</lastmod>
     </url>
-    
-  
-    
     <url>
-    
-      <loc>https://www.newresalhaider.com/post/introduction/</loc>
-      <lastmod>2018-01-14T00:00:00+01:00</lastmod>
+        <loc>https://www.newresalhaider.com/post/introduction/</loc>
+        <lastmod>2018-01-14</lastmod>
     </url>
-    
-  
-    
     <url>
-    
-      <loc>https://www.newresalhaider.com/project/legal-banking-compliance/</loc>
-      <lastmod>2017-12-31T00:00:00+00:00</lastmod>
+        <loc>https://www.newresalhaider.com/post/meditations/</loc>
+        <lastmod>2021-01-06</lastmod>
     </url>
-    
-  
-    
     <url>
-    
-      <loc>https://www.newresalhaider.com/project/innius/</loc>
-      <lastmod>2017-12-30T00:00:00+00:00</lastmod>
+        <loc>https://www.newresalhaider.com/post/pharo-prince/</loc>
+        <lastmod>2021-01-24</lastmod>
     </url>
-    
-  
-    
     <url>
-    
-      <loc>https://www.newresalhaider.com/project/clinical-semantics/</loc>
-      <lastmod>2017-12-29T00:00:00+00:00</lastmod>
+        <loc>https://www.newresalhaider.com/post/probable-mystery-machine/</loc>
+        <lastmod>2019-12-06</lastmod>
     </url>
-    
-  
-    
     <url>
-    
-      <loc>https://www.newresalhaider.com/project/semantic-software-analysis/</loc>
-      <lastmod>2017-12-22T00:00:00+00:00</lastmod>
+        <loc>https://www.newresalhaider.com/post/prolog-price-of-peace/</loc>
+        <lastmod>2019-02-04</lastmod>
     </url>
-    
-  
-    
     <url>
-    
-      <loc>https://www.newresalhaider.com/tags/academic/</loc>
-      <lastmod>2017-01-01T00:00:00+00:00</lastmod>
+        <loc>https://www.newresalhaider.com/post/spec-stacular-spider-man/</loc>
+        <lastmod>2018-05-01</lastmod>
     </url>
-    
-  
-    
     <url>
-    
-      <loc>https://www.newresalhaider.com/publication/</loc>
-      <lastmod>2017-01-01T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/talk/</loc>
-      <lastmod>2017-01-01T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/post/</loc>
-      <lastmod>2017-01-01T00:00:00+01:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/publication/medical-data-semantic/</loc>
-      <lastmod>2014-10-27T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/publication/benchmark-framework/</loc>
-      <lastmod>2014-10-19T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/publication/comparison-mobile-rule-engines/</loc>
-      <lastmod>2014-08-11T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/publication/towards-cdss-mobile/</loc>
-      <lastmod>2014-06-18T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/publication/execution-trace-analysis/</loc>
-      <lastmod>2011-09-27T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/publication/approach-da-ontologies/</loc>
-      <lastmod>2010-07-12T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/publication_types/1/</loc>
-      <lastmod>2019-09-11T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/ai/</loc>
-      <lastmod>2019-02-02T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/aesopica/</loc>
-      <lastmod>2019-10-06T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/android/</loc>
-      <lastmod>2021-01-06T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/categories/</loc>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/clojure/</loc>
-      <lastmod>2019-10-06T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/clojurescript/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/common-lisp/</loc>
-      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/curry/</loc>
-      <lastmod>2020-07-04T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/cyborg/</loc>
-      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/dc/</loc>
-      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/dart/</loc>
-      <lastmod>2021-01-06T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/deep-space-9/</loc>
-      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/fintech/</loc>
-      <lastmod>2017-12-31T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/flutter/</loc>
-      <lastmod>2021-01-06T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/fresh-prince-of-bel-air/</loc>
-      <lastmod>2021-01-24T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/golang/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/haskell/</loc>
-      <lastmod>2020-07-04T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/idris/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/java/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/javascript/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/kotlin/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/league-of-legends/</loc>
-      <lastmod>2020-07-04T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/linked-data/</loc>
-      <lastmod>2019-10-06T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/</loc>
-      <lastmod>2017-12-21T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/org-mode/</loc>
-      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/pharo/</loc>
-      <lastmod>2021-01-24T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/problog/</loc>
-      <lastmod>2019-12-06T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/project/</loc>
-      <lastmod>2017-12-31T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/prolog/</loc>
-      <lastmod>2019-12-06T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/publication_types/</loc>
-      <lastmod>2019-09-11T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/python/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/rdf/</loc>
-      <lastmod>2019-10-06T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/react-native/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/regtech/</loc>
-      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/rust/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/snomed-ct/</loc>
-      <lastmod>2017-12-29T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/scala/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/semantic-web/</loc>
-      <lastmod>2019-10-06T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/smalltalk/</loc>
-      <lastmod>2021-01-24T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/star-trek/</loc>
-      <lastmod>2019-02-02T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/</loc>
-      <lastmod>2017-01-01T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/app-development/</loc>
-      <lastmod>2021-01-06T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/archeology/</loc>
-      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/art/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/banking/</loc>
-      <lastmod>2017-12-31T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/clinical/</loc>
-      <lastmod>2017-12-29T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/clojure/</loc>
-      <lastmod>2019-10-06T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/clojure.spec/</loc>
-      <lastmod>2018-05-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/core.logic/</loc>
-      <lastmod>2019-02-02T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/declarative-programming/</loc>
-      <lastmod>2020-07-04T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/deep-learning/</loc>
-      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/dynamic-analysis/</loc>
-      <lastmod>2017-12-22T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/emacs/</loc>
-      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/functional-programming/</loc>
-      <lastmod>2020-07-04T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/health/</loc>
-      <lastmod>2017-12-29T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/history/</loc>
-      <lastmod>2021-01-06T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/industrial/</loc>
-      <lastmod>2017-12-30T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/introduction/</loc>
-      <lastmod>2018-01-14T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/kanren/</loc>
-      <lastmod>2019-02-02T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/knowledge-graph/</loc>
-      <lastmod>2019-10-06T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/knowledge-representation/</loc>
-      <lastmod>2019-10-06T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/law/</loc>
-      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/logic-programming/</loc>
-      <lastmod>2020-07-04T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/machine-learning/</loc>
-      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/mobile/</loc>
-      <lastmod>2021-01-06T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/org/</loc>
-      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/philosophy/</loc>
-      <lastmod>2021-01-06T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/probabilistic-programming/</loc>
-      <lastmod>2019-12-06T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/program-analysis/</loc>
-      <lastmod>2017-12-22T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/program-traces/</loc>
-      <lastmod>2017-12-22T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/programming-languages/</loc>
-      <lastmod>2018-03-18T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/reasoning/</loc>
-      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/regulations/</loc>
-      <lastmod>2017-12-31T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/rules/</loc>
-      <lastmod>2019-02-04T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/rules-engine/</loc>
-      <lastmod>2018-06-30T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/sensors/</loc>
-      <lastmod>2017-12-30T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/software/</loc>
-      <lastmod>2017-12-22T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/software-contracts/</loc>
-      <lastmod>2018-05-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/spacemacs/</loc>
-      <lastmod>2020-06-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/specs/</loc>
-      <lastmod>2018-05-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/triples/</loc>
-      <lastmod>2018-02-18T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.newresalhaider.com/tags/tv-show/</loc>
-      <lastmod>2021-01-24T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
+        <loc>https://www.newresalhaider.com/post/trouble-with-triples/</loc>
+        <lastmod>2018-01-28</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/project/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/project/clinical-semantics/</loc>
+        <lastmod>2017-12-29</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/project/innius/</loc>
+        <lastmod>2017-12-30</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/project/legal-banking-compliance/</loc>
+        <lastmod>2017-12-31</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/project/semantic-software-analysis/</loc>
+        <lastmod>2017-12-22</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/publication/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/publication/approach-da-ontologies/</loc>
+        <lastmod>2010-07-12</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/publication/benchmark-framework/</loc>
+        <lastmod>2014-10-19</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/publication/comparison-mobile-rule-engines/</loc>
+        <lastmod>2014-08-11</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/publication/execution-trace-analysis/</loc>
+        <lastmod>2011-09-27</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/publication/medical-data-semantic/</loc>
+        <lastmod>2014-10-27</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/publication/solving-compliance-software-contracts/</loc>
+        <lastmod>2019-09-11</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/publication/towards-cdss-mobile/</loc>
+        <lastmod>2014-06-18</lastmod>
+    </url>
 </urlset>
