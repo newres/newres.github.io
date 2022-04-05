@@ -64,7 +64,7 @@
 ">
 
 
-<meta property="twitter:image" content="https://www.newresalhaider.com/post/aesopica-1/../static/img/series/aesopica/foxandstork-header.png">
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/static/img/series/aesopica/foxandstork-header.png">
 
 
 <h1 class="title">
@@ -90,23 +90,23 @@
 <p>The intention of stories such as these, as well as text in general, is to convey meaning. However, in addition to humans, a new audience for text has come to light in recent years: machines. To facilitate this new audience a set of technologies has been developed to convey the meaning of text in a precise and unambiguous way that is easily understandable for both humans and machines alike. Many of these new methods fall under the umbrella of the <a href="https://www.w3.org/standards/semanticweb/">Semantic Web</a>. The goal of the Semantic Web is to create a web of data where the meaning of the information is both human and machine understandable.</p>
 <p>One of the cornerstone technologies in conveying information for this purpose is <a href="https://www.w3.org/standards/semanticweb/data">Linked Data</a>, and in particular the <a href="https://www.w3.org/RDF/">Resource Description Framework (RDF)</a> standard that defines how this Linked Data can be expressed. I have written a <a href="https://www.newresalhaider.com/post/interlinked-data/">short introduction to Linked Data</a> before but to summarize: it allows for the expressing information as a set of facts. These facts have the form of subject, predicate, object triples. A set of these facts is often called a knowledge base, or in an alternative view this can also been seen as a knowledge graph where the facts define the nodes and edges.</p>
 <p>In a Linked Data representation the story of Fox and the Stork would look something like this: </p>
-<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt;</span><span> .
-</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .
+<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt;</span><span> .</span><span>
+</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .</span><span>
 </span><span>
-</span><span style="color:#d08770;">&lt;fox&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;animal&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;stork&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;animal&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;fox&gt; &lt;gives-invitation&gt; &lt;invitation1&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;invitation1&gt; &lt;has-invited&gt; &lt;stork&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;invitation1&gt; &lt;has-food&gt; &lt;soup&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;invitation1&gt; &lt;serves-using&gt; &lt;shallow-plate&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;stork&gt; &lt;gives-invitation&gt; &lt;invitation2&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;invitation2&gt; &lt;has-invited&gt; &lt;fox&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;invitation2&gt; &lt;has-food&gt; &lt;crumbled-food&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;invitation2&gt; &lt;serves-using&gt; &lt;narrow-mouthed-jug&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;fox&gt; &lt;can-eat-food-served-using&gt; &lt;shallow-plate&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;fox&gt; &lt;can-not-eat-food-served-using&gt; &lt;narrow-mouthed-jug&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;stork&gt; &lt;can-eat-food-served-using&gt; &lt;narrow-mouthed-jug&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;stork&gt; &lt;can-not-eat-food-served-using&gt; &lt;shallow-plate&gt;</span><span>.
+</span><span style="color:#d08770;">&lt;fox&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;animal&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;stork&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;animal&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;fox&gt; &lt;gives-invitation&gt; &lt;invitation1&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;invitation1&gt; &lt;has-invited&gt; &lt;stork&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;invitation1&gt; &lt;has-food&gt; &lt;soup&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;invitation1&gt; &lt;serves-using&gt; &lt;shallow-plate&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;stork&gt; &lt;gives-invitation&gt; &lt;invitation2&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;invitation2&gt; &lt;has-invited&gt; &lt;fox&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;invitation2&gt; &lt;has-food&gt; &lt;crumbled-food&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;invitation2&gt; &lt;serves-using&gt; &lt;narrow-mouthed-jug&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;fox&gt; &lt;can-eat-food-served-using&gt; &lt;shallow-plate&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;fox&gt; &lt;can-not-eat-food-served-using&gt; &lt;narrow-mouthed-jug&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;stork&gt; &lt;can-eat-food-served-using&gt; &lt;narrow-mouthed-jug&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;stork&gt; &lt;can-not-eat-food-served-using&gt; &lt;shallow-plate&gt;</span><span>.</span><span>
 </span></code></pre>
 <p>This is in the <a href="https://www.w3.org/TR/turtle/">Turtle syntax</a> of RDF. There are other types of syntax are available to represent Linked Data, for example in JSON form as <a href="https://www.w3.org/TR/json-ld/">JSON-LD</a>.</p>
 <p>To summarize a bit of what this Linked Data format does in this scenario, is that it uses <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">Uniform Resource Identifiers (URIs)</a> to define the subjects, predicates and objects of each fact. This allows to precisely and unambiguously define and link the meaning between these elements. For example, the fact that the fox is a type of animal could be expressed by the triple with the full URIs: <code>http://www.newresalhaider.com/ontologies/aesop/foxstork/fox http://www.w3.org/1999/02/22-rdf-syntax-ns#type http://www.newresalhaider.com/ontologies/aesop/foxstork/animal .</code> Due to the fact that writing the full URIs can be quite cumbersome, the Turtle syntax uses two kinds of shorthands to help out. In this case one can define a base URI for the current document, <a href="http://www.newresalhaider.com/ontologies/aesop/foxstork">http://www.newresalhaider.com/ontologies/aesop/foxstork</a>, as well as prefixes for other namespeaces, such as <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#">http://www.w3.org/1999/02/22-rdf-syntax-ns#</a>, with which the writing of each fact that would begin with these URI fragments could be shortened.</p>
@@ -142,28 +142,28 @@
 <p>Using this notation elements of EDN, we can build an EDN based version of the story of the Fox and the Stork, using some conventions. </p>
 <p>Given that in many practical cases we are probably going to shorten URIs with prefixes when writing, we can use a keyword for denoting elements. In the case where we would use the base prefix, we can just use a regular, non-namespaced, keyword, i.e. <code>:fox</code>, and in cases where we would refer to any other prefix we can use namespaced keywords, i.e. <code>:rdf/type</code>. A full fact could then be described with a relatively straightforward vector, for example <code>[:fox :rdf/type :animal]</code> and the knowledge base with a set of facts such as <code>#{[:fox :rdf/type :animal] [:stork :rdf/type :animal]}</code>. </p>
 <p>Of course this means that in addition to facts we also need some data for the context, in which we store the base and other prefixes and to what they map to, to be able to fully build an equivalent Linked Data representation. The context will be a map of the relevant prefixes as keys, as well as nil for the base prefix. For the above example this means that the below example will describe the context needed to resolve all the full URIs: </p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>{</span><span style="color:#d08770;">nil </span><span>&quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/</span><span>&quot;
-</span><span style="color:#d08770;">:rdf </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span>&quot;}
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>{</span><span style="color:#d08770;">nil </span><span>&quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/</span><span>&quot;</span><span>
+</span><span style="color:#d08770;">:rdf </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span>&quot;}</span><span>
 </span></code></pre>
 <p>Putting everything together, to have a full Linked Data graph we need a context and a set of facts, so the overall structure will be a map where these are both defined:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>  {</span><span style="color:#d08770;">::aes/context
-</span><span>   {</span><span style="color:#d08770;">nil </span><span>&quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/</span><span>&quot;
-</span><span>    </span><span style="color:#d08770;">:rdf </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span>&quot;}
-</span><span>   </span><span style="color:#d08770;">::aes/facts
-</span><span>   #{[</span><span style="color:#d08770;">:fox :rdf/type :animal</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:stork :rdf/type :animal</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:fox :gives-invitation :invitation1</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:invitation1 :has-invited :stork</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:invitation1 :has-food :soup</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:invitation1 :serves-using :shallow-plate</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:stork :gives-invitation :invitation2</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:invitation2 :has-invited :stork</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:invitation2 :has-food :crumbled-food</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:invitation2 :serves-using :narrow-mouthed-jug</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:fox :can-eat-food-served-using :shallow-plate</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:fox :can-not-eat-food-served-suing :narrow-mouthed-jug</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:stork :can-eat-food-served-using :narrow-mouthed-jug</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:stork :can-not-eat-food-served-suing :shallow-plate</span><span>]}}
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>  {</span><span style="color:#d08770;">::aes/context</span><span>
+</span><span>   {</span><span style="color:#d08770;">nil </span><span>&quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/</span><span>&quot;</span><span>
+</span><span>    </span><span style="color:#d08770;">:rdf </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span>&quot;}</span><span>
+</span><span>   </span><span style="color:#d08770;">::aes/facts</span><span>
+</span><span>   #{[</span><span style="color:#d08770;">:fox :rdf/type :animal</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:stork :rdf/type :animal</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:fox :gives-invitation :invitation1</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:invitation1 :has-invited :stork</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:invitation1 :has-food :soup</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:invitation1 :serves-using :shallow-plate</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:stork :gives-invitation :invitation2</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:invitation2 :has-invited :stork</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:invitation2 :has-food :crumbled-food</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:invitation2 :serves-using :narrow-mouthed-jug</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:fox :can-eat-food-served-using :shallow-plate</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:fox :can-not-eat-food-served-suing :narrow-mouthed-jug</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:stork :can-eat-food-served-using :narrow-mouthed-jug</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:stork :can-not-eat-food-served-suing :shallow-plate</span><span>]}}</span><span>
 </span></code></pre>
 <p>I have started a small library for manipulating Linked Data structures written this way, with the name <a href="https://github.com/newres/aesopica">Aesopica</a>. It is in very early stages, where the current main functionality is to translate Linked Data written this way into the Turtle format described above.</p>
 <p>Of course there are lot of other elements of Linked Data that needs to be represented in this that we did not tackle yet. In addition there are also a large number of Clojure libraries that could be used to make writing and using Linked Data in this fashion easier. How these features could be achieved however is a story for another time.</p>

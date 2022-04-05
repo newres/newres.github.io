@@ -74,49 +74,49 @@
 <p>Human beings enhanced by machine parts, often called <a href="https://en.wikipedia.org/wiki/Cyborg">cyborgs</a>, are a staple of the science-fiction and comic books. The, very aptly named, hero <a href="https://en.wikipedia.org/wiki/Cyborg_(comics)">Cyborg</a>, is a good example of this. Due to advanced mechanical modifications he not only has greatly increased strength and the ability to fly, but he is able to interface directly with computer systems to organize and plan ahead. These skills make him an important member of many superhero teams such as the <a href="https://en.wikipedia.org/wiki/Justice_League">Justice League</a> and <a href="https://en.wikipedia.org/wiki/Teen_Titans">Teen Titans</a>.</p>
 <p>Thankfully for us, even without any of the cybernetic implants that Cyborg has, there exists some great tools to help organize, document and plan ahead. One of such tools is called <a href="https://orgmode.org/">Org-mode</a>. Org-mode, also denoted as Org mode or even more simply as Org, is a system for organizing notes, plans, authoring documents and many other tasks. One of its main benefits is that although specialized tools exist to help create and edit Org documents, all Org documents are <a href="https://en.wikipedia.org/wiki/Plain_text">plain text</a> files. This means that the format is very portable and can be used and edited on any platform which can edit text files. In this article we give a brief introduction to Org mode with an example based on the hero Cyborg.</p>
 <p>Org documents can be outlined with a tree structure using headlines. Suppose that we want to describe various information about Cyborg, such as his biography, his powers, his relationships and his schedule. For each of these we can use an asterisk (<code>*</code>) symbol followed by some text to create a headline in the document as follows:</p>
-<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">* Biography
-</span><span style="color:#8fa1b3;">* Powers
-</span><span style="color:#8fa1b3;">* Relationships
-</span><span style="color:#8fa1b3;">* Cyborg&#39;s Schedule
+<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">* Biography</span><span>
+</span><span style="color:#8fa1b3;">* Powers</span><span>
+</span><span style="color:#8fa1b3;">* Relationships</span><span>
+</span><span style="color:#8fa1b3;">* Cyborg&#39;s Schedule</span><span>
 </span></code></pre>
 <p>We can add nested headlines by increasing the number of asterisks in front of a section name. For example, if we want to create two headlines under relationships detailing Cyborgs team affiliations, as well as his villains, we can do that:</p>
-<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">* Biography
-</span><span style="color:#8fa1b3;">* Powers
-</span><span style="color:#8fa1b3;">* Relationships
-</span><span style="color:#8fa1b3;">** Team Affiliations
-</span><span style="color:#8fa1b3;">** Villains
-</span><span style="color:#8fa1b3;">* Cyborg&#39;s Schedule
+<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">* Biography</span><span>
+</span><span style="color:#8fa1b3;">* Powers</span><span>
+</span><span style="color:#8fa1b3;">* Relationships</span><span>
+</span><span style="color:#8fa1b3;">** Team Affiliations</span><span>
+</span><span style="color:#8fa1b3;">** Villains</span><span>
+</span><span style="color:#8fa1b3;">* Cyborg&#39;s Schedule</span><span>
 </span></code></pre>
 <p>Of course while headlines can help us structure a document, text is an integral part of it. A simple biography can be shown as one would expect: </p>
-<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">* Biography
-</span><span>Vic Stone was a high school athlete when a tragic accident nearly killed him and destroyed most of this body. His father, Dr. Silas Stone, used his scientific knowledge and advanced technology to save his life by augmenting him with machine parts.
-</span><span>Living now as a cyborg, a being with both organic and machine parts, he is now has super strength, increased durability and a control over advanced technology and weaponry.
-</span><span>Although he continues to struggle with his newfound status as both man and machine, he uses his newfound powers as a superhero.
-</span><span style="color:#8fa1b3;">* Powers
-</span><span style="color:#8fa1b3;">* Relationships
-</span><span style="color:#8fa1b3;">** Team Affiliations
-</span><span style="color:#8fa1b3;">** Villains
-</span><span style="color:#8fa1b3;">* Cyborg&#39;s Schedule
+<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">* Biography</span><span>
+</span><span>Vic Stone was a high school athlete when a tragic accident nearly killed him and destroyed most of this body. His father, Dr. Silas Stone, used his scientific knowledge and advanced technology to save his life by augmenting him with machine parts.</span><span>
+</span><span>Living now as a cyborg, a being with both organic and machine parts, he is now has super strength, increased durability and a control over advanced technology and weaponry.</span><span>
+</span><span>Although he continues to struggle with his newfound status as both man and machine, he uses his newfound powers as a superhero.</span><span>
+</span><span style="color:#8fa1b3;">* Powers</span><span>
+</span><span style="color:#8fa1b3;">* Relationships</span><span>
+</span><span style="color:#8fa1b3;">** Team Affiliations</span><span>
+</span><span style="color:#8fa1b3;">** Villains</span><span>
+</span><span style="color:#8fa1b3;">* Cyborg&#39;s Schedule</span><span>
 </span></code></pre>
 <p>We can also create lists in the document. For example we can give an unordered list of Cyborg's powers such as super strength and instant weaponary by prefacing each item on a new line by a hyphen (<code>-</code>): </p>
-<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">* Biography
-</span><span>Vic Stone was a high school athlete when a tragic accident nearly killed him and destroyed most of this body. His father, Dr. Silas Stone, used his scientific
-</span><span>knowledge and advanced technology to save his life by augmenting him with machine parts.
-</span><span>Living now as a cyborg, a being with both organic and machine parts, he is now has super strength, increased durability and a control over advanced technology and weaponry.
-</span><span>Although he continues to struggle with his newfound status as both man and machine, he uses his newfound powers as a superhero.
-</span><span style="color:#8fa1b3;">* Powers
-</span><span>- super strength
-</span><span>- advanced technology,
-</span><span>- instant weaponry
-</span><span>- genius-level intellect
-</span><span>- control over technology
-</span><span>- computer hacking
-</span><span>- durability
-</span><span>- teleportation
-</span><span style="color:#8fa1b3;">* Relationships
-</span><span style="color:#8fa1b3;">** Team Affiliations
-</span><span style="color:#8fa1b3;">** Villains
-</span><span style="color:#8fa1b3;">* Cyborg&#39;s Schedule
+<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">* Biography</span><span>
+</span><span>Vic Stone was a high school athlete when a tragic accident nearly killed him and destroyed most of this body. His father, Dr. Silas Stone, used his scientific</span><span>
+</span><span>knowledge and advanced technology to save his life by augmenting him with machine parts.</span><span>
+</span><span>Living now as a cyborg, a being with both organic and machine parts, he is now has super strength, increased durability and a control over advanced technology and weaponry.</span><span>
+</span><span>Although he continues to struggle with his newfound status as both man and machine, he uses his newfound powers as a superhero.</span><span>
+</span><span style="color:#8fa1b3;">* Powers</span><span>
+</span><span>- super strength</span><span>
+</span><span>- advanced technology,</span><span>
+</span><span>- instant weaponry</span><span>
+</span><span>- genius-level intellect</span><span>
+</span><span>- control over technology</span><span>
+</span><span>- computer hacking</span><span>
+</span><span>- durability</span><span>
+</span><span>- teleportation</span><span>
+</span><span style="color:#8fa1b3;">* Relationships</span><span>
+</span><span style="color:#8fa1b3;">** Team Affiliations</span><span>
+</span><span style="color:#8fa1b3;">** Villains</span><span>
+</span><span style="color:#8fa1b3;">* Cyborg&#39;s Schedule</span><span>
 </span></code></pre>
 <p>Note that the document is now getting larger and the parts of what we want to focus on to show here, the powers, can get lost in the other information. One of the strengths of Org-mode that even though it can be viewed and edited as plain text, there exists quite a bit of tooling to help navigate, edit and make use of the described structures. The editor <a href="https://www.gnu.org/software/emacs/">emacs</a> and its various flavours such as <a href="https://www.spacemacs.org/">spacemacs</a> that I personally use have excellent features for these tasks. However other editors such as <a href="https://code.visualstudio.com/">Visual Studio Code</a> have <a href="https://github.com/vscode-org-mode/vscode-org-mode">plugins</a> to support Org-mode as well.</p>
 <p>One of the basic features to help such editors provide is to fold headlines under which we do not want to see all the content in detail and unfold it for those that we do. In the following animation we show how this can be done on a portion of a more extended version of the Cyborg document: </p>
@@ -139,14 +139,14 @@
 <!-- {{< figure src="/img/post/2020/cyborg-mode/foldingheadlines.gif" title="Folding and unfolding headlines in Org document using Spacemacs" >}} -->
 <p>The above image shows how the <a href="https://www.spacemacs.org/">spacemacs</a> editor handles Org documents. By simply pressing tab on headlines we can fold (i.e. not show the underlying content) and unfold (i.e. showing the underlying content) them as we please and directing our attention to parts of the document we want to view and edit. It also shows how editor support uses the underlying structure for additional visualizations, such as on the level of headlines, even though the underlying document is still plaintext.</p>
 <p>Expanding on our example we can describe the Team Affiliations and the Villains as lists as well. For the list of Team Affiliations we will use an ordered list, which can be done by using a number followed by a dot, e.g.: <code>1. 2.</code> for the list indicators.  Note for brevity we now only show the new/relevant portions of the full Org document in the examples as opposed to the whole.</p>
-<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">* Relationships
-</span><span style="color:#8fa1b3;">** Team Affiliations
-</span><span>1. Justice League
-</span><span>2. Teen Titans
-</span><span>3. Doom Patrol
-</span><span style="color:#8fa1b3;">** Villains
-</span><span>- Lex Luthor
-</span><span>- Deathstroke
+<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">* Relationships</span><span>
+</span><span style="color:#8fa1b3;">** Team Affiliations</span><span>
+</span><span>1. Justice League</span><span>
+</span><span>2. Teen Titans</span><span>
+</span><span>3. Doom Patrol</span><span>
+</span><span style="color:#8fa1b3;">** Villains</span><span>
+</span><span>- Lex Luthor</span><span>
+</span><span>- Deathstroke</span><span>
 </span></code></pre>
 <p>Another interesting feature in Org documents are TODO items. Any headline can be made a TODO in them by prefacing it with TODO. For example in a headline of Cyborg's schedule we can put two TODO items for things Cyborg wants to do at some point: attend a Justice League Meeting and Upgrading Equipment. </p>
 <p>There are various ways such TODO items could be used similarly to folding or unfolding headlines.  In emacs/spacemacs such actions, and many others relating to various aspects of an Org document, can be done by commands. For example the command <code>org-show-todo-tree</code> can take ensure that all the headlines are folded as much as possible and only the TODO headlines are unfolded. Similarly the command <code>org-todo</code> cycles between not marking the headline with a TODO, marking it with a TODO or marking it with DONE denoted that the item has been completed. </p>
@@ -171,54 +171,54 @@
 <p>First is the associating a date with the TODO item, in particular when it is scheduled. By toggling the TODO to DONE, our editor uses the current time to mark when the task was finished. This allows for a nice way to create a checklist of the things that have to be done and marking them off.</p>
 <p>Another aspect is the use of markup around 'must' and 'Lex Luthor'. Enclosing a phrase with an underscore underlines the phrase while enclosing it between asterisks (*) makes it bold. Markups for italicizing (enclosing it between slashes (/)), code fragments and others also exist. </p>
 <p>The full list of TODO items in Cyborg's schedule is as follows.</p>
-<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">*** </span><span style="color:#b48ead;">TODO</span><span style="color:#8fa1b3;"> Justice League Meeting
-</span><span>    SCHEDULED: &lt;2024-08-02&gt;
-</span><span>    Something _must_ be done about </span><span style="font-weight:bold;color:#ebcb8b;">*Lex Luthor*</span><span>. He seems to be planning an attack on </span><span style="font-style:italic;color:#b48ead;">/Metropolis/</span><span> with the help of </span><span style="font-weight:bold;color:#ebcb8b;">*Deathstroke*</span><span>. 
-</span><span style="color:#8fa1b3;">*** </span><span style="color:#b48ead;">TODO</span><span style="color:#8fa1b3;"> Upgrade Equipment
-</span><span>    SCHEDULED: &lt;2024-06-01&gt;
-</span><span>    Enhance arm cannon.
+<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">*** </span><span style="color:#b48ead;">TODO</span><span style="color:#8fa1b3;"> Justice League Meeting</span><span>
+</span><span>    SCHEDULED: &lt;2024-08-02&gt;</span><span>
+</span><span>    Something _must_ be done about </span><span style="font-weight:bold;color:#ebcb8b;">*Lex Luthor*</span><span>. He seems to be planning an attack on </span><span style="font-style:italic;color:#b48ead;">/Metropolis/</span><span> with the help of </span><span style="font-weight:bold;color:#ebcb8b;">*Deathstroke*</span><span>. </span><span>
+</span><span style="color:#8fa1b3;">*** </span><span style="color:#b48ead;">TODO</span><span style="color:#8fa1b3;"> Upgrade Equipment</span><span>
+</span><span>    SCHEDULED: &lt;2024-06-01&gt;</span><span>
+</span><span>    Enhance arm cannon.</span><span>
 </span></code></pre>
 <p>One of the most interesting features of Org mode that we will cover in this article is the ability to embed fragment of code in an Org document that can be executed in the right environment. In Cyborg's schedule one of the upcoming items is to enhance his arm cannon. In order to prepare for this, and to illustrate our code embedding, a simple Weapon Damage calculator application was written in Python:</p>
-<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>  arm_cannon = {&quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Arm Cannon</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">power</span><span>&quot;: </span><span style="color:#d08770;">8</span><span>}
-</span><span>  reinforced_door = {&quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Reinforced Door</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">armor</span><span>&quot;: </span><span style="color:#d08770;">3</span><span>}
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>  arm_cannon = {&quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Arm Cannon</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">power</span><span>&quot;: </span><span style="color:#d08770;">8</span><span>}</span><span>
+</span><span>  reinforced_door = {&quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Reinforced Door</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">armor</span><span>&quot;: </span><span style="color:#d08770;">3</span><span>}</span><span>
 </span><span>
-</span><span>  </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">wdc</span><span>(</span><span style="color:#bf616a;">weapon</span><span>, </span><span style="color:#bf616a;">target</span><span>):
-</span><span>    damage = weapon[&quot;</span><span style="color:#a3be8c;">power</span><span>&quot;] - target[&quot;</span><span style="color:#a3be8c;">armor</span><span>&quot;]
-</span><span>    </span><span style="color:#b48ead;">if </span><span>damage&lt;</span><span style="color:#d08770;">0</span><span>:
-</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0
-</span><span>    </span><span style="color:#b48ead;">else</span><span>: 
-</span><span>      </span><span style="color:#b48ead;">return </span><span>damage
+</span><span>  </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">wdc</span><span>(</span><span style="color:#bf616a;">weapon</span><span>, </span><span style="color:#bf616a;">target</span><span>):</span><span>
+</span><span>    damage = weapon[&quot;</span><span style="color:#a3be8c;">power</span><span>&quot;] - target[&quot;</span><span style="color:#a3be8c;">armor</span><span>&quot;]</span><span>
+</span><span>    </span><span style="color:#b48ead;">if </span><span>damage&lt;</span><span style="color:#d08770;">0</span><span>:</span><span>
+</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span>
+</span><span>    </span><span style="color:#b48ead;">else</span><span>: </span><span>
+</span><span>      </span><span style="color:#b48ead;">return </span><span>damage</span><span>
 </span><span>
-</span><span>  damage_done = </span><span style="color:#bf616a;">wdc</span><span>(arm_cannon, reinforced_door)
-</span><span>  </span><span style="color:#96b5b4;">print</span><span>(&quot;</span><span style="color:#a3be8c;">Using the weapon </span><span>&quot; + arm_cannon[&quot;</span><span style="color:#a3be8c;">name</span><span>&quot;] + &quot;</span><span style="color:#a3be8c;"> with </span><span>&quot; + </span><span style="color:#bf616a;">str</span><span>(arm_cannon[&quot;</span><span style="color:#a3be8c;">power</span><span>&quot;]) + &quot;</span><span style="color:#a3be8c;"> power,</span><span>&quot;)
-</span><span>  </span><span style="color:#96b5b4;">print</span><span>(&quot;</span><span style="color:#a3be8c;">against the target </span><span>&quot; + reinforced_door[&quot;</span><span style="color:#a3be8c;">name</span><span>&quot;] + &quot;</span><span style="color:#a3be8c;"> with </span><span>&quot; + </span><span style="color:#bf616a;">str</span><span>(reinforced_door[&quot;</span><span style="color:#a3be8c;">armor</span><span>&quot;]) + &quot;</span><span style="color:#a3be8c;"> armor,</span><span>&quot;)
-</span><span>  </span><span style="color:#96b5b4;">print</span><span>(&quot;</span><span style="color:#a3be8c;">results in </span><span>&quot; + </span><span style="color:#bf616a;">str</span><span>(damage_done) + &quot;</span><span style="color:#a3be8c;"> damage.</span><span>&quot;)
+</span><span>  damage_done = </span><span style="color:#bf616a;">wdc</span><span>(arm_cannon, reinforced_door)</span><span>
+</span><span>  </span><span style="color:#96b5b4;">print</span><span>(&quot;</span><span style="color:#a3be8c;">Using the weapon </span><span>&quot; + arm_cannon[&quot;</span><span style="color:#a3be8c;">name</span><span>&quot;] + &quot;</span><span style="color:#a3be8c;"> with </span><span>&quot; + </span><span style="color:#bf616a;">str</span><span>(arm_cannon[&quot;</span><span style="color:#a3be8c;">power</span><span>&quot;]) + &quot;</span><span style="color:#a3be8c;"> power,</span><span>&quot;)</span><span>
+</span><span>  </span><span style="color:#96b5b4;">print</span><span>(&quot;</span><span style="color:#a3be8c;">against the target </span><span>&quot; + reinforced_door[&quot;</span><span style="color:#a3be8c;">name</span><span>&quot;] + &quot;</span><span style="color:#a3be8c;"> with </span><span>&quot; + </span><span style="color:#bf616a;">str</span><span>(reinforced_door[&quot;</span><span style="color:#a3be8c;">armor</span><span>&quot;]) + &quot;</span><span style="color:#a3be8c;"> armor,</span><span>&quot;)</span><span>
+</span><span>  </span><span style="color:#96b5b4;">print</span><span>(&quot;</span><span style="color:#a3be8c;">results in </span><span>&quot; + </span><span style="color:#bf616a;">str</span><span>(damage_done) + &quot;</span><span style="color:#a3be8c;"> damage.</span><span>&quot;)</span><span>
 </span></code></pre>
 <p>This code aims to use features of Cyborg's arm cannon to calculate damage on the target and to write these features out along with the resulting damage.</p>
 <p>We can embed this code fragment by using the property system to give this fragment a name and denote some other attributes. This property system is essentially a key-value system in Org mode that is used for all types information represented with key-value pairs. For example the following two properties describe the title and description of the Org document:</p>
-<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span>#+</span><span style="color:#b48ead;">title</span><span>: </span><span style="color:#a3be8c;">Cyborg Agenda
-</span><span>#+</span><span style="color:#b48ead;">description</span><span>: </span><span style="color:#a3be8c;">An introduction to org mode by creating an org document for information on the superhero Cyborg.
+<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span>#+</span><span style="color:#b48ead;">title</span><span>: </span><span style="color:#a3be8c;">Cyborg Agenda</span><span>
+</span><span>#+</span><span style="color:#b48ead;">description</span><span>: </span><span style="color:#a3be8c;">An introduction to org mode by creating an org document for information on the superhero Cyborg.</span><span>
 </span></code></pre>
 <p>For the code we want to embed we want set the properties on how we name this fragment, where the source begins and ends, what language it is and what should be done with the results. This looks as follows within the Org document:</p>
-<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">* Weapon Damage Calculator
-</span><span>#+</span><span style="color:#b48ead;">NAME</span><span>: </span><span style="color:#a3be8c;">wdc
-</span><span>#+</span><span style="color:#b48ead;">BEGIN_SRC </span><span style="color:#d08770;">python </span><span style="color:#a3be8c;">:results output
-</span><span>  arm_cannon = {&quot;name&quot;: &quot;Arm Cannon&quot;, &quot;power&quot;: 8}
-</span><span>  reinforced_door = {&quot;name&quot;: &quot;Reinforced Door&quot;, &quot;armor&quot;: 3}
+<pre data-lang="org" style="background-color:#2b303b;color:#c0c5ce;" class="language-org "><code class="language-org" data-lang="org"><span style="color:#8fa1b3;">* Weapon Damage Calculator</span><span>
+</span><span>#+</span><span style="color:#b48ead;">NAME</span><span>: </span><span style="color:#a3be8c;">wdc</span><span>
+</span><span>#+</span><span style="color:#b48ead;">BEGIN_SRC </span><span style="color:#d08770;">python </span><span style="color:#a3be8c;">:results output</span><span>
+</span><span>  arm_cannon = {&quot;name&quot;: &quot;Arm Cannon&quot;, &quot;power&quot;: 8}</span><span>
+</span><span>  reinforced_door = {&quot;name&quot;: &quot;Reinforced Door&quot;, &quot;armor&quot;: 3}</span><span>
 </span><span>
-</span><span>  def wdc(weapon, target):
-</span><span>    damage = weapon[&quot;power&quot;] - target[&quot;armor&quot;]
-</span><span>    if damage&lt;0:
-</span><span>      return 0
-</span><span>    else: 
-</span><span>      return damage
+</span><span>  def wdc(weapon, target):</span><span>
+</span><span>    damage = weapon[&quot;power&quot;] - target[&quot;armor&quot;]</span><span>
+</span><span>    if damage&lt;0:</span><span>
+</span><span>      return 0</span><span>
+</span><span>    else: </span><span>
+</span><span>      return damage</span><span>
 </span><span>
-</span><span>  damage_done = wdc(arm_cannon, reinforced_door)
-</span><span>  print(&quot;Using the weapon &quot; + arm_cannon[&quot;name&quot;] + &quot; with &quot; + str(arm_cannon[&quot;power&quot;]) + &quot; power,&quot;)
-</span><span>  print(&quot;against the target &quot; + reinforced_door[&quot;name&quot;] + &quot; with &quot; + str(reinforced_door[&quot;armor&quot;]) + &quot; armor,&quot;)
-</span><span>  print(&quot;results in &quot; + str(damage_done) + &quot; damage.&quot;)
-</span><span>#+</span><span style="color:#b48ead;">END_SRC
-</span><span>#+</span><span style="color:#b48ead;">RESULTS</span><span>: </span><span style="color:#a3be8c;">wdc
+</span><span>  damage_done = wdc(arm_cannon, reinforced_door)</span><span>
+</span><span>  print(&quot;Using the weapon &quot; + arm_cannon[&quot;name&quot;] + &quot; with &quot; + str(arm_cannon[&quot;power&quot;]) + &quot; power,&quot;)</span><span>
+</span><span>  print(&quot;against the target &quot; + reinforced_door[&quot;name&quot;] + &quot; with &quot; + str(reinforced_door[&quot;armor&quot;]) + &quot; armor,&quot;)</span><span>
+</span><span>  print(&quot;results in &quot; + str(damage_done) + &quot; damage.&quot;)</span><span>
+</span><span>#+</span><span style="color:#b48ead;">END_SRC</span><span>
+</span><span>#+</span><span style="color:#b48ead;">RESULTS</span><span>: </span><span style="color:#a3be8c;">wdc</span><span>
 </span></code></pre>
 <p>This embeds the weapon damage calculator as a source fragment named wdc, while also setting up where the results will be show in the document. Now if we execute the command <code>org-babel-execute-src-block</code> we can see the results directly within the document:</p>
 <!-- <figure>

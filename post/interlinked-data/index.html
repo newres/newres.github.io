@@ -98,12 +98,12 @@
 <!-- {{< figure src="/img/post/2018/interlinked-data/bladerunner2049.png" title="Blade Runner 2049" caption="Poster for the movie © Columbia Pictures">}} -->
 <p>In life, such relationships always surround us. They are not just between people, but in our work, in our beliefs, in our art and in the knowledge we represent.</p>
 <p>Suppose we intend to describe the link between the movie <em>Blade Runner</em> and the book <em>Pale Fire</em>. We can summarize this information with a number of facts.</p>
-<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Blade Runner is a movie. 
-</span><span>Blade Runner has a character named K.
-</span><span>K is a Replicant.
-</span><span>Replicants must pass a Baseline Test.
-</span><span>Baseline Test is based on the poem Pale Fire.
-</span><span>Pale Fire is written by Vladimir Nabokov.
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Blade Runner is a movie. </span><span>
+</span><span>Blade Runner has a character named K.</span><span>
+</span><span>K is a Replicant.</span><span>
+</span><span>Replicants must pass a Baseline Test.</span><span>
+</span><span>Baseline Test is based on the poem Pale Fire.</span><span>
+</span><span>Pale Fire is written by Vladimir Nabokov.</span><span>
 </span></code></pre>
 <p>The above facts show that the links that can tie together various pieces of knowledge. One can trace the connections from a simple description of a movie, released in 2017, to the author Vladimir Nabokov, as was intended by the writers of the movie.</p>
 <p>Although the above recitation of facts is easy to follow, from a knowledge representation perspective one can find some issues with it. </p>
@@ -138,48 +138,48 @@
 <p>One significant feature of RDF is that requires precise naming. Many elements of it are either a <a href="https://en.wikipedia.org/wiki/International_Resource_Identifier">International Resource Identifier (IRI)</a> or some raw data-types. Good examples of the former are URLs, such as the link to this website: http://www.newresalhaider.com , that allows one to find a web resource. Examples of the later are texts or numbers, such as &quot;Blade Runner&quot; or 15 respectively.</p>
 <p>The other significant feature of RDF is that most knowledge is represented as a set of facts, where each fact is expressed as subject, predicate object triples. For example the fact &quot;Blade Runner is a movie&quot; is expressed with the subject &quot;Blade Runner&quot; the predicate &quot;is a&quot; and the object &quot;movie&quot;.</p>
 <p>Putting this together in RDF (using the <a href="https://www.w3.org/TR/turtle/">Turtle</a> notation) you would get a triple such as:</p>
-<pre data-lang="Turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-Turtle "><code class="language-Turtle" data-lang="Turtle"><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/bladerunner/blade-runner&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.newresalhaider.com/ontologies/bladerunner/movie&gt;</span><span>.
+<pre data-lang="Turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-Turtle "><code class="language-Turtle" data-lang="Turtle"><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/bladerunner/blade-runner&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.newresalhaider.com/ontologies/bladerunner/movie&gt;</span><span>.</span><span>
 </span></code></pre>
 <p>This example is an RDF way of saying &quot;Blade Runner is a type of movie&quot; or alternatively &quot;Blade runner is a movie&quot;. This type of representation shows us a couple of benefits. First we are now being more precise as each element in the triple can refer to one specific resource, for example Blade Runner or Movie, where there IRI makes sure we do not necessarily confuse the term with anything else. Second this also shows off the fact that you can link to resources from different places: the predicate &quot;type&quot; is from a completely different domain. This allows us to re-use knowledge that has already been defined. As one can expect saying something is of a &quot;type&quot;, for example an apple is a type of a fruit, is actually very common. This is one of the main strengths of what makes Linked Data so powerful, one can re-use knowledge already stated. </p>
 <p>Typing out the full IRI each time can be pretty bothersome, and it does not help the readability either. Thankfully we can define a common prefix we use separately, and just write the last part of the IRI in each case. In this case we define a base prefix and we refer to subject and object by &quot;&lt;#blade-runner&gt;&quot; and &quot;&lt;#movie&gt;&quot; respectively.</p>
-<pre data-lang="Turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-Turtle "><code class="language-Turtle" data-lang="Turtle"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/bladerunner&gt;</span><span> .
-</span><span style="color:#d08770;">&lt;#blade-runner&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;#movie&gt;</span><span>.
+<pre data-lang="Turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-Turtle "><code class="language-Turtle" data-lang="Turtle"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/bladerunner&gt;</span><span> .</span><span>
+</span><span style="color:#d08770;">&lt;#blade-runner&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;#movie&gt;</span><span>.</span><span>
 </span></code></pre>
 <p>We can do similar things when linking elements that have been already defined elsewhere. In this case we define a prefix to use as an abbreviation while writing:</p>
-<pre data-lang="Turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-Turtle "><code class="language-Turtle" data-lang="Turtle"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/bladerunner&gt;</span><span> .
-</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .
+<pre data-lang="Turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-Turtle "><code class="language-Turtle" data-lang="Turtle"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/bladerunner&gt;</span><span> .</span><span>
+</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .</span><span>
 </span><span>
-</span><span style="color:#d08770;">&lt;#blade-runner&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;#movie&gt;</span><span>.
+</span><span style="color:#d08770;">&lt;#blade-runner&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;#movie&gt;</span><span>.</span><span>
 </span></code></pre>
 <p>In practice, &quot;rdf:type&quot; as a predicate is so common that there is an even simpler notation. We can use 'a' as a predicate, which is in line with what we intend to express: &quot;Blade Runner is a movie&quot;.</p>
 <p>The resulting RDF facts look as follows (note that the rdf prefix could be omitted here as the &quot;a&quot; abbreviation does not make it necessary):</p>
-<pre data-lang="Turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-Turtle "><code class="language-Turtle" data-lang="Turtle"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/bladerunner&gt;</span><span> .
-</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .
+<pre data-lang="Turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-Turtle "><code class="language-Turtle" data-lang="Turtle"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/bladerunner&gt;</span><span> .</span><span>
+</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .</span><span>
 </span><span>
-</span><span style="color:#d08770;">&lt;#blade-runner&gt; </span><span style="color:#b48ead;">a </span><span style="color:#d08770;">&lt;#movie&gt;</span><span>.
+</span><span style="color:#d08770;">&lt;#blade-runner&gt; </span><span style="color:#b48ead;">a </span><span style="color:#d08770;">&lt;#movie&gt;</span><span>.</span><span>
 </span></code></pre>
 <p>If we aim to write something that is just a text as a subject, say when referring to the title of a movie , we can do that as well:</p>
-<pre data-lang="Turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-Turtle "><code class="language-Turtle" data-lang="Turtle"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/bladerunner&gt;</span><span> .
-</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .
+<pre data-lang="Turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-Turtle "><code class="language-Turtle" data-lang="Turtle"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/bladerunner&gt;</span><span> .</span><span>
+</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .</span><span>
 </span><span>
-</span><span style="color:#d08770;">&lt;#blade-runner&gt; </span><span style="color:#b48ead;">a </span><span style="color:#d08770;">&lt;#movie&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;#blade-runner&gt; &lt;#title&gt; </span><span>&quot;</span><span style="color:#a3be8c;">Blade Runner 2049</span><span>&quot;.
+</span><span style="color:#d08770;">&lt;#blade-runner&gt; </span><span style="color:#b48ead;">a </span><span style="color:#d08770;">&lt;#movie&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;#blade-runner&gt; &lt;#title&gt; </span><span>&quot;</span><span style="color:#a3be8c;">Blade Runner 2049</span><span>&quot;.</span><span>
 </span></code></pre>
 <p>With this way of writing, we can actually rewrite our original set of facts as follows:</p>
-<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/bladerunner&gt;</span><span> .
-</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .
-</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">foaf: </span><span style="color:#d08770;">&lt;http://xmlns.com/foaf/0.1/&gt;</span><span> .
+<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/bladerunner&gt;</span><span> .</span><span>
+</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .</span><span>
+</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">foaf: </span><span style="color:#d08770;">&lt;http://xmlns.com/foaf/0.1/&gt;</span><span> .</span><span>
 </span><span>
-</span><span style="color:#d08770;">&lt;#blade-runner&gt; </span><span style="color:#b48ead;">a </span><span style="color:#d08770;">&lt;#movie&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;#blade-runner&gt; &lt;#title&gt; </span><span>&quot;</span><span style="color:#a3be8c;">Blade Runner 2049</span><span>&quot;.
-</span><span style="color:#d08770;">&lt;#blade-runner&gt; &lt;#has-character&gt; &lt;#K&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;#K&gt; </span><span style="color:#ebcb8b;">foaf:</span><span style="color:#bf616a;">name </span><span>&quot;</span><span style="color:#a3be8c;">K</span><span>&quot;.
-</span><span style="color:#d08770;">&lt;#K&gt; </span><span style="color:#b48ead;">a </span><span style="color:#d08770;">&lt;#replicant&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;#replicant&gt; &lt;#must-pass&gt; &lt;#baseline-test&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;#baseline-test&gt; &lt;#based-on&gt; &lt;#pale-fire-poem&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;#pale-fire-poem&gt; &lt;#included-in&gt; &lt;#pale-fire-book&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;#pale-fire-book&gt; &lt;#written-by&gt; &lt;#nabokov&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;#nabokov&gt; </span><span style="color:#ebcb8b;">foaf:</span><span style="color:#bf616a;">name </span><span>&quot;</span><span style="color:#a3be8c;">Vladimir Nabokov</span><span>&quot;.
+</span><span style="color:#d08770;">&lt;#blade-runner&gt; </span><span style="color:#b48ead;">a </span><span style="color:#d08770;">&lt;#movie&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;#blade-runner&gt; &lt;#title&gt; </span><span>&quot;</span><span style="color:#a3be8c;">Blade Runner 2049</span><span>&quot;.</span><span>
+</span><span style="color:#d08770;">&lt;#blade-runner&gt; &lt;#has-character&gt; &lt;#K&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;#K&gt; </span><span style="color:#ebcb8b;">foaf:</span><span style="color:#bf616a;">name </span><span>&quot;</span><span style="color:#a3be8c;">K</span><span>&quot;.</span><span>
+</span><span style="color:#d08770;">&lt;#K&gt; </span><span style="color:#b48ead;">a </span><span style="color:#d08770;">&lt;#replicant&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;#replicant&gt; &lt;#must-pass&gt; &lt;#baseline-test&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;#baseline-test&gt; &lt;#based-on&gt; &lt;#pale-fire-poem&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;#pale-fire-poem&gt; &lt;#included-in&gt; &lt;#pale-fire-book&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;#pale-fire-book&gt; &lt;#written-by&gt; &lt;#nabokov&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;#nabokov&gt; </span><span style="color:#ebcb8b;">foaf:</span><span style="color:#bf616a;">name </span><span>&quot;</span><span style="color:#a3be8c;">Vladimir Nabokov</span><span>&quot;.</span><span>
 </span></code></pre>
 <p>With this version we suddenly defined our list of facts in a more formal manner than previously. This makes it much more simpler for machines to understand this set of facts. In fact we actually used the <a href="https://en.wikipedia.org/wiki/FOAF_(ontology)">Friend of a Friend (FOAF) ontology</a> to use the notion of name that is also used when talking about relationships between people. In fact, one could argue that using an existing movie dataset, such as the <a href="https://old.datahub.io/dataset/linkedmdb">Linked Movie Database</a> would have been even better, which we will leave as an exercise for the reader.</p>
 <p>Hopefully I could show a glimpse of the possibilities the <a href="https://www.w3.org/standards/semanticweb/">Semantic Web</a> for which Linked Data forms the basis, with this example. Of course the above is just scratching the surface of what it can be done with RDF, Linked Data. With each addition, our set of facts could grow. One could go beyond a single movie and build a document of poems that are references in movies, or a knowledge base of the Blade Runner franchise. It might be easier than one expects, due to the fact that knowledge, much like people are...</p>

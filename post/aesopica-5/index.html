@@ -64,7 +64,7 @@
 ">
 
 
-<meta property="twitter:image" content="https://www.newresalhaider.com/post/aesopica-5/../static/img/series/aesopica/foxandstork-header.png">
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/static/img/series/aesopica/foxandstork-header.png">
 
 
 <h1 class="title">
@@ -74,40 +74,40 @@
 <p>This article is the fifth part of a series, examining the use of the Clojure language for representing Linked Data, using examples from Aesop's stories. The topic of this article is to explain the somewhat contentious subject of blank nodes. </p>
 <p>One of the strengths of <a href="https://www.w3.org/RDF/">RDF</a> as a graph representation format is the way resources are named. Through the use of <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">Uniform Resource Identifiers (URIs)</a> every element of the graph can be uniquely identified. With such generic and powerful facilities for naming it can easily represent information in any domain. For example on <a href="https://schema.org/">schema.org</a> elements have been defined for the notion of a <a href="http://schema.org/MedicalCondition">medical condition (http://schema.org/MedicalCondition)</a>, <a href="http://schema.org/employee">employee (http://schema.org/employee)</a> and <a href="http://schema.org/BankAccount">bank account (http://schema.org/BankAccount)</a>, just to name a few. In particular the namespacing part of the URI, e.g.: http://schema.org/ for http://schema.org/employee , helps to ensure that concepts can be uniquely named, even in scenarios with multiple definitions of the same concept. </p>
 <p>Blank nodes go against this notion of making everything explicitly named. In fact an alternative name for a blank node is &quot;an anonymous resource&quot;&quot;. Instead of giving a resource an explicit name with a URI a placeholder is used. This indicates the existence of the resource, but does not tie it together with a namespaced name. In the Turtle syntax for RDF we can use a label prefixed by <code>_:</code> to indicate a blank node. For example, the following RDF graph states that the fox and the stork both give out an invitation.</p>
-<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt;</span><span> .
+<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt;</span><span> .</span><span>
 </span><span>
-</span><span style="color:#d08770;">&lt;#fox&gt; &lt;#gives-invitation&gt; </span><span style="color:#ebcb8b;">_:</span><span style="color:#bf616a;">invitation1.
-</span><span style="color:#d08770;">&lt;#stork&gt; &lt;#gives-invitation&gt; </span><span style="color:#ebcb8b;">_:</span><span style="color:#bf616a;">invitation2.
+</span><span style="color:#d08770;">&lt;#fox&gt; &lt;#gives-invitation&gt; </span><span style="color:#ebcb8b;">_:</span><span style="color:#bf616a;">invitation1.</span><span style="color:#bf616a;">
+</span><span style="color:#d08770;">&lt;#stork&gt; &lt;#gives-invitation&gt; </span><span style="color:#ebcb8b;">_:</span><span style="color:#bf616a;">invitation2.</span><span style="color:#bf616a;">
 </span></code></pre>
 <p>Due to the invitations having different names we can expect them to be different resources. However the exact names of these resources do not matter. For example the RDF triples below have arguably the same meaning: </p>
-<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt;</span><span> .
+<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt;</span><span> .</span><span>
 </span><span>
-</span><span style="color:#d08770;">&lt;#fox&gt; &lt;#gives-invitation&gt; </span><span style="color:#ebcb8b;">_:</span><span style="color:#bf616a;">abc.
-</span><span style="color:#d08770;">&lt;#stork&gt; &lt;#gives-invitation&gt; </span><span style="color:#ebcb8b;">_:</span><span style="color:#bf616a;">xyz.
+</span><span style="color:#d08770;">&lt;#fox&gt; &lt;#gives-invitation&gt; </span><span style="color:#ebcb8b;">_:</span><span style="color:#bf616a;">abc.</span><span style="color:#bf616a;">
+</span><span style="color:#d08770;">&lt;#stork&gt; &lt;#gives-invitation&gt; </span><span style="color:#ebcb8b;">_:</span><span style="color:#bf616a;">xyz.</span><span style="color:#bf616a;">
 </span></code></pre>
 <p>It is important to reiterate that the blank nodes are not resource identifiers such as URIs. They are also only local in scope: an <code>_:invitation1</code> in one graph and a <code>_:invitation1</code> in another are not referring to the same thing. Even resources used in the similar places in different graphs are not the same. For example the <code>_:abc</code> and the  <code>_:invitation1</code> used in the above graphs, while expressing the same meaning, are not the same resource.</p>
 <p>The above features are both the strength and the weakness of using anonymous resources. We are not required to use a specific named identifier, but this makes referring to resources and comparing them more difficult. </p>
 <p>There are number of scenarios where such anonymous resources can be useful. For example, when representing complex structures not easily expressed in triples where we would need &quot;placeholder nodes&quot; in the graph but do not particularly care about its naming. In other cases we want to hide some information, and blank nodes could be used as placeholders for named resources. A good overview of the various uses of Blank Nodes can be found in the paper: <a href="https://link.springer.com/chapter/10.1007/978-3-642-25073-6_27">On Blank Nodes</a>.</p>
 <p>With the above description of blank nodes, we also want to provide something similar in our Clojure based RDF representation as well. As we are using keywords to represent URIs in our Clojure representation (i.e. :fox and :rdf/type), a natural element to differentiate them is to use symbols for blank nodes. Symbols are created in Clojure by prefixing it with <code>'</code>. For example in the Clojure based RDF representation we use blank nodes for representing invitations:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">fox-and-stork-blank-node-edn
-</span><span>  {</span><span style="color:#d08770;">::aes/context
-</span><span>   {</span><span style="color:#d08770;">nil </span><span>&quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/</span><span>&quot;
-</span><span>    </span><span style="color:#d08770;">:rdf </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span>&quot;}
-</span><span>   </span><span style="color:#d08770;">::aes/facts
-</span><span>   #{[</span><span style="color:#d08770;">:fox :rdf/type :animal</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:stork :rdf/type :animal</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:fox :gives-invitation </span><span>&#39;invitation1]
-</span><span>     [&#39;invitation1 </span><span style="color:#d08770;">:has-invited :stork</span><span>]
-</span><span>     [&#39;invitation1 </span><span style="color:#d08770;">:has-food :soup</span><span>]
-</span><span>     [&#39;invitation1 </span><span style="color:#d08770;">:serves-using :shallow-plate</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:stork :gives-invitation </span><span>&#39;invitation2]
-</span><span>     [&#39;invitation2 </span><span style="color:#d08770;">:has-invited :fox</span><span>]
-</span><span>     [&#39;invitation2 </span><span style="color:#d08770;">:has-food :crumbled-food</span><span>]
-</span><span>     [&#39;invitation2 </span><span style="color:#d08770;">:serves-using :narrow-mouthed-jug</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:fox :can-eat-food-served-using :shallow-plate</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:fox :can-not-eat-food-served-using :narrow-mouthed-jug</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:stork :can-eat-food-served-using :narrow-mouthed-jug</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:stork :can-not-eat-food-served-using :shallow-plate</span><span>]}})
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">fox-and-stork-blank-node-edn</span><span>
+</span><span>  {</span><span style="color:#d08770;">::aes/context</span><span>
+</span><span>   {</span><span style="color:#d08770;">nil </span><span>&quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/</span><span>&quot;</span><span>
+</span><span>    </span><span style="color:#d08770;">:rdf </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span>&quot;}</span><span>
+</span><span>   </span><span style="color:#d08770;">::aes/facts</span><span>
+</span><span>   #{[</span><span style="color:#d08770;">:fox :rdf/type :animal</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:stork :rdf/type :animal</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:fox :gives-invitation </span><span>&#39;invitation1]</span><span>
+</span><span>     [&#39;invitation1 </span><span style="color:#d08770;">:has-invited :stork</span><span>]</span><span>
+</span><span>     [&#39;invitation1 </span><span style="color:#d08770;">:has-food :soup</span><span>]</span><span>
+</span><span>     [&#39;invitation1 </span><span style="color:#d08770;">:serves-using :shallow-plate</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:stork :gives-invitation </span><span>&#39;invitation2]</span><span>
+</span><span>     [&#39;invitation2 </span><span style="color:#d08770;">:has-invited :fox</span><span>]</span><span>
+</span><span>     [&#39;invitation2 </span><span style="color:#d08770;">:has-food :crumbled-food</span><span>]</span><span>
+</span><span>     [&#39;invitation2 </span><span style="color:#d08770;">:serves-using :narrow-mouthed-jug</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:fox :can-eat-food-served-using :shallow-plate</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:fox :can-not-eat-food-served-using :narrow-mouthed-jug</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:stork :can-eat-food-served-using :narrow-mouthed-jug</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:stork :can-not-eat-food-served-using :shallow-plate</span><span>]}})</span><span>
 </span></code></pre>
 <p>The above is our version of &quot;The Fox and the Stork&quot; story that we previously explored in this series of articles The main difference is that two blank nodes are used:  <code>'invitation1</code> and <code>'invitation2</code>, instead of named resources. Perhaps the story teller might want to hide some details of their invitations.</p>
 <p>As with all the previous features in this series of articles, blank nodes been implemented in our implementation of this syntax in the <a href="https://github.com/newres/aesopica">Aesopica</a> library for using Clojure to write Linked Data. Hiding details with blank nodes, even in Clojure, is now just one library away.</p>

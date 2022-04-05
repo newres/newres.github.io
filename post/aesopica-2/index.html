@@ -64,7 +64,7 @@
 ">
 
 
-<meta property="twitter:image" content="https://www.newresalhaider.com/post/aesopica-2/../static/img/series/aesopica/foxandstork-header.png">
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/static/img/series/aesopica/foxandstork-header.png">
 
 
 <h1 class="title">
@@ -75,55 +75,55 @@
 <p>As mentioned in the previous article the story of the Fox and the Stork is about the fox who invited the stork for a dinner. At the dinner soup was served from a shallow plate that the fox could eat but the stork could not. In return, the stork invited the fox to a dinner, where the food was served in a narrow mouthed jug. This time the fox could not reach the food, while the stork ate it happily. </p>
 <p>Elements of this story can be represented as <a href="https://www.w3.org/standards/semanticweb/data">Linked Data</a>, and in particular the <a href="https://www.w3.org/RDF/">Resource Description Framework (RDF)</a> that allows for a precise retelling of the story that is understandable to both humans and machines alike. </p>
 <p>For example, the part of the Linked Data we generated in the previous article is as follows:</p>
-<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt;</span><span> .
-</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .
+<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt;</span><span> .</span><span>
+</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .</span><span>
 </span><span>
-</span><span style="color:#d08770;">&lt;fox&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;animal&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;stork&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;animal&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;fox&gt; &lt;gives-invitation&gt; &lt;invitation1&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;invitation1&gt; &lt;has-invited&gt; &lt;stork&gt;</span><span>.
-</span><span style="color:#d08770;">&lt;invitation1&gt; &lt;has-food&gt; &lt;soup&gt;</span><span>.
+</span><span style="color:#d08770;">&lt;fox&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;animal&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;stork&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;animal&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;fox&gt; &lt;gives-invitation&gt; &lt;invitation1&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;invitation1&gt; &lt;has-invited&gt; &lt;stork&gt;</span><span>.</span><span>
+</span><span style="color:#d08770;">&lt;invitation1&gt; &lt;has-food&gt; &lt;soup&gt;</span><span>.</span><span>
 </span></code></pre>
 <p>which details the elements of the story that the fox invites the stork, where soup is served. Elements that might be implicitly obvious to a human reader, but not to a program, that the fox and the stork are animals, are also represented in this fragment. These elements are describes as a set of facts, where each fact is a triple in the form of a subject, predicate and object. Each part of these facts in this example are represented as a <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">Uniform Resource Identifier (URI)</a>, which are shortened with prefixes (i.e. <code>&quot;rdf&quot;</code>) or the base URI (i.e. <code>&lt;fox&gt;</code> is a shorthand for <code>http://www.newresalhaider.com/ontologies/aesop/foxstork/fox</code> ).</p>
 <p>Now suppose we want to expand on the elements of this story. For example, we want to give the fox and the stork a name, an age, describe their personalities, give a time for the dinners, etc. For many of these elements we want to simply use value as objects in the representations. For example the number <code>2</code> as a representative of the age of the fox. In such scenarios we do not use URIs in the facts but <a href="https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal">Literals</a>.</p>
 <p>Literals can be used to denote numbers, strings, dates and other such elements. In the Linked Data representation below we describe various attributes of the fox, the stork and the dinner with such literals.</p>
-<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt;</span><span> .
-</span><span>  </span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .
-</span><span>  </span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">foaf: </span><span style="color:#d08770;">&lt;http://xmlns.com/foaf/0.1/&gt;</span><span> .
-</span><span>  </span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">xsd: </span><span style="color:#d08770;">&lt;http://www.w3.org/2001/XMLSchema#&gt;</span><span>.
+<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#b48ead;">@base </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/&gt;</span><span> .</span><span>
+</span><span>  </span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .</span><span>
+</span><span>  </span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">foaf: </span><span style="color:#d08770;">&lt;http://xmlns.com/foaf/0.1/&gt;</span><span> .</span><span>
+</span><span>  </span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">xsd: </span><span style="color:#d08770;">&lt;http://www.w3.org/2001/XMLSchema#&gt;</span><span>.</span><span>
 </span><span>
-</span><span>  </span><span style="color:#d08770;">&lt;fox&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;animal&gt;</span><span>.
-</span><span>  </span><span style="color:#d08770;">&lt;fox&gt; </span><span style="color:#ebcb8b;">foaf:</span><span style="color:#bf616a;">name </span><span>&quot;</span><span style="color:#a3be8c;">vo</span><span>&quot;.
-</span><span>  </span><span style="color:#d08770;">&lt;fox&gt; </span><span style="color:#ebcb8b;">foaf:</span><span style="color:#bf616a;">age </span><span>2.
-</span><span>  </span><span style="color:#d08770;">&lt;fox&gt; &lt;is-cunning&gt;</span><span> true.
-</span><span>  </span><span style="color:#d08770;">&lt;stork&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;animal&gt;</span><span>.
-</span><span>  </span><span style="color:#d08770;">&lt;stork&gt; </span><span style="color:#ebcb8b;">foaf:</span><span style="color:#bf616a;">name </span><span>&quot;</span><span style="color:#a3be8c;">ooi</span><span>&quot;.
-</span><span>  </span><span style="color:#d08770;">&lt;stork&gt; </span><span style="color:#ebcb8b;">foaf:</span><span style="color:#bf616a;">age </span><span>13.
-</span><span>  </span><span style="color:#d08770;">&lt;stork&gt; &lt;is-cunning&gt;</span><span> true.
-</span><span>  </span><span style="color:#d08770;">&lt;dinner1&gt; &lt;has-date&gt; </span><span>&quot;</span><span style="color:#a3be8c;">2006-06-30T20:00:00</span><span>&quot;^^</span><span style="color:#ebcb8b;">xsd:</span><span style="color:#bf616a;">dateTime
+</span><span>  </span><span style="color:#d08770;">&lt;fox&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;animal&gt;</span><span>.</span><span>
+</span><span>  </span><span style="color:#d08770;">&lt;fox&gt; </span><span style="color:#ebcb8b;">foaf:</span><span style="color:#bf616a;">name </span><span>&quot;</span><span style="color:#a3be8c;">vo</span><span>&quot;.</span><span>
+</span><span>  </span><span style="color:#d08770;">&lt;fox&gt; </span><span style="color:#ebcb8b;">foaf:</span><span style="color:#bf616a;">age </span><span>2.</span><span>
+</span><span>  </span><span style="color:#d08770;">&lt;fox&gt; &lt;is-cunning&gt;</span><span> true.</span><span>
+</span><span>  </span><span style="color:#d08770;">&lt;stork&gt; </span><span style="color:#ebcb8b;">rdf:</span><span style="color:#bf616a;">type </span><span style="color:#d08770;">&lt;animal&gt;</span><span>.</span><span>
+</span><span>  </span><span style="color:#d08770;">&lt;stork&gt; </span><span style="color:#ebcb8b;">foaf:</span><span style="color:#bf616a;">name </span><span>&quot;</span><span style="color:#a3be8c;">ooi</span><span>&quot;.</span><span>
+</span><span>  </span><span style="color:#d08770;">&lt;stork&gt; </span><span style="color:#ebcb8b;">foaf:</span><span style="color:#bf616a;">age </span><span>13.</span><span>
+</span><span>  </span><span style="color:#d08770;">&lt;stork&gt; &lt;is-cunning&gt;</span><span> true.</span><span>
+</span><span>  </span><span style="color:#d08770;">&lt;dinner1&gt; &lt;has-date&gt; </span><span>&quot;</span><span style="color:#a3be8c;">2006-06-30T20:00:00</span><span>&quot;^^</span><span style="color:#ebcb8b;">xsd:</span><span style="color:#bf616a;">dateTime</span><span style="color:#bf616a;">
 </span></code></pre>
 <p>As one can see in this example, representing literals is very similar to other objects. For example <code>&quot;vo&quot;</code> in the triple <code>&lt;fox&gt; foaf:name &quot;vo&quot;</code> represents the name of the fox. Note that the base of <code>foaf</code> in <code>foaf:name</code> and <code>foaf:age</code> refers to the 'Friend of a Friend' ontology, that allows us to use the common terminology of this ontology to describe facts about the fox and the stork.  Literals such as <code>2</code> or <code>true</code> describe the age, and whether the fox is cunning, respectively. These are called the lexical forms of the literals and while they also have explicit types (e.g. <code>http://www.w3.org/2001/XMLSchema#string</code> or simply <code>xsd:string</code> when using prefixes ), these types of literals are so common that writing the types explicitly is not required. </p>
 <p>The slightly more complicated case is the definition of the time of the dinner shown by <code>&quot;2006-06-30T20:00:00&quot;^^xsd:dateTime</code> that shows off custom types for literals, or when we would like to give the type explicitly. Here the addition of the <code>^^xsd:dateTime</code> is an URI (with a prefix) describing how lexical form, i.e. &quot;2006-06-30T20:00:00&quot; exactly maps to a particular value. This allows for easier interpretation of such literal values for machines.</p>
 <p>As in the previous article, we aim to use the data representation and manipulation capabilities of Clojure to represent the above-mentioned fragment. Again, for the basic cases, such as strings, numbers, etc, we can be pretty straightforward and only use the lexical form, i.e. <code>&quot;vo&quot;</code>, <code>2</code> or <code>true</code> in or representations. For the cases where we also want to specify a custom datatype, we use a map such as:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>{</span><span style="color:#d08770;">::aes/value </span><span>&quot;</span><span style="color:#a3be8c;">2006-06-30T20:00:00</span><span>&quot; </span><span style="color:#d08770;">::aes/type :xsd/dateTime</span><span>}
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>{</span><span style="color:#d08770;">::aes/value </span><span>&quot;</span><span style="color:#a3be8c;">2006-06-30T20:00:00</span><span>&quot; </span><span style="color:#d08770;">::aes/type :xsd/dateTime</span><span>}</span><span>
 </span></code></pre>
 <p>where the keys <code>::aes/value</code> and <code>::aes/type</code> are representing the lexical form and datatype respectively. Note that <code>aes</code> in these keywords, and other refers, to the core namespace of the <a href="https://github.com/newres/aesopica">Aesopica</a> library implementing this data representation. To full Clojure version of this example can be found below:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>  {</span><span style="color:#d08770;">::aes/context
-</span><span>   {</span><span style="color:#d08770;">nil </span><span>&quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/</span><span>&quot;
-</span><span>    </span><span style="color:#d08770;">:rdf </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span>&quot;
-</span><span>    </span><span style="color:#d08770;">:foaf </span><span>&quot;</span><span style="color:#a3be8c;">http://xmlns.com/foaf/0.1/</span><span>&quot;
-</span><span>    </span><span style="color:#d08770;">:xsd </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/2001/XMLSchema#</span><span>&quot;}
-</span><span>   </span><span style="color:#d08770;">::aes/facts
-</span><span>   #{[</span><span style="color:#d08770;">:fox :rdf/type :animal</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:fox :foaf/name </span><span>&quot;</span><span style="color:#a3be8c;">vo</span><span>&quot;]
-</span><span>     [</span><span style="color:#d08770;">:fox :foaf/age 2</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:fox :is-cunning true</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:fox :has-weight 6.8</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:stork :rdf/type :animal</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:stork :foaf/name </span><span>&quot;</span><span style="color:#a3be8c;">ooi</span><span>&quot;]
-</span><span>     [</span><span style="color:#d08770;">:stork :foaf/age 13</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:stork :is-cunning true</span><span>]
-</span><span>     [</span><span style="color:#d08770;">:dinner1 :has-date </span><span>{</span><span style="color:#d08770;">::aes/value </span><span>&quot;</span><span style="color:#a3be8c;">2006-06-30T20:00:00</span><span>&quot; </span><span style="color:#d08770;">::aes/type :xsd/dateTime</span><span>}]}}
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>  {</span><span style="color:#d08770;">::aes/context</span><span>
+</span><span>   {</span><span style="color:#d08770;">nil </span><span>&quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/</span><span>&quot;</span><span>
+</span><span>    </span><span style="color:#d08770;">:rdf </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span>&quot;</span><span>
+</span><span>    </span><span style="color:#d08770;">:foaf </span><span>&quot;</span><span style="color:#a3be8c;">http://xmlns.com/foaf/0.1/</span><span>&quot;</span><span>
+</span><span>    </span><span style="color:#d08770;">:xsd </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/2001/XMLSchema#</span><span>&quot;}</span><span>
+</span><span>   </span><span style="color:#d08770;">::aes/facts</span><span>
+</span><span>   #{[</span><span style="color:#d08770;">:fox :rdf/type :animal</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:fox :foaf/name </span><span>&quot;</span><span style="color:#a3be8c;">vo</span><span>&quot;]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:fox :foaf/age 2</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:fox :is-cunning true</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:fox :has-weight 6.8</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:stork :rdf/type :animal</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:stork :foaf/name </span><span>&quot;</span><span style="color:#a3be8c;">ooi</span><span>&quot;]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:stork :foaf/age 13</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:stork :is-cunning true</span><span>]</span><span>
+</span><span>     [</span><span style="color:#d08770;">:dinner1 :has-date </span><span>{</span><span style="color:#d08770;">::aes/value </span><span>&quot;</span><span style="color:#a3be8c;">2006-06-30T20:00:00</span><span>&quot; </span><span style="color:#d08770;">::aes/type :xsd/dateTime</span><span>}]}}</span><span>
 </span></code></pre>
 <p>Of course given that this story is centuries old, it is unlikely that the dinner took place at <code>2006-06-30T20:00:00</code>. As always care must be taken when taking things literally.</p>
 
