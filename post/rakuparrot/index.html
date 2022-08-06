@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Newres Al Haider</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+  <link href="https:&#x2F;&#x2F;www.newresalhaider.com/style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.newresalhaider.com/scripts/menu.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@newresa">
+<meta name="twitter:creator" content="@newresa">
+
+
+<meta name="twitter:title" content="Raku Parrot">
+<meta name="title" property="og:title" content="Raku Parrot" />
+
+
+<meta name="twitter:description" content="Exploring the built-in feature of Grammars in the Raku language by creating a small language that is parroted back to us from the command line.
+">
+<meta name="description" property="og:description" content="Exploring the built-in feature of Grammars in the Raku language by creating a small language that is parroted back to us from the command line.
+" />
+
+
+<meta name="author" content="Newres Al Haider" />
+<meta property="article:author" content="Newres Al Haider">
+<meta property="og:type" content="article" />
+
+<meta property="article:published_time" content="2022-08-06">
+
+
+    
+        <meta property="article:tag" content="Raku">
+    
+        <meta property="article:tag" content="Language">
+    
+        <meta property="article:tag" content="Grammars">
+    
+
+
+    <meta property="article:modified_time" content="2022-08-06">
+
+
+
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/rakuparrot/featured.png">
+<meta property="og:image" content="https://www.newresalhaider.com/post/rakuparrot/featured.png" />
+
+
+</head>
+
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="title is-3">
+                Newres Al Haider
+            </h1>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="NavbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="NavbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/">
+                <h2 class="subtitle is-5">
+                    Home
+                </h2>
+            </a>
+            <a class="navbar-item" href="/post/">
+                <h2 class="subtitle is-5">
+                    Posts
+                </h2>
+            </a>
+            <a class="navbar-item" href="/project/">
+                <h2 class="subtitle is-5">
+                    Projects
+                </h2>
+            </a>
+            <a class="navbar-item" href="/publication/">
+                <h2 class="subtitle is-5">
+                    Publications
+                </h2>
+            </a>
+        </div>
+    </div>
+</nav>
+  <section class="section">
+    <div class="container">
+      
+
+<h1 class="title">
+    Raku Parrot
+</h1>
+<p class="subtitle"><strong>2022-08-06</strong></p>
+<p>One of the programming languages that I have stumbled upon not too long ago is <a href="https://www.raku.org/">Raku</a>. This language, which was previously known as Perl 6, is chock-full of really cool features. It has support for programming in both object oriented and functional paradigms, optional gradual typing, a nice story for async programming and more. </p>
+<p>A really nice feature of Raku is that <a href="https://docs.raku.org/language/grammars">Grammars</a> are a core part of the language. Grammars allow for a great way to interpret textual information. When programming there are a lot of use cases where a specific set of patterns need to be recognized and used from text. An interpreter for a format such as <a href="https://www.json.org">JSON</a> is a good example. From the text version of a JSON file elements such as arrays, objects, numbers, strings, etc. needs to be recognized. In addition a representation of them needs to be built for manipulation and use within a programming language. </p>
+<p>In order to demonstrate this grammar feature of Raku, we are going to implement a small program to parrot phrases back to us. The grammar inside this program describes short three word (sometimes a bit irregular) sentences like &quot;I like sushi.&quot; or &quot;They eat pear.&quot;. Our program will parrot these phrases back to us twice, first just as text and the second time with certain words being replaced by emojis. </p>
+<p>To give a preview of what this code will do, if we call it from the command line given the input: </p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>I like sushi.
+</span></code></pre>
+<p>we get back:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>I like sushi.
+</span><span>I like 🍣.
+</span></code></pre>
+<p>if we would use an input like: </p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>They eat pear.
+</span></code></pre>
+<p>we get back:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>They eat pear.
+</span><span>They eat 🍐.
+</span></code></pre>
+<p>In cases where the our parroting program does not understand what we enter, for example for the sentence: </p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>This is too complex!
+</span></code></pre>
+<p>we get the phrase back:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Squaaawk can not understand!
+</span></code></pre>
+<p>To show how this is implemented, first we will list the full code in Raku and we will go over its elements piece by piece. If one wants to follow along <a href="https://replit.com/languages/raku">Replit</a> offers a way to see the Raku language in action without any installation. For a local installation the <a href="https://rakudo.org/downloads">Rakudo</a> implementation or the <a href="https://rakudo.org/star">Rakudo Star bundle</a> are great starting points. </p>
+<pre data-lang="raku" style="background-color:#2b303b;color:#c0c5ce;" class="language-raku "><code class="language-raku" data-lang="raku"><span style="color:#b48ead;">grammar ParrotHearing</span><span> {
+</span><span>    </span><span style="color:#b48ead;">rule</span><span> TOP { &lt;personalPronoun&gt; &lt;parrotVerb&gt; &lt;parrotNoun&gt;&lt;ending&gt;}
+</span><span>    </span><span style="color:#b48ead;">token</span><span> personalPronoun { &quot;</span><span style="color:#a3be8c;">I</span><span>&quot; | &quot;</span><span style="color:#a3be8c;">You</span><span>&quot; | &quot;</span><span style="color:#a3be8c;">He</span><span>&quot; | &quot;</span><span style="color:#a3be8c;">She</span><span>&quot; | &quot;</span><span style="color:#a3be8c;">It</span><span>&quot; | &quot;</span><span style="color:#a3be8c;">We</span><span>&quot; | &quot;</span><span style="color:#a3be8c;">They</span><span>&quot;| &quot;</span><span style="color:#a3be8c;">Me</span><span>&quot; | &quot;</span><span style="color:#a3be8c;">Him</span><span>&quot; | &quot;</span><span style="color:#a3be8c;">Her</span><span>&quot; | &quot;</span><span style="color:#a3be8c;">Us</span><span>&quot; | &quot;</span><span style="color:#a3be8c;">Them</span><span>&quot; }
+</span><span>    </span><span style="color:#b48ead;">token</span><span> parrotVerb { \w+ }
+</span><span>    </span><span style="color:#b48ead;">token</span><span> parrotNoun { \w+ }
+</span><span>    </span><span style="color:#b48ead;">token</span><span> ending { &quot;</span><span style="color:#a3be8c;">.</span><span>&quot; | &quot;</span><span style="color:#a3be8c;">!</span><span>&quot; | &quot;</span><span style="color:#a3be8c;">?</span><span>&quot; }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">sub </span><span style="color:#8fa1b3;">convertToEmoji</span><span>($</span><span style="color:#bf616a;">string</span><span>)
+</span><span>{
+</span><span>    </span><span style="color:#b48ead;">my </span><span>$</span><span style="color:#bf616a;">parsedValue</span><span> = uniparse($</span><span style="color:#bf616a;">string</span><span>.</span><span style="color:#96b5b4;">uc</span><span>);
+</span><span>    </span><span style="color:#b48ead;">if</span><span> ($</span><span style="color:#bf616a;">parsedValue</span><span>) {</span><span style="color:#b48ead;">return </span><span>$</span><span style="color:#bf616a;">parsedValue</span><span>}
+</span><span>    </span><span style="color:#b48ead;">else</span><span> {</span><span style="color:#b48ead;">return </span><span>$</span><span style="color:#bf616a;">string</span><span>}
+</span><span>}
+</span><span>
+</span><span style="color:#eff1f5;">class </span><span style="color:#ebcb8b;">EmojiActions</span><span> {
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">method </span><span style="color:#8fa1b3;">TOP</span><span> ($</span><span style="color:#96b5b4;">/) {
+</span><span style="color:#96b5b4;">        my $personalPronoun = $&lt;personalPronoun&gt;;
+</span><span style="color:#96b5b4;">        my $parrotVerb= $&lt;parrotVerb&gt;.made;
+</span><span style="color:#96b5b4;">        my $parrotNoun= $&lt;parrotNoun&gt;.made;
+</span><span style="color:#96b5b4;">        my $ending= $&lt;ending&gt;;
+</span><span style="color:#96b5b4;">        make ( &quot;$personalPronoun $parrotVerb $parrotNoun$ending&quot;)
+</span><span style="color:#96b5b4;">    }
+</span><span style="color:#96b5b4;">
+</span><span style="color:#96b5b4;">    method parrotVerb ($/</span><span>) {
+</span><span>       make (convertToEmoji($</span><span style="color:#96b5b4;">/))
+</span><span style="color:#96b5b4;">    }
+</span><span style="color:#96b5b4;">
+</span><span style="color:#96b5b4;">    method parrotNoun($/</span><span>) {
+</span><span>       make (convertToEmoji($</span><span style="color:#96b5b4;">/))
+</span><span style="color:#96b5b4;">    }
+</span><span style="color:#96b5b4;">}
+</span><span style="color:#96b5b4;">
+</span><span style="color:#96b5b4;">sub MAIN($name) {
+</span><span style="color:#96b5b4;">
+</span><span style="color:#96b5b4;">    my $parrotParsed =  ParrotHearing.parse($name.Str, actions =&gt; EmojiActions);
+</span><span style="color:#96b5b4;">    if ($parrotParsed) {say $parrotParsed.Str;
+</span><span style="color:#96b5b4;">                       say $parrotParsed.made.Str}
+</span><span style="color:#96b5b4;">    else {say &quot;Squaaawk can not understand!&quot;};
+</span><span style="color:#96b5b4;">}
+</span></code></pre>
+<p>The first part of the implementation is defining the Grammar of the language that the parrot hears that we call ParrotHearing. Grammars in Raku are a way to organize <a href="https://docs.raku.org/language/regexes">Regular Expressions (Regexes)</a>. Without going into the <a href="https://en.wikipedia.org/wiki/Regular_expression#Formal_language_theory">formal definition of Regular Expressions</a> they can be used to define patterns of characters in text. These patterns can be utilized in various way, such as searching, replacing and transforming text. </p>
+<p>The basic elements of the grammar are regex objects. These contain the regex patterns that we use. In Raku these regular expressions are defined with their own domain specific language. For example one regex object our grammar will be using is <code>{ \w+ }</code>. The pattern in this object, <code>\w+</code>,  matches a single word character, consisting of  letters, digits or underscores, one or more times. For example if we have the text <code>&quot;These are all w0rds_ &quot;</code> it will match four times. </p>
+<p>Another regex object that we will use is <code>{ &quot;I&quot; | &quot;You&quot; | &quot;He&quot; | &quot;She&quot; | &quot;It&quot; | &quot;We&quot; | &quot;They&quot;| &quot;Me&quot; | &quot;Him&quot; | &quot;Her&quot; | &quot;Us&quot; | &quot;Them&quot; }</code> which contains a pattern that will match any of the listed personal pronouns that is capitalized. This means that it will match the text of &quot;You&quot;, &quot;They&quot; and &quot;Them&quot;, but not &quot;i&quot;, &quot;apple&quot; or &quot;them&quot;.</p>
+<p>Next let's take a look at how the ParrotHearing grammar is organizing the regular expressions. The sentences that that this grammar defines are very basic: they have the form of a personal pronoun, followed by verb, a noun and an ending. In fact, the verbs and nouns that the Parrot accepts are very simplified: they are the pattern <code>\w+</code> that we described above that would match most words. The personal pronouns are those that the regex object <code>{ &quot;I&quot; | &quot;You&quot; | &quot;He&quot; | &quot;She&quot; | &quot;It&quot; | &quot;We&quot; | &quot;They&quot;| &quot;Me&quot; | &quot;Him&quot; | &quot;Her&quot; | &quot;Us&quot; | &quot;Them&quot; }</code> will match while the ending is one of the <code>.</code>, <code>!</code> and <code>?</code> characters.</p>
+<p>The final piece is a function that replaces the nouns and verbs in a sentence with the emoji equivalent if it can. If no replacement can be found it leaves the text unchanged. When parsing we can use this function as part of an action to perform. This allows us to tie everything together in our <code>MAIN</code> function (also called a subroutine in Raku). This parses in the text from the command line, prints the text twice (can be done by the <code>say</code> function in Raku). The first time it will print the text and the second time it will print the text with the emoji replacements. In the case when it can not parse the input it will print <code>&quot;Squaaawk can not understand!&quot;</code> instead.</p>
+<p>To run everything, if the code is in a file called main.raku one can call <code>raku main.raku &quot;I love sushi.&quot;</code> or some other sentence to get started. Feel free to give it a try on <a href="https://replit.com/languages/raku">Replit</a> to see what the code parrots back!</p>
+
+
+    </div>
+  </section>
+</body>
+
+</html>

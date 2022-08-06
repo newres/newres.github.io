@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title> - software contracts</title>
+	<link href="https://www.newresalhaider.com/tags/software-contracts/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.newresalhaider.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2018-05-01T00:00:00+00:00</updated>
+	<id>https://www.newresalhaider.com/tags/software-contracts/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Spec-stacular Spider-Man</title>
+		<published>2018-04-29T00:00:00+00:00</published>
+		<updated>2018-05-01T00:00:00+00:00</updated>
+		<link rel="alternate" href="https://www.newresalhaider.com/post/spec-stacular-spider-man/" type="text/html"/>
+		<id>https://www.newresalhaider.com/post/spec-stacular-spider-man/</id>
+		<content type="html">&lt;p&gt;Spider-Man is one of the most iconic heroes of the Marvel universe. Created by Stan Lee and Steve Ditko, Spider-Man is a regular teenager named Peter Parker, who due to being bitten by a radio-active spider, gains abilities such as the proportional strength of a spider, wall crawling and a spider sense to detect upcoming danger. One of the biggest draws of Spider-Man that although he is a superhero and fought various villains from cosmic beings to petty criminals, he also had to deal with regular everyday problems, such as money issues, school life and the pressure of a job.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=spectacular-spider-man.jpg&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;The Spectacular Spider-Man © Marvel Entertainment&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2018&#x2F;spec-stacular-spider-man&#x2F;spectacular-spider-man.jpg&quot; title=&quot;The Spectacular Spider-Man © Marvel Entertainment&quot; &gt;}} --&gt;
+&lt;p&gt;In software there are also everyday problems which one has to tackle before one can defeat the villains of the domain at hand. One of these everyday problems is the issue of data validation. Data validation is the process of ensuring that the elements of the data are correct. This process has to be done in pretty much all domains when working with actual data. Consider the financial domain where a financial product can only be made available if the right requirements are fulfilled in the request. If the request is not written correctly then the request needs to be denied. In the legal and regulatory domains certain information that is required for a law must be fulfilled, otherwise costly corrections or fines can follow. Another good example is the clinical domain, where the a patients data needs to be transferred to an application. Here is it essential that this data fulfills the requirement for requesting a clinical procedure or a medication, as any mistake can lead to huge negative impact on the health of the patient.&lt;&#x2F;p&gt;
+&lt;p&gt;One relatively recent tool that can be used to solve this problem is the &lt;a href=&quot;https:&#x2F;&#x2F;clojure.org&#x2F;guides&#x2F;spec&quot;&gt;clojure.spec&lt;&#x2F;a&gt; library in the Clojure programming language. In this article we aim to explain, alongside Spider-Man, how these specs can be used to tackle the data validation problem in a spectacular way. As this library relies on the Clojure language some knowledge of Clojure is needed. In order to make this article understandable to those without such prior expertise we introduce some aspects of Clojure. In particular we focus on two features of it: the way information (data) is represented and the fact that it is a Lisp.&lt;&#x2F;p&gt;
+&lt;p&gt;In Clojure data is represented with relatively few elements that are combined together. Take for example a scenario where we want to create a profile of Spider-Man, as taken from the Marvel wiki entry on &lt;a href=&quot;http:&#x2F;&#x2F;marvel.com&#x2F;universe&#x2F;Spider-Man_(Peter_Parker)&quot;&gt;Spider-Man&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The full name of Spider-Man can be represented in text form as a string. Like in many other languages the text is placed in between quotation marks.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clojure&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clojure &quot;&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Peter Benjamin Parker&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;For the numbers to represent his relative power in the Marvel universe, we use natural numbers (we leave the concepts and issues surrounding very large or floating point numbers out in this article). In case of Spider-Man his durability is 5:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clojure&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clojure &quot;&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Of course having just a value of the name and the durability of Spider-Man just floating around makes the representation somewhat incomplete, as they are not attached to the concepts of &amp;quot;name&amp;quot; or &amp;quot;durability&amp;quot;. Just like how Spider-Man needs buildings to sling off of, we need a representation that links the values with what they represent. In Clojure, keywords are often used for this purpose. &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clojure&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clojure &quot;&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:real-name
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;pre data-lang=&quot;clojure&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clojure &quot;&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:spider-man-spec.core&#x2F;name
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;pre data-lang=&quot;clojure&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clojure &quot;&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::durability
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Keywords are symbolic identifiers. Think of them as symbols, much like one would use a string, but with some special powers attached. They are text prefaced by &amp;quot;:&amp;quot;, as it can be seen in the keyword &lt;code&gt;:real-name&lt;&#x2F;code&gt;. They have the ability to be namespace-qualified, such as &lt;code&gt;:spider-man-spec.core&#x2F;name&lt;&#x2F;code&gt; which indicates that this is the keyword in the &lt;code&gt;spider-man-spec.core&lt;&#x2F;code&gt; namespace. Namespaces are what allows us to modularize our data and code, by grouping them under together a single identifier. In our case this is &lt;code&gt;spider-man-spec.core&lt;&#x2F;code&gt;. This namespacing ensures that our definition of the concepts of &amp;quot;name&amp;quot;, &amp;quot;real-name&amp;quot;, &amp;quot;durability&amp;quot;, etc. can remain distinct from any other use of similar concepts. Finally, when writing internally to the library which uses the namespace, or when aliasing to it, we can just shorten the keyword with &amp;quot;::&amp;quot;, such as in &lt;code&gt;::durability&lt;&#x2F;code&gt;. &lt;&#x2F;p&gt;
+&lt;p&gt;Keywords come with some nice implementation details, such as fast equality checks and some other powers we will show in the future. This makes them the preferred keys in data-structures such as maps. And speaking of maps they allow the description of information in key-value pairs, as written between curly braces in the small example below. &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clojure&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clojure &quot;&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span&gt;  {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::name &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Spider-Man&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::real-name &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Peter Benjamin Parker&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The curly backets around the pairs express the keys and values in a map in Clojure. In the above example &lt;code&gt;::name&lt;&#x2F;code&gt; and &lt;code&gt;::real-name&lt;&#x2F;code&gt; are the key and value pairs for &lt;code&gt;&amp;quot;Spider-Man&amp;quot;&lt;&#x2F;code&gt; and &lt;code&gt;&amp;quot;Peter Benjamin Parker&amp;quot;&lt;&#x2F;code&gt; respectively. &lt;&#x2F;p&gt;
+&lt;p&gt;Maps are just one of the ways one can describe a collection of elements. You also have sets, collections in which each element is unique. This can be done with a hashtag and some curly brackets &amp;quot;#{}&amp;quot;. In the example below we list the current and former affiliations of Spider-Man.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clojure&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clojure &quot;&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::current-affiliations &lt;&#x2F;span&gt;&lt;span&gt;#{&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Avengers&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;}
+&lt;&#x2F;span&gt;&lt;span&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::former-affiliations &lt;&#x2F;span&gt;&lt;span&gt;#{&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Secret Defenders&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;New Fantastic Four&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;The Outlaws&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;}}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Note that how sets are used within maps to represent this knowledge. This is actually a common way to represent knowledge in Clojure: you combine all the various data representations directly. This way you can have a list containing maps, with keywords as keys and values that contain maps and strings, where the maps contain numbers, etc. You have these data-structures in pretty much all commonly used programming languages. Where Clojure differs from many is that it does not put (almost any) sugaring or abstraction on top. &lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=spider-man-swinging.jpg&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;Spider-Man swinging around the city. © Marvel Studios&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2018&#x2F;spec-stacular-spider-man&#x2F;spider-man-swinging.jpg&quot; title=&quot;Spider-Man swinging around the city. © Marvel Studios&quot; &gt;}} --&gt;
+&lt;p&gt;Just as Spider-Man is often at his best when he is just being &amp;quot;plain old Spidey&amp;quot;, having data represented this way has some nice advantages. The biggest is simplicity. Instead of learning to work with specific wrappers, objects, prototypes, etc on top of this data, that can differ between applications and libraries, it is enough to learn how to handle and manipulate maps, list, sets once. This knowledge can be then reused in any domain, and frees up the attention of the programmer to focus on the domain problem, and not the exact way the data was wrapped up in a library. &lt;&#x2F;p&gt;
+&lt;p&gt;This of course also means that a system, such as clojure.spec, that aims at data validation in Clojure, has to handle the above-mentioned style of composition well. But before we get ahead of ourselves lets finish up by providing the profile of Spider Man.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clojure&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clojure &quot;&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;spider-man-profile
+&lt;&#x2F;span&gt;&lt;span&gt;  {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::name &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Spider-Man&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::real-name &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Peter Benjamin Parker&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::identity ::secret
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::affiliations
+&lt;&#x2F;span&gt;&lt;span&gt;                   {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::current-affiliations &lt;&#x2F;span&gt;&lt;span&gt;#{&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Avengers&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;}
+&lt;&#x2F;span&gt;&lt;span&gt;                    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::former-affiliations &lt;&#x2F;span&gt;&lt;span&gt;#{&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Secret Defenders&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;New Fantastic Four&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;The Outlaws&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;}}
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::power-grid &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;                 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::durability 3
+&lt;&#x2F;span&gt;&lt;span&gt;                 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::energy 4
+&lt;&#x2F;span&gt;&lt;span&gt;                 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::fighting 5
+&lt;&#x2F;span&gt;&lt;span&gt;                 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::intelligence 4
+&lt;&#x2F;span&gt;&lt;span&gt;                 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::speed 5
+&lt;&#x2F;span&gt;&lt;span&gt;                 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::strength 4
+&lt;&#x2F;span&gt;&lt;span&gt;                 }
+&lt;&#x2F;span&gt;&lt;span&gt;   }
+&lt;&#x2F;span&gt;&lt;span&gt;  )
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;vulture-profile
+&lt;&#x2F;span&gt;&lt;span&gt;  {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::name &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Vulture&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::real-name &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Adrian Toomes&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::identity ::publicly-known
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::affiliations
+&lt;&#x2F;span&gt;&lt;span&gt;                   {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::current-affiliations &lt;&#x2F;span&gt;&lt;span&gt;{}
+&lt;&#x2F;span&gt;&lt;span&gt;                    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::former-affiliations &lt;&#x2F;span&gt;&lt;span&gt;#{&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Sinister Twelve&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Sinister Six&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;}}
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::power-grid &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;                 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::durability 4
+&lt;&#x2F;span&gt;&lt;span&gt;                 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::energy 3
+&lt;&#x2F;span&gt;&lt;span&gt;                 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::fighting 4
+&lt;&#x2F;span&gt;&lt;span&gt;                 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::intelligence 4
+&lt;&#x2F;span&gt;&lt;span&gt;                 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::speed 5
+&lt;&#x2F;span&gt;&lt;span&gt;                 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::strength 3
+&lt;&#x2F;span&gt;&lt;span&gt;                 }
+&lt;&#x2F;span&gt;&lt;span&gt;   }
+&lt;&#x2F;span&gt;&lt;span&gt;  )
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;spider-man-characters &lt;&#x2F;span&gt;&lt;span&gt;[spider-man-profile vulture-profile])
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Oh no, our Spider Senses should be tingling. It is Vulture, that has shown up in our list of Spider-Man characters. In addition we just introduced some new elements in our example that need some explanation for readers new to Clojure.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=vulture.jpg&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;Uh oh, Vulture must be up to no good if he shows up here. © Marvel Studios&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2018&#x2F;spec-stacular-spider-man&#x2F;vulture.jpg&quot; title=&quot;Uh oh, Vulture must be up to no good if he shows up here. © Marvel Studios&quot; &gt;}} --&gt;
+&lt;p&gt;The first is the use of square brackets [], which indicate a list. This is a collection of elements, in this case of &lt;code&gt;spider-man-profile&lt;&#x2F;code&gt; and &lt;code&gt;vulture-profile&lt;&#x2F;code&gt;, that unlike a set, can have multiples of the same element. &lt;&#x2F;p&gt;
+&lt;p&gt;The other new type of element we use is the form of using parentheses along side def as in &lt;code&gt;(def spider-man-characters ...)&lt;&#x2F;code&gt;. Expressions of these type, called symbolic expressions, or s-expressions for short, are a characteristic of the Lisp family of languages to which Clojure belongs to. In a Lisp, parts of the program are either atoms, such as &lt;code&gt;5&lt;&#x2F;code&gt;, &lt;code&gt;&amp;quot;Peter Benjamin Parker&amp;quot;&lt;&#x2F;code&gt;, &lt;code&gt;true&lt;&#x2F;code&gt;, or an s-expression where the first element between parens is a function and the rest are parameters. For example &lt;code&gt;(+ 1 3)&lt;&#x2F;code&gt;. While atoms evaluate to themselves, the s-expressions evaluate to a function with the given parameters. In the case of &lt;code&gt;(+ 1 3)&lt;&#x2F;code&gt; they should evaluate to &lt;code&gt;4&lt;&#x2F;code&gt;. You can also nest s-expressions, such as &lt;code&gt;(- (+ 1 3) 2)&lt;&#x2F;code&gt;, which will evaluate to &lt;code&gt;2&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;You might be thinking, &amp;quot;Wait, if everything is either an atom or an s-expression, what kind of villainous things are those strange brackets that one has to use to create a set, list or map!&amp;quot;. For all the simplicity in Clojure, it does make use of some syntactical sugar. Lists can be written &lt;code&gt;[spider-man-profile vulture-profile]&lt;&#x2F;code&gt; as a shorthand for the s-expression &lt;code&gt;(list spider-man-profile vulture-profile)&lt;&#x2F;code&gt;. Similar functions exist for maps and sets as well. &lt;&#x2F;p&gt;
+&lt;p&gt;Much like Spider-Man, who for all his powers still has to struggle with juggling a school and a job and has to make practical decisions, Clojure has to make them as well. In this case because certain things, such as maps, sets and list are used so often, it uses a shorter syntax for creating them. This does makes the language slightly more complex, but in the author&#x27;s view, it pays off. &lt;&#x2F;p&gt;
+&lt;p&gt;Another matter of practicality of course is that while we can nest the two profiles directly into a list, we can create variables for them to associate. The &lt;code&gt;def&lt;&#x2F;code&gt; function does exactly this, and it also ensures they become part of the current namespace. For example, if the current namespace is &lt;code&gt;spider-man-spec.core&lt;&#x2F;code&gt; then a &lt;code&gt;def&lt;&#x2F;code&gt; of &lt;code&gt;vulture-profile&lt;&#x2F;code&gt; can be referred to as &lt;code&gt;spider-man-spec.core&#x2F;vulture-profile&lt;&#x2F;code&gt; from other namespaces, and simply &lt;code&gt;vulture-profile&lt;&#x2F;code&gt; in the current namespace. This allows us to break up the overall data in smaller parts to use.&lt;&#x2F;p&gt;
+&lt;p&gt;Now we finally described the profiles of both Spider-Man and Vulture, but are they correct? The library of clojure.spec uses the notion of a spec for this. A spec is simply a function on a single parameter that returns a truthy value (in most cases a &lt;code&gt;true&lt;&#x2F;code&gt; if the spec holds, &lt;code&gt;false&lt;&#x2F;code&gt; if the spec does not hold).&lt;&#x2F;p&gt;
+&lt;p&gt;In essence this allows for many existing functions to be used as specs. For example the already existing function &lt;code&gt;string?&lt;&#x2F;code&gt; checks whether a particular value is a string or not. &lt;&#x2F;p&gt;
+&lt;p&gt;In order to check whether a value is valid for a particular spec we can use the &lt;code&gt;s&#x2F;valid?&lt;&#x2F;code&gt; function. Here the &lt;code&gt;s&lt;&#x2F;code&gt; stands the namespace of the spec library &lt;code&gt;clojure.spec.alpha&lt;&#x2F;code&gt;, so by calling &lt;code&gt;s&#x2F;valid?&lt;&#x2F;code&gt; we are calling the &lt;code&gt;valid?&lt;&#x2F;code&gt; function of this particular namespace.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clj&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clj &quot;&gt;&lt;code class=&quot;language-clj&quot; data-lang=&quot;clj&quot;&gt;&lt;span&gt;(s&#x2F;valid? string? &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Spider-Man&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The above function call will checking if &lt;code&gt;&amp;quot;Spider-Man&amp;quot;&lt;&#x2F;code&gt; is indeed a string, and return &lt;code&gt;true&lt;&#x2F;code&gt; if it is. On the other hand if we check whether a number is valid for this spec, using &lt;code&gt;(s&#x2F;valid? string? 6)&lt;&#x2F;code&gt; we instead get &lt;code&gt;false&lt;&#x2F;code&gt; returned. &lt;&#x2F;p&gt;
+&lt;p&gt;Another way to use a spec, is to explain why a value is wrong. For example, we can call the function &lt;code&gt;explain-data&lt;&#x2F;code&gt; on with the spec and an incorrect value, to get a map back with an explanation. The function call: &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clj&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clj &quot;&gt;&lt;code class=&quot;language-clj&quot; data-lang=&quot;clj&quot;&gt;&lt;span&gt;(s&#x2F;explain-data string? &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;6&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;would result in the map:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clj&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clj &quot;&gt;&lt;code class=&quot;language-clj&quot; data-lang=&quot;clj&quot;&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:val 6 :predicate :clojure.spec.alpha&#x2F;unknown&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now the above example clearly shows the value on which the spec has failed, but it denotes the predicate as unknown with &lt;code&gt;:clojure.spec.alpha&#x2F;unknown&lt;&#x2F;code&gt;. The solution to this is to provide a name for the spec, which the system can use to pin point if things fail. We can register any spec using the function &lt;code&gt;s&#x2F;def&lt;&#x2F;code&gt;. For example the functions: &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clj&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clj &quot;&gt;&lt;code class=&quot;language-clj&quot; data-lang=&quot;clj&quot;&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::name &lt;&#x2F;span&gt;&lt;span&gt;string?)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::real-name &lt;&#x2F;span&gt;&lt;span&gt;string?)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;will register the two specs under the keys &lt;code&gt;:name&lt;&#x2F;code&gt; and &lt;code&gt;:real-name&lt;&#x2F;code&gt; in the current namespace, i.e.: under &lt;code&gt;spider-man-spec.core&#x2F;name&lt;&#x2F;code&gt; and &lt;code&gt;spider-man-spec.core&#x2F;name&lt;&#x2F;code&gt; respectively.&lt;&#x2F;p&gt;
+&lt;p&gt;Now if we would aim to explain why the spec &lt;code&gt;:real-name&lt;&#x2F;code&gt;  does not allow the value &lt;code&gt;6&lt;&#x2F;code&gt;, it would return the explanation:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clj&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clj &quot;&gt;&lt;code class=&quot;language-clj&quot; data-lang=&quot;clj&quot;&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:val 6 :predicate :spider-man-spec.core&#x2F;real-name&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;where the predicate now identifies the spec that was not fulfilled.&lt;&#x2F;p&gt;
+&lt;p&gt;Specs can also be created in other ways. For example a set of values indicating the correct values can be used as a spec.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clj&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clj &quot;&gt;&lt;code class=&quot;language-clj&quot; data-lang=&quot;clj&quot;&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::identity &lt;&#x2F;span&gt;&lt;span&gt;#{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::secret ::publicly-known&lt;&#x2F;span&gt;&lt;span&gt;})
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The above code defines a spec for identity as having two possible values: either &lt;code&gt;::secret&lt;&#x2F;code&gt; or &lt;code&gt;::publicly-known&lt;&#x2F;code&gt;. &lt;&#x2F;p&gt;
+&lt;p&gt;Specs can also be defined for collections as well. The specs for current- and former affiliations: &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clj&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clj &quot;&gt;&lt;code class=&quot;language-clj&quot; data-lang=&quot;clj&quot;&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::current-affilications &lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;coll-of string? &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:kind &lt;&#x2F;span&gt;&lt;span&gt;set?))
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::former-affilications &lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;coll-of string? &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:kind &lt;&#x2F;span&gt;&lt;span&gt;set?))
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;These specs describe that that both current- and former have to be sets of strings. The affiliations part of a profile is actually map containing both current- and former affiliations. This is defined as the spec:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clojure&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clojure &quot;&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::affiliations &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s&#x2F;keys &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:req &lt;&#x2F;span&gt;&lt;span&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::current-affiliations&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:opt &lt;&#x2F;span&gt;&lt;span&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::former-affiliations&lt;&#x2F;span&gt;&lt;span&gt;]) )
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;which makes it requirement for affiliations to contain current-affiliations, but any former affiliations are optional.&lt;&#x2F;p&gt;
+&lt;p&gt;For checking whether Spider-Man has a valid profile we can use the &lt;code&gt;s&#x2F;valid?&lt;&#x2F;code&gt; function again. We use the following code to do just that:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clj&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clj &quot;&gt;&lt;code class=&quot;language-clj&quot; data-lang=&quot;clj&quot;&gt;&lt;span&gt;    (let [spider-man-affiliations (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:spider-man-spec.core&#x2F;affiliations &lt;&#x2F;span&gt;&lt;span&gt;spider-man-profile)]
+&lt;&#x2F;span&gt;&lt;span&gt;      (s&#x2F;valid? &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:spider-man-spec.core&#x2F;affiliations &lt;&#x2F;span&gt;&lt;span&gt;spider-man-affiliations))
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The &lt;code&gt;let&lt;&#x2F;code&gt; form is new here, but what it essentially does is deconstructing the while &lt;code&gt;spider-man-profile&lt;&#x2F;code&gt; and associating its affiliations temporarily the &lt;code&gt;spider-man-affiliations&lt;&#x2F;code&gt;. This allows us to use a shorthand when calling functions, instead of writing out everything in a single line.&lt;&#x2F;p&gt;
+&lt;p&gt;While this value is also valid according to the spec, as the spec and the value we are checking gets more complex, it could also be useful to gather the exact value that has passed the spec. In such cases we can use &lt;code&gt;s&#x2F;conform&lt;&#x2F;code&gt; to gather these. The call: &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clj&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clj &quot;&gt;&lt;code class=&quot;language-clj&quot; data-lang=&quot;clj&quot;&gt;&lt;span&gt;(s&#x2F;conform &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:spider-man-spec.core&#x2F;affiliations &lt;&#x2F;span&gt;&lt;span&gt;spider-man-affiliations)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Returns the map:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clj&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clj &quot;&gt;&lt;code class=&quot;language-clj&quot; data-lang=&quot;clj&quot;&gt;&lt;span&gt;#:spider-man-spec.core{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:current-affiliations &lt;&#x2F;span&gt;&lt;span&gt;#{&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Avengers&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;}, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:former-affiliations &lt;&#x2F;span&gt;&lt;span&gt;#{&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;The Outlaws&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Secret Defenders&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;New Fantastic Four&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;}}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Note that this is a namespaced map, which is a feature that allows us to refer to the keywords inside a map more efficiently, instead of writing them all out in each case.&lt;&#x2F;p&gt;
+&lt;p&gt;The final aspect of each profile, the power grid, is also something that can be given a spec. Each of the powers can only take a whole number value from 1 until 7. We can specify this with the follow spec:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clj&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clj &quot;&gt;&lt;code class=&quot;language-clj&quot; data-lang=&quot;clj&quot;&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::power-value &lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;and pos-int? #(&amp;gt;= % &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;) #(&amp;lt;= % &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;7&lt;&#x2F;span&gt;&lt;span&gt;)))
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::durability ::power-value &lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::energy ::power-value &lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::fighting ::power-value &lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::intelligence ::power-value &lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::speed ::power-value &lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::strength ::power-value &lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Note that we use the function &lt;code&gt;s&#x2F;and&lt;&#x2F;code&gt; to combine three specs: that the value should be a positive integer, greater than or equal to 1 and less or equal to 7. Such a combined spec can then be (re-)used like any other.&lt;&#x2F;p&gt;
+&lt;p&gt;We can combine all the previous specs together to specify a profile: &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clj&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clj &quot;&gt;&lt;code class=&quot;language-clj&quot; data-lang=&quot;clj&quot;&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::profile &lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;keys &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;:req &lt;&#x2F;span&gt;&lt;span&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::name ::real-name ::identity ::affiliations ::power-grid&lt;&#x2F;span&gt;&lt;span&gt;] ) )
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;For this spec, both Spider-Man and Vulture are valid profiles. However, this is a problem, as it does not allow us to differentiate between a hero and a villain. Of course we do not want to get Vulture get into the same places as Spider-Man can. We must fight him, much like Spider-Man, but in our own way: by creating a spec for which the Spider-Man profile is a valid value, but not that of Vulture.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=spider-man-vs-vulture.jpg&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;Spider-Man vs Vulture © Marvel Entertainment&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2018&#x2F;spec-stacular-spider-man&#x2F;spider-man-vs-vulture.jpg&quot; title=&quot;Spider-Man vs Vulture © Marvel Entertainment&quot; &gt;}} --&gt;
+&lt;p&gt;While we can make a separate requirement that only persons with the name &amp;quot;Spider-Man&amp;quot; can fulfill our new &amp;quot;hero-spec&amp;quot; this might be too restrictive. Instead we are going to spec an Avenger profile, so Spider-Man and all his friends can join in, while villains such as Vulture are kept out.&lt;&#x2F;p&gt;
+&lt;p&gt;The requirement for an Avenger in our system, is that any-one with the current affiliation of &lt;code&gt;&amp;quot;Avengers&amp;quot;&lt;&#x2F;code&gt; is an avenger. We can describe this requirement as a spec, using a function defined for this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;clj&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clj &quot;&gt;&lt;code class=&quot;language-clj&quot; data-lang=&quot;clj&quot;&gt;&lt;span&gt;(defn is-avenger? [profile]
+&lt;&#x2F;span&gt;&lt;span&gt;  (contains? (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::current-affiliations &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::affiliations &lt;&#x2F;span&gt;&lt;span&gt;profile) ) &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Avengers&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;  )
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::avenger-profile &lt;&#x2F;span&gt;&lt;span&gt;(s&#x2F;and &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;::profile &lt;&#x2F;span&gt;&lt;span&gt;is-avenger? ) )
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now we can check whether a profile is a valid Avenger, which will be true for Spider-Man but not for Vulture. Finally, we can get rid of this villain that showed up in our tutorial. In addition, this spec will also make sure that all current members of the Avengers be valid, so Spider-Man can fight freely alongside of them. &lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=spider-man-avengers.jpg&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;Our spec answers the question posed in this cover: Spider-Man is indeed an Avenger © Marvel Entertainment&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2018&#x2F;spec-stacular-spider-man&#x2F;spider-man-avengers.jpg&quot; title=&quot;Our spec answers the question posed in this cover: Spider-Man is indeed an Avenger © Marvel Entertainment&quot; &gt;}} --&gt;
+&lt;p&gt;So there we have it, a brief look at using the spec library to validate data. There are many things that I have not touched, such as the ability to generate values based on the Spec, other ways to compose a spec, etc.&lt;&#x2F;p&gt;
+&lt;p&gt;Nonetheless I hope this article gives a solid introduction, and maybe an interest to using the spec library, even if one does not have a Clojure or even a heavy programming background. The source code snippets are available at: &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;spider-man-spec&quot;&gt;Spider-Man-Spec&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;If you have a data validation problem, by all means take a swing at it with the Spec library. I am convinced that the results you will get will be nothing short of spectacular.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

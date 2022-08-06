@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title> - Deep Space 9</title>
+	<link href="https://www.newresalhaider.com/tags/deep-space-9/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.newresalhaider.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2019-02-04T00:00:00+00:00</updated>
+	<id>https://www.newresalhaider.com/tags/deep-space-9/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Prolog and the Price of Peace</title>
+		<published>2019-02-01T00:00:00+00:00</published>
+		<updated>2019-02-04T00:00:00+00:00</updated>
+		<link rel="alternate" href="https://www.newresalhaider.com/post/prolog-price-of-peace/" type="text/html"/>
+		<id>https://www.newresalhaider.com/post/prolog-price-of-peace/</id>
+		<content type="html">&lt;p&gt;The use of logic is a common element in Science Fiction. In the Star Trek universe &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Vulcan_(Star_Trek)&quot;&gt;Vulcans&lt;&#x2F;a&gt; are a species that is famously known for aiming to live by logic and reason. Because of this they are often considered masters of these subjects. Yet there was a case in an episode of the Star Trek show &lt;a href=&quot;http:&#x2F;&#x2F;memory-alpha.wikia.com&#x2F;wiki&#x2F;The_Maquis,_Part_II_(episode)&quot;&gt;Deep Space 9&lt;&#x2F;a&gt;, where &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Quark_(Star_Trek)&quot;&gt;Quark&lt;&#x2F;a&gt;, a &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Ferengi&quot;&gt;Ferengi&lt;&#x2F;a&gt;, was able to convince Sakonna, a Vulcan, of the error of her logic and reasoning. &lt;&#x2F;p&gt;
+&lt;p&gt;For this Quark made use of Ferengi philosophy, namely the Third Rule of Acquisition. The Rules of Acquisition are a series of proverbs and guidelines that govern Ferengi society, and notably their business dealings that take a prominent place in their lives. The Third Rule of Acquisition states that &amp;quot;Never spend more for an acquisition than you have to.&amp;quot; By applying this rule to the situation in the episode Quark was able make it clear to Sakonna that the best time broker a peace agreement would be &amp;quot;right now&amp;quot;, as the price of peace is at an all time low. &lt;&#x2F;p&gt;
+&lt;figure&gt;
+  &lt;img src=&quot;featured.jpg&quot;  &#x2F;&gt;
+  &lt;figcaption&gt;
+      &lt;h4&gt;Quark explaining the Third Rule of Acquisition to Sakonna Copyright CBS Corporation.&lt;&#x2F;h4&gt;
+  &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;featured.jpg&quot; title=&quot;Quark explaining the Third Rule of Acquisition to Sakonna&quot; attr=&quot;Copyright CBS Corporation&quot; &gt;}} --&gt;
+&lt;p&gt;Much like with Ferengi society, various rules and regulations play a prominent role in our lives and dealings with each other. So much so, that navigating the various rules to their logical conclusion, whether in the realm of law, finance and other domains, is often a difficult process. Thankfully there are tools and techniques to help us. The programming language Prolog, in particular, can be a very helpful in dealing with various rules and logical problems. This article aims to provide a brief introduction to this language using by using it to show how Quark&#x27;s reasoning can be implemented within a computer program.&lt;&#x2F;p&gt;
+&lt;p&gt;Prolog is a logic programming language, originally created in the 1970s, but with many modern implementations such as &lt;a href=&quot;http:&#x2F;&#x2F;www.swi-prolog.org&#x2F;&quot;&gt;SWI-Prolog&lt;&#x2F;a&gt;. With logic programming programs are written and solved using some variation of a formal logic. Using such logic, information about the problem and its domain is first declared. Then the user can pose queries about the problem domain, which the programming language aims to answer through reasoning with the available information. This style of programming contrasts with the more common, imperative, paradigm. Instead of telling the computer how to solve the problem, we can declare information about the problem and let the computer, through the use of logic, solve it for us.&lt;&#x2F;p&gt;
+&lt;p&gt;In order to show how Prolog works, we aim to use it to represent the same problem and reasoning that Quark used to convince Sakonna. To do this first lets examine the situation depicted the episode a bit more closely. In the episode the Maquis are a group that are at odds Cardassian colonists both living the Demilitarized Zone. Tensions were escalating as the Cardassian colonists were recently supplied in secret with weapons by the Cardassian Union. As a result Sakonna, along with other members of the Maquis, aimed at acquiring more weapons of their own. Even after it was found that the Cardassian Union was behind weapon supplies, Sakonna still aimed at gathering more, as a way to ensure peace. Quark pointed out the flaws in the logic of her argument, given the Third Rule of Acquisition: &amp;quot;Never spend more for an acquisition than you have to.&amp;quot; If the goal of Sakonna is truly to acquire peace, than it is the perfect time to be negotiating with the Cardassian colonists. With the flow of the smuggled in weapons having stopped, and both sides already having weapons, neither the Maquis nor the Cardassian colonists have any advantage. By aiming to acquire weapons still, they would only escalate the conflict, and making peace more costly in the long run.&lt;&#x2F;p&gt;
+&lt;p&gt;To express this scenario with Prolog, we are going to introduce some elements of this language first (for a bit more through introduction see the excellent &lt;a href=&quot;http:&#x2F;&#x2F;www.learnprolognow.org&#x2F;&quot;&gt;Learn Prolog Now!&lt;&#x2F;a&gt; available online). There are three basic elements to a Prolog program: facts, rules and queries. &lt;&#x2F;p&gt;
+&lt;p&gt;Facts are elements that have been stated to hold. For example the following statement:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(cardassians).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;can be used to denote that the advantage is held by the Cardassians colonists.&lt;&#x2F;p&gt;
+&lt;p&gt;Rules are a way for Prolog to infer new information from the knowledge that already exists. For example if we aim to state that &amp;quot;if the Cardassian colonists have the advantage the price of peace is high&amp;quot; in Prolog we would have the rule: &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;priceOfPeace&lt;&#x2F;span&gt;&lt;span&gt;(high) :- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(cardassians).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;There are two parts to writing such rules in Prolog: the body and the head. The body of the rule is in this case &lt;code&gt;advantage(cardassians)&lt;&#x2F;code&gt; while the head is &lt;code&gt;priceOfPeace(high)&lt;&#x2F;code&gt;. In Prolog if the body of the rule holds true, than it can be concluded that the head is true as well. This exactly matches to what we aim to express: if the Prolog program knows that the Cardassian colonists hold the advantage, than it can conclude that the price of peace is high. &lt;&#x2F;p&gt;
+&lt;p&gt;Facts and rules together form the knowledge base that can describe a domain. In this case the domain is the situation between the Cardassian colonists and the Maquis. The final piece, queries, allows us to examine this knowledge base and ask questions on what Prolog can infer from this knowledge. For the above example we could query whether the price of peace is indeed high, which should follow directly from the semantics of the rules and facts that we have described.&lt;&#x2F;p&gt;
+&lt;p&gt;Given that we load in the knowledge base consisting of the above-mentioned fact and rule, the query: &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;?-  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;priceOfPeace&lt;&#x2F;span&gt;&lt;span&gt;(high).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;that asks whether the price of peace is high, will return &lt;code&gt;true&lt;&#x2F;code&gt; indicating that this is indeed the case. Instead if we ask whether the price of peace is low, using the query:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;?-  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;priceOfPeace&lt;&#x2F;span&gt;&lt;span&gt;(low).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;the result will be &lt;code&gt;false&lt;&#x2F;code&gt; indicating this is not the case.&lt;&#x2F;p&gt;
+&lt;p&gt;We can also ask more open ended questions using variables. Variables are written by starting with a capitalized letter (or an underscore), such as &lt;code&gt;X&lt;&#x2F;code&gt;. These variables could be used to write queries with unknowns. The query: &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;?-  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;priceOfPeace&lt;&#x2F;span&gt;&lt;span&gt;(X).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;will give us the result: &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;X = high
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Which again is what would directly follow from the facts and the rules. What Prolog does with variables is to try to &amp;quot;unify&amp;quot; them with known values that match (or other variables). In this case from the knowledge base we have given it, it unifies it with the value of &lt;code&gt;high&lt;&#x2F;code&gt;. &lt;&#x2F;p&gt;
+&lt;p&gt;From the basic elements of facts, rules and queries Prolog is able to represent and answer problems in many domains. This is also shows off the feature of a logical programming language, such as Prolog, that make it different compared to many other programming languages. Instead of telling the program what to do, the program becomes a description of the domain, over which queries are answered to solve the overall goal. &lt;&#x2F;p&gt;
+&lt;p&gt;Beyond the above basics, Prolog has many features to support the description of more complicated domains. Here we only list a few that helps us to convey our translation of Quark&#x27;s reasoning into Prolog. &lt;&#x2F;p&gt;
+&lt;p&gt;One such feature is the use variables within the rules themselves. The rule &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;acquirePeace&lt;&#x2F;span&gt;&lt;span&gt;(X) :- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;priceOfPeace&lt;&#x2F;span&gt;&lt;span&gt;(X).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;indicates that the price of acquiring peace depends on the price of peace.&lt;&#x2F;p&gt;
+&lt;p&gt;The rule &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;priceOfPeace&lt;&#x2F;span&gt;&lt;span&gt;(low)  :- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(cardassians), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(maquis).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;shows off the logical operator &lt;strong&gt;and&lt;&#x2F;strong&gt;, meaning that the price of peace is low if both the Cardassians and the Maquis have the advantage. &lt;&#x2F;p&gt;
+&lt;p&gt;The rule&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;priceOfPeace&lt;&#x2F;span&gt;&lt;span&gt;(low)  :- \+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(cardassians), \+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(maquis).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;shows off the logical &lt;strong&gt;not&lt;&#x2F;strong&gt;, denoted by the &#x27;+&#x27; symbol, which states that the price of peace is also low if neither the Cardassians nor the Maquis have the advantage.&lt;&#x2F;p&gt;
+&lt;p&gt;Finally, much like in other languages, comments for the code can also be written. This is done by prefacing a line with &amp;quot;%%&amp;quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;Now if we put every element together to use Prolog to describe Quarks scenario, a possible knowledge base is as follows:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;%% Rules
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;acquirePeace&lt;&#x2F;span&gt;&lt;span&gt;(X)  :- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;priceOfPeace&lt;&#x2F;span&gt;&lt;span&gt;(X).
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;priceOfPeace&lt;&#x2F;span&gt;&lt;span&gt;(low)  :- \+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(cardassians), \+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(maquis).
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;priceOfPeace&lt;&#x2F;span&gt;&lt;span&gt;(low)  :- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(cardassians), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(maquis).
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;priceOfPeace&lt;&#x2F;span&gt;&lt;span&gt;(high) :- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(cardassians).
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;priceOfPeace&lt;&#x2F;span&gt;&lt;span&gt;(low) :- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(maquis).
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(cardassians)  :- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;weapons&lt;&#x2F;span&gt;&lt;span&gt;(cardassians), \+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;weapons&lt;&#x2F;span&gt;&lt;span&gt;(maquis).
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(maquis)  :- \+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;weapons&lt;&#x2F;span&gt;&lt;span&gt;(cardassians), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;weapons&lt;&#x2F;span&gt;&lt;span&gt;(maquis).
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;%% Facts
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;weapons&lt;&#x2F;span&gt;&lt;span&gt;(cardassians).
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;weapons&lt;&#x2F;span&gt;&lt;span&gt;(maquis).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In the overall knowledge base, the logic of Quark&#x27;s reasoning is broken down into a number of rules and a pair of facts. &lt;&#x2F;p&gt;
+&lt;p&gt;The rules state that advantage of either side, the Cardassians settlers or the Maquis, is decided by one side having weapons while the other side has not. The price of peace is in turn dependent on who has the advantage. In this formalisation the price of peace is only high if Cardassians have the advantage. Finally the price of acquiring peace is dependent solely on the price of peace.&lt;&#x2F;p&gt;
+&lt;p&gt;The facts for this scenario is that both the Cardassian settlers and the Maquis have weapons. &lt;&#x2F;p&gt;
+&lt;p&gt;With this knowledge base describing Quark&#x27;s reasoning process the query to see for what price we can aquire peace:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;?-  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;acquirePeace&lt;&#x2F;span&gt;&lt;span&gt;(X).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;will indeed return&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;X = low
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;indicating that acquiring peace can be done at a low price. &lt;&#x2F;p&gt;
+&lt;p&gt;Going a bit beyond this query, if we would further want to test the logic of Quark&#x27;s scenario, we can also inquire about other information.&lt;&#x2F;p&gt;
+&lt;p&gt;For example if we would ask for the price of peace:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;?-  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;priceOfPeace&lt;&#x2F;span&gt;&lt;span&gt;(X).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;we would also unsurprisingly get &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;X = low
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;as with the rules defined in our knowledge base these values are intertwined. &lt;&#x2F;p&gt;
+&lt;p&gt;We can also ask for who has the advantage:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;?-  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;advantage&lt;&#x2F;span&gt;&lt;span&gt;(X).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;which will return: &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;which is completely in line with the scenario that noone has the advantage. &lt;&#x2F;p&gt;
+&lt;p&gt;We can also ask who has weapons, the query of:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;?-  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;weapons&lt;&#x2F;span&gt;&lt;span&gt;(X).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;gives us the answer&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;X = cardassians
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;... but wait, this can not be right! Did we not state in the knowledge base that both the Cardassian colonists and the Maquis have weapons? Prolog can actually return mutliple answers, if they exist. In &lt;a href=&quot;http:&#x2F;&#x2F;www.swi-prolog.org&#x2F;&quot;&gt;SWI-Prolog&lt;&#x2F;a&gt; this can be done by pressing semicolon (&lt;code&gt;;&lt;&#x2F;code&gt;) after an answer, in which case another answers is returned, if it exists or simply false otherwise. By pressing &lt;code&gt;;&lt;&#x2F;code&gt; once after the first answer we will see a total output such as:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;X = cardassians &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;X = maquis.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Hopefully Sakonna would also be quite convinced with the logic of Prolog, but just to be absolutely sure, lets examine some scenario&#x27;s where the facts of the scenario are changed. In such cases the rules should still be applied in ways that we would expect.&lt;&#x2F;p&gt;
+&lt;p&gt;Suppose that our only fact now is that only the cardassians colonists have weapons, while rules remain the same. Giving the query for knowing the price of acquiring peace:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;?-  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;acquirePeace&lt;&#x2F;span&gt;&lt;span&gt;(X).
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;will now return:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;pro&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-pro &quot;&gt;&lt;code class=&quot;language-pro&quot; data-lang=&quot;pro&quot;&gt;&lt;span&gt;X = high 
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Hopefully, much like Quark&#x27;s application of the Third Rule of Acquisition, this intro would have been enough to convince Sakonna of the logic of purchasing peace at the lowest possible price. Similarly, I hope that as a reader, this article gave some insight to the usefulness of Prolog in such scenarios. Next time, you are dealing with a problem domain, that would easily match to a similar scenario of rules, facts and queries, give Prolog a try. It is, after all, a very logical choice.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

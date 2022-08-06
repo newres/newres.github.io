@@ -142,7 +142,7 @@
 <!-- To very briefly explain what happens here is to note that Pharo works by passing messages. Here to `go` message was to `ProfStef` to indicate that we want to kick off the tutorial. `ProfStef`  has a method named `go` implemented that defines how to handle this message.  -->
 <p>Now given the above description of Pharo, we want to apply it by creating a representation of what happens in the intro song in &quot;The Fresh Prince of Bel-Air&quot; by sending messages. In particular we want to represent the character of &quot;Will Smith&quot; in the intro as an object and the changes in location and activity based on the intro song. </p>
 <p>So let's start off by creating a new Object representing Will. We aim to do this by instantiating a class called <code>FPWillSmith</code> by typing the following into the Playground.</p>
-<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>will </span><span style="color:#bf616a;">:</span><span>= FPWillSmith new.</span><span>
+<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>will </span><span style="color:#bf616a;">:</span><span>= FPWillSmith new.
 </span></code></pre>
 <p>Here we want to send the <em>New</em> message to the class <code>FPWillSmith</code> to create a new object of this class and assign it to the variable <code>will</code>. Let us quickly go over the syntax elements for this statement. </p>
 <p>The operator <code>:=</code> is used in Pharo for assignment, and in this case to assign our new object instance to the <code>will</code> variable. We also send to class <code>FPWillSmith</code>, functioning as the receiver, the message <code>new</code> to create a new instance of it. Messages like this that are sent to an object without any additional information are called <code>unary</code> messages. These are always in the form of <code>receiver message</code>. Lastly, statements in Pharo are separated/ended by a <code>.</code>. This can be omitted in many cases but we keep it around in our examples to show its use.</p>
@@ -173,15 +173,15 @@
 </figure>
 <!-- {{< figure src="/img/post/2021/pharo-prince/classcreation.png" title="We define a class FPWillSmith, to ensure that every object of this class holds some data about the object's name, location and activity." >}} -->
 <p>A few things to note for this code in this picture: </p>
-<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>Object </span><span style="color:#bf616a;">subclass:</span><span> #FPWillSmith</span><span>
-</span><span>       </span><span style="color:#bf616a;">instanceVariableNames: </span><span style="color:#d08770;">&#39;name </span><span>location activity</span><span style="color:#d08770;">&#39; </span><span>
-</span><span>       </span><span style="color:#bf616a;">classVariableNames: </span><span style="color:#d08770;">&#39;&#39;</span><span style="color:#d08770;">
-</span><span>       </span><span style="color:#bf616a;">category:</span><span> FreshPrinceDemo</span><span>
+<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>Object </span><span style="color:#bf616a;">subclass:</span><span> #FPWillSmith
+</span><span>       </span><span style="color:#bf616a;">instanceVariableNames: </span><span style="color:#d08770;">&#39;name </span><span>location activity</span><span style="color:#d08770;">&#39; 
+</span><span>       </span><span style="color:#bf616a;">classVariableNames: </span><span style="color:#d08770;">&#39;&#39;
+</span><span>       </span><span style="color:#bf616a;">category:</span><span> FreshPrinceDemo
 </span></code></pre>
 <p>Much like every other part of Pharo, the creation of a new class also happens through message passing. Here a keyword message is sent to the <code>Object</code> class to define our new class. Unlike unary messages, these messages use one or more keywords to send additional object information along with the message. These are defined in the form of <code>receiver keyword1: object1 keyword2: object2 ...</code>  where the keyword and object pairs make up the message to the receiving object.</p>
 <p>We will go over the objects sent in the message one by one. The <code>subclass</code> part of the message defines the name of our new class <code>FPWillSmith</code>. The <code>#</code> in front of <code>FPWillSmith</code> indicates a symbol that is globally unique, unlike a string, which is part of the requirement for this subclass message. Next is defining the name of the instance variables using the keyword <code>instanceVariablesNames</code>, that will represent the elements of an instance of <code>FPWillSmith</code> that we would like to use. There are also <code>classVariableNames</code> that describe such elements for the class itself as opposed to the instances, but here we do not define any. Finally, there is a <code>category</code> defined as <code>FreshPrinceDemo</code>, that is essentially the name of the package that we are currently defining.</p>
 <p>Now that we have created our <code>FPWillSmith</code> class, we can now take our original statement:</p>
-<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>will </span><span style="color:#bf616a;">:</span><span>= FPWillSmith new.</span><span>
+<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>will </span><span style="color:#bf616a;">:</span><span>= FPWillSmith new.
 </span></code></pre>
 <p>and execute it, by right clicking it and selecting 'Do It', or using a shortcut such as <code>CTRL+D</code>. As you can see, we now don’t receive errors.</p>
 <p>What we would like to do is to double check, whether the object we created is what we want. Pharo has a really neat feature for inspecting <em>any</em> object. We can right-click this statement in the playground and select 'Inspect It' from the menu, or using the shortcut <code>CTRL+I</code> for giving us the object inspector. This should give us a window such as this:</p>
@@ -213,10 +213,10 @@
 <p>The system browser can be used to find, organize and edit classes and methods for <em>all</em> packages within the Pharo image. It is divided up into four columns. The leftmost column lists the packages. We can use this to filter for our new package named 'FreshPrinceDemo'. The second column on the left details the classes in the selected package. For our new package we should only have one class here: <code>FPWillSmith</code>. The third column lists all the <em>protocols</em> of the selected class. Protocols are a way to group together related methods, which makes for easier browsing and search. Finally the fourth column from the left lists all the methods, for the given class or selected protocol. </p>
 <p>The panel below these four columns is also very interesting. If one selects a package, it shows in a tab a template for defining a class. If one selects a class, it shows a tab for a template on how to define new methods. It also has a tab for the class definition itself .</p>
 <p>In order to proceed let's use the method definition template to define our new constructor, as follows:</p>
-<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>initialize</span><span>
-</span><span>	name </span><span style="color:#bf616a;">:</span><span>= </span><span style="color:#d08770;">&#39;Will </span><span>Smith</span><span style="color:#d08770;">&#39;.</span><span style="color:#d08770;">
-</span><span>	location </span><span style="color:#bf616a;">:</span><span>= </span><span style="color:#d08770;">&#39;West </span><span>Philadelphia playground</span><span style="color:#d08770;">&#39;.</span><span style="color:#d08770;">
-</span><span>	activity </span><span style="color:#bf616a;">:</span><span>= </span><span style="color:#d08770;">&#39;Playing </span><span>basketball</span><span style="color:#d08770;">&#39;.</span><span style="color:#d08770;">
+<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>initialize
+</span><span>	name </span><span style="color:#bf616a;">:</span><span>= </span><span style="color:#d08770;">&#39;Will </span><span>Smith</span><span style="color:#d08770;">&#39;.
+</span><span>	location </span><span style="color:#bf616a;">:</span><span>= </span><span style="color:#d08770;">&#39;West </span><span>Philadelphia playground</span><span style="color:#d08770;">&#39;.
+</span><span>	activity </span><span style="color:#bf616a;">:</span><span>= </span><span style="color:#d08770;">&#39;Playing </span><span>basketball</span><span style="color:#d08770;">&#39;.
 </span></code></pre>
 <p>which we can fill into the new instance side method window below, instead of the template code.</p>
 <p>What this definition does is to create a constructor, that sets the values for name, location and activity to values that makes sense, given where Will is and what he is doing in the beginning of the &quot;The Fresh Prince of Bel-Air&quot; intro song.</p>
@@ -247,8 +247,8 @@
 <!-- {{< figure src="/img/post/2021/pharo-prince/inspectorafterconstructor.png" title="Inspecting the new instance after saving our new constructor." >}} -->
 <p>Now the <code>will</code> representation of the character has the right name, location and activity, but we want to express a bit more of the intro song. We will do this by sending messages to the <code>will</code> object after which we expect that the location and the activity changes accordingly.</p>
 <p>Let's assume we instead have the following in the Playground:</p>
-<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>will </span><span style="color:#bf616a;">:</span><span>= FPWillSmith new.</span><span>
-</span><span>will getsInTrouble.</span><span>
+<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>will </span><span style="color:#bf616a;">:</span><span>= FPWillSmith new.
+</span><span>will getsInTrouble.
 </span></code></pre>
 <p>As we can now expect, executing ('Doing It') of the second statement will not go well as we did not yet define a way for the object to handle this message. In fact this message will bring up the debugger because the object does not know how to handle the message <code>getsInTrouble</code>. </p>
 <figure class=centeredfig>
@@ -263,12 +263,12 @@
 </figure>
 <!-- {{< figure src="/img/post/2021/pharo-prince/getsintrouble.png" title="We go into the Debugger when the object can not handle the getsInTrouble message." >}} -->
 <p>We can fix this by defining a method, named <code>getsInTrouble</code>. We can even do this from the debugger by clicking on the <code>Create</code> button at the top of the debugger to define <code>getsInTrouble</code> method for the <code>FPWillSmith</code> class. After getting a popup for picking a protocol, which we do not need to do for this tutorial, we get the window showing a placeholder definition for the method:</p>
-<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>getsInTrouble</span><span>
-</span><span>	</span><span style="color:#b48ead;">self</span><span> shouldBeImplemented.</span><span>
+<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>getsInTrouble
+</span><span>	</span><span style="color:#b48ead;">self</span><span> shouldBeImplemented.
 </span></code></pre>
 <p>We want to replace this with the following definition, that updates the activity of the object:</p>
-<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>getsInTrouble</span><span>
-</span><span>	activity </span><span style="color:#bf616a;">:</span><span>= </span><span style="color:#d08770;">&#39;In </span><span>trouble</span><span style="color:#d08770;">&#39;.</span><span style="color:#d08770;">
+<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>getsInTrouble
+</span><span>	activity </span><span style="color:#bf616a;">:</span><span>= </span><span style="color:#d08770;">&#39;In </span><span>trouble</span><span style="color:#d08770;">&#39;.
 </span></code></pre>
 <figure class=centeredfig>
     <img src=proceed.png>
@@ -295,15 +295,15 @@
 </figure>
 <!-- {{< figure src="/img/post/2021/pharo-prince/introubleinspected.png" title="The activity now properly updates on the object after receiving the getsInTrouble message." >}} -->
 <p>For the final piece we will define a method for sending the object to aunt and uncle, with the following definition:</p>
-<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>sentToAuntAndUncle</span><span>
-</span><span>	activity </span><span style="color:#bf616a;">:</span><span>= </span><span style="color:#d08770;">&#39;Being </span><span>the Prince of Bel-Air</span><span style="color:#d08770;">&#39;.</span><span style="color:#d08770;">
-</span><span>	location </span><span style="color:#bf616a;">:</span><span>= </span><span style="color:#d08770;">&#39;Bel-Air&#39;.</span><span style="color:#d08770;">
+<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>sentToAuntAndUncle
+</span><span>	activity </span><span style="color:#bf616a;">:</span><span>= </span><span style="color:#d08770;">&#39;Being </span><span>the Prince of Bel-Air</span><span style="color:#d08770;">&#39;.
+</span><span>	location </span><span style="color:#bf616a;">:</span><span>= </span><span style="color:#d08770;">&#39;Bel-Air&#39;.
 </span></code></pre>
 <p>If one follows along, we will leave it up to you on where to define this method from, the debugger or the system browser. </p>
 <p>Once we have defined it we can put the following in the Playground:</p>
-<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>will </span><span style="color:#bf616a;">:</span><span>= FPWillSmith new.</span><span>
-</span><span>will getsInTrouble.</span><span>
-</span><span>will sentToAuntAndUncle.</span><span>
+<pre data-lang="smalltalk" style="background-color:#2b303b;color:#c0c5ce;" class="language-smalltalk "><code class="language-smalltalk" data-lang="smalltalk"><span>will </span><span style="color:#bf616a;">:</span><span>= FPWillSmith new.
+</span><span>will getsInTrouble.
+</span><span>will sentToAuntAndUncle.
 </span></code></pre>
 <p>and inspect our object:</p>
 <figure class=centeredfig>

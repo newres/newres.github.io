@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title> - Raku</title>
+	<link href="https://www.newresalhaider.com/tags/raku/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.newresalhaider.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2022-08-06T00:00:00+00:00</updated>
+	<id>https://www.newresalhaider.com/tags/raku/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Raku Parrot</title>
+		<published>2022-08-06T00:00:00+00:00</published>
+		<updated>2022-08-06T00:00:00+00:00</updated>
+		<link rel="alternate" href="https://www.newresalhaider.com/post/rakuparrot/" type="text/html"/>
+		<id>https://www.newresalhaider.com/post/rakuparrot/</id>
+		<content type="html">&lt;p&gt;One of the programming languages that I have stumbled upon not too long ago is &lt;a href=&quot;https:&#x2F;&#x2F;www.raku.org&#x2F;&quot;&gt;Raku&lt;&#x2F;a&gt;. This language, which was previously known as Perl 6, is chock-full of really cool features. It has support for programming in both object oriented and functional paradigms, optional gradual typing, a nice story for async programming and more. &lt;&#x2F;p&gt;
+&lt;p&gt;A really nice feature of Raku is that &lt;a href=&quot;https:&#x2F;&#x2F;docs.raku.org&#x2F;language&#x2F;grammars&quot;&gt;Grammars&lt;&#x2F;a&gt; are a core part of the language. Grammars allow for a great way to interpret textual information. When programming there are a lot of use cases where a specific set of patterns need to be recognized and used from text. An interpreter for a format such as &lt;a href=&quot;https:&#x2F;&#x2F;www.json.org&quot;&gt;JSON&lt;&#x2F;a&gt; is a good example. From the text version of a JSON file elements such as arrays, objects, numbers, strings, etc. needs to be recognized. In addition a representation of them needs to be built for manipulation and use within a programming language. &lt;&#x2F;p&gt;
+&lt;p&gt;In order to demonstrate this grammar feature of Raku, we are going to implement a small program to parrot phrases back to us. The grammar inside this program describes short three word (sometimes a bit irregular) sentences like &amp;quot;I like sushi.&amp;quot; or &amp;quot;They eat pear.&amp;quot;. Our program will parrot these phrases back to us twice, first just as text and the second time with certain words being replaced by emojis. &lt;&#x2F;p&gt;
+&lt;p&gt;To give a preview of what this code will do, if we call it from the command line given the input: &lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;I like sushi.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;we get back:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;I like sushi.
+&lt;&#x2F;span&gt;&lt;span&gt;I like 🍣.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;if we would use an input like: &lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;They eat pear.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;we get back:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;They eat pear.
+&lt;&#x2F;span&gt;&lt;span&gt;They eat 🍐.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In cases where the our parroting program does not understand what we enter, for example for the sentence: &lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;This is too complex!
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;we get the phrase back:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Squaaawk can not understand!
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To show how this is implemented, first we will list the full code in Raku and we will go over its elements piece by piece. If one wants to follow along &lt;a href=&quot;https:&#x2F;&#x2F;replit.com&#x2F;languages&#x2F;raku&quot;&gt;Replit&lt;&#x2F;a&gt; offers a way to see the Raku language in action without any installation. For a local installation the &lt;a href=&quot;https:&#x2F;&#x2F;rakudo.org&#x2F;downloads&quot;&gt;Rakudo&lt;&#x2F;a&gt; implementation or the &lt;a href=&quot;https:&#x2F;&#x2F;rakudo.org&#x2F;star&quot;&gt;Rakudo Star bundle&lt;&#x2F;a&gt; are great starting points. &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;raku&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-raku &quot;&gt;&lt;code class=&quot;language-raku&quot; data-lang=&quot;raku&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;grammar ParrotHearing&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;rule&lt;&#x2F;span&gt;&lt;span&gt; TOP { &amp;lt;personalPronoun&amp;gt; &amp;lt;parrotVerb&amp;gt; &amp;lt;parrotNoun&amp;gt;&amp;lt;ending&amp;gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;token&lt;&#x2F;span&gt;&lt;span&gt; personalPronoun { &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;I&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; | &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;You&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; | &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;He&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; | &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;She&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; | &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;It&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; | &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;We&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; | &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;They&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;| &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Me&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; | &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Him&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; | &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Her&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; | &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Us&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; | &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Them&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; }
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;token&lt;&#x2F;span&gt;&lt;span&gt; parrotVerb { \w+ }
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;token&lt;&#x2F;span&gt;&lt;span&gt; parrotNoun { \w+ }
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;token&lt;&#x2F;span&gt;&lt;span&gt; ending { &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; | &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; | &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;?&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;sub &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;convertToEmoji&lt;&#x2F;span&gt;&lt;span&gt;($&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;string&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;my &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;parsedValue&lt;&#x2F;span&gt;&lt;span&gt; = uniparse($&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;string&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;uc&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; ($&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;parsedValue&lt;&#x2F;span&gt;&lt;span&gt;) {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;parsedValue&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt; {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;string&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;EmojiActions&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;method &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;TOP&lt;&#x2F;span&gt;&lt;span&gt; ($&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;&#x2F;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;        my $personalPronoun = $&amp;lt;personalPronoun&amp;gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;        my $parrotVerb= $&amp;lt;parrotVerb&amp;gt;.made;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;        my $parrotNoun= $&amp;lt;parrotNoun&amp;gt;.made;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;        my $ending= $&amp;lt;ending&amp;gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;        make ( &amp;quot;$personalPronoun $parrotVerb $parrotNoun$ending&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;    }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;    method parrotVerb ($&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;       make (convertToEmoji($&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;&#x2F;))
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;    }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;    method parrotNoun($&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;       make (convertToEmoji($&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;&#x2F;))
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;    }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;sub MAIN($name) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;    my $parrotParsed =  ParrotHearing.parse($name.Str, actions =&amp;gt; EmojiActions);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;    if ($parrotParsed) {say $parrotParsed.Str;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;                       say $parrotParsed.made.Str}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;    else {say &amp;quot;Squaaawk can not understand!&amp;quot;};
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The first part of the implementation is defining the Grammar of the language that the parrot hears that we call ParrotHearing. Grammars in Raku are a way to organize &lt;a href=&quot;https:&#x2F;&#x2F;docs.raku.org&#x2F;language&#x2F;regexes&quot;&gt;Regular Expressions (Regexes)&lt;&#x2F;a&gt;. Without going into the &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Regular_expression#Formal_language_theory&quot;&gt;formal definition of Regular Expressions&lt;&#x2F;a&gt; they can be used to define patterns of characters in text. These patterns can be utilized in various way, such as searching, replacing and transforming text. &lt;&#x2F;p&gt;
+&lt;p&gt;The basic elements of the grammar are regex objects. These contain the regex patterns that we use. In Raku these regular expressions are defined with their own domain specific language. For example one regex object our grammar will be using is &lt;code&gt;{ \w+ }&lt;&#x2F;code&gt;. The pattern in this object, &lt;code&gt;\w+&lt;&#x2F;code&gt;,  matches a single word character, consisting of  letters, digits or underscores, one or more times. For example if we have the text &lt;code&gt;&amp;quot;These are all w0rds_ &amp;quot;&lt;&#x2F;code&gt; it will match four times. &lt;&#x2F;p&gt;
+&lt;p&gt;Another regex object that we will use is &lt;code&gt;{ &amp;quot;I&amp;quot; | &amp;quot;You&amp;quot; | &amp;quot;He&amp;quot; | &amp;quot;She&amp;quot; | &amp;quot;It&amp;quot; | &amp;quot;We&amp;quot; | &amp;quot;They&amp;quot;| &amp;quot;Me&amp;quot; | &amp;quot;Him&amp;quot; | &amp;quot;Her&amp;quot; | &amp;quot;Us&amp;quot; | &amp;quot;Them&amp;quot; }&lt;&#x2F;code&gt; which contains a pattern that will match any of the listed personal pronouns that is capitalized. This means that it will match the text of &amp;quot;You&amp;quot;, &amp;quot;They&amp;quot; and &amp;quot;Them&amp;quot;, but not &amp;quot;i&amp;quot;, &amp;quot;apple&amp;quot; or &amp;quot;them&amp;quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;Next let&#x27;s take a look at how the ParrotHearing grammar is organizing the regular expressions. The sentences that that this grammar defines are very basic: they have the form of a personal pronoun, followed by verb, a noun and an ending. In fact, the verbs and nouns that the Parrot accepts are very simplified: they are the pattern &lt;code&gt;\w+&lt;&#x2F;code&gt; that we described above that would match most words. The personal pronouns are those that the regex object &lt;code&gt;{ &amp;quot;I&amp;quot; | &amp;quot;You&amp;quot; | &amp;quot;He&amp;quot; | &amp;quot;She&amp;quot; | &amp;quot;It&amp;quot; | &amp;quot;We&amp;quot; | &amp;quot;They&amp;quot;| &amp;quot;Me&amp;quot; | &amp;quot;Him&amp;quot; | &amp;quot;Her&amp;quot; | &amp;quot;Us&amp;quot; | &amp;quot;Them&amp;quot; }&lt;&#x2F;code&gt; will match while the ending is one of the &lt;code&gt;.&lt;&#x2F;code&gt;, &lt;code&gt;!&lt;&#x2F;code&gt; and &lt;code&gt;?&lt;&#x2F;code&gt; characters.&lt;&#x2F;p&gt;
+&lt;p&gt;The final piece is a function that replaces the nouns and verbs in a sentence with the emoji equivalent if it can. If no replacement can be found it leaves the text unchanged. When parsing we can use this function as part of an action to perform. This allows us to tie everything together in our &lt;code&gt;MAIN&lt;&#x2F;code&gt; function (also called a subroutine in Raku). This parses in the text from the command line, prints the text twice (can be done by the &lt;code&gt;say&lt;&#x2F;code&gt; function in Raku). The first time it will print the text and the second time it will print the text with the emoji replacements. In the case when it can not parse the input it will print &lt;code&gt;&amp;quot;Squaaawk can not understand!&amp;quot;&lt;&#x2F;code&gt; instead.&lt;&#x2F;p&gt;
+&lt;p&gt;To run everything, if the code is in a file called main.raku one can call &lt;code&gt;raku main.raku &amp;quot;I love sushi.&amp;quot;&lt;&#x2F;code&gt; or some other sentence to get started. Feel free to give it a try on &lt;a href=&quot;https:&#x2F;&#x2F;replit.com&#x2F;languages&#x2F;raku&quot;&gt;Replit&lt;&#x2F;a&gt; to see what the code parrots back!&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title> - introduction</title>
+	<link href="https://www.newresalhaider.com/tags/introduction/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.newresalhaider.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2018-01-14T00:00:00+00:00</updated>
+	<id>https://www.newresalhaider.com/tags/introduction/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Introduction</title>
+		<published>2018-01-14T00:00:00+00:00</published>
+		<updated>2018-01-14T00:00:00+00:00</updated>
+		<link rel="alternate" href="https://www.newresalhaider.com/post/introduction/" type="text/html"/>
+		<id>https://www.newresalhaider.com/post/introduction/</id>
+		<content type="html">&lt;p&gt;Welcome to the first post on my blog on which hopefully many will follow. My intention is to write about knowledge representation, reasoning, AI and coding, in an easily digestible but in depth-way.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

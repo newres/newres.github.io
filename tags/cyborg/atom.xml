@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title> - Cyborg</title>
+	<link href="https://www.newresalhaider.com/tags/cyborg/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.newresalhaider.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2021-01-06T00:00:00+00:00</updated>
+	<id>https://www.newresalhaider.com/tags/cyborg/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Meditations in your Pocket</title>
+		<published>2020-12-28T00:00:00+00:00</published>
+		<updated>2021-01-06T00:00:00+00:00</updated>
+		<link rel="alternate" href="https://www.newresalhaider.com/post/meditations/" type="text/html"/>
+		<id>https://www.newresalhaider.com/post/meditations/</id>
+		<content type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Meditations&quot;&gt;Meditations&lt;&#x2F;a&gt; are a series of notes that the Roman emperor &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Marcus_Aurelius&quot;&gt;Marcus Aurelius&lt;&#x2F;a&gt;
+wrote for guidance and self-improvement. While it is likely that the emperor wrote them purely for his own benefit, they have been published after his death and contain elements of &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Stoicism&quot;&gt;Stoic philosophy&lt;&#x2F;a&gt; that many people have consulted since.&lt;&#x2F;p&gt;
+&lt;p&gt;One way achieve a bit of self-improvement, coding-wise, is to pick a small project to do with a new set of tools. In particular, I have found the &lt;a href=&quot;https:&#x2F;&#x2F;flutter.dev&#x2F;&quot;&gt;Flutter&lt;&#x2F;a&gt; framework for creating mobile apps very interesting. Unfortunately I did not have the opportunity to explore Flutter much beyond running some &lt;a href=&quot;https:&#x2F;&#x2F;flutter.github.io&#x2F;samples&#x2F;#&quot;&gt;sample apps&lt;&#x2F;a&gt; previously. To bring a change to this I thought it would be a nice small project to create a small app for browsing the text of &amp;quot;Meditations&amp;quot; in Flutter. I aim to show what I have built in this article, organize my thoughts, and hopefully help others unfamiliar with Flutter to get a small glimpse of what it can do.&lt;&#x2F;p&gt;
+&lt;p&gt;To give a preview of the implemented functionality, here is an animation of the functionality of the app:&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=meditationsapp.gif&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;Navigating the text of Meditations in the app running on an Android emulator.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2020&#x2F;meditations&#x2F;meditationsapp.gif&quot; title=&quot;Navigating the text of Meditations in the app running on an Android emulator.&quot; &gt;}} --&gt;
+&lt;p&gt;The full code of the application presented in this article is &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;meditations&quot;&gt;available&lt;&#x2F;a&gt; to explore. If one wants to follow along by running the code, or has a similar project in mind, the first step is to install &lt;a href=&quot;https:&#x2F;&#x2F;flutter.dev&#x2F;&quot;&gt;Flutter&lt;&#x2F;a&gt;. There are quite a few dependencies needed for mobile development, but thankfully there is some excellent &lt;a href=&quot;https:&#x2F;&#x2F;flutter.dev&#x2F;docs&quot;&gt;documentation&lt;&#x2F;a&gt; available on how to get started from the official Flutter site. For code editing I highly recommend &lt;a href=&quot;https:&#x2F;&#x2F;code.visualstudio.com&#x2F;&quot;&gt;Visual Studio Code&lt;&#x2F;a&gt; with the Flutter plugin, but other options are also &lt;a href=&quot;https:&#x2F;&#x2F;flutter.dev&#x2F;docs&#x2F;get-started&#x2F;editor?tab=androidstudio&quot;&gt;available&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;If everything is installed correctly the &lt;code&gt;flutter&lt;&#x2F;code&gt; command line tool will be available. For this project I intended to create an Android app, but the framework allows for app development for iOS (Apple) phones, as well as desktop and web targets. For Android development, aside from the development toolchain, it is probably good idea to have either an emulator or a device for Android development setup and connected. This allows us to the result of the code up and running. In fact, on of the biggest draws of the Flutter framework is &lt;a href=&quot;https:&#x2F;&#x2F;flutter.dev&#x2F;docs&#x2F;development&#x2F;tools&#x2F;hot-reload&quot;&gt;Hot Reload&lt;&#x2F;a&gt;, which allows on to make changes and quickly see the results in the running app, without reinstalling everything from scratch.&lt;&#x2F;p&gt;
+&lt;p&gt;To get started with a fresh project, the command &lt;code&gt;flutter create&lt;&#x2F;code&gt; will create a directory with all the necessary files, while &lt;code&gt;flutter run&lt;&#x2F;code&gt; will ensure that the project is run on the emulator or connected device for testing, debugging and seeing our work. For the &amp;quot;Meditations&amp;quot; app, we could start by creating a new project named &lt;code&gt;Meditations&lt;&#x2F;code&gt; and making changes from there on.&lt;&#x2F;p&gt;
+&lt;p&gt;The default generated project will create a bunch of files and directories required for an example app, which is a very small application that has a single button and a screen that shows how many times that button has been pressed (see the &lt;a href=&quot;https:&#x2F;&#x2F;flutter.dev&#x2F;docs&#x2F;get-started&#x2F;test-drive?tab=terminal&quot;&gt;test drive&lt;&#x2F;a&gt; part of the Flutter docs). The core part are the files &lt;code&gt;main.dart&lt;&#x2F;code&gt; and &lt;code&gt;widget_test.dart&lt;&#x2F;code&gt;, in the &lt;code&gt;lib&lt;&#x2F;code&gt; and &lt;code&gt;test&lt;&#x2F;code&gt; directories respectively. The former is responsible for defining and running the app, while the later exists for testing the functionality.&lt;&#x2F;p&gt;
+&lt;p&gt;In order to get the Meditations app up and running, we will have four files in total. Similarly to the default project we have a &lt;code&gt;main.dart&lt;&#x2F;code&gt; and a &lt;code&gt;widget_test.dart&lt;&#x2F;code&gt; for defining and testing our app, but with different contents. In addition, we also have a &lt;code&gt;meditations.dart&lt;&#x2F;code&gt; file where we define how to search and navigate the text of the Meditations, as well as the file &lt;code&gt;meditations_test.dart&lt;&#x2F;code&gt; to test this search and navigation functionality. &lt;&#x2F;p&gt;
+&lt;p&gt;Although we do not have to go full &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Test-driven_development&quot;&gt;Test Driven Development (TDD)&lt;&#x2F;a&gt; for such a small demo application, it is a good idea and practice to start off writing some tests to define what behavior we want to show.&lt;&#x2F;p&gt;
+&lt;p&gt;We first start describing our application by walking through (some of) the contents of &lt;code&gt;meditations_test.dart&lt;&#x2F;code&gt;. It also gives us an opportunity to ease us into the &lt;a href=&quot;https:&#x2F;&#x2F;dart.dev&#x2F;&quot;&gt;Dart language&lt;&#x2F;a&gt; that the Flutter framework uses, in case if the reader is unfamiliar with it. It would be too much for this short article to fully explain the Dart language, for which there are some excellent &lt;a href=&quot;https:&#x2F;&#x2F;dart.dev&#x2F;guides&quot;&gt;guides&lt;&#x2F;a&gt;, but I hope I can make the functionality clear enough, even for readers completely new to it.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;package:meditations&#x2F;mediations.dart&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;package:test&#x2F;test.dart&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The first portion is importing elements that we are going to test, to be defined in the &lt;code&gt;mediations.dart&lt;&#x2F;code&gt; file, and functionality for defining tests, which is in the &lt;code&gt;test&lt;&#x2F;code&gt; package.&lt;&#x2F;p&gt;
+&lt;p&gt;Next up are the tests that are in the &lt;code&gt;main&lt;&#x2F;code&gt; method. As in some other languages, the main method is where the app execution starts. In the case of testing, the tests within the &#x27;main&#x27; method are executed. The tests themselves contain information about the purpose of the test, the returned value (or values) of the functionality under test and the expected value of what we believe should be returned.&lt;&#x2F;p&gt;
+&lt;p&gt;Below are some examples of such tests:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Checking the existance of a Book that exists.&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;existBook&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Checking the existance of a Book that can not exist.&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;existBook&lt;&#x2F;span&gt;&lt;span&gt;(-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Checking the existance of a Book that does not exist.&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;existBook&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;40&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Checking the existance of a Book Section that exists.&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;existBookSection&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Checking the existance of a Book Section that can not exist.&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;existBookSection&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, -&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Checking the existance of a Book Section in a non-existent Book.&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;existBookSection&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;40&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Checking the existance of a Book Section that does not exist in an existing Book.&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;      () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;existBookSection&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;40&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In order to understand what these tests want to achieve, first we need to dive deeper about what functionality that is implemented in &lt;code&gt;Meditations.dart&lt;&#x2F;code&gt; which we intend to test. The purpose of it is to easily find a particular part in the text of &#x27;Meditations&#x27;. &#x27;Meditations&#x27; itself is divided into a total of 12 books, each with multiple sections of text. Instead of showing the full text of all books on a single screen we want to make the user able to navigate between the text of each of these sections. &lt;&#x2F;p&gt;
+&lt;p&gt;Part of implementing this navigation process requires having the ability to check, for a given book number, whether that book exists. As in Dart indexes start at 0, the method &lt;code&gt;existBook&lt;&#x2F;code&gt; should return &lt;code&gt;true&lt;&#x2F;code&gt; for any integer from 0 to 11, and false otherwise. Later on we will show how we will turn the book and section numbers back to 1-indexed ones in the UI of the app. Similarly to checking the existence of a book, we want to able to check if a specific section in a specific book exists, which the method &lt;code&gt;existBookSection&lt;&#x2F;code&gt; should provide.&lt;&#x2F;p&gt;
+&lt;p&gt;Of course the functionality should not end here. In particular we also want to be able to get the text of the first and last sections of Meditations. In order to keep the return of these search results simple, we also return the book and section numbers (0-indexed) along with the text where possible as well, even though for the first section, we should already know the book and section numbers. &lt;&#x2F;p&gt;
+&lt;p&gt;As Dart is an object oriented language, we create a specific object of the class &lt;code&gt;BookSectionText&lt;&#x2F;code&gt; to hold these elements (more on the definition of this class a bit later).&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Getting the first part of Meditations returns Book 1, Section 1.&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt; bst = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getFirst&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; firstText = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.book1.first;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedBookNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedSectionNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.bookNr, expectedBookNr);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.sectionNr, expectedSectionNr);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.text, firstText);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Getting the last part of Meditations returns last Section of the last Book.&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;      () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt; bst = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getLast&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; lastText = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.books.last.last;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedBookNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.books.length - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedSectionNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.books.last.length - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.bookNr, expectedBookNr);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.sectionNr, expectedSectionNr);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.text, lastText);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The final set of tests we are going over are for the methods for finding the previous section and the next one. This seems generally a straightforward thing to do, when moving to the previous or next section in the same book. However for convenience we also want to move to the next, or previous, book if the these are unavailable in the current book, but exist in another one. So the functions for &lt;code&gt;nextSection&lt;&#x2F;code&gt; and &lt;code&gt;previousSection&lt;&#x2F;code&gt; has to have this &#x27;roll-over&#x27; functionality included which will make for a nicer user interface. However even with roll-over, there are cases when we ran out of sections to show (e.g.: when wanting to get the next section after the last one). In this case we use an object of the class &lt;code&gt;NoSuchBookSection&lt;&#x2F;code&gt; to indicate this.&lt;&#x2F;p&gt;
+&lt;p&gt;Below are some tests for the &lt;code&gt;nextSection&lt;&#x2F;code&gt; and &lt;code&gt;previousSection&lt;&#x2F;code&gt; functionality:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Getting the next Section of a Book.&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt; bst = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getNextSection&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;11&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedBookNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;11&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedSectionNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedText = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.books[expectedBookNr][expectedSectionNr];
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.bookNr, expectedBookNr);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.sectionNr, expectedSectionNr);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.text, expectedText);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Getting the next Section of a Book when not available.&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult&lt;&#x2F;span&gt;&lt;span&gt; bst = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getNextSection&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;12&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;30&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst is &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;NoSuchBookSection&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Getting the next Section in the next Book&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt; bst = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getNextSection&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;16&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedBookNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedSectionNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedText = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.books[expectedBookNr][expectedSectionNr];
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.bookNr, expectedBookNr);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.sectionNr, expectedSectionNr);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.text, expectedText);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Getting the previous Section of a Book.&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt; bst = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getPreviousSection&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedBookNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedSectionNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedText = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.books[expectedBookNr][expectedSectionNr];
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.bookNr, expectedBookNr);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.sectionNr, expectedSectionNr);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.text, expectedText);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Getting the previous Section of a Book when not available.&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult&lt;&#x2F;span&gt;&lt;span&gt; bst = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getPreviousSection&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst is &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;NoSuchBookSection&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Getting the previous Section in the previous Book&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, () {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt; bst = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getPreviousSection&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedBookNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedSectionNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;16&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; expectedText = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.books[expectedBookNr][expectedSectionNr];
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.bookNr, expectedBookNr);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.sectionNr, expectedSectionNr);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(bst.text, expectedText);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now that we got the tests for the core functionality of navigating the text of Meditations done. Next we will go over the actual implementation of what we aim to test in the file &lt;code&gt;meditations.dart&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;First off are the class definitions for the classes that we mentioned above:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult&lt;&#x2F;span&gt;&lt;span&gt; {}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; This represents the result of search, which results in a text with the attached book and section number.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;extends &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; bookNr;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; sectionNr;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;String&lt;&#x2F;span&gt;&lt;span&gt; text;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; This represent the result of a search, in which case no section is found.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;NoSuchBookSection &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;extends &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult&lt;&#x2F;span&gt;&lt;span&gt; {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;If the reader is familiar with an object oriented language, the definitions should be reasonably straightforward. The search results are represented by two types of classes that we used in our tests. An instance of a class &lt;code&gt;NoSuchBookSection&lt;&#x2F;code&gt; represents that no valid text could be returned and an instance &lt;code&gt;BookSectionText&lt;&#x2F;code&gt; represents the search results that returned the text of a specific section and its book&#x2F;section numbers. These are both subclasses of the class &lt;code&gt;BookSectionSearchResult&lt;&#x2F;code&gt; which allows us easily define the return type of the methods &lt;code&gt;getPreviousSection&lt;&#x2F;code&gt; and &lt;code&gt;getNextSection&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Also note that the code here contains single line comments which are denoted after a &lt;code&gt;&#x2F;&#x2F;&lt;&#x2F;code&gt; in Dart.&lt;&#x2F;p&gt;
+&lt;p&gt;Next up is the definition of the &lt;code&gt;Meditations&lt;&#x2F;code&gt; class that describes the text of Meditations by Marcus Aurelius and how to access them.&lt;&#x2F;p&gt;
+&lt;p&gt;It starts with the snippet:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;static final&lt;&#x2F;span&gt;&lt;span&gt; book1 = [
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;&amp;#39;&amp;#39;I. Of my grandfather Verus I have learned to be gentle and meek, ... 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;    &#x2F;&#x2F; End of snippet. 
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Of course quoting the full text of the representation is too much for this article. Even in the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;meditations&quot;&gt;code of this demo app&lt;&#x2F;a&gt; we only represent the full text of the first and last books in detail at the moment, although the structure to implement every section exists. &lt;&#x2F;p&gt;
+&lt;p&gt;However we can say we represent the text as a list of books, where each book is itself a list of sections which are represented by the text of these sections.&lt;&#x2F;p&gt;
+&lt;p&gt;In Dart, we can represent a list as a set of items in between square brackets, i.e. &lt;code&gt;[]&lt;&#x2F;code&gt;, such as follows:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;static final&lt;&#x2F;span&gt;&lt;span&gt; books = [
+&lt;&#x2F;span&gt;&lt;span&gt;    book1,
+&lt;&#x2F;span&gt;&lt;span&gt;    book2,
+&lt;&#x2F;span&gt;&lt;span&gt;    book3,
+&lt;&#x2F;span&gt;&lt;span&gt;    book4,
+&lt;&#x2F;span&gt;&lt;span&gt;    book5,
+&lt;&#x2F;span&gt;&lt;span&gt;    book6,
+&lt;&#x2F;span&gt;&lt;span&gt;    book7,
+&lt;&#x2F;span&gt;&lt;span&gt;    book8,
+&lt;&#x2F;span&gt;&lt;span&gt;    book9,
+&lt;&#x2F;span&gt;&lt;span&gt;    book10,
+&lt;&#x2F;span&gt;&lt;span&gt;    book11,
+&lt;&#x2F;span&gt;&lt;span&gt;    book12
+&lt;&#x2F;span&gt;&lt;span&gt;  ];
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The other interesting part is that we use the keywords &lt;code&gt;static&lt;&#x2F;code&gt; and &lt;code&gt;final&lt;&#x2F;code&gt;. The &lt;code&gt;static&lt;&#x2F;code&gt; keyword indicates that the variables are class-wide, as the text in these books would be same for any instance of the &lt;code&gt;Meditations&lt;&#x2F;code&gt; class. The &lt;code&gt;final&lt;&#x2F;code&gt; keyword indicates that we do not intend to change these variables once they are defined, as the text of Meditations will not be changing in our app. &lt;&#x2F;p&gt;
+&lt;p&gt;The final piece of our &lt;code&gt;Meditations&lt;&#x2F;code&gt; class are methods for accessing and navigating the texts that we described previously in our tests, such as &lt;code&gt;getFirst&lt;&#x2F;code&gt;, &lt;code&gt;getLast&lt;&#x2F;code&gt;, &lt;code&gt;getPreviousSection&lt;&#x2F;code&gt; and &lt;code&gt;getNextSection&lt;&#x2F;code&gt;. Hopefully following them should be reasonably straightforward given the comments and our tests. The only additional thing to note that these methods are also marked as &lt;code&gt;static&lt;&#x2F;code&gt;. As the &lt;code&gt;Meditations&lt;&#x2F;code&gt; class does not contain any variables that would change per instance, every one of these methods could be made available at a class level (e.g. it could be called as &lt;code&gt;Meditations.getNextSection(11, 3)&lt;&#x2F;code&gt;). &lt;&#x2F;p&gt;
+&lt;p&gt;See the text of these methods below:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; We assume that there is always at least one book in the list of books and at least one section in each book with a text.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Checks if the book with given book number exists.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;existBook&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; bookNr) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (bookNr &amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span&gt;|| bookNr &amp;gt; books.length - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Checks if the section with given book and section numbers exists.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;existBookSection&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; bookNr, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; sectionNr) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;existBook&lt;&#x2F;span&gt;&lt;span&gt;(bookNr)) {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; selectedBook = books[bookNr];
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (sectionNr &amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span&gt;|| sectionNr &amp;gt; selectedBook.length - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Returns the length of a book, in the number of sections.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;bookLength&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; bookNr) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;existBook&lt;&#x2F;span&gt;&lt;span&gt;(bookNr)) {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; selectedBook = books[bookNr];
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; selectedBook.length;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Returns the search result for a given book and section number.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getText&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; bookNr, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; sectionNr) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;existBookSection&lt;&#x2F;span&gt;&lt;span&gt;(bookNr, sectionNr)) {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;NoSuchBookSection&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; bst = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;new &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;      bst.bookNr = bookNr;
+&lt;&#x2F;span&gt;&lt;span&gt;      bst.sectionNr = sectionNr;
+&lt;&#x2F;span&gt;&lt;span&gt;      bst.text = books[bookNr][sectionNr];
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; bst;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Returns the first section.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getFirst&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; selectedBook = books[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;];
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (selectedBook == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;null&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;NoSuchBookSection&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; selectedSection = selectedBook[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;];
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (selectedSection == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;null&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;NoSuchBookSection&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; bst = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;new &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;      bst.bookNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      bst.sectionNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      bst.text = selectedSection;
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; bst;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Returns the last section.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getLast&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; selectedBook = books.last;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (selectedBook == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;null&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;NoSuchBookSection&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; selectedSection = selectedBook.last;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (selectedSection == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;null&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;NoSuchBookSection&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; bst = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;new &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;      bst.bookNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.books.length - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      bst.sectionNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.books.last.length - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      bst.text = selectedSection;
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; bst;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Given a book- and a section number, gets the next section.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getNextSection&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; bookNr, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; sectionNr) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;Get the next section in the current book
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; nextSection = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getText&lt;&#x2F;span&gt;&lt;span&gt;(bookNr, sectionNr + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;If it exits return it
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (!(nextSection is &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;NoSuchBookSection&lt;&#x2F;span&gt;&lt;span&gt;)) {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; nextSection;
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;Otherwise get the first section of the next book
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getText&lt;&#x2F;span&gt;&lt;span&gt;(bookNr + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Given a book- and a section number, gets the previous section.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getPreviousSection&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; bookNr, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; sectionNr) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;Get the previous section in the current book
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; previousSection = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getText&lt;&#x2F;span&gt;&lt;span&gt;(bookNr, sectionNr - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;If it exits return it
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (!(previousSection is &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;NoSuchBookSection&lt;&#x2F;span&gt;&lt;span&gt;)) {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; previousSection;
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;Otherwise get the last section of the previous book
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;var&lt;&#x2F;span&gt;&lt;span&gt; previousBookNr = bookNr - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getText&lt;&#x2F;span&gt;&lt;span&gt;(previousBookNr, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;bookLength&lt;&#x2F;span&gt;&lt;span&gt;(previousBookNr) - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We have now covered two of the four main files responsible for the functionality of our app, notably the functionality to navigate the text of Meditations and the tests for them. The purpose of the other two is to create the app using this functionality for navigating the text with the Flutter framework (&lt;code&gt;main.dart&lt;&#x2F;code&gt;) and the tests for the app (&lt;code&gt;widget_test.dart&lt;&#x2F;code&gt;). &lt;&#x2F;p&gt;
+&lt;p&gt;Let us start with the test first. One of the nice features of the Flutter framework is that one can test the full app nearly as easily than any other Dart code. &lt;&#x2F;p&gt;
+&lt;p&gt;First we start importing the functionality for testing, as well as our main app that we aim to test:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;package:flutter&#x2F;material.dart&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;package:flutter_test&#x2F;flutter_test.dart&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;package:meditations&#x2F;main.dart&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Next up is the main method with the functionality that we aim to test. This functionality is similar to the functionality that we have shown previously of our app, seen here again below:&lt;&#x2F;p&gt;
+&lt;p&gt;{{&amp;lt; figure src=&amp;quot;&#x2F;img&#x2F;post&#x2F;2020&#x2F;meditations&#x2F;meditationsapp.gif&amp;quot; title=&amp;quot;Navigating the text of Meditations in the app running on an Android emulator.&amp;quot; &amp;gt;}}&lt;&#x2F;p&gt;
+&lt;p&gt;In particular when we are navigating the text of Meditations, we tap the icons for first, previous, next and last in the bottom navigation bar. &lt;&#x2F;p&gt;
+&lt;p&gt;On the screen we not only navigate to the right text, but we also show the number of the book and section of the text that we are currently reading. 
+We use this information to create a navigation test, as once the right icon has been tapped, we should be able to predict and check the book and section numbers that should now be on screen. &lt;&#x2F;p&gt;
+&lt;p&gt;The test is all tied together with the test functionality of Flutter for setting up the widgets (the elements of interaction) of the app for testing, redrawing the elements after a (simulated) interaction and checking them (more documentation on testing Flutter widgets can be found in the &lt;a href=&quot;https:&#x2F;&#x2F;flutter.dev&#x2F;docs&#x2F;cookbook&#x2F;testing&#x2F;widget&#x2F;introduction&quot;&gt;Flutter documentation&lt;&#x2F;a&gt;). The code of this for the app can be seen as below.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;testWidgets&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Bottom navigation smoke test&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;, (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;WidgetTester&lt;&#x2F;span&gt;&lt;span&gt; tester) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;async&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Build the app and trigger a frame.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;await&lt;&#x2F;span&gt;&lt;span&gt; tester.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;pumpWidget&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;MyApp&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Verify that the title shows Book 1 and Section 1.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(find.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;text&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Meditations Book 1 Section 1&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;), findsOneWidget);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Tap the icon for next and trigger a frame.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;await&lt;&#x2F;span&gt;&lt;span&gt; tester.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;tap&lt;&#x2F;span&gt;&lt;span&gt;(find.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;byIcon&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Icons&lt;&#x2F;span&gt;&lt;span&gt;.navigate_next));
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;await&lt;&#x2F;span&gt;&lt;span&gt; tester.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;pump&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Verify that the title has changed correctly.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(find.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;text&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Meditations Book 1 Section 2&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;), findsOneWidget);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(find.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;text&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Meditations Book 1 Section 1&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;), findsNothing);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Tap the icon for last and trigger a frame.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;await&lt;&#x2F;span&gt;&lt;span&gt; tester.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;tap&lt;&#x2F;span&gt;&lt;span&gt;(find.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;byIcon&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Icons&lt;&#x2F;span&gt;&lt;span&gt;.last_page));
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;await&lt;&#x2F;span&gt;&lt;span&gt; tester.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;pump&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Verify that the title has changed correctly.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(find.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;text&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Meditations Book 12 Section 26&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;), findsOneWidget);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(find.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;text&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Meditations Book 1 Section 2&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;), findsNothing);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Tap the icon for previous and trigger a frame.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;await&lt;&#x2F;span&gt;&lt;span&gt; tester.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;tap&lt;&#x2F;span&gt;&lt;span&gt;(find.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;byIcon&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Icons&lt;&#x2F;span&gt;&lt;span&gt;.navigate_before));
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;await&lt;&#x2F;span&gt;&lt;span&gt; tester.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;pump&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Verify that the title has changed correctly.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(find.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;text&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Meditations Book 12 Section 25&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;), findsOneWidget);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(find.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;text&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Meditations Book 12 Section 26&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;), findsNothing);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Tap the icon for first and trigger a frame.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;await&lt;&#x2F;span&gt;&lt;span&gt; tester.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;tap&lt;&#x2F;span&gt;&lt;span&gt;(find.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;byIcon&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Icons&lt;&#x2F;span&gt;&lt;span&gt;.first_page));
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;await&lt;&#x2F;span&gt;&lt;span&gt; tester.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;pump&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Verify that the title has changed correctly.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(find.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;text&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Meditations Book 1 Section 1&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;), findsOneWidget);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(find.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;text&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Meditations Book 12 Section 25&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;), findsNothing);
+&lt;&#x2F;span&gt;&lt;span&gt;  });
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now all that remains is to show how the actual app is put together. We will go through the code of it here, found in &lt;code&gt;main.dart&lt;&#x2F;code&gt;, step by step. &lt;&#x2F;p&gt;
+&lt;p&gt;First we start with the imports of the widget library we are using as well as our implementation of accessing the text of Meditations.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;package:flutter&#x2F;material.dart&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;mediations.dart&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Next is, the very short main method, that ensures the app we are building is run when requested.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; The main method runs the app that was described
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;runApp&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;MyApp&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;As mentioned in our description of the test, this app consists of a tree of &lt;a href=&quot;https:&#x2F;&#x2F;flutter.dev&#x2F;docs&#x2F;development&#x2F;ui&#x2F;widgets-intro&quot;&gt;widgets&lt;&#x2F;a&gt; (elements of interaction), the root of which we identify with &lt;code&gt;MyApp&lt;&#x2F;code&gt; in the code. This MyApp widget is the one that gets run by the main method seen above.&lt;&#x2F;p&gt;
+&lt;p&gt;The widgets themselves have properties that contain the elements that the widget is using. For example the title of the app, the theme of the app and the other widgets it uses such as a widget for a home page. The main job of the widget is to implement a specific build function that describes how these various elements fit together. In the case of &lt;code&gt;MyApp&lt;&#x2F;code&gt; we are creating a &lt;a href=&quot;https:&#x2F;&#x2F;api.flutter.dev&#x2F;flutter&#x2F;material&#x2F;MaterialApp-class.html&quot;&gt;MaterialApp&lt;&#x2F;a&gt; customized to our specific needs. This includes a home page for navigating the text of Mediations, as well as a theme that uses a color (hopefully) close enough to &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Tyrian_purple&quot;&gt;Imperial purple&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;MyApp &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;extends &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;StatelessWidget&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; The app consists of a tree of widgets, of which this is the root.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;@override
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Widget &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BuildContext&lt;&#x2F;span&gt;&lt;span&gt; context) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;MaterialApp&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;      title: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Meditations&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;      theme: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;ThemeData&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;        primarySwatch: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Colors&lt;&#x2F;span&gt;&lt;span&gt;.purple,
+&lt;&#x2F;span&gt;&lt;span&gt;        visualDensity: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;VisualDensity&lt;&#x2F;span&gt;&lt;span&gt;.adaptivePlatformDensity,
+&lt;&#x2F;span&gt;&lt;span&gt;      ),
+&lt;&#x2F;span&gt;&lt;span&gt;      home: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;MyHomePage&lt;&#x2F;span&gt;&lt;span&gt;(title: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Meditations&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;),
+&lt;&#x2F;span&gt;&lt;span&gt;    );
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The previous Widget does not carry an internal, mutable, state directly in itself (hence why it is an extension of a &lt;a href=&quot;https:&#x2F;&#x2F;api.flutter.dev&#x2F;flutter&#x2F;widgets&#x2F;StatelessWidget-class.html&quot;&gt;StatelessWidget&lt;&#x2F;a&gt;). However, as one can deduce from our tests, we want to keep information such as the current book and section number around and display these.&lt;&#x2F;p&gt;
+&lt;p&gt;In order to get this done, we use an extension of &lt;a href=&quot;https:&#x2F;&#x2F;api.flutter.dev&#x2F;flutter&#x2F;widgets&#x2F;StatefulWidget-class.html&quot;&gt;StatefulWidget&lt;&#x2F;a&gt; named &lt;code&gt;MyHomePage&lt;&#x2F;code&gt; which carries the state. The state itself contains the elements of book number, section number and the text to be shown on page. In addition, there are methods for manipulating the state and showing it. &lt;&#x2F;p&gt;
+&lt;p&gt;For setting the state, we make use of all the functionality we built in &lt;code&gt;meditations.dart&lt;&#x2F;code&gt; to search for the next (or previous, first, last) section and change the state accordingly. Each of these state setting methods are inside a call to &lt;code&gt;setState&lt;&#x2F;code&gt; which makes the Flutter framework be aware of the state changes and, if required, it can redraw the relevant widgets to show these changes.&lt;&#x2F;p&gt;
+&lt;p&gt;The methods for showing the state are reasonably straightforward. we mostly use these to translate the internally 0-indexed book- and section numbers into 1 indexed ones to match the actual numbers used in Meditations (albeit not with Roman Numerals though that would be a nice future feature for the app).&lt;&#x2F;p&gt;
+&lt;p&gt;The final part is making sure there are widgets for showing the state and interacting with the state. As one can see in the animation of the screen, as well is in the test, we have a section showing the current section and page number, a text area that scrolls showing the current section and a bottom navigation bar to change the current section. &lt;&#x2F;p&gt;
+&lt;p&gt;The code for all of this, when put together, can be seen below:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dart&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-dart &quot;&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;MyHomePage &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;extends &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;StatefulWidget&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; The homepage of the app, which also creates and holds the state.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;MyHomePage&lt;&#x2F;span&gt;&lt;span&gt;({&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Key&lt;&#x2F;span&gt;&lt;span&gt; key, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;this&lt;&#x2F;span&gt;&lt;span&gt;.title}) : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;super&lt;&#x2F;span&gt;&lt;span&gt;(key: key);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;final &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;String&lt;&#x2F;span&gt;&lt;span&gt; title;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;@override
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;_MyHomePageState &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;createState&lt;&#x2F;span&gt;&lt;span&gt;() =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;_MyHomePageState&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;_MyHomePageState &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;extends &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;State&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;MyHomePage&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; The variables used to describe the state.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; _bookNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; _sectionNr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;String&lt;&#x2F;span&gt;&lt;span&gt; _text = (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getFirst&lt;&#x2F;span&gt;&lt;span&gt;() &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;as &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt;).text;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Functions to show the state variables on the screen.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;String &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getShowText&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; _text;
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getShowBookNr&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; The screen should book and section numbers starting with 1 instead of 0.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; _bookNr + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getShowSectionNr&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; _sectionNr + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Functions to navigate the text of Meditations and update the state based on UI interaction.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;_first&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; The call to setState makes the Flutter framework aware of the state changes.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; It will ensure that the build method below will be rerun.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;setState&lt;&#x2F;span&gt;&lt;span&gt;(() {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult&lt;&#x2F;span&gt;&lt;span&gt; result = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getFirst&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (result is &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;        _text = result.text;
+&lt;&#x2F;span&gt;&lt;span&gt;        _bookNr = result.bookNr;
+&lt;&#x2F;span&gt;&lt;span&gt;        _sectionNr = result.sectionNr;
+&lt;&#x2F;span&gt;&lt;span&gt;      }
+&lt;&#x2F;span&gt;&lt;span&gt;    });
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;_previous&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;setState&lt;&#x2F;span&gt;&lt;span&gt;(() {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult&lt;&#x2F;span&gt;&lt;span&gt; result =
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getPreviousSection&lt;&#x2F;span&gt;&lt;span&gt;(_bookNr, _sectionNr);
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (result is &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;        _text = result.text;
+&lt;&#x2F;span&gt;&lt;span&gt;        _bookNr = result.bookNr;
+&lt;&#x2F;span&gt;&lt;span&gt;        _sectionNr = result.sectionNr;
+&lt;&#x2F;span&gt;&lt;span&gt;      }
+&lt;&#x2F;span&gt;&lt;span&gt;    });
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;_next&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;setState&lt;&#x2F;span&gt;&lt;span&gt;(() {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult&lt;&#x2F;span&gt;&lt;span&gt; result =
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getNextSection&lt;&#x2F;span&gt;&lt;span&gt;(_bookNr, _sectionNr);
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (result is &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;        _text = result.text;
+&lt;&#x2F;span&gt;&lt;span&gt;        _bookNr = result.bookNr;
+&lt;&#x2F;span&gt;&lt;span&gt;        _sectionNr = result.sectionNr;
+&lt;&#x2F;span&gt;&lt;span&gt;      }
+&lt;&#x2F;span&gt;&lt;span&gt;    });
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;_last&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;setState&lt;&#x2F;span&gt;&lt;span&gt;(() {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionSearchResult&lt;&#x2F;span&gt;&lt;span&gt; result = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Meditations&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getLast&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; (result is &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BookSectionText&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;        _text = result.text;
+&lt;&#x2F;span&gt;&lt;span&gt;        _bookNr = result.bookNr;
+&lt;&#x2F;span&gt;&lt;span&gt;        _sectionNr = result.sectionNr;
+&lt;&#x2F;span&gt;&lt;span&gt;      }
+&lt;&#x2F;span&gt;&lt;span&gt;    });
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Handles the action of the bottom navigation bar on screen.
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;_onBottomNavTapped&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; index) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;setState&lt;&#x2F;span&gt;&lt;span&gt;(() {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;switch&lt;&#x2F;span&gt;&lt;span&gt; (index) {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;case &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;          {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;_first&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;          }
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;case &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;          {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;_previous&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;          }
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;case &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;          {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;_next&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;          }
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;case &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;          {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;_last&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;          }
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;default&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;          {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;_first&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;          }
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      }
+&lt;&#x2F;span&gt;&lt;span&gt;    });
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;@override
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Widget &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BuildContext&lt;&#x2F;span&gt;&lt;span&gt; context) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; This method is rerun every time setState is called.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; It contains a nested widget with a app bar on top, a scrollable text area in the middle, and a navigation bar at the bottom.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Scaffold&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;      appBar: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;AppBar&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;        title: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Text&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;widget.title&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;} Book ${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;getShowBookNr()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;} Section ${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;getShowSectionNr()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;}&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;),
+&lt;&#x2F;span&gt;&lt;span&gt;      ),
+&lt;&#x2F;span&gt;&lt;span&gt;      body: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Center&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;        child: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Column&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;          children: &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Widget&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;[
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;new &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Expanded&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;                flex: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                child: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;SingleChildScrollView&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;                    child: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Container&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;                      padding: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;EdgeInsets&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;all&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;8.0&lt;&#x2F;span&gt;&lt;span&gt;),
+&lt;&#x2F;span&gt;&lt;span&gt;                      child: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Text&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;getShowText&lt;&#x2F;span&gt;&lt;span&gt;())))),
+&lt;&#x2F;span&gt;&lt;span&gt;          ],
+&lt;&#x2F;span&gt;&lt;span&gt;        ),
+&lt;&#x2F;span&gt;&lt;span&gt;      ),
+&lt;&#x2F;span&gt;&lt;span&gt;      bottomNavigationBar: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BottomNavigationBar&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;        type: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BottomNavigationBarType&lt;&#x2F;span&gt;&lt;span&gt;.fixed,
+&lt;&#x2F;span&gt;&lt;span&gt;        items: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BottomNavigationBarItem&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;[
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BottomNavigationBarItem&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;            icon: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Icon&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Icons&lt;&#x2F;span&gt;&lt;span&gt;.first_page),
+&lt;&#x2F;span&gt;&lt;span&gt;            label: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;First&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;          ),
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BottomNavigationBarItem&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;            icon: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Icon&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Icons&lt;&#x2F;span&gt;&lt;span&gt;.navigate_before),
+&lt;&#x2F;span&gt;&lt;span&gt;            label: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Previous&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;          ),
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BottomNavigationBarItem&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;            icon: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Icon&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Icons&lt;&#x2F;span&gt;&lt;span&gt;.navigate_next),
+&lt;&#x2F;span&gt;&lt;span&gt;            label: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Next&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;          ),
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;BottomNavigationBarItem&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;            icon: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Icon&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Icons&lt;&#x2F;span&gt;&lt;span&gt;.last_page),
+&lt;&#x2F;span&gt;&lt;span&gt;            label: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;#39;Last&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;          ),
+&lt;&#x2F;span&gt;&lt;span&gt;        ],
+&lt;&#x2F;span&gt;&lt;span&gt;        onTap: _onBottomNavTapped,
+&lt;&#x2F;span&gt;&lt;span&gt;      ),
+&lt;&#x2F;span&gt;&lt;span&gt;    );
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This is pretty much the full description of the Meditations app. It shows how a small application can be built up and structured. My experience with the Flutter framework was very pleasant. Most things I wanted to do were pretty straightforward and there is a large amount of documentation for the framework and setup. I like the emphasis on getting tests up and running straight from the box and the large set of pre-made widgets help a lot with getting a workable UI going very quickly. My biggest pain point was the setup of the whole Android tool-chain itself. Although there were some additional features to the Dart language (such as the upcoming, at the time of this writing, &lt;a href=&quot;https:&#x2F;&#x2F;dart.dev&#x2F;null-safety&quot;&gt;Null Safety&lt;&#x2F;a&gt;) the language is easy to pick up and become productive with.&lt;&#x2F;p&gt;
+&lt;p&gt;Of course there are tons of possible extensions to the app. Aside from including the full text of Meditations, one can improve upon the navigation, add features such as bookmarking, random section selection and more. Refactoring and extending the app so it could load in other advice&#x2F;text in similar format is also a possibility. &lt;&#x2F;p&gt;
+&lt;p&gt;Hopefully this article and code was clear enough to follow and my thought process came over clearly. The project has definitely increased my interest in using Dart&#x2F;Flutter in another project and felt like good practice. Hopefully your next project, perhaps made with Flutter, will be similarly enjoyable and enriching to do! &lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>CybOrg Mode</title>
+		<published>2020-06-01T00:00:00+00:00</published>
+		<updated>2020-06-01T00:00:00+00:00</updated>
+		<link rel="alternate" href="https://www.newresalhaider.com/post/cyborg-mode/" type="text/html"/>
+		<id>https://www.newresalhaider.com/post/cyborg-mode/</id>
+		<content type="html">&lt;p&gt;Human beings enhanced by machine parts, often called &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cyborg&quot;&gt;cyborgs&lt;&#x2F;a&gt;, are a staple of the science-fiction and comic books. The, very aptly named, hero &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cyborg_(comics)&quot;&gt;Cyborg&lt;&#x2F;a&gt;, is a good example of this. Due to advanced mechanical modifications he not only has greatly increased strength and the ability to fly, but he is able to interface directly with computer systems to organize and plan ahead. These skills make him an important member of many superhero teams such as the &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Justice_League&quot;&gt;Justice League&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Teen_Titans&quot;&gt;Teen Titans&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Thankfully for us, even without any of the cybernetic implants that Cyborg has, there exists some great tools to help organize, document and plan ahead. One of such tools is called &lt;a href=&quot;https:&#x2F;&#x2F;orgmode.org&#x2F;&quot;&gt;Org-mode&lt;&#x2F;a&gt;. Org-mode, also denoted as Org mode or even more simply as Org, is a system for organizing notes, plans, authoring documents and many other tasks. One of its main benefits is that although specialized tools exist to help create and edit Org documents, all Org documents are &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Plain_text&quot;&gt;plain text&lt;&#x2F;a&gt; files. This means that the format is very portable and can be used and edited on any platform which can edit text files. In this article we give a brief introduction to Org mode with an example based on the hero Cyborg.&lt;&#x2F;p&gt;
+&lt;p&gt;Org documents can be outlined with a tree structure using headlines. Suppose that we want to describe various information about Cyborg, such as his biography, his powers, his relationships and his schedule. For each of these we can use an asterisk (&lt;code&gt;*&lt;&#x2F;code&gt;) symbol followed by some text to create a headline in the document as follows:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;org&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-org &quot;&gt;&lt;code class=&quot;language-org&quot; data-lang=&quot;org&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Biography
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Powers
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Relationships
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Cyborg&amp;#39;s Schedule
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We can add nested headlines by increasing the number of asterisks in front of a section name. For example, if we want to create two headlines under relationships detailing Cyborgs team affiliations, as well as his villains, we can do that:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;org&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-org &quot;&gt;&lt;code class=&quot;language-org&quot; data-lang=&quot;org&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Biography
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Powers
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Relationships
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;** Team Affiliations
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;** Villains
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Cyborg&amp;#39;s Schedule
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Of course while headlines can help us structure a document, text is an integral part of it. A simple biography can be shown as one would expect: &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;org&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-org &quot;&gt;&lt;code class=&quot;language-org&quot; data-lang=&quot;org&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Biography
+&lt;&#x2F;span&gt;&lt;span&gt;Vic Stone was a high school athlete when a tragic accident nearly killed him and destroyed most of this body. His father, Dr. Silas Stone, used his scientific knowledge and advanced technology to save his life by augmenting him with machine parts.
+&lt;&#x2F;span&gt;&lt;span&gt;Living now as a cyborg, a being with both organic and machine parts, he is now has super strength, increased durability and a control over advanced technology and weaponry.
+&lt;&#x2F;span&gt;&lt;span&gt;Although he continues to struggle with his newfound status as both man and machine, he uses his newfound powers as a superhero.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Powers
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Relationships
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;** Team Affiliations
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;** Villains
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Cyborg&amp;#39;s Schedule
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We can also create lists in the document. For example we can give an unordered list of Cyborg&#x27;s powers such as super strength and instant weaponary by prefacing each item on a new line by a hyphen (&lt;code&gt;-&lt;&#x2F;code&gt;): &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;org&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-org &quot;&gt;&lt;code class=&quot;language-org&quot; data-lang=&quot;org&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Biography
+&lt;&#x2F;span&gt;&lt;span&gt;Vic Stone was a high school athlete when a tragic accident nearly killed him and destroyed most of this body. His father, Dr. Silas Stone, used his scientific
+&lt;&#x2F;span&gt;&lt;span&gt;knowledge and advanced technology to save his life by augmenting him with machine parts.
+&lt;&#x2F;span&gt;&lt;span&gt;Living now as a cyborg, a being with both organic and machine parts, he is now has super strength, increased durability and a control over advanced technology and weaponry.
+&lt;&#x2F;span&gt;&lt;span&gt;Although he continues to struggle with his newfound status as both man and machine, he uses his newfound powers as a superhero.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Powers
+&lt;&#x2F;span&gt;&lt;span&gt;- super strength
+&lt;&#x2F;span&gt;&lt;span&gt;- advanced technology,
+&lt;&#x2F;span&gt;&lt;span&gt;- instant weaponry
+&lt;&#x2F;span&gt;&lt;span&gt;- genius-level intellect
+&lt;&#x2F;span&gt;&lt;span&gt;- control over technology
+&lt;&#x2F;span&gt;&lt;span&gt;- computer hacking
+&lt;&#x2F;span&gt;&lt;span&gt;- durability
+&lt;&#x2F;span&gt;&lt;span&gt;- teleportation
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Relationships
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;** Team Affiliations
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;** Villains
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Cyborg&amp;#39;s Schedule
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Note that the document is now getting larger and the parts of what we want to focus on to show here, the powers, can get lost in the other information. One of the strengths of Org-mode that even though it can be viewed and edited as plain text, there exists quite a bit of tooling to help navigate, edit and make use of the described structures. The editor &lt;a href=&quot;https:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;emacs&#x2F;&quot;&gt;emacs&lt;&#x2F;a&gt; and its various flavours such as &lt;a href=&quot;https:&#x2F;&#x2F;www.spacemacs.org&#x2F;&quot;&gt;spacemacs&lt;&#x2F;a&gt; that I personally use have excellent features for these tasks. However other editors such as &lt;a href=&quot;https:&#x2F;&#x2F;code.visualstudio.com&#x2F;&quot;&gt;Visual Studio Code&lt;&#x2F;a&gt; have &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;vscode-org-mode&#x2F;vscode-org-mode&quot;&gt;plugins&lt;&#x2F;a&gt; to support Org-mode as well.&lt;&#x2F;p&gt;
+&lt;p&gt;One of the basic features to help such editors provide is to fold headlines under which we do not want to see all the content in detail and unfold it for those that we do. In the following animation we show how this can be done on a portion of a more extended version of the Cyborg document: &lt;&#x2F;p&gt;
+&lt;!-- &lt;figure&gt;
+  &lt;img src=&quot;foldingheadlines.gif&quot;&#x2F;&gt;
+  &lt;figcaption&gt;
+      &lt;h4&gt;Folding and unfolding headlines in Org document using Spacemacs&lt;&#x2F;h4&gt;
+  &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt; --&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=foldingheadlines.gif&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;Folding and unfolding headlines in Org document using Spacemacs&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2020&#x2F;cyborg-mode&#x2F;foldingheadlines.gif&quot; title=&quot;Folding and unfolding headlines in Org document using Spacemacs&quot; &gt;}} --&gt;
+&lt;p&gt;The above image shows how the &lt;a href=&quot;https:&#x2F;&#x2F;www.spacemacs.org&#x2F;&quot;&gt;spacemacs&lt;&#x2F;a&gt; editor handles Org documents. By simply pressing tab on headlines we can fold (i.e. not show the underlying content) and unfold (i.e. showing the underlying content) them as we please and directing our attention to parts of the document we want to view and edit. It also shows how editor support uses the underlying structure for additional visualizations, such as on the level of headlines, even though the underlying document is still plaintext.&lt;&#x2F;p&gt;
+&lt;p&gt;Expanding on our example we can describe the Team Affiliations and the Villains as lists as well. For the list of Team Affiliations we will use an ordered list, which can be done by using a number followed by a dot, e.g.: &lt;code&gt;1. 2.&lt;&#x2F;code&gt; for the list indicators.  Note for brevity we now only show the new&#x2F;relevant portions of the full Org document in the examples as opposed to the whole.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;org&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-org &quot;&gt;&lt;code class=&quot;language-org&quot; data-lang=&quot;org&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Relationships
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;** Team Affiliations
+&lt;&#x2F;span&gt;&lt;span&gt;1. Justice League
+&lt;&#x2F;span&gt;&lt;span&gt;2. Teen Titans
+&lt;&#x2F;span&gt;&lt;span&gt;3. Doom Patrol
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;** Villains
+&lt;&#x2F;span&gt;&lt;span&gt;- Lex Luthor
+&lt;&#x2F;span&gt;&lt;span&gt;- Deathstroke
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Another interesting feature in Org documents are TODO items. Any headline can be made a TODO in them by prefacing it with TODO. For example in a headline of Cyborg&#x27;s schedule we can put two TODO items for things Cyborg wants to do at some point: attend a Justice League Meeting and Upgrading Equipment. &lt;&#x2F;p&gt;
+&lt;p&gt;There are various ways such TODO items could be used similarly to folding or unfolding headlines.  In emacs&#x2F;spacemacs such actions, and many others relating to various aspects of an Org document, can be done by commands. For example the command &lt;code&gt;org-show-todo-tree&lt;&#x2F;code&gt; can take ensure that all the headlines are folded as much as possible and only the TODO headlines are unfolded. Similarly the command &lt;code&gt;org-todo&lt;&#x2F;code&gt; cycles between not marking the headline with a TODO, marking it with a TODO or marking it with DONE denoted that the item has been completed. &lt;&#x2F;p&gt;
+&lt;!-- &lt;figure&gt;
+  &lt;img src=&quot;toggletododate.gif&quot;&#x2F;&gt;
+  &lt;figcaption&gt;
+      &lt;h4&gt;Toggling using the command the command `org-todo` for headlines in Org document using Spacemacs&lt;&#x2F;h4&gt;
+  &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt; --&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=toggletododate.gif&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;Toggling using the command the command `org-todo` for headlines in Org document using Spacemacs&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2020&#x2F;cyborg-mode&#x2F;toggletododate.gif&quot; title=&quot;Toggling using the command the command `org-todo` for headlines in Org document using Spacemacs&quot; &gt;}} --&gt;
+&lt;p&gt;The above image shows how the command &lt;code&gt;org-todo&lt;&#x2F;code&gt; can cycle between the TODO states of the Justice League Meeting headline. In addition, it also shows a few other features. &lt;&#x2F;p&gt;
+&lt;p&gt;First is the associating a date with the TODO item, in particular when it is scheduled. By toggling the TODO to DONE, our editor uses the current time to mark when the task was finished. This allows for a nice way to create a checklist of the things that have to be done and marking them off.&lt;&#x2F;p&gt;
+&lt;p&gt;Another aspect is the use of markup around &#x27;must&#x27; and &#x27;Lex Luthor&#x27;. Enclosing a phrase with an underscore underlines the phrase while enclosing it between asterisks (*) makes it bold. Markups for italicizing (enclosing it between slashes (&#x2F;)), code fragments and others also exist. &lt;&#x2F;p&gt;
+&lt;p&gt;The full list of TODO items in Cyborg&#x27;s schedule is as follows.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;org&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-org &quot;&gt;&lt;code class=&quot;language-org&quot; data-lang=&quot;org&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;*** &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;TODO&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt; Justice League Meeting
+&lt;&#x2F;span&gt;&lt;span&gt;    SCHEDULED: &amp;lt;2024-08-02&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Something _must_ be done about &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#ebcb8b;&quot;&gt;*Lex Luthor*&lt;&#x2F;span&gt;&lt;span&gt;. He seems to be planning an attack on &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#b48ead;&quot;&gt;&#x2F;Metropolis&#x2F;&lt;&#x2F;span&gt;&lt;span&gt; with the help of &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#ebcb8b;&quot;&gt;*Deathstroke*&lt;&#x2F;span&gt;&lt;span&gt;. 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;*** &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;TODO&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt; Upgrade Equipment
+&lt;&#x2F;span&gt;&lt;span&gt;    SCHEDULED: &amp;lt;2024-06-01&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Enhance arm cannon.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;One of the most interesting features of Org mode that we will cover in this article is the ability to embed fragment of code in an Org document that can be executed in the right environment. In Cyborg&#x27;s schedule one of the upcoming items is to enhance his arm cannon. In order to prepare for this, and to illustrate our code embedding, a simple Weapon Damage calculator application was written in Python:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;  arm_cannon = {&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Arm Cannon&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;power&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;8&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;  reinforced_door = {&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Reinforced Door&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;armor&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;wdc&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;weapon&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    damage = weapon[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;power&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] - target[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;armor&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;damage&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;: 
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;damage
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  damage_done = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;wdc&lt;&#x2F;span&gt;&lt;span&gt;(arm_cannon, reinforced_door)
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Using the weapon &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; + arm_cannon[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] + &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt; with &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;str&lt;&#x2F;span&gt;&lt;span&gt;(arm_cannon[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;power&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]) + &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt; power,&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;against the target &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; + reinforced_door[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] + &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt; with &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;str&lt;&#x2F;span&gt;&lt;span&gt;(reinforced_door[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;armor&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]) + &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt; armor,&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;results in &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;str&lt;&#x2F;span&gt;&lt;span&gt;(damage_done) + &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt; damage.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This code aims to use features of Cyborg&#x27;s arm cannon to calculate damage on the target and to write these features out along with the resulting damage.&lt;&#x2F;p&gt;
+&lt;p&gt;We can embed this code fragment by using the property system to give this fragment a name and denote some other attributes. This property system is essentially a key-value system in Org mode that is used for all types information represented with key-value pairs. For example the following two properties describe the title and description of the Org document:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;org&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-org &quot;&gt;&lt;code class=&quot;language-org&quot; data-lang=&quot;org&quot;&gt;&lt;span&gt;#+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;title&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Cyborg Agenda
+&lt;&#x2F;span&gt;&lt;span&gt;#+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;description&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;An introduction to org mode by creating an org document for information on the superhero Cyborg.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;For the code we want to embed we want set the properties on how we name this fragment, where the source begins and ends, what language it is and what should be done with the results. This looks as follows within the Org document:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;org&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-org &quot;&gt;&lt;code class=&quot;language-org&quot; data-lang=&quot;org&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Weapon Damage Calculator
+&lt;&#x2F;span&gt;&lt;span&gt;#+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;NAME&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;wdc
+&lt;&#x2F;span&gt;&lt;span&gt;#+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;BEGIN_SRC &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;python &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:results output
+&lt;&#x2F;span&gt;&lt;span&gt;  arm_cannon = {&amp;quot;name&amp;quot;: &amp;quot;Arm Cannon&amp;quot;, &amp;quot;power&amp;quot;: 8}
+&lt;&#x2F;span&gt;&lt;span&gt;  reinforced_door = {&amp;quot;name&amp;quot;: &amp;quot;Reinforced Door&amp;quot;, &amp;quot;armor&amp;quot;: 3}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  def wdc(weapon, target):
+&lt;&#x2F;span&gt;&lt;span&gt;    damage = weapon[&amp;quot;power&amp;quot;] - target[&amp;quot;armor&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;    if damage&amp;lt;0:
+&lt;&#x2F;span&gt;&lt;span&gt;      return 0
+&lt;&#x2F;span&gt;&lt;span&gt;    else: 
+&lt;&#x2F;span&gt;&lt;span&gt;      return damage
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  damage_done = wdc(arm_cannon, reinforced_door)
+&lt;&#x2F;span&gt;&lt;span&gt;  print(&amp;quot;Using the weapon &amp;quot; + arm_cannon[&amp;quot;name&amp;quot;] + &amp;quot; with &amp;quot; + str(arm_cannon[&amp;quot;power&amp;quot;]) + &amp;quot; power,&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;  print(&amp;quot;against the target &amp;quot; + reinforced_door[&amp;quot;name&amp;quot;] + &amp;quot; with &amp;quot; + str(reinforced_door[&amp;quot;armor&amp;quot;]) + &amp;quot; armor,&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;  print(&amp;quot;results in &amp;quot; + str(damage_done) + &amp;quot; damage.&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;#+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;END_SRC
+&lt;&#x2F;span&gt;&lt;span&gt;#+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;RESULTS&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;wdc
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This embeds the weapon damage calculator as a source fragment named wdc, while also setting up where the results will be show in the document. Now if we execute the command &lt;code&gt;org-babel-execute-src-block&lt;&#x2F;code&gt; we can see the results directly within the document:&lt;&#x2F;p&gt;
+&lt;!-- &lt;figure&gt;
+  &lt;img src=&quot;executingcode.gif&quot;&#x2F;&gt;
+  &lt;figcaption&gt;
+      &lt;h4&gt;Executing the source block to see the results directly within the Org document&lt;&#x2F;h4&gt;
+  &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt; --&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=executingcode.gif&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;Executing the source block to see the results directly within the Org document&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2020&#x2F;cyborg-mode&#x2F;executingcode.gif&quot; title=&quot;Executing the source block to see the results directly within the Org document&quot; &gt;}} --&gt;
+&lt;p&gt;That is it for this tutorial, hopefully I have given a glimpse of what Org mode can do, and gives you some idea on how it can enhance your organizing, planning and note taking. Here I have not even touched on many other great features such as authoring documents and converting to other formats, using it as a spreadsheet system and many more. For further resources on this tool take a look at the official &lt;a href=&quot;https:&#x2F;&#x2F;orgmode.org&#x2F;&quot;&gt;Org mode website&lt;&#x2F;a&gt;, as well the &lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=PVsSOmUB7ic&quot;&gt;excellent video tutorial&lt;&#x2F;a&gt; by GDQuest on using the Spacemacs editor with Org mode. The Org document that was built up can also be found in its entirety at a &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;cyborg-mode&#x2F;&quot;&gt;github repository&lt;&#x2F;a&gt; along with some extra documentation.&lt;&#x2F;p&gt;
+&lt;p&gt;Hopefully you have enjoyed the article and if you want to enhance yourself with one of the best note taking and planning tools around give Org mode a shot.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

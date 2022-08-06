@@ -127,283 +127,283 @@ wrote for guidance and self-improvement. While it is likely that the emperor wro
 <p>In order to get the Meditations app up and running, we will have four files in total. Similarly to the default project we have a <code>main.dart</code> and a <code>widget_test.dart</code> for defining and testing our app, but with different contents. In addition, we also have a <code>meditations.dart</code> file where we define how to search and navigate the text of the Meditations, as well as the file <code>meditations_test.dart</code> to test this search and navigation functionality. </p>
 <p>Although we do not have to go full <a href="https://en.wikipedia.org/wiki/Test-driven_development">Test Driven Development (TDD)</a> for such a small demo application, it is a good idea and practice to start off writing some tests to define what behavior we want to show.</p>
 <p>We first start describing our application by walking through (some of) the contents of <code>meditations_test.dart</code>. It also gives us an opportunity to ease us into the <a href="https://dart.dev/">Dart language</a> that the Flutter framework uses, in case if the reader is unfamiliar with it. It would be too much for this short article to fully explain the Dart language, for which there are some excellent <a href="https://dart.dev/guides">guides</a>, but I hope I can make the functionality clear enough, even for readers completely new to it.</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:meditations/mediations.dart&#39;</span><span>;</span><span>
-</span><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:test/test.dart&#39;</span><span>;</span><span>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:meditations/mediations.dart&#39;</span><span>;
+</span><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:test/test.dart&#39;</span><span>;
 </span></code></pre>
 <p>The first portion is importing elements that we are going to test, to be defined in the <code>mediations.dart</code> file, and functionality for defining tests, which is in the <code>test</code> package.</p>
 <p>Next up are the tests that are in the <code>main</code> method. As in some other languages, the main method is where the app execution starts. In the case of testing, the tests within the 'main' method are executed. The tests themselves contain information about the purpose of the test, the returned value (or values) of the functionality under test and the expected value of what we believe should be returned.</p>
 <p>Below are some examples of such tests:</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Checking the existance of a Book that exists.&#39;</span><span>, () {</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBook</span><span>(</span><span style="color:#d08770;">0</span><span>), </span><span style="color:#d08770;">true</span><span>);</span><span>
-</span><span>  });</span><span>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Checking the existance of a Book that exists.&#39;</span><span>, () {
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBook</span><span>(</span><span style="color:#d08770;">0</span><span>), </span><span style="color:#d08770;">true</span><span>);
+</span><span>  });
 </span><span>
-</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Checking the existance of a Book that can not exist.&#39;</span><span>, () {</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBook</span><span>(-</span><span style="color:#d08770;">1</span><span>), </span><span style="color:#d08770;">false</span><span>);</span><span>
-</span><span>  });</span><span>
+</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Checking the existance of a Book that can not exist.&#39;</span><span>, () {
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBook</span><span>(-</span><span style="color:#d08770;">1</span><span>), </span><span style="color:#d08770;">false</span><span>);
+</span><span>  });
 </span><span>
-</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Checking the existance of a Book that does not exist.&#39;</span><span>, () {</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBook</span><span>(</span><span style="color:#d08770;">40</span><span>), </span><span style="color:#d08770;">false</span><span>);</span><span>
-</span><span>  });</span><span>
+</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Checking the existance of a Book that does not exist.&#39;</span><span>, () {
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBook</span><span>(</span><span style="color:#d08770;">40</span><span>), </span><span style="color:#d08770;">false</span><span>);
+</span><span>  });
 </span><span>
-</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Checking the existance of a Book Section that exists.&#39;</span><span>, () {</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBookSection</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>), </span><span style="color:#d08770;">true</span><span>);</span><span>
-</span><span>  });</span><span>
+</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Checking the existance of a Book Section that exists.&#39;</span><span>, () {
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBookSection</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>), </span><span style="color:#d08770;">true</span><span>);
+</span><span>  });
 </span><span>
-</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Checking the existance of a Book Section that can not exist.&#39;</span><span>, () {</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBookSection</span><span>(</span><span style="color:#d08770;">0</span><span>, -</span><span style="color:#d08770;">10</span><span>), </span><span style="color:#d08770;">false</span><span>);</span><span>
-</span><span>  });</span><span>
+</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Checking the existance of a Book Section that can not exist.&#39;</span><span>, () {
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBookSection</span><span>(</span><span style="color:#d08770;">0</span><span>, -</span><span style="color:#d08770;">10</span><span>), </span><span style="color:#d08770;">false</span><span>);
+</span><span>  });
 </span><span>
-</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Checking the existance of a Book Section in a non-existent Book.&#39;</span><span>, () {</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBookSection</span><span>(</span><span style="color:#d08770;">40</span><span>, </span><span style="color:#d08770;">0</span><span>), </span><span style="color:#d08770;">false</span><span>);</span><span>
-</span><span>  });</span><span>
+</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Checking the existance of a Book Section in a non-existent Book.&#39;</span><span>, () {
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBookSection</span><span>(</span><span style="color:#d08770;">40</span><span>, </span><span style="color:#d08770;">0</span><span>), </span><span style="color:#d08770;">false</span><span>);
+</span><span>  });
 </span><span>
-</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span>
-</span><span>      </span><span style="color:#a3be8c;">&#39;Checking the existance of a Book Section that does not exist in an existing Book.&#39;</span><span>,</span><span>
-</span><span>      () {</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBookSection</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">40</span><span>), </span><span style="color:#d08770;">false</span><span>);</span><span>
-</span><span>  });</span><span>
+</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(
+</span><span>      </span><span style="color:#a3be8c;">&#39;Checking the existance of a Book Section that does not exist in an existing Book.&#39;</span><span>,
+</span><span>      () {
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">existBookSection</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">40</span><span>), </span><span style="color:#d08770;">false</span><span>);
+</span><span>  });
 </span></code></pre>
 <p>In order to understand what these tests want to achieve, first we need to dive deeper about what functionality that is implemented in <code>Meditations.dart</code> which we intend to test. The purpose of it is to easily find a particular part in the text of 'Meditations'. 'Meditations' itself is divided into a total of 12 books, each with multiple sections of text. Instead of showing the full text of all books on a single screen we want to make the user able to navigate between the text of each of these sections. </p>
 <p>Part of implementing this navigation process requires having the ability to check, for a given book number, whether that book exists. As in Dart indexes start at 0, the method <code>existBook</code> should return <code>true</code> for any integer from 0 to 11, and false otherwise. Later on we will show how we will turn the book and section numbers back to 1-indexed ones in the UI of the app. Similarly to checking the existence of a book, we want to able to check if a specific section in a specific book exists, which the method <code>existBookSection</code> should provide.</p>
 <p>Of course the functionality should not end here. In particular we also want to be able to get the text of the first and last sections of Meditations. In order to keep the return of these search results simple, we also return the book and section numbers (0-indexed) along with the text where possible as well, even though for the first section, we should already know the book and section numbers. </p>
 <p>As Dart is an object oriented language, we create a specific object of the class <code>BookSectionText</code> to hold these elements (more on the definition of this class a bit later).</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the first part of Meditations returns Book 1, Section 1.&#39;</span><span>, () {</span><span>
-</span><span>    </span><span style="color:#ebcb8b;">BookSectionText</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getFirst</span><span>();</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> firstText = </span><span style="color:#ebcb8b;">Meditations</span><span>.book1.first;</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedBookNr = </span><span style="color:#d08770;">0</span><span>;</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedSectionNr = </span><span style="color:#d08770;">0</span><span>;</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.bookNr, expectedBookNr);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.sectionNr, expectedSectionNr);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.text, firstText);</span><span>
-</span><span>  });</span><span>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the first part of Meditations returns Book 1, Section 1.&#39;</span><span>, () {
+</span><span>    </span><span style="color:#ebcb8b;">BookSectionText</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getFirst</span><span>();
+</span><span>    </span><span style="color:#b48ead;">var</span><span> firstText = </span><span style="color:#ebcb8b;">Meditations</span><span>.book1.first;
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedBookNr = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedSectionNr = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.bookNr, expectedBookNr);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.sectionNr, expectedSectionNr);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.text, firstText);
+</span><span>  });
 </span><span>
-</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span>
-</span><span>      </span><span style="color:#a3be8c;">&#39;Getting the last part of Meditations returns last Section of the last Book.&#39;</span><span>,</span><span>
-</span><span>      () {</span><span>
-</span><span>    </span><span style="color:#ebcb8b;">BookSectionText</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getLast</span><span>();</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> lastText = </span><span style="color:#ebcb8b;">Meditations</span><span>.books.last.last;</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedBookNr = </span><span style="color:#ebcb8b;">Meditations</span><span>.books.length - </span><span style="color:#d08770;">1</span><span>;</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedSectionNr = </span><span style="color:#ebcb8b;">Meditations</span><span>.books.last.length - </span><span style="color:#d08770;">1</span><span>;</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.bookNr, expectedBookNr);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.sectionNr, expectedSectionNr);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.text, lastText);</span><span>
-</span><span>  });</span><span>
+</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(
+</span><span>      </span><span style="color:#a3be8c;">&#39;Getting the last part of Meditations returns last Section of the last Book.&#39;</span><span>,
+</span><span>      () {
+</span><span>    </span><span style="color:#ebcb8b;">BookSectionText</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getLast</span><span>();
+</span><span>    </span><span style="color:#b48ead;">var</span><span> lastText = </span><span style="color:#ebcb8b;">Meditations</span><span>.books.last.last;
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedBookNr = </span><span style="color:#ebcb8b;">Meditations</span><span>.books.length - </span><span style="color:#d08770;">1</span><span>;
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedSectionNr = </span><span style="color:#ebcb8b;">Meditations</span><span>.books.last.length - </span><span style="color:#d08770;">1</span><span>;
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.bookNr, expectedBookNr);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.sectionNr, expectedSectionNr);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.text, lastText);
+</span><span>  });
 </span></code></pre>
 <p>The final set of tests we are going over are for the methods for finding the previous section and the next one. This seems generally a straightforward thing to do, when moving to the previous or next section in the same book. However for convenience we also want to move to the next, or previous, book if the these are unavailable in the current book, but exist in another one. So the functions for <code>nextSection</code> and <code>previousSection</code> has to have this 'roll-over' functionality included which will make for a nicer user interface. However even with roll-over, there are cases when we ran out of sections to show (e.g.: when wanting to get the next section after the last one). In this case we use an object of the class <code>NoSuchBookSection</code> to indicate this.</p>
 <p>Below are some tests for the <code>nextSection</code> and <code>previousSection</code> functionality:</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the next Section of a Book.&#39;</span><span>, () {</span><span>
-</span><span>    </span><span style="color:#ebcb8b;">BookSectionText</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getNextSection</span><span>(</span><span style="color:#d08770;">11</span><span>, </span><span style="color:#d08770;">3</span><span>);</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedBookNr = </span><span style="color:#d08770;">11</span><span>;</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedSectionNr = </span><span style="color:#d08770;">4</span><span>;</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedText = </span><span style="color:#ebcb8b;">Meditations</span><span>.books[expectedBookNr][expectedSectionNr];</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.bookNr, expectedBookNr);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.sectionNr, expectedSectionNr);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.text, expectedText);</span><span>
-</span><span>  });</span><span>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the next Section of a Book.&#39;</span><span>, () {
+</span><span>    </span><span style="color:#ebcb8b;">BookSectionText</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getNextSection</span><span>(</span><span style="color:#d08770;">11</span><span>, </span><span style="color:#d08770;">3</span><span>);
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedBookNr = </span><span style="color:#d08770;">11</span><span>;
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedSectionNr = </span><span style="color:#d08770;">4</span><span>;
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedText = </span><span style="color:#ebcb8b;">Meditations</span><span>.books[expectedBookNr][expectedSectionNr];
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.bookNr, expectedBookNr);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.sectionNr, expectedSectionNr);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.text, expectedText);
+</span><span>  });
 </span><span>
-</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the next Section of a Book when not available.&#39;</span><span>, () {</span><span>
-</span><span>    </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getNextSection</span><span>(</span><span style="color:#d08770;">12</span><span>, </span><span style="color:#d08770;">30</span><span>);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst is </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>, </span><span style="color:#d08770;">true</span><span>);</span><span>
-</span><span>  });</span><span>
+</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the next Section of a Book when not available.&#39;</span><span>, () {
+</span><span>    </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getNextSection</span><span>(</span><span style="color:#d08770;">12</span><span>, </span><span style="color:#d08770;">30</span><span>);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst is </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>, </span><span style="color:#d08770;">true</span><span>);
+</span><span>  });
 </span><span>
-</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the next Section in the next Book&#39;</span><span>, () {</span><span>
-</span><span>    </span><span style="color:#ebcb8b;">BookSectionText</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getNextSection</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">16</span><span>);</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedBookNr = </span><span style="color:#d08770;">1</span><span>;</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedSectionNr = </span><span style="color:#d08770;">0</span><span>;</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedText = </span><span style="color:#ebcb8b;">Meditations</span><span>.books[expectedBookNr][expectedSectionNr];</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.bookNr, expectedBookNr);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.sectionNr, expectedSectionNr);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.text, expectedText);</span><span>
-</span><span>  });</span><span>
+</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the next Section in the next Book&#39;</span><span>, () {
+</span><span>    </span><span style="color:#ebcb8b;">BookSectionText</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getNextSection</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">16</span><span>);
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedBookNr = </span><span style="color:#d08770;">1</span><span>;
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedSectionNr = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedText = </span><span style="color:#ebcb8b;">Meditations</span><span>.books[expectedBookNr][expectedSectionNr];
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.bookNr, expectedBookNr);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.sectionNr, expectedSectionNr);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.text, expectedText);
+</span><span>  });
 </span><span>
-</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the previous Section of a Book.&#39;</span><span>, () {</span><span>
-</span><span>    </span><span style="color:#ebcb8b;">BookSectionText</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getPreviousSection</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">3</span><span>);</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedBookNr = </span><span style="color:#d08770;">0</span><span>;</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedSectionNr = </span><span style="color:#d08770;">2</span><span>;</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedText = </span><span style="color:#ebcb8b;">Meditations</span><span>.books[expectedBookNr][expectedSectionNr];</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.bookNr, expectedBookNr);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.sectionNr, expectedSectionNr);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.text, expectedText);</span><span>
-</span><span>  });</span><span>
+</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the previous Section of a Book.&#39;</span><span>, () {
+</span><span>    </span><span style="color:#ebcb8b;">BookSectionText</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getPreviousSection</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">3</span><span>);
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedBookNr = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedSectionNr = </span><span style="color:#d08770;">2</span><span>;
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedText = </span><span style="color:#ebcb8b;">Meditations</span><span>.books[expectedBookNr][expectedSectionNr];
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.bookNr, expectedBookNr);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.sectionNr, expectedSectionNr);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.text, expectedText);
+</span><span>  });
 </span><span>
-</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the previous Section of a Book when not available.&#39;</span><span>, () {</span><span>
-</span><span>    </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getPreviousSection</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst is </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>, </span><span style="color:#d08770;">true</span><span>);</span><span>
-</span><span>  });</span><span>
+</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the previous Section of a Book when not available.&#39;</span><span>, () {
+</span><span>    </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getPreviousSection</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst is </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>, </span><span style="color:#d08770;">true</span><span>);
+</span><span>  });
 </span><span>
-</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the previous Section in the previous Book&#39;</span><span>, () {</span><span>
-</span><span>    </span><span style="color:#ebcb8b;">BookSectionText</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getPreviousSection</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">0</span><span>);</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedBookNr = </span><span style="color:#d08770;">0</span><span>;</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedSectionNr = </span><span style="color:#d08770;">16</span><span>;</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedText = </span><span style="color:#ebcb8b;">Meditations</span><span>.books[expectedBookNr][expectedSectionNr];</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.bookNr, expectedBookNr);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.sectionNr, expectedSectionNr);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.text, expectedText);</span><span>
-</span><span>  });</span><span>
-</span><span>}</span><span>
+</span><span>  </span><span style="color:#8fa1b3;">test</span><span>(</span><span style="color:#a3be8c;">&#39;Getting the previous Section in the previous Book&#39;</span><span>, () {
+</span><span>    </span><span style="color:#ebcb8b;">BookSectionText</span><span> bst = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getPreviousSection</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">0</span><span>);
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedBookNr = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedSectionNr = </span><span style="color:#d08770;">16</span><span>;
+</span><span>    </span><span style="color:#b48ead;">var</span><span> expectedText = </span><span style="color:#ebcb8b;">Meditations</span><span>.books[expectedBookNr][expectedSectionNr];
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.bookNr, expectedBookNr);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.sectionNr, expectedSectionNr);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(bst.text, expectedText);
+</span><span>  });
+</span><span>}
 </span></code></pre>
 <p>Now that we got the tests for the core functionality of navigating the text of Meditations done. Next we will go over the actual implementation of what we aim to test in the file <code>meditations.dart</code>.</p>
 <p>First off are the class definitions for the classes that we mentioned above:</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> {}</span><span>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> {}
 </span><span>
-</span><span style="color:#65737e;">// This represents the result of search, which results in a text with the attached book and section number.</span><span>
-</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">BookSectionText </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> {</span><span>
-</span><span>  </span><span style="color:#ebcb8b;">int</span><span> bookNr;</span><span>
-</span><span>  </span><span style="color:#ebcb8b;">int</span><span> sectionNr;</span><span>
-</span><span>  </span><span style="color:#ebcb8b;">String</span><span> text;</span><span>
-</span><span>}</span><span>
+</span><span style="color:#65737e;">// This represents the result of search, which results in a text with the attached book and section number.
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">BookSectionText </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> {
+</span><span>  </span><span style="color:#ebcb8b;">int</span><span> bookNr;
+</span><span>  </span><span style="color:#ebcb8b;">int</span><span> sectionNr;
+</span><span>  </span><span style="color:#ebcb8b;">String</span><span> text;
+</span><span>}
 </span><span>
-</span><span style="color:#65737e;">// This represent the result of a search, in which case no section is found.</span><span>
-</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">NoSuchBookSection </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> {}</span><span>
+</span><span style="color:#65737e;">// This represent the result of a search, in which case no section is found.
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">NoSuchBookSection </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> {}
 </span></code></pre>
 <p>If the reader is familiar with an object oriented language, the definitions should be reasonably straightforward. The search results are represented by two types of classes that we used in our tests. An instance of a class <code>NoSuchBookSection</code> represents that no valid text could be returned and an instance <code>BookSectionText</code> represents the search results that returned the text of a specific section and its book/section numbers. These are both subclasses of the class <code>BookSectionSearchResult</code> which allows us easily define the return type of the methods <code>getPreviousSection</code> and <code>getNextSection</code>.</p>
 <p>Also note that the code here contains single line comments which are denoted after a <code>//</code> in Dart.</p>
 <p>Next up is the definition of the <code>Meditations</code> class that describes the text of Meditations by Marcus Aurelius and how to access them.</p>
 <p>It starts with the snippet:</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Meditations</span><span> {</span><span>
-</span><span>  </span><span style="color:#b48ead;">static final</span><span> book1 = [</span><span>
-</span><span>    </span><span style="color:#a3be8c;">&#39;&#39;&#39;I. Of my grandfather Verus I have learned to be gentle and meek, ... </span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">    // End of snippet. </span><span style="color:#a3be8c;">
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Meditations</span><span> {
+</span><span>  </span><span style="color:#b48ead;">static final</span><span> book1 = [
+</span><span>    </span><span style="color:#a3be8c;">&#39;&#39;&#39;I. Of my grandfather Verus I have learned to be gentle and meek, ... 
+</span><span style="color:#a3be8c;">    // End of snippet. 
 </span></code></pre>
 <p>Of course quoting the full text of the representation is too much for this article. Even in the <a href="https://github.com/newres/meditations">code of this demo app</a> we only represent the full text of the first and last books in detail at the moment, although the structure to implement every section exists. </p>
 <p>However we can say we represent the text as a list of books, where each book is itself a list of sections which are represented by the text of these sections.</p>
 <p>In Dart, we can represent a list as a set of items in between square brackets, i.e. <code>[]</code>, such as follows:</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span>  </span><span style="color:#b48ead;">static final</span><span> books = [</span><span>
-</span><span>    book1,</span><span>
-</span><span>    book2,</span><span>
-</span><span>    book3,</span><span>
-</span><span>    book4,</span><span>
-</span><span>    book5,</span><span>
-</span><span>    book6,</span><span>
-</span><span>    book7,</span><span>
-</span><span>    book8,</span><span>
-</span><span>    book9,</span><span>
-</span><span>    book10,</span><span>
-</span><span>    book11,</span><span>
-</span><span>    book12</span><span>
-</span><span>  ];</span><span>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span>  </span><span style="color:#b48ead;">static final</span><span> books = [
+</span><span>    book1,
+</span><span>    book2,
+</span><span>    book3,
+</span><span>    book4,
+</span><span>    book5,
+</span><span>    book6,
+</span><span>    book7,
+</span><span>    book8,
+</span><span>    book9,
+</span><span>    book10,
+</span><span>    book11,
+</span><span>    book12
+</span><span>  ];
 </span></code></pre>
 <p>The other interesting part is that we use the keywords <code>static</code> and <code>final</code>. The <code>static</code> keyword indicates that the variables are class-wide, as the text in these books would be same for any instance of the <code>Meditations</code> class. The <code>final</code> keyword indicates that we do not intend to change these variables once they are defined, as the text of Meditations will not be changing in our app. </p>
 <p>The final piece of our <code>Meditations</code> class are methods for accessing and navigating the texts that we described previously in our tests, such as <code>getFirst</code>, <code>getLast</code>, <code>getPreviousSection</code> and <code>getNextSection</code>. Hopefully following them should be reasonably straightforward given the comments and our tests. The only additional thing to note that these methods are also marked as <code>static</code>. As the <code>Meditations</code> class does not contain any variables that would change per instance, every one of these methods could be made available at a class level (e.g. it could be called as <code>Meditations.getNextSection(11, 3)</code>). </p>
 <p>See the text of these methods below:</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#65737e;">// We assume that there is always at least one book in the list of books and at least one section in each book with a text.</span><span>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#65737e;">// We assume that there is always at least one book in the list of books and at least one section in each book with a text.
 </span><span>
-</span><span>  </span><span style="color:#65737e;">// Checks if the book with given book number exists.</span><span>
-</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">bool </span><span style="color:#8fa1b3;">existBook</span><span>(</span><span style="color:#ebcb8b;">int</span><span> bookNr) {</span><span>
-</span><span>    </span><span style="color:#b48ead;">if</span><span> (bookNr &lt; </span><span style="color:#d08770;">0 </span><span>|| bookNr &gt; books.length - </span><span style="color:#d08770;">1</span><span>) {</span><span>
-</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span>;</span><span>
-</span><span>    } </span><span style="color:#b48ead;">else</span><span> {</span><span>
-</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">true</span><span>;</span><span>
-</span><span>    }</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#65737e;">// Checks if the book with given book number exists.
+</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">bool </span><span style="color:#8fa1b3;">existBook</span><span>(</span><span style="color:#ebcb8b;">int</span><span> bookNr) {
+</span><span>    </span><span style="color:#b48ead;">if</span><span> (bookNr &lt; </span><span style="color:#d08770;">0 </span><span>|| bookNr &gt; books.length - </span><span style="color:#d08770;">1</span><span>) {
+</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span>;
+</span><span>    } </span><span style="color:#b48ead;">else</span><span> {
+</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">true</span><span>;
+</span><span>    }
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#65737e;">// Checks if the section with given book and section numbers exists.</span><span>
-</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">bool </span><span style="color:#8fa1b3;">existBookSection</span><span>(</span><span style="color:#ebcb8b;">int</span><span> bookNr, </span><span style="color:#ebcb8b;">int</span><span> sectionNr) {</span><span>
-</span><span>    </span><span style="color:#b48ead;">if</span><span> (!</span><span style="color:#8fa1b3;">existBook</span><span>(bookNr)) {</span><span>
-</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span>;</span><span>
-</span><span>    } </span><span style="color:#b48ead;">else</span><span> {</span><span>
-</span><span>      </span><span style="color:#b48ead;">var</span><span> selectedBook = books[bookNr];</span><span>
-</span><span>      </span><span style="color:#b48ead;">if</span><span> (sectionNr &lt; </span><span style="color:#d08770;">0 </span><span>|| sectionNr &gt; selectedBook.length - </span><span style="color:#d08770;">1</span><span>) {</span><span>
-</span><span>        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span>;</span><span>
-</span><span>      } </span><span style="color:#b48ead;">else</span><span> {</span><span>
-</span><span>        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">true</span><span>;</span><span>
-</span><span>      }</span><span>
-</span><span>    }</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#65737e;">// Checks if the section with given book and section numbers exists.
+</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">bool </span><span style="color:#8fa1b3;">existBookSection</span><span>(</span><span style="color:#ebcb8b;">int</span><span> bookNr, </span><span style="color:#ebcb8b;">int</span><span> sectionNr) {
+</span><span>    </span><span style="color:#b48ead;">if</span><span> (!</span><span style="color:#8fa1b3;">existBook</span><span>(bookNr)) {
+</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span>;
+</span><span>    } </span><span style="color:#b48ead;">else</span><span> {
+</span><span>      </span><span style="color:#b48ead;">var</span><span> selectedBook = books[bookNr];
+</span><span>      </span><span style="color:#b48ead;">if</span><span> (sectionNr &lt; </span><span style="color:#d08770;">0 </span><span>|| sectionNr &gt; selectedBook.length - </span><span style="color:#d08770;">1</span><span>) {
+</span><span>        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span>;
+</span><span>      } </span><span style="color:#b48ead;">else</span><span> {
+</span><span>        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">true</span><span>;
+</span><span>      }
+</span><span>    }
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#65737e;">// Returns the length of a book, in the number of sections.</span><span>
-</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">int </span><span style="color:#8fa1b3;">bookLength</span><span>(</span><span style="color:#ebcb8b;">int</span><span> bookNr) {</span><span>
-</span><span>    </span><span style="color:#b48ead;">if</span><span> (!</span><span style="color:#8fa1b3;">existBook</span><span>(bookNr)) {</span><span>
-</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span>;</span><span>
-</span><span>    } </span><span style="color:#b48ead;">else</span><span> {</span><span>
-</span><span>      </span><span style="color:#b48ead;">var</span><span> selectedBook = books[bookNr];</span><span>
-</span><span>      </span><span style="color:#b48ead;">return</span><span> selectedBook.length;</span><span>
-</span><span>    }</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#65737e;">// Returns the length of a book, in the number of sections.
+</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">int </span><span style="color:#8fa1b3;">bookLength</span><span>(</span><span style="color:#ebcb8b;">int</span><span> bookNr) {
+</span><span>    </span><span style="color:#b48ead;">if</span><span> (!</span><span style="color:#8fa1b3;">existBook</span><span>(bookNr)) {
+</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span>;
+</span><span>    } </span><span style="color:#b48ead;">else</span><span> {
+</span><span>      </span><span style="color:#b48ead;">var</span><span> selectedBook = books[bookNr];
+</span><span>      </span><span style="color:#b48ead;">return</span><span> selectedBook.length;
+</span><span>    }
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#65737e;">// Returns the search result for a given book and section number.</span><span>
-</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">BookSectionSearchResult </span><span style="color:#8fa1b3;">getText</span><span>(</span><span style="color:#ebcb8b;">int</span><span> bookNr, </span><span style="color:#ebcb8b;">int</span><span> sectionNr) {</span><span>
-</span><span>    </span><span style="color:#b48ead;">if</span><span> (!</span><span style="color:#8fa1b3;">existBookSection</span><span>(bookNr, sectionNr)) {</span><span>
-</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>();</span><span>
-</span><span>    } </span><span style="color:#b48ead;">else</span><span> {</span><span>
-</span><span>      </span><span style="color:#b48ead;">var</span><span> bst = </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">BookSectionText</span><span>();</span><span>
-</span><span>      bst.bookNr = bookNr;</span><span>
-</span><span>      bst.sectionNr = sectionNr;</span><span>
-</span><span>      bst.text = books[bookNr][sectionNr];</span><span>
-</span><span>      </span><span style="color:#b48ead;">return</span><span> bst;</span><span>
-</span><span>    }</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#65737e;">// Returns the search result for a given book and section number.
+</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">BookSectionSearchResult </span><span style="color:#8fa1b3;">getText</span><span>(</span><span style="color:#ebcb8b;">int</span><span> bookNr, </span><span style="color:#ebcb8b;">int</span><span> sectionNr) {
+</span><span>    </span><span style="color:#b48ead;">if</span><span> (!</span><span style="color:#8fa1b3;">existBookSection</span><span>(bookNr, sectionNr)) {
+</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>();
+</span><span>    } </span><span style="color:#b48ead;">else</span><span> {
+</span><span>      </span><span style="color:#b48ead;">var</span><span> bst = </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">BookSectionText</span><span>();
+</span><span>      bst.bookNr = bookNr;
+</span><span>      bst.sectionNr = sectionNr;
+</span><span>      bst.text = books[bookNr][sectionNr];
+</span><span>      </span><span style="color:#b48ead;">return</span><span> bst;
+</span><span>    }
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#65737e;">// Returns the first section.</span><span>
-</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">BookSectionSearchResult </span><span style="color:#8fa1b3;">getFirst</span><span>() {</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> selectedBook = books[</span><span style="color:#d08770;">0</span><span>];</span><span>
-</span><span>    </span><span style="color:#b48ead;">if</span><span> (selectedBook == </span><span style="color:#d08770;">null</span><span>) {</span><span>
-</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>();</span><span>
-</span><span>    }</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> selectedSection = selectedBook[</span><span style="color:#d08770;">0</span><span>];</span><span>
-</span><span>    </span><span style="color:#b48ead;">if</span><span> (selectedSection == </span><span style="color:#d08770;">null</span><span>) {</span><span>
-</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>();</span><span>
-</span><span>    } </span><span style="color:#b48ead;">else</span><span> {</span><span>
-</span><span>      </span><span style="color:#b48ead;">var</span><span> bst = </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">BookSectionText</span><span>();</span><span>
-</span><span>      bst.bookNr = </span><span style="color:#d08770;">0</span><span>;</span><span>
-</span><span>      bst.sectionNr = </span><span style="color:#d08770;">0</span><span>;</span><span>
-</span><span>      bst.text = selectedSection;</span><span>
-</span><span>      </span><span style="color:#b48ead;">return</span><span> bst;</span><span>
-</span><span>    }</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#65737e;">// Returns the first section.
+</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">BookSectionSearchResult </span><span style="color:#8fa1b3;">getFirst</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">var</span><span> selectedBook = books[</span><span style="color:#d08770;">0</span><span>];
+</span><span>    </span><span style="color:#b48ead;">if</span><span> (selectedBook == </span><span style="color:#d08770;">null</span><span>) {
+</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>();
+</span><span>    }
+</span><span>    </span><span style="color:#b48ead;">var</span><span> selectedSection = selectedBook[</span><span style="color:#d08770;">0</span><span>];
+</span><span>    </span><span style="color:#b48ead;">if</span><span> (selectedSection == </span><span style="color:#d08770;">null</span><span>) {
+</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>();
+</span><span>    } </span><span style="color:#b48ead;">else</span><span> {
+</span><span>      </span><span style="color:#b48ead;">var</span><span> bst = </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">BookSectionText</span><span>();
+</span><span>      bst.bookNr = </span><span style="color:#d08770;">0</span><span>;
+</span><span>      bst.sectionNr = </span><span style="color:#d08770;">0</span><span>;
+</span><span>      bst.text = selectedSection;
+</span><span>      </span><span style="color:#b48ead;">return</span><span> bst;
+</span><span>    }
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#65737e;">// Returns the last section.</span><span>
-</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">BookSectionSearchResult </span><span style="color:#8fa1b3;">getLast</span><span>() {</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> selectedBook = books.last;</span><span>
-</span><span>    </span><span style="color:#b48ead;">if</span><span> (selectedBook == </span><span style="color:#d08770;">null</span><span>) {</span><span>
-</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>();</span><span>
-</span><span>    }</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> selectedSection = selectedBook.last;</span><span>
-</span><span>    </span><span style="color:#b48ead;">if</span><span> (selectedSection == </span><span style="color:#d08770;">null</span><span>) {</span><span>
-</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>();</span><span>
-</span><span>    } </span><span style="color:#b48ead;">else</span><span> {</span><span>
-</span><span>      </span><span style="color:#b48ead;">var</span><span> bst = </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">BookSectionText</span><span>();</span><span>
-</span><span>      bst.bookNr = </span><span style="color:#ebcb8b;">Meditations</span><span>.books.length - </span><span style="color:#d08770;">1</span><span>;</span><span>
-</span><span>      bst.sectionNr = </span><span style="color:#ebcb8b;">Meditations</span><span>.books.last.length - </span><span style="color:#d08770;">1</span><span>;</span><span>
-</span><span>      bst.text = selectedSection;</span><span>
-</span><span>      </span><span style="color:#b48ead;">return</span><span> bst;</span><span>
-</span><span>    }</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#65737e;">// Returns the last section.
+</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">BookSectionSearchResult </span><span style="color:#8fa1b3;">getLast</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">var</span><span> selectedBook = books.last;
+</span><span>    </span><span style="color:#b48ead;">if</span><span> (selectedBook == </span><span style="color:#d08770;">null</span><span>) {
+</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>();
+</span><span>    }
+</span><span>    </span><span style="color:#b48ead;">var</span><span> selectedSection = selectedBook.last;
+</span><span>    </span><span style="color:#b48ead;">if</span><span> (selectedSection == </span><span style="color:#d08770;">null</span><span>) {
+</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>();
+</span><span>    } </span><span style="color:#b48ead;">else</span><span> {
+</span><span>      </span><span style="color:#b48ead;">var</span><span> bst = </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">BookSectionText</span><span>();
+</span><span>      bst.bookNr = </span><span style="color:#ebcb8b;">Meditations</span><span>.books.length - </span><span style="color:#d08770;">1</span><span>;
+</span><span>      bst.sectionNr = </span><span style="color:#ebcb8b;">Meditations</span><span>.books.last.length - </span><span style="color:#d08770;">1</span><span>;
+</span><span>      bst.text = selectedSection;
+</span><span>      </span><span style="color:#b48ead;">return</span><span> bst;
+</span><span>    }
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#65737e;">// Given a book- and a section number, gets the next section.</span><span>
-</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">BookSectionSearchResult </span><span style="color:#8fa1b3;">getNextSection</span><span>(</span><span style="color:#ebcb8b;">int</span><span> bookNr, </span><span style="color:#ebcb8b;">int</span><span> sectionNr) {</span><span>
-</span><span>    </span><span style="color:#65737e;">//Get the next section in the current book</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> nextSection = </span><span style="color:#8fa1b3;">getText</span><span>(bookNr, sectionNr + </span><span style="color:#d08770;">1</span><span>);</span><span>
-</span><span>    </span><span style="color:#65737e;">//If it exits return it</span><span>
-</span><span>    </span><span style="color:#b48ead;">if</span><span> (!(nextSection is </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>)) {</span><span>
-</span><span>      </span><span style="color:#b48ead;">return</span><span> nextSection;</span><span>
-</span><span>    } </span><span style="color:#b48ead;">else</span><span> {</span><span>
-</span><span>      </span><span style="color:#65737e;">//Otherwise get the first section of the next book</span><span>
-</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#8fa1b3;">getText</span><span>(bookNr + </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">0</span><span>);</span><span>
-</span><span>    }</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#65737e;">// Given a book- and a section number, gets the next section.
+</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">BookSectionSearchResult </span><span style="color:#8fa1b3;">getNextSection</span><span>(</span><span style="color:#ebcb8b;">int</span><span> bookNr, </span><span style="color:#ebcb8b;">int</span><span> sectionNr) {
+</span><span>    </span><span style="color:#65737e;">//Get the next section in the current book
+</span><span>    </span><span style="color:#b48ead;">var</span><span> nextSection = </span><span style="color:#8fa1b3;">getText</span><span>(bookNr, sectionNr + </span><span style="color:#d08770;">1</span><span>);
+</span><span>    </span><span style="color:#65737e;">//If it exits return it
+</span><span>    </span><span style="color:#b48ead;">if</span><span> (!(nextSection is </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>)) {
+</span><span>      </span><span style="color:#b48ead;">return</span><span> nextSection;
+</span><span>    } </span><span style="color:#b48ead;">else</span><span> {
+</span><span>      </span><span style="color:#65737e;">//Otherwise get the first section of the next book
+</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#8fa1b3;">getText</span><span>(bookNr + </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">0</span><span>);
+</span><span>    }
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#65737e;">// Given a book- and a section number, gets the previous section.</span><span>
-</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">BookSectionSearchResult </span><span style="color:#8fa1b3;">getPreviousSection</span><span>(</span><span style="color:#ebcb8b;">int</span><span> bookNr, </span><span style="color:#ebcb8b;">int</span><span> sectionNr) {</span><span>
-</span><span>    </span><span style="color:#65737e;">//Get the previous section in the current book</span><span>
-</span><span>    </span><span style="color:#b48ead;">var</span><span> previousSection = </span><span style="color:#8fa1b3;">getText</span><span>(bookNr, sectionNr - </span><span style="color:#d08770;">1</span><span>);</span><span>
-</span><span>    </span><span style="color:#65737e;">//If it exits return it</span><span>
-</span><span>    </span><span style="color:#b48ead;">if</span><span> (!(previousSection is </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>)) {</span><span>
-</span><span>      </span><span style="color:#b48ead;">return</span><span> previousSection;</span><span>
-</span><span>    } </span><span style="color:#b48ead;">else</span><span> {</span><span>
-</span><span>      </span><span style="color:#65737e;">//Otherwise get the last section of the previous book</span><span>
-</span><span>      </span><span style="color:#b48ead;">var</span><span> previousBookNr = bookNr - </span><span style="color:#d08770;">1</span><span>;</span><span>
-</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#8fa1b3;">getText</span><span>(previousBookNr, </span><span style="color:#8fa1b3;">bookLength</span><span>(previousBookNr) - </span><span style="color:#d08770;">1</span><span>);</span><span>
-</span><span>    }</span><span>
-</span><span>  }</span><span>
-</span><span>}</span><span>
+</span><span>  </span><span style="color:#65737e;">// Given a book- and a section number, gets the previous section.
+</span><span>  </span><span style="color:#b48ead;">static </span><span style="color:#ebcb8b;">BookSectionSearchResult </span><span style="color:#8fa1b3;">getPreviousSection</span><span>(</span><span style="color:#ebcb8b;">int</span><span> bookNr, </span><span style="color:#ebcb8b;">int</span><span> sectionNr) {
+</span><span>    </span><span style="color:#65737e;">//Get the previous section in the current book
+</span><span>    </span><span style="color:#b48ead;">var</span><span> previousSection = </span><span style="color:#8fa1b3;">getText</span><span>(bookNr, sectionNr - </span><span style="color:#d08770;">1</span><span>);
+</span><span>    </span><span style="color:#65737e;">//If it exits return it
+</span><span>    </span><span style="color:#b48ead;">if</span><span> (!(previousSection is </span><span style="color:#ebcb8b;">NoSuchBookSection</span><span>)) {
+</span><span>      </span><span style="color:#b48ead;">return</span><span> previousSection;
+</span><span>    } </span><span style="color:#b48ead;">else</span><span> {
+</span><span>      </span><span style="color:#65737e;">//Otherwise get the last section of the previous book
+</span><span>      </span><span style="color:#b48ead;">var</span><span> previousBookNr = bookNr - </span><span style="color:#d08770;">1</span><span>;
+</span><span>      </span><span style="color:#b48ead;">return </span><span style="color:#8fa1b3;">getText</span><span>(previousBookNr, </span><span style="color:#8fa1b3;">bookLength</span><span>(previousBookNr) - </span><span style="color:#d08770;">1</span><span>);
+</span><span>    }
+</span><span>  }
+</span><span>}
 </span></code></pre>
 <p>We have now covered two of the four main files responsible for the functionality of our app, notably the functionality to navigate the text of Meditations and the tests for them. The purpose of the other two is to create the app using this functionality for navigating the text with the Flutter framework (<code>main.dart</code>) and the tests for the app (<code>widget_test.dart</code>). </p>
 <p>Let us start with the test first. One of the nice features of the Flutter framework is that one can test the full app nearly as easily than any other Dart code. </p>
 <p>First we start importing the functionality for testing, as well as our main app that we aim to test:</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:flutter/material.dart&#39;</span><span>;</span><span>
-</span><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:flutter_test/flutter_test.dart&#39;</span><span>;</span><span>
-</span><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:meditations/main.dart&#39;</span><span>;</span><span>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:flutter/material.dart&#39;</span><span>;
+</span><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:flutter_test/flutter_test.dart&#39;</span><span>;
+</span><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:meditations/main.dart&#39;</span><span>;
 </span></code></pre>
 <p>Next up is the main method with the functionality that we aim to test. This functionality is similar to the functionality that we have shown previously of our app, seen here again below:</p>
 <p>{{&lt; figure src=&quot;/img/post/2020/meditations/meditationsapp.gif&quot; title=&quot;Navigating the text of Meditations in the app running on an Android emulator.&quot; &gt;}}</p>
@@ -411,75 +411,75 @@ wrote for guidance and self-improvement. While it is likely that the emperor wro
 <p>On the screen we not only navigate to the right text, but we also show the number of the book and section of the text that we are currently reading. 
 We use this information to create a navigation test, as once the right icon has been tapped, we should be able to predict and check the book and section numbers that should now be on screen. </p>
 <p>The test is all tied together with the test functionality of Flutter for setting up the widgets (the elements of interaction) of the app for testing, redrawing the elements after a (simulated) interaction and checking them (more documentation on testing Flutter widgets can be found in the <a href="https://flutter.dev/docs/cookbook/testing/widget/introduction">Flutter documentation</a>). The code of this for the app can be seen as below.</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">main</span><span>() {</span><span>
-</span><span>  </span><span style="color:#8fa1b3;">testWidgets</span><span>(</span><span style="color:#a3be8c;">&#39;Bottom navigation smoke test&#39;</span><span>, (</span><span style="color:#ebcb8b;">WidgetTester</span><span> tester) </span><span style="color:#b48ead;">async</span><span> {</span><span>
-</span><span>    </span><span style="color:#65737e;">// Build the app and trigger a frame.</span><span>
-</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">pumpWidget</span><span>(</span><span style="color:#ebcb8b;">MyApp</span><span>());</span><span>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>  </span><span style="color:#8fa1b3;">testWidgets</span><span>(</span><span style="color:#a3be8c;">&#39;Bottom navigation smoke test&#39;</span><span>, (</span><span style="color:#ebcb8b;">WidgetTester</span><span> tester) </span><span style="color:#b48ead;">async</span><span> {
+</span><span>    </span><span style="color:#65737e;">// Build the app and trigger a frame.
+</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">pumpWidget</span><span>(</span><span style="color:#ebcb8b;">MyApp</span><span>());
 </span><span>
-</span><span>    </span><span style="color:#65737e;">// Verify that the title shows Book 1 and Section 1.</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 1 Section 1&#39;</span><span>), findsOneWidget);</span><span>
+</span><span>    </span><span style="color:#65737e;">// Verify that the title shows Book 1 and Section 1.
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 1 Section 1&#39;</span><span>), findsOneWidget);
 </span><span>
-</span><span>    </span><span style="color:#65737e;">// Tap the icon for next and trigger a frame.</span><span>
-</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">tap</span><span>(find.</span><span style="color:#8fa1b3;">byIcon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.navigate_next));</span><span>
-</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">pump</span><span>();</span><span>
+</span><span>    </span><span style="color:#65737e;">// Tap the icon for next and trigger a frame.
+</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">tap</span><span>(find.</span><span style="color:#8fa1b3;">byIcon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.navigate_next));
+</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">pump</span><span>();
 </span><span>
-</span><span>    </span><span style="color:#65737e;">// Verify that the title has changed correctly.</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 1 Section 2&#39;</span><span>), findsOneWidget);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 1 Section 1&#39;</span><span>), findsNothing);</span><span>
+</span><span>    </span><span style="color:#65737e;">// Verify that the title has changed correctly.
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 1 Section 2&#39;</span><span>), findsOneWidget);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 1 Section 1&#39;</span><span>), findsNothing);
 </span><span>
-</span><span>    </span><span style="color:#65737e;">// Tap the icon for last and trigger a frame.</span><span>
-</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">tap</span><span>(find.</span><span style="color:#8fa1b3;">byIcon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.last_page));</span><span>
-</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">pump</span><span>();</span><span>
+</span><span>    </span><span style="color:#65737e;">// Tap the icon for last and trigger a frame.
+</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">tap</span><span>(find.</span><span style="color:#8fa1b3;">byIcon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.last_page));
+</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">pump</span><span>();
 </span><span>
-</span><span>    </span><span style="color:#65737e;">// Verify that the title has changed correctly.</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 12 Section 26&#39;</span><span>), findsOneWidget);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 1 Section 2&#39;</span><span>), findsNothing);</span><span>
+</span><span>    </span><span style="color:#65737e;">// Verify that the title has changed correctly.
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 12 Section 26&#39;</span><span>), findsOneWidget);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 1 Section 2&#39;</span><span>), findsNothing);
 </span><span>
-</span><span>    </span><span style="color:#65737e;">// Tap the icon for previous and trigger a frame.</span><span>
-</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">tap</span><span>(find.</span><span style="color:#8fa1b3;">byIcon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.navigate_before));</span><span>
-</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">pump</span><span>();</span><span>
+</span><span>    </span><span style="color:#65737e;">// Tap the icon for previous and trigger a frame.
+</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">tap</span><span>(find.</span><span style="color:#8fa1b3;">byIcon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.navigate_before));
+</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">pump</span><span>();
 </span><span>
-</span><span>    </span><span style="color:#65737e;">// Verify that the title has changed correctly.</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 12 Section 25&#39;</span><span>), findsOneWidget);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 12 Section 26&#39;</span><span>), findsNothing);</span><span>
+</span><span>    </span><span style="color:#65737e;">// Verify that the title has changed correctly.
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 12 Section 25&#39;</span><span>), findsOneWidget);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 12 Section 26&#39;</span><span>), findsNothing);
 </span><span>
-</span><span>    </span><span style="color:#65737e;">// Tap the icon for first and trigger a frame.</span><span>
-</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">tap</span><span>(find.</span><span style="color:#8fa1b3;">byIcon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.first_page));</span><span>
-</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">pump</span><span>();</span><span>
+</span><span>    </span><span style="color:#65737e;">// Tap the icon for first and trigger a frame.
+</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">tap</span><span>(find.</span><span style="color:#8fa1b3;">byIcon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.first_page));
+</span><span>    </span><span style="color:#b48ead;">await</span><span> tester.</span><span style="color:#8fa1b3;">pump</span><span>();
 </span><span>
-</span><span>    </span><span style="color:#65737e;">// Verify that the title has changed correctly.</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 1 Section 1&#39;</span><span>), findsOneWidget);</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 12 Section 25&#39;</span><span>), findsNothing);</span><span>
-</span><span>  });</span><span>
-</span><span>}</span><span>
+</span><span>    </span><span style="color:#65737e;">// Verify that the title has changed correctly.
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 1 Section 1&#39;</span><span>), findsOneWidget);
+</span><span>    </span><span style="color:#8fa1b3;">expect</span><span>(find.</span><span style="color:#8fa1b3;">text</span><span>(</span><span style="color:#a3be8c;">&#39;Meditations Book 12 Section 25&#39;</span><span>), findsNothing);
+</span><span>  });
+</span><span>}
 </span></code></pre>
 <p>Now all that remains is to show how the actual app is put together. We will go through the code of it here, found in <code>main.dart</code>, step by step. </p>
 <p>First we start with the imports of the widget library we are using as well as our implementation of accessing the text of Meditations.</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:flutter/material.dart&#39;</span><span>;</span><span>
-</span><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;mediations.dart&#39;</span><span>;</span><span>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:flutter/material.dart&#39;</span><span>;
+</span><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;mediations.dart&#39;</span><span>;
 </span></code></pre>
 <p>Next is, the very short main method, that ensures the app we are building is run when requested.</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">main</span><span>() {</span><span>
-</span><span>  </span><span style="color:#65737e;">// The main method runs the app that was described</span><span>
-</span><span>  </span><span style="color:#8fa1b3;">runApp</span><span>(</span><span style="color:#ebcb8b;">MyApp</span><span>());</span><span>
-</span><span>}</span><span>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>  </span><span style="color:#65737e;">// The main method runs the app that was described
+</span><span>  </span><span style="color:#8fa1b3;">runApp</span><span>(</span><span style="color:#ebcb8b;">MyApp</span><span>());
+</span><span>}
 </span></code></pre>
 <p>As mentioned in our description of the test, this app consists of a tree of <a href="https://flutter.dev/docs/development/ui/widgets-intro">widgets</a> (elements of interaction), the root of which we identify with <code>MyApp</code> in the code. This MyApp widget is the one that gets run by the main method seen above.</p>
 <p>The widgets themselves have properties that contain the elements that the widget is using. For example the title of the app, the theme of the app and the other widgets it uses such as a widget for a home page. The main job of the widget is to implement a specific build function that describes how these various elements fit together. In the case of <code>MyApp</code> we are creating a <a href="https://api.flutter.dev/flutter/material/MaterialApp-class.html">MaterialApp</a> customized to our specific needs. This includes a home page for navigating the text of Mediations, as well as a theme that uses a color (hopefully) close enough to <a href="https://en.wikipedia.org/wiki/Tyrian_purple">Imperial purple</a>.</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">MyApp </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">StatelessWidget</span><span> {</span><span>
-</span><span>  </span><span style="color:#65737e;">// The app consists of a tree of widgets, of which this is the root.</span><span>
-</span><span>  </span><span style="color:#b48ead;">@override</span><span>
-</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {</span><span>
-</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">MaterialApp</span><span>(</span><span>
-</span><span>      title: </span><span style="color:#a3be8c;">&#39;Meditations&#39;</span><span>,</span><span>
-</span><span>      theme: </span><span style="color:#ebcb8b;">ThemeData</span><span>(</span><span>
-</span><span>        primarySwatch: </span><span style="color:#ebcb8b;">Colors</span><span>.purple,</span><span>
-</span><span>        visualDensity: </span><span style="color:#ebcb8b;">VisualDensity</span><span>.adaptivePlatformDensity,</span><span>
-</span><span>      ),</span><span>
-</span><span>      home: </span><span style="color:#ebcb8b;">MyHomePage</span><span>(title: </span><span style="color:#a3be8c;">&#39;Meditations&#39;</span><span>),</span><span>
-</span><span>    );</span><span>
-</span><span>  }</span><span>
-</span><span>}</span><span>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">MyApp </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">StatelessWidget</span><span> {
+</span><span>  </span><span style="color:#65737e;">// The app consists of a tree of widgets, of which this is the root.
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">MaterialApp</span><span>(
+</span><span>      title: </span><span style="color:#a3be8c;">&#39;Meditations&#39;</span><span>,
+</span><span>      theme: </span><span style="color:#ebcb8b;">ThemeData</span><span>(
+</span><span>        primarySwatch: </span><span style="color:#ebcb8b;">Colors</span><span>.purple,
+</span><span>        visualDensity: </span><span style="color:#ebcb8b;">VisualDensity</span><span>.adaptivePlatformDensity,
+</span><span>      ),
+</span><span>      home: </span><span style="color:#ebcb8b;">MyHomePage</span><span>(title: </span><span style="color:#a3be8c;">&#39;Meditations&#39;</span><span>),
+</span><span>    );
+</span><span>  }
+</span><span>}
 </span></code></pre>
 <p>The previous Widget does not carry an internal, mutable, state directly in itself (hence why it is an extension of a <a href="https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html">StatelessWidget</a>). However, as one can deduce from our tests, we want to keep information such as the current book and section number around and display these.</p>
 <p>In order to get this done, we use an extension of <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a> named <code>MyHomePage</code> which carries the state. The state itself contains the elements of book number, section number and the text to be shown on page. In addition, there are methods for manipulating the state and showing it. </p>
@@ -487,168 +487,168 @@ We use this information to create a navigation test, as once the right icon has 
 <p>The methods for showing the state are reasonably straightforward. we mostly use these to translate the internally 0-indexed book- and section numbers into 1 indexed ones to match the actual numbers used in Meditations (albeit not with Roman Numerals though that would be a nice future feature for the app).</p>
 <p>The final part is making sure there are widgets for showing the state and interacting with the state. As one can see in the animation of the screen, as well is in the test, we have a section showing the current section and page number, a text area that scrolls showing the current section and a bottom navigation bar to change the current section. </p>
 <p>The code for all of this, when put together, can be seen below:</p>
-<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">MyHomePage </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">StatefulWidget</span><span> {</span><span>
-</span><span>  </span><span style="color:#65737e;">// The homepage of the app, which also creates and holds the state.</span><span>
-</span><span>  </span><span style="color:#ebcb8b;">MyHomePage</span><span>({</span><span style="color:#ebcb8b;">Key</span><span> key, </span><span style="color:#bf616a;">this</span><span>.title}) : </span><span style="color:#bf616a;">super</span><span>(key: key);</span><span>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">MyHomePage </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">StatefulWidget</span><span> {
+</span><span>  </span><span style="color:#65737e;">// The homepage of the app, which also creates and holds the state.
+</span><span>  </span><span style="color:#ebcb8b;">MyHomePage</span><span>({</span><span style="color:#ebcb8b;">Key</span><span> key, </span><span style="color:#bf616a;">this</span><span>.title}) : </span><span style="color:#bf616a;">super</span><span>(key: key);
 </span><span>
-</span><span>  </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String</span><span> title;</span><span>
+</span><span>  </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String</span><span> title;
 </span><span>
-</span><span>  </span><span style="color:#b48ead;">@override</span><span>
-</span><span>  </span><span style="color:#ebcb8b;">_MyHomePageState </span><span style="color:#8fa1b3;">createState</span><span>() =&gt; </span><span style="color:#ebcb8b;">_MyHomePageState</span><span>();</span><span>
-</span><span>}</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">_MyHomePageState </span><span style="color:#8fa1b3;">createState</span><span>() =&gt; </span><span style="color:#ebcb8b;">_MyHomePageState</span><span>();
+</span><span>}
 </span><span>
-</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">_MyHomePageState </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">MyHomePage</span><span>&gt; {</span><span>
-</span><span>  </span><span style="color:#65737e;">// The variables used to describe the state.</span><span>
-</span><span>  </span><span style="color:#ebcb8b;">int</span><span> _bookNr = </span><span style="color:#d08770;">0</span><span>;</span><span>
-</span><span>  </span><span style="color:#ebcb8b;">int</span><span> _sectionNr = </span><span style="color:#d08770;">0</span><span>;</span><span>
-</span><span>  </span><span style="color:#ebcb8b;">String</span><span> _text = (</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getFirst</span><span>() </span><span style="color:#b48ead;">as </span><span style="color:#ebcb8b;">BookSectionText</span><span>).text;</span><span>
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">_MyHomePageState </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">MyHomePage</span><span>&gt; {
+</span><span>  </span><span style="color:#65737e;">// The variables used to describe the state.
+</span><span>  </span><span style="color:#ebcb8b;">int</span><span> _bookNr = </span><span style="color:#d08770;">0</span><span>;
+</span><span>  </span><span style="color:#ebcb8b;">int</span><span> _sectionNr = </span><span style="color:#d08770;">0</span><span>;
+</span><span>  </span><span style="color:#ebcb8b;">String</span><span> _text = (</span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getFirst</span><span>() </span><span style="color:#b48ead;">as </span><span style="color:#ebcb8b;">BookSectionText</span><span>).text;
 </span><span>
-</span><span>  </span><span style="color:#65737e;">// Functions to show the state variables on the screen.</span><span>
-</span><span>  </span><span style="color:#ebcb8b;">String </span><span style="color:#8fa1b3;">getShowText</span><span>() {</span><span>
-</span><span>    </span><span style="color:#b48ead;">return</span><span> _text;</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#65737e;">// Functions to show the state variables on the screen.
+</span><span>  </span><span style="color:#ebcb8b;">String </span><span style="color:#8fa1b3;">getShowText</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">return</span><span> _text;
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#ebcb8b;">int </span><span style="color:#8fa1b3;">getShowBookNr</span><span>() {</span><span>
-</span><span>    </span><span style="color:#65737e;">// The screen should book and section numbers starting with 1 instead of 0.</span><span>
-</span><span>    </span><span style="color:#b48ead;">return</span><span> _bookNr + </span><span style="color:#d08770;">1</span><span>;</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#ebcb8b;">int </span><span style="color:#8fa1b3;">getShowBookNr</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// The screen should book and section numbers starting with 1 instead of 0.
+</span><span>    </span><span style="color:#b48ead;">return</span><span> _bookNr + </span><span style="color:#d08770;">1</span><span>;
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#ebcb8b;">int </span><span style="color:#8fa1b3;">getShowSectionNr</span><span>() {</span><span>
-</span><span>    </span><span style="color:#b48ead;">return</span><span> _sectionNr + </span><span style="color:#d08770;">1</span><span>;</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#ebcb8b;">int </span><span style="color:#8fa1b3;">getShowSectionNr</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">return</span><span> _sectionNr + </span><span style="color:#d08770;">1</span><span>;
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#65737e;">// Functions to navigate the text of Meditations and update the state based on UI interaction.</span><span>
-</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">_first</span><span>() {</span><span>
-</span><span>    </span><span style="color:#65737e;">// The call to setState makes the Flutter framework aware of the state changes.</span><span>
-</span><span>    </span><span style="color:#65737e;">// It will ensure that the build method below will be rerun.</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">setState</span><span>(() {</span><span>
-</span><span>      </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> result = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getFirst</span><span>();</span><span>
-</span><span>      </span><span style="color:#b48ead;">if</span><span> (result is </span><span style="color:#ebcb8b;">BookSectionText</span><span>) {</span><span>
-</span><span>        _text = result.text;</span><span>
-</span><span>        _bookNr = result.bookNr;</span><span>
-</span><span>        _sectionNr = result.sectionNr;</span><span>
-</span><span>      }</span><span>
-</span><span>    });</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#65737e;">// Functions to navigate the text of Meditations and update the state based on UI interaction.
+</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">_first</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// The call to setState makes the Flutter framework aware of the state changes.
+</span><span>    </span><span style="color:#65737e;">// It will ensure that the build method below will be rerun.
+</span><span>    </span><span style="color:#8fa1b3;">setState</span><span>(() {
+</span><span>      </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> result = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getFirst</span><span>();
+</span><span>      </span><span style="color:#b48ead;">if</span><span> (result is </span><span style="color:#ebcb8b;">BookSectionText</span><span>) {
+</span><span>        _text = result.text;
+</span><span>        _bookNr = result.bookNr;
+</span><span>        _sectionNr = result.sectionNr;
+</span><span>      }
+</span><span>    });
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">_previous</span><span>() {</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">setState</span><span>(() {</span><span>
-</span><span>      </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> result =</span><span>
-</span><span>          </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getPreviousSection</span><span>(_bookNr, _sectionNr);</span><span>
-</span><span>      </span><span style="color:#b48ead;">if</span><span> (result is </span><span style="color:#ebcb8b;">BookSectionText</span><span>) {</span><span>
-</span><span>        _text = result.text;</span><span>
-</span><span>        _bookNr = result.bookNr;</span><span>
-</span><span>        _sectionNr = result.sectionNr;</span><span>
-</span><span>      }</span><span>
-</span><span>    });</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">_previous</span><span>() {
+</span><span>    </span><span style="color:#8fa1b3;">setState</span><span>(() {
+</span><span>      </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> result =
+</span><span>          </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getPreviousSection</span><span>(_bookNr, _sectionNr);
+</span><span>      </span><span style="color:#b48ead;">if</span><span> (result is </span><span style="color:#ebcb8b;">BookSectionText</span><span>) {
+</span><span>        _text = result.text;
+</span><span>        _bookNr = result.bookNr;
+</span><span>        _sectionNr = result.sectionNr;
+</span><span>      }
+</span><span>    });
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">_next</span><span>() {</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">setState</span><span>(() {</span><span>
-</span><span>      </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> result =</span><span>
-</span><span>          </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getNextSection</span><span>(_bookNr, _sectionNr);</span><span>
-</span><span>      </span><span style="color:#b48ead;">if</span><span> (result is </span><span style="color:#ebcb8b;">BookSectionText</span><span>) {</span><span>
-</span><span>        _text = result.text;</span><span>
-</span><span>        _bookNr = result.bookNr;</span><span>
-</span><span>        _sectionNr = result.sectionNr;</span><span>
-</span><span>      }</span><span>
-</span><span>    });</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">_next</span><span>() {
+</span><span>    </span><span style="color:#8fa1b3;">setState</span><span>(() {
+</span><span>      </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> result =
+</span><span>          </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getNextSection</span><span>(_bookNr, _sectionNr);
+</span><span>      </span><span style="color:#b48ead;">if</span><span> (result is </span><span style="color:#ebcb8b;">BookSectionText</span><span>) {
+</span><span>        _text = result.text;
+</span><span>        _bookNr = result.bookNr;
+</span><span>        _sectionNr = result.sectionNr;
+</span><span>      }
+</span><span>    });
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">_last</span><span>() {</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">setState</span><span>(() {</span><span>
-</span><span>      </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> result = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getLast</span><span>();</span><span>
-</span><span>      </span><span style="color:#b48ead;">if</span><span> (result is </span><span style="color:#ebcb8b;">BookSectionText</span><span>) {</span><span>
-</span><span>        _text = result.text;</span><span>
-</span><span>        _bookNr = result.bookNr;</span><span>
-</span><span>        _sectionNr = result.sectionNr;</span><span>
-</span><span>      }</span><span>
-</span><span>    });</span><span>
-</span><span>  }</span><span>
+</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">_last</span><span>() {
+</span><span>    </span><span style="color:#8fa1b3;">setState</span><span>(() {
+</span><span>      </span><span style="color:#ebcb8b;">BookSectionSearchResult</span><span> result = </span><span style="color:#ebcb8b;">Meditations</span><span>.</span><span style="color:#8fa1b3;">getLast</span><span>();
+</span><span>      </span><span style="color:#b48ead;">if</span><span> (result is </span><span style="color:#ebcb8b;">BookSectionText</span><span>) {
+</span><span>        _text = result.text;
+</span><span>        _bookNr = result.bookNr;
+</span><span>        _sectionNr = result.sectionNr;
+</span><span>      }
+</span><span>    });
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#65737e;">// Handles the action of the bottom navigation bar on screen.</span><span>
-</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">_onBottomNavTapped</span><span>(</span><span style="color:#ebcb8b;">int</span><span> index) {</span><span>
-</span><span>    </span><span style="color:#8fa1b3;">setState</span><span>(() {</span><span>
-</span><span>      </span><span style="color:#b48ead;">switch</span><span> (index) {</span><span>
-</span><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">0</span><span>:</span><span>
-</span><span>          {</span><span>
-</span><span>            </span><span style="color:#8fa1b3;">_first</span><span>();</span><span>
-</span><span>          }</span><span>
-</span><span>          </span><span style="color:#b48ead;">break</span><span>;</span><span>
+</span><span>  </span><span style="color:#65737e;">// Handles the action of the bottom navigation bar on screen.
+</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">_onBottomNavTapped</span><span>(</span><span style="color:#ebcb8b;">int</span><span> index) {
+</span><span>    </span><span style="color:#8fa1b3;">setState</span><span>(() {
+</span><span>      </span><span style="color:#b48ead;">switch</span><span> (index) {
+</span><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">0</span><span>:
+</span><span>          {
+</span><span>            </span><span style="color:#8fa1b3;">_first</span><span>();
+</span><span>          }
+</span><span>          </span><span style="color:#b48ead;">break</span><span>;
 </span><span>
-</span><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">1</span><span>:</span><span>
-</span><span>          {</span><span>
-</span><span>            </span><span style="color:#8fa1b3;">_previous</span><span>();</span><span>
-</span><span>          }</span><span>
-</span><span>          </span><span style="color:#b48ead;">break</span><span>;</span><span>
+</span><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">1</span><span>:
+</span><span>          {
+</span><span>            </span><span style="color:#8fa1b3;">_previous</span><span>();
+</span><span>          }
+</span><span>          </span><span style="color:#b48ead;">break</span><span>;
 </span><span>
-</span><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">2</span><span>:</span><span>
-</span><span>          {</span><span>
-</span><span>            </span><span style="color:#8fa1b3;">_next</span><span>();</span><span>
-</span><span>          }</span><span>
-</span><span>          </span><span style="color:#b48ead;">break</span><span>;</span><span>
+</span><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">2</span><span>:
+</span><span>          {
+</span><span>            </span><span style="color:#8fa1b3;">_next</span><span>();
+</span><span>          }
+</span><span>          </span><span style="color:#b48ead;">break</span><span>;
 </span><span>
-</span><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">3</span><span>:</span><span>
-</span><span>          {</span><span>
-</span><span>            </span><span style="color:#8fa1b3;">_last</span><span>();</span><span>
-</span><span>          }</span><span>
-</span><span>          </span><span style="color:#b48ead;">break</span><span>;</span><span>
+</span><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">3</span><span>:
+</span><span>          {
+</span><span>            </span><span style="color:#8fa1b3;">_last</span><span>();
+</span><span>          }
+</span><span>          </span><span style="color:#b48ead;">break</span><span>;
 </span><span>
-</span><span>        </span><span style="color:#b48ead;">default</span><span>:</span><span>
-</span><span>          {</span><span>
-</span><span>            </span><span style="color:#8fa1b3;">_first</span><span>();</span><span>
-</span><span>          }</span><span>
-</span><span>          </span><span style="color:#b48ead;">break</span><span>;</span><span>
-</span><span>      }</span><span>
-</span><span>    });</span><span>
-</span><span>  }</span><span>
+</span><span>        </span><span style="color:#b48ead;">default</span><span>:
+</span><span>          {
+</span><span>            </span><span style="color:#8fa1b3;">_first</span><span>();
+</span><span>          }
+</span><span>          </span><span style="color:#b48ead;">break</span><span>;
+</span><span>      }
+</span><span>    });
+</span><span>  }
 </span><span>
-</span><span>  </span><span style="color:#b48ead;">@override</span><span>
-</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {</span><span>
-</span><span>    </span><span style="color:#65737e;">// This method is rerun every time setState is called.</span><span>
-</span><span>    </span><span style="color:#65737e;">// It contains a nested widget with a app bar on top, a scrollable text area in the middle, and a navigation bar at the bottom.</span><span>
-</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">Scaffold</span><span>(</span><span>
-</span><span>      appBar: </span><span style="color:#ebcb8b;">AppBar</span><span>(</span><span>
-</span><span>        title: </span><span style="color:#ebcb8b;">Text</span><span>(</span><span>
-</span><span>            </span><span style="color:#a3be8c;">&#39;${</span><span style="color:#bf616a;">widget.title</span><span style="color:#a3be8c;">} Book ${</span><span style="color:#bf616a;">getShowBookNr()</span><span style="color:#a3be8c;">} Section ${</span><span style="color:#bf616a;">getShowSectionNr()</span><span style="color:#a3be8c;">}&#39;</span><span>),</span><span>
-</span><span>      ),</span><span>
-</span><span>      body: </span><span style="color:#ebcb8b;">Center</span><span>(</span><span>
-</span><span>        child: </span><span style="color:#ebcb8b;">Column</span><span>(</span><span>
-</span><span>          children: &lt;</span><span style="color:#ebcb8b;">Widget</span><span>&gt;[</span><span>
-</span><span>            </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Expanded</span><span>(</span><span>
-</span><span>                flex: </span><span style="color:#d08770;">1</span><span>,</span><span>
-</span><span>                child: </span><span style="color:#ebcb8b;">SingleChildScrollView</span><span>(</span><span>
-</span><span>                    child: </span><span style="color:#ebcb8b;">Container</span><span>(</span><span>
-</span><span>                      padding: </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">EdgeInsets</span><span>.</span><span style="color:#8fa1b3;">all</span><span>(</span><span style="color:#d08770;">8.0</span><span>),</span><span>
-</span><span>                      child: </span><span style="color:#ebcb8b;">Text</span><span>(</span><span style="color:#8fa1b3;">getShowText</span><span>())))),</span><span>
-</span><span>          ],</span><span>
-</span><span>        ),</span><span>
-</span><span>      ),</span><span>
-</span><span>      bottomNavigationBar: </span><span style="color:#ebcb8b;">BottomNavigationBar</span><span>(</span><span>
-</span><span>        type: </span><span style="color:#ebcb8b;">BottomNavigationBarType</span><span>.fixed,</span><span>
-</span><span>        items: </span><span style="color:#b48ead;">const </span><span>&lt;</span><span style="color:#ebcb8b;">BottomNavigationBarItem</span><span>&gt;[</span><span>
-</span><span>          </span><span style="color:#ebcb8b;">BottomNavigationBarItem</span><span>(</span><span>
-</span><span>            icon: </span><span style="color:#ebcb8b;">Icon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.first_page),</span><span>
-</span><span>            label: </span><span style="color:#a3be8c;">&#39;First&#39;</span><span>,</span><span>
-</span><span>          ),</span><span>
-</span><span>          </span><span style="color:#ebcb8b;">BottomNavigationBarItem</span><span>(</span><span>
-</span><span>            icon: </span><span style="color:#ebcb8b;">Icon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.navigate_before),</span><span>
-</span><span>            label: </span><span style="color:#a3be8c;">&#39;Previous&#39;</span><span>,</span><span>
-</span><span>          ),</span><span>
-</span><span>          </span><span style="color:#ebcb8b;">BottomNavigationBarItem</span><span>(</span><span>
-</span><span>            icon: </span><span style="color:#ebcb8b;">Icon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.navigate_next),</span><span>
-</span><span>            label: </span><span style="color:#a3be8c;">&#39;Next&#39;</span><span>,</span><span>
-</span><span>          ),</span><span>
-</span><span>          </span><span style="color:#ebcb8b;">BottomNavigationBarItem</span><span>(</span><span>
-</span><span>            icon: </span><span style="color:#ebcb8b;">Icon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.last_page),</span><span>
-</span><span>            label: </span><span style="color:#a3be8c;">&#39;Last&#39;</span><span>,</span><span>
-</span><span>          ),</span><span>
-</span><span>        ],</span><span>
-</span><span>        onTap: _onBottomNavTapped,</span><span>
-</span><span>      ),</span><span>
-</span><span>    );</span><span>
-</span><span>  }</span><span>
-</span><span>}</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {
+</span><span>    </span><span style="color:#65737e;">// This method is rerun every time setState is called.
+</span><span>    </span><span style="color:#65737e;">// It contains a nested widget with a app bar on top, a scrollable text area in the middle, and a navigation bar at the bottom.
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">Scaffold</span><span>(
+</span><span>      appBar: </span><span style="color:#ebcb8b;">AppBar</span><span>(
+</span><span>        title: </span><span style="color:#ebcb8b;">Text</span><span>(
+</span><span>            </span><span style="color:#a3be8c;">&#39;${</span><span style="color:#bf616a;">widget.title</span><span style="color:#a3be8c;">} Book ${</span><span style="color:#bf616a;">getShowBookNr()</span><span style="color:#a3be8c;">} Section ${</span><span style="color:#bf616a;">getShowSectionNr()</span><span style="color:#a3be8c;">}&#39;</span><span>),
+</span><span>      ),
+</span><span>      body: </span><span style="color:#ebcb8b;">Center</span><span>(
+</span><span>        child: </span><span style="color:#ebcb8b;">Column</span><span>(
+</span><span>          children: &lt;</span><span style="color:#ebcb8b;">Widget</span><span>&gt;[
+</span><span>            </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Expanded</span><span>(
+</span><span>                flex: </span><span style="color:#d08770;">1</span><span>,
+</span><span>                child: </span><span style="color:#ebcb8b;">SingleChildScrollView</span><span>(
+</span><span>                    child: </span><span style="color:#ebcb8b;">Container</span><span>(
+</span><span>                      padding: </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">EdgeInsets</span><span>.</span><span style="color:#8fa1b3;">all</span><span>(</span><span style="color:#d08770;">8.0</span><span>),
+</span><span>                      child: </span><span style="color:#ebcb8b;">Text</span><span>(</span><span style="color:#8fa1b3;">getShowText</span><span>())))),
+</span><span>          ],
+</span><span>        ),
+</span><span>      ),
+</span><span>      bottomNavigationBar: </span><span style="color:#ebcb8b;">BottomNavigationBar</span><span>(
+</span><span>        type: </span><span style="color:#ebcb8b;">BottomNavigationBarType</span><span>.fixed,
+</span><span>        items: </span><span style="color:#b48ead;">const </span><span>&lt;</span><span style="color:#ebcb8b;">BottomNavigationBarItem</span><span>&gt;[
+</span><span>          </span><span style="color:#ebcb8b;">BottomNavigationBarItem</span><span>(
+</span><span>            icon: </span><span style="color:#ebcb8b;">Icon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.first_page),
+</span><span>            label: </span><span style="color:#a3be8c;">&#39;First&#39;</span><span>,
+</span><span>          ),
+</span><span>          </span><span style="color:#ebcb8b;">BottomNavigationBarItem</span><span>(
+</span><span>            icon: </span><span style="color:#ebcb8b;">Icon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.navigate_before),
+</span><span>            label: </span><span style="color:#a3be8c;">&#39;Previous&#39;</span><span>,
+</span><span>          ),
+</span><span>          </span><span style="color:#ebcb8b;">BottomNavigationBarItem</span><span>(
+</span><span>            icon: </span><span style="color:#ebcb8b;">Icon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.navigate_next),
+</span><span>            label: </span><span style="color:#a3be8c;">&#39;Next&#39;</span><span>,
+</span><span>          ),
+</span><span>          </span><span style="color:#ebcb8b;">BottomNavigationBarItem</span><span>(
+</span><span>            icon: </span><span style="color:#ebcb8b;">Icon</span><span>(</span><span style="color:#ebcb8b;">Icons</span><span>.last_page),
+</span><span>            label: </span><span style="color:#a3be8c;">&#39;Last&#39;</span><span>,
+</span><span>          ),
+</span><span>        ],
+</span><span>        onTap: _onBottomNavTapped,
+</span><span>      ),
+</span><span>    );
+</span><span>  }
+</span><span>}
 </span></code></pre>
 <p>This is pretty much the full description of the Meditations app. It shows how a small application can be built up and structured. My experience with the Flutter framework was very pleasant. Most things I wanted to do were pretty straightforward and there is a large amount of documentation for the framework and setup. I like the emphasis on getting tests up and running straight from the box and the large set of pre-made widgets help a lot with getting a workable UI going very quickly. My biggest pain point was the setup of the whole Android tool-chain itself. Although there were some additional features to the Dart language (such as the upcoming, at the time of this writing, <a href="https://dart.dev/null-safety">Null Safety</a>) the language is easy to pick up and become productive with.</p>
 <p>Of course there are tons of possible extensions to the app. Aside from including the full text of Meditations, one can improve upon the navigation, add features such as bookmarking, random section selection and more. Refactoring and extending the app so it could load in other advice/text in similar format is also a possibility. </p>

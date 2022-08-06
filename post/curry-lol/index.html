@@ -111,50 +111,50 @@
 <p>If you want to code along with this article, one can use <a href="https://www-ps.informatik.uni-kiel.de/smap/smap.cgi?new/curry">SMAP</a> to evaluate Curry code online, aside from installing a Curry language implementation such as <a href="https://www.informatik.uni-kiel.de/%7Epakcs/">PACKS</a> locally. The code described in this article can be found in a <a href="https://github.com/newres/curry-league">source repository</a> in its entirety as well.</p>
 <p>In order to build such a recommendation system, the first thing we need to do is figure out a way to represent both the player preferences and the League of Legends champions in Curry.</p>
 <p>To start off, let's define the aspects of a champion in Curry as follows:</p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#b48ead;">module </span><span>Main </span><span style="color:#b48ead;">where</span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#b48ead;">module </span><span>Main </span><span style="color:#b48ead;">where
 </span><span>
-</span><span style="color:#b48ead;">data </span><span style="color:#d08770;">Tag </span><span>= </span><span style="color:#d08770;">Fighter </span><span>| </span><span style="color:#d08770;">Tank </span><span>| </span><span style="color:#d08770;">Marksman </span><span>| </span><span style="color:#d08770;">Assassin </span><span>| </span><span style="color:#d08770;">Mage </span><span>| </span><span style="color:#d08770;">Support</span><span>
-</span><span>         </span><span style="color:#b48ead;">deriving</span><span> (</span><span style="color:#a3be8c;">Show</span><span>, </span><span style="color:#a3be8c;">Eq</span><span>)</span><span>
-</span><span>                                       </span><span>
-</span><span style="color:#b48ead;">data </span><span style="color:#d08770;">Champion </span><span>=</span><span>
-</span><span>     </span><span style="color:#d08770;">Champion</span><span> {name :: </span><span style="color:#d08770;">String</span><span>,</span><span>
-</span><span>              </span><span style="color:#8fa1b3;">attack </span><span style="color:#b48ead;">:: Int</span><span>,</span><span>
-</span><span>              </span><span style="color:#8fa1b3;">defense </span><span style="color:#b48ead;">:: Int</span><span>,</span><span>
-</span><span>              </span><span style="color:#8fa1b3;">magic </span><span style="color:#b48ead;">:: Int</span><span>,</span><span>
-</span><span>              </span><span style="color:#8fa1b3;">difficulty </span><span style="color:#b48ead;">:: Int</span><span>,</span><span>
-</span><span>              </span><span style="color:#8fa1b3;">tags </span><span style="color:#b48ead;">::</span><span> []</span><span style="color:#b48ead;">Tag</span><span>}</span><span>
-</span><span>     </span><span style="color:#b48ead;">deriving</span><span> (</span><span style="color:#a3be8c;">Show</span><span>, </span><span style="color:#a3be8c;">Eq</span><span>)</span><span>
+</span><span style="color:#b48ead;">data </span><span style="color:#d08770;">Tag </span><span>= </span><span style="color:#d08770;">Fighter </span><span>| </span><span style="color:#d08770;">Tank </span><span>| </span><span style="color:#d08770;">Marksman </span><span>| </span><span style="color:#d08770;">Assassin </span><span>| </span><span style="color:#d08770;">Mage </span><span>| </span><span style="color:#d08770;">Support
+</span><span>         </span><span style="color:#b48ead;">deriving</span><span> (</span><span style="color:#a3be8c;">Show</span><span>, </span><span style="color:#a3be8c;">Eq</span><span>)
+</span><span>                                       
+</span><span style="color:#b48ead;">data </span><span style="color:#d08770;">Champion </span><span>=
+</span><span>     </span><span style="color:#d08770;">Champion</span><span> {name :: </span><span style="color:#d08770;">String</span><span>,
+</span><span>              </span><span style="color:#8fa1b3;">attack </span><span style="color:#b48ead;">:: Int</span><span>,
+</span><span>              </span><span style="color:#8fa1b3;">defense </span><span style="color:#b48ead;">:: Int</span><span>,
+</span><span>              </span><span style="color:#8fa1b3;">magic </span><span style="color:#b48ead;">:: Int</span><span>,
+</span><span>              </span><span style="color:#8fa1b3;">difficulty </span><span style="color:#b48ead;">:: Int</span><span>,
+</span><span>              </span><span style="color:#8fa1b3;">tags </span><span style="color:#b48ead;">::</span><span> []</span><span style="color:#b48ead;">Tag</span><span>}
+</span><span>     </span><span style="color:#b48ead;">deriving</span><span> (</span><span style="color:#a3be8c;">Show</span><span>, </span><span style="color:#a3be8c;">Eq</span><span>)
 </span></code></pre>
 <p>Lets just go over the above code step-by-step. </p>
 <p>The first line is the module declaration, which is essentially a grouping of related code together. We will define all elements required for our champion recommendation program in this Main module.</p>
 <p>Next we define the data types for our representation of Champion Tags and Champions. Curry is a statically typed language, meaning you can define the structure of the data as types, and you can check these types at compile time before the actual program is run. For example, it only allows the following Tags to be used for the Champions: Fighter, Tank, Marksman, Assassin, Mage, Support. Similarly, a Champion is a record of very specific keys and types of values. For example it has a field for <code>name</code> that must be a string of characters, a field for <code>attack</code> that must be an integer number and a field for <code>tags</code> which must be a list of Tags that we previously defined.</p>
 <p>These types allow us to define various champions avaiable in League of Legends. For example, the champion Aatrox can be defined as: </p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">aatrox </span><span style="color:#b48ead;">:: Champion</span><span>
-</span><span>aatrox = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Aatrox</span><span>&quot;,</span><span>
-</span><span>                       attack = </span><span style="color:#d08770;">8</span><span>,</span><span>
-</span><span>                       defense = </span><span style="color:#d08770;">4</span><span>,</span><span>
-</span><span>                       magic = </span><span style="color:#d08770;">3</span><span>,</span><span>
-</span><span>                       difficulty = </span><span style="color:#d08770;">4</span><span>,</span><span>
-</span><span>                       tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Tank</span><span>]</span><span>
-</span><span>                       }</span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">aatrox </span><span style="color:#b48ead;">:: Champion
+</span><span>aatrox = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Aatrox</span><span>&quot;,
+</span><span>                       attack = </span><span style="color:#d08770;">8</span><span>,
+</span><span>                       defense = </span><span style="color:#d08770;">4</span><span>,
+</span><span>                       magic = </span><span style="color:#d08770;">3</span><span>,
+</span><span>                       difficulty = </span><span style="color:#d08770;">4</span><span>,
+</span><span>                       tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Tank</span><span>]
+</span><span>                       }
 </span></code></pre>
 <p>Note that this is a correct champion as it fulfills every criteria we gave to the type of Champion. If we would define this champion in the wrong way, such as: </p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">aatrox </span><span style="color:#b48ead;">:: Champion</span><span>
-</span><span>aatrox = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Aatrox</span><span>&quot;,</span><span>
-</span><span>                       attack = &quot;</span><span style="color:#a3be8c;">high</span><span>&quot;,</span><span>
-</span><span>                       defense = </span><span style="color:#d08770;">4</span><span>,</span><span>
-</span><span>                       magic = </span><span style="color:#d08770;">3</span><span>,</span><span>
-</span><span>                       difficulty = </span><span style="color:#d08770;">4</span><span>,</span><span>
-</span><span>                       tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Tank</span><span>]</span><span>
-</span><span>                       }</span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">aatrox </span><span style="color:#b48ead;">:: Champion
+</span><span>aatrox = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Aatrox</span><span>&quot;,
+</span><span>                       attack = &quot;</span><span style="color:#a3be8c;">high</span><span>&quot;,
+</span><span>                       defense = </span><span style="color:#d08770;">4</span><span>,
+</span><span>                       magic = </span><span style="color:#d08770;">3</span><span>,
+</span><span>                       difficulty = </span><span style="color:#d08770;">4</span><span>,
+</span><span>                       tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Tank</span><span>]
+</span><span>                       }
 </span></code></pre>
 <p>the compiler of Curry would give us an error, &quot;Type error in record construction&quot;, along with some additional information that the attack field has a value that does not match the type.</p>
 <p>In this definition we explicitly denoted that Aatrox is of the type champion using the line:</p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">aatrox </span><span style="color:#b48ead;">:: Champion</span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">aatrox </span><span style="color:#b48ead;">:: Champion
 </span></code></pre>
 <p>This is not a strict requirement. Curry can infer the type simply from the constructor of the record <code>Champion</code>. Curry can perform type inference even in many other more complex cases, but for clarity we will give the types of records and functions whenever we can.</p>
 <p>The final part of this definition, is the portion:</p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span>     </span><span style="color:#b48ead;">deriving</span><span> (</span><span style="color:#a3be8c;">Show</span><span>, </span><span style="color:#a3be8c;">Eq</span><span>)</span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span>     </span><span style="color:#b48ead;">deriving</span><span> (</span><span style="color:#a3be8c;">Show</span><span>, </span><span style="color:#a3be8c;">Eq</span><span>)
 </span></code></pre>
 <p>Without going into too much detail, these makes instances of Champions, and Tags, easy to compare and print as a string.</p>
 <!-- {{< figure src="/img/post/2020/curry-lol/Aatrox.jpg" title="Aatrox, a champion in League of Legends Copyright Riot Games" >}} -->
@@ -170,274 +170,274 @@
 </figure>
 <p>The above code should be very familiar to <a href="https://www.haskell.org/">Haskell</a> programmers! The syntax, the type system and many other aspects of Curry are heavily influenced by Haskell. Even the naming of the two languages have the same origin: they are both named after the logician <a href="https://en.wikipedia.org/wiki/Haskell_Curry">Haskell Curry</a>.</p>
 <p>Now that we got the basics out of the way let us define a lot more champions than just Aatrox. </p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">aatrox </span><span style="color:#b48ead;">:: Champion</span><span>
-</span><span>aatrox = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Aatrox</span><span>&quot;,</span><span>
-</span><span>                       attack = </span><span style="color:#d08770;">8</span><span>,</span><span>
-</span><span>                       defense = </span><span style="color:#d08770;">4</span><span>,</span><span>
-</span><span>                       magic = </span><span style="color:#d08770;">3</span><span>,</span><span>
-</span><span>                       difficulty = </span><span style="color:#d08770;">4</span><span>,</span><span>
-</span><span>                       tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Tank</span><span>]</span><span>
-</span><span>                       }</span><span>
-</span><span style="color:#8fa1b3;">darius </span><span style="color:#b48ead;">:: Champion</span><span>
-</span><span>darius = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Darius</span><span>&quot;,</span><span>
-</span><span>                   attack = </span><span style="color:#d08770;">9</span><span>,</span><span>
-</span><span>                   defense = </span><span style="color:#d08770;">5</span><span>,</span><span>
-</span><span>                   magic = </span><span style="color:#d08770;">1</span><span>,</span><span>
-</span><span>                   difficulty = </span><span style="color:#d08770;">2</span><span>,</span><span>
-</span><span>                   tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Tank</span><span>]</span><span>
-</span><span>                  }</span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">aatrox </span><span style="color:#b48ead;">:: Champion
+</span><span>aatrox = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Aatrox</span><span>&quot;,
+</span><span>                       attack = </span><span style="color:#d08770;">8</span><span>,
+</span><span>                       defense = </span><span style="color:#d08770;">4</span><span>,
+</span><span>                       magic = </span><span style="color:#d08770;">3</span><span>,
+</span><span>                       difficulty = </span><span style="color:#d08770;">4</span><span>,
+</span><span>                       tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Tank</span><span>]
+</span><span>                       }
+</span><span style="color:#8fa1b3;">darius </span><span style="color:#b48ead;">:: Champion
+</span><span>darius = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Darius</span><span>&quot;,
+</span><span>                   attack = </span><span style="color:#d08770;">9</span><span>,
+</span><span>                   defense = </span><span style="color:#d08770;">5</span><span>,
+</span><span>                   magic = </span><span style="color:#d08770;">1</span><span>,
+</span><span>                   difficulty = </span><span style="color:#d08770;">2</span><span>,
+</span><span>                   tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Tank</span><span>]
+</span><span>                  }
 </span><span>
 </span><span>
-</span><span style="color:#8fa1b3;">fiora </span><span style="color:#b48ead;">:: Champion</span><span>
-</span><span>fiora = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Fiora</span><span>&quot;,</span><span>
-</span><span>                  attack = </span><span style="color:#d08770;">10</span><span>,</span><span>
-</span><span>                  defense = </span><span style="color:#d08770;">4</span><span>,</span><span>
-</span><span>                  magic = </span><span style="color:#d08770;">2</span><span>,</span><span>
-</span><span>                  difficulty = </span><span style="color:#d08770;">3</span><span>,</span><span>
-</span><span>                  tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Assassin</span><span>]</span><span>
-</span><span>                 }</span><span>
+</span><span style="color:#8fa1b3;">fiora </span><span style="color:#b48ead;">:: Champion
+</span><span>fiora = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Fiora</span><span>&quot;,
+</span><span>                  attack = </span><span style="color:#d08770;">10</span><span>,
+</span><span>                  defense = </span><span style="color:#d08770;">4</span><span>,
+</span><span>                  magic = </span><span style="color:#d08770;">2</span><span>,
+</span><span>                  difficulty = </span><span style="color:#d08770;">3</span><span>,
+</span><span>                  tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Assassin</span><span>]
+</span><span>                 }
 </span><span>
-</span><span style="color:#8fa1b3;">gnar </span><span style="color:#b48ead;">:: Champion</span><span>
-</span><span>gnar = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Gnar</span><span>&quot;,</span><span>
-</span><span>                 attack = </span><span style="color:#d08770;">6</span><span>,</span><span>
-</span><span>                 defense = </span><span style="color:#d08770;">5</span><span>,</span><span>
-</span><span>                 magic = </span><span style="color:#d08770;">5</span><span>,</span><span>
-</span><span>                 difficulty = </span><span style="color:#d08770;">8</span><span>,</span><span>
-</span><span>                 tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Tank</span><span>]</span><span>
-</span><span>                 }</span><span>
+</span><span style="color:#8fa1b3;">gnar </span><span style="color:#b48ead;">:: Champion
+</span><span>gnar = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Gnar</span><span>&quot;,
+</span><span>                 attack = </span><span style="color:#d08770;">6</span><span>,
+</span><span>                 defense = </span><span style="color:#d08770;">5</span><span>,
+</span><span>                 magic = </span><span style="color:#d08770;">5</span><span>,
+</span><span>                 difficulty = </span><span style="color:#d08770;">8</span><span>,
+</span><span>                 tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Tank</span><span>]
+</span><span>                 }
 </span><span>
-</span><span style="color:#8fa1b3;">irelia </span><span style="color:#b48ead;">:: Champion</span><span>
-</span><span>irelia = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Irelia</span><span>&quot;,</span><span>
-</span><span>                  attack = </span><span style="color:#d08770;">7</span><span>,</span><span>
-</span><span>                  defense = </span><span style="color:#d08770;">4</span><span>,</span><span>
-</span><span>                  magic = </span><span style="color:#d08770;">5</span><span>,</span><span>
-</span><span>                  difficulty = </span><span style="color:#d08770;">5</span><span>,</span><span>
-</span><span>                  tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Assassin</span><span>]</span><span>
-</span><span>                  }</span><span>
+</span><span style="color:#8fa1b3;">irelia </span><span style="color:#b48ead;">:: Champion
+</span><span>irelia = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Irelia</span><span>&quot;,
+</span><span>                  attack = </span><span style="color:#d08770;">7</span><span>,
+</span><span>                  defense = </span><span style="color:#d08770;">4</span><span>,
+</span><span>                  magic = </span><span style="color:#d08770;">5</span><span>,
+</span><span>                  difficulty = </span><span style="color:#d08770;">5</span><span>,
+</span><span>                  tags = [</span><span style="color:#d08770;">Fighter</span><span>, </span><span style="color:#d08770;">Assassin</span><span>]
+</span><span>                  }
 </span><span>
-</span><span style="color:#8fa1b3;">karma </span><span style="color:#b48ead;">:: Champion</span><span>
-</span><span>karma = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Karma</span><span>&quot;,</span><span>
-</span><span>                  attack = </span><span style="color:#d08770;">1</span><span>,</span><span>
-</span><span>                  defense = </span><span style="color:#d08770;">7</span><span>,</span><span>
-</span><span>                  magic = </span><span style="color:#d08770;">8</span><span>,</span><span>
-</span><span>                  difficulty = </span><span style="color:#d08770;">5</span><span>,</span><span>
-</span><span>                  tags = [</span><span style="color:#d08770;">Mage</span><span>, </span><span style="color:#d08770;">Support</span><span>]</span><span>
-</span><span>                  }</span><span>
+</span><span style="color:#8fa1b3;">karma </span><span style="color:#b48ead;">:: Champion
+</span><span>karma = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Karma</span><span>&quot;,
+</span><span>                  attack = </span><span style="color:#d08770;">1</span><span>,
+</span><span>                  defense = </span><span style="color:#d08770;">7</span><span>,
+</span><span>                  magic = </span><span style="color:#d08770;">8</span><span>,
+</span><span>                  difficulty = </span><span style="color:#d08770;">5</span><span>,
+</span><span>                  tags = [</span><span style="color:#d08770;">Mage</span><span>, </span><span style="color:#d08770;">Support</span><span>]
+</span><span>                  }
 </span><span>
-</span><span style="color:#8fa1b3;">maokai </span><span style="color:#b48ead;">:: Champion</span><span>
-</span><span>maokai = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Maokai</span><span>&quot;,</span><span>
-</span><span>                   attack = </span><span style="color:#d08770;">3</span><span>,</span><span>
-</span><span>                   defense = </span><span style="color:#d08770;">8</span><span>,</span><span>
-</span><span>                   magic = </span><span style="color:#d08770;">6</span><span>,</span><span>
-</span><span>                   difficulty = </span><span style="color:#d08770;">3</span><span>,</span><span>
-</span><span>                   tags = [</span><span style="color:#d08770;">Tank</span><span>, </span><span style="color:#d08770;">Mage</span><span>]</span><span>
-</span><span>                  }</span><span>
+</span><span style="color:#8fa1b3;">maokai </span><span style="color:#b48ead;">:: Champion
+</span><span>maokai = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Maokai</span><span>&quot;,
+</span><span>                   attack = </span><span style="color:#d08770;">3</span><span>,
+</span><span>                   defense = </span><span style="color:#d08770;">8</span><span>,
+</span><span>                   magic = </span><span style="color:#d08770;">6</span><span>,
+</span><span>                   difficulty = </span><span style="color:#d08770;">3</span><span>,
+</span><span>                   tags = [</span><span style="color:#d08770;">Tank</span><span>, </span><span style="color:#d08770;">Mage</span><span>]
+</span><span>                  }
 </span><span>
-</span><span style="color:#8fa1b3;">neeko </span><span style="color:#b48ead;">:: Champion</span><span>
-</span><span>neeko = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Neeko</span><span>&quot;,</span><span>
-</span><span>                  attack = </span><span style="color:#d08770;">1</span><span>,</span><span>
-</span><span>                  defense = </span><span style="color:#d08770;">1</span><span>,</span><span>
-</span><span>                  magic = </span><span style="color:#d08770;">9</span><span>,</span><span>
-</span><span>                  difficulty = </span><span style="color:#d08770;">5</span><span>,</span><span>
-</span><span>                  tags = [</span><span style="color:#d08770;">Mage</span><span>, </span><span style="color:#d08770;">Support</span><span>]</span><span>
-</span><span>                  }</span><span>
+</span><span style="color:#8fa1b3;">neeko </span><span style="color:#b48ead;">:: Champion
+</span><span>neeko = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Neeko</span><span>&quot;,
+</span><span>                  attack = </span><span style="color:#d08770;">1</span><span>,
+</span><span>                  defense = </span><span style="color:#d08770;">1</span><span>,
+</span><span>                  magic = </span><span style="color:#d08770;">9</span><span>,
+</span><span>                  difficulty = </span><span style="color:#d08770;">5</span><span>,
+</span><span>                  tags = [</span><span style="color:#d08770;">Mage</span><span>, </span><span style="color:#d08770;">Support</span><span>]
+</span><span>                  }
 </span><span>
-</span><span style="color:#8fa1b3;">sylas </span><span style="color:#b48ead;">:: Champion</span><span>
-</span><span>sylas = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Sylas</span><span>&quot;,</span><span>
-</span><span>                  attack = </span><span style="color:#d08770;">3</span><span>,</span><span>
-</span><span>                  defense = </span><span style="color:#d08770;">4</span><span>,</span><span>
-</span><span>                  magic = </span><span style="color:#d08770;">8</span><span>,</span><span>
-</span><span>                  difficulty = </span><span style="color:#d08770;">5</span><span>,</span><span>
-</span><span>                  tags = [</span><span style="color:#d08770;">Mage</span><span>, </span><span style="color:#d08770;">Assassin</span><span>]</span><span>
-</span><span>                  }</span><span>
+</span><span style="color:#8fa1b3;">sylas </span><span style="color:#b48ead;">:: Champion
+</span><span>sylas = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Sylas</span><span>&quot;,
+</span><span>                  attack = </span><span style="color:#d08770;">3</span><span>,
+</span><span>                  defense = </span><span style="color:#d08770;">4</span><span>,
+</span><span>                  magic = </span><span style="color:#d08770;">8</span><span>,
+</span><span>                  difficulty = </span><span style="color:#d08770;">5</span><span>,
+</span><span>                  tags = [</span><span style="color:#d08770;">Mage</span><span>, </span><span style="color:#d08770;">Assassin</span><span>]
+</span><span>                  }
 </span><span>
-</span><span style="color:#8fa1b3;">vayne </span><span style="color:#b48ead;">:: Champion </span><span>
-</span><span>vayne = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Vayne</span><span>&quot;,</span><span>
-</span><span>                  attack = </span><span style="color:#d08770;">10</span><span>,</span><span>
-</span><span>                  defense = </span><span style="color:#d08770;">1</span><span>,</span><span>
-</span><span>                  magic = </span><span style="color:#d08770;">1</span><span>,</span><span>
-</span><span>                  difficulty = </span><span style="color:#d08770;">8</span><span>,</span><span>
-</span><span>                  tags = [</span><span style="color:#d08770;">Marksman</span><span>, </span><span style="color:#d08770;">Assassin</span><span>]</span><span>
-</span><span>                  }</span><span>
+</span><span style="color:#8fa1b3;">vayne </span><span style="color:#b48ead;">:: Champion 
+</span><span>vayne = </span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Vayne</span><span>&quot;,
+</span><span>                  attack = </span><span style="color:#d08770;">10</span><span>,
+</span><span>                  defense = </span><span style="color:#d08770;">1</span><span>,
+</span><span>                  magic = </span><span style="color:#d08770;">1</span><span>,
+</span><span>                  difficulty = </span><span style="color:#d08770;">8</span><span>,
+</span><span>                  tags = [</span><span style="color:#d08770;">Marksman</span><span>, </span><span style="color:#d08770;">Assassin</span><span>]
+</span><span>                  }
 </span><span>
-</span><span style="color:#8fa1b3;">champions </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">Champion</span><span>]</span><span>
-</span><span>champions = [aatrox,</span><span>
-</span><span>             darius,</span><span>
-</span><span>             fiora,</span><span>
-</span><span>             gnar,</span><span>
-</span><span>             irelia,</span><span>
-</span><span>             karma,</span><span>
-</span><span>             maokai,</span><span>
-</span><span>             neeko,</span><span>
-</span><span>             sylas,</span><span>
-</span><span>             vayne</span><span>
-</span><span>            ]</span><span>
+</span><span style="color:#8fa1b3;">champions </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">Champion</span><span>]
+</span><span>champions = [aatrox,
+</span><span>             darius,
+</span><span>             fiora,
+</span><span>             gnar,
+</span><span>             irelia,
+</span><span>             karma,
+</span><span>             maokai,
+</span><span>             neeko,
+</span><span>             sylas,
+</span><span>             vayne
+</span><span>            ]
 </span></code></pre>
 <p>The above code defines a total of 10 different Champions that exist in League of Legends, whose data values are derived from Riot games <a href="https://developer.riotgames.com/docs/lol#data-dragon_champions">Data Dragon API</a>. For easy access, we define a list of champions as the aptly named <code>champions</code>. Note that in Curry a list is denoted by elements between <code>[]</code>. The type for a list of elements is denoted by using these bracket in front of the type, such as <code>[]Tag</code>, which denotes the type of a list of Tags.</p>
 <p>Now that we have the champion definitions out of the way, we also want to define player preferences that we aim to match champions against. Here our preferences consists of a summoner name, identifying the player, minimum requirements for the champion's attack, defense and magic values, a maximum difficulty rating, as well as tags on type of champions the player prefers.</p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#b48ead;">data </span><span style="color:#d08770;">Preference </span><span>=</span><span>
-</span><span>    </span><span style="color:#d08770;">Preference</span><span> {summonerName :: </span><span style="color:#d08770;">String</span><span>,</span><span>
-</span><span>                </span><span style="color:#8fa1b3;">minAttack </span><span style="color:#b48ead;">:: Int</span><span>,</span><span>
-</span><span>                </span><span style="color:#8fa1b3;">minDefense </span><span style="color:#b48ead;">:: Int</span><span>,</span><span>
-</span><span>                </span><span style="color:#8fa1b3;">minMagic </span><span style="color:#b48ead;">:: Int</span><span>,</span><span>
-</span><span>                </span><span style="color:#8fa1b3;">maxDifficulty </span><span style="color:#b48ead;">:: Int</span><span>,</span><span>
-</span><span>                </span><span style="color:#8fa1b3;">prefTags </span><span style="color:#b48ead;">::</span><span> []</span><span style="color:#b48ead;">Tag</span><span>}</span><span>
-</span><span>     </span><span style="color:#b48ead;">deriving</span><span> (</span><span style="color:#a3be8c;">Show</span><span>, </span><span style="color:#a3be8c;">Eq</span><span>)</span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#b48ead;">data </span><span style="color:#d08770;">Preference </span><span>=
+</span><span>    </span><span style="color:#d08770;">Preference</span><span> {summonerName :: </span><span style="color:#d08770;">String</span><span>,
+</span><span>                </span><span style="color:#8fa1b3;">minAttack </span><span style="color:#b48ead;">:: Int</span><span>,
+</span><span>                </span><span style="color:#8fa1b3;">minDefense </span><span style="color:#b48ead;">:: Int</span><span>,
+</span><span>                </span><span style="color:#8fa1b3;">minMagic </span><span style="color:#b48ead;">:: Int</span><span>,
+</span><span>                </span><span style="color:#8fa1b3;">maxDifficulty </span><span style="color:#b48ead;">:: Int</span><span>,
+</span><span>                </span><span style="color:#8fa1b3;">prefTags </span><span style="color:#b48ead;">::</span><span> []</span><span style="color:#b48ead;">Tag</span><span>}
+</span><span>     </span><span style="color:#b48ead;">deriving</span><span> (</span><span style="color:#a3be8c;">Show</span><span>, </span><span style="color:#a3be8c;">Eq</span><span>)
 </span></code></pre>
 <p>Using this Preference type we define two player preferences, one for Alice and one for Bob, as well as a collection for both of them.</p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">alicePref </span><span style="color:#b48ead;">:: Preference</span><span>
-</span><span>alicePref = </span><span style="color:#d08770;">Preference</span><span> {  summonerName = &quot;</span><span style="color:#a3be8c;">Alice</span><span>&quot;,</span><span>
-</span><span>                          minAttack = </span><span style="color:#d08770;">2</span><span>,</span><span>
-</span><span>                          minDefense = </span><span style="color:#d08770;">1</span><span>,</span><span>
-</span><span>                          minMagic = </span><span style="color:#d08770;">4</span><span>,</span><span>
-</span><span>                          maxDifficulty = </span><span style="color:#d08770;">3</span><span>,</span><span>
-</span><span>                          prefTags = [</span><span style="color:#d08770;">Mage</span><span>]</span><span>
-</span><span>                         }</span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">alicePref </span><span style="color:#b48ead;">:: Preference
+</span><span>alicePref = </span><span style="color:#d08770;">Preference</span><span> {  summonerName = &quot;</span><span style="color:#a3be8c;">Alice</span><span>&quot;,
+</span><span>                          minAttack = </span><span style="color:#d08770;">2</span><span>,
+</span><span>                          minDefense = </span><span style="color:#d08770;">1</span><span>,
+</span><span>                          minMagic = </span><span style="color:#d08770;">4</span><span>,
+</span><span>                          maxDifficulty = </span><span style="color:#d08770;">3</span><span>,
+</span><span>                          prefTags = [</span><span style="color:#d08770;">Mage</span><span>]
+</span><span>                         }
 </span><span>
-</span><span style="color:#8fa1b3;">bobPref </span><span style="color:#b48ead;">:: Preference</span><span>
-</span><span>bobPref = </span><span style="color:#d08770;">Preference</span><span> {  summonerName = &quot;</span><span style="color:#a3be8c;">Bob</span><span>&quot;,</span><span>
-</span><span>                        minAttack = </span><span style="color:#d08770;">2</span><span>,</span><span>
-</span><span>                        minDefense = </span><span style="color:#d08770;">5</span><span>,</span><span>
-</span><span>                        minMagic = </span><span style="color:#d08770;">2</span><span>,</span><span>
-</span><span>                        maxDifficulty = </span><span style="color:#d08770;">1</span><span>,</span><span>
-</span><span>                        prefTags = [</span><span style="color:#d08770;">Tank</span><span>, </span><span style="color:#d08770;">Support</span><span>]}</span><span>
+</span><span style="color:#8fa1b3;">bobPref </span><span style="color:#b48ead;">:: Preference
+</span><span>bobPref = </span><span style="color:#d08770;">Preference</span><span> {  summonerName = &quot;</span><span style="color:#a3be8c;">Bob</span><span>&quot;,
+</span><span>                        minAttack = </span><span style="color:#d08770;">2</span><span>,
+</span><span>                        minDefense = </span><span style="color:#d08770;">5</span><span>,
+</span><span>                        minMagic = </span><span style="color:#d08770;">2</span><span>,
+</span><span>                        maxDifficulty = </span><span style="color:#d08770;">1</span><span>,
+</span><span>                        prefTags = [</span><span style="color:#d08770;">Tank</span><span>, </span><span style="color:#d08770;">Support</span><span>]}
 </span><span>
-</span><span style="color:#8fa1b3;">preferences </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">Preference</span><span>]</span><span>
-</span><span>preferences = [ alicePref,</span><span>
-</span><span>                bobPref</span><span>
-</span><span>              ]</span><span>
+</span><span style="color:#8fa1b3;">preferences </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">Preference</span><span>]
+</span><span>preferences = [ alicePref,
+</span><span>                bobPref
+</span><span>              ]
 </span></code></pre>
 <p>We have now defined both the champions and the player preferences and we can move towards creating the functionality to match them together. But first a bit of introduction, or a refresher depending on the readers background, to functional programming. </p>
 <p>As mentioned at the start of this article, Curry is a language that supports both functional and logical programming. Functional programming allows us to express the program we want to write as a composition of functions.</p>
 <p>To use an example, suppose we want to write a program that given a list of champions, returns only those champion that have an attack of more than 5. In order to do this we can first write a function that given a champion returns true if it has an attack more than 5 and returns false if this is not the case. Then we can use this function as filter inside another function, that only returns members of a list of champions that have more than 5 attack.</p>
 <p>To put this together, such a function would look as follows:</p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">highAttackChamps </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">Champion</span><span>] </span><span style="color:#b48ead;">-&gt;</span><span> [</span><span style="color:#b48ead;">Champion</span><span>]</span><span>
-</span><span>highAttackChamps champList = filter (\ champion -&gt; attack champion &gt;</span><span style="color:#d08770;">5</span><span>) champList</span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">highAttackChamps </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">Champion</span><span>] </span><span style="color:#b48ead;">-&gt;</span><span> [</span><span style="color:#b48ead;">Champion</span><span>]
+</span><span>highAttackChamps champList = filter (\ champion -&gt; attack champion &gt;</span><span style="color:#d08770;">5</span><span>) champList
 </span></code></pre>
 <p>There are a couple of things to note here. </p>
 <p>First is that the function that &quot;returns true only if the attack of a champion is greater than 5&quot; has no name. Such anonymous functions, also known as lambda expressions, can be defined using a form starting with a backslash (\) followed by the parameter names of the function, followed by an arrow (-&gt;) and the expressions that this function should execute. In this case this expression first gets the attack of the champion and compares it, to give the right result. Anonymous functions are very convenient for expressions that we do not aim to reuse somewhere else.</p>
 <p>The second thing to note is the function composition that allows the filtering. The <code>filter</code> function is a predefined function that is imported by default, as a part of a group of functions such as these called a Prelude. As mentioned before this takes a function as a parameter that returns a Bool (True or False), as well as a list, and returns only those members of the list for which the function returned true. Using a function as an argument makes the <code>filter</code> function very versatile. If we, for example wanted to filter based on champion defense, we could have just replaced function used as an argument. Such a composition using functions is one of the core elements of what makes functional programming so effective.</p>
 <p>The final thing to note is how the <code>highAttackChamps</code> is given a type. The type declaration <code>highAttackChamps :: [Champion] -&gt; [Champion]</code> shows that this function takes a list of champions and returns a list of champions, where the arrow <code>-&gt;</code> functions as a separator between the type of the parameter(s) and/or the type of returned value.</p>
 <p>Now that we got over the basics of functional programming lets start to put this knowledge to good use by writing a number of functions that helps us match the Preferences with the Champions. These functions are designed to match a single criteria within a Preference with the value of a Champion. If this match succeeds that the function returns True, if it fails it returns a False. We have a function to match based on attack, defense, magic and difficulty. </p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">matchChampionAttack </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool</span><span>
-</span><span>matchChampionAttack pref champ = (minAttack pref) &lt;= (attack champ) </span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">matchChampionAttack </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool
+</span><span>matchChampionAttack pref champ = (minAttack pref) &lt;= (attack champ) 
 </span><span>
-</span><span style="color:#8fa1b3;">matchChampionDefense </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool</span><span>
-</span><span>matchChampionDefense pref champ = (minDefense pref) &lt;= (defense champ) </span><span>
+</span><span style="color:#8fa1b3;">matchChampionDefense </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool
+</span><span>matchChampionDefense pref champ = (minDefense pref) &lt;= (defense champ) 
 </span><span>
-</span><span style="color:#8fa1b3;">matchChampionMagic </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool</span><span>
-</span><span>matchChampionMagic pref champ = (minMagic pref) &lt;= (magic champ) </span><span>
+</span><span style="color:#8fa1b3;">matchChampionMagic </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool
+</span><span>matchChampionMagic pref champ = (minMagic pref) &lt;= (magic champ) 
 </span><span>
-</span><span style="color:#8fa1b3;">matchChampionDifficulty </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool</span><span>
-</span><span>matchChampionDifficulty pref champ = (maxDifficulty pref) &gt;= (difficulty champ) </span><span>
+</span><span style="color:#8fa1b3;">matchChampionDifficulty </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool
+</span><span>matchChampionDifficulty pref champ = (maxDifficulty pref) &gt;= (difficulty champ) 
 </span></code></pre>
 <p>Note that the type definition now have three elements separated by an arrow (-&gt;), as these functions have two parameters, a Preference and a Champion, and return a Bool (the type for True or False).</p>
 <p>For matching the preferences, we are going to explore some of the logic programming features of Curry. In logic programming the program can be defined as a set of facts, rules and (logic) variables, where the underlying logic system can search for a suitable solution given the criteria.</p>
 <p>Give given an example, suppose we are looking for Tag that is both part of the preferred tags of the Preferences as well as part of the tags of the Champions. We can state this problem exactly like this in Curry as follows:</p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">matchChampionTag </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool</span><span>
-</span><span>matchChampionTag pref champ = (elem tag (prefTags pref) &amp;&amp; elem tag (tags champ)) =:= </span><span style="color:#d08770;">True </span><span style="color:#b48ead;">where</span><span> tag free</span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">matchChampionTag </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool
+</span><span>matchChampionTag pref champ = (elem tag (prefTags pref) &amp;&amp; elem tag (tags champ)) =:= </span><span style="color:#d08770;">True </span><span style="color:#b48ead;">where</span><span> tag free
 </span></code></pre>
 <p>To go over the elements in this code <code>(elem tag (prefTags pref) &amp;&amp; elem tag (tags champ))</code> express that <code>tag</code> has to be an element of both the <code>prefTags</code> of the a given preference and <code>tags</code> of the given champion. Unlike with our purely functional code above, we do not give the value of <code>tag</code> as a parameter. Instead we say that this variable is a free variable and let Curry find the values of Tag which makes the above constraint hold True  (i.e. the <code>=:= True where tag free</code> portion of the function).</p>
 <p>Now that we have all the functions for matching individual elements (i.e.: attack, defense, magic, difficulty and tags) of champions to profiles, we can create combined functions such as <code>matchChampionAny</code> that holds true if any of the elements match and <code>matchChampionAll</code> for which all elements need to match.</p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">matchChampionAny </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool</span><span>
-</span><span>matchChampionAny pref champ =  matchChampionAttack pref champ ||</span><span>
-</span><span>                               matchChampionDefense pref champ ||</span><span>
-</span><span>                               matchChampionMagic pref champ ||</span><span>
-</span><span>                               matchChampionDifficulty pref champ ||</span><span>
-</span><span>                               matchChampionTag pref champ</span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">matchChampionAny </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool
+</span><span>matchChampionAny pref champ =  matchChampionAttack pref champ ||
+</span><span>                               matchChampionDefense pref champ ||
+</span><span>                               matchChampionMagic pref champ ||
+</span><span>                               matchChampionDifficulty pref champ ||
+</span><span>                               matchChampionTag pref champ
 </span><span>
 </span><span>
-</span><span style="color:#8fa1b3;">matchChampionAll </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool</span><span>
-</span><span>matchChampionAll pref champ =  matchChampionAttack pref champ &amp;&amp;</span><span>
-</span><span>                                 matchChampionDefense pref champ &amp;&amp;</span><span>
-</span><span>                                 matchChampionMagic pref champ &amp;&amp;</span><span>
-</span><span>                                 matchChampionDifficulty pref champ &amp;&amp;</span><span>
-</span><span>                                 matchChampionTag pref champ</span><span>
+</span><span style="color:#8fa1b3;">matchChampionAll </span><span style="color:#b48ead;">:: Preference -&gt; Champion -&gt; Bool
+</span><span>matchChampionAll pref champ =  matchChampionAttack pref champ &amp;&amp;
+</span><span>                                 matchChampionDefense pref champ &amp;&amp;
+</span><span>                                 matchChampionMagic pref champ &amp;&amp;
+</span><span>                                 matchChampionDifficulty pref champ &amp;&amp;
+</span><span>                                 matchChampionTag pref champ
 </span></code></pre>
 <p>One of the coolest features of this language, which we can see in the above definition, is the way logic programming elements can mix with functional elements. In both <code>matchChampionAny</code> and <code>matchChampionAll</code>  we use functions that make use of functional programming, as well as logic programming, seamlessly. </p>
 <p>Once we got our functions for matching we can use these to match, we finally have all the ingredients to create recommendations. We are going to create two recommendation functions: one for matching based on <code>matchChampionAny</code> which is a &quot;weak&quot; criteria as any there are lot of opportunities to match and one based on <code>matchChampionAll</code> which is a lot &quot;stronger&quot; as all stats of a champion has to match with the preferences.</p>
 <p>The functions for these is given as follows: </p>
-<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>recommendWeak :: Preference -&gt; [Champion] -&gt; [String]</span><span>
-</span><span>recommendWeak preference champList = map (\ champion -&gt; name champion) (filter (\ champion -&gt; matchChampionAny preference champion ) champList)</span><span>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>recommendWeak :: Preference -&gt; [Champion] -&gt; [String]
+</span><span>recommendWeak preference champList = map (\ champion -&gt; name champion) (filter (\ champion -&gt; matchChampionAny preference champion ) champList)
 </span><span>
-</span><span>recommendStrong :: Preference -&gt; [Champion] -&gt; [String]</span><span>
-</span><span>recommendStrong preference champList = map (\champion -&gt; name champion) (filter (\ champion -&gt; matchChampionAll preference champion ) champList)</span><span>
+</span><span>recommendStrong :: Preference -&gt; [Champion] -&gt; [String]
+</span><span>recommendStrong preference champList = map (\champion -&gt; name champion) (filter (\ champion -&gt; matchChampionAll preference champion ) champList)
 </span></code></pre>
 <p>The constructs in here should look familiar with one exception: the use of <code>map (\champion -&gt; name champion)</code>. The <code>map</code> function is similar to <code>filter</code> in takes a function for a parameter as well as a list. Instead of filtering, in instead applies that function to all members of that list. The anonymous function used takes a champion and returns only the name value of that champion. This allows for the matching function to return not a list of champions, but a list of strings i.e.: <code>[String]</code> that are the names of the champions. This makes the return value much less verbose, as we can identify champions by name. </p>
 <p>Finally, in order to show off the code detailed here with, we put together some examples of using the all the functions we defined. We then print the answers out, line by line for each of these examples. The main function, with the return type IO (), allows us to not to return a specific value but print the values out, to the REPL or the command-line, depending on how we use our code.</p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">example1 </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">Champion</span><span>]</span><span>
-</span><span>example1 = highAttackChamps champions</span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">example1 </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">Champion</span><span>]
+</span><span>example1 = highAttackChamps champions
 </span><span>
-</span><span style="color:#8fa1b3;">example2 </span><span style="color:#b48ead;">:: Bool</span><span>
-</span><span>example2 = matchChampionAttack alicePref aatrox</span><span>
+</span><span style="color:#8fa1b3;">example2 </span><span style="color:#b48ead;">:: Bool
+</span><span>example2 = matchChampionAttack alicePref aatrox
 </span><span>
-</span><span style="color:#8fa1b3;">example3 </span><span style="color:#b48ead;">:: Bool</span><span>
-</span><span>example3 = matchChampionDifficulty bobPref vayne </span><span>
+</span><span style="color:#8fa1b3;">example3 </span><span style="color:#b48ead;">:: Bool
+</span><span>example3 = matchChampionDifficulty bobPref vayne 
 </span><span>
-</span><span style="color:#8fa1b3;">example4 </span><span style="color:#b48ead;">:: Bool</span><span>
-</span><span>example4 =  matchChampionTag alicePref karma</span><span>
+</span><span style="color:#8fa1b3;">example4 </span><span style="color:#b48ead;">:: Bool
+</span><span>example4 =  matchChampionTag alicePref karma
 </span><span>
-</span><span style="color:#8fa1b3;">example5 </span><span style="color:#b48ead;">:: Bool</span><span>
-</span><span>example5 =  matchChampionAny alicePref neeko</span><span>
+</span><span style="color:#8fa1b3;">example5 </span><span style="color:#b48ead;">:: Bool
+</span><span>example5 =  matchChampionAny alicePref neeko
 </span><span>
-</span><span style="color:#8fa1b3;">example6 </span><span style="color:#b48ead;">:: Bool</span><span>
-</span><span>example6 =  matchChampionAll bobPref gnar</span><span>
+</span><span style="color:#8fa1b3;">example6 </span><span style="color:#b48ead;">:: Bool
+</span><span>example6 =  matchChampionAll bobPref gnar
 </span><span>
-</span><span style="color:#8fa1b3;">example7 </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">String</span><span>]</span><span>
-</span><span>example7 =  recommendWeak alicePref champions</span><span>
+</span><span style="color:#8fa1b3;">example7 </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">String</span><span>]
+</span><span>example7 =  recommendWeak alicePref champions
 </span><span>
-</span><span style="color:#8fa1b3;">example8 </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">String</span><span>]</span><span>
-</span><span>example8 =  recommendWeak bobPref champions</span><span>
+</span><span style="color:#8fa1b3;">example8 </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">String</span><span>]
+</span><span>example8 =  recommendWeak bobPref champions
 </span><span>
-</span><span style="color:#8fa1b3;">example9 </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">String</span><span>]</span><span>
-</span><span>example9 =  recommendStrong alicePref champions</span><span>
+</span><span style="color:#8fa1b3;">example9 </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">String</span><span>]
+</span><span>example9 =  recommendStrong alicePref champions
 </span><span>
-</span><span style="color:#8fa1b3;">example10 </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">String</span><span>]</span><span>
-</span><span>example10 =  recommendStrong bobPref champions</span><span>
+</span><span style="color:#8fa1b3;">example10 </span><span style="color:#b48ead;">::</span><span> [</span><span style="color:#b48ead;">String</span><span>]
+</span><span>example10 =  recommendStrong bobPref champions
 </span><span>
-</span><span style="color:#8fa1b3;">main </span><span style="color:#b48ead;">:: IO </span><span>()</span><span>
-</span><span>main = putStrLn (&quot;</span><span style="color:#a3be8c;">Example 1, champions with more than 5 attack:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 (show example1) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 2, matching Aatrox with Alice&#39;s preferences based on attack:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 (show example2) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 3, matching Vayne with Bob&#39;s preferences based on difficulty:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 (show example3) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 4, matching Karma with Alice&#39;s preferences based on tag(s):</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 (show example4) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 5, matching Neeko with Alice&#39;s preferences based on any matching criteria:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 (show example5) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 6, matching Gnar with Bob&#39;s preferences based on all matching criteria:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 (show example6) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 7, recommendation based on a weak criteria for Alice:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 (show example7) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 8, recommendation based on a weak criteria for Bob:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 (show example8) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 9, recommendation based on a strong criteria for Alice:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 (show example9) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 10, recommendation based on a strong criteria for Bob:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++</span><span>
-</span><span>                 (show example10))</span><span>
+</span><span style="color:#8fa1b3;">main </span><span style="color:#b48ead;">:: IO </span><span>()
+</span><span>main = putStrLn (&quot;</span><span style="color:#a3be8c;">Example 1, champions with more than 5 attack:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 (show example1) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 2, matching Aatrox with Alice&#39;s preferences based on attack:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 (show example2) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 3, matching Vayne with Bob&#39;s preferences based on difficulty:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 (show example3) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 4, matching Karma with Alice&#39;s preferences based on tag(s):</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 (show example4) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 5, matching Neeko with Alice&#39;s preferences based on any matching criteria:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 (show example5) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 6, matching Gnar with Bob&#39;s preferences based on all matching criteria:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 (show example6) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 7, recommendation based on a weak criteria for Alice:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 (show example7) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 8, recommendation based on a weak criteria for Bob:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 (show example8) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 9, recommendation based on a strong criteria for Alice:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 (show example9) ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 &quot;</span><span style="color:#a3be8c;">Example 10, recommendation based on a strong criteria for Bob:</span><span>&quot; ++ &quot;</span><span style="color:#96b5b4;">\n</span><span>&quot; ++
+</span><span>                 (show example10))
 </span></code></pre>
 <p>This results in the following being printed out:</p>
-<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#d08770;">Example 1</span><span>, champions with more than </span><span style="color:#d08770;">5</span><span> attack:</span><span>
-</span><span>[</span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Aatrox</span><span>&quot;, attack = </span><span style="color:#d08770;">8</span><span>, defense = </span><span style="color:#d08770;">4</span><span>, magic = </span><span style="color:#d08770;">3</span><span>, difficulty = </span><span style="color:#d08770;">4</span><span>, tags = [</span><span style="color:#d08770;">Fighter</span><span>,</span><span style="color:#d08770;">Tank</span><span>]},</span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Darius</span><span>&quot;, attack = </span><span style="color:#d08770;">9</span><span>, defense = </span><span style="color:#d08770;">5</span><span>, magic = </span><span style="color:#d08770;">1</span><span>, difficulty = </span><span style="color:#d08770;">2</span><span>, tags = [</span><span style="color:#d08770;">Fighter</span><span>,</span><span style="color:#d08770;">Tank</span><span>]},</span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Fiora</span><span>&quot;, attack = </span><span style="color:#d08770;">10</span><span>, defense = </span><span style="color:#d08770;">4</span><span>, magic = </span><span style="color:#d08770;">2</span><span>, difficulty = </span><span style="color:#d08770;">3</span><span>, tags = [</span><span style="color:#d08770;">Fighter</span><span>,</span><span style="color:#d08770;">Assassin</span><span>]},</span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Gnar</span><span>&quot;, attack = </span><span style="color:#d08770;">6</span><span>, defense = </span><span style="color:#d08770;">5</span><span>, magic = </span><span style="color:#d08770;">5</span><span>, difficulty = </span><span style="color:#d08770;">8</span><span>, tags = [</span><span style="color:#d08770;">Fighter</span><span>,</span><span style="color:#d08770;">Tank</span><span>]},</span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Irelia</span><span>&quot;, attack = </span><span style="color:#d08770;">7</span><span>, defense = </span><span style="color:#d08770;">4</span><span>, magic = </span><span style="color:#d08770;">5</span><span>, difficulty = </span><span style="color:#d08770;">5</span><span>, tags = [</span><span style="color:#d08770;">Fighter</span><span>,</span><span style="color:#d08770;">Assassin</span><span>]},</span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Vayne</span><span>&quot;, attack = </span><span style="color:#d08770;">10</span><span>, defense = </span><span style="color:#d08770;">1</span><span>, magic = </span><span style="color:#d08770;">1</span><span>, difficulty = </span><span style="color:#d08770;">8</span><span>, tags = [</span><span style="color:#d08770;">Marksman</span><span>,</span><span style="color:#d08770;">Assassin</span><span>]}]</span><span>
-</span><span style="color:#d08770;">Example 2</span><span>, matching </span><span style="color:#d08770;">Aatrox</span><span> with </span><span style="color:#d08770;">Alice</span><span>&#39;s preferences based on attack:</span><span>
-</span><span style="color:#d08770;">True</span><span>
-</span><span style="color:#d08770;">Example 3</span><span>, matching </span><span style="color:#d08770;">Vayne</span><span> with </span><span style="color:#d08770;">Bob</span><span>&#39;s preferences based on difficulty:</span><span>
-</span><span style="color:#d08770;">False</span><span>
-</span><span style="color:#d08770;">Example 4</span><span>, matching </span><span style="color:#d08770;">Karma</span><span> with </span><span style="color:#d08770;">Alice</span><span>&#39;s preferences based on tag(s):</span><span>
-</span><span style="color:#d08770;">True</span><span>
-</span><span style="color:#d08770;">Example 5</span><span>, matching </span><span style="color:#d08770;">Neeko</span><span> with </span><span style="color:#d08770;">Alice</span><span>&#39;s preferences based on any matching criteria:</span><span>
-</span><span style="color:#d08770;">True</span><span>
-</span><span style="color:#d08770;">Example 6</span><span>, matching </span><span style="color:#d08770;">Gnar</span><span> with </span><span style="color:#d08770;">Bob</span><span>&#39;s preferences based on all matching criteria:</span><span>
-</span><span style="color:#d08770;">False</span><span>
-</span><span style="color:#d08770;">Example 7</span><span>, recommendation based on a weak criteria for </span><span style="color:#d08770;">Alice</span><span>:</span><span>
-</span><span>[&quot;</span><span style="color:#a3be8c;">Aatrox</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Darius</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Fiora</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Gnar</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Irelia</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Karma</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Maokai</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Neeko</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Sylas</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Vayne</span><span>&quot;]</span><span>
-</span><span style="color:#d08770;">Example 8</span><span>, recommendation based on a weak criteria for </span><span style="color:#d08770;">Bob</span><span>:</span><span>
-</span><span>[&quot;</span><span style="color:#a3be8c;">Aatrox</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Darius</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Fiora</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Gnar</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Irelia</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Karma</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Maokai</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Neeko</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Sylas</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Vayne</span><span>&quot;]</span><span>
-</span><span style="color:#d08770;">Example 9</span><span>, recommendation based on a strong criteria for </span><span style="color:#d08770;">Alice</span><span>:</span><span>
-</span><span>[&quot;</span><span style="color:#a3be8c;">Maokai</span><span>&quot;]</span><span>
-</span><span style="color:#d08770;">Example 10</span><span>, recommendation based on a strong criteria for </span><span style="color:#d08770;">Bob</span><span>:</span><span>
-</span><span style="color:#d08770;">[]</span><span>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#d08770;">Example 1</span><span>, champions with more than </span><span style="color:#d08770;">5</span><span> attack:
+</span><span>[</span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Aatrox</span><span>&quot;, attack = </span><span style="color:#d08770;">8</span><span>, defense = </span><span style="color:#d08770;">4</span><span>, magic = </span><span style="color:#d08770;">3</span><span>, difficulty = </span><span style="color:#d08770;">4</span><span>, tags = [</span><span style="color:#d08770;">Fighter</span><span>,</span><span style="color:#d08770;">Tank</span><span>]},</span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Darius</span><span>&quot;, attack = </span><span style="color:#d08770;">9</span><span>, defense = </span><span style="color:#d08770;">5</span><span>, magic = </span><span style="color:#d08770;">1</span><span>, difficulty = </span><span style="color:#d08770;">2</span><span>, tags = [</span><span style="color:#d08770;">Fighter</span><span>,</span><span style="color:#d08770;">Tank</span><span>]},</span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Fiora</span><span>&quot;, attack = </span><span style="color:#d08770;">10</span><span>, defense = </span><span style="color:#d08770;">4</span><span>, magic = </span><span style="color:#d08770;">2</span><span>, difficulty = </span><span style="color:#d08770;">3</span><span>, tags = [</span><span style="color:#d08770;">Fighter</span><span>,</span><span style="color:#d08770;">Assassin</span><span>]},</span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Gnar</span><span>&quot;, attack = </span><span style="color:#d08770;">6</span><span>, defense = </span><span style="color:#d08770;">5</span><span>, magic = </span><span style="color:#d08770;">5</span><span>, difficulty = </span><span style="color:#d08770;">8</span><span>, tags = [</span><span style="color:#d08770;">Fighter</span><span>,</span><span style="color:#d08770;">Tank</span><span>]},</span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Irelia</span><span>&quot;, attack = </span><span style="color:#d08770;">7</span><span>, defense = </span><span style="color:#d08770;">4</span><span>, magic = </span><span style="color:#d08770;">5</span><span>, difficulty = </span><span style="color:#d08770;">5</span><span>, tags = [</span><span style="color:#d08770;">Fighter</span><span>,</span><span style="color:#d08770;">Assassin</span><span>]},</span><span style="color:#d08770;">Champion</span><span> {name = &quot;</span><span style="color:#a3be8c;">Vayne</span><span>&quot;, attack = </span><span style="color:#d08770;">10</span><span>, defense = </span><span style="color:#d08770;">1</span><span>, magic = </span><span style="color:#d08770;">1</span><span>, difficulty = </span><span style="color:#d08770;">8</span><span>, tags = [</span><span style="color:#d08770;">Marksman</span><span>,</span><span style="color:#d08770;">Assassin</span><span>]}]
+</span><span style="color:#d08770;">Example 2</span><span>, matching </span><span style="color:#d08770;">Aatrox</span><span> with </span><span style="color:#d08770;">Alice</span><span>&#39;s preferences based on attack:
+</span><span style="color:#d08770;">True
+</span><span style="color:#d08770;">Example 3</span><span>, matching </span><span style="color:#d08770;">Vayne</span><span> with </span><span style="color:#d08770;">Bob</span><span>&#39;s preferences based on difficulty:
+</span><span style="color:#d08770;">False
+</span><span style="color:#d08770;">Example 4</span><span>, matching </span><span style="color:#d08770;">Karma</span><span> with </span><span style="color:#d08770;">Alice</span><span>&#39;s preferences based on tag(s):
+</span><span style="color:#d08770;">True
+</span><span style="color:#d08770;">Example 5</span><span>, matching </span><span style="color:#d08770;">Neeko</span><span> with </span><span style="color:#d08770;">Alice</span><span>&#39;s preferences based on any matching criteria:
+</span><span style="color:#d08770;">True
+</span><span style="color:#d08770;">Example 6</span><span>, matching </span><span style="color:#d08770;">Gnar</span><span> with </span><span style="color:#d08770;">Bob</span><span>&#39;s preferences based on all matching criteria:
+</span><span style="color:#d08770;">False
+</span><span style="color:#d08770;">Example 7</span><span>, recommendation based on a weak criteria for </span><span style="color:#d08770;">Alice</span><span>:
+</span><span>[&quot;</span><span style="color:#a3be8c;">Aatrox</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Darius</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Fiora</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Gnar</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Irelia</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Karma</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Maokai</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Neeko</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Sylas</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Vayne</span><span>&quot;]
+</span><span style="color:#d08770;">Example 8</span><span>, recommendation based on a weak criteria for </span><span style="color:#d08770;">Bob</span><span>:
+</span><span>[&quot;</span><span style="color:#a3be8c;">Aatrox</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Darius</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Fiora</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Gnar</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Irelia</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Karma</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Maokai</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Neeko</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Sylas</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">Vayne</span><span>&quot;]
+</span><span style="color:#d08770;">Example 9</span><span>, recommendation based on a strong criteria for </span><span style="color:#d08770;">Alice</span><span>:
+</span><span>[&quot;</span><span style="color:#a3be8c;">Maokai</span><span>&quot;]
+</span><span style="color:#d08770;">Example 10</span><span>, recommendation based on a strong criteria for </span><span style="color:#d08770;">Bob</span><span>:
+</span><span style="color:#d08770;">[]
 </span></code></pre>
 <p>Hopefully the result nothing is too surprising and it matches all expectations. The result also verifies some of our assumptions: the weak criteria matches everything in this case, but a strong criteria has some nice results: Maokai is well suited for Alice, and Bob probably needs to widen his criteria, given the above 10 champions. </p>
 <p>There are many ways we could proceed from this point on. As one could see from the examples the recommendation based on a weak criteria is quite weak, as anything matches, while a strong criteria can be too restrictive at times. Coming up with the different types of matching functions, could be a next step, if one wants to expand upon this small application. With multiple matching functions one can also write a function that takes a matching function as a parameter in order to avoid writing duplicate code for each recommendation function. </p>

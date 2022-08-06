@@ -105,81 +105,81 @@
 <p>While having a van named The Mystery Machine can help solving mysteries, we can turn our computer into a mystery solving machine as well. We can represent possible stories in a Scooby Doo episode using some logical facts (e.g. a each adventure has a monster in it) as well as probabilities (e.g. there is a 40% chance a monster will be a ghost). In particular, we can use a probabilistic logic programming language, namely <a href="https://dtai.cs.kuleuven.be/problog/">ProbLog</a> to guide us through a scenario of a Scooby Doo story.</p>
 <p>First let's start off with a basic scenario on how a Scooby Doo adventure starts. In general there is usually some sort of an issue why the group must stop during their travels. Although there are many possible causes for this in the cartoon, here we represent three of them. Either they get a flat tire, they unexpectedly run out of gas, or there is some engine trouble that they have to deal with. For each of these scenarios there is a probability with which they happen. This probability we assume is 40% for a flat tire, 30% for being unexpectedly out of gas, and 60% for having an engine trouble. These are the probabilistic facts in our scenario, as each of these facts have a probability attached to them with which they occur. If any of these facts hold, it will lead to an adventure. This type of knowledge we can represent as a rule. Finally, we aim to query this scenario for the probability that an adventure will occur. </p>
 <p>In ProbLog the above scenario can be represented as follows:</p>
-<pre data-lang="pro" style="background-color:#2b303b;color:#c0c5ce;" class="language-pro "><code class="language-pro" data-lang="pro"><span>% Probabilistic facts:</span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::flat_tire.</span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::out_of_gas.</span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">6</span><span>::engine_trouble.</span><span>
+<pre data-lang="pro" style="background-color:#2b303b;color:#c0c5ce;" class="language-pro "><code class="language-pro" data-lang="pro"><span>% Probabilistic facts:
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::flat_tire.
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::out_of_gas.
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">6</span><span>::engine_trouble.
 </span><span>
-</span><span>% Rules:</span><span>
-</span><span style="color:#bf616a;">adventure_start </span><span>:- flat_tire.</span><span>
-</span><span style="color:#bf616a;">adventure_start </span><span>:- out_of_gas.</span><span>
-</span><span style="color:#bf616a;">adventure_start </span><span>:- engine_trouble.</span><span>
+</span><span>% Rules:
+</span><span style="color:#bf616a;">adventure_start </span><span>:- flat_tire.
+</span><span style="color:#bf616a;">adventure_start </span><span>:- out_of_gas.
+</span><span style="color:#bf616a;">adventure_start </span><span>:- engine_trouble.
 </span><span>
-</span><span>% Queries:.</span><span>
-</span><span style="color:#8fa1b3;">query</span><span>(adventure_start).</span><span>
+</span><span>% Queries:.
+</span><span style="color:#8fa1b3;">query</span><span>(adventure_start).
 </span></code></pre>
 <p>As one can see, a ProbLog program is a combination of probabilistic facts, rules and queries (with comments in lines following <code>%</code>). Probabilistic facts represent the facts of the domain with an attached probability between 0 and 1. Rules are deterministic rules (i.e. they have no probabilities attached) that show the system how new facts can be inferred from existing ones. Finally queries allow us to ask the program questions, such as the probabilities for a certain fact occuring. These program elements are similar to those employed in <a href="https://www.newresalhaider.com/post/prolog-price-of-peace/">Prolog</a>, where a program consists of facts, rules and queries, with the main difference that there are probabilities attached to each fact.</p>
 <p>We can use infer new facts from these probabilistic facts using rules. For example, if we want to infer the probability of an adventure the query: <code>query(adventure).</code> will return the probability <code>0.832</code>.</p>
 <p>Now we can make our Scooby Doo scenario a bit more complex. Suppose the group starts an adventure, after their van stopped working somehow, and they quickly realize that there is a mystery in the area. The location of this mystery is either an abandoned mansion, a local museum, an old theme park, or a nearby farm. We set the probabilities for each of these locations occurring at <code>0.3</code> for the abandoned mansion, <code>0.3</code> for a local museum, <code>0,2</code> for an old theme park and <code>0.2</code> for the nearby farm. We also assume that there is only one mystery location in each adventure. </p>
 <p>In order to express the requirements for the adventure locations succinctly, we make use of a feature called annotated disjunctions. This allows for a more readable way to state that only one of the stated choices holds true, with a given probability. Below is the ProbLog program extended to include this information.</p>
-<pre data-lang="pro" style="background-color:#2b303b;color:#c0c5ce;" class="language-pro "><code class="language-pro" data-lang="pro"><span>% Probabilistic facts:</span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::flat_tire.</span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::out_of_gas.</span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">6</span><span>::engine_trouble.</span><span>
+<pre data-lang="pro" style="background-color:#2b303b;color:#c0c5ce;" class="language-pro "><code class="language-pro" data-lang="pro"><span>% Probabilistic facts:
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::flat_tire.
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::out_of_gas.
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">6</span><span>::engine_trouble.
 </span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(abandoned_mansion); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(local_museum); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(old_theme_park); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(nearby_farm).</span><span>
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(abandoned_mansion); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(local_museum); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(old_theme_park); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(nearby_farm).
 </span><span>
-</span><span>% Rules:</span><span>
-</span><span style="color:#bf616a;">adventure_start </span><span>:- flat_tire.</span><span>
-</span><span style="color:#bf616a;">adventure_start </span><span>:- out_of_gas.</span><span>
-</span><span style="color:#bf616a;">adventure_start </span><span>:- engine_trouble.</span><span>
+</span><span>% Rules:
+</span><span style="color:#bf616a;">adventure_start </span><span>:- flat_tire.
+</span><span style="color:#bf616a;">adventure_start </span><span>:- out_of_gas.
+</span><span style="color:#bf616a;">adventure_start </span><span>:- engine_trouble.
 </span><span>
-</span><span style="color:#bf616a;">adventure </span><span>:- </span><span style="color:#8fa1b3;">monster_location</span><span>(X), adventure_start.</span><span>
-</span><span style="color:#bf616a;">two_locations </span><span>:- </span><span style="color:#8fa1b3;">monster_location</span><span>(X), </span><span style="color:#8fa1b3;">monster_location</span><span>(Y), X \== Y.</span><span>
+</span><span style="color:#bf616a;">adventure </span><span>:- </span><span style="color:#8fa1b3;">monster_location</span><span>(X), adventure_start.
+</span><span style="color:#bf616a;">two_locations </span><span>:- </span><span style="color:#8fa1b3;">monster_location</span><span>(X), </span><span style="color:#8fa1b3;">monster_location</span><span>(Y), X \== Y.
 </span><span>
 </span><span>
 </span><span>
-</span><span>% Queries:.</span><span>
-</span><span style="color:#8fa1b3;">query</span><span>(two_locations).</span><span>
+</span><span>% Queries:.
+</span><span style="color:#8fa1b3;">query</span><span>(two_locations).
 </span></code></pre>
 <p>There are two other new concepts that we showcase here. One is using variables, notably the <code>X</code> in <code>monster_location(X)</code>, which helps to express that the values used for this variable all express the monster's location. The other is the use of restrictions in the use <code>two_locations</code> to showcase that the probability for two monster locations occurring at once is 0. There are number of <a href="https://problog.readthedocs.io/en/latest/prolog.html">built-ins</a> that one can use for defining Problog models. In this case we use to define a rule to express that the <code>two_locations</code> fact should be derived if there are two distinct monster locations. Given the example above, due to the use of an annotated disjunction for defining the monster location, the query <code>query(two_locations).</code> will correctly probability of 0 for the chance of two monster locations at the same time.</p>
 <p>The final ingredient for a Scooby Doo story that we represent in this article is the monster. There are five types of monsters that can occur: a Mummy, a Zombie, a Ghost, a Swamp Monster and a Headless Horseman.  The chance at which these monsters occur is dependent on the current location. In the stories that we represent only 1 monster can occur in an adventure. </p>
 <p>Such cases can also be represented with annotated disjunctions, but they are now used as the head (which is the left hand side portion of the rule, with the <code>:-</code> sign separating the two sides). This allows us to express the conditions, i.e. the monster locations, that is required for these facts. See our final example for the probabilities of monsters given the locations:</p>
-<pre data-lang="pro" style="background-color:#2b303b;color:#c0c5ce;" class="language-pro "><code class="language-pro" data-lang="pro"><span>% Probabilistic facts:</span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::flat_tire.</span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::out_of_gas.</span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">6</span><span>::engine_trouble.</span><span>
+<pre data-lang="pro" style="background-color:#2b303b;color:#c0c5ce;" class="language-pro "><code class="language-pro" data-lang="pro"><span>% Probabilistic facts:
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::flat_tire.
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::out_of_gas.
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">6</span><span>::engine_trouble.
 </span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(abandoned_mansion); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(local_museum); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(old_theme_park); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(nearby_farm).</span><span>
-</span><span>
-</span><span>
-</span><span>% Rules:</span><span>
-</span><span style="color:#bf616a;">adventure_start </span><span>:- flat_tire.</span><span>
-</span><span style="color:#bf616a;">adventure_start </span><span>:- out_of_gas.</span><span>
-</span><span style="color:#bf616a;">adventure_start </span><span>:- engine_trouble.</span><span>
-</span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(ghost); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(vampire); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(zombie) :- </span><span style="color:#8fa1b3;">monster_location</span><span>(abandoned_mansion).</span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">5</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(mummy); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(headless_horseman); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(ghost) :- </span><span style="color:#8fa1b3;">monster_location</span><span>(local_museum).</span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">5</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(zombie); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(ghost); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">1</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(mummy) :- </span><span style="color:#8fa1b3;">monster_location</span><span>(old_theme_park).</span><span>
-</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(ghost); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(zombie); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(headless_horseman); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(vampire) :- </span><span style="color:#8fa1b3;">monster_location</span><span>(nearby_farm).</span><span>
-</span><span>
-</span><span style="color:#bf616a;">adventure </span><span>:- </span><span style="color:#8fa1b3;">monster_location</span><span>(X), </span><span style="color:#8fa1b3;">monster</span><span>(Y), adventure_start.</span><span>
-</span><span style="color:#bf616a;">any_monster_location </span><span>:- </span><span style="color:#8fa1b3;">monster_location</span><span>(X).</span><span>
-</span><span style="color:#bf616a;">any_monster </span><span>:- </span><span style="color:#8fa1b3;">monster</span><span>(X).</span><span>
-</span><span style="color:#bf616a;">two_locations </span><span>:- </span><span style="color:#8fa1b3;">monster_location</span><span>(X), </span><span style="color:#8fa1b3;">monster_location</span><span>(Y), X \== Y.</span><span>
-</span><span style="color:#bf616a;">two_monsters </span><span>:- </span><span style="color:#8fa1b3;">monster</span><span>(X), </span><span style="color:#8fa1b3;">monster</span><span>(Y), X \== Y.</span><span>
-</span><span style="color:#bf616a;">vampire_after_flat_tire </span><span>:- </span><span style="color:#8fa1b3;">monster</span><span>(vampire), flat_tire.</span><span>
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(abandoned_mansion); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(local_museum); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(old_theme_park); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster_location</span><span>(nearby_farm).
 </span><span>
 </span><span>
-</span><span>% Queries:.</span><span>
-</span><span style="color:#8fa1b3;">query</span><span>(adventure_start).</span><span>
-</span><span style="color:#8fa1b3;">query</span><span>(any_monster_location).</span><span>
-</span><span style="color:#8fa1b3;">query</span><span>(any_monster).</span><span>
-</span><span style="color:#8fa1b3;">query</span><span>(adventure).</span><span>
-</span><span style="color:#8fa1b3;">query</span><span>(two_locations).</span><span>
-</span><span style="color:#8fa1b3;">query</span><span>(two_monsters).</span><span>
-</span><span style="color:#8fa1b3;">query</span><span>(</span><span style="color:#8fa1b3;">monster</span><span>(ghost)).</span><span>
-</span><span style="color:#8fa1b3;">query</span><span>(vampire_after_flat_tire).</span><span>
+</span><span>% Rules:
+</span><span style="color:#bf616a;">adventure_start </span><span>:- flat_tire.
+</span><span style="color:#bf616a;">adventure_start </span><span>:- out_of_gas.
+</span><span style="color:#bf616a;">adventure_start </span><span>:- engine_trouble.
+</span><span>
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(ghost); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(vampire); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(zombie) :- </span><span style="color:#8fa1b3;">monster_location</span><span>(abandoned_mansion).
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">5</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(mummy); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(headless_horseman); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">3</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(ghost) :- </span><span style="color:#8fa1b3;">monster_location</span><span>(local_museum).
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">5</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(zombie); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(ghost); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">1</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(mummy) :- </span><span style="color:#8fa1b3;">monster_location</span><span>(old_theme_park).
+</span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">4</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(ghost); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(zombie); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(headless_horseman); </span><span style="color:#d08770;">0</span><span>.</span><span style="color:#d08770;">2</span><span>::</span><span style="color:#8fa1b3;">monster</span><span>(vampire) :- </span><span style="color:#8fa1b3;">monster_location</span><span>(nearby_farm).
+</span><span>
+</span><span style="color:#bf616a;">adventure </span><span>:- </span><span style="color:#8fa1b3;">monster_location</span><span>(X), </span><span style="color:#8fa1b3;">monster</span><span>(Y), adventure_start.
+</span><span style="color:#bf616a;">any_monster_location </span><span>:- </span><span style="color:#8fa1b3;">monster_location</span><span>(X).
+</span><span style="color:#bf616a;">any_monster </span><span>:- </span><span style="color:#8fa1b3;">monster</span><span>(X).
+</span><span style="color:#bf616a;">two_locations </span><span>:- </span><span style="color:#8fa1b3;">monster_location</span><span>(X), </span><span style="color:#8fa1b3;">monster_location</span><span>(Y), X \== Y.
+</span><span style="color:#bf616a;">two_monsters </span><span>:- </span><span style="color:#8fa1b3;">monster</span><span>(X), </span><span style="color:#8fa1b3;">monster</span><span>(Y), X \== Y.
+</span><span style="color:#bf616a;">vampire_after_flat_tire </span><span>:- </span><span style="color:#8fa1b3;">monster</span><span>(vampire), flat_tire.
+</span><span>
+</span><span>
+</span><span>% Queries:.
+</span><span style="color:#8fa1b3;">query</span><span>(adventure_start).
+</span><span style="color:#8fa1b3;">query</span><span>(any_monster_location).
+</span><span style="color:#8fa1b3;">query</span><span>(any_monster).
+</span><span style="color:#8fa1b3;">query</span><span>(adventure).
+</span><span style="color:#8fa1b3;">query</span><span>(two_locations).
+</span><span style="color:#8fa1b3;">query</span><span>(two_monsters).
+</span><span style="color:#8fa1b3;">query</span><span>(</span><span style="color:#8fa1b3;">monster</span><span>(ghost)).
+</span><span style="color:#8fa1b3;">query</span><span>(vampire_after_flat_tire).
 </span></code></pre>
 <p>In this example we also show a number of interesting facts that we might want to be able to query. The probability that an adventure starts is 0.832. Given that the probability for a monster location and a monster existing is 1 in both cases, and adventure requires only an &quot;adventure start&quot;, a &quot;monster&quot; and its &quot;location&quot;, the probability for an adventure happening is also 0.832. As mentioned before, due to the annotated disjunctions the probability of having two monsters or two locations is 0. We can also query for facts such as the probability of a monster occuring, which is inferred based on both the conditional probability given the monster location and the probability of the monster location itself. For example the probability of the monster being a ghost is 0.37. Finally we can calculate the probabilities for any particular scenario that we create, such as the probability of having the monster be a vampire after having a flat tire: 0.064. </p>
 <p>As one can see many spooky scenarios can be explored with ProbLog. Here we only taken a quick peek for representing a small portion of Scooby Doo stories, but these can also be applied to other domains, be it reasoning in the legal, financial, health and other fields. So do not be scared off and give it a try for any domain modelling you might encounter involving probabilities!</p>

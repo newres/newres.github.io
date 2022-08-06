@@ -110,99 +110,99 @@ These methodologies can be quite complex, which they need to be in order to capt
 <p>In order to make things more concrete lets imagine a scenario where small application is needed to be built that aims to search for definitions within legal documents. One of the nice aspects of many legal texts is that they often have a section of definitions that the reader can refer to. Our application will aim to retrieve these definitions based on a given criteria. As an example use case, given the acronym DODD of our approach, we will use the text of the <a href="https://www.congress.gov/bill/111th-congress/house-bill/4173/text?r=1">Dodd-Frank Wall Street Reform and Consumer Protection Act</a>, which we will simply refer as the Dodd-Frank law in this context. </p>
 <p>I am going to preface this by saying that &quot;I am not a lawyer&quot; and I am looking at this application from a software- and knowledge engineers perspective. I will simplify out a LOT of the intricacies of legal text search and representation. That said as mentioned this perspective should be illustrative of the issues when developing software for such a new domain and how Data Oriented Domain Design could be a good starting point.</p>
 <p>The text of this law has multiple sections for definitions, but here in particular we are looking at the first ten definitions outlined in Section 2 of the Dodd-Frank act. </p>
-<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SEC. 2. &lt;&lt;NOTE: 12 USC 5301.&gt;&gt; DEFINITIONS.</span><span>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SEC. 2. &lt;&lt;NOTE: 12 USC 5301.&gt;&gt; DEFINITIONS.
 </span><span>
-</span><span>    As used in this Act, the following definitions shall apply, except </span><span>
-</span><span>as the context otherwise requires or as otherwise specifically provided </span><span>
-</span><span>in this Act:</span><span>
-</span><span>            (1) Affiliate.--The term ``affiliate&#39;&#39; has the same meaning </span><span>
-</span><span>        as in section 3 of the Federal Deposit Insurance Act (12 U.S.C. </span><span>
-</span><span>        1813).</span><span>
-</span><span>            (2) Appropriate federal banking agency.--On and after the </span><span>
-</span><span>        transfer date, the term ``appropriate Federal banking agency&#39;&#39; </span><span>
-</span><span>        has the same meaning as in section 3(q) of the Federal Deposit </span><span>
-</span><span>        Insurance Act (12 U.S.C. 1813(q)), as amended by title III.</span><span>
+</span><span>    As used in this Act, the following definitions shall apply, except 
+</span><span>as the context otherwise requires or as otherwise specifically provided 
+</span><span>in this Act:
+</span><span>            (1) Affiliate.--The term ``affiliate&#39;&#39; has the same meaning 
+</span><span>        as in section 3 of the Federal Deposit Insurance Act (12 U.S.C. 
+</span><span>        1813).
+</span><span>            (2) Appropriate federal banking agency.--On and after the 
+</span><span>        transfer date, the term ``appropriate Federal banking agency&#39;&#39; 
+</span><span>        has the same meaning as in section 3(q) of the Federal Deposit 
+</span><span>        Insurance Act (12 U.S.C. 1813(q)), as amended by title III.
 </span><span>
-</span><span>[[Page 124 STAT. 1387]]</span><span>
+</span><span>[[Page 124 STAT. 1387]]
 </span><span>
-</span><span>            (3) Board of governors.--The term ``Board of Governors&#39;&#39; </span><span>
-</span><span>        means the Board of Governors of the Federal Reserve System.</span><span>
-</span><span>            (4) Bureau.--The term ``Bureau&#39;&#39; means the Bureau of </span><span>
-</span><span>        Consumer Financial Protection established under title X.</span><span>
-</span><span>            (5) Commission.--The term ``Commission&#39;&#39; means the </span><span>
-</span><span>        Securities and Exchange Commission, except in the context of the </span><span>
-</span><span>        Commodity Futures Trading Commission.</span><span>
-</span><span>            (6) Commodity futures terms.--The terms ``futures commission </span><span>
-</span><span>        merchant&#39;&#39;, ``swap&#39;&#39;, ``swap dealer&#39;&#39;, ``swap execution </span><span>
-</span><span>        facility&#39;&#39;, ``derivatives clearing organization&#39;&#39;, ``board of </span><span>
-</span><span>        trade&#39;&#39;, ``commodity trading advisor&#39;&#39;, ``commodity pool&#39;&#39;, and </span><span>
-</span><span>        ``commodity pool operator&#39;&#39; have the same meanings as given the </span><span>
-</span><span>        terms in section 1a of the Commodity Exchange Act (7 U.S.C. 1 et </span><span>
-</span><span>        seq.).</span><span>
-</span><span>            (7) Corporation.--The term ``Corporation&#39;&#39; means the Federal </span><span>
-</span><span>        Deposit Insurance Corporation.</span><span>
-</span><span>            (8) Council.--The term ``Council&#39;&#39; means the Financial </span><span>
-</span><span>        Stability Oversight Council established under title I.</span><span>
-</span><span>            (9) Credit union.--The term ``credit union&#39;&#39; means a Federal </span><span>
-</span><span>        credit union, State credit union, or State-chartered credit </span><span>
-</span><span>        union, as those terms are defined in section 101 of the Federal </span><span>
-</span><span>        Credit Union Act (12 U.S.C. 1752).</span><span>
-</span><span>            (10) Federal banking agency.--The term--</span><span>
-</span><span>                    (A) ``Federal banking agency&#39;&#39; means, individually, </span><span>
-</span><span>                the Board of Governors, the Office of the Comptroller of </span><span>
-</span><span>                the Currency, and the Corporation; and</span><span>
-</span><span>                    (B) ``Federal banking agencies&#39;&#39; means all of the </span><span>
-</span><span>                agencies referred to in subparagraph (A), collectively.</span><span>
+</span><span>            (3) Board of governors.--The term ``Board of Governors&#39;&#39; 
+</span><span>        means the Board of Governors of the Federal Reserve System.
+</span><span>            (4) Bureau.--The term ``Bureau&#39;&#39; means the Bureau of 
+</span><span>        Consumer Financial Protection established under title X.
+</span><span>            (5) Commission.--The term ``Commission&#39;&#39; means the 
+</span><span>        Securities and Exchange Commission, except in the context of the 
+</span><span>        Commodity Futures Trading Commission.
+</span><span>            (6) Commodity futures terms.--The terms ``futures commission 
+</span><span>        merchant&#39;&#39;, ``swap&#39;&#39;, ``swap dealer&#39;&#39;, ``swap execution 
+</span><span>        facility&#39;&#39;, ``derivatives clearing organization&#39;&#39;, ``board of 
+</span><span>        trade&#39;&#39;, ``commodity trading advisor&#39;&#39;, ``commodity pool&#39;&#39;, and 
+</span><span>        ``commodity pool operator&#39;&#39; have the same meanings as given the 
+</span><span>        terms in section 1a of the Commodity Exchange Act (7 U.S.C. 1 et 
+</span><span>        seq.).
+</span><span>            (7) Corporation.--The term ``Corporation&#39;&#39; means the Federal 
+</span><span>        Deposit Insurance Corporation.
+</span><span>            (8) Council.--The term ``Council&#39;&#39; means the Financial 
+</span><span>        Stability Oversight Council established under title I.
+</span><span>            (9) Credit union.--The term ``credit union&#39;&#39; means a Federal 
+</span><span>        credit union, State credit union, or State-chartered credit 
+</span><span>        union, as those terms are defined in section 101 of the Federal 
+</span><span>        Credit Union Act (12 U.S.C. 1752).
+</span><span>            (10) Federal banking agency.--The term--
+</span><span>                    (A) ``Federal banking agency&#39;&#39; means, individually, 
+</span><span>                the Board of Governors, the Office of the Comptroller of 
+</span><span>                the Currency, and the Corporation; and
+</span><span>                    (B) ``Federal banking agencies&#39;&#39; means all of the 
+</span><span>                agencies referred to in subparagraph (A), collectively.
 </span></code></pre>
 <p>Now lets consider the case of an application searching for definitions in legal text. One of the features we would like to do is that given the exact name of the term, such as &quot;Board of Governors&quot;, &quot;Bureau&quot;, etc, the text of its definition is found. The name of the term can be represented as data with a string of characters. In Clojure, and many other languages, this is denoted as the text between quotation marks (<code>&quot;&quot;</code>). For example, the input for our search can be given as:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>&quot;</span><span style="color:#a3be8c;">Board of Governors</span><span>&quot;</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>&quot;</span><span style="color:#a3be8c;">Board of Governors</span><span>&quot;
 </span></code></pre>
 <p>Next we have to examine on how to represent the output (the result) of our search. In most cases we would like to have a sequence of results that indicate the found definitions. This is due to a number of reasons. First, a specific term could be defined with multiple definitions over a variety of documents. Second, it provides us a straightforward way to represent the results in the case when there are no results are found. In this case we can return an indicator of a sequence of 0 elements. In Clojure such a sequence of elements can be indicated by elements in between square brackets <code>[]</code>. Other data interchange formats and languages call such ordered sequence by different terms: lists, arrays, etc. Such representations are very common in (programming languages) but for in this article we will stick with the EDN definitions. </p>
 <p>In our first version of our program we will just return the sequence of the found texts that describes the definition. To give a concrete example lets assume we search for the term &quot;Board of Governors&quot; in the above partial document. The input for our program is the string of characters indicating this term:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>&quot;</span><span style="color:#a3be8c;">Board of Governors</span><span>&quot;</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>&quot;</span><span style="color:#a3be8c;">Board of Governors</span><span>&quot;
 </span></code></pre>
 <p>and the output would be:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>[ &quot;</span><span style="color:#a3be8c;">(3) Board of governors.--The term ``Board of Governors&#39;&#39; means the Board of Governors of the Federal Reserve System.</span><span>&quot;]</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>[ &quot;</span><span style="color:#a3be8c;">(3) Board of governors.--The term ``Board of Governors&#39;&#39; means the Board of Governors of the Federal Reserve System.</span><span>&quot;]
 </span></code></pre>
 <p>To show an example where we would not find any definitions in the above text, if we search for the term &quot;Central Bank&quot; in the above fragment using the input</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>&quot;</span><span style="color:#a3be8c;">Central Bank</span><span>&quot;</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>&quot;</span><span style="color:#a3be8c;">Central Bank</span><span>&quot;
 </span></code></pre>
 <p>we would get an empty sequence as a result:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>[]</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>[]
 </span></code></pre>
 <p>Giving examples such as this should already give a good indication on how the code could be structured. Just as importantly, given some information on the basic notation of sequences and strings, legal domain experts could understand the program is aiming to achieve, just by looking at a few of such examples and verify whether we are on the right track.</p>
 <p>Of course the above example is a very minimal abstraction. Let's try to expand upon it, to capture a few more elements of the legal domain. </p>
 <p>The location in which the searched terms are found is also quite important. A program might search legal terms over multiple legal documents, and if found, people would likely want to know exact location in the source material to get more context. This means that we want to represent a few additional values in our search result. For example if the definition was found in a law, we would also want to have the title of the law, the section in which the definition was found, the URL of where the law could be read, etc.</p>
 <p>In EDN the format to represent such key-value pairs is called map, represented by pairs of elements between curly brackets: <code>{}</code>. For example if we want to express the term description with a key-value pair, with both the key and value being a string, we could write:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>[{ &quot;</span><span style="color:#a3be8c;">description</span><span>&quot; &quot;</span><span style="color:#a3be8c;">(3) Board of governors.--The term ``Board of Governors&#39;&#39; means the Board of Governors of the Federal Reserve System.</span><span>&quot;}]</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>[{ &quot;</span><span style="color:#a3be8c;">description</span><span>&quot; &quot;</span><span style="color:#a3be8c;">(3) Board of governors.--The term ``Board of Governors&#39;&#39; means the Board of Governors of the Federal Reserve System.</span><span>&quot;}]
 </span></code></pre>
 <p>In other languages such maps are called as object, record, struct, dictionary, hash table, etc but the general concept is the same. </p>
 <p>The main question is of-course what additional elements we want add here and what we would like to name the keys of these elements. To reiterate, &quot;I am not a Lawyer&quot;, but we can look towards the ways of how laws are cited to figure out what additional information would make sense from a legal perspective. Thankfully there are some descriptions online on how to cite laws, such on the site of the <a href="https://guides.libraries.uc.edu/c.php?g=222561&amp;p=1472889">University of Cincinnati</a> and the <a href="https://www.law.cornell.edu/citation/2-300">Cornell University Law</a>.</p>
 <p>Given this information, we will add the terms &quot;title of the act&quot;, &quot;public law number&quot; &quot;statute&quot;, &quot;year of enaction&quot; and &quot;url&quot; of the law where this definition was found to our search result. Below is the expanded example:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>[{ &quot;</span><span style="color:#a3be8c;">description</span><span>&quot; &quot;</span><span style="color:#a3be8c;">(3) Board of governors.--The term ``Board of Governors&#39;&#39; means the Board of Governors of the Federal Reserve System.</span><span>&quot;</span><span>
-</span><span>  &quot;</span><span style="color:#a3be8c;">title-of-act</span><span>&quot; &quot;</span><span style="color:#a3be8c;">H.R.4173 - Dodd-Frank Wall Street Reform and Consumer Protection Act</span><span>&quot;</span><span>
-</span><span>  &quot;</span><span style="color:#a3be8c;">public-law-number</span><span>&quot; &quot;</span><span style="color:#a3be8c;">111-203</span><span>&quot; </span><span>
-</span><span>  &quot;</span><span style="color:#a3be8c;">statute</span><span>&quot; &quot;</span><span style="color:#a3be8c;">1387</span><span>&quot;</span><span>
-</span><span>  &quot;</span><span style="color:#a3be8c;">year-of-enaction</span><span>&quot; &quot;</span><span style="color:#a3be8c;">2010</span><span>&quot;</span><span>
-</span><span>  &quot;</span><span style="color:#a3be8c;">url</span><span>&quot; &quot;</span><span style="color:#a3be8c;">https://www.congress.gov/bill/111th-congress/house-bill/4173/text?r=1</span><span>&quot;}]</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>[{ &quot;</span><span style="color:#a3be8c;">description</span><span>&quot; &quot;</span><span style="color:#a3be8c;">(3) Board of governors.--The term ``Board of Governors&#39;&#39; means the Board of Governors of the Federal Reserve System.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">title-of-act</span><span>&quot; &quot;</span><span style="color:#a3be8c;">H.R.4173 - Dodd-Frank Wall Street Reform and Consumer Protection Act</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">public-law-number</span><span>&quot; &quot;</span><span style="color:#a3be8c;">111-203</span><span>&quot; 
+</span><span>  &quot;</span><span style="color:#a3be8c;">statute</span><span>&quot; &quot;</span><span style="color:#a3be8c;">1387</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">year-of-enaction</span><span>&quot; &quot;</span><span style="color:#a3be8c;">2010</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">url</span><span>&quot; &quot;</span><span style="color:#a3be8c;">https://www.congress.gov/bill/111th-congress/house-bill/4173/text?r=1</span><span>&quot;}]
 </span></code></pre>
 <p>Now this might be sufficient, but again there are some features we could use to make this a better representation. First, we use a lot of strings of characters when we ideally want to specify a number or numbers. In EDN, as well as in JSON and other formats, you generally have a bit more precision and safety by expressing these elements as numbers (or more precisely integers). By the program that we intend to build, this helps us automatically invalidate certain wrong values and helps us better describe the intent of what is allowed. For example if we write the string <code>&quot;start&quot;</code> instead of a number such as '111' for the law number, this program should handle this by not allowing such scenaros to occur that contradict the rules of the domain. The extra precision allows us to more precisely declare the range of laws, with a number denoting the starting and the ending point with the keys <code>&quot;from&quot;</code> and <code>&quot;to&quot;</code>. </p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>[{ &quot;</span><span style="color:#a3be8c;">description</span><span>&quot; &quot;</span><span style="color:#a3be8c;">(3) Board of governors.--The term ``Board of Governors&#39;&#39; means the Board of Governors of the Federal Reserve System.</span><span>&quot;</span><span>
-</span><span>  &quot;</span><span style="color:#a3be8c;">title-of-act</span><span>&quot; &quot;</span><span style="color:#a3be8c;">H.R.4173 - Dodd-Frank Wall Street Reform and Consumer Protection Act</span><span>&quot;</span><span>
-</span><span>  &quot;</span><span style="color:#a3be8c;">public-law-number</span><span>&quot; {&quot;</span><span style="color:#a3be8c;">from</span><span>&quot;: </span><span style="color:#d08770;">111 </span><span>&quot;</span><span style="color:#a3be8c;">to</span><span>&quot;: </span><span style="color:#d08770;">203</span><span>} </span><span>
-</span><span>  &quot;</span><span style="color:#a3be8c;">statute</span><span>&quot; &quot;</span><span style="color:#a3be8c;">1387</span><span>&quot;</span><span>
-</span><span>  &quot;</span><span style="color:#a3be8c;">year-of-enaction</span><span>&quot; 2010</span><span>
-</span><span>  &quot;</span><span style="color:#a3be8c;">url</span><span>&quot; &quot;</span><span style="color:#a3be8c;">https://www.congress.gov/bill/111th-congress/house-bill/4173/text?r=1</span><span>&quot;}]</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>[{ &quot;</span><span style="color:#a3be8c;">description</span><span>&quot; &quot;</span><span style="color:#a3be8c;">(3) Board of governors.--The term ``Board of Governors&#39;&#39; means the Board of Governors of the Federal Reserve System.</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">title-of-act</span><span>&quot; &quot;</span><span style="color:#a3be8c;">H.R.4173 - Dodd-Frank Wall Street Reform and Consumer Protection Act</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">public-law-number</span><span>&quot; {&quot;</span><span style="color:#a3be8c;">from</span><span>&quot;: </span><span style="color:#d08770;">111 </span><span>&quot;</span><span style="color:#a3be8c;">to</span><span>&quot;: </span><span style="color:#d08770;">203</span><span>} 
+</span><span>  &quot;</span><span style="color:#a3be8c;">statute</span><span>&quot; &quot;</span><span style="color:#a3be8c;">1387</span><span>&quot;
+</span><span>  &quot;</span><span style="color:#a3be8c;">year-of-enaction</span><span>&quot; </span><span style="color:#d08770;">2010
+</span><span>  &quot;</span><span style="color:#a3be8c;">url</span><span>&quot; &quot;</span><span style="color:#a3be8c;">https://www.congress.gov/bill/111th-congress/house-bill/4173/text?r=1</span><span>&quot;}]
 </span></code></pre>
 <p>We are going to add one additional feature to improve this representation. Note that depending on what we search for, certain the strings representing the values will vary a lot while those for the keys will remain the same. For example the value for the returned description can be <code>&quot;(3) Board of governors.--The term ``Board of Governors'' means the Board of Governors of the Federal Reserve System.&quot;</code> if we search for the term &quot;Board of governors&quot;, while it will be <code>&quot;(4) Bureau.--The term ``Bureau'' means the Bureau of Consumer Financial Protection established under title X.&quot;</code> if we search for &quot;Bureau&quot;. However the key for both of these values would be &quot;description&quot;.</p>
 <p>The solution in EDN is to use keywords, for the commonly used strings. The names of these are prefaced by <code>:</code> instead of putting them in quotation marks. While JSON does not have such keywords, many other languages do. Notably <a href="https://json-ld.org/">JSON-LD</a> can use <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">Uniform Resource Identifiers (URI)</a> for a similar purpose.</p>
 <p>Using keywords we can give an output for our definition search as follows:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>[{ </span><span style="color:#d08770;">:description </span><span>&quot;</span><span style="color:#a3be8c;">(3) Board of governors.--The term ``Board of Governors&#39;&#39; means the Board of Governors of the Federal Reserve System.</span><span>&quot;</span><span>
-</span><span>  </span><span style="color:#d08770;">:title-of-act </span><span>&quot;</span><span style="color:#a3be8c;">H.R.4173 - Dodd-Frank Wall Street Reform and Consumer Protection Act</span><span>&quot;</span><span>
-</span><span>  </span><span style="color:#d08770;">:public-law-number</span><span>&quot;</span><span style="color:#a3be8c;"> {</span><span>&quot;from&quot;</span><span style="color:#a3be8c;">: 111 </span><span>&quot;to&quot;&quot;: </span><span style="color:#d08770;">203</span><span>} </span><span>
-</span><span>  </span><span style="color:#d08770;">:statute</span><span>&quot; &quot;</span><span style="color:#d08770;">1387</span><span>&quot;</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">  :year-of-enaction 2010</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">  :url </span><span>&quot;https://www.congress.gov/bill/111th-congress/house-bill/4173/text?r=1&quot;</span><span style="color:#a3be8c;">}]</span><span style="color:#a3be8c;">
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>[{ </span><span style="color:#d08770;">:description </span><span>&quot;</span><span style="color:#a3be8c;">(3) Board of governors.--The term ``Board of Governors&#39;&#39; means the Board of Governors of the Federal Reserve System.</span><span>&quot;
+</span><span>  </span><span style="color:#d08770;">:title-of-act </span><span>&quot;</span><span style="color:#a3be8c;">H.R.4173 - Dodd-Frank Wall Street Reform and Consumer Protection Act</span><span>&quot;
+</span><span>  </span><span style="color:#d08770;">:public-law-number</span><span>&quot;</span><span style="color:#a3be8c;"> {</span><span>&quot;from&quot;</span><span style="color:#a3be8c;">: 111 </span><span>&quot;to&quot;&quot;: </span><span style="color:#d08770;">203</span><span>} 
+</span><span>  </span><span style="color:#d08770;">:statute</span><span>&quot; &quot;</span><span style="color:#d08770;">1387</span><span>&quot;
+</span><span style="color:#a3be8c;">  :year-of-enaction 2010
+</span><span style="color:#a3be8c;">  :url </span><span>&quot;https://www.congress.gov/bill/111th-congress/house-bill/4173/text?r=1&quot;</span><span style="color:#a3be8c;">}]
 </span></code></pre>
 <p>As one can see from just these few examples there can be quite a few ways in which domain concepts are represented. A small set of examples, that describe the elements of the domain in a way that is understandable for both the domain expert and the software engineer can be invaluable. The great benefit of Data Oriented Domain Design, is that it co-opts some battle tested light-weight data representation languages, such as EDN, for this purpose. This allows for some excellent test cases to use when developing the software with methodologies such as <a href="https://en.wikipedia.org/wiki/Test-driven_development">Test Driven Development (TDD)</a>.</p>
 <!-- [JSON-LD](https://json-ld.org/)  -->

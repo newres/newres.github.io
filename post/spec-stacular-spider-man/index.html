@@ -119,27 +119,27 @@
 <p>One relatively recent tool that can be used to solve this problem is the <a href="https://clojure.org/guides/spec">clojure.spec</a> library in the Clojure programming language. In this article we aim to explain, alongside Spider-Man, how these specs can be used to tackle the data validation problem in a spectacular way. As this library relies on the Clojure language some knowledge of Clojure is needed. In order to make this article understandable to those without such prior expertise we introduce some aspects of Clojure. In particular we focus on two features of it: the way information (data) is represented and the fact that it is a Lisp.</p>
 <p>In Clojure data is represented with relatively few elements that are combined together. Take for example a scenario where we want to create a profile of Spider-Man, as taken from the Marvel wiki entry on <a href="http://marvel.com/universe/Spider-Man_(Peter_Parker)">Spider-Man</a>.</p>
 <p>The full name of Spider-Man can be represented in text form as a string. Like in many other languages the text is placed in between quotation marks.</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>&quot;</span><span style="color:#a3be8c;">Peter Benjamin Parker</span><span>&quot;</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>&quot;</span><span style="color:#a3be8c;">Peter Benjamin Parker</span><span>&quot;
 </span></code></pre>
 <p>For the numbers to represent his relative power in the Marvel universe, we use natural numbers (we leave the concepts and issues surrounding very large or floating point numbers out in this article). In case of Spider-Man his durability is 5:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>5</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#d08770;">5
 </span></code></pre>
 <p>Of course having just a value of the name and the durability of Spider-Man just floating around makes the representation somewhat incomplete, as they are not attached to the concepts of &quot;name&quot; or &quot;durability&quot;. Just like how Spider-Man needs buildings to sling off of, we need a representation that links the values with what they represent. In Clojure, keywords are often used for this purpose. </p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#d08770;">:real-name</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#d08770;">:real-name
 </span></code></pre>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#d08770;">:spider-man-spec.core/name</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#d08770;">:spider-man-spec.core/name
 </span></code></pre>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#d08770;">::durability</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#d08770;">::durability
 </span></code></pre>
 <p>Keywords are symbolic identifiers. Think of them as symbols, much like one would use a string, but with some special powers attached. They are text prefaced by &quot;:&quot;, as it can be seen in the keyword <code>:real-name</code>. They have the ability to be namespace-qualified, such as <code>:spider-man-spec.core/name</code> which indicates that this is the keyword in the <code>spider-man-spec.core</code> namespace. Namespaces are what allows us to modularize our data and code, by grouping them under together a single identifier. In our case this is <code>spider-man-spec.core</code>. This namespacing ensures that our definition of the concepts of &quot;name&quot;, &quot;real-name&quot;, &quot;durability&quot;, etc. can remain distinct from any other use of similar concepts. Finally, when writing internally to the library which uses the namespace, or when aliasing to it, we can just shorten the keyword with &quot;::&quot;, such as in <code>::durability</code>. </p>
 <p>Keywords come with some nice implementation details, such as fast equality checks and some other powers we will show in the future. This makes them the preferred keys in data-structures such as maps. And speaking of maps they allow the description of information in key-value pairs, as written between curly braces in the small example below. </p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>  {</span><span style="color:#d08770;">::name </span><span>&quot;</span><span style="color:#a3be8c;">Spider-Man</span><span>&quot;</span><span>
-</span><span>   </span><span style="color:#d08770;">::real-name </span><span>&quot;</span><span style="color:#a3be8c;">Peter Benjamin Parker</span><span>&quot;}</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>  {</span><span style="color:#d08770;">::name </span><span>&quot;</span><span style="color:#a3be8c;">Spider-Man</span><span>&quot;
+</span><span>   </span><span style="color:#d08770;">::real-name </span><span>&quot;</span><span style="color:#a3be8c;">Peter Benjamin Parker</span><span>&quot;}
 </span></code></pre>
 <p>The curly backets around the pairs express the keys and values in a map in Clojure. In the above example <code>::name</code> and <code>::real-name</code> are the key and value pairs for <code>&quot;Spider-Man&quot;</code> and <code>&quot;Peter Benjamin Parker&quot;</code> respectively. </p>
 <p>Maps are just one of the ways one can describe a collection of elements. You also have sets, collections in which each element is unique. This can be done with a hashtag and some curly brackets &quot;#{}&quot;. In the example below we list the current and former affiliations of Spider-Man.</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>{</span><span style="color:#d08770;">::current-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">Avengers</span><span>&quot;}</span><span>
-</span><span> </span><span style="color:#d08770;">::former-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">Secret Defenders</span><span>&quot; &quot;</span><span style="color:#a3be8c;">New Fantastic Four</span><span>&quot; &quot;</span><span style="color:#a3be8c;">The Outlaws</span><span>&quot;}}</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>{</span><span style="color:#d08770;">::current-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">Avengers</span><span>&quot;}
+</span><span> </span><span style="color:#d08770;">::former-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">Secret Defenders</span><span>&quot; &quot;</span><span style="color:#a3be8c;">New Fantastic Four</span><span>&quot; &quot;</span><span style="color:#a3be8c;">The Outlaws</span><span>&quot;}}
 </span></code></pre>
 <p>Note that how sets are used within maps to represent this knowledge. This is actually a common way to represent knowledge in Clojure: you combine all the various data representations directly. This way you can have a list containing maps, with keywords as keys and values that contain maps and strings, where the maps contain numbers, etc. You have these data-structures in pretty much all commonly used programming languages. Where Clojure differs from many is that it does not put (almost any) sugaring or abstraction on top. </p>
 <figure class=centeredfig>
@@ -155,44 +155,44 @@
 <!-- {{< figure src="/img/post/2018/spec-stacular-spider-man/spider-man-swinging.jpg" title="Spider-Man swinging around the city. © Marvel Studios" >}} -->
 <p>Just as Spider-Man is often at his best when he is just being &quot;plain old Spidey&quot;, having data represented this way has some nice advantages. The biggest is simplicity. Instead of learning to work with specific wrappers, objects, prototypes, etc on top of this data, that can differ between applications and libraries, it is enough to learn how to handle and manipulate maps, list, sets once. This knowledge can be then reused in any domain, and frees up the attention of the programmer to focus on the domain problem, and not the exact way the data was wrapped up in a library. </p>
 <p>This of course also means that a system, such as clojure.spec, that aims at data validation in Clojure, has to handle the above-mentioned style of composition well. But before we get ahead of ourselves lets finish up by providing the profile of Spider Man.</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">spider-man-profile</span><span>
-</span><span>  {</span><span style="color:#d08770;">::name </span><span>&quot;</span><span style="color:#a3be8c;">Spider-Man</span><span>&quot;</span><span>
-</span><span>   </span><span style="color:#d08770;">::real-name </span><span>&quot;</span><span style="color:#a3be8c;">Peter Benjamin Parker</span><span>&quot;</span><span>
-</span><span>   </span><span style="color:#d08770;">::identity ::secret</span><span>
-</span><span>   </span><span style="color:#d08770;">::affiliations</span><span>
-</span><span>                   {</span><span style="color:#d08770;">::current-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">Avengers</span><span>&quot;}</span><span>
-</span><span>                    </span><span style="color:#d08770;">::former-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">Secret Defenders</span><span>&quot; &quot;</span><span style="color:#a3be8c;">New Fantastic Four</span><span>&quot; &quot;</span><span style="color:#a3be8c;">The Outlaws</span><span>&quot;}}</span><span>
-</span><span>   </span><span style="color:#d08770;">::power-grid </span><span>{</span><span>
-</span><span>                 </span><span style="color:#d08770;">::durability</span><span> 3</span><span>
-</span><span>                 </span><span style="color:#d08770;">::energy</span><span> 4</span><span>
-</span><span>                 </span><span style="color:#d08770;">::fighting</span><span> 5</span><span>
-</span><span>                 </span><span style="color:#d08770;">::intelligence</span><span> 4</span><span>
-</span><span>                 </span><span style="color:#d08770;">::speed</span><span> 5</span><span>
-</span><span>                 </span><span style="color:#d08770;">::strength</span><span> 4</span><span>
-</span><span>                 }</span><span>
-</span><span>   }</span><span>
-</span><span>  )</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">spider-man-profile
+</span><span>  {</span><span style="color:#d08770;">::name </span><span>&quot;</span><span style="color:#a3be8c;">Spider-Man</span><span>&quot;
+</span><span>   </span><span style="color:#d08770;">::real-name </span><span>&quot;</span><span style="color:#a3be8c;">Peter Benjamin Parker</span><span>&quot;
+</span><span>   </span><span style="color:#d08770;">::identity ::secret
+</span><span>   </span><span style="color:#d08770;">::affiliations
+</span><span>                   {</span><span style="color:#d08770;">::current-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">Avengers</span><span>&quot;}
+</span><span>                    </span><span style="color:#d08770;">::former-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">Secret Defenders</span><span>&quot; &quot;</span><span style="color:#a3be8c;">New Fantastic Four</span><span>&quot; &quot;</span><span style="color:#a3be8c;">The Outlaws</span><span>&quot;}}
+</span><span>   </span><span style="color:#d08770;">::power-grid </span><span>{
+</span><span>                 </span><span style="color:#d08770;">::durability 3
+</span><span>                 </span><span style="color:#d08770;">::energy 4
+</span><span>                 </span><span style="color:#d08770;">::fighting 5
+</span><span>                 </span><span style="color:#d08770;">::intelligence 4
+</span><span>                 </span><span style="color:#d08770;">::speed 5
+</span><span>                 </span><span style="color:#d08770;">::strength 4
+</span><span>                 }
+</span><span>   }
+</span><span>  )
 </span><span>
 </span><span>
-</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">vulture-profile</span><span>
-</span><span>  {</span><span style="color:#d08770;">::name </span><span>&quot;</span><span style="color:#a3be8c;">Vulture</span><span>&quot;</span><span>
-</span><span>   </span><span style="color:#d08770;">::real-name </span><span>&quot;</span><span style="color:#a3be8c;">Adrian Toomes</span><span>&quot;</span><span>
-</span><span>   </span><span style="color:#d08770;">::identity ::publicly-known</span><span>
-</span><span>   </span><span style="color:#d08770;">::affiliations</span><span>
-</span><span>                   {</span><span style="color:#d08770;">::current-affiliations </span><span>{}</span><span>
-</span><span>                    </span><span style="color:#d08770;">::former-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">Sinister Twelve</span><span>&quot; &quot;</span><span style="color:#a3be8c;">Sinister Six</span><span>&quot;}}</span><span>
-</span><span>   </span><span style="color:#d08770;">::power-grid </span><span>{</span><span>
-</span><span>                 </span><span style="color:#d08770;">::durability</span><span> 4</span><span>
-</span><span>                 </span><span style="color:#d08770;">::energy</span><span> 3</span><span>
-</span><span>                 </span><span style="color:#d08770;">::fighting</span><span> 4</span><span>
-</span><span>                 </span><span style="color:#d08770;">::intelligence</span><span> 4</span><span>
-</span><span>                 </span><span style="color:#d08770;">::speed</span><span> 5</span><span>
-</span><span>                 </span><span style="color:#d08770;">::strength</span><span> 3</span><span>
-</span><span>                 }</span><span>
-</span><span>   }</span><span>
-</span><span>  )</span><span>
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">vulture-profile
+</span><span>  {</span><span style="color:#d08770;">::name </span><span>&quot;</span><span style="color:#a3be8c;">Vulture</span><span>&quot;
+</span><span>   </span><span style="color:#d08770;">::real-name </span><span>&quot;</span><span style="color:#a3be8c;">Adrian Toomes</span><span>&quot;
+</span><span>   </span><span style="color:#d08770;">::identity ::publicly-known
+</span><span>   </span><span style="color:#d08770;">::affiliations
+</span><span>                   {</span><span style="color:#d08770;">::current-affiliations </span><span>{}
+</span><span>                    </span><span style="color:#d08770;">::former-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">Sinister Twelve</span><span>&quot; &quot;</span><span style="color:#a3be8c;">Sinister Six</span><span>&quot;}}
+</span><span>   </span><span style="color:#d08770;">::power-grid </span><span>{
+</span><span>                 </span><span style="color:#d08770;">::durability 4
+</span><span>                 </span><span style="color:#d08770;">::energy 3
+</span><span>                 </span><span style="color:#d08770;">::fighting 4
+</span><span>                 </span><span style="color:#d08770;">::intelligence 4
+</span><span>                 </span><span style="color:#d08770;">::speed 5
+</span><span>                 </span><span style="color:#d08770;">::strength 3
+</span><span>                 }
+</span><span>   }
+</span><span>  )
 </span><span>
-</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">spider-man-characters </span><span>[spider-man-profile vulture-profile])</span><span>
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">spider-man-characters </span><span>[spider-man-profile vulture-profile])
 </span></code></pre>
 <p>Oh no, our Spider Senses should be tingling. It is Vulture, that has shown up in our list of Spider-Man characters. In addition we just introduced some new elements in our example that need some explanation for readers new to Clojure.</p>
 <figure class=centeredfig>
@@ -214,63 +214,63 @@
 <p>Now we finally described the profiles of both Spider-Man and Vulture, but are they correct? The library of clojure.spec uses the notion of a spec for this. A spec is simply a function on a single parameter that returns a truthy value (in most cases a <code>true</code> if the spec holds, <code>false</code> if the spec does not hold).</p>
 <p>In essence this allows for many existing functions to be used as specs. For example the already existing function <code>string?</code> checks whether a particular value is a string or not. </p>
 <p>In order to check whether a value is valid for a particular spec we can use the <code>s/valid?</code> function. Here the <code>s</code> stands the namespace of the spec library <code>clojure.spec.alpha</code>, so by calling <code>s/valid?</code> we are calling the <code>valid?</code> function of this particular namespace.</p>
-<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/valid? string? &quot;</span><span style="color:#a3be8c;">Spider-Man</span><span>&quot;)</span><span>
+<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/valid? string? &quot;</span><span style="color:#a3be8c;">Spider-Man</span><span>&quot;)
 </span></code></pre>
 <p>The above function call will checking if <code>&quot;Spider-Man&quot;</code> is indeed a string, and return <code>true</code> if it is. On the other hand if we check whether a number is valid for this spec, using <code>(s/valid? string? 6)</code> we instead get <code>false</code> returned. </p>
 <p>Another way to use a spec, is to explain why a value is wrong. For example, we can call the function <code>explain-data</code> on with the spec and an incorrect value, to get a map back with an explanation. The function call: </p>
-<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/explain-data string? </span><span style="color:#d08770;">6</span><span>)</span><span>
+<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/explain-data string? </span><span style="color:#d08770;">6</span><span>)
 </span></code></pre>
 <p>would result in the map:</p>
-<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>{</span><span style="color:#d08770;">:val 6 :predicate :clojure.spec.alpha/unknown</span><span>}</span><span>
+<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>{</span><span style="color:#d08770;">:val 6 :predicate :clojure.spec.alpha/unknown</span><span>}
 </span></code></pre>
 <p>Now the above example clearly shows the value on which the spec has failed, but it denotes the predicate as unknown with <code>:clojure.spec.alpha/unknown</code>. The solution to this is to provide a name for the spec, which the system can use to pin point if things fail. We can register any spec using the function <code>s/def</code>. For example the functions: </p>
-<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/def </span><span style="color:#d08770;">::name </span><span>string?)</span><span>
+<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/def </span><span style="color:#d08770;">::name </span><span>string?)
 </span><span>
-</span><span>(s/def </span><span style="color:#d08770;">::real-name </span><span>string?)</span><span>
+</span><span>(s/def </span><span style="color:#d08770;">::real-name </span><span>string?)
 </span></code></pre>
 <p>will register the two specs under the keys <code>:name</code> and <code>:real-name</code> in the current namespace, i.e.: under <code>spider-man-spec.core/name</code> and <code>spider-man-spec.core/name</code> respectively.</p>
 <p>Now if we would aim to explain why the spec <code>:real-name</code>  does not allow the value <code>6</code>, it would return the explanation:</p>
-<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>{</span><span style="color:#d08770;">:val 6 :predicate :spider-man-spec.core/real-name</span><span>}</span><span>
+<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>{</span><span style="color:#d08770;">:val 6 :predicate :spider-man-spec.core/real-name</span><span>}
 </span></code></pre>
 <p>where the predicate now identifies the spec that was not fulfilled.</p>
 <p>Specs can also be created in other ways. For example a set of values indicating the correct values can be used as a spec.</p>
-<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/def </span><span style="color:#d08770;">::identity </span><span>#{</span><span style="color:#d08770;">::secret ::publicly-known</span><span>})</span><span>
+<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/def </span><span style="color:#d08770;">::identity </span><span>#{</span><span style="color:#d08770;">::secret ::publicly-known</span><span>})
 </span></code></pre>
 <p>The above code defines a spec for identity as having two possible values: either <code>::secret</code> or <code>::publicly-known</code>. </p>
 <p>Specs can also be defined for collections as well. The specs for current- and former affiliations: </p>
-<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/def </span><span style="color:#d08770;">::current-affilications </span><span>(s/coll-of string? </span><span style="color:#d08770;">:kind </span><span>set?))</span><span>
+<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/def </span><span style="color:#d08770;">::current-affilications </span><span>(s/coll-of string? </span><span style="color:#d08770;">:kind </span><span>set?))
 </span><span>
-</span><span>(s/def </span><span style="color:#d08770;">::former-affilications </span><span>(s/coll-of string? </span><span style="color:#d08770;">:kind </span><span>set?))</span><span>
+</span><span>(s/def </span><span style="color:#d08770;">::former-affilications </span><span>(s/coll-of string? </span><span style="color:#d08770;">:kind </span><span>set?))
 </span></code></pre>
 <p>These specs describe that that both current- and former have to be sets of strings. The affiliations part of a profile is actually map containing both current- and former affiliations. This is defined as the spec:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">s/def </span><span style="color:#d08770;">::affiliations </span><span>(</span><span style="color:#bf616a;">s/keys </span><span style="color:#d08770;">:req </span><span>[</span><span style="color:#d08770;">::current-affiliations</span><span>] </span><span style="color:#d08770;">:opt </span><span>[</span><span style="color:#d08770;">::former-affiliations</span><span>]) )</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">s/def </span><span style="color:#d08770;">::affiliations </span><span>(</span><span style="color:#bf616a;">s/keys </span><span style="color:#d08770;">:req </span><span>[</span><span style="color:#d08770;">::current-affiliations</span><span>] </span><span style="color:#d08770;">:opt </span><span>[</span><span style="color:#d08770;">::former-affiliations</span><span>]) )
 </span></code></pre>
 <p>which makes it requirement for affiliations to contain current-affiliations, but any former affiliations are optional.</p>
 <p>For checking whether Spider-Man has a valid profile we can use the <code>s/valid?</code> function again. We use the following code to do just that:</p>
-<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>    (let [spider-man-affiliations (</span><span style="color:#d08770;">:spider-man-spec.core/affiliations </span><span>spider-man-profile)]</span><span>
-</span><span>      (s/valid? </span><span style="color:#d08770;">:spider-man-spec.core/affiliations </span><span>spider-man-affiliations))</span><span>
+<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>    (let [spider-man-affiliations (</span><span style="color:#d08770;">:spider-man-spec.core/affiliations </span><span>spider-man-profile)]
+</span><span>      (s/valid? </span><span style="color:#d08770;">:spider-man-spec.core/affiliations </span><span>spider-man-affiliations))
 </span></code></pre>
 <p>The <code>let</code> form is new here, but what it essentially does is deconstructing the while <code>spider-man-profile</code> and associating its affiliations temporarily the <code>spider-man-affiliations</code>. This allows us to use a shorthand when calling functions, instead of writing out everything in a single line.</p>
 <p>While this value is also valid according to the spec, as the spec and the value we are checking gets more complex, it could also be useful to gather the exact value that has passed the spec. In such cases we can use <code>s/conform</code> to gather these. The call: </p>
-<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/conform </span><span style="color:#d08770;">:spider-man-spec.core/affiliations </span><span>spider-man-affiliations)</span><span>
+<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/conform </span><span style="color:#d08770;">:spider-man-spec.core/affiliations </span><span>spider-man-affiliations)
 </span></code></pre>
 <p>Returns the map:</p>
-<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>#:spider-man-spec.core{</span><span style="color:#d08770;">:current-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">Avengers</span><span>&quot;}, </span><span style="color:#d08770;">:former-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">The Outlaws</span><span>&quot; &quot;</span><span style="color:#a3be8c;">Secret Defenders</span><span>&quot; &quot;</span><span style="color:#a3be8c;">New Fantastic Four</span><span>&quot;}}</span><span>
+<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>#:spider-man-spec.core{</span><span style="color:#d08770;">:current-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">Avengers</span><span>&quot;}, </span><span style="color:#d08770;">:former-affiliations </span><span>#{&quot;</span><span style="color:#a3be8c;">The Outlaws</span><span>&quot; &quot;</span><span style="color:#a3be8c;">Secret Defenders</span><span>&quot; &quot;</span><span style="color:#a3be8c;">New Fantastic Four</span><span>&quot;}}
 </span></code></pre>
 <p>Note that this is a namespaced map, which is a feature that allows us to refer to the keywords inside a map more efficiently, instead of writing them all out in each case.</p>
 <p>The final aspect of each profile, the power grid, is also something that can be given a spec. Each of the powers can only take a whole number value from 1 until 7. We can specify this with the follow spec:</p>
-<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/def </span><span style="color:#d08770;">::power-value </span><span>(s/and pos-int? #(&gt;= % </span><span style="color:#d08770;">1</span><span>) #(&lt;= % </span><span style="color:#d08770;">7</span><span>)))</span><span>
+<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/def </span><span style="color:#d08770;">::power-value </span><span>(s/and pos-int? #(&gt;= % </span><span style="color:#d08770;">1</span><span>) #(&lt;= % </span><span style="color:#d08770;">7</span><span>)))
 </span><span>
-</span><span>(s/def </span><span style="color:#d08770;">::durability ::power-value </span><span>)</span><span>
-</span><span>(s/def </span><span style="color:#d08770;">::energy ::power-value </span><span>)</span><span>
-</span><span>(s/def </span><span style="color:#d08770;">::fighting ::power-value </span><span>)</span><span>
-</span><span>(s/def </span><span style="color:#d08770;">::intelligence ::power-value </span><span>)</span><span>
-</span><span>(s/def </span><span style="color:#d08770;">::speed ::power-value </span><span>)</span><span>
-</span><span>(s/def </span><span style="color:#d08770;">::strength ::power-value </span><span>)</span><span>
+</span><span>(s/def </span><span style="color:#d08770;">::durability ::power-value </span><span>)
+</span><span>(s/def </span><span style="color:#d08770;">::energy ::power-value </span><span>)
+</span><span>(s/def </span><span style="color:#d08770;">::fighting ::power-value </span><span>)
+</span><span>(s/def </span><span style="color:#d08770;">::intelligence ::power-value </span><span>)
+</span><span>(s/def </span><span style="color:#d08770;">::speed ::power-value </span><span>)
+</span><span>(s/def </span><span style="color:#d08770;">::strength ::power-value </span><span>)
 </span></code></pre>
 <p>Note that we use the function <code>s/and</code> to combine three specs: that the value should be a positive integer, greater than or equal to 1 and less or equal to 7. Such a combined spec can then be (re-)used like any other.</p>
 <p>We can combine all the previous specs together to specify a profile: </p>
-<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/def </span><span style="color:#d08770;">::profile </span><span>(s/keys </span><span style="color:#d08770;">:req </span><span>[</span><span style="color:#d08770;">::name ::real-name ::identity ::affiliations ::power-grid</span><span>] ) )</span><span>
+<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(s/def </span><span style="color:#d08770;">::profile </span><span>(s/keys </span><span style="color:#d08770;">:req </span><span>[</span><span style="color:#d08770;">::name ::real-name ::identity ::affiliations ::power-grid</span><span>] ) )
 </span></code></pre>
 <p>For this spec, both Spider-Man and Vulture are valid profiles. However, this is a problem, as it does not allow us to differentiate between a hero and a villain. Of course we do not want to get Vulture get into the same places as Spider-Man can. We must fight him, much like Spider-Man, but in our own way: by creating a spec for which the Spider-Man profile is a valid value, but not that of Vulture.</p>
 <figure class=centeredfig>
@@ -286,11 +286,11 @@
 <!-- {{< figure src="/img/post/2018/spec-stacular-spider-man/spider-man-vs-vulture.jpg" title="Spider-Man vs Vulture © Marvel Entertainment" >}} -->
 <p>While we can make a separate requirement that only persons with the name &quot;Spider-Man&quot; can fulfill our new &quot;hero-spec&quot; this might be too restrictive. Instead we are going to spec an Avenger profile, so Spider-Man and all his friends can join in, while villains such as Vulture are kept out.</p>
 <p>The requirement for an Avenger in our system, is that any-one with the current affiliation of <code>&quot;Avengers&quot;</code> is an avenger. We can describe this requirement as a spec, using a function defined for this:</p>
-<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(defn is-avenger? [profile]</span><span>
-</span><span>  (contains? (</span><span style="color:#d08770;">::current-affiliations </span><span>(</span><span style="color:#d08770;">::affiliations </span><span>profile) ) &quot;</span><span style="color:#a3be8c;">Avengers</span><span>&quot;)</span><span>
-</span><span>  )</span><span>
+<pre data-lang="clj" style="background-color:#2b303b;color:#c0c5ce;" class="language-clj "><code class="language-clj" data-lang="clj"><span>(defn is-avenger? [profile]
+</span><span>  (contains? (</span><span style="color:#d08770;">::current-affiliations </span><span>(</span><span style="color:#d08770;">::affiliations </span><span>profile) ) &quot;</span><span style="color:#a3be8c;">Avengers</span><span>&quot;)
+</span><span>  )
 </span><span>
-</span><span>(s/def </span><span style="color:#d08770;">::avenger-profile </span><span>(s/and </span><span style="color:#d08770;">::profile </span><span>is-avenger? ) )</span><span>
+</span><span>(s/def </span><span style="color:#d08770;">::avenger-profile </span><span>(s/and </span><span style="color:#d08770;">::profile </span><span>is-avenger? ) )
 </span></code></pre>
 <p>Now we can check whether a profile is a valid Avenger, which will be true for Spider-Man but not for Vulture. Finally, we can get rid of this villain that showed up in our tutorial. In addition, this spec will also make sure that all current members of the Avengers be valid, so Spider-Man can fight freely alongside of them. </p>
 <figure class=centeredfig>

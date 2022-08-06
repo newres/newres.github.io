@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title> - FinTech</title>
+	<link href="https://www.newresalhaider.com/tags/fintech/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.newresalhaider.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2017-12-31T00:00:00+00:00</updated>
+	<id>https://www.newresalhaider.com/tags/fintech/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Legal Regulatory Compliance Within The Financial Domain.</title>
+		<published>2017-12-31T00:00:00+00:00</published>
+		<updated>2017-12-31T00:00:00+00:00</updated>
+		<link rel="alternate" href="https://www.newresalhaider.com/project/legal-banking-compliance/" type="text/html"/>
+		<id>https://www.newresalhaider.com/project/legal-banking-compliance/</id>
+		<content type="html">&lt;p&gt;Regulatory compliance is the goal of an organization to ensure it complies with all the relevant policies, regulations and laws. Failure to comply can have grave consequences for an organization, with huge fines and penalties being imposed. Regulatory pressure has been increasing over the years, with new and more complex regulation being enacted. This is especially true for the financial sector, where in the wake of the financial crisis, new policies and laws where enacted, both internal and external, to prevent a similar crisis happening in the future.&lt;&#x2F;p&gt;
+&lt;p&gt;These new and changing policies and laws give a huge challenge for financial organizations. These issues get compounded by fact that in a global world, internal, national and international regulations create an interwoven set of rules that need to be interpreted and applied on various financial products and services. Ensuring this compliance, is a time and expertise intensive task that often needs to be done manually. Automating these tasks is a huge challenge due to the fact that more traditional techniques are often ill equipped to tackle such an ever changing and complex domain in a way that is transparent to the domain experts and regulators.&lt;&#x2F;p&gt;
+&lt;p&gt;In this project, the goal is to find innovative techniques and solutions to the issue of regulatory compliance in the legal and financial domain.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

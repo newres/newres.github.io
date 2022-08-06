@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title> - Smalltalk</title>
+	<link href="https://www.newresalhaider.com/tags/smalltalk/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.newresalhaider.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2021-01-24T00:00:00+00:00</updated>
+	<id>https://www.newresalhaider.com/tags/smalltalk/atom.xml</id>
+	<entry xml:lang="en">
+		<title>The Pharo Prince of Bel-Air</title>
+		<published>2021-01-24T00:00:00+00:00</published>
+		<updated>2021-01-24T00:00:00+00:00</updated>
+		<link rel="alternate" href="https://www.newresalhaider.com/post/pharo-prince/" type="text/html"/>
+		<id>https://www.newresalhaider.com/post/pharo-prince/</id>
+		<content type="html">&lt;p&gt;Recently I have been aiming to explore the &lt;a href=&quot;https:&#x2F;&#x2F;pharo.org&#x2F;&quot;&gt;Pharo&lt;&#x2F;a&gt; programming language. The close combination between the language and the &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Integrated_development_environment&quot;&gt;Integrated Development Environment (IDE)&lt;&#x2F;a&gt;, makes it quite unlike most other languages that I have encountered. You can, for example, inspect every program element in a visual environment, even on a currently running program. While exploring, I spent much time using the &lt;code&gt;Playground&lt;&#x2F;code&gt; feature, where you easily start executing, and interacting with, small snippets of code.&lt;&#x2F;p&gt;
+&lt;p&gt;While exploring the language, the &lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=1nCqRmx3Dnw&quot;&gt;intro-song&lt;&#x2F;a&gt; to the tv-show &amp;quot;&lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;The_Fresh_Prince_of_Bel-Air&quot;&gt;The Fresh Prince of Bel-Air&lt;&#x2F;a&gt;&amp;quot; got stuck in my head. The song tells the story of the title character, Will Smith, on how he ended up being &amp;quot;The Fresh Prince of Bel-Air&amp;quot;. To paraphrase the song, Will was born and raised in Philadelphia, spending much of his time on the playground. On one occasion, while playing basketball, he got into a fight with some troublemakers. This experience got his mom scared so he was sent off to live with his aunt and uncle in Bel Air. After a flight and a taxi ride, he arrives in Bel Air at his uncles and aunts house, to become &amp;quot;the Prince of Bel-Air&amp;quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;In this article, let’s explore Pharo together with the story from “The Fresh Prince of Bel Air”. If one wants to follow along, feel free to &lt;a href=&quot;https:&#x2F;&#x2F;pharo.org&#x2F;download&quot;&gt;download&lt;&#x2F;a&gt; and setup Pharo. The language has a really smooth process for getting started, as one can download and install the &lt;a href=&quot;https:&#x2F;&#x2F;pharo.org&#x2F;download&quot;&gt;Pharo Launcher&lt;&#x2F;a&gt; and be pretty much set.&lt;&#x2F;p&gt;
+&lt;p&gt;It is difficult to do the language justice by text, because it is so intertwined with the IDE and image based development. I will try to illustrate things as best as I can.&lt;&#x2F;p&gt;
+&lt;p&gt;Once we have installed and started the Pharo Launcher the first step is to create a Pharo image for our project. One can think of a Pharo image, as a store of all the objects created by the program. This not only includes what would normally be represented as files of source code of other languages, but also the objects of the running program, as well as the state of the editor. As an example, suppose we create an application for taking notes, and while developing, we create two notes to experiment and play around with. We can now save the Pharo image including these objects. The next time we start the image our notes will be there, alongside with the state of the IDE as we have left it. This can help tremendously when developing or debugging a new application.&lt;&#x2F;p&gt;
+&lt;p&gt;To come back to our &amp;quot;The Fresh Prince of Bel-Air&amp;quot; example, first we are going to create an image which will contain our project (see a screenshot of this below). &lt;&#x2F;p&gt;
+&lt;!-- &lt;figure class=centeredfig&gt;
+    &lt;img src=unknownvariable.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;We did not define what we mean by FPWillSmith which brings us some options on what to do now.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+ --&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=imagecreation.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;Creating a Pharo image for our &amp;#x27;The Fresh Prince of Bel-Air&amp;#x27; example.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2021&#x2F;pharo-prince&#x2F;imagecreation.png&quot; title=&quot;Creating a Pharo image for our \&quot;The Fresh Prince of Bel-Air\&quot; example.&quot; &gt;}} --&gt;
+&lt;p&gt;In the Pharo launcher, we can click on the &amp;quot;New&amp;quot; button and get a dialog window for the image that we want to create. We base our image on the last stable Pharo version, which is at the time of this writing version 8.0, enter a name and a short description for our image and click &amp;quot;Create Image&amp;quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;In a short order our image is then initialized, and we are greeted in our IDE by a welcome message, and some guides and documentation in a menu. I highly recommend the “ProStef” tutorial from this set of guides.&lt;&#x2F;p&gt;
+&lt;p&gt;Our next step is the playground which, as mentioned at the start of the article, is a place for experimentation and playing around with code that we are going to develop. One can open this Playground from the menu &amp;quot;Tools&amp;quot; on the top of the screen by selecting &amp;quot;Playground&amp;quot; or by the shortcut &lt;code&gt;CTRL+O+W&lt;&#x2F;code&gt;. &lt;&#x2F;p&gt;
+&lt;p&gt;Note that the shortcuts might be different depending on settings and operating systems, as the command key might be either &lt;code&gt;CTRL&lt;&#x2F;code&gt;, &lt;code&gt;CMD&lt;&#x2F;code&gt; or &lt;code&gt;ALT&lt;&#x2F;code&gt;. Thankfully the IDE shows shortcuts very neatly next to the clickable menu options, so they should be easy to figure out and learn.&lt;&#x2F;p&gt;
+&lt;p&gt;Once the Playground is open we have a canvas where we can start to write and execute our code. &lt;&#x2F;p&gt;
+&lt;p&gt;Before I get into the actual creation of the example I will briefly try to summarize how Pharo as a language works. In Pharo everything is an &lt;em&gt;object&lt;&#x2F;em&gt; and any computation is done by sending messages to objects. Creating such objects is done through specific objects known as &lt;em&gt;classes&lt;&#x2F;em&gt;, which define structure and behaviour of the objects they create. &lt;&#x2F;p&gt;
+&lt;p&gt;These classes are organized into hierarchies. Hierarchies allow you to reuse behaviour. A class lower in the hierarchy, the so-called &lt;em&gt;subclass&lt;&#x2F;em&gt; can inherit the behaviour of a class higher in the hierarchy, called a &lt;em&gt;superclass&lt;&#x2F;em&gt;. At the root of this hierarchy is the class named &lt;em&gt;Object&lt;&#x2F;em&gt;, which ensures as we noted that anything we create is by definition and behaviour an &lt;em&gt;Object&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;We call the objects created by the class as their &lt;em&gt;instances&lt;&#x2F;em&gt;. The &lt;em&gt;methods&lt;&#x2F;em&gt; of an object specify how the messages an object receives should be handled. When an object receives a &lt;em&gt;message&lt;&#x2F;em&gt; it aims to find the method that has the same name as the message to handle it. An &lt;em&gt;object&lt;&#x2F;em&gt; also encapsulates data, such as dates, numbers, strings and other objects, based on what the object represents into variables. It can use this data to help handle the messages it receives. &lt;&#x2F;p&gt;
+&lt;p&gt;An object can refer to itself by using the special identifier &lt;em&gt;self&lt;&#x2F;em&gt;. In order to create a new object of a class, the &lt;em&gt;initialize&lt;&#x2F;em&gt; message needs to be sent which gets handled by the &lt;em&gt;initialize&lt;&#x2F;em&gt; method, though often the message &lt;em&gt;new&lt;&#x2F;em&gt; is used as a shorthand for this.&lt;&#x2F;p&gt;
+&lt;p&gt;For people with some experience with another &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Object-oriented_programming&quot;&gt;Object Oriented programming language&lt;&#x2F;a&gt; the above description should sound familiar. One thing that stands out for me on a first glance is how consistently the use of objects and message passing is applied within Pharo. &lt;em&gt;Everything&lt;&#x2F;em&gt; is an object and interaction seems to always happen by message passing. The above summary should hopefully be enough to follow the examples below but for a more in depth look I highly recommend the &lt;a href=&quot;https:&#x2F;&#x2F;books.pharo.org&#x2F;learning-oop&#x2F;&quot;&gt;Learning Object-Oriented Programming, Design with TDD in Pharo&lt;&#x2F;a&gt; book.&lt;&#x2F;p&gt;
+&lt;!-- To very briefly explain what happens here is to note that Pharo works by passing messages. Here to `go` message was to `ProfStef` to indicate that we want to kick off the tutorial. `ProfStef`  has a method named `go` implemented that defines how to handle this message.  --&gt;
+&lt;p&gt;Now given the above description of Pharo, we want to apply it by creating a representation of what happens in the intro song in &amp;quot;The Fresh Prince of Bel-Air&amp;quot; by sending messages. In particular we want to represent the character of &amp;quot;Will Smith&amp;quot; in the intro as an object and the changes in location and activity based on the intro song. &lt;&#x2F;p&gt;
+&lt;p&gt;So let&#x27;s start off by creating a new Object representing Will. We aim to do this by instantiating a class called &lt;code&gt;FPWillSmith&lt;&#x2F;code&gt; by typing the following into the Playground.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;smalltalk&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-smalltalk &quot;&gt;&lt;code class=&quot;language-smalltalk&quot; data-lang=&quot;smalltalk&quot;&gt;&lt;span&gt;will &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt;= FPWillSmith new.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Here we want to send the &lt;em&gt;New&lt;&#x2F;em&gt; message to the class &lt;code&gt;FPWillSmith&lt;&#x2F;code&gt; to create a new object of this class and assign it to the variable &lt;code&gt;will&lt;&#x2F;code&gt;. Let us quickly go over the syntax elements for this statement. &lt;&#x2F;p&gt;
+&lt;p&gt;The operator &lt;code&gt;:=&lt;&#x2F;code&gt; is used in Pharo for assignment, and in this case to assign our new object instance to the &lt;code&gt;will&lt;&#x2F;code&gt; variable. We also send to class &lt;code&gt;FPWillSmith&lt;&#x2F;code&gt;, functioning as the receiver, the message &lt;code&gt;new&lt;&#x2F;code&gt; to create a new instance of it. Messages like this that are sent to an object without any additional information are called &lt;code&gt;unary&lt;&#x2F;code&gt; messages. These are always in the form of &lt;code&gt;receiver message&lt;&#x2F;code&gt;. Lastly, statements in Pharo are separated&#x2F;ended by a &lt;code&gt;.&lt;&#x2F;code&gt;. This can be omitted in many cases but we keep it around in our examples to show its use.&lt;&#x2F;p&gt;
+&lt;p&gt;To execute this statement we can right click it and select &#x27;Do It&#x27; or use the short-cut for this &lt;code&gt;CTRL+D&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;After doing this we will get the following dialog:&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=unknownvariable.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;We did not define what we mean by FPWillSmith which brings us some options on what to do now.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2021&#x2F;pharo-prince&#x2F;unknownvariable.png&quot; title=&quot;We did not define what we mean by FPWillSmith which brings us some options on what to do now.&quot; &gt;}} --&gt;
+&lt;p&gt;Well, whoops it seems we kind of forgot to define our class &lt;code&gt;FPWillSmith&lt;&#x2F;code&gt;, so we get a notification for it. The reason why I am highlighting this error is to show that unlike many other languages, where you would just get an error at either compile or runtime, the system brings up a dialog to help us solve this issue. The only other language where I experienced a similar dialog was with &lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;post&#x2F;common-treasure&#x2F;&quot;&gt;CommonLisp&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;So lets click &amp;quot;Define a new class&amp;quot; and give a class definition as follows:&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=classcreation.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;We define a class FPWillSmith, to ensure that every object of this class holds some data about the object&amp;#x27;s name, location and activity.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2021&#x2F;pharo-prince&#x2F;classcreation.png&quot; title=&quot;We define a class FPWillSmith, to ensure that every object of this class holds some data about the object&#x27;s name, location and activity.&quot; &gt;}} --&gt;
+&lt;p&gt;A few things to note for this code in this picture: &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;smalltalk&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-smalltalk &quot;&gt;&lt;code class=&quot;language-smalltalk&quot; data-lang=&quot;smalltalk&quot;&gt;&lt;span&gt;Object &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;subclass:&lt;&#x2F;span&gt;&lt;span&gt; #FPWillSmith
+&lt;&#x2F;span&gt;&lt;span&gt;       &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;instanceVariableNames: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39;name &lt;&#x2F;span&gt;&lt;span&gt;location activity&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39; 
+&lt;&#x2F;span&gt;&lt;span&gt;       &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;classVariableNames: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;       &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;category:&lt;&#x2F;span&gt;&lt;span&gt; FreshPrinceDemo
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Much like every other part of Pharo, the creation of a new class also happens through message passing. Here a keyword message is sent to the &lt;code&gt;Object&lt;&#x2F;code&gt; class to define our new class. Unlike unary messages, these messages use one or more keywords to send additional object information along with the message. These are defined in the form of &lt;code&gt;receiver keyword1: object1 keyword2: object2 ...&lt;&#x2F;code&gt;  where the keyword and object pairs make up the message to the receiving object.&lt;&#x2F;p&gt;
+&lt;p&gt;We will go over the objects sent in the message one by one. The &lt;code&gt;subclass&lt;&#x2F;code&gt; part of the message defines the name of our new class &lt;code&gt;FPWillSmith&lt;&#x2F;code&gt;. The &lt;code&gt;#&lt;&#x2F;code&gt; in front of &lt;code&gt;FPWillSmith&lt;&#x2F;code&gt; indicates a symbol that is globally unique, unlike a string, which is part of the requirement for this subclass message. Next is defining the name of the instance variables using the keyword &lt;code&gt;instanceVariablesNames&lt;&#x2F;code&gt;, that will represent the elements of an instance of &lt;code&gt;FPWillSmith&lt;&#x2F;code&gt; that we would like to use. There are also &lt;code&gt;classVariableNames&lt;&#x2F;code&gt; that describe such elements for the class itself as opposed to the instances, but here we do not define any. Finally, there is a &lt;code&gt;category&lt;&#x2F;code&gt; defined as &lt;code&gt;FreshPrinceDemo&lt;&#x2F;code&gt;, that is essentially the name of the package that we are currently defining.&lt;&#x2F;p&gt;
+&lt;p&gt;Now that we have created our &lt;code&gt;FPWillSmith&lt;&#x2F;code&gt; class, we can now take our original statement:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;smalltalk&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-smalltalk &quot;&gt;&lt;code class=&quot;language-smalltalk&quot; data-lang=&quot;smalltalk&quot;&gt;&lt;span&gt;will &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt;= FPWillSmith new.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;and execute it, by right clicking it and selecting &#x27;Do It&#x27;, or using a shortcut such as &lt;code&gt;CTRL+D&lt;&#x2F;code&gt;. As you can see, we now don’t receive errors.&lt;&#x2F;p&gt;
+&lt;p&gt;What we would like to do is to double check, whether the object we created is what we want. Pharo has a really neat feature for inspecting &lt;em&gt;any&lt;&#x2F;em&gt; object. We can right-click this statement in the playground and select &#x27;Inspect It&#x27; from the menu, or using the shortcut &lt;code&gt;CTRL+I&lt;&#x2F;code&gt; for giving us the object inspector. This should give us a window such as this:&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=inspector.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;Inspecting our newly created object.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2021&#x2F;pharo-prince&#x2F;inspector.png&quot; title=&quot;Inspecting our newly created object.&quot; &gt;}} --&gt;
+&lt;p&gt;As we can see from the inspector, while the object has all the instance variables that we wanted (name, location, activity), the value for this is &lt;code&gt;nil&lt;&#x2F;code&gt; which is not what we want.&lt;&#x2F;p&gt;
+&lt;p&gt;In order to make sure there are meaningful values for these variables for a new object, we need to define our own &lt;code&gt;initialize&lt;&#x2F;code&gt; method that will get called for every new object.&lt;&#x2F;p&gt;
+&lt;p&gt;First we are going to look up our class in the code browser. This can be done by clicking the menu options Tools and then Systems Browser, or by using the short-cut &lt;code&gt;CTRL+O+B&lt;&#x2F;code&gt;. &lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=systembrowser.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;The System Browser, where we filtered for our new Package and selected our `FPWillSmith` class , showing the template for a new method.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2021&#x2F;pharo-prince&#x2F;systembrowser.png&quot; title=&quot;The System Browser, where we filtered for our new Package and selected our `FPWillSmith` class , showing the template for a new method.&quot; &gt;}} --&gt;
+&lt;p&gt;The system browser can be used to find, organize and edit classes and methods for &lt;em&gt;all&lt;&#x2F;em&gt; packages within the Pharo image. It is divided up into four columns. The leftmost column lists the packages. We can use this to filter for our new package named &#x27;FreshPrinceDemo&#x27;. The second column on the left details the classes in the selected package. For our new package we should only have one class here: &lt;code&gt;FPWillSmith&lt;&#x2F;code&gt;. The third column lists all the &lt;em&gt;protocols&lt;&#x2F;em&gt; of the selected class. Protocols are a way to group together related methods, which makes for easier browsing and search. Finally the fourth column from the left lists all the methods, for the given class or selected protocol. &lt;&#x2F;p&gt;
+&lt;p&gt;The panel below these four columns is also very interesting. If one selects a package, it shows in a tab a template for defining a class. If one selects a class, it shows a tab for a template on how to define new methods. It also has a tab for the class definition itself .&lt;&#x2F;p&gt;
+&lt;p&gt;In order to proceed let&#x27;s use the method definition template to define our new constructor, as follows:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;smalltalk&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-smalltalk &quot;&gt;&lt;code class=&quot;language-smalltalk&quot; data-lang=&quot;smalltalk&quot;&gt;&lt;span&gt;initialize
+&lt;&#x2F;span&gt;&lt;span&gt;	name &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39;Will &lt;&#x2F;span&gt;&lt;span&gt;Smith&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39;.
+&lt;&#x2F;span&gt;&lt;span&gt;	location &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39;West &lt;&#x2F;span&gt;&lt;span&gt;Philadelphia playground&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39;.
+&lt;&#x2F;span&gt;&lt;span&gt;	activity &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39;Playing &lt;&#x2F;span&gt;&lt;span&gt;basketball&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39;.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;which we can fill into the new instance side method window below, instead of the template code.&lt;&#x2F;p&gt;
+&lt;p&gt;What this definition does is to create a constructor, that sets the values for name, location and activity to values that makes sense, given where Will is and what he is doing in the beginning of the &amp;quot;The Fresh Prince of Bel-Air&amp;quot; intro song.&lt;&#x2F;p&gt;
+&lt;p&gt;Make sure to accept these values, using right click on the panel and selecting Accept or by pressing the shortcut &lt;code&gt;CTRL+S&lt;&#x2F;code&gt; (you might also need to save your name as the author for this piece of code in a dialog along the way).&lt;&#x2F;p&gt;
+&lt;p&gt;We will now have the initialization method defined:&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=browserinitdefined.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;The System Browser showing our newly defined constructor method.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2021&#x2F;pharo-prince&#x2F;browserinitdefined.png&quot; title=&quot;The System Browser showing our newly defined constructor method.&quot; &gt;}} --&gt;
+&lt;p&gt;We can check whether our new constructor has worked by inspecting the statement we initially created in the Playground:&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=inspectorafterconstructor.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;Inspecting the new instance after saving our new constructor.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2021&#x2F;pharo-prince&#x2F;inspectorafterconstructor.png&quot; title=&quot;Inspecting the new instance after saving our new constructor.&quot; &gt;}} --&gt;
+&lt;p&gt;Now the &lt;code&gt;will&lt;&#x2F;code&gt; representation of the character has the right name, location and activity, but we want to express a bit more of the intro song. We will do this by sending messages to the &lt;code&gt;will&lt;&#x2F;code&gt; object after which we expect that the location and the activity changes accordingly.&lt;&#x2F;p&gt;
+&lt;p&gt;Let&#x27;s assume we instead have the following in the Playground:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;smalltalk&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-smalltalk &quot;&gt;&lt;code class=&quot;language-smalltalk&quot; data-lang=&quot;smalltalk&quot;&gt;&lt;span&gt;will &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt;= FPWillSmith new.
+&lt;&#x2F;span&gt;&lt;span&gt;will getsInTrouble.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;As we can now expect, executing (&#x27;Doing It&#x27;) of the second statement will not go well as we did not yet define a way for the object to handle this message. In fact this message will bring up the debugger because the object does not know how to handle the message &lt;code&gt;getsInTrouble&lt;&#x2F;code&gt;. &lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=getsintrouble.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;We go into the Debugger when the object can not handle the getsInTrouble message.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2021&#x2F;pharo-prince&#x2F;getsintrouble.png&quot; title=&quot;We go into the Debugger when the object can not handle the getsInTrouble message.&quot; &gt;}} --&gt;
+&lt;p&gt;We can fix this by defining a method, named &lt;code&gt;getsInTrouble&lt;&#x2F;code&gt;. We can even do this from the debugger by clicking on the &lt;code&gt;Create&lt;&#x2F;code&gt; button at the top of the debugger to define &lt;code&gt;getsInTrouble&lt;&#x2F;code&gt; method for the &lt;code&gt;FPWillSmith&lt;&#x2F;code&gt; class. After getting a popup for picking a protocol, which we do not need to do for this tutorial, we get the window showing a placeholder definition for the method:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;smalltalk&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-smalltalk &quot;&gt;&lt;code class=&quot;language-smalltalk&quot; data-lang=&quot;smalltalk&quot;&gt;&lt;span&gt;getsInTrouble
+&lt;&#x2F;span&gt;&lt;span&gt;	&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt; shouldBeImplemented.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We want to replace this with the following definition, that updates the activity of the object:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;smalltalk&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-smalltalk &quot;&gt;&lt;code class=&quot;language-smalltalk&quot; data-lang=&quot;smalltalk&quot;&gt;&lt;span&gt;getsInTrouble
+&lt;&#x2F;span&gt;&lt;span&gt;	activity &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39;In &lt;&#x2F;span&gt;&lt;span&gt;trouble&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39;.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=proceed.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;The getsInTrouble method defined in the debugger, after which we can proceed, with the tool-tip of the proceed button highlighted.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2021&#x2F;pharo-prince&#x2F;proceed.png&quot; title=&quot;The getsInTrouble method defined in the debugger, after which we can proceed, with the tool-tip of the proceed button highlighted.&quot; &gt;}} --&gt;
+&lt;p&gt;We have now created the method from inside the debugger, while the execution of the code was put on hold! With the definition saved we can even click the &lt;code&gt;Proceed&lt;&#x2F;code&gt; button on the top of the debugger to continue from where we halted.&lt;&#x2F;p&gt;
+&lt;p&gt;Now the code correctly executes and when we next inspect the last statement have the activity properly updated.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=introubleinspected.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;The activity now properly updates on the object after receiving the getsInTrouble message.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2021&#x2F;pharo-prince&#x2F;introubleinspected.png&quot; title=&quot;The activity now properly updates on the object after receiving the getsInTrouble message.&quot; &gt;}} --&gt;
+&lt;p&gt;For the final piece we will define a method for sending the object to aunt and uncle, with the following definition:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;smalltalk&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-smalltalk &quot;&gt;&lt;code class=&quot;language-smalltalk&quot; data-lang=&quot;smalltalk&quot;&gt;&lt;span&gt;sentToAuntAndUncle
+&lt;&#x2F;span&gt;&lt;span&gt;	activity &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39;Being &lt;&#x2F;span&gt;&lt;span&gt;the Prince of Bel-Air&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39;.
+&lt;&#x2F;span&gt;&lt;span&gt;	location &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;#39;Bel-Air&amp;#39;.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;If one follows along, we will leave it up to you on where to define this method from, the debugger or the system browser. &lt;&#x2F;p&gt;
+&lt;p&gt;Once we have defined it we can put the following in the Playground:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;smalltalk&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-smalltalk &quot;&gt;&lt;code class=&quot;language-smalltalk&quot; data-lang=&quot;smalltalk&quot;&gt;&lt;span&gt;will &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt;= FPWillSmith new.
+&lt;&#x2F;span&gt;&lt;span&gt;will getsInTrouble.
+&lt;&#x2F;span&gt;&lt;span&gt;will sentToAuntAndUncle.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;and inspect our object:&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=endinspect.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;The object now shows the new updated activity as &amp;#x27;Being the Prince of Bel-Air&amp;#x27; in the location &amp;#x27;Bel-Air&amp;#x27;.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2021&#x2F;pharo-prince&#x2F;endinspect.png&quot; title=&quot;The object now shows the new updated activity as \&quot;Being the Prince of Bel-Air\&quot; in the location \&quot;Bel-Air\&quot;.&quot; &gt;}} --&gt;
+&lt;p&gt;That is it for this short tutorial. I hope I have shown a small glimpse of why Pharo is such an interesting language.&lt;&#x2F;p&gt;
+&lt;p&gt;We have started with no definitions at all, and slowly built up what we wanted to do in a very organic way. We just started putting the statements down in the Playground for passing messages to objects, and created the definitions as we went along. Whenever something has given an error in the debugger or did not show up to our liking in the inspector, we slowly added more code. In the process we have evolved an object that initially represented no aspect of Will&#x27;s character, to something that had a name, location and activity, including; “Playing basketball” in a “West Philadelphia playground”. &lt;&#x2F;p&gt;
+&lt;p&gt;And at the end we are now finally there,
+having the object&#x27;s activity denoted as &lt;code&gt;Being the Prince of Bel-Air&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

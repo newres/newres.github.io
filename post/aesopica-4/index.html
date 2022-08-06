@@ -51,8 +51,8 @@
 
 
 
-<meta property="twitter:image" content="https://www.newresalhaider.com/post/static/img/series/aesopica/foxandstork-header.png">
-<meta property="og:image" content="https://www.newresalhaider.com/post/static/img/series/aesopica/foxandstork-header.png" />
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/aesopica-4/../static/img/series/aesopica/foxandstork-header.png">
+<meta property="og:image" content="https://www.newresalhaider.com/post/aesopica-4/../static/img/series/aesopica/foxandstork-header.png" />
 
 
 </head>
@@ -110,186 +110,186 @@
 <p>This article is the fourth part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop's stories. The topic of this article is to describe how to do some basic conversions from our Clojure representation of Linked Data, to some of the other formats, such as <a href="https://www.w3.org/TR/turtle/">Turtle</a>, <a href="https://www.w3.org/TR/n-quads/">NQUADS</a> or <a href="https://json-ld.org/">JSON-LD</a>. </p>
 <p>In previous articles of this series, we created a Clojure based syntax for defining Linked Data. In order to make this syntax a viable member of the Linked Data ecosystem, it is important to provide conversion functionality to other Linked Data formats. This allows for the user of the associated <a href="https://github.com/newres/aesopica">Aesopica</a> library, to create and use Linked Data in a Clojure based environment, and convert it, when needed, to other formats. In order to implement this functionality we made use of Clojure's Java interop and the <a href="https://jena.apache.org/">Apache Jena</a>, and made it available in the <a href="https://github.com/newres/aesopica">Aesopica</a> library.</p>
 <p>To start off we begin with the basic example of &quot;The Fox and The Stork&quot; story that we introduced <a href="https://www.newresalhaider.com/post/aesopica-1/">initially</a>. The Clojure representation of this is as follows:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">fox-and-stork-edn</span><span>
-</span><span>  {</span><span style="color:#d08770;">::aes/context</span><span>
-</span><span>   {</span><span style="color:#d08770;">nil </span><span>&quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/</span><span>&quot;</span><span>
-</span><span>    </span><span style="color:#d08770;">:rdf </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span>&quot;}</span><span>
-</span><span>   </span><span style="color:#d08770;">::aes/facts</span><span>
-</span><span>   #{[</span><span style="color:#d08770;">:fox :rdf/type :animal</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:stork :rdf/type :animal</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:fox :gives-invitation :invitation1</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:invitation1 :has-invited :stork</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:invitation1 :has-food :soup</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:invitation1 :serves-using :shallow-plate</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:stork :gives-invitation :invitation2</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:invitation2 :has-invited :fox</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:invitation2 :has-food :crumbled-food</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:invitation2 :serves-using :narrow-mouthed-jug</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:fox :can-eat-food-served-using :shallow-plate</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:fox :can-not-eat-food-served-using :narrow-mouthed-jug</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:stork :can-eat-food-served-using :narrow-mouthed-jug</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:stork :can-not-eat-food-served-using :shallow-plate</span><span>]}})</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">fox-and-stork-edn
+</span><span>  {</span><span style="color:#d08770;">::aes/context
+</span><span>   {</span><span style="color:#d08770;">nil </span><span>&quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/</span><span>&quot;
+</span><span>    </span><span style="color:#d08770;">:rdf </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span>&quot;}
+</span><span>   </span><span style="color:#d08770;">::aes/facts
+</span><span>   #{[</span><span style="color:#d08770;">:fox :rdf/type :animal</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:stork :rdf/type :animal</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:fox :gives-invitation :invitation1</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:invitation1 :has-invited :stork</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:invitation1 :has-food :soup</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:invitation1 :serves-using :shallow-plate</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:stork :gives-invitation :invitation2</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:invitation2 :has-invited :fox</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:invitation2 :has-food :crumbled-food</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:invitation2 :serves-using :narrow-mouthed-jug</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:fox :can-eat-food-served-using :shallow-plate</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:fox :can-not-eat-food-served-using :narrow-mouthed-jug</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:stork :can-eat-food-served-using :narrow-mouthed-jug</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:stork :can-not-eat-food-served-using :shallow-plate</span><span>]}})
 </span></code></pre>
 <p>The full details of this representation are explained in our previous work. Here we only briefly summarize its main elements. The above mentioned example defines a knowledge base containing a set of facts that describe the &quot;The Fox and The Stork&quot; story. Each fact is a triple of a subject, predicate and object. These elements are all represented by an <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">URI</a>, but for human readability and use as well as ease of use in Clojure, they are identified by (namespaced) keywords. The context map, containing the keywords for the namespaces used, allows us to transform the namespaced keywords into full URIs when required. Of course there are more elements possible in Linked Data/RDF and in this representation as well, such as <a href="https://www.newresalhaider.com/post/aesopica-1/">literal values</a>, but this summary should suffice for this article.</p>
 <p>Now in order to explain how this conversion is done, assuming no familiarity with Clojure or a similar language, two new concepts are required. </p>
 <p>First, it is important to note that in the above example we bind the &quot;The Fox and The Stork&quot;, Linked Data representation to the <code>fox-and-stork-edn</code> variable. Although this is not a necessity for creating the knowledge base, it allows us to reuse this definition from inside the code and in this article as well, without explicitly writing out the full representation each time. </p>
 <p>The second concept that we make use is how Clojure functions are called to be executed. In Clojure invoking a function has the general form of <code>(function-name param1 param2 ...)</code>. For example lets assume that the function for translation from our Clojure representation to Turtle is represented by <code>conv/convert-to-turtle</code>. Here <code>conv</code> is a shorthand for Aesopica's conversion namespace. Given this, the call to translate to a Turtle string representation of the Linked Data can be invoked by:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">conv/convert-to-turtle</span><span> fox-and-stork-edn)</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">conv/convert-to-turtle</span><span> fox-and-stork-edn)
 </span></code></pre>
 <p>The resulting string representation shows the same Linked Data knowledge base in Turtle syntax:</p>
-<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span>&quot;</span><span style="color:#a3be8c;">@base &lt;http://www</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">newresalhaider</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">com/ontologies/aesop/foxstork/&gt; </span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">@prefix rdf: &lt;http://www</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">w3</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">org/1999/02/22-rdf-syntax-ns#&gt; </span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
+<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span>&quot;</span><span style="color:#a3be8c;">@base &lt;http://www</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">newresalhaider</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">com/ontologies/aesop/foxstork/&gt; </span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">@prefix rdf: &lt;http://www</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">w3</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">org/1999/02/22-rdf-syntax-ns#&gt; </span><span style="color:#96b5b4;">.
 </span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;fox&gt; rdf:type &lt;animal&gt;</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;stork&gt; rdf:type &lt;animal&gt;</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;fox&gt; &lt;gives-invitation&gt; &lt;invitation1&gt;</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;invitation1&gt; &lt;has-invited&gt; &lt;stork&gt;</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;invitation1&gt; &lt;has-food&gt; &lt;soup&gt;</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;invitation1&gt; &lt;serves-using&gt; &lt;shallow-plate&gt;</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;stork&gt; &lt;gives-invitation&gt; &lt;invitation2&gt;</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;invitation2&gt; &lt;has-invited&gt; &lt;fox&gt;</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;invitation2&gt; &lt;has-food&gt; &lt;crumbled-food&gt;</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;invitation2&gt; &lt;serves-using&gt; &lt;narrow-mouthed-jug&gt;</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;fox&gt; &lt;can-eat-food-served-using&gt; &lt;shallow-plate&gt;</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;fox&gt; &lt;can-not-eat-food-served-using&gt; &lt;narrow-mouthed-jug&gt;</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;stork&gt; &lt;can-eat-food-served-using&gt; &lt;narrow-mouthed-jug&gt;</span><span style="color:#96b5b4;">.</span><span style="color:#a3be8c;">
-</span><span style="color:#a3be8c;">&lt;stork&gt; &lt;can-not-eat-food-served-using&gt; &lt;shallow-plate&gt;</span><span style="color:#96b5b4;">.</span><span>&quot;</span><span>
+</span><span style="color:#a3be8c;">&lt;fox&gt; rdf:type &lt;animal&gt;</span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">&lt;stork&gt; rdf:type &lt;animal&gt;</span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">&lt;fox&gt; &lt;gives-invitation&gt; &lt;invitation1&gt;</span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">&lt;invitation1&gt; &lt;has-invited&gt; &lt;stork&gt;</span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">&lt;invitation1&gt; &lt;has-food&gt; &lt;soup&gt;</span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">&lt;invitation1&gt; &lt;serves-using&gt; &lt;shallow-plate&gt;</span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">&lt;stork&gt; &lt;gives-invitation&gt; &lt;invitation2&gt;</span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">&lt;invitation2&gt; &lt;has-invited&gt; &lt;fox&gt;</span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">&lt;invitation2&gt; &lt;has-food&gt; &lt;crumbled-food&gt;</span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">&lt;invitation2&gt; &lt;serves-using&gt; &lt;narrow-mouthed-jug&gt;</span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">&lt;fox&gt; &lt;can-eat-food-served-using&gt; &lt;shallow-plate&gt;</span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">&lt;fox&gt; &lt;can-not-eat-food-served-using&gt; &lt;narrow-mouthed-jug&gt;</span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">&lt;stork&gt; &lt;can-eat-food-served-using&gt; &lt;narrow-mouthed-jug&gt;</span><span style="color:#96b5b4;">.
+</span><span style="color:#a3be8c;">&lt;stork&gt; &lt;can-not-eat-food-served-using&gt; &lt;shallow-plate&gt;</span><span style="color:#96b5b4;">.</span><span>&quot;
 </span></code></pre>
 <p>This representation has a similar form to our Clojure based notation. A set of facts is represented and prefixes and/or a base prefix is used, to enable easy reading and writing of the triples.</p>
 <p>Now let us look at some other formats and conversions. </p>
 <p><a href="https://www.w3.org/TR/trig/">TriG</a> is an extension of the Turtle format for enabling &quot;named graphs&quot;. Now this is a topic of <a href="https://www.newresalhaider.com/post/aesopica-3/">a previous article</a> but here it is suffice to say that by associating a set of facts with a specific graph, we enable the easy adding of metadata to these facts. To show this conversion, we use an example that uses this notion:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">fox-and-stork-named-graph-edn</span><span>
-</span><span>  {</span><span style="color:#d08770;">::aes/context</span><span>
-</span><span>   {</span><span style="color:#d08770;">nil </span><span>&quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/</span><span>&quot;</span><span>
-</span><span>    </span><span style="color:#d08770;">:rdf </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span>&quot;</span><span>
-</span><span>    </span><span style="color:#d08770;">:time </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/2006/time#</span><span>&quot;}</span><span>
-</span><span>   </span><span style="color:#d08770;">::aes/facts</span><span>
-</span><span>   #{[</span><span style="color:#d08770;">:fox :rdf/type :animal</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:stork :rdf/type :animal</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:fox :gives-invitation :invitation1 :dinner1</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:invitation1 :has-invited :stork :dinner1</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:invitation1 :has-food :soup :dinner1</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:invitation1 :serves-using :shallow-plate :dinner1</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:stork :gives-invitation :invitation2 :dinner2</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:invitation2 :has-invited :fox :dinner2</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:invitation2 :has-food :crumbled-food :dinner2</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:invitation2 :serves-using :narrow-mouthed-jug :dinner2</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:invitation1 :serves-using :narrow-mouthed-jug :dinner2</span><span>]</span><span>
-</span><span>     [</span><span style="color:#d08770;">:dinner1 :time/before :dinner2</span><span>]}})</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">fox-and-stork-named-graph-edn
+</span><span>  {</span><span style="color:#d08770;">::aes/context
+</span><span>   {</span><span style="color:#d08770;">nil </span><span>&quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/</span><span>&quot;
+</span><span>    </span><span style="color:#d08770;">:rdf </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span>&quot;
+</span><span>    </span><span style="color:#d08770;">:time </span><span>&quot;</span><span style="color:#a3be8c;">http://www.w3.org/2006/time#</span><span>&quot;}
+</span><span>   </span><span style="color:#d08770;">::aes/facts
+</span><span>   #{[</span><span style="color:#d08770;">:fox :rdf/type :animal</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:stork :rdf/type :animal</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:fox :gives-invitation :invitation1 :dinner1</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:invitation1 :has-invited :stork :dinner1</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:invitation1 :has-food :soup :dinner1</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:invitation1 :serves-using :shallow-plate :dinner1</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:stork :gives-invitation :invitation2 :dinner2</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:invitation2 :has-invited :fox :dinner2</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:invitation2 :has-food :crumbled-food :dinner2</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:invitation2 :serves-using :narrow-mouthed-jug :dinner2</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:invitation1 :serves-using :narrow-mouthed-jug :dinner2</span><span>]
+</span><span>     [</span><span style="color:#d08770;">:dinner1 :time/before :dinner2</span><span>]}})
 </span></code></pre>
 <p>As one can see, here we simply extend our triple based representation of facts to include either triples or quads. In a quad the last element is the graph name identifier of the graph the fact is a member of.</p>
 <p>Translating this representation to TriG can be done by:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">conv/convert-to-trig</span><span> fox-and-stork-named-graph-edn)</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">conv/convert-to-trig</span><span> fox-and-stork-named-graph-edn)
 </span></code></pre>
 <p>Which results in the following string representation that is TriG formatted: </p>
-<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span>{ </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt;</span><span>
-</span><span>        </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&gt;</span><span> .</span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt;</span><span>
-</span><span>        </span><span style="color:#d08770;">&lt;http://www.w3.org/2006/time#before&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .</span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt;</span><span>
-</span><span>        </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&gt;</span><span> .</span><span>
-</span><span>}</span><span>
+<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span>{ </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt;
+</span><span>        </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&gt;</span><span> .
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt;
+</span><span>        </span><span style="color:#d08770;">&lt;http://www.w3.org/2006/time#before&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt;
+</span><span>        </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&gt;</span><span> .
+</span><span>}
 </span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> {</span><span>
-</span><span>    </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt;</span><span>
-</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&gt;</span><span> ;</span><span>
-</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/crumbled-food&gt;</span><span> ;</span><span>
-</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt;</span><span> .</span><span>
-</span><span>    </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt;</span><span>
-</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt;</span><span> .</span><span>
-</span><span>    </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt;</span><span>
-</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&gt;</span><span> .</span><span>
-</span><span>}</span><span>
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> {
+</span><span>    </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt;
+</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&gt;</span><span> ;
+</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/crumbled-food&gt;</span><span> ;
+</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt;</span><span> .
+</span><span>    </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt;
+</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt;</span><span> .
+</span><span>    </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt;
+</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&gt;</span><span> .
+</span><span>}
 </span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt;</span><span> {</span><span>
-</span><span>    </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt;</span><span>
-</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt;</span><span> .</span><span>
-</span><span>    </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt;</span><span>
-</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/soup&gt;</span><span> ;</span><span>
-</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/shallow-plate&gt;</span><span> ;</span><span>
-</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt;</span><span> .</span><span>
-</span><span>}</span><span>
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt;</span><span> {
+</span><span>    </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt;
+</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt;</span><span> .
+</span><span>    </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt;
+</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/soup&gt;</span><span> ;
+</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/shallow-plate&gt;</span><span> ;
+</span><span>            </span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&gt;  &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt;</span><span> .
+</span><span>}
 </span><span>
 </span></code></pre>
 <p>There are a number of differences in representation from the above TriG output to he Clojure representation, but also from the previous Turtle output. Probably one of the most apparent is that in this output no prefixes are used: URIs are all written out fully. Both Turtle and TriG are flexible in whether they abbreviate URIs with prefixes or not. This is completely left up to the author, on in this case the specific way the conversion has been implemented. Another difference is how graphs are identified. Instead of using a quad like formatting for denoting the graph to which each fact belongs to they are grouped together. For example in the form of: <code>&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt; { ... }</code>, all the facts inside the curly braces belong to the <code>&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</code> graph. Finally a somewhat similar construction is used to abbreviate a group of triples that all use the same object. Instead of writing each fact out fully, &quot;predicate-lists&quot; are used to match a single subject with a series subject and object pairs. This is quite a nice feature, and something similar is definitely on the list of future improvements to the Clojure notation, although care must be taken that such shorthands can make the definition a bit more complex. </p>
 <p>Speaking of complexity, an interesting format created with the purpose of being very simple is <a href="https://www.w3.org/TR/n-quads/">NQUADS</a>. This is a straightfoward, line based syntax where each fact is represented by a single line. It is actually an extension of the <a href="https://www.w3.org/TR/n-triples/">N-Triples</a> format, with support added for handling named graphs. The conversion of our named graph example using the function invocation:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">conv/convert-to-nquads</span><span> fox-and-stork-named-graph-edn)</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">conv/convert-to-nquads</span><span> fox-and-stork-named-graph-edn)
 </span></code></pre>
 <p>would give us the following example:</p>
-<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&gt;</span><span> .</span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt; &lt;http://www.w3.org/2006/time#before&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .</span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&gt;</span><span> .</span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .</span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/crumbled-food&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .</span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .</span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .</span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .</span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt;</span><span> .</span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/soup&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt;</span><span> .</span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/shallow-plate&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt;</span><span> .</span><span>
-</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt;</span><span> .</span><span>
+<pre data-lang="ttl" style="background-color:#2b303b;color:#c0c5ce;" class="language-ttl "><code class="language-ttl" data-lang="ttl"><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&gt;</span><span> .
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt; &lt;http://www.w3.org/2006/time#before&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/animal&gt;</span><span> .
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/crumbled-food&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2&gt;</span><span> .
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/fox&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt;</span><span> .
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/soup&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt;</span><span> .
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/shallow-plate&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt;</span><span> .
+</span><span style="color:#d08770;">&lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/stork&gt; &lt;http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1&gt;</span><span> .
 </span></code></pre>
 <p>As one can see this format does not use prefixes: each fact is a triple or a quad on a single line ending with a dot, with each element URI written out fully. This way of writing facts is similar to the Clojure based notation, with main change that the Clojure notation does use prefixes for URI abbreviation. This simplicity contrasts with the flexibility of the Turtle format, which can be more terse, but more complex to parse and generate. This also shows that a separate <a href="https://www.w3.org/TR/n-triples/">N-Triples</a> converter is not really needed. As long as the original knowledge bases does not use any named-graphs the result will be the same as with N-Triples.</p>
 <p>The final format that we aim to convert to is <a href="https://json-ld.org/">JSON-LD</a>. This is a format based on the JavaScript Object Notation <a href="https://www.json.org/">JSON</a>, which allows for very easy interoperability with JSON based tools. </p>
 <p>Converting can be done with the following invocation:</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">conv/convert-to-json-ld</span><span> fox-and-stork-named-graph-edn)</span><span>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">conv/convert-to-json-ld</span><span> fox-and-stork-named-graph-edn)
 </span></code></pre>
 <p>resulting in the following JSON representation:</p>
-<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>{</span><span>
-</span><span>  &quot;</span><span style="color:#a3be8c;">@graph</span><span>&quot; : [ {</span><span>
-</span><span>    &quot;</span><span style="color:#a3be8c;">@graph</span><span>&quot; : [ {</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/fox</span><span>&quot;,</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation</span><span>&quot; : {</span><span>
-</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1</span><span>&quot;</span><span>
-</span><span>      }</span><span>
-</span><span>    }, {</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1</span><span>&quot;,</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food</span><span>&quot; : {</span><span>
-</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/soup</span><span>&quot;</span><span>
-</span><span>      },</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited</span><span>&quot; : {</span><span>
-</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/stork</span><span>&quot;</span><span>
-</span><span>      },</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using</span><span>&quot; : {</span><span>
-</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/shallow-plate</span><span>&quot;</span><span>
-</span><span>      }</span><span>
-</span><span>    } ],</span><span>
-</span><span>    &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1</span><span>&quot;,</span><span>
-</span><span>    &quot;</span><span style="color:#a3be8c;">http://www.w3.org/2006/time#before</span><span>&quot; : {</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2</span><span>&quot;</span><span>
-</span><span>    }</span><span>
-</span><span>  }, {</span><span>
-</span><span>    &quot;</span><span style="color:#a3be8c;">@graph</span><span>&quot; : [ {</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1</span><span>&quot;,</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using</span><span>&quot; : {</span><span>
-</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug</span><span>&quot;</span><span>
-</span><span>      }</span><span>
-</span><span>    }, {</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2</span><span>&quot;,</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food</span><span>&quot; : {</span><span>
-</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/crumbled-food</span><span>&quot;</span><span>
-</span><span>      },</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited</span><span>&quot; : {</span><span>
-</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/fox</span><span>&quot;</span><span>
-</span><span>      },</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using</span><span>&quot; : {</span><span>
-</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug</span><span>&quot;</span><span>
-</span><span>      }</span><span>
-</span><span>    }, {</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/stork</span><span>&quot;,</span><span>
-</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation</span><span>&quot; : {</span><span>
-</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2</span><span>&quot;</span><span>
-</span><span>      }</span><span>
-</span><span>    } ],</span><span>
-</span><span>    &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2</span><span>&quot;</span><span>
-</span><span>  }, {</span><span>
-</span><span>    &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/fox</span><span>&quot;,</span><span>
-</span><span>    &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/animal</span><span>&quot;</span><span>
-</span><span>  }, {</span><span>
-</span><span>    &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/stork</span><span>&quot;,</span><span>
-</span><span>    &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/animal</span><span>&quot;</span><span>
-</span><span>  } ]</span><span>
-</span><span>}</span><span>
+<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">@graph</span><span>&quot; : [ {
+</span><span>    &quot;</span><span style="color:#a3be8c;">@graph</span><span>&quot; : [ {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/fox</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation</span><span>&quot; : {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1</span><span>&quot;
+</span><span>      }
+</span><span>    }, {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food</span><span>&quot; : {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/soup</span><span>&quot;
+</span><span>      },
+</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited</span><span>&quot; : {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/stork</span><span>&quot;
+</span><span>      },
+</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using</span><span>&quot; : {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/shallow-plate</span><span>&quot;
+</span><span>      }
+</span><span>    } ],
+</span><span>    &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner1</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">http://www.w3.org/2006/time#before</span><span>&quot; : {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2</span><span>&quot;
+</span><span>    }
+</span><span>  }, {
+</span><span>    &quot;</span><span style="color:#a3be8c;">@graph</span><span>&quot; : [ {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation1</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using</span><span>&quot; : {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug</span><span>&quot;
+</span><span>      }
+</span><span>    }, {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/has-food</span><span>&quot; : {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/crumbled-food</span><span>&quot;
+</span><span>      },
+</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/has-invited</span><span>&quot; : {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/fox</span><span>&quot;
+</span><span>      },
+</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/serves-using</span><span>&quot; : {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/narrow-mouthed-jug</span><span>&quot;
+</span><span>      }
+</span><span>    }, {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/stork</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/gives-invitation</span><span>&quot; : {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/invitation2</span><span>&quot;
+</span><span>      }
+</span><span>    } ],
+</span><span>    &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/dinner2</span><span>&quot;
+</span><span>  }, {
+</span><span>    &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/fox</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/animal</span><span>&quot;
+</span><span>  }, {
+</span><span>    &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/stork</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot; : &quot;</span><span style="color:#a3be8c;">http://www.newresalhaider.com/ontologies/aesop/foxstork/animal</span><span>&quot;
+</span><span>  } ]
+</span><span>}
 </span></code></pre>
 <p>The biggest benefit of this format is the compatibility with JSON based tools and techniques. Regular JSON parsers, encoders and other tooling will just work, giving the format a very wide reach. Similarly to this our Clojure based approach uses <a href="https://github.com/edn-format/edn">EDN</a> as its basis. This is a subset of Clojure, notably its notation of data values, and is used by <a href="https://www.datomic.com/">Datomic</a> and others as a data transfer format.</p>
 <p>To summarize, we have seen how converting Linked Data from the Clojure representation to various other formats using the <a href="https://github.com/newres/aesopica">Aesopica</a> library is just a function invocation away. We have also looked at some of the differences between various syntaxes, notably the benefits that they provide: Turtle/TriG offers a lot of flexibity and shorthands for reading and writing, N-Quads simplicity of notation, and JSON-LD compatibility with an existing and well used standard. The Clojure representation is aimed creating a new, and hopefully interesting blend. It makes use of prefixes for easy reading and writing by human users, similarly to what is possible in Turtle. It has the simplicity of fact representation as triples and quads, like in N-Quads. Finally it uses a common, albeit not nearly as widespread, standard  a basis so it can make use of EDN based tooling. </p>
