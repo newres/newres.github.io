@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - Language</title>
-	<link href="https://www.newresalhaider.com/tags/language/atom.xml" rel="self" type="application/atom+xml"/>
+	<title> - Programming Language</title>
+	<link href="https://www.newresalhaider.com/tags/programming-language/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://www.newresalhaider.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
 	<updated>2022-08-06T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/language/atom.xml</id>
+	<id>https://www.newresalhaider.com/tags/programming-language/atom.xml</id>
 	<entry xml:lang="en">
 		<title>Raku Parrot</title>
 		<published>2022-08-06T00:00:00+00:00</published>
 		<updated>2022-08-06T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/post/rakuparrot/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/rakuparrot/</id>
+		<link rel="alternate" href="https://www.newresalhaider.com/post/raku-parrot/" type="text/html"/>
+		<id>https://www.newresalhaider.com/post/raku-parrot/</id>
 		<content type="html">&lt;p&gt;One of the programming languages that I have stumbled upon not too long ago is &lt;a href=&quot;https:&#x2F;&#x2F;www.raku.org&#x2F;&quot;&gt;Raku&lt;&#x2F;a&gt;. This language, which was previously known as Perl 6, is chock-full of really cool features. It has support for programming in both object oriented and functional paradigms, optional gradual typing, a nice story for async programming and more. &lt;&#x2F;p&gt;
 &lt;p&gt;A really nice feature of Raku is that &lt;a href=&quot;https:&#x2F;&#x2F;docs.raku.org&#x2F;language&#x2F;grammars&quot;&gt;Grammars&lt;&#x2F;a&gt; are a core part of the language. Grammars allow for a great way to interpret textual information. When programming there are a lot of use cases where a specific set of patterns need to be recognized and used from text. An interpreter for a format such as &lt;a href=&quot;https:&#x2F;&#x2F;www.json.org&quot;&gt;JSON&lt;&#x2F;a&gt; is a good example. From the text version of a JSON file elements such as arrays, objects, numbers, strings, etc. needs to be recognized. In addition a representation of them needs to be built for manipulation and use within a programming language. &lt;&#x2F;p&gt;
 &lt;p&gt;In order to demonstrate this grammar feature of Raku, we are going to implement a small program to parrot phrases back to us. The grammar inside this program describes short three word (sometimes a bit irregular) sentences like &amp;quot;I like sushi.&amp;quot; or &amp;quot;They eat pear.&amp;quot;. Our program will parrot these phrases back to us twice, first just as text and the second time with certain words being replaced by emojis. &lt;&#x2F;p&gt;
