@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title> - Classifier</title>
+	<link href="https://www.newresalhaider.com/tags/classifier/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.newresalhaider.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2022-08-26T00:00:00+00:00</updated>
+	<id>https://www.newresalhaider.com/tags/classifier/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Star Wars Trek</title>
+		<published>2022-08-26T00:00:00+00:00</published>
+		<updated>2022-08-26T00:00:00+00:00</updated>
+		<link rel="alternate" href="https://www.newresalhaider.com/post/star-wars-trek/" type="text/html"/>
+		<id>https://www.newresalhaider.com/post/star-wars-trek/</id>
+		<content type="html">&lt;p&gt;Recently I started to do the latest version of the course &lt;a href=&quot;https:&#x2F;&#x2F;course.fast.ai&#x2F;&quot;&gt;Practical Deep Learning for Coders&lt;&#x2F;a&gt; from &lt;a href=&quot;https:&#x2F;&#x2F;www.fast.ai&#x2F;&quot;&gt;fast.ai&lt;&#x2F;a&gt;. I am very much enjoying the hands-on approach of the course and it is quite amazing to see how a deep learning based image classifier could be built with very little code. In the &lt;a href=&quot;https:&#x2F;&#x2F;course.fast.ai&#x2F;Lessons&#x2F;lesson1.html&quot;&gt;first chapter of the book that accompanies the course&lt;&#x2F;a&gt; a model is trained to recognize whether an image depicts a bird or a forest. In this article, as an exercise, I will instead create a model that can recognize if an image of a spaceship is from Star Wars or from Star Trek.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=featured.png&gt;
+    
+    &lt;alt= A star destroyer from Star Wars on the left and the Enterprise from Star Trek on the right. Star Wars is the copyright of Disney and Star Wars is the copyright of Paramount Pictures.&gt;
+    
+    &lt;figcaption&gt;
+        
+        
+        A star destroyer from Star Wars on the left and the Enterprise from Star Trek on the right. Star Wars is the copyright of Disney and Star Wars is the copyright of Paramount Pictures.
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;I will list all the code I used for this in this article, with a brief description after each code fragment on what it does. The code is very similar to the code used in the the first chapter of the FastAI book, as in both cases we are aiming to recognize wether an image belongs to one of two categories, with the same setup. If one wants to follow along, I can highly recommend using a service such as &lt;a href=&quot;https:&#x2F;&#x2F;colab.research.google.com&#x2F;&quot;&gt;Colab&lt;&#x2F;a&gt; to get started quickly but a local install also does work. &lt;a href=&quot;https:&#x2F;&#x2F;colab.research.google.com&#x2F;github&#x2F;fastai&#x2F;fastbook&#x2F;blob&#x2F;master&#x2F;01_intro.ipynb&quot;&gt;Chapter 1 of the book&lt;&#x2F;a&gt; is directly available on Colab as well. &lt;&#x2F;p&gt;
+&lt;p&gt;Now let&#x27;s get to the code used:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;! [ -e &#x2F;content ] &amp;amp;&amp;amp; pip install -Uqq fastbook
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;fastbook
+&lt;&#x2F;span&gt;&lt;span&gt;fastbook.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;setup_book&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The first part is installing and setting up all the dependencies. Assuming we are working in Colab we need the first line to install the dependencies. If we work in our local (virtual) environment we can just do a &lt;code&gt;pip install fastbook&lt;&#x2F;code&gt; instead.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;from &lt;&#x2F;span&gt;&lt;span&gt;fastbook &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;*
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The next part is importing all the things we will need from fastbook. For the purposes of this small tutorial we will just import everything.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;searches = &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;star wars ship&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;,&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;star trek ship&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;path = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Path&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;star_wars_or_trek&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;not path.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;exists&lt;&#x2F;span&gt;&lt;span&gt;():
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;o &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;searches:
+&lt;&#x2F;span&gt;&lt;span&gt;        dest = (path&#x2F;o)
+&lt;&#x2F;span&gt;&lt;span&gt;        dest.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mkdir&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;exist_ok&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;True&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;parents&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;True&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        results = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;search_images_ddg&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;f&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;{o}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt; photo&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;download_images&lt;&#x2F;span&gt;&lt;span&gt;(dest, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;urls&lt;&#x2F;span&gt;&lt;span&gt;=results[:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;200&lt;&#x2F;span&gt;&lt;span&gt;])
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;resize_images&lt;&#x2F;span&gt;&lt;span&gt;(dest, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max_size&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;400&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;dest&lt;&#x2F;span&gt;&lt;span&gt;=dest)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Next we are going to gather the images based on which we will create and test our classifier. The above code will set up a directory called &lt;code&gt;star_wars_or_trek&lt;&#x2F;code&gt; and,assuming it does not yet exist, will search for images using the phrase &lt;code&gt;star wars ship&lt;&#x2F;code&gt; and &lt;code&gt;star trek ship&lt;&#x2F;code&gt; using &lt;a href=&quot;https:&#x2F;&#x2F;duckduckgo.com&#x2F;&quot;&gt;DuckDuckGo&lt;&#x2F;a&gt;. These will be put in sub-directories called &lt;code&gt;star wars ship&lt;&#x2F;code&gt; and &lt;code&gt;star trek ship&lt;&#x2F;code&gt; containing the respective images. Finally we are going to resize the images that we download to a comparable maximum size. &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;failed = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;verify_images&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_image_files&lt;&#x2F;span&gt;&lt;span&gt;(path))
+&lt;&#x2F;span&gt;&lt;span&gt;failed.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;map&lt;&#x2F;span&gt;&lt;span&gt;(Path.unlink)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The next step is verifying that all the images we got are valid image files, as things can go wrong during search. If they are not valid images we can remove them from our dataset.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;dls = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;DataBlock&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;blocks&lt;&#x2F;span&gt;&lt;span&gt;=(ImageBlock, CategoryBlock), 
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_items&lt;&#x2F;span&gt;&lt;span&gt;=get_image_files, 
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;splitter&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RandomSplitter&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;valid_pct&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.2&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;seed&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;42&lt;&#x2F;span&gt;&lt;span&gt;),
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_y&lt;&#x2F;span&gt;&lt;span&gt;=parent_label,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;item_tfms&lt;&#x2F;span&gt;&lt;span&gt;=[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Resize&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;192&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;method&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;squish&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)]
+&lt;&#x2F;span&gt;&lt;span&gt;).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;dataloaders&lt;&#x2F;span&gt;&lt;span&gt;(path)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The datablock is where all the elements are setup to that are required for learning our model. It specifies that we want to learn from images and want to derive categories from it, i.e. whether an image is a Star Wars ship or a Star Trek ship. It uses the data from the files that we have downloaded. &lt;&#x2F;p&gt;
+&lt;p&gt;One very important aspect is creating a model is to ensure its predictions are accurate. One way we can test is to set some portion of the data to the side and use it to evaluate our predictions using this data. In this case we set 20% of the data aside for this purpose.&lt;&#x2F;p&gt;
+&lt;p&gt;We also specify that the label for each images can be derived from the directory that they are in. Finally we aim to apply a transform to the images, to standardize them in a way that helps the training of the model. &lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;dls.show_batch(max_n=6)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A good way to check if our datablock is setup correctly is to show a batch images, in this case six, from our datablock. This can give us a set of images, such as the one below, that we can visually inspect before we start our learning.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=batchofships.png&gt;
+    
+    &lt;alt= A batch of six images from our dataset of ships that we have labelled either a Star Wars ship or a Star Trek ship.&gt;
+    
+    &lt;figcaption&gt;
+        
+        
+        A batch of six images from our dataset of ships that we have labelled either a Star Wars ship or a Star Trek ship.
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;learn = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;vision_learner&lt;&#x2F;span&gt;&lt;span&gt;(dls, resnet18, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;metrics&lt;&#x2F;span&gt;&lt;span&gt;=error_rate)
+&lt;&#x2F;span&gt;&lt;span&gt;learn.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;fine_tune&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The above two lines kick off the actual learning, i.e. the creation of a model that can differentiate between a ship from Star Wars and Star Trek, based on our setup of the datablock. One of the great things for image based models is that there are pre-trained models that exist, such as &lt;code&gt;resnet18&lt;&#x2F;code&gt; that have been trained on a lot of images. This means that we do not have to start our image learning from scratch but use this existing model as a starting point and fine tune it to our task at hand: the recognition of the right class of spaceship. &lt;&#x2F;p&gt;
+&lt;p&gt;Here we just do 3 iterations of fine tuning. The output from this fine tuning can be seen below (again this will vary for each run of fine tuning, but this will hopefully illustrate the results):&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;csv&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-csv &quot;&gt;&lt;code class=&quot;language-csv&quot; data-lang=&quot;csv&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;epoch	train_loss	valid_loss	error_rate	time
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0	1.236515	0.963507	0.323944	&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;00:07
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;epoch	train_loss	valid_loss	error_rate	time
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0	0.531795	0.751966	0.281690	&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;00:10
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1	0.419798	0.844729	0.225352	&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;00:10
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2	0.312620	0.631814	0.197183	&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;00:10
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In this case model was trained on desktop with a GPU but doing this on Colab is also very fast. We can get an error rate at around 0.2 with this setup which is good enough for our quick article (though it would be interesting exercise for the future to see how we could get this error rate down or what are the examples where the model finds it difficult to predict the right category).&lt;&#x2F;p&gt;
+&lt;p&gt;Now that we learned our model we would like to put it to use by giving it an image to classify. We have two options on how to do this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;uploader = widgets.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;FileUpload&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;uploader
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;When using a notebook we can have a widget with a file selector, with which we can upload the image we would like to classify.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;uploader = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;SimpleNamespace&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;data &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;images&#x2F;stardestroyer.jpeg&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;])
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# uploader = SimpleNamespace(data = [&amp;#39;images&#x2F;enterprise.webp&amp;#39;])
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We can otherwise also just load in the image from our (local) drive as well. Here one line is commented out so we could quickly switch between two options for images. &lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;img = PILImage.create(uploader.data[0])
+&lt;&#x2F;span&gt;&lt;span&gt;is_star_wars,_,probs = learn.predict(img)
+&lt;&#x2F;span&gt;&lt;span&gt;print(f&amp;quot;What ship is this?: {is_star_wars}.&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;print(f&amp;quot;Probability it&amp;#39;s a star wars ship: {probs[1].item():.6f}&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;print(f&amp;quot;Probability it&amp;#39;s a star trek ship: {probs[0].item():.6f}&amp;quot;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The final part is taking the image that we now added and asking the learned model to predict what kind of ship it is. With the above code we will print out both the category of the ship as well as the probabilities attached to the category giving an indication of how confident the model is in the prediction.&lt;&#x2F;p&gt;
+&lt;p&gt;If we use the Star Destroyer, from Star Wars that is displayed at the start of this article, our model will predict with very high confidence that it is a ship from Star Wars.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;What ship is this?: star wars ship.
+&lt;&#x2F;span&gt;&lt;span&gt;Probability it&amp;#39;s a star wars ship: 0.999536
+&lt;&#x2F;span&gt;&lt;span&gt;Probability it&amp;#39;s a star trek ship: 0.000464
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Similarly, if we use Enterprise from Star Trek, the model will have classify it correctly with very high probabilities. &lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;What ship is this?: star trek ship.
+&lt;&#x2F;span&gt;&lt;span&gt;Probability it&amp;#39;s a star wars ship: 0.000007
+&lt;&#x2F;span&gt;&lt;span&gt;Probability it&amp;#39;s a star trek ship: 0.999993
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In both cases the model can classify these iconic spaceships really well. It is really cool to see how little code it too to create and use a model for these type of predictions with fast.ai which I think it is pretty amazing. I can not recommend the book&#x2F;course &lt;a href=&quot;https:&#x2F;&#x2F;course.fast.ai&#x2F;&quot;&gt;Practical Deep Learning for Coders&lt;&#x2F;a&gt; enough and will definitely hope to dive deeper as I go along.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

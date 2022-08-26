@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Newres Al Haider</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+  <link href="https:&#x2F;&#x2F;www.newresalhaider.com/style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.newresalhaider.com/scripts/menu.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@newresa">
+<meta name="twitter:creator" content="@newresa">
+
+
+<meta name="twitter:title" content="Star Wars Trek">
+<meta name="title" property="og:title" content="Star Wars Trek" />
+
+
+<meta name="twitter:description" content="Building an image classifier that can recognize the difference between a spaceship from Star Wars versus one from Star Trek with only few lines of code.
+">
+<meta name="description" property="og:description" content="Building an image classifier that can recognize the difference between a spaceship from Star Wars versus one from Star Trek with only few lines of code.
+" />
+
+
+<meta name="author" content="Newres Al Haider" />
+<meta property="article:author" content="Newres Al Haider">
+<meta property="og:type" content="article" />
+
+<meta property="article:published_time" content="2022-08-26">
+
+
+    
+        <meta property="article:tag" content="fast.ai">
+    
+        <meta property="article:tag" content="Deep Learning">
+    
+        <meta property="article:tag" content="Machine Learning">
+    
+        <meta property="article:tag" content="Classifier">
+    
+
+
+    <meta property="article:modified_time" content="2022-08-26">
+
+
+
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/star-wars-trek/featured.png">
+<meta property="og:image" content="https://www.newresalhaider.com/post/star-wars-trek/featured.png" />
+
+
+</head>
+
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="title is-3">
+                Newres Al Haider
+            </h1>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="NavbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="NavbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/">
+                <h2 class="subtitle is-5">
+                    Home
+                </h2>
+            </a>
+            <a class="navbar-item" href="/post/">
+                <h2 class="subtitle is-5">
+                    Posts
+                </h2>
+            </a>
+            <a class="navbar-item" href="/project/">
+                <h2 class="subtitle is-5">
+                    Projects
+                </h2>
+            </a>
+            <a class="navbar-item" href="/publication/">
+                <h2 class="subtitle is-5">
+                    Publications
+                </h2>
+            </a>
+        </div>
+    </div>
+</nav>
+  <section class="section">
+    <div class="container">
+      
+
+<h1 class="title">
+    Star Wars Trek
+</h1>
+<p class="subtitle"><strong>2022-08-26</strong></p>
+<p>Recently I started to do the latest version of the course <a href="https://course.fast.ai/">Practical Deep Learning for Coders</a> from <a href="https://www.fast.ai/">fast.ai</a>. I am very much enjoying the hands-on approach of the course and it is quite amazing to see how a deep learning based image classifier could be built with very little code. In the <a href="https://course.fast.ai/Lessons/lesson1.html">first chapter of the book that accompanies the course</a> a model is trained to recognize whether an image depicts a bird or a forest. In this article, as an exercise, I will instead create a model that can recognize if an image of a spaceship is from Star Wars or from Star Trek.</p>
+<figure class=centeredfig>
+    <img src=featured.png>
+    
+    <alt= A star destroyer from Star Wars on the left and the Enterprise from Star Trek on the right. Star Wars is the copyright of Disney and Star Wars is the copyright of Paramount Pictures.>
+    
+    <figcaption>
+        
+        
+        A star destroyer from Star Wars on the left and the Enterprise from Star Trek on the right. Star Wars is the copyright of Disney and Star Wars is the copyright of Paramount Pictures.
+        
+    </figcaption>
+</figure>
+<p>I will list all the code I used for this in this article, with a brief description after each code fragment on what it does. The code is very similar to the code used in the the first chapter of the FastAI book, as in both cases we are aiming to recognize wether an image belongs to one of two categories, with the same setup. If one wants to follow along, I can highly recommend using a service such as <a href="https://colab.research.google.com/">Colab</a> to get started quickly but a local install also does work. <a href="https://colab.research.google.com/github/fastai/fastbook/blob/master/01_intro.ipynb">Chapter 1 of the book</a> is directly available on Colab as well. </p>
+<p>Now let's get to the code used:</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>! [ -e /content ] &amp;&amp; pip install -Uqq fastbook
+</span><span style="color:#b48ead;">import </span><span>fastbook
+</span><span>fastbook.</span><span style="color:#bf616a;">setup_book</span><span>()
+</span></code></pre>
+<p>The first part is installing and setting up all the dependencies. Assuming we are working in Colab we need the first line to install the dependencies. If we work in our local (virtual) environment we can just do a <code>pip install fastbook</code> instead.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">from </span><span>fastbook </span><span style="color:#b48ead;">import </span><span style="color:#d08770;">*
+</span></code></pre>
+<p>The next part is importing all the things we will need from fastbook. For the purposes of this small tutorial we will just import everything.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>searches = &#39;</span><span style="color:#a3be8c;">star wars ship</span><span>&#39;,&#39;</span><span style="color:#a3be8c;">star trek ship</span><span>&#39;
+</span><span>path = </span><span style="color:#bf616a;">Path</span><span>(&#39;</span><span style="color:#a3be8c;">star_wars_or_trek</span><span>&#39;)
+</span><span>
+</span><span style="color:#b48ead;">if </span><span>not path.</span><span style="color:#bf616a;">exists</span><span>():
+</span><span>    </span><span style="color:#b48ead;">for </span><span>o </span><span style="color:#b48ead;">in </span><span>searches:
+</span><span>        dest = (path/o)
+</span><span>        dest.</span><span style="color:#bf616a;">mkdir</span><span>(</span><span style="color:#bf616a;">exist_ok</span><span>=</span><span style="color:#d08770;">True</span><span>, </span><span style="color:#bf616a;">parents</span><span>=</span><span style="color:#d08770;">True</span><span>)
+</span><span>        results = </span><span style="color:#bf616a;">search_images_ddg</span><span>(</span><span style="color:#b48ead;">f</span><span>&#39;{o}</span><span style="color:#a3be8c;"> photo</span><span>&#39;)
+</span><span>        </span><span style="color:#bf616a;">download_images</span><span>(dest, </span><span style="color:#bf616a;">urls</span><span>=results[:</span><span style="color:#d08770;">200</span><span>])
+</span><span>        </span><span style="color:#bf616a;">resize_images</span><span>(dest, </span><span style="color:#bf616a;">max_size</span><span>=</span><span style="color:#d08770;">400</span><span>, </span><span style="color:#bf616a;">dest</span><span>=dest)
+</span></code></pre>
+<p>Next we are going to gather the images based on which we will create and test our classifier. The above code will set up a directory called <code>star_wars_or_trek</code> and,assuming it does not yet exist, will search for images using the phrase <code>star wars ship</code> and <code>star trek ship</code> using <a href="https://duckduckgo.com/">DuckDuckGo</a>. These will be put in sub-directories called <code>star wars ship</code> and <code>star trek ship</code> containing the respective images. Finally we are going to resize the images that we download to a comparable maximum size. </p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>failed = </span><span style="color:#bf616a;">verify_images</span><span>(</span><span style="color:#bf616a;">get_image_files</span><span>(path))
+</span><span>failed.</span><span style="color:#bf616a;">map</span><span>(Path.unlink)
+</span></code></pre>
+<p>The next step is verifying that all the images we got are valid image files, as things can go wrong during search. If they are not valid images we can remove them from our dataset.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>dls = </span><span style="color:#bf616a;">DataBlock</span><span>(
+</span><span>    </span><span style="color:#bf616a;">blocks</span><span>=(ImageBlock, CategoryBlock), 
+</span><span>    </span><span style="color:#bf616a;">get_items</span><span>=get_image_files, 
+</span><span>    </span><span style="color:#bf616a;">splitter</span><span>=</span><span style="color:#bf616a;">RandomSplitter</span><span>(</span><span style="color:#bf616a;">valid_pct</span><span>=</span><span style="color:#d08770;">0.2</span><span>, </span><span style="color:#bf616a;">seed</span><span>=</span><span style="color:#d08770;">42</span><span>),
+</span><span>    </span><span style="color:#bf616a;">get_y</span><span>=parent_label,
+</span><span>    </span><span style="color:#bf616a;">item_tfms</span><span>=[</span><span style="color:#bf616a;">Resize</span><span>(</span><span style="color:#d08770;">192</span><span>, </span><span style="color:#bf616a;">method</span><span>=&#39;</span><span style="color:#a3be8c;">squish</span><span>&#39;)]
+</span><span>).</span><span style="color:#bf616a;">dataloaders</span><span>(path)
+</span></code></pre>
+<p>The datablock is where all the elements are setup to that are required for learning our model. It specifies that we want to learn from images and want to derive categories from it, i.e. whether an image is a Star Wars ship or a Star Trek ship. It uses the data from the files that we have downloaded. </p>
+<p>One very important aspect is creating a model is to ensure its predictions are accurate. One way we can test is to set some portion of the data to the side and use it to evaluate our predictions using this data. In this case we set 20% of the data aside for this purpose.</p>
+<p>We also specify that the label for each images can be derived from the directory that they are in. Finally we aim to apply a transform to the images, to standardize them in a way that helps the training of the model. </p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>dls.show_batch(max_n=6)
+</span></code></pre>
+<p>A good way to check if our datablock is setup correctly is to show a batch images, in this case six, from our datablock. This can give us a set of images, such as the one below, that we can visually inspect before we start our learning.</p>
+<figure class=centeredfig>
+    <img src=batchofships.png>
+    
+    <alt= A batch of six images from our dataset of ships that we have labelled either a Star Wars ship or a Star Trek ship.>
+    
+    <figcaption>
+        
+        
+        A batch of six images from our dataset of ships that we have labelled either a Star Wars ship or a Star Trek ship.
+        
+    </figcaption>
+</figure>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>learn = </span><span style="color:#bf616a;">vision_learner</span><span>(dls, resnet18, </span><span style="color:#bf616a;">metrics</span><span>=error_rate)
+</span><span>learn.</span><span style="color:#bf616a;">fine_tune</span><span>(</span><span style="color:#d08770;">3</span><span>)
+</span></code></pre>
+<p>The above two lines kick off the actual learning, i.e. the creation of a model that can differentiate between a ship from Star Wars and Star Trek, based on our setup of the datablock. One of the great things for image based models is that there are pre-trained models that exist, such as <code>resnet18</code> that have been trained on a lot of images. This means that we do not have to start our image learning from scratch but use this existing model as a starting point and fine tune it to our task at hand: the recognition of the right class of spaceship. </p>
+<p>Here we just do 3 iterations of fine tuning. The output from this fine tuning can be seen below (again this will vary for each run of fine tuning, but this will hopefully illustrate the results):</p>
+<pre data-lang="csv" style="background-color:#2b303b;color:#c0c5ce;" class="language-csv "><code class="language-csv" data-lang="csv"><span style="color:#b48ead;">epoch	train_loss	valid_loss	error_rate	time
+</span><span style="color:#d08770;">0	1.236515	0.963507	0.323944	</span><span style="color:#b48ead;">00:07
+</span><span style="color:#b48ead;">epoch	train_loss	valid_loss	error_rate	time
+</span><span style="color:#d08770;">0	0.531795	0.751966	0.281690	</span><span style="color:#b48ead;">00:10
+</span><span style="color:#d08770;">1	0.419798	0.844729	0.225352	</span><span style="color:#b48ead;">00:10
+</span><span style="color:#d08770;">2	0.312620	0.631814	0.197183	</span><span style="color:#b48ead;">00:10
+</span></code></pre>
+<p>In this case model was trained on desktop with a GPU but doing this on Colab is also very fast. We can get an error rate at around 0.2 with this setup which is good enough for our quick article (though it would be interesting exercise for the future to see how we could get this error rate down or what are the examples where the model finds it difficult to predict the right category).</p>
+<p>Now that we learned our model we would like to put it to use by giving it an image to classify. We have two options on how to do this:</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>uploader = widgets.</span><span style="color:#bf616a;">FileUpload</span><span>()
+</span><span>uploader
+</span></code></pre>
+<p>When using a notebook we can have a widget with a file selector, with which we can upload the image we would like to classify.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>uploader = </span><span style="color:#bf616a;">SimpleNamespace</span><span>(</span><span style="color:#bf616a;">data </span><span>= [&#39;</span><span style="color:#a3be8c;">images/stardestroyer.jpeg</span><span>&#39;])
+</span><span style="color:#65737e;"># uploader = SimpleNamespace(data = [&#39;images/enterprise.webp&#39;])
+</span></code></pre>
+<p>We can otherwise also just load in the image from our (local) drive as well. Here one line is commented out so we could quickly switch between two options for images. </p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>img = PILImage.create(uploader.data[0])
+</span><span>is_star_wars,_,probs = learn.predict(img)
+</span><span>print(f&quot;What ship is this?: {is_star_wars}.&quot;)
+</span><span>print(f&quot;Probability it&#39;s a star wars ship: {probs[1].item():.6f}&quot;)
+</span><span>print(f&quot;Probability it&#39;s a star trek ship: {probs[0].item():.6f}&quot;)
+</span></code></pre>
+<p>The final part is taking the image that we now added and asking the learned model to predict what kind of ship it is. With the above code we will print out both the category of the ship as well as the probabilities attached to the category giving an indication of how confident the model is in the prediction.</p>
+<p>If we use the Star Destroyer, from Star Wars that is displayed at the start of this article, our model will predict with very high confidence that it is a ship from Star Wars.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>What ship is this?: star wars ship.
+</span><span>Probability it&#39;s a star wars ship: 0.999536
+</span><span>Probability it&#39;s a star trek ship: 0.000464
+</span></code></pre>
+<p>Similarly, if we use Enterprise from Star Trek, the model will have classify it correctly with very high probabilities. </p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>What ship is this?: star trek ship.
+</span><span>Probability it&#39;s a star wars ship: 0.000007
+</span><span>Probability it&#39;s a star trek ship: 0.999993
+</span></code></pre>
+<p>In both cases the model can classify these iconic spaceships really well. It is really cool to see how little code it too to create and use a model for these type of predictions with fast.ai which I think it is pretty amazing. I can not recommend the book/course <a href="https://course.fast.ai/">Practical Deep Learning for Coders</a> enough and will definitely hope to dive deeper as I go along.</p>
+
+
+    </div>
+  </section>
+</body>
+
+</html>
