@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Newres Al Haider</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+  <link href="https:&#x2F;&#x2F;www.newresalhaider.com/style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.newresalhaider.com/scripts/menu.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@newresa">
+<meta name="twitter:creator" content="@newresa">
+
+
+<meta name="twitter:title" content="Dunes">
+<meta name="title" property="og:title" content="Dunes" />
+
+
+<meta name="twitter:description" content="Using Stable Diffusion image generation to generate a picture of Arrakis from Dune and and Tatooine from Star Wars based on a picture of dunes from the Netherlands and some text.
+">
+<meta name="description" property="og:description" content="Using Stable Diffusion image generation to generate a picture of Arrakis from Dune and and Tatooine from Star Wars based on a picture of dunes from the Netherlands and some text.
+" />
+
+
+<meta name="author" content="Newres Al Haider" />
+<meta property="article:author" content="Newres Al Haider">
+<meta property="og:type" content="article" />
+
+<meta property="article:published_time" content="2022-09-18">
+
+
+    
+        <meta property="article:tag" content="Deep Learning">
+    
+        <meta property="article:tag" content="Machine Learning">
+    
+        <meta property="article:tag" content="Stable Diffusion">
+    
+        <meta property="article:tag" content="AI Art">
+    
+
+
+    <meta property="article:modified_time" content="2022-09-18">
+
+
+
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/dunes/featured.png">
+<meta property="og:image" content="https://www.newresalhaider.com/post/dunes/featured.png" />
+
+
+</head>
+
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="title is-3">
+                Newres Al Haider
+            </h1>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="NavbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="NavbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/">
+                <h2 class="subtitle is-5">
+                    Home
+                </h2>
+            </a>
+            <a class="navbar-item" href="/post/">
+                <h2 class="subtitle is-5">
+                    Posts
+                </h2>
+            </a>
+            <a class="navbar-item" href="/project/">
+                <h2 class="subtitle is-5">
+                    Projects
+                </h2>
+            </a>
+            <a class="navbar-item" href="/publication/">
+                <h2 class="subtitle is-5">
+                    Publications
+                </h2>
+            </a>
+        </div>
+    </div>
+</nav>
+  <section class="section">
+    <div class="container">
+      
+
+<h1 class="title">
+    Dunes
+</h1>
+<p class="subtitle"><strong>2022-09-18</strong></p>
+<p><a href="https://stability.ai/blog/stable-diffusion-public-release">Stable Diffusion</a> is one of the latest models that is capable of translating a piece of text, such as &quot;arid, desert dunes&quot; into great looking images. Unlike some other tools and models, Stable Diffusion can be installed and run locally on a desktop machine (see this <a href="https://github.com/lstein/stable-diffusion">repo and instructions</a>).</p>
+<p>One of the great features of the Stable Diffusion model is the ability to combine a text input with a pre-existing image to generate new images. In this article I aim to dive into this feature by starting with a photo of dunes that I took a while back. I will use descriptions based on sci-fi worlds with dunes, notably <a href="https://en.wikipedia.org/wiki/Arrakis">Arrakis from Dune</a> and <a href="https://en.wikipedia.org/wiki/Tatooine">Tatooine from Star Wars</a>, to create images from the original photo that look like as if they were from these worlds.</p>
+<figure class=centeredfig>
+    <img src=featured.png>
+    
+    <alt= A sequence of images (from left to right): the original picture of dunes in the Netherlands (Soester Duinen), a generated image of Arrakis and a generated image of Tatooine.>
+    
+    <figcaption>
+        
+        
+        A sequence of images (from left to right): the original picture of dunes in the Netherlands (Soester Duinen), a generated image of Arrakis and a generated image of Tatooine.
+        
+    </figcaption>
+</figure>
+<p>The original photo itself has been taken in the sand dunes of <a href="https://commons.wikimedia.org/wiki/Soester_Duinen">Soester Duinen</a> in the Netherlands. The sand here has been deposited during the last ice age which came to lay bare due to intensive grazing during the middle ages. Almost all such areas in the Netherlands have been reclaimed from the sand, with the remaining dunes of the Soester Duinen now being maintained as geographical monuments.</p>
+<figure class=centeredfig>
+    <img src=duinen.png>
+    
+    <alt= The original photo I have taken of dunes in Soester Duinen.>
+    
+    <figcaption>
+        
+        
+        The original photo I have taken of dunes in Soester Duinen.
+        
+    </figcaption>
+</figure>
+<p>Given this image, with the help of Stable Diffusion, I had the goal to transform it to sand dunes that one could find in a sci-fi setting. </p>
+<p>First I tried to get an image that looks more like <a href="https://en.wikipedia.org/wiki/Arrakis">the planet Arrakis, also known as Dune</a>. One of the characteristics of this planet is that it is incredibly arid. This means that in order to get something that resembles Arrakis, with less vegetation and clouds, I need to provide a text prompt that emphasizes the harsh arid nature of Arrakis.</p>
+<p>I have used the prompt &quot;The planet Arrakis also known as Dune, arid, desert dunes, desolate, cloudless blue sky&quot; to transform the image to the one that follows:</p>
+<figure class=centeredfig>
+    <img src=dune.png>
+    
+    <alt= An image of Arrakis, the planet in the novel Dune, that was generated.>
+    
+    <figcaption>
+        
+        
+        An image of Arrakis, the planet in the novel Dune, that was generated.
+        
+    </figcaption>
+</figure>
+<p>The Stable Diffusion model takes a number of parameters aside from the text prompt to generate images. One that is specific to using a starting image is called Img2Img strength, which defines how much weight should be given to the initial image when generating new images. Lower scores make the generated image look closer to the initial image, while higher scores let the model dream up new images more freely. For the images generated the value 0.75 was used (unless noted otherwise). One can quite well see the effect of the base image in the layout of the new one that is made to look like Arrakis e.g.: like how the sand dunes have replaced the vegetation in the background.</p>
+<p>It can generally take some trial and error to find the right parameters to generate images that fit the creators vision. Nonetheless it is quite amazing how many good looking images can be generated just by playing around with the parameter and prompt selection.</p>
+<p>While for Arrakis it took quite a long text prompt get close to the results that I wanted it is quite different when trying a Star wars related prompt. The prompt: &quot;Tatooine, from Star Wars&quot; is itself enough to help generate the following image from our original dune photo:</p>
+<figure class=centeredfig>
+    <img src=starwars.png>
+    
+    <alt= An image of Tatooine, a planet from Star Wars, that was generated.>
+    
+    <figcaption>
+        
+        
+        An image of Tatooine, a planet from Star Wars, that was generated.
+        
+    </figcaption>
+</figure>
+<p>As one can see even from a short prompt, it is possible for the model to generate images that look like they were taken as photographs from the planet Tatooine from Star Wars. It seems the system has a notion of how the architecture of buildings look like on the planet in this setting and is capable of generating images of such buildings into the photograph.</p>
+<p>It is also possible to go beyond the well-known fictional planets and let the model dream up a setting.</p>
+<p>The prompt &quot;Cyberpunk settlement, detailed&quot; gave the following results:</p>
+<figure class=centeredfig>
+    <img src=cyberpunk.png>
+    
+    <alt= A cyberpunk styled settlement that was generated from the original image. Generated with the img2img strength of 0.65.>
+    
+    <figcaption>
+        
+        
+        A cyberpunk styled settlement that was generated from the original image. Generated with the img2img strength of 0.65.
+        
+    </figcaption>
+</figure>
+<p>I hope I have given at least a small preview or what is possible with Stable Diffusion's img2img generation. It is quite a fun project to take photographs and modify them using text prompts to all kinds of imaginary settings. Images of the next sci-fi setting set in the dunes could be just one prompt and one photograph away.</p>
+
+
+    </div>
+  </section>
+</body>
+
+</html>

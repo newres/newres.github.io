@@ -4,8 +4,89 @@
 	<link href="https://www.newresalhaider.com/tags/deep-learning/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://www.newresalhaider.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2022-08-27T00:00:00+00:00</updated>
+	<updated>2022-09-18T00:00:00+00:00</updated>
 	<id>https://www.newresalhaider.com/tags/deep-learning/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Dunes</title>
+		<published>2022-09-18T00:00:00+00:00</published>
+		<updated>2022-09-18T00:00:00+00:00</updated>
+		<link rel="alternate" href="https://www.newresalhaider.com/post/dunes/" type="text/html"/>
+		<id>https://www.newresalhaider.com/post/dunes/</id>
+		<content type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;stability.ai&#x2F;blog&#x2F;stable-diffusion-public-release&quot;&gt;Stable Diffusion&lt;&#x2F;a&gt; is one of the latest models that is capable of translating a piece of text, such as &amp;quot;arid, desert dunes&amp;quot; into great looking images. Unlike some other tools and models, Stable Diffusion can be installed and run locally on a desktop machine (see this &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;lstein&#x2F;stable-diffusion&quot;&gt;repo and instructions&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;One of the great features of the Stable Diffusion model is the ability to combine a text input with a pre-existing image to generate new images. In this article I aim to dive into this feature by starting with a photo of dunes that I took a while back. I will use descriptions based on sci-fi worlds with dunes, notably &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Arrakis&quot;&gt;Arrakis from Dune&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Tatooine&quot;&gt;Tatooine from Star Wars&lt;&#x2F;a&gt;, to create images from the original photo that look like as if they were from these worlds.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=featured.png&gt;
+    
+    &lt;alt= A sequence of images (from left to right): the original picture of dunes in the Netherlands (Soester Duinen), a generated image of Arrakis and a generated image of Tatooine.&gt;
+    
+    &lt;figcaption&gt;
+        
+        
+        A sequence of images (from left to right): the original picture of dunes in the Netherlands (Soester Duinen), a generated image of Arrakis and a generated image of Tatooine.
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;The original photo itself has been taken in the sand dunes of &lt;a href=&quot;https:&#x2F;&#x2F;commons.wikimedia.org&#x2F;wiki&#x2F;Soester_Duinen&quot;&gt;Soester Duinen&lt;&#x2F;a&gt; in the Netherlands. The sand here has been deposited during the last ice age which came to lay bare due to intensive grazing during the middle ages. Almost all such areas in the Netherlands have been reclaimed from the sand, with the remaining dunes of the Soester Duinen now being maintained as geographical monuments.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=duinen.png&gt;
+    
+    &lt;alt= The original photo I have taken of dunes in Soester Duinen.&gt;
+    
+    &lt;figcaption&gt;
+        
+        
+        The original photo I have taken of dunes in Soester Duinen.
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;Given this image, with the help of Stable Diffusion, I had the goal to transform it to sand dunes that one could find in a sci-fi setting. &lt;&#x2F;p&gt;
+&lt;p&gt;First I tried to get an image that looks more like &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Arrakis&quot;&gt;the planet Arrakis, also known as Dune&lt;&#x2F;a&gt;. One of the characteristics of this planet is that it is incredibly arid. This means that in order to get something that resembles Arrakis, with less vegetation and clouds, I need to provide a text prompt that emphasizes the harsh arid nature of Arrakis.&lt;&#x2F;p&gt;
+&lt;p&gt;I have used the prompt &amp;quot;The planet Arrakis also known as Dune, arid, desert dunes, desolate, cloudless blue sky&amp;quot; to transform the image to the one that follows:&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=dune.png&gt;
+    
+    &lt;alt= An image of Arrakis, the planet in the novel Dune, that was generated.&gt;
+    
+    &lt;figcaption&gt;
+        
+        
+        An image of Arrakis, the planet in the novel Dune, that was generated.
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;The Stable Diffusion model takes a number of parameters aside from the text prompt to generate images. One that is specific to using a starting image is called Img2Img strength, which defines how much weight should be given to the initial image when generating new images. Lower scores make the generated image look closer to the initial image, while higher scores let the model dream up new images more freely. For the images generated the value 0.75 was used (unless noted otherwise). One can quite well see the effect of the base image in the layout of the new one that is made to look like Arrakis e.g.: like how the sand dunes have replaced the vegetation in the background.&lt;&#x2F;p&gt;
+&lt;p&gt;It can generally take some trial and error to find the right parameters to generate images that fit the creators vision. Nonetheless it is quite amazing how many good looking images can be generated just by playing around with the parameter and prompt selection.&lt;&#x2F;p&gt;
+&lt;p&gt;While for Arrakis it took quite a long text prompt get close to the results that I wanted it is quite different when trying a Star wars related prompt. The prompt: &amp;quot;Tatooine, from Star Wars&amp;quot; is itself enough to help generate the following image from our original dune photo:&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=starwars.png&gt;
+    
+    &lt;alt= An image of Tatooine, a planet from Star Wars, that was generated.&gt;
+    
+    &lt;figcaption&gt;
+        
+        
+        An image of Tatooine, a planet from Star Wars, that was generated.
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;As one can see even from a short prompt, it is possible for the model to generate images that look like they were taken as photographs from the planet Tatooine from Star Wars. It seems the system has a notion of how the architecture of buildings look like on the planet in this setting and is capable of generating images of such buildings into the photograph.&lt;&#x2F;p&gt;
+&lt;p&gt;It is also possible to go beyond the well-known fictional planets and let the model dream up a setting.&lt;&#x2F;p&gt;
+&lt;p&gt;The prompt &amp;quot;Cyberpunk settlement, detailed&amp;quot; gave the following results:&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=cyberpunk.png&gt;
+    
+    &lt;alt= A cyberpunk styled settlement that was generated from the original image. Generated with the img2img strength of 0.65.&gt;
+    
+    &lt;figcaption&gt;
+        
+        
+        A cyberpunk styled settlement that was generated from the original image. Generated with the img2img strength of 0.65.
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;I hope I have given at least a small preview or what is possible with Stable Diffusion&#x27;s img2img generation. It is quite a fun project to take photographs and modify them using text prompts to all kinds of imaginary settings. Images of the next sci-fi setting set in the dunes could be just one prompt and one photograph away.&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Star Wars Trek</title>
 		<published>2022-08-26T00:00:00+00:00</published>
@@ -107,12 +188,12 @@
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;The final part is taking the image that we now added and asking the learned model to predict what kind of ship it is. With the above code we will print out both the category of the ship as well as the probabilities attached to the category. This will give an indication of how confident the model is in the prediction.&lt;&#x2F;p&gt;
 &lt;p&gt;If we use the image of a Star Destroyer from Star Wars, that is displayed on the left at the start of this article, our model will predict with very high confidence that it is a ship from Star Wars.&lt;&#x2F;p&gt;
-&lt;pre data-lang=&quot;text&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-text &quot;&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;What ship is this?: star wars ship.
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;What ship is this?: star wars ship.
 &lt;&#x2F;span&gt;&lt;span&gt;Probability it&amp;#39;s a star wars ship: 0.999536
 &lt;&#x2F;span&gt;&lt;span&gt;Probability it&amp;#39;s a star trek ship: 0.000464
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;Similarly, if we use the image of Enterprise from Star Trek, the model will have classify it correctly with very high probabilities. &lt;&#x2F;p&gt;
-&lt;pre data-lang=&quot;text&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-text &quot;&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;What ship is this?: star trek ship.
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;What ship is this?: star trek ship.
 &lt;&#x2F;span&gt;&lt;span&gt;Probability it&amp;#39;s a star wars ship: 0.000007
 &lt;&#x2F;span&gt;&lt;span&gt;Probability it&amp;#39;s a star trek ship: 0.999993
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
