@@ -10,7 +10,7 @@
 		<title>Ontology Enabled Clinical Software</title>
 		<published>2017-12-29T00:00:00+00:00</published>
 		<updated>2017-12-29T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/project/clinical-semantics/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/project/clinical-semantics/" type="text/html"/>
 		<id>https://www.newresalhaider.com/project/clinical-semantics/</id>
 		<content type="html">&lt;p&gt;The time of clinical health professionals is incredibly valuable. Software can alleviate the burden of physicians, nursers and other health experts and allow them to provide better, more effective health care to patients. &lt;&#x2F;p&gt;
 &lt;p&gt;Creating, maintaining and using software in clinical environments is a difficult process. Not only it is paramount that such software needs to be correct, it has to have an understanding of highly domain specific knowledge about clinical processes in order to provide beneficial support to health professionals.&lt;&#x2F;p&gt;

@@ -10,7 +10,7 @@
 		<title>Meditations in your Pocket</title>
 		<published>2020-12-28T00:00:00+00:00</published>
 		<updated>2021-01-06T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/post/meditations/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/post/meditations/" type="text/html"/>
 		<id>https://www.newresalhaider.com/post/meditations/</id>
 		<content type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Meditations&quot;&gt;Meditations&lt;&#x2F;a&gt; are a series of notes that the Roman emperor &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Marcus_Aurelius&quot;&gt;Marcus Aurelius&lt;&#x2F;a&gt;
 wrote for guidance and self-improvement. While it is likely that the emperor wrote them purely for his own benefit, they have been published after his death and contain elements of &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Stoicism&quot;&gt;Stoic philosophy&lt;&#x2F;a&gt; that many people have consulted since.&lt;&#x2F;p&gt;
@@ -566,7 +566,7 @@ We use this information to create a navigation test, as once the right icon has 
 		<title>CybOrg Mode</title>
 		<published>2020-06-01T00:00:00+00:00</published>
 		<updated>2020-06-01T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/post/cyborg-mode/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/post/cyborg-mode/" type="text/html"/>
 		<id>https://www.newresalhaider.com/post/cyborg-mode/</id>
 		<content type="html">&lt;p&gt;Human beings enhanced by machine parts, often called &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cyborg&quot;&gt;cyborgs&lt;&#x2F;a&gt;, are a staple of the science-fiction and comic books. The, very aptly named, hero &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cyborg_(comics)&quot;&gt;Cyborg&lt;&#x2F;a&gt;, is a good example of this. Due to advanced mechanical modifications he not only has greatly increased strength and the ability to fly, but he is able to interface directly with computer systems to organize and plan ahead. These skills make him an important member of many superhero teams such as the &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Justice_League&quot;&gt;Justice League&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Teen_Titans&quot;&gt;Teen Titans&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;Thankfully for us, even without any of the cybernetic implants that Cyborg has, there exists some great tools to help organize, document and plan ahead. One of such tools is called &lt;a href=&quot;https:&#x2F;&#x2F;orgmode.org&#x2F;&quot;&gt;Org-mode&lt;&#x2F;a&gt;. Org-mode, also denoted as Org mode or even more simply as Org, is a system for organizing notes, plans, authoring documents and many other tasks. One of its main benefits is that although specialized tools exist to help create and edit Org documents, all Org documents are &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Plain_text&quot;&gt;plain text&lt;&#x2F;a&gt; files. This means that the format is very portable and can be used and edited on any platform which can edit text files. In this article we give a brief introduction to Org mode with an example based on the hero Cyborg.&lt;&#x2F;p&gt;

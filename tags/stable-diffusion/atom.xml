@@ -10,7 +10,7 @@
 		<title>Dunes</title>
 		<published>2022-09-18T00:00:00+00:00</published>
 		<updated>2022-09-18T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/post/dunes/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/post/dunes/" type="text/html"/>
 		<id>https://www.newresalhaider.com/post/dunes/</id>
 		<content type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;stability.ai&#x2F;blog&#x2F;stable-diffusion-public-release&quot;&gt;Stable Diffusion&lt;&#x2F;a&gt; is one of the latest models that is capable of translating a piece of text, such as &amp;quot;arid, desert dunes&amp;quot; into great looking images. Unlike some other tools and models, Stable Diffusion can be installed and run locally on a desktop machine (see this &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;lstein&#x2F;stable-diffusion&quot;&gt;repo and instructions&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
 &lt;p&gt;One of the great features of the Stable Diffusion model is the ability to combine a text input with a pre-existing image to generate new images. In this article I aim to dive into this feature by starting with a photo of dunes that I took a while back. I will use descriptions based on sci-fi worlds with dunes, notably &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Arrakis&quot;&gt;Arrakis from Dune&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Tatooine&quot;&gt;Tatooine from Star Wars&lt;&#x2F;a&gt;, to create images from the original photo that look like as if they were from these worlds.&lt;&#x2F;p&gt;

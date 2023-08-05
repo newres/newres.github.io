@@ -4,13 +4,166 @@
 	<link href="https://www.newresalhaider.com/tags/machine-learning/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://www.newresalhaider.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2022-09-18T00:00:00+00:00</updated>
+	<updated>2023-08-03T00:00:00+00:00</updated>
 	<id>https://www.newresalhaider.com/tags/machine-learning/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Accidental Renaissance</title>
+		<published>2023-08-03T00:00:00+00:00</published>
+		<updated>2022-08-03T00:00:00+00:00</updated>
+		<link href="https://www.newresalhaider.com/post/accidentalren/" type="text/html"/>
+		<id>https://www.newresalhaider.com/post/accidentalren/</id>
+		<content type="html">&lt;p&gt;One interesting place to look for nice photographs is the &lt;a href=&quot;https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;AccidentalRenaissance&#x2F;&quot;&gt;Accidental Renaissance subreddit&lt;&#x2F;a&gt;. It is a forum where photographs that resemble Renaissance art, or other art movements that existed between the 14th and 19th centuries, are shared.&lt;&#x2F;p&gt;
+&lt;p&gt;A related question is how to decide on what counts as Renaissance (or Baroque, Romanticist, etc) art for the photographs that would fall under the Accidental Renaissance subreddit. This is especially for people with no in-depth knowledge on art movements. With the great results that deep learning based image classifiers can achieve and how easy it is using libraries such as &lt;a href=&quot;https:&#x2F;&#x2F;www.fast.ai&#x2F;&quot;&gt;fast.ai&lt;&#x2F;a&gt; to implement them, I thought it would be a good idea to create a solution for this question. In this article I aim to build a model that given a photo can decide whether a photograph could belong in the Accidental Renaissance subreddit.&lt;&#x2F;p&gt;
+&lt;p&gt;We are going to use two sources of data for this purpose. One is a collection of photos from the Accidental Renaissance subreddit, from which we can learn what makes for a good &amp;quot;Accidental Renaissance&amp;quot; photo. The other is a group of photos that are likely to be not accidental renaissance. For this we will use the following &lt;a href=&quot;https:&#x2F;&#x2F;www.kaggle.com&#x2F;datasets&#x2F;duttadebadri&#x2F;image-classification&quot;&gt;image data set from Kaggle&lt;&#x2F;a&gt;. This dataset contains images categorized into the following groups: Architecture, Arts and Culture, Food and Drinks and Travel and Adventure.&lt;&#x2F;p&gt;
+&lt;p&gt;With these two datasets we can start to create the classifier using &lt;a href=&quot;https:&#x2F;&#x2F;www.fast.ai&#x2F;&quot;&gt;fast.ai&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
+&lt;p&gt;First part is importing the required dependencies.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;fastai
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;from &lt;&#x2F;span&gt;&lt;span&gt;fastai.vision.all &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;*
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;from &lt;&#x2F;span&gt;&lt;span&gt;random &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;sample
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;from &lt;&#x2F;span&gt;&lt;span&gt;ipywidgets &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;interact
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;torch
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Next we define the paths for the images in the datasets.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;all_path = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;mnt&#x2F;c&#x2F;data&#x2F;accidental&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;renaissance_path = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;mnt&#x2F;c&#x2F;data&#x2F;accidental&#x2F;renaissance&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;architecture_path = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;mnt&#x2F;c&#x2F;data&#x2F;accidental&#x2F;architecture&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;art_and_culture_path = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;mnt&#x2F;c&#x2F;data&#x2F;accidental&#x2F;artandculture&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;food_and_drinks_path = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;mnt&#x2F;c&#x2F;data&#x2F;accidental&#x2F;foodanddrinks&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;travel_and_adventure_path = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;mnt&#x2F;c&#x2F;data&#x2F;accidental&#x2F;travelandadventure&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;While fast.ai has a function to gather all the image files from a directory, the version used for this experiment did not gather image files with the .webp extension. As many image files from Accidental Renaissance subreddit have a .webp extension, we will create a custom function to get all images files, including those of this type. &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;get_all_image_files&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;path&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;recurse&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;True&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;folders&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;None&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Get image files in `path` recursively, only in `folders`, if specified.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_files&lt;&#x2F;span&gt;&lt;span&gt;(path, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;extensions&lt;&#x2F;span&gt;&lt;span&gt;=[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.webp&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.jpeg&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.gif&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.jpg&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;], &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;recurse&lt;&#x2F;span&gt;&lt;span&gt;=recurse, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;folders&lt;&#x2F;span&gt;&lt;span&gt;=folders)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The files of each category can be retrieved using the above function and the relevant paths.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;renaissance_files = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_all_image_files&lt;&#x2F;span&gt;&lt;span&gt;(renaissance_path)
+&lt;&#x2F;span&gt;&lt;span&gt;architecture_files = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_all_image_files&lt;&#x2F;span&gt;&lt;span&gt;(architecture_path)
+&lt;&#x2F;span&gt;&lt;span&gt;art_and_culture_files = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_all_image_files&lt;&#x2F;span&gt;&lt;span&gt;(art_and_culture_path)
+&lt;&#x2F;span&gt;&lt;span&gt;food_and_drinks_files = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_all_image_files&lt;&#x2F;span&gt;&lt;span&gt;(food_and_drinks_path)
+&lt;&#x2F;span&gt;&lt;span&gt;travel_and_adventure_files = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_all_image_files&lt;&#x2F;span&gt;&lt;span&gt;(travel_and_adventure_path)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now that we have the list of files, it would be great to see how many of each type we have in the dataset.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;{&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Renaissance files&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(renaissance_files), 
+&lt;&#x2F;span&gt;&lt;span&gt; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Architecture files&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(architecture_files),
+&lt;&#x2F;span&gt;&lt;span&gt; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Arts and Culture files&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(art_and_culture_files),
+&lt;&#x2F;span&gt;&lt;span&gt; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Food and Drinks files&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(food_and_drinks_files),
+&lt;&#x2F;span&gt;&lt;span&gt; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Travel and Adventure files&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(travel_and_adventure_files)
+&lt;&#x2F;span&gt;&lt;span&gt; }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The above code will give use the following result: &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;{&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Renaissance files&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;135&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt; &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Architecture files&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;8763&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt; &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Arts and Culture files&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;8531&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt; &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Food and Drinks files&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;7849&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt; &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Travel and Adventure files&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;8800&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;It seems we have far more images in each category of the Kaggle dataset than those from the Accidental Renaissance subreddit. There are many possible ways to deal with an unbalanced dataset, but here we go for a simple sampling based solution. We create a sampled dataset from the Kaggle dataset that is as large as the image set of the subreddit, that we call our &amp;quot;regular&amp;quot; image set.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;sampled_regular_files = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sample&lt;&#x2F;span&gt;&lt;span&gt;(architecture_files + art_and_culture_files + food_and_drinks_files + travel_and_adventure_files, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;135&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Next we set up two directories, one for the renaissance files and one for the regular files respectively. We make sure to create the directories &lt;code&gt;learning&#x2F;renaissance&lt;&#x2F;code&gt; and &lt;code&gt;learning&#x2F;regular&lt;&#x2F;code&gt; if they do not yet exist. If they do exist already, the files within them will be deleted (which makes rerunning the experiment easier).&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;delete_files&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;directory&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;filename &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;os.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;listdir&lt;&#x2F;span&gt;&lt;span&gt;(directory):
+&lt;&#x2F;span&gt;&lt;span&gt;        file_path = os.path.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;join&lt;&#x2F;span&gt;&lt;span&gt;(directory, filename)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;os.path.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;isfile&lt;&#x2F;span&gt;&lt;span&gt;(file_path):
+&lt;&#x2F;span&gt;&lt;span&gt;            os.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;remove&lt;&#x2F;span&gt;&lt;span&gt;(file_path)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;learning_dir = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;learning&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;learning_renaissance_dir = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;learning&#x2F;renaissance&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;learning_regular_dir= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;learning&#x2F;regular&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;not os.path.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;exists&lt;&#x2F;span&gt;&lt;span&gt;(learning_renaissance_dir):
+&lt;&#x2F;span&gt;&lt;span&gt;    os.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;makedirs&lt;&#x2F;span&gt;&lt;span&gt;(learning_renaissance_dir)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;delete_files&lt;&#x2F;span&gt;&lt;span&gt;(learning_renaissance_dir)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;not os.path.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;exists&lt;&#x2F;span&gt;&lt;span&gt;(learning_regular_dir):
+&lt;&#x2F;span&gt;&lt;span&gt;    os.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;makedirs&lt;&#x2F;span&gt;&lt;span&gt;(learning_regular_dir)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;delete_files&lt;&#x2F;span&gt;&lt;span&gt;(learning_regular_dir)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;With the directories in place we can copy all the files into their respective directories as the final part of our dataset setup.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;file &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;sampled_regular_files:
+&lt;&#x2F;span&gt;&lt;span&gt;    shutil.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;copy&lt;&#x2F;span&gt;&lt;span&gt;(file, learning_regular_dir)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;file &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;renaissance_files:
+&lt;&#x2F;span&gt;&lt;span&gt;    shutil.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;copy&lt;&#x2F;span&gt;&lt;span&gt;(file, learning_renaissance_dir)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We can double check things to see if everything went well. First we check if the amount of files in the directories add up.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;files = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_all_image_files&lt;&#x2F;span&gt;&lt;span&gt;(learning_dir)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(files)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This should return 270. We can also check and remove any files that could not be read as image files using the following:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;failed = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;verify_images&lt;&#x2F;span&gt;&lt;span&gt;(files)
+&lt;&#x2F;span&gt;&lt;span&gt;failed.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;map&lt;&#x2F;span&gt;&lt;span&gt;(Path.unlink)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Next we are going to set up a Datablock to get everything ready to run the learners using fast.ai. The categories will be labelled &lt;code&gt;renaissance&lt;&#x2F;code&gt; and &lt;code&gt;regular&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;label_function&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;o&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    parent_name  = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Path&lt;&#x2F;span&gt;&lt;span&gt;(o).parent.name
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;parent_name == &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;renaissance&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;:
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;renaissance&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;regular&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;data_block = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;DataBlock&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;blocks&lt;&#x2F;span&gt;&lt;span&gt;=(ImageBlock, CategoryBlock), 
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_items&lt;&#x2F;span&gt;&lt;span&gt;=get_all_image_files, 
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;splitter&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RandomSplitter&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;valid_pct&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.2&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;seed&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;),
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_y&lt;&#x2F;span&gt;&lt;span&gt;=label_function,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;item_tfms&lt;&#x2F;span&gt;&lt;span&gt;=[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RandomResizedCrop&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;128&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min_scale&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.3&lt;&#x2F;span&gt;&lt;span&gt;)]
+&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;dls = data_block.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;dataloaders&lt;&#x2F;span&gt;&lt;span&gt;(learning_dir)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We can check our datablock setup by showing a batch of images and their labels from it.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt; dls.show_batch(max_n=8)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=batch.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;A batch of the datablock showing examples of the image dataset with their labels.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;The above code will return a batch such as this, if all went well.&lt;&#x2F;p&gt;
+&lt;p&gt;Now that we have the datablock set up we can do the learning. We are going to use the resnet34 model as a base with 5 iterations of fine tuning.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;learn = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;vision_learner&lt;&#x2F;span&gt;&lt;span&gt;(dls, resnet34, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;metrics&lt;&#x2F;span&gt;&lt;span&gt;=error_rate)
+&lt;&#x2F;span&gt;&lt;span&gt;learn.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;fine_tune&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;After 5 iterations, this particular model got a 0.486287 loss on the training set, a 0.595300 loss on the validation set and an error rate of 0.203704.&lt;&#x2F;p&gt;
+&lt;p&gt;So how does the model actually do in practice? One interesting way to evaluate it is to generate a few photos in a renaissance art style, with the nice AI image generation tools available. I have generated a few photos using &lt;a href=&quot;https:&#x2F;&#x2F;www.mage.space&#x2F;&quot;&gt;mage.space&lt;&#x2F;a&gt; where I aimed for modern objects in a renaissance style, similarly to what might be photographed and posted in the Accidental Renaissance subreddit.&lt;&#x2F;p&gt;
+&lt;p&gt;For a generated photo of a kitchen in renaissance style the model got the right category predicted (i.e.: &amp;quot;renaissance&amp;quot;), with a probability of 0.7438. &lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=featured.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;A photo of a kitchen in renaissance style generated on mage.space.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;A generated photo of a car in a renaissance style got the right category predicted with a probability of 0.8643.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=car.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;A photo of a car in renaissance style generated on mage.space.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;However interestingly enough the trained model has trouble recognizing actual renaissance (or baroque) paintings. The famous picture of the &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;The_Last_Supper_(Leonardo)&quot;&gt;Last Supper&lt;&#x2F;a&gt; by Da Vinci got classified as &amp;quot;regular&amp;quot;, just as &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Judith_Beheading_Holofernes_(Caravaggio)&quot;&gt;Judith Beheading Holofernes&lt;&#x2F;a&gt; by Caravaggio. &lt;&#x2F;p&gt;
+&lt;p&gt;It would be interesting to hypothesize and investigate why this could be the case. Although they might be similar in art style, the paintings and the photos in the subreddit as well as the generated photos might differ in other aspects, such as the subject matter. The learning process is likely needing additional data, as 135 photos might be too low for a well fine tuned model. We could for example use exiting renaissance or baroque art to bolster the dataset. We could also investigate data augmentation to improve the training set.&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Dunes</title>
 		<published>2022-09-18T00:00:00+00:00</published>
 		<updated>2022-09-18T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/post/dunes/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/post/dunes/" type="text/html"/>
 		<id>https://www.newresalhaider.com/post/dunes/</id>
 		<content type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;stability.ai&#x2F;blog&#x2F;stable-diffusion-public-release&quot;&gt;Stable Diffusion&lt;&#x2F;a&gt; is one of the latest models that is capable of translating a piece of text, such as &amp;quot;arid, desert dunes&amp;quot; into great looking images. Unlike some other tools and models, Stable Diffusion can be installed and run locally on a desktop machine (see this &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;lstein&#x2F;stable-diffusion&quot;&gt;repo and instructions&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
 &lt;p&gt;One of the great features of the Stable Diffusion model is the ability to combine a text input with a pre-existing image to generate new images. In this article I aim to dive into this feature by starting with a photo of dunes that I took a while back. I will use descriptions based on sci-fi worlds with dunes, notably &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Arrakis&quot;&gt;Arrakis from Dune&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Tatooine&quot;&gt;Tatooine from Star Wars&lt;&#x2F;a&gt;, to create images from the original photo that look like as if they were from these worlds.&lt;&#x2F;p&gt;
@@ -91,7 +244,7 @@
 		<title>Star Wars Trek</title>
 		<published>2022-08-26T00:00:00+00:00</published>
 		<updated>2022-08-27T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/post/star-wars-trek/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/post/star-wars-trek/" type="text/html"/>
 		<id>https://www.newresalhaider.com/post/star-wars-trek/</id>
 		<content type="html">&lt;p&gt;Recently I started to do the latest version of the course &lt;a href=&quot;https:&#x2F;&#x2F;course.fast.ai&#x2F;&quot;&gt;Practical Deep Learning for Coders&lt;&#x2F;a&gt; from &lt;a href=&quot;https:&#x2F;&#x2F;www.fast.ai&#x2F;&quot;&gt;fast.ai&lt;&#x2F;a&gt;. I am very much enjoying the hands-on approach of the course and it is quite amazing to see how a deep learning based image classifier could be built with very little code. In the &lt;a href=&quot;https:&#x2F;&#x2F;course.fast.ai&#x2F;Lessons&#x2F;lesson1.html&quot;&gt;first chapter of the book that accompanies the course&lt;&#x2F;a&gt; a model is trained to recognize whether an image depicts a bird or a forest. In this article, as an exercise, I will instead create a model that can recognize if an image of a spaceship is from Star Wars or from Star Trek.&lt;&#x2F;p&gt;
 &lt;figure class=centeredfig&gt;

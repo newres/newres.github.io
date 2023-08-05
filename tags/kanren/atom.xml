@@ -10,7 +10,7 @@
 		<title>Darmok in core.logic</title>
 		<published>2020-02-02T00:00:00+00:00</published>
 		<updated>2019-02-02T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/post/darmok-core-logic/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/post/darmok-core-logic/" type="text/html"/>
 		<id>https://www.newresalhaider.com/post/darmok-core-logic/</id>
 		<content type="html">&lt;p&gt;One of the greatest Star Trek episodes is titled &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Darmok&quot;&gt;Darmok&lt;&#x2F;a&gt; in &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Star_Trek:_The_Next_Generation&quot;&gt;Star Trek: The Next Generation&lt;&#x2F;a&gt;.  It has the hallmarks of a great Star Trek: TNG episode: a first contact between two civilizations and a dilemma that is not solved by violence but by thinking and understanding.&lt;&#x2F;p&gt;
 &lt;p&gt;One of the nicest logic programming languages is &lt;a href=&quot;http:&#x2F;&#x2F;minikanren.org&#x2F;&quot;&gt;miniKanren&lt;&#x2F;a&gt;. This is due to the fact that it is a small, relatively easy to understand &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Logic_programming&quot;&gt;Logic Programming (LP)&lt;&#x2F;a&gt; language and has implementations in many programming languages. This later feature allows for logic programming features to be used in many different environments, as a logic programming &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Domain-specific_language&quot;&gt;Domain-Specific language (DSL)&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;

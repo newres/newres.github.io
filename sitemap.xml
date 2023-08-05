@@ -22,6 +22,13 @@
         <loc>https://www.newresalhaider.com/post/2022/</loc>
     </url>
     <url>
+        <loc>https://www.newresalhaider.com/post/2023/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/accidentalren/</loc>
+        <lastmod>2022-08-03</lastmod>
+    </url>
+    <url>
         <loc>https://www.newresalhaider.com/post/aesopica-1/</loc>
         <lastmod>2018-09-10</lastmod>
     </url>
@@ -152,6 +159,10 @@
         <lastmod>2011-09-27</lastmod>
     </url>
     <url>
+        <loc>https://www.newresalhaider.com/publication/linked-data-adcr/</loc>
+        <lastmod>2023-06-23</lastmod>
+    </url>
+    <url>
         <loc>https://www.newresalhaider.com/publication/medical-data-semantic/</loc>
         <lastmod>2014-10-27</lastmod>
     </url>
@@ -162,9 +173,6 @@
     <url>
         <loc>https://www.newresalhaider.com/publication/towards-cdss-mobile/</loc>
         <lastmod>2014-06-18</lastmod>
-    </url>
-    <url>
-        <loc>https://www.newresalhaider.com/series/</loc>
     </url>
     <url>
         <loc>https://www.newresalhaider.com/tags/</loc>

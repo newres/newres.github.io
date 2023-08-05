@@ -10,7 +10,7 @@
 		<title>The Probable Mystery Machine</title>
 		<published>2019-12-06T00:00:00+00:00</published>
 		<updated>2019-12-06T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/post/probable-mystery-machine/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/post/probable-mystery-machine/" type="text/html"/>
 		<id>https://www.newresalhaider.com/post/probable-mystery-machine/</id>
 		<content type="html">&lt;p&gt;Scooby Doo is mystery horror cartoon series in which a group of teenagers named Fred, Daphne, Velma and Shaggy alongside the titular Great Dane named Scooby-Doo, ride around in their van named &amp;quot;The Mystery Machine&amp;quot; solving mysteries. The episodes of the show generally follow a set structure. First their van tends to break down near a place apparently haunted by a ghost or another supernatural creature. They would offer to solve the mystery behind the existence of the monster and start looking for clues. The monster tries to scare them away while they find various pieces of evidence relating to it, all pointing to the fact that the monster is not real. At a certain point the creature starts to chase them until they can trap or otherwise incapacitate it. Finally they figure out that the monster is person in a costume who put the mystery in place to scare people away for some (financial) reason, and who would have gotten away with it &amp;quot;if not for them meddling kids&amp;quot;.&lt;&#x2F;p&gt;
 &lt;p&gt;While having a van named The Mystery Machine can help solving mysteries, we can turn our computer into a mystery solving machine as well. We can represent possible stories in a Scooby Doo episode using some logical facts (e.g. a each adventure has a monster in it) as well as probabilities (e.g. there is a 40% chance a monster will be a ghost). In particular, we can use a probabilistic logic programming language, namely &lt;a href=&quot;https:&#x2F;&#x2F;dtai.cs.kuleuven.be&#x2F;problog&#x2F;&quot;&gt;ProbLog&lt;&#x2F;a&gt; to guide us through a scenario of a Scooby Doo story.&lt;&#x2F;p&gt;
@@ -100,7 +100,7 @@
 		<title>Prolog and the Price of Peace</title>
 		<published>2019-02-01T00:00:00+00:00</published>
 		<updated>2019-02-04T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/post/prolog-price-of-peace/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/post/prolog-price-of-peace/" type="text/html"/>
 		<id>https://www.newresalhaider.com/post/prolog-price-of-peace/</id>
 		<content type="html">&lt;p&gt;The use of logic is a common element in Science Fiction. In the Star Trek universe &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Vulcan_(Star_Trek)&quot;&gt;Vulcans&lt;&#x2F;a&gt; are a species that is famously known for aiming to live by logic and reason. Because of this they are often considered masters of these subjects. Yet there was a case in an episode of the Star Trek show &lt;a href=&quot;http:&#x2F;&#x2F;memory-alpha.wikia.com&#x2F;wiki&#x2F;The_Maquis,_Part_II_(episode)&quot;&gt;Deep Space 9&lt;&#x2F;a&gt;, where &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Quark_(Star_Trek)&quot;&gt;Quark&lt;&#x2F;a&gt;, a &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Ferengi&quot;&gt;Ferengi&lt;&#x2F;a&gt;, was able to convince Sakonna, a Vulcan, of the error of her logic and reasoning. &lt;&#x2F;p&gt;
 &lt;p&gt;For this Quark made use of Ferengi philosophy, namely the Third Rule of Acquisition. The Rules of Acquisition are a series of proverbs and guidelines that govern Ferengi society, and notably their business dealings that take a prominent place in their lives. The Third Rule of Acquisition states that &amp;quot;Never spend more for an acquisition than you have to.&amp;quot; By applying this rule to the situation in the episode Quark was able make it clear to Sakonna that the best time broker a peace agreement would be &amp;quot;right now&amp;quot;, as the price of peace is at an all time low. &lt;&#x2F;p&gt;
@@ -219,7 +219,7 @@
 		<title>The Art of Choosing a Programming Language</title>
 		<published>2018-03-18T00:00:00+00:00</published>
 		<updated>2018-03-18T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/post/art-of-choosing-language/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/post/art-of-choosing-language/" type="text/html"/>
 		<id>https://www.newresalhaider.com/post/art-of-choosing-language/</id>
 		<content type="html">&lt;p&gt;Programmers, like professionals in other fields, are passionate about their tools. One of the main elements in the toolbox of coders are programming languages. They allow their users to express solutions through code to tackle a large variety of problems in many domains. &lt;&#x2F;p&gt;
 &lt;p&gt;Programming is also an art, as described in the article by Donald Knuth titled &lt;a href=&quot;http:&#x2F;&#x2F;www.paulgraham.com&#x2F;knuth.html&quot;&gt;Computer Programming as an Art&lt;&#x2F;a&gt; and in certain aspects of programming languages can be seen as art styles.&lt;&#x2F;p&gt;

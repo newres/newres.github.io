@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Newres Al Haider</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+  <link href="https:&#x2F;&#x2F;www.newresalhaider.com/style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.newresalhaider.com/scripts/menu.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@newresa">
+<meta name="twitter:creator" content="@newresa">
+
+
+<meta name="twitter:title" content="Accidental Renaissance">
+<meta name="title" property="og:title" content="Accidental Renaissance" />
+
+
+<meta name="twitter:description" content="Building an image classifier that can recognize whether a photo looks like Renaissance (or Baroque, Romanticist, etc) art, similar to those that could be found in the the Accidental Renaissance subreddit.
+">
+<meta name="description" property="og:description" content="Building an image classifier that can recognize whether a photo looks like Renaissance (or Baroque, Romanticist, etc) art, similar to those that could be found in the the Accidental Renaissance subreddit.
+" />
+
+
+<meta name="author" content="Newres Al Haider" />
+<meta property="article:author" content="Newres Al Haider">
+<meta property="og:type" content="article" />
+
+<meta property="article:published_time" content="2023-08-03">
+
+
+    
+        <meta property="article:tag" content="fast.ai">
+    
+        <meta property="article:tag" content="Deep Learning">
+    
+        <meta property="article:tag" content="Machine Learning">
+    
+        <meta property="article:tag" content="Classifier">
+    
+
+
+    <meta property="article:modified_time" content="2022-08-03">
+
+
+
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/accidentalren/featured.png">
+<meta property="og:image" content="https://www.newresalhaider.com/post/accidentalren/featured.png" />
+
+
+</head>
+
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="title is-3">
+                Newres Al Haider
+            </h1>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="NavbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="NavbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/">
+                <h2 class="subtitle is-5">
+                    Home
+                </h2>
+            </a>
+            <a class="navbar-item" href="/post/">
+                <h2 class="subtitle is-5">
+                    Posts
+                </h2>
+            </a>
+            <a class="navbar-item" href="/project/">
+                <h2 class="subtitle is-5">
+                    Projects
+                </h2>
+            </a>
+            <a class="navbar-item" href="/publication/">
+                <h2 class="subtitle is-5">
+                    Publications
+                </h2>
+            </a>
+        </div>
+    </div>
+</nav>
+  <section class="section">
+    <div class="container">
+      
+
+<h1 class="title">
+    Accidental Renaissance
+</h1>
+<p class="subtitle"><strong>2023-08-03</strong></p>
+<p>One interesting place to look for nice photographs is the <a href="https://www.reddit.com/r/AccidentalRenaissance/">Accidental Renaissance subreddit</a>. It is a forum where photographs that resemble Renaissance art, or other art movements that existed between the 14th and 19th centuries, are shared.</p>
+<p>A related question is how to decide on what counts as Renaissance (or Baroque, Romanticist, etc) art for the photographs that would fall under the Accidental Renaissance subreddit. This is especially for people with no in-depth knowledge on art movements. With the great results that deep learning based image classifiers can achieve and how easy it is using libraries such as <a href="https://www.fast.ai/">fast.ai</a> to implement them, I thought it would be a good idea to create a solution for this question. In this article I aim to build a model that given a photo can decide whether a photograph could belong in the Accidental Renaissance subreddit.</p>
+<p>We are going to use two sources of data for this purpose. One is a collection of photos from the Accidental Renaissance subreddit, from which we can learn what makes for a good &quot;Accidental Renaissance&quot; photo. The other is a group of photos that are likely to be not accidental renaissance. For this we will use the following <a href="https://www.kaggle.com/datasets/duttadebadri/image-classification">image data set from Kaggle</a>. This dataset contains images categorized into the following groups: Architecture, Arts and Culture, Food and Drinks and Travel and Adventure.</p>
+<p>With these two datasets we can start to create the classifier using <a href="https://www.fast.ai/">fast.ai</a>. </p>
+<p>First part is importing the required dependencies.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">import </span><span>fastai
+</span><span style="color:#b48ead;">from </span><span>fastai.vision.all </span><span style="color:#b48ead;">import </span><span style="color:#d08770;">*
+</span><span style="color:#b48ead;">from </span><span>random </span><span style="color:#b48ead;">import </span><span>sample
+</span><span style="color:#b48ead;">from </span><span>ipywidgets </span><span style="color:#b48ead;">import </span><span>interact
+</span><span style="color:#b48ead;">import </span><span>torch
+</span></code></pre>
+<p>Next we define the paths for the images in the datasets.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>all_path = &quot;</span><span style="color:#a3be8c;">/mnt/c/data/accidental/</span><span>&quot;
+</span><span>renaissance_path = &quot;</span><span style="color:#a3be8c;">/mnt/c/data/accidental/renaissance</span><span>&quot;
+</span><span>architecture_path = &quot;</span><span style="color:#a3be8c;">/mnt/c/data/accidental/architecture</span><span>&quot;
+</span><span>art_and_culture_path = &quot;</span><span style="color:#a3be8c;">/mnt/c/data/accidental/artandculture</span><span>&quot;
+</span><span>food_and_drinks_path = &quot;</span><span style="color:#a3be8c;">/mnt/c/data/accidental/foodanddrinks</span><span>&quot;
+</span><span>travel_and_adventure_path = &quot;</span><span style="color:#a3be8c;">/mnt/c/data/accidental/travelandadventure</span><span>&quot;
+</span></code></pre>
+<p>While fast.ai has a function to gather all the image files from a directory, the version used for this experiment did not gather image files with the .webp extension. As many image files from Accidental Renaissance subreddit have a .webp extension, we will create a custom function to get all images files, including those of this type. </p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">get_all_image_files</span><span>(</span><span style="color:#bf616a;">path</span><span>, </span><span style="color:#bf616a;">recurse</span><span>=</span><span style="color:#d08770;">True</span><span>, </span><span style="color:#bf616a;">folders</span><span>=</span><span style="color:#d08770;">None</span><span>):
+</span><span>    &quot;</span><span style="color:#a3be8c;">Get image files in `path` recursively, only in `folders`, if specified.</span><span>&quot;
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">get_files</span><span>(path, </span><span style="color:#bf616a;">extensions</span><span>=[&quot;</span><span style="color:#a3be8c;">.webp</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">.jpeg</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">.gif</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">.jpg</span><span>&quot;], </span><span style="color:#bf616a;">recurse</span><span>=recurse, </span><span style="color:#bf616a;">folders</span><span>=folders)
+</span></code></pre>
+<p>The files of each category can be retrieved using the above function and the relevant paths.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>renaissance_files = </span><span style="color:#bf616a;">get_all_image_files</span><span>(renaissance_path)
+</span><span>architecture_files = </span><span style="color:#bf616a;">get_all_image_files</span><span>(architecture_path)
+</span><span>art_and_culture_files = </span><span style="color:#bf616a;">get_all_image_files</span><span>(art_and_culture_path)
+</span><span>food_and_drinks_files = </span><span style="color:#bf616a;">get_all_image_files</span><span>(food_and_drinks_path)
+</span><span>travel_and_adventure_files = </span><span style="color:#bf616a;">get_all_image_files</span><span>(travel_and_adventure_path)
+</span></code></pre>
+<p>Now that we have the list of files, it would be great to see how many of each type we have in the dataset.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>{&quot;</span><span style="color:#a3be8c;">Renaissance files</span><span>&quot;: </span><span style="color:#96b5b4;">len</span><span>(renaissance_files), 
+</span><span> &quot;</span><span style="color:#a3be8c;">Architecture files</span><span>&quot;: </span><span style="color:#96b5b4;">len</span><span>(architecture_files),
+</span><span> &quot;</span><span style="color:#a3be8c;">Arts and Culture files</span><span>&quot;: </span><span style="color:#96b5b4;">len</span><span>(art_and_culture_files),
+</span><span> &quot;</span><span style="color:#a3be8c;">Food and Drinks files</span><span>&quot;: </span><span style="color:#96b5b4;">len</span><span>(food_and_drinks_files),
+</span><span> &quot;</span><span style="color:#a3be8c;">Travel and Adventure files</span><span>&quot;: </span><span style="color:#96b5b4;">len</span><span>(travel_and_adventure_files)
+</span><span> }
+</span></code></pre>
+<p>The above code will give use the following result: </p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>{&#39;</span><span style="color:#a3be8c;">Renaissance files</span><span>&#39;: </span><span style="color:#d08770;">135</span><span>,
+</span><span> &#39;</span><span style="color:#a3be8c;">Architecture files</span><span>&#39;: </span><span style="color:#d08770;">8763</span><span>,
+</span><span> &#39;</span><span style="color:#a3be8c;">Arts and Culture files</span><span>&#39;: </span><span style="color:#d08770;">8531</span><span>,
+</span><span> &#39;</span><span style="color:#a3be8c;">Food and Drinks files</span><span>&#39;: </span><span style="color:#d08770;">7849</span><span>,
+</span><span> &#39;</span><span style="color:#a3be8c;">Travel and Adventure files</span><span>&#39;: </span><span style="color:#d08770;">8800</span><span>}
+</span></code></pre>
+<p>It seems we have far more images in each category of the Kaggle dataset than those from the Accidental Renaissance subreddit. There are many possible ways to deal with an unbalanced dataset, but here we go for a simple sampling based solution. We create a sampled dataset from the Kaggle dataset that is as large as the image set of the subreddit, that we call our &quot;regular&quot; image set.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>sampled_regular_files = </span><span style="color:#bf616a;">sample</span><span>(architecture_files + art_and_culture_files + food_and_drinks_files + travel_and_adventure_files, </span><span style="color:#d08770;">135</span><span>)
+</span></code></pre>
+<p>Next we set up two directories, one for the renaissance files and one for the regular files respectively. We make sure to create the directories <code>learning/renaissance</code> and <code>learning/regular</code> if they do not yet exist. If they do exist already, the files within them will be deleted (which makes rerunning the experiment easier).</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">delete_files</span><span>(</span><span style="color:#bf616a;">directory</span><span>):
+</span><span>    </span><span style="color:#b48ead;">for </span><span>filename </span><span style="color:#b48ead;">in </span><span>os.</span><span style="color:#bf616a;">listdir</span><span>(directory):
+</span><span>        file_path = os.path.</span><span style="color:#bf616a;">join</span><span>(directory, filename)
+</span><span>        </span><span style="color:#b48ead;">if </span><span>os.path.</span><span style="color:#bf616a;">isfile</span><span>(file_path):
+</span><span>            os.</span><span style="color:#bf616a;">remove</span><span>(file_path)
+</span><span>
+</span><span>learning_dir = &quot;</span><span style="color:#a3be8c;">learning</span><span>&quot;
+</span><span>learning_renaissance_dir = &quot;</span><span style="color:#a3be8c;">learning/renaissance</span><span>&quot;
+</span><span>learning_regular_dir= &quot;</span><span style="color:#a3be8c;">learning/regular</span><span>&quot;
+</span><span style="color:#b48ead;">if </span><span>not os.path.</span><span style="color:#bf616a;">exists</span><span>(learning_renaissance_dir):
+</span><span>    os.</span><span style="color:#bf616a;">makedirs</span><span>(learning_renaissance_dir)
+</span><span style="color:#b48ead;">else</span><span>:
+</span><span>    </span><span style="color:#bf616a;">delete_files</span><span>(learning_renaissance_dir)
+</span><span style="color:#b48ead;">if </span><span>not os.path.</span><span style="color:#bf616a;">exists</span><span>(learning_regular_dir):
+</span><span>    os.</span><span style="color:#bf616a;">makedirs</span><span>(learning_regular_dir)
+</span><span style="color:#b48ead;">else</span><span>:
+</span><span>    </span><span style="color:#bf616a;">delete_files</span><span>(learning_regular_dir)
+</span></code></pre>
+<p>With the directories in place we can copy all the files into their respective directories as the final part of our dataset setup.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">for </span><span>file </span><span style="color:#b48ead;">in </span><span>sampled_regular_files:
+</span><span>    shutil.</span><span style="color:#bf616a;">copy</span><span>(file, learning_regular_dir)
+</span><span>
+</span><span style="color:#b48ead;">for </span><span>file </span><span style="color:#b48ead;">in </span><span>renaissance_files:
+</span><span>    shutil.</span><span style="color:#bf616a;">copy</span><span>(file, learning_renaissance_dir)
+</span></code></pre>
+<p>We can double check things to see if everything went well. First we check if the amount of files in the directories add up.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>files = </span><span style="color:#bf616a;">get_all_image_files</span><span>(learning_dir)
+</span><span style="color:#96b5b4;">len</span><span>(files)
+</span></code></pre>
+<p>This should return 270. We can also check and remove any files that could not be read as image files using the following:</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>failed = </span><span style="color:#bf616a;">verify_images</span><span>(files)
+</span><span>failed.</span><span style="color:#bf616a;">map</span><span>(Path.unlink)
+</span></code></pre>
+<p>Next we are going to set up a Datablock to get everything ready to run the learners using fast.ai. The categories will be labelled <code>renaissance</code> and <code>regular</code>.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">label_function</span><span>(</span><span style="color:#bf616a;">o</span><span>):
+</span><span>    parent_name  = </span><span style="color:#bf616a;">Path</span><span>(o).parent.name
+</span><span>    </span><span style="color:#b48ead;">if </span><span>parent_name == &quot;</span><span style="color:#a3be8c;">renaissance</span><span>&quot;:
+</span><span>            </span><span style="color:#b48ead;">return </span><span>&quot;</span><span style="color:#a3be8c;">renaissance</span><span>&quot;
+</span><span>    </span><span style="color:#b48ead;">else</span><span>:
+</span><span>            </span><span style="color:#b48ead;">return </span><span>&quot;</span><span style="color:#a3be8c;">regular</span><span>&quot;
+</span><span>
+</span><span>data_block = </span><span style="color:#bf616a;">DataBlock</span><span>(
+</span><span>    </span><span style="color:#bf616a;">blocks</span><span>=(ImageBlock, CategoryBlock), 
+</span><span>    </span><span style="color:#bf616a;">get_items</span><span>=get_all_image_files, 
+</span><span>    </span><span style="color:#bf616a;">splitter</span><span>=</span><span style="color:#bf616a;">RandomSplitter</span><span>(</span><span style="color:#bf616a;">valid_pct</span><span>=</span><span style="color:#d08770;">0.2</span><span>, </span><span style="color:#bf616a;">seed</span><span>=</span><span style="color:#d08770;">4</span><span>),
+</span><span>    </span><span style="color:#bf616a;">get_y</span><span>=label_function,
+</span><span>    </span><span style="color:#bf616a;">item_tfms</span><span>=[</span><span style="color:#bf616a;">RandomResizedCrop</span><span>(</span><span style="color:#d08770;">128</span><span>, </span><span style="color:#bf616a;">min_scale</span><span>=</span><span style="color:#d08770;">0.3</span><span>)]
+</span><span>)
+</span><span>
+</span><span>dls = data_block.</span><span style="color:#bf616a;">dataloaders</span><span>(learning_dir)
+</span></code></pre>
+<p>We can check our datablock setup by showing a batch of images and their labels from it.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span> dls.show_batch(max_n=8)
+</span></code></pre>
+<figure class=centeredfig>
+    <img src=batch.png>
+    
+    <figcaption>
+        
+        <h4>A batch of the datablock showing examples of the image dataset with their labels.</h4>
+        
+        
+    </figcaption>
+</figure>
+<p>The above code will return a batch such as this, if all went well.</p>
+<p>Now that we have the datablock set up we can do the learning. We are going to use the resnet34 model as a base with 5 iterations of fine tuning.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>learn = </span><span style="color:#bf616a;">vision_learner</span><span>(dls, resnet34, </span><span style="color:#bf616a;">metrics</span><span>=error_rate)
+</span><span>learn.</span><span style="color:#bf616a;">fine_tune</span><span>(</span><span style="color:#d08770;">5</span><span>)
+</span></code></pre>
+<p>After 5 iterations, this particular model got a 0.486287 loss on the training set, a 0.595300 loss on the validation set and an error rate of 0.203704.</p>
+<p>So how does the model actually do in practice? One interesting way to evaluate it is to generate a few photos in a renaissance art style, with the nice AI image generation tools available. I have generated a few photos using <a href="https://www.mage.space/">mage.space</a> where I aimed for modern objects in a renaissance style, similarly to what might be photographed and posted in the Accidental Renaissance subreddit.</p>
+<p>For a generated photo of a kitchen in renaissance style the model got the right category predicted (i.e.: &quot;renaissance&quot;), with a probability of 0.7438. </p>
+<figure class=centeredfig>
+    <img src=featured.png>
+    
+    <figcaption>
+        
+        <h4>A photo of a kitchen in renaissance style generated on mage.space.</h4>
+        
+        
+    </figcaption>
+</figure>
+<p>A generated photo of a car in a renaissance style got the right category predicted with a probability of 0.8643.</p>
+<figure class=centeredfig>
+    <img src=car.png>
+    
+    <figcaption>
+        
+        <h4>A photo of a car in renaissance style generated on mage.space.</h4>
+        
+        
+    </figcaption>
+</figure>
+<p>However interestingly enough the trained model has trouble recognizing actual renaissance (or baroque) paintings. The famous picture of the <a href="https://en.wikipedia.org/wiki/The_Last_Supper_(Leonardo)">Last Supper</a> by Da Vinci got classified as &quot;regular&quot;, just as <a href="https://en.wikipedia.org/wiki/Judith_Beheading_Holofernes_(Caravaggio)">Judith Beheading Holofernes</a> by Caravaggio. </p>
+<p>It would be interesting to hypothesize and investigate why this could be the case. Although they might be similar in art style, the paintings and the photos in the subreddit as well as the generated photos might differ in other aspects, such as the subject matter. The learning process is likely needing additional data, as 135 photos might be too low for a well fine tuned model. We could for example use exiting renaissance or baroque art to bolster the dataset. We could also investigate data augmentation to improve the training set.</p>
+
+
+    </div>
+  </section>
+</body>
+
+</html>

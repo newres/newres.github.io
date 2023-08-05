@@ -10,7 +10,7 @@
 		<title>Data Oriented Domain Design</title>
 		<published>2022-04-05T00:00:00+00:00</published>
 		<updated>2022-04-05T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/post/dodd/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/post/dodd/" type="text/html"/>
 		<id>https://www.newresalhaider.com/post/dodd/</id>
 		<content type="html">&lt;p&gt;One of the most difficult parts of developing software for a particular task is understanding the (business) domain in which the software needs to operate. This is due to the fact that software engineers often lack the expertise in complex areas such as health, law, finance, etc in which the software they create needs to solve problems. A similar situation holds for domain experts. For example, while lawyers are by definition well versed in the legal domain, it is not necessarily the case that they are also software engineers. This lack of knowledge can make developing software quite difficult. To continue with our legal example, suppose we want to create an application that represents and searches laws. From the software engineers side, the legal terminology can be quite burdensome to understand and it might not be very clear to them what aspects of it would be important for them to implement. On the other hand, it is important to be able to make it understandable to legal experts, without any software engineering knowledge, what the software is doing in relation to the concepts in their domain.&lt;&#x2F;p&gt;
 &lt;p&gt;Various solutions have been proposed for this problem, such as &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Domain-driven_design&quot;&gt;Domain Driven Design&lt;&#x2F;a&gt; and formalizing the domain using &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;standards&#x2F;semanticweb&#x2F;ontology&quot;&gt;Linked Data Ontologies&lt;&#x2F;a&gt;.
@@ -128,7 +128,7 @@ These methodologies can be quite complex, which they need to be in order to capt
 		<title>Prolog and the Price of Peace</title>
 		<published>2019-02-01T00:00:00+00:00</published>
 		<updated>2019-02-04T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/post/prolog-price-of-peace/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/post/prolog-price-of-peace/" type="text/html"/>
 		<id>https://www.newresalhaider.com/post/prolog-price-of-peace/</id>
 		<content type="html">&lt;p&gt;The use of logic is a common element in Science Fiction. In the Star Trek universe &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Vulcan_(Star_Trek)&quot;&gt;Vulcans&lt;&#x2F;a&gt; are a species that is famously known for aiming to live by logic and reason. Because of this they are often considered masters of these subjects. Yet there was a case in an episode of the Star Trek show &lt;a href=&quot;http:&#x2F;&#x2F;memory-alpha.wikia.com&#x2F;wiki&#x2F;The_Maquis,_Part_II_(episode)&quot;&gt;Deep Space 9&lt;&#x2F;a&gt;, where &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Quark_(Star_Trek)&quot;&gt;Quark&lt;&#x2F;a&gt;, a &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Ferengi&quot;&gt;Ferengi&lt;&#x2F;a&gt;, was able to convince Sakonna, a Vulcan, of the error of her logic and reasoning. &lt;&#x2F;p&gt;
 &lt;p&gt;For this Quark made use of Ferengi philosophy, namely the Third Rule of Acquisition. The Rules of Acquisition are a series of proverbs and guidelines that govern Ferengi society, and notably their business dealings that take a prominent place in their lives. The Third Rule of Acquisition states that &amp;quot;Never spend more for an acquisition than you have to.&amp;quot; By applying this rule to the situation in the episode Quark was able make it clear to Sakonna that the best time broker a peace agreement would be &amp;quot;right now&amp;quot;, as the price of peace is at an all time low. &lt;&#x2F;p&gt;
@@ -247,7 +247,7 @@ These methodologies can be quite complex, which they need to be in order to capt
 		<title>Excavating a Common Treasure</title>
 		<published>2018-06-30T00:00:00+00:00</published>
 		<updated>2018-06-30T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/post/common-treasure/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/post/common-treasure/" type="text/html"/>
 		<id>https://www.newresalhaider.com/post/common-treasure/</id>
 		<content type="html">&lt;p&gt;History is full of legends of ancient treasures and powerful artifacts, lost to time or hidden by purpose, that would bring glory, power and riches to their discoverer.&lt;&#x2F;p&gt;
 &lt;figure class=centeredfig&gt;
@@ -458,7 +458,7 @@ These methodologies can be quite complex, which they need to be in order to capt
 		<title>Legal Regulatory Compliance Within The Financial Domain.</title>
 		<published>2017-12-31T00:00:00+00:00</published>
 		<updated>2017-12-31T00:00:00+00:00</updated>
-		<link rel="alternate" href="https://www.newresalhaider.com/project/legal-banking-compliance/" type="text/html"/>
+		<link href="https://www.newresalhaider.com/project/legal-banking-compliance/" type="text/html"/>
 		<id>https://www.newresalhaider.com/project/legal-banking-compliance/</id>
 		<content type="html">&lt;p&gt;Regulatory compliance is the goal of an organization to ensure it complies with all the relevant policies, regulations and laws. Failure to comply can have grave consequences for an organization, with huge fines and penalties being imposed. Regulatory pressure has been increasing over the years, with new and more complex regulation being enacted. This is especially true for the financial sector, where in the wake of the financial crisis, new policies and laws where enacted, both internal and external, to prevent a similar crisis happening in the future.&lt;&#x2F;p&gt;
 &lt;p&gt;These new and changing policies and laws give a huge challenge for financial organizations. These issues get compounded by fact that in a global world, internal, national and international regulations create an interwoven set of rules that need to be interpreted and applied on various financial products and services. Ensuring this compliance, is a time and expertise intensive task that often needs to be done manually. Automating these tasks is a huge challenge due to the fact that more traditional techniques are often ill equipped to tackle such an ever changing and complex domain in a way that is transparent to the domain experts and regulators.&lt;&#x2F;p&gt;
