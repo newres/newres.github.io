@@ -41,7 +41,7 @@
     
 
 
-    <meta property="article:modified_time" content="2022-08-03">
+    <meta property="article:modified_time" content="2022-10-14">
 
 
 
@@ -102,6 +102,16 @@
 </h1>
 <p class="subtitle"><strong>2023-08-03</strong></p>
 <p>One interesting place to look for nice photographs is the <a href="https://www.reddit.com/r/AccidentalRenaissance/">Accidental Renaissance subreddit</a>. It is a forum where photographs that resemble Renaissance art, or other art movements that existed between the 14th and 19th centuries, are shared.</p>
+<figure class=centeredfig>
+    <img src=featured.png>
+    
+    <figcaption>
+        
+        <h4>A generated photo of a kitchen in renaissance style.</h4>
+        
+        
+    </figcaption>
+</figure>
 <p>A related question is how to decide on what counts as Renaissance (or Baroque, Romanticist, etc) art for the photographs that would fall under the Accidental Renaissance subreddit. This is especially for people with no in-depth knowledge on art movements. With the great results that deep learning based image classifiers can achieve and how easy it is using libraries such as <a href="https://www.fast.ai/">fast.ai</a> to implement them, I thought it would be a good idea to create a solution for this question. In this article I aim to build a model that given a photo can decide whether a photograph could belong in the Accidental Renaissance subreddit.</p>
 <p>We are going to use two sources of data for this purpose. One is a collection of photos from the Accidental Renaissance subreddit, from which we can learn what makes for a good &quot;Accidental Renaissance&quot; photo. The other is a group of photos that are likely to be not accidental renaissance. For this we will use the following <a href="https://www.kaggle.com/datasets/duttadebadri/image-classification">image data set from Kaggle</a>. This dataset contains images categorized into the following groups: Architecture, Arts and Culture, Food and Drinks and Travel and Adventure.</p>
 <p>With these two datasets we can start to create the classifier using <a href="https://www.fast.ai/">fast.ai</a>. </p>
