@@ -4,26 +4,26 @@
 	<link href="https://www.newresalhaider.com/tags/machine-learning/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://www.newresalhaider.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2023-08-03T00:00:00+00:00</updated>
+	<updated>2023-10-14T00:00:00+00:00</updated>
 	<id>https://www.newresalhaider.com/tags/machine-learning/atom.xml</id>
 	<entry xml:lang="en">
 		<title>Accidental Renaissance</title>
-		<published>2023-08-03T00:00:00+00:00</published>
-		<updated>2022-10-14T00:00:00+00:00</updated>
+		<published>2023-10-14T00:00:00+00:00</published>
+		<updated>2023-10-14T00:00:00+00:00</updated>
 		<link href="https://www.newresalhaider.com/post/accidentalren/" type="text/html"/>
 		<id>https://www.newresalhaider.com/post/accidentalren/</id>
 		<content type="html">&lt;p&gt;One interesting place to look for nice photographs is the &lt;a href=&quot;https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;AccidentalRenaissance&#x2F;&quot;&gt;Accidental Renaissance subreddit&lt;&#x2F;a&gt;. It is a forum where photographs that resemble Renaissance art, or other art movements that existed between the 14th and 19th centuries, are shared.&lt;&#x2F;p&gt;
 &lt;figure class=centeredfig&gt;
-    &lt;img src=featured.png&gt;
+    &lt;img src=featuredcard.png&gt;
     
     &lt;figcaption&gt;
         
-        &lt;h4&gt;A generated photo of a kitchen in renaissance style.&lt;&#x2F;h4&gt;
+        &lt;h4&gt;Photo of part of a kitchen in renaissance style, generated using mage.space.&lt;&#x2F;h4&gt;
         
         
     &lt;&#x2F;figcaption&gt;
 &lt;&#x2F;figure&gt;
-&lt;p&gt;A related question is how to decide on what counts as Renaissance (or Baroque, Romanticist, etc) art for the photographs that would fall under the Accidental Renaissance subreddit. This is especially for people with no in-depth knowledge on art movements. With the great results that deep learning based image classifiers can achieve and how easy it is using libraries such as &lt;a href=&quot;https:&#x2F;&#x2F;www.fast.ai&#x2F;&quot;&gt;fast.ai&lt;&#x2F;a&gt; to implement them, I thought it would be a good idea to create a solution for this question. In this article I aim to build a model that given a photo can decide whether a photograph could belong in the Accidental Renaissance subreddit.&lt;&#x2F;p&gt;
+&lt;p&gt;A related question is how to decide on what counts as Renaissance (or Baroque, Romanticist, etc) art for the photographs that would fall under the Accidental Renaissance subreddit. This is especially true for people with no in-depth knowledge on art movements. With the great results that deep learning based image classifiers can achieve and how easy it is using libraries such as &lt;a href=&quot;https:&#x2F;&#x2F;www.fast.ai&#x2F;&quot;&gt;fast.ai&lt;&#x2F;a&gt; to implement them, I thought it would be a good idea to create a solution for this question. In this article I aim to build a model that given a photo can decide whether a photograph could belong in the Accidental Renaissance subreddit.&lt;&#x2F;p&gt;
 &lt;p&gt;We are going to use two sources of data for this purpose. One is a collection of photos from the Accidental Renaissance subreddit, from which we can learn what makes for a good &amp;quot;Accidental Renaissance&amp;quot; photo. The other is a group of photos that are likely to be not accidental renaissance. For this we will use the following &lt;a href=&quot;https:&#x2F;&#x2F;www.kaggle.com&#x2F;datasets&#x2F;duttadebadri&#x2F;image-classification&quot;&gt;image data set from Kaggle&lt;&#x2F;a&gt;. This dataset contains images categorized into the following groups: Architecture, Arts and Culture, Food and Drinks and Travel and Adventure.&lt;&#x2F;p&gt;
 &lt;p&gt;With these two datasets we can start to create the classifier using &lt;a href=&quot;https:&#x2F;&#x2F;www.fast.ai&#x2F;&quot;&gt;fast.ai&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
 &lt;p&gt;First part is importing the required dependencies.&lt;&#x2F;p&gt;
