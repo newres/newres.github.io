@@ -4,8 +4,43 @@
 	<link href="https://www.newresalhaider.com/tags/ai/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://www.newresalhaider.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2020-02-02T00:00:00+00:00</updated>
+	<updated>2023-12-10T00:00:00+00:00</updated>
 	<id>https://www.newresalhaider.com/tags/ai/atom.xml</id>
+	<entry xml:lang="en">
+		<title>AI at Home</title>
+		<published>2023-12-10T00:00:00+00:00</published>
+		<updated>2023-12-10T00:00:00+00:00</updated>
+		<link href="https://www.newresalhaider.com/post/aiathome/" type="text/html"/>
+		<id>https://www.newresalhaider.com/post/aiathome/</id>
+		<content type="html">&lt;p&gt;Large Language Models (LLMs), such as those that enable Chat-GPT, have been shown to incredibly capable for language understanding and generation tasks. With the right prompt, they can answer questions, categorize input, can rewrite pieces of text, perform sentiment analysis and more. &lt;&#x2F;p&gt;
+&lt;p&gt;As good as these tools are, many of them require data to be sent to a remote server and&#x2F;or take some additional costs to run due the processing power required and the proprietary nature of these models. However there exist models that can be run locally, even on relatively modest hardware, such as some of the &lt;a href=&quot;https:&#x2F;&#x2F;ai.meta.com&#x2F;llama&#x2F;&quot;&gt;LLaMA&lt;&#x2F;a&gt; models from Meta. Such locally runnable models can enable such a modern AI setups fully running at home without the need for remote connections. This article is a brief introduction on how to get one these models up and running.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=aiathome.jpg&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;A generated picture of an AI helping at home.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;The easiest solution that I have found so for for this purpose is &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;oobabooga&#x2F;text-generation-webui&quot;&gt;text-generation-webui&lt;&#x2F;a&gt;. As the name suggests it enables the use of  language models by a web based UI and it can do so fully on just a local machine. The setup is very straightforward: clone or download the repository, run the right script for the Operating System and you are generally good to get started.&lt;&#x2F;p&gt;
+&lt;p&gt;This tool can use various models, but a nice one to get started is &lt;a href=&quot;https:&#x2F;&#x2F;huggingface.co&#x2F;TheBloke&#x2F;Llama-2-7B-GGUF&quot;&gt;Llama-2-7B-GGUF model provided by TheBloke&lt;&#x2F;a&gt;, which is a 7 billion parameter LLaMa2 model. After loading it, we can simply start chatting.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=aiconversation.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;A short conversation with the AI model.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;Although this model is on the smaller side it runs very adequately on a 2021 model Asus G14 laptop can function for simple queries and conversations.&lt;&#x2F;p&gt;
+&lt;p&gt;There can be a lot of possibilities to explore with such a local setup, such as utilizing the models through an AI. Especially with larger more capable models, one can explore use cases that would be hard to do due to the sensitive nature of the prompts and&#x2F;or the costs involved in running models remotely.&lt;&#x2F;p&gt;
+&lt;p&gt;I hope this article can help you get you started in exploring your AI use cases locally!&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Darmok in core.logic</title>
 		<published>2020-02-02T00:00:00+00:00</published>
