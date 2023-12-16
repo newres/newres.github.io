@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - Aesopica</title>
-	<link href="https://www.newresalhaider.com/tags/aesopica/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2019-10-06T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/aesopica/atom.xml</id>
-	<entry xml:lang="en">
-		<title>Aesopica, Part 5: Blank Nodes</title>
-		<published>2019-06-08T00:00:00+00:00</published>
-		<updated>2019-10-06T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/aesopica-5/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/aesopica-5/</id>
-		<content type="html">&lt;p&gt;This article is the fifth part of a series, examining the use of the Clojure language for representing Linked Data, using examples from Aesop&#x27;s stories. The topic of this article is to explain the somewhat contentious subject of blank nodes. &lt;&#x2F;p&gt;
+    <title> - Aesopica</title>
+    <link href="https://www.newresalhaider.com/tags/aesopica/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2019-10-06T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/aesopica/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Aesopica, Part 5: Blank Nodes</title>
+        <published>2019-06-08T00:00:00+00:00</published>
+        <updated>2019-10-06T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/aesopica-5/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/aesopica-5/</id>
+        
+        <content type="html">&lt;p&gt;This article is the fifth part of a series, examining the use of the Clojure language for representing Linked Data, using examples from Aesop&#x27;s stories. The topic of this article is to explain the somewhat contentious subject of blank nodes. &lt;&#x2F;p&gt;
 &lt;p&gt;One of the strengths of &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;RDF&#x2F;&quot;&gt;RDF&lt;&#x2F;a&gt; as a graph representation format is the way resources are named. Through the use of &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Uniform_Resource_Identifier&quot;&gt;Uniform Resource Identifiers (URIs)&lt;&#x2F;a&gt; every element of the graph can be uniquely identified. With such generic and powerful facilities for naming it can easily represent information in any domain. For example on &lt;a href=&quot;https:&#x2F;&#x2F;schema.org&#x2F;&quot;&gt;schema.org&lt;&#x2F;a&gt; elements have been defined for the notion of a &lt;a href=&quot;http:&#x2F;&#x2F;schema.org&#x2F;MedicalCondition&quot;&gt;medical condition (http:&#x2F;&#x2F;schema.org&#x2F;MedicalCondition)&lt;&#x2F;a&gt;, &lt;a href=&quot;http:&#x2F;&#x2F;schema.org&#x2F;employee&quot;&gt;employee (http:&#x2F;&#x2F;schema.org&#x2F;employee)&lt;&#x2F;a&gt; and &lt;a href=&quot;http:&#x2F;&#x2F;schema.org&#x2F;BankAccount&quot;&gt;bank account (http:&#x2F;&#x2F;schema.org&#x2F;BankAccount)&lt;&#x2F;a&gt;, just to name a few. In particular the namespacing part of the URI, e.g.: http:&#x2F;&#x2F;schema.org&#x2F; for http:&#x2F;&#x2F;schema.org&#x2F;employee , helps to ensure that concepts can be uniquely named, even in scenarios with multiple definitions of the same concept. &lt;&#x2F;p&gt;
 &lt;p&gt;Blank nodes go against this notion of making everything explicitly named. In fact an alternative name for a blank node is &amp;quot;an anonymous resource&amp;quot;&amp;quot;. Instead of giving a resource an explicit name with a URI a placeholder is used. This indicates the existence of the resource, but does not tie it together with a namespaced name. In the Turtle syntax for RDF we can use a label prefixed by &lt;code&gt;_:&lt;&#x2F;code&gt; to indicate a blank node. For example, the following RDF graph states that the fox and the stork both give out an invitation.&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;ttl&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-ttl &quot;&gt;&lt;code class=&quot;language-ttl&quot; data-lang=&quot;ttl&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;@base &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;lt;http:&#x2F;&#x2F;www.newresalhaider.com&#x2F;ontologies&#x2F;aesop&#x2F;foxstork&#x2F;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; .
@@ -53,14 +57,19 @@
 &lt;p&gt;The above is our version of &amp;quot;The Fox and the Stork&amp;quot; story that we previously explored in this series of articles The main difference is that two blank nodes are used:  &lt;code&gt;&#x27;invitation1&lt;&#x2F;code&gt; and &lt;code&gt;&#x27;invitation2&lt;&#x2F;code&gt;, instead of named resources. Perhaps the story teller might want to hide some details of their invitations.&lt;&#x2F;p&gt;
 &lt;p&gt;As with all the previous features in this series of articles, blank nodes been implemented in our implementation of this syntax in the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;aesopica&quot;&gt;Aesopica&lt;&#x2F;a&gt; library for using Clojure to write Linked Data. Hiding details with blank nodes, even in Clojure, is now just one library away.&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Exploring the Deep, Part 1: Introduction</title>
-		<published>2019-02-04T00:00:00+00:00</published>
-		<updated>2019-02-04T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/exploring-the-deep/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/exploring-the-deep/</id>
-		<content type="html">&lt;p&gt;Deep Learning is a field within Artificial Intelligence (AI) that has got quite a lot of attention lately, due to some truly impressive results in recent years. From recognizing objects in images with accuracy that rivals humans, to generating realistic looking texts, to even &lt;a href=&quot;https:&#x2F;&#x2F;deepmind.com&#x2F;blog&#x2F;alphastar-mastering-real-time-strategy-game-starcraft-ii&#x2F;&quot;&gt;beating professional players in Starcraft 2&lt;&#x2F;a&gt;, some truly groundbreaking applications are done with Deep Learning techniques.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Exploring the Deep, Part 1: Introduction</title>
+        <published>2019-02-04T00:00:00+00:00</published>
+        <updated>2019-02-04T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/exploring-the-deep/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/exploring-the-deep/</id>
+        
+        <content type="html">&lt;p&gt;Deep Learning is a field within Artificial Intelligence (AI) that has got quite a lot of attention lately, due to some truly impressive results in recent years. From recognizing objects in images with accuracy that rivals humans, to generating realistic looking texts, to even &lt;a href=&quot;https:&#x2F;&#x2F;deepmind.com&#x2F;blog&#x2F;alphastar-mastering-real-time-strategy-game-starcraft-ii&#x2F;&quot;&gt;beating professional players in Starcraft 2&lt;&#x2F;a&gt;, some truly groundbreaking applications are done with Deep Learning techniques.&lt;&#x2F;p&gt;
 &lt;p&gt;As someone whose AI background is more &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Symbolic_artificial_intelligence&quot;&gt;Symbolic Artifical Intelligence&lt;&#x2F;a&gt;, but is anxious to learn, it is a good time as any to explore this field. Thankfully there are some excellent books and tutorials out there to get a nice start. &lt;&#x2F;p&gt;
 &lt;p&gt;One book that has caught my attention is &lt;a href=&quot;https:&#x2F;&#x2F;d2l.ai&#x2F;index.html&quot;&gt;Dive into Deep Learning&lt;&#x2F;a&gt;, which seems to have a nice overview of the field, while being very practical at the same time. I aim to work through the book and share my notes, summaries and experiences on this journey in a series of articles. My goal is to write these articles for a bit more broader audience than the book itself. I hope that even those with less exposure to the field than me could follow along, and if a topic piques their interest, they can use the book for a more detailed reference point. &lt;&#x2F;p&gt;
 &lt;p&gt;The &lt;a href=&quot;https:&#x2F;&#x2F;d2l.ai&#x2F;chapter_introduction&#x2F;intro.html&quot;&gt;first chapter&lt;&#x2F;a&gt; that I aim to go over is the introduction to the book as well as Machine Learning in general. As Deep Learning (DL), is a form of Machine Learning (ML), an intro&#x2F;refresher on the topic of Machine Learning is a natural start.&lt;&#x2F;p&gt;
@@ -122,14 +131,19 @@
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h2&gt;
 &lt;p&gt;This was a quick rundown of the first chapter. The book actually goes into much more detail, with some previews of techniques and extensive references, for the interested reader. If you have any remarks or suggestions for this series of articles please let me know! I am quite anxious for the next part when I hope to plunge deep into some coding with &lt;a href=&quot;https:&#x2F;&#x2F;mxnet.apache.org&#x2F;&quot;&gt;MXNet&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Aesopica, Part 4: Basic Conversion to Other Formats</title>
-		<published>2018-12-18T00:00:00+00:00</published>
-		<updated>2018-12-18T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/aesopica-4/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/aesopica-4/</id>
-		<content type="html">&lt;p&gt;This article is the fourth part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&#x27;s stories. The topic of this article is to describe how to do some basic conversions from our Clojure representation of Linked Data, to some of the other formats, such as &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;turtle&#x2F;&quot;&gt;Turtle&lt;&#x2F;a&gt;, &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;n-quads&#x2F;&quot;&gt;NQUADS&lt;&#x2F;a&gt; or &lt;a href=&quot;https:&#x2F;&#x2F;json-ld.org&#x2F;&quot;&gt;JSON-LD&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Aesopica, Part 4: Basic Conversion to Other Formats</title>
+        <published>2018-12-18T00:00:00+00:00</published>
+        <updated>2018-12-18T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/aesopica-4/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/aesopica-4/</id>
+        
+        <content type="html">&lt;p&gt;This article is the fourth part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&#x27;s stories. The topic of this article is to describe how to do some basic conversions from our Clojure representation of Linked Data, to some of the other formats, such as &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;turtle&#x2F;&quot;&gt;Turtle&lt;&#x2F;a&gt;, &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;n-quads&#x2F;&quot;&gt;NQUADS&lt;&#x2F;a&gt; or &lt;a href=&quot;https:&#x2F;&#x2F;json-ld.org&#x2F;&quot;&gt;JSON-LD&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
 &lt;p&gt;In previous articles of this series, we created a Clojure based syntax for defining Linked Data. In order to make this syntax a viable member of the Linked Data ecosystem, it is important to provide conversion functionality to other Linked Data formats. This allows for the user of the associated &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;aesopica&quot;&gt;Aesopica&lt;&#x2F;a&gt; library, to create and use Linked Data in a Clojure based environment, and convert it, when needed, to other formats. In order to implement this functionality we made use of Clojure&#x27;s Java interop and the &lt;a href=&quot;https:&#x2F;&#x2F;jena.apache.org&#x2F;&quot;&gt;Apache Jena&lt;&#x2F;a&gt;, and made it available in the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;aesopica&quot;&gt;Aesopica&lt;&#x2F;a&gt; library.&lt;&#x2F;p&gt;
 &lt;p&gt;To start off we begin with the basic example of &amp;quot;The Fox and The Stork&amp;quot; story that we introduced &lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;post&#x2F;aesopica-1&#x2F;&quot;&gt;initially&lt;&#x2F;a&gt;. The Clojure representation of this is as follows:&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;clojure&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-clojure &quot;&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;fox-and-stork-edn
@@ -324,14 +338,19 @@
 &lt;&#x2F;ul&gt;
 &lt;p&gt;As always, the functionality detailed in these articles can be found in the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;aesopica&quot;&gt;Aesopica&lt;&#x2F;a&gt; library for using Clojure to write Linked Data.&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Aesopica, Part 3: Named Graphs</title>
-		<published>2018-12-04T00:00:00+00:00</published>
-		<updated>2018-12-04T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/aesopica-3/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/aesopica-3/</id>
-		<content type="html">&lt;p&gt;This article is the third part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&#x27;s stories. In &lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;post&#x2F;aesopica-1&#x2F;&quot;&gt;part one&lt;&#x2F;a&gt; the basic elements of &amp;quot;The Fox and the Stork&amp;quot; story were formalised as Linked Data in Clojure, while in &lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;post&#x2F;aesopica-2&#x2F;&quot;&gt;part two&lt;&#x2F;a&gt; we investigated how various literal values can be described. In this article we examine how information about facts themselves, such as meta-information, can be described with Linked Data. As always, the functionality detailed in these articles can be found in the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;aesopica&quot;&gt;Aesopica&lt;&#x2F;a&gt; library for using Clojure to write Linked Data.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Aesopica, Part 3: Named Graphs</title>
+        <published>2018-12-04T00:00:00+00:00</published>
+        <updated>2018-12-04T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/aesopica-3/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/aesopica-3/</id>
+        
+        <content type="html">&lt;p&gt;This article is the third part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&#x27;s stories. In &lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;post&#x2F;aesopica-1&#x2F;&quot;&gt;part one&lt;&#x2F;a&gt; the basic elements of &amp;quot;The Fox and the Stork&amp;quot; story were formalised as Linked Data in Clojure, while in &lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;post&#x2F;aesopica-2&#x2F;&quot;&gt;part two&lt;&#x2F;a&gt; we investigated how various literal values can be described. In this article we examine how information about facts themselves, such as meta-information, can be described with Linked Data. As always, the functionality detailed in these articles can be found in the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;aesopica&quot;&gt;Aesopica&lt;&#x2F;a&gt; library for using Clojure to write Linked Data.&lt;&#x2F;p&gt;
 &lt;p&gt;In Linked Data, facts are represented as triples of subjects, predicates and objects. For example, when representing the story of the &amp;quot;The Fox and the Stork&amp;quot; one fact that we want to represent is &amp;quot;The Fox gives an invitation.&amp;quot; In this fact &amp;quot;The Fox&amp;quot; is the subject, the &amp;quot;gives an&amp;quot; is the predicate and &amp;quot;an invitation&amp;quot; is the object. Of course, as we mentioned in our previous articles, one of the strengths of Linked Data is that the elements are more precisely defined than just their natural language representations in a sentence. A Uniform Resource Identifier (&lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;wiki&#x2F;URI&quot;&gt;URI&lt;&#x2F;a&gt;) is used to more formally identify these elements. This would make the previous fact to be written as follows, using the Turtle notation of RDF:&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;ttl&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-ttl &quot;&gt;&lt;code class=&quot;language-ttl&quot; data-lang=&quot;ttl&quot;&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;http:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;&#x2F;&#x2F;www.newresalhaider.com&#x2F;ontologies&#x2F;aesop&#x2F;foxstork&#x2F;fox &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;http:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;&#x2F;&#x2F;www.newresalhaider.com&#x2F;ontologies&#x2F;aesop&#x2F;foxstork&#x2F;gives-invitation &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;http:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;&#x2F;&#x2F;www.newresalhaider.com&#x2F;ontologies&#x2F;aesop&#x2F;foxstork&#x2F;invitation1.
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
@@ -395,14 +414,19 @@
 &lt;p&gt;The main difference between the Clojure representation and NQUADS is that the Clojure representation uses prefixes and NQUADS uses full URIs written out each time. This is a deliberate design choice in syntax from both perspectives. In NQUADS this allows the format to represent each fact on a single line, without the need for a lookup based on context for the full URI of elements. In the Clojure representation the prefixes allow for a much more compact fact representation that makes for easier reading and writing by human users. &lt;&#x2F;p&gt;
 &lt;p&gt;There are a number of other formats for writing Linked Data, some of which support named graphs. &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;trig&#x2F;&quot;&gt;TriG&lt;&#x2F;a&gt; for example is an extension of the Turtle format used in previous articles in this series. &lt;a href=&quot;https:&#x2F;&#x2F;json-ld.org&#x2F;&quot;&gt;JSON-LD&lt;&#x2F;a&gt; is also a very commonly used format for Linked Data that also supports named graphs. With the introduction of the Clojure way of writing Linked Data in this series, it makes sense to enable translating Linked Data into these formats for compatibility and reaching a wider audience. The facts on how to achieve this will be detailed in another article.&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Aesopica, Part 2: Literal Values</title>
-		<published>2018-09-14T00:00:00+00:00</published>
-		<updated>2018-09-14T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/aesopica-2/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/aesopica-2/</id>
-		<content type="html">&lt;p&gt;This article is the second part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&#x27;s stories. Part one can be found &lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;post&#x2F;aesopica-1&#x2F;&quot;&gt;on this site&lt;&#x2F;a&gt; where the basic elements of the Fox and the Stork story were formalised. In this article we examine how literal values can be represented, using Clojure, in Linked Data. The code to enable the functionality described in these articles can be found in the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;aesopica&quot;&gt;Aesopica&lt;&#x2F;a&gt; library for using Clojure to write Linked Data.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Aesopica, Part 2: Literal Values</title>
+        <published>2018-09-14T00:00:00+00:00</published>
+        <updated>2018-09-14T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/aesopica-2/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/aesopica-2/</id>
+        
+        <content type="html">&lt;p&gt;This article is the second part of a series, examining the use of the Clojure language for representing Linked Data, with examples from Aesop&#x27;s stories. Part one can be found &lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;post&#x2F;aesopica-1&#x2F;&quot;&gt;on this site&lt;&#x2F;a&gt; where the basic elements of the Fox and the Stork story were formalised. In this article we examine how literal values can be represented, using Clojure, in Linked Data. The code to enable the functionality described in these articles can be found in the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;aesopica&quot;&gt;Aesopica&lt;&#x2F;a&gt; library for using Clojure to write Linked Data.&lt;&#x2F;p&gt;
 &lt;p&gt;As mentioned in the previous article the story of the Fox and the Stork is about the fox who invited the stork for a dinner. At the dinner soup was served from a shallow plate that the fox could eat but the stork could not. In return, the stork invited the fox to a dinner, where the food was served in a narrow mouthed jug. This time the fox could not reach the food, while the stork ate it happily. &lt;&#x2F;p&gt;
 &lt;p&gt;Elements of this story can be represented as &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;standards&#x2F;semanticweb&#x2F;data&quot;&gt;Linked Data&lt;&#x2F;a&gt;, and in particular the &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;RDF&#x2F;&quot;&gt;Resource Description Framework (RDF)&lt;&#x2F;a&gt; that allows for a precise retelling of the story that is understandable to both humans and machines alike. &lt;&#x2F;p&gt;
 &lt;p&gt;For example, the part of the Linked Data we generated in the previous article is as follows:&lt;&#x2F;p&gt;
@@ -458,14 +482,19 @@
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;Of course given that this story is centuries old, it is unlikely that the dinner took place at &lt;code&gt;2006-06-30T20:00:00&lt;&#x2F;code&gt;. As always care must be taken when taking things literally.&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Aesopica, Part 1: General Introduction</title>
-		<published>2018-09-10T00:00:00+00:00</published>
-		<updated>2018-09-10T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/aesopica-1/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/aesopica-1/</id>
-		<content type="html">&lt;p&gt;The stories called Aesop&#x27;s Fables or the Aesopica, are an ancient collection of stories that have been passed down to modern day. These stories are of diverse origins they cover a wide variety of themes. Although originally intended for an adult audience, in later times were often used for the education of children.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Aesopica, Part 1: General Introduction</title>
+        <published>2018-09-10T00:00:00+00:00</published>
+        <updated>2018-09-10T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/aesopica-1/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/aesopica-1/</id>
+        
+        <content type="html">&lt;p&gt;The stories called Aesop&#x27;s Fables or the Aesopica, are an ancient collection of stories that have been passed down to modern day. These stories are of diverse origins they cover a wide variety of themes. Although originally intended for an adult audience, in later times were often used for the education of children.&lt;&#x2F;p&gt;
 &lt;p&gt;One of such stories is the tale of the Fox and the Stork. There are many versions of this fable, but the overall outline is generally as follows:&lt;&#x2F;p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&amp;quot;The fox invited the stork to dinner. At the dinner soup was served from a shallow plate, that the fox could eat but the hungry stork could not even taste. In turn the stork invited the fox to a dinner. Dinner was served in a narrow mouthed jug filled with crumbled food. This time the fox could not reach the food, while the stork ate.&amp;quot;&lt;&#x2F;p&gt;
@@ -562,5 +591,6 @@
 &lt;p&gt;I have started a small library for manipulating Linked Data structures written this way, with the name &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;aesopica&quot;&gt;Aesopica&lt;&#x2F;a&gt;. It is in very early stages, where the current main functionality is to translate Linked Data written this way into the Turtle format described above.&lt;&#x2F;p&gt;
 &lt;p&gt;Of course there are lot of other elements of Linked Data that needs to be represented in this that we did not tackle yet. In addition there are also a large number of Clojure libraries that could be used to make writing and using Linked Data in this fashion easier. How these features could be achieved however is a story for another time.&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

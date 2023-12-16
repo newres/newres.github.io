@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - kanren</title>
-	<link href="https://www.newresalhaider.com/tags/kanren/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2020-02-02T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/kanren/atom.xml</id>
-	<entry xml:lang="en">
-		<title>Darmok in core.logic</title>
-		<published>2020-02-02T00:00:00+00:00</published>
-		<updated>2019-02-02T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/darmok-core-logic/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/darmok-core-logic/</id>
-		<content type="html">&lt;p&gt;One of the greatest Star Trek episodes is titled &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Darmok&quot;&gt;Darmok&lt;&#x2F;a&gt; in &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Star_Trek:_The_Next_Generation&quot;&gt;Star Trek: The Next Generation&lt;&#x2F;a&gt;.  It has the hallmarks of a great Star Trek: TNG episode: a first contact between two civilizations and a dilemma that is not solved by violence but by thinking and understanding.&lt;&#x2F;p&gt;
+    <title> - kanren</title>
+    <link href="https://www.newresalhaider.com/tags/kanren/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-02-02T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/kanren/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Darmok in core.logic</title>
+        <published>2020-02-02T00:00:00+00:00</published>
+        <updated>2019-02-02T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/darmok-core-logic/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/darmok-core-logic/</id>
+        
+        <content type="html">&lt;p&gt;One of the greatest Star Trek episodes is titled &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Darmok&quot;&gt;Darmok&lt;&#x2F;a&gt; in &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Star_Trek:_The_Next_Generation&quot;&gt;Star Trek: The Next Generation&lt;&#x2F;a&gt;.  It has the hallmarks of a great Star Trek: TNG episode: a first contact between two civilizations and a dilemma that is not solved by violence but by thinking and understanding.&lt;&#x2F;p&gt;
 &lt;p&gt;One of the nicest logic programming languages is &lt;a href=&quot;http:&#x2F;&#x2F;minikanren.org&#x2F;&quot;&gt;miniKanren&lt;&#x2F;a&gt;. This is due to the fact that it is a small, relatively easy to understand &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Logic_programming&quot;&gt;Logic Programming (LP)&lt;&#x2F;a&gt; language and has implementations in many programming languages. This later feature allows for logic programming features to be used in many different environments, as a logic programming &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Domain-specific_language&quot;&gt;Domain-Specific language (DSL)&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
 &lt;p&gt;A popular implementation of miniKanren is the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;clojure&#x2F;core.logic&quot;&gt;core.logic&lt;&#x2F;a&gt; library of the &lt;a href=&quot;https:&#x2F;&#x2F;clojure.org&#x2F;&quot;&gt;Clojure&lt;&#x2F;a&gt; programming language. In this article we aim to introduce miniKanren&#x2F;core.logic by encoding story elements of the Darmok episode of Star Trek: TNG (some spoilers for the episode will follow). &lt;&#x2F;p&gt;
 &lt;p&gt;The episode is based around the fact that the Federation and the Tamarian people aim to establish successful first contact with each other. From the Federation, the crew of the starship Enterprise are sent to the planet El-Adrel where a Tamarian ship awaits them. Unfortunately attempts at communication fail from both sides and lead to some dangerous situations. The difficulty of communication arises from the fact that Tamarians communicate exclusively through allegory. This means that it is not enough to just decipher the words and grammar used in the Tamarian language, but the crew of the Enterprise must also understand the myths and historical events to which these allegories refer to. Within the episode multiple allegories are used by the Tamarians, such as with the phrase &amp;quot;Darmok and Jalad at Tanagra&amp;quot;, that utterly baffle the crew at first. However due to shared dangers and cooperation by the captain of the Enterprise, Picard, and the captain of the Tamarian ship, Darmok, they start to understand each other. In the end a successful first contact is made. This is captured by the newly coined allegory for first contact in the Tamarian language: &amp;quot;Picard and Dathon at El-Adrel&amp;quot;.&lt;&#x2F;p&gt;
@@ -246,5 +250,6 @@
 &lt;p&gt;There you have it, a very quick overview of using core.logic for logic programming. If you would like to experiment further the code used in this article is &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;darmok-core-logic&quot;&gt;available&lt;&#x2F;a&gt;. Here we only scratched the surface of what is possible in a logic programming environment such as core.logic. Feel free to check it out, or any other &lt;a href=&quot;http:&#x2F;&#x2F;minikanren.org&#x2F;#implementations&quot;&gt;miniKanren implementation available in your language&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;I hope that, much like the Darmok episode, this article has expanded your horizons on communicating. Logic programming is a very interesting, and often underutilized programming paradigm. The core.logic&#x2F;miniKanren logic programming language is a great system to get started with it. I hope that this, perhaps first, contact with Logic Programming or core.logic aids you in your future endeavors.&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - Dart</title>
-	<link href="https://www.newresalhaider.com/tags/dart/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2018-03-18T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/dart/atom.xml</id>
-	<entry xml:lang="en">
-		<title>The Art of Choosing a Programming Language</title>
-		<published>2018-03-18T00:00:00+00:00</published>
-		<updated>2018-03-18T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/art-of-choosing-language/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/art-of-choosing-language/</id>
-		<content type="html">&lt;p&gt;Programmers, like professionals in other fields, are passionate about their tools. One of the main elements in the toolbox of coders are programming languages. They allow their users to express solutions through code to tackle a large variety of problems in many domains. &lt;&#x2F;p&gt;
+    <title> - Dart</title>
+    <link href="https://www.newresalhaider.com/tags/dart/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-03-18T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/dart/atom.xml</id>
+    <entry xml:lang="en">
+        <title>The Art of Choosing a Programming Language</title>
+        <published>2018-03-18T00:00:00+00:00</published>
+        <updated>2018-03-18T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/art-of-choosing-language/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/art-of-choosing-language/</id>
+        
+        <content type="html">&lt;p&gt;Programmers, like professionals in other fields, are passionate about their tools. One of the main elements in the toolbox of coders are programming languages. They allow their users to express solutions through code to tackle a large variety of problems in many domains. &lt;&#x2F;p&gt;
 &lt;p&gt;Programming is also an art, as described in the article by Donald Knuth titled &lt;a href=&quot;http:&#x2F;&#x2F;www.paulgraham.com&#x2F;knuth.html&quot;&gt;Computer Programming as an Art&lt;&#x2F;a&gt; and in certain aspects of programming languages can be seen as art styles.&lt;&#x2F;p&gt;
 &lt;p&gt;As can be expected with many things that people are passionate about, whether viewed as a tool or an art style, coders can bond or argue about programming languages. Like philosophers of old, these discussions can go quite into depth, but to the outsider the arguments made or the sentiments behind them can be quite opaque. &lt;&#x2F;p&gt;
 &lt;figure class=centeredfig&gt;
@@ -128,5 +132,6 @@
 &lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h1&gt;
 &lt;p&gt;I hope this article gave some insight on why programmers pick and argue about programming languages. Despite all the various differences and arguments it is also very important to note, that great software has been written in many different languages, that is both excellent code and solves important problems. And while picking the right tool for the job is an important, it can be just an aspect of the art of solving problems with code.&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

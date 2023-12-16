@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - spacemacs</title>
-	<link href="https://www.newresalhaider.com/tags/spacemacs/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2021-01-06T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/spacemacs/atom.xml</id>
-	<entry xml:lang="en">
-		<title>Meditations in your Pocket</title>
-		<published>2020-12-28T00:00:00+00:00</published>
-		<updated>2021-01-06T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/meditations/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/meditations/</id>
-		<content type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Meditations&quot;&gt;Meditations&lt;&#x2F;a&gt; are a series of notes that the Roman emperor &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Marcus_Aurelius&quot;&gt;Marcus Aurelius&lt;&#x2F;a&gt;
+    <title> - spacemacs</title>
+    <link href="https://www.newresalhaider.com/tags/spacemacs/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2021-01-06T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/spacemacs/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Meditations in your Pocket</title>
+        <published>2020-12-28T00:00:00+00:00</published>
+        <updated>2021-01-06T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/meditations/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/meditations/</id>
+        
+        <content type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Meditations&quot;&gt;Meditations&lt;&#x2F;a&gt; are a series of notes that the Roman emperor &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Marcus_Aurelius&quot;&gt;Marcus Aurelius&lt;&#x2F;a&gt;
 wrote for guidance and self-improvement. While it is likely that the emperor wrote them purely for his own benefit, they have been published after his death and contain elements of &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Stoicism&quot;&gt;Stoic philosophy&lt;&#x2F;a&gt; that many people have consulted since.&lt;&#x2F;p&gt;
 &lt;p&gt;One way achieve a bit of self-improvement, coding-wise, is to pick a small project to do with a new set of tools. In particular, I have found the &lt;a href=&quot;https:&#x2F;&#x2F;flutter.dev&#x2F;&quot;&gt;Flutter&lt;&#x2F;a&gt; framework for creating mobile apps very interesting. Unfortunately I did not have the opportunity to explore Flutter much beyond running some &lt;a href=&quot;https:&#x2F;&#x2F;flutter.github.io&#x2F;samples&#x2F;#&quot;&gt;sample apps&lt;&#x2F;a&gt; previously. To bring a change to this I thought it would be a nice small project to create a small app for browsing the text of &amp;quot;Meditations&amp;quot; in Flutter. I aim to show what I have built in this article, organize my thoughts, and hopefully help others unfamiliar with Flutter to get a small glimpse of what it can do.&lt;&#x2F;p&gt;
 &lt;p&gt;To give a preview of the implemented functionality, here is an animation of the functionality of the app:&lt;&#x2F;p&gt;
@@ -561,14 +565,19 @@ We use this information to create a navigation test, as once the right icon has 
 &lt;p&gt;Of course there are tons of possible extensions to the app. Aside from including the full text of Meditations, one can improve upon the navigation, add features such as bookmarking, random section selection and more. Refactoring and extending the app so it could load in other advice&#x2F;text in similar format is also a possibility. &lt;&#x2F;p&gt;
 &lt;p&gt;Hopefully this article and code was clear enough to follow and my thought process came over clearly. The project has definitely increased my interest in using Dart&#x2F;Flutter in another project and felt like good practice. Hopefully your next project, perhaps made with Flutter, will be similarly enjoyable and enriching to do! &lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>CybOrg Mode</title>
-		<published>2020-06-01T00:00:00+00:00</published>
-		<updated>2020-06-01T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/cyborg-mode/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/cyborg-mode/</id>
-		<content type="html">&lt;p&gt;Human beings enhanced by machine parts, often called &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cyborg&quot;&gt;cyborgs&lt;&#x2F;a&gt;, are a staple of the science-fiction and comic books. The, very aptly named, hero &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cyborg_(comics)&quot;&gt;Cyborg&lt;&#x2F;a&gt;, is a good example of this. Due to advanced mechanical modifications he not only has greatly increased strength and the ability to fly, but he is able to interface directly with computer systems to organize and plan ahead. These skills make him an important member of many superhero teams such as the &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Justice_League&quot;&gt;Justice League&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Teen_Titans&quot;&gt;Teen Titans&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>CybOrg Mode</title>
+        <published>2020-06-01T00:00:00+00:00</published>
+        <updated>2020-06-01T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/cyborg-mode/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/cyborg-mode/</id>
+        
+        <content type="html">&lt;p&gt;Human beings enhanced by machine parts, often called &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cyborg&quot;&gt;cyborgs&lt;&#x2F;a&gt;, are a staple of the science-fiction and comic books. The, very aptly named, hero &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cyborg_(comics)&quot;&gt;Cyborg&lt;&#x2F;a&gt;, is a good example of this. Due to advanced mechanical modifications he not only has greatly increased strength and the ability to fly, but he is able to interface directly with computer systems to organize and plan ahead. These skills make him an important member of many superhero teams such as the &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Justice_League&quot;&gt;Justice League&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Teen_Titans&quot;&gt;Teen Titans&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;Thankfully for us, even without any of the cybernetic implants that Cyborg has, there exists some great tools to help organize, document and plan ahead. One of such tools is called &lt;a href=&quot;https:&#x2F;&#x2F;orgmode.org&#x2F;&quot;&gt;Org-mode&lt;&#x2F;a&gt;. Org-mode, also denoted as Org mode or even more simply as Org, is a system for organizing notes, plans, authoring documents and many other tasks. One of its main benefits is that although specialized tools exist to help create and edit Org documents, all Org documents are &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Plain_text&quot;&gt;plain text&lt;&#x2F;a&gt; files. This means that the format is very portable and can be used and edited on any platform which can edit text files. In this article we give a brief introduction to Org mode with an example based on the hero Cyborg.&lt;&#x2F;p&gt;
 &lt;p&gt;Org documents can be outlined with a tree structure using headlines. Suppose that we want to describe various information about Cyborg, such as his biography, his powers, his relationships and his schedule. For each of these we can use an asterisk (&lt;code&gt;*&lt;&#x2F;code&gt;) symbol followed by some text to create a headline in the document as follows:&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;org&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-org &quot;&gt;&lt;code class=&quot;language-org&quot; data-lang=&quot;org&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;* Biography
@@ -738,5 +747,6 @@ We use this information to create a navigation test, as once the right icon has 
 &lt;p&gt;That is it for this tutorial, hopefully I have given a glimpse of what Org mode can do, and gives you some idea on how it can enhance your organizing, planning and note taking. Here I have not even touched on many other great features such as authoring documents and converting to other formats, using it as a spreadsheet system and many more. For further resources on this tool take a look at the official &lt;a href=&quot;https:&#x2F;&#x2F;orgmode.org&#x2F;&quot;&gt;Org mode website&lt;&#x2F;a&gt;, as well the &lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=PVsSOmUB7ic&quot;&gt;excellent video tutorial&lt;&#x2F;a&gt; by GDQuest on using the Spacemacs editor with Org mode. The Org document that was built up can also be found in its entirety at a &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;cyborg-mode&#x2F;&quot;&gt;github repository&lt;&#x2F;a&gt; along with some extra documentation.&lt;&#x2F;p&gt;
 &lt;p&gt;Hopefully you have enjoyed the article and if you want to enhance yourself with one of the best note taking and planning tools around give Org mode a shot.&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

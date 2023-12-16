@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - Curry</title>
-	<link href="https://www.newresalhaider.com/tags/curry/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2020-07-04T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/curry/atom.xml</id>
-	<entry xml:lang="en">
-		<title>To Curry in League of Legends</title>
-		<published>2020-07-04T00:00:00+00:00</published>
-		<updated>2020-07-04T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/curry-lol/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/curry-lol/</id>
-		<content type="html">&lt;p&gt;One of the most well-known and popular online multi-player games is &lt;a href=&quot;https:&#x2F;&#x2F;euw.leagueoflegends.com&#x2F;en-gb&#x2F;&quot;&gt;League of Legends&lt;&#x2F;a&gt;. In this game two teams of five players compete against other. Within the game each player controls a champion that they can use to defeat the enemy team by destroying their base. There are many aspects required to winning a game of League of Legends: good in-game strategy, good control of champions but also selecting a good composition of 5 champions, out of more than a hundred, that fits the needs of the players and play-styles.&lt;&#x2F;p&gt;
+    <title> - Curry</title>
+    <link href="https://www.newresalhaider.com/tags/curry/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-07-04T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/curry/atom.xml</id>
+    <entry xml:lang="en">
+        <title>To Curry in League of Legends</title>
+        <published>2020-07-04T00:00:00+00:00</published>
+        <updated>2020-07-04T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/curry-lol/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/curry-lol/</id>
+        
+        <content type="html">&lt;p&gt;One of the most well-known and popular online multi-player games is &lt;a href=&quot;https:&#x2F;&#x2F;euw.leagueoflegends.com&#x2F;en-gb&#x2F;&quot;&gt;League of Legends&lt;&#x2F;a&gt;. In this game two teams of five players compete against other. Within the game each player controls a champion that they can use to defeat the enemy team by destroying their base. There are many aspects required to winning a game of League of Legends: good in-game strategy, good control of champions but also selecting a good composition of 5 champions, out of more than a hundred, that fits the needs of the players and play-styles.&lt;&#x2F;p&gt;
 &lt;p&gt;One of the lesser-known, but nonetheless very innovative, programming languages is &lt;a href=&quot;https:&#x2F;&#x2F;www-ps.informatik.uni-kiel.de&#x2F;currywiki&#x2F;&quot;&gt;Curry&lt;&#x2F;a&gt;. What makes this language so unique that it is a functional logic language. This means that it combines features of functional programming, composing a program through functions, and logic programming, defining the program as predicates of a logic system and searching for answers. &lt;&#x2F;p&gt;
 &lt;p&gt;This article aims to give an introduction to the Curry language by creating a small system in it that matches and recommends League Of Legends champions based on player preferences.&lt;&#x2F;p&gt;
-&lt;p&gt;If you want to code along with this article, one can use &lt;a href=&quot;https:&#x2F;&#x2F;www-ps.informatik.uni-kiel.de&#x2F;smap&#x2F;smap.cgi?new&#x2F;curry&quot;&gt;SMAP&lt;&#x2F;a&gt; to evaluate Curry code online, aside from installing a Curry language implementation such as &lt;a href=&quot;https:&#x2F;&#x2F;www.informatik.uni-kiel.de&#x2F;%7Epakcs&#x2F;&quot;&gt;PACKS&lt;&#x2F;a&gt; locally. The code described in this article can be found in a &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;curry-league&quot;&gt;source repository&lt;&#x2F;a&gt; in its entirety as well.&lt;&#x2F;p&gt;
+&lt;p&gt;If you want to code along with this article, one can use &lt;a href=&quot;https:&#x2F;&#x2F;www-ps.informatik.uni-kiel.de&#x2F;smap&#x2F;smap.cgi?new&#x2F;curry&quot;&gt;SMAP&lt;&#x2F;a&gt; to evaluate Curry code online, aside from installing a Curry language implementation such as &lt;a href=&quot;https:&#x2F;&#x2F;www.informatik.uni-kiel.de&#x2F;~pakcs&#x2F;&quot;&gt;PACKS&lt;&#x2F;a&gt; locally. The code described in this article can be found in a &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;curry-league&quot;&gt;source repository&lt;&#x2F;a&gt; in its entirety as well.&lt;&#x2F;p&gt;
 &lt;p&gt;In order to build such a recommendation system, the first thing we need to do is figure out a way to represent both the player preferences and the League of Legends champions in Curry.&lt;&#x2F;p&gt;
 &lt;p&gt;To start off, let&#x27;s define the aspects of a champion in Curry as follows:&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;haskell&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-haskell &quot;&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;module &lt;&#x2F;span&gt;&lt;span&gt;Main &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;where
@@ -350,5 +354,6 @@
 &lt;p&gt;There are many ways we could proceed from this point on. As one could see from the examples the recommendation based on a weak criteria is quite weak, as anything matches, while a strong criteria can be too restrictive at times. Coming up with the different types of matching functions, could be a next step, if one wants to expand upon this small application. With multiple matching functions one can also write a function that takes a matching function as a parameter in order to avoid writing duplicate code for each recommendation function. &lt;&#x2F;p&gt;
 &lt;p&gt;Hopefully this article has given you a bit of an intro to the Curry language and why it is so interesting. There exists a number of options for using functional and logic programming separately but this is one of the few languages that aims to combine both. If you wish to explore either paradigms further I wish you the best of luck to curry on with your endeavors. &lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - Fresh Prince of Bel-Air</title>
-	<link href="https://www.newresalhaider.com/tags/fresh-prince-of-bel-air/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2021-01-24T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/fresh-prince-of-bel-air/atom.xml</id>
-	<entry xml:lang="en">
-		<title>The Pharo Prince of Bel-Air</title>
-		<published>2021-01-24T00:00:00+00:00</published>
-		<updated>2021-01-24T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/pharo-prince/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/pharo-prince/</id>
-		<content type="html">&lt;p&gt;Recently I have been aiming to explore the &lt;a href=&quot;https:&#x2F;&#x2F;pharo.org&#x2F;&quot;&gt;Pharo&lt;&#x2F;a&gt; programming language. The close combination between the language and the &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Integrated_development_environment&quot;&gt;Integrated Development Environment (IDE)&lt;&#x2F;a&gt;, makes it quite unlike most other languages that I have encountered. You can, for example, inspect every program element in a visual environment, even on a currently running program. While exploring, I spent much time using the &lt;code&gt;Playground&lt;&#x2F;code&gt; feature, where you easily start executing, and interacting with, small snippets of code.&lt;&#x2F;p&gt;
+    <title> - Fresh Prince of Bel-Air</title>
+    <link href="https://www.newresalhaider.com/tags/fresh-prince-of-bel-air/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2021-01-24T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/fresh-prince-of-bel-air/atom.xml</id>
+    <entry xml:lang="en">
+        <title>The Pharo Prince of Bel-Air</title>
+        <published>2021-01-24T00:00:00+00:00</published>
+        <updated>2021-01-24T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/pharo-prince/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/pharo-prince/</id>
+        
+        <content type="html">&lt;p&gt;Recently I have been aiming to explore the &lt;a href=&quot;https:&#x2F;&#x2F;pharo.org&#x2F;&quot;&gt;Pharo&lt;&#x2F;a&gt; programming language. The close combination between the language and the &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Integrated_development_environment&quot;&gt;Integrated Development Environment (IDE)&lt;&#x2F;a&gt;, makes it quite unlike most other languages that I have encountered. You can, for example, inspect every program element in a visual environment, even on a currently running program. While exploring, I spent much time using the &lt;code&gt;Playground&lt;&#x2F;code&gt; feature, where you easily start executing, and interacting with, small snippets of code.&lt;&#x2F;p&gt;
 &lt;p&gt;While exploring the language, the &lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=1nCqRmx3Dnw&quot;&gt;intro-song&lt;&#x2F;a&gt; to the tv-show &amp;quot;&lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;The_Fresh_Prince_of_Bel-Air&quot;&gt;The Fresh Prince of Bel-Air&lt;&#x2F;a&gt;&amp;quot; got stuck in my head. The song tells the story of the title character, Will Smith, on how he ended up being &amp;quot;The Fresh Prince of Bel-Air&amp;quot;. To paraphrase the song, Will was born and raised in Philadelphia, spending much of his time on the playground. On one occasion, while playing basketball, he got into a fight with some troublemakers. This experience got his mom scared so he was sent off to live with his aunt and uncle in Bel Air. After a flight and a taxi ride, he arrives in Bel Air at his uncles and aunts house, to become &amp;quot;the Prince of Bel-Air&amp;quot;.&lt;&#x2F;p&gt;
 &lt;p&gt;In this article, let’s explore Pharo together with the story from “The Fresh Prince of Bel Air”. If one wants to follow along, feel free to &lt;a href=&quot;https:&#x2F;&#x2F;pharo.org&#x2F;download&quot;&gt;download&lt;&#x2F;a&gt; and setup Pharo. The language has a really smooth process for getting started, as one can download and install the &lt;a href=&quot;https:&#x2F;&#x2F;pharo.org&#x2F;download&quot;&gt;Pharo Launcher&lt;&#x2F;a&gt; and be pretty much set.&lt;&#x2F;p&gt;
 &lt;p&gt;It is difficult to do the language justice by text, because it is so intertwined with the IDE and image based development. I will try to illustrate things as best as I can.&lt;&#x2F;p&gt;
@@ -27,7 +31,8 @@
         
         
     &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt; --&gt;
+&lt;&#x2F;figure&gt;
+ --&gt;
 &lt;figure class=centeredfig&gt;
     &lt;img src=imagecreation.png&gt;
     
@@ -232,5 +237,6 @@
 &lt;p&gt;And at the end we are now finally there,
 having the object&#x27;s activity denoted as &lt;code&gt;Being the Prince of Bel-Air&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

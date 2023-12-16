@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - triples</title>
-	<link href="https://www.newresalhaider.com/tags/triples/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2018-02-18T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/triples/atom.xml</id>
-	<entry xml:lang="en">
-		<title>Data Interlinked</title>
-		<published>2018-02-18T00:00:00+00:00</published>
-		<updated>2018-02-18T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/interlinked-data/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/interlinked-data/</id>
-		<content type="html">&lt;p&gt;&lt;em&gt;This article contains some very minor spoilers for the Blade Runner 2049 movie. If you have not seen it yet, by all means do, it is really good.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+    <title> - triples</title>
+    <link href="https://www.newresalhaider.com/tags/triples/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-02-18T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/triples/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Data Interlinked</title>
+        <published>2018-02-18T00:00:00+00:00</published>
+        <updated>2018-02-18T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/interlinked-data/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/interlinked-data/</id>
+        
+        <content type="html">&lt;p&gt;&lt;em&gt;This article contains some very minor spoilers for the Blade Runner 2049 movie. If you have not seen it yet, by all means do, it is really good.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;&amp;quot;And blood-black nothingness began to spin... A system of cells interlinked within cells interlinked within cells interlinked within one stem... And dreadfully distinct against the dark, a tall white fountain played.&amp;quot;&lt;&#x2F;p&gt;
 &lt;figure class=centeredfig&gt;
     &lt;img src=palefire.jpg&gt;
@@ -126,14 +130,19 @@
 &lt;p&gt;Hopefully I could show a glimpse of the possibilities the &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;standards&#x2F;semanticweb&#x2F;&quot;&gt;Semantic Web&lt;&#x2F;a&gt; for which Linked Data forms the basis, with this example. Of course the above is just scratching the surface of what it can be done with RDF, Linked Data. With each addition, our set of facts could grow. One could go beyond a single movie and build a document of poems that are references in movies, or a knowledge base of the Blade Runner franchise. It might be easier than one expects, due to the fact that knowledge, much like people are...&lt;&#x2F;p&gt;
 &lt;p&gt;Interlinked.&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>The Trouble with Triples</title>
-		<published>2018-01-28T00:00:00+00:00</published>
-		<updated>2018-01-28T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/trouble-with-triples/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/trouble-with-triples/</id>
-		<content type="html">&lt;p&gt;In the Star Trek episode &amp;quot;The Trouble with Tribbles&amp;quot; the crew of the starship Enterprise encounters creatures called Tribbles. They are cute, simple creatures of mysterious origin that seem harmless at first but when they multiply the pose a big problem for the ship and the crew.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>The Trouble with Triples</title>
+        <published>2018-01-28T00:00:00+00:00</published>
+        <updated>2018-01-28T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/trouble-with-triples/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/trouble-with-triples/</id>
+        
+        <content type="html">&lt;p&gt;In the Star Trek episode &amp;quot;The Trouble with Tribbles&amp;quot; the crew of the starship Enterprise encounters creatures called Tribbles. They are cute, simple creatures of mysterious origin that seem harmless at first but when they multiply the pose a big problem for the ship and the crew.&lt;&#x2F;p&gt;
 &lt;figure class=centeredfig&gt;
     &lt;img src=featured.jpg&gt;
     
@@ -153,5 +162,6 @@
 &lt;p&gt;Another interesting issue with representing facts is the context of the information. To us the viewers, and initially to the crew of the Enterprise, Tribbles look like harmless and adorable creatures. To the Klingons they are an ecological menace and their mortal enemies. How such &amp;quot;knowledge about knowledge&amp;quot; is represented and used is often a challenging problem.&lt;&#x2F;p&gt;
 &lt;p&gt;Various technologies have been proposed to deal with the above-mentioned issues. &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;standards&#x2F;semanticweb&#x2F;&quot;&gt;The Semantic Web technologies&lt;&#x2F;a&gt; of &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;standards&#x2F;semanticweb&#x2F;data&quot;&gt;Linked Data&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;standards&#x2F;techs&#x2F;owl#w3c_all&quot;&gt;Ontologies&lt;&#x2F;a&gt; in particular have been designed around solving many of these problems. Nonetheless there is room for improvement. In the future I hope to be able to explain how these techniques can be utilized and perhaps lessen the pain points that currently surround (the use of) them.&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

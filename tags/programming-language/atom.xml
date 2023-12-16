@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - Programming Language</title>
-	<link href="https://www.newresalhaider.com/tags/programming-language/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2022-08-06T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/programming-language/atom.xml</id>
-	<entry xml:lang="en">
-		<title>Raku Parrot</title>
-		<published>2022-08-06T00:00:00+00:00</published>
-		<updated>2022-08-06T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/raku-parrot/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/raku-parrot/</id>
-		<content type="html">&lt;p&gt;One of the programming languages that I have stumbled upon not too long ago is &lt;a href=&quot;https:&#x2F;&#x2F;www.raku.org&#x2F;&quot;&gt;Raku&lt;&#x2F;a&gt;. This language, which was previously known as Perl 6, is chock-full of really cool features. It has support for programming in both object oriented and functional paradigms, optional gradual typing, a nice story for async programming and more. &lt;&#x2F;p&gt;
+    <title> - Programming Language</title>
+    <link href="https://www.newresalhaider.com/tags/programming-language/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-08-06T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/programming-language/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Raku Parrot</title>
+        <published>2022-08-06T00:00:00+00:00</published>
+        <updated>2022-08-06T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/raku-parrot/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/raku-parrot/</id>
+        
+        <content type="html">&lt;p&gt;One of the programming languages that I have stumbled upon not too long ago is &lt;a href=&quot;https:&#x2F;&#x2F;www.raku.org&#x2F;&quot;&gt;Raku&lt;&#x2F;a&gt;. This language, which was previously known as Perl 6, is chock-full of really cool features. It has support for programming in both object oriented and functional paradigms, optional gradual typing, a nice story for async programming and more. &lt;&#x2F;p&gt;
 &lt;p&gt;A really nice feature of Raku is that &lt;a href=&quot;https:&#x2F;&#x2F;docs.raku.org&#x2F;language&#x2F;grammars&quot;&gt;Grammars&lt;&#x2F;a&gt; are a core part of the language. Grammars allow for a great way to interpret textual information. When programming there are a lot of use cases where a specific set of patterns need to be recognized and used from text. An interpreter for a format such as &lt;a href=&quot;https:&#x2F;&#x2F;www.json.org&quot;&gt;JSON&lt;&#x2F;a&gt; is a good example. From the text version of a JSON file elements such as arrays, objects, numbers, strings, etc. needs to be recognized. In addition a representation of them needs to be built for manipulation and use within a programming language. &lt;&#x2F;p&gt;
 &lt;p&gt;In order to demonstrate this grammar feature of Raku, we are going to implement a small program to parrot phrases back to us. The grammar inside this program describes short three word (sometimes a bit irregular) sentences like &amp;quot;I like sushi.&amp;quot; or &amp;quot;They eat pear.&amp;quot;. Our program will parrot these phrases back to us twice, first just as text and the second time with certain words being replaced by emojis. &lt;&#x2F;p&gt;
 &lt;p&gt;To give a preview of what this code will do, if we call it from the command line given the input: &lt;&#x2F;p&gt;
@@ -85,5 +89,6 @@
 &lt;p&gt;The final piece is a function that replaces the nouns and verbs in a sentence with the emoji equivalent if it can. If no replacement can be found it leaves the text unchanged. When parsing we can use this function as part of an action to perform. This allows us to tie everything together in our &lt;code&gt;MAIN&lt;&#x2F;code&gt; function (also called a subroutine in Raku). This parses in the text from the command line, prints the text twice (can be done by the &lt;code&gt;say&lt;&#x2F;code&gt; function in Raku). The first time it will print the text and the second time it will print the text with the emoji replacements. In the case when it can not parse the input it will print &lt;code&gt;&amp;quot;Squaaawk can not understand!&amp;quot;&lt;&#x2F;code&gt; instead.&lt;&#x2F;p&gt;
 &lt;p&gt;To run everything, if the code is in a file called main.raku one can call &lt;code&gt;raku main.raku &amp;quot;I love sushi.&amp;quot;&lt;&#x2F;code&gt; or some other sentence to get started. Feel free to give it a try on &lt;a href=&quot;https:&#x2F;&#x2F;replit.com&#x2F;languages&#x2F;raku&quot;&gt;Replit&lt;&#x2F;a&gt; to see what the code parrots back!&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

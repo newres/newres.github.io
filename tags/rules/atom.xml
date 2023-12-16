@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - rules</title>
-	<link href="https://www.newresalhaider.com/tags/rules/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2019-02-04T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/rules/atom.xml</id>
-	<entry xml:lang="en">
-		<title>Prolog and the Price of Peace</title>
-		<published>2019-02-01T00:00:00+00:00</published>
-		<updated>2019-02-04T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/prolog-price-of-peace/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/prolog-price-of-peace/</id>
-		<content type="html">&lt;p&gt;The use of logic is a common element in Science Fiction. In the Star Trek universe &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Vulcan_(Star_Trek)&quot;&gt;Vulcans&lt;&#x2F;a&gt; are a species that is famously known for aiming to live by logic and reason. Because of this they are often considered masters of these subjects. Yet there was a case in an episode of the Star Trek show &lt;a href=&quot;http:&#x2F;&#x2F;memory-alpha.wikia.com&#x2F;wiki&#x2F;The_Maquis,_Part_II_(episode)&quot;&gt;Deep Space 9&lt;&#x2F;a&gt;, where &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Quark_(Star_Trek)&quot;&gt;Quark&lt;&#x2F;a&gt;, a &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Ferengi&quot;&gt;Ferengi&lt;&#x2F;a&gt;, was able to convince Sakonna, a Vulcan, of the error of her logic and reasoning. &lt;&#x2F;p&gt;
+    <title> - rules</title>
+    <link href="https://www.newresalhaider.com/tags/rules/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2019-02-04T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/rules/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Prolog and the Price of Peace</title>
+        <published>2019-02-01T00:00:00+00:00</published>
+        <updated>2019-02-04T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/prolog-price-of-peace/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/prolog-price-of-peace/</id>
+        
+        <content type="html">&lt;p&gt;The use of logic is a common element in Science Fiction. In the Star Trek universe &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Vulcan_(Star_Trek)&quot;&gt;Vulcans&lt;&#x2F;a&gt; are a species that is famously known for aiming to live by logic and reason. Because of this they are often considered masters of these subjects. Yet there was a case in an episode of the Star Trek show &lt;a href=&quot;http:&#x2F;&#x2F;memory-alpha.wikia.com&#x2F;wiki&#x2F;The_Maquis,_Part_II_(episode)&quot;&gt;Deep Space 9&lt;&#x2F;a&gt;, where &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Quark_(Star_Trek)&quot;&gt;Quark&lt;&#x2F;a&gt;, a &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Ferengi&quot;&gt;Ferengi&lt;&#x2F;a&gt;, was able to convince Sakonna, a Vulcan, of the error of her logic and reasoning. &lt;&#x2F;p&gt;
 &lt;p&gt;For this Quark made use of Ferengi philosophy, namely the Third Rule of Acquisition. The Rules of Acquisition are a series of proverbs and guidelines that govern Ferengi society, and notably their business dealings that take a prominent place in their lives. The Third Rule of Acquisition states that &amp;quot;Never spend more for an acquisition than you have to.&amp;quot; By applying this rule to the situation in the episode Quark was able make it clear to Sakonna that the best time broker a peace agreement would be &amp;quot;right now&amp;quot;, as the price of peace is at an all time low. &lt;&#x2F;p&gt;
 &lt;figure&gt;
   &lt;img src=&quot;featured.jpg&quot;  &#x2F;&gt;
@@ -124,14 +128,19 @@
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;Hopefully, much like Quark&#x27;s application of the Third Rule of Acquisition, this intro would have been enough to convince Sakonna of the logic of purchasing peace at the lowest possible price. Similarly, I hope that as a reader, this article gave some insight to the usefulness of Prolog in such scenarios. Next time, you are dealing with a problem domain, that would easily match to a similar scenario of rules, facts and queries, give Prolog a try. It is, after all, a very logical choice.&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Excavating a Common Treasure</title>
-		<published>2018-06-30T00:00:00+00:00</published>
-		<updated>2018-06-30T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/common-treasure/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/common-treasure/</id>
-		<content type="html">&lt;p&gt;History is full of legends of ancient treasures and powerful artifacts, lost to time or hidden by purpose, that would bring glory, power and riches to their discoverer.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Excavating a Common Treasure</title>
+        <published>2018-06-30T00:00:00+00:00</published>
+        <updated>2018-06-30T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/common-treasure/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/common-treasure/</id>
+        
+        <content type="html">&lt;p&gt;History is full of legends of ancient treasures and powerful artifacts, lost to time or hidden by purpose, that would bring glory, power and riches to their discoverer.&lt;&#x2F;p&gt;
 &lt;figure class=centeredfig&gt;
     &lt;img src=winged-bull.jpg&gt;
     
@@ -235,8 +244,8 @@
 &lt;&#x2F;span&gt;&lt;span&gt;  :in-order-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;to &lt;&#x2F;span&gt;&lt;span&gt;((test-op (test-op &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;common-treasure-test&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;))))
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;Now we just need to make sure the dependencies needed are actually downloaded and available. For this we use &lt;a href=&quot;https:&#x2F;&#x2F;www.quicklisp.org&#x2F;beta&#x2F;&quot;&gt;quicklisp&lt;&#x2F;a&gt; which is the library manager Common Lisp. By using the command &lt;code&gt;(ql:quickload &amp;quot;common-treasure&amp;quot;)&lt;&#x2F;code&gt; we can get all the dependencies for our system, which in this case consists of just LISA.&lt;&#x2F;p&gt;
-&lt;p&gt;Now in order to translate our example scenario, we look at some of the examples that are available for LISA. A typical system consists of a knowledge base, in which facts are defined as &lt;a href=&quot;http:&#x2F;&#x2F;www.aiai.ed.ac.uk&#x2F;%7Ejeff&#x2F;clos-guide.html&quot;&gt;Common Lisp Object System (CLOS)&lt;&#x2F;a&gt; objects and rules to manipulate such instances as the reasoning method. &lt;&#x2F;p&gt;
-&lt;p&gt;CLOS is a way in which Common Lisp can do object-oriented programming, and LISA co-opts this as a way to represent facts in the knowledge base. Without going into detail on object-oriented programming theory, this allows one to, define classes, create instances of those classes and define methods that make use of those classes (see this &lt;a href=&quot;http:&#x2F;&#x2F;www.aiai.ed.ac.uk&#x2F;%7Ejeff&#x2F;clos-guide.html&quot;&gt;nice intro on Common Lisp Object System (CLOS)&lt;&#x2F;a&gt; for its general use). &lt;&#x2F;p&gt;
+&lt;p&gt;Now in order to translate our example scenario, we look at some of the examples that are available for LISA. A typical system consists of a knowledge base, in which facts are defined as &lt;a href=&quot;http:&#x2F;&#x2F;www.aiai.ed.ac.uk&#x2F;~jeff&#x2F;clos-guide.html&quot;&gt;Common Lisp Object System (CLOS)&lt;&#x2F;a&gt; objects and rules to manipulate such instances as the reasoning method. &lt;&#x2F;p&gt;
+&lt;p&gt;CLOS is a way in which Common Lisp can do object-oriented programming, and LISA co-opts this as a way to represent facts in the knowledge base. Without going into detail on object-oriented programming theory, this allows one to, define classes, create instances of those classes and define methods that make use of those classes (see this &lt;a href=&quot;http:&#x2F;&#x2F;www.aiai.ed.ac.uk&#x2F;~jeff&#x2F;clos-guide.html&quot;&gt;nice intro on Common Lisp Object System (CLOS)&lt;&#x2F;a&gt; for its general use). &lt;&#x2F;p&gt;
 &lt;p&gt;In the context of LISA, these allow us to represent classes of facts, specific instances of facts, and methods that can be used with those facts. For example we can represent the type of facts in our domain with two classes of objects: one that represents &amp;quot;area&amp;quot; and one that whether &amp;quot;a permit is required&amp;quot;. In Common Lisp these can be defined with the &lt;code&gt;defclass&lt;&#x2F;code&gt; macro. So for our example the following would be a call for permission requirement:&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;lisp&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-lisp &quot;&gt;&lt;code class=&quot;language-lisp&quot; data-lang=&quot;lisp&quot;&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;defclass&lt;&#x2F;span&gt;&lt;span&gt; permit-required ()
 &lt;&#x2F;span&gt;&lt;span&gt;  ()
@@ -335,5 +344,6 @@
 &lt;p&gt;This shows that our fact base did not change due to our running the reasoning system.&lt;&#x2F;p&gt;
 &lt;p&gt;So there we have it, a bit of a peek of what can be done with Common Lisp. I have to say the language and its various features are quite a bit daunting, as I feel I have only scratched the surface of what is possible, with both interacting with the language as well as with A.I. tools such as LISA. That said digging into the language and seeing how it can handle a small, but also relevant scenario, felt like a worthwhile journey, and that is an experience always worth treasuring.&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

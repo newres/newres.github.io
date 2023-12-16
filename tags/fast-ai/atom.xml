@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - fast.ai</title>
-	<link href="https://www.newresalhaider.com/tags/fast-ai/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2023-10-14T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/fast-ai/atom.xml</id>
-	<entry xml:lang="en">
-		<title>Accidental Renaissance</title>
-		<published>2023-10-14T00:00:00+00:00</published>
-		<updated>2023-10-14T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/accidentalren/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/accidentalren/</id>
-		<content type="html">&lt;p&gt;One interesting place to look for nice photographs is the &lt;a href=&quot;https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;AccidentalRenaissance&#x2F;&quot;&gt;Accidental Renaissance subreddit&lt;&#x2F;a&gt;. It is a forum where photographs that resemble Renaissance art, or other art movements that existed between the 14th and 19th centuries, are shared.&lt;&#x2F;p&gt;
+    <title> - fast.ai</title>
+    <link href="https://www.newresalhaider.com/tags/fast-ai/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2023-10-14T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/fast-ai/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Accidental Renaissance</title>
+        <published>2023-10-14T00:00:00+00:00</published>
+        <updated>2023-10-14T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/accidentalren/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/accidentalren/</id>
+        
+        <content type="html">&lt;p&gt;One interesting place to look for nice photographs is the &lt;a href=&quot;https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;AccidentalRenaissance&#x2F;&quot;&gt;Accidental Renaissance subreddit&lt;&#x2F;a&gt;. It is a forum where photographs that resemble Renaissance art, or other art movements that existed between the 14th and 19th centuries, are shared.&lt;&#x2F;p&gt;
 &lt;figure class=centeredfig&gt;
     &lt;img src=featuredcard.png&gt;
     
@@ -168,14 +172,19 @@
 &lt;p&gt;However interestingly enough the trained model has trouble recognizing actual renaissance (or baroque) paintings. The famous picture of the &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;The_Last_Supper_(Leonardo)&quot;&gt;Last Supper&lt;&#x2F;a&gt; by Da Vinci got classified as &amp;quot;regular&amp;quot;, just as &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Judith_Beheading_Holofernes_(Caravaggio)&quot;&gt;Judith Beheading Holofernes&lt;&#x2F;a&gt; by Caravaggio. &lt;&#x2F;p&gt;
 &lt;p&gt;It would be interesting to hypothesize and investigate why this could be the case. Although they might be similar in art style, the paintings and the photos in the subreddit as well as the generated photos might differ in other aspects, such as the subject matter. The learning process is likely needing additional data, as 135 photos might be too low for a well fine tuned model. We could for example use exiting renaissance or baroque art to bolster the dataset. We could also investigate data augmentation to improve the training set.&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Star Wars Trek</title>
-		<published>2022-08-26T00:00:00+00:00</published>
-		<updated>2022-08-27T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/star-wars-trek/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/star-wars-trek/</id>
-		<content type="html">&lt;p&gt;Recently I started to do the latest version of the course &lt;a href=&quot;https:&#x2F;&#x2F;course.fast.ai&#x2F;&quot;&gt;Practical Deep Learning for Coders&lt;&#x2F;a&gt; from &lt;a href=&quot;https:&#x2F;&#x2F;www.fast.ai&#x2F;&quot;&gt;fast.ai&lt;&#x2F;a&gt;. I am very much enjoying the hands-on approach of the course and it is quite amazing to see how a deep learning based image classifier could be built with very little code. In the &lt;a href=&quot;https:&#x2F;&#x2F;course.fast.ai&#x2F;Lessons&#x2F;lesson1.html&quot;&gt;first chapter of the book that accompanies the course&lt;&#x2F;a&gt; a model is trained to recognize whether an image depicts a bird or a forest. In this article, as an exercise, I will instead create a model that can recognize if an image of a spaceship is from Star Wars or from Star Trek.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Star Wars Trek</title>
+        <published>2022-08-26T00:00:00+00:00</published>
+        <updated>2022-08-27T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/star-wars-trek/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/star-wars-trek/</id>
+        
+        <content type="html">&lt;p&gt;Recently I started to do the latest version of the course &lt;a href=&quot;https:&#x2F;&#x2F;course.fast.ai&#x2F;&quot;&gt;Practical Deep Learning for Coders&lt;&#x2F;a&gt; from &lt;a href=&quot;https:&#x2F;&#x2F;www.fast.ai&#x2F;&quot;&gt;fast.ai&lt;&#x2F;a&gt;. I am very much enjoying the hands-on approach of the course and it is quite amazing to see how a deep learning based image classifier could be built with very little code. In the &lt;a href=&quot;https:&#x2F;&#x2F;course.fast.ai&#x2F;Lessons&#x2F;lesson1.html&quot;&gt;first chapter of the book that accompanies the course&lt;&#x2F;a&gt; a model is trained to recognize whether an image depicts a bird or a forest. In this article, as an exercise, I will instead create a model that can recognize if an image of a spaceship is from Star Wars or from Star Trek.&lt;&#x2F;p&gt;
 &lt;figure class=centeredfig&gt;
     &lt;img src=featured.png&gt;
     
@@ -281,5 +290,6 @@
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;In both cases the model can classify these iconic spaceships really well. It is really cool to see how little code is required to create and use a model for these type of predictions with fast.ai, which I think it is pretty amazing. I can not recommend the book&#x2F;course &lt;a href=&quot;https:&#x2F;&#x2F;course.fast.ai&#x2F;&quot;&gt;Practical Deep Learning for Coders&lt;&#x2F;a&gt; enough and will definitely hope to dive deeper as I go along.&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

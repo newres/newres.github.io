@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - program analysis</title>
-	<link href="https://www.newresalhaider.com/tags/program-analysis/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2017-12-22T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/program-analysis/atom.xml</id>
-	<entry xml:lang="en">
-		<title>Semantic Aware Software Analysis</title>
-		<published>2017-12-22T00:00:00+00:00</published>
-		<updated>2017-12-22T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/project/semantic-software-analysis/" type="text/html"/>
-		<id>https://www.newresalhaider.com/project/semantic-software-analysis/</id>
-		<content type="html">&lt;p&gt;Software bugs and errors have a monumental negative impact on society. Not only can they have huge monetary cost, ranging into billions of dollars annually in the United States alone, but in some cases can even lead to disasters that lead to the loss of life. Preventing such issues from happening requires a large amount of effort in designing and maintaining software. &lt;&#x2F;p&gt;
+    <title> - program analysis</title>
+    <link href="https://www.newresalhaider.com/tags/program-analysis/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2017-12-22T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/program-analysis/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Semantic Aware Software Analysis</title>
+        <published>2017-12-22T00:00:00+00:00</published>
+        <updated>2017-12-22T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/project/semantic-software-analysis/" type="text/html"/>
+        <id>https://www.newresalhaider.com/project/semantic-software-analysis/</id>
+        
+        <content type="html">&lt;p&gt;Software bugs and errors have a monumental negative impact on society. Not only can they have huge monetary cost, ranging into billions of dollars annually in the United States alone, but in some cases can even lead to disasters that lead to the loss of life. Preventing such issues from happening requires a large amount of effort in designing and maintaining software. &lt;&#x2F;p&gt;
 &lt;p&gt;However designing and maintaining error free software remains a difficult problem. Not only is software getting more complex, its correct functioning often depends on highly specific domain knowledge of its purpose and its environment. Therefor manually checking the correctness of the software is expensive in both time and available expertise.&lt;&#x2F;p&gt;
 &lt;p&gt;A potential solution that was proposed for this is using machine understandable domain knowledge to help automate software maintenance tasks. Formal ontologies have been proposed and used in various fields to make domain knowledge explicit and usable for both humans and software. In particular during my thesis work, titled &amp;quot;An Ontology Based Framework for Specification Mining and Dynamic Program Analysis&amp;quot;, the use of ontologies to help understand the working of a running program were successfully explored. In particular it was shown that for a category of bugs, general ontologies such as WordNet, can be used find issues issues from program traces.&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

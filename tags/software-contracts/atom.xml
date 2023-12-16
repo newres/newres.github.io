@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - software contracts</title>
-	<link href="https://www.newresalhaider.com/tags/software-contracts/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2018-05-01T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/software-contracts/atom.xml</id>
-	<entry xml:lang="en">
-		<title>Spec-stacular Spider-Man</title>
-		<published>2018-04-29T00:00:00+00:00</published>
-		<updated>2018-05-01T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/spec-stacular-spider-man/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/spec-stacular-spider-man/</id>
-		<content type="html">&lt;p&gt;Spider-Man is one of the most iconic heroes of the Marvel universe. Created by Stan Lee and Steve Ditko, Spider-Man is a regular teenager named Peter Parker, who due to being bitten by a radio-active spider, gains abilities such as the proportional strength of a spider, wall crawling and a spider sense to detect upcoming danger. One of the biggest draws of Spider-Man that although he is a superhero and fought various villains from cosmic beings to petty criminals, he also had to deal with regular everyday problems, such as money issues, school life and the pressure of a job.&lt;&#x2F;p&gt;
+    <title> - software contracts</title>
+    <link href="https://www.newresalhaider.com/tags/software-contracts/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-05-01T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/software-contracts/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Spec-stacular Spider-Man</title>
+        <published>2018-04-29T00:00:00+00:00</published>
+        <updated>2018-05-01T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/spec-stacular-spider-man/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/spec-stacular-spider-man/</id>
+        
+        <content type="html">&lt;p&gt;Spider-Man is one of the most iconic heroes of the Marvel universe. Created by Stan Lee and Steve Ditko, Spider-Man is a regular teenager named Peter Parker, who due to being bitten by a radio-active spider, gains abilities such as the proportional strength of a spider, wall crawling and a spider sense to detect upcoming danger. One of the biggest draws of Spider-Man that although he is a superhero and fought various villains from cosmic beings to petty criminals, he also had to deal with regular everyday problems, such as money issues, school life and the pressure of a job.&lt;&#x2F;p&gt;
 &lt;figure class=centeredfig&gt;
     &lt;img src=spectacular-spider-man.jpg&gt;
     
@@ -217,5 +221,6 @@
 &lt;p&gt;Nonetheless I hope this article gives a solid introduction, and maybe an interest to using the spec library, even if one does not have a Clojure or even a heavy programming background. The source code snippets are available at: &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;spider-man-spec&quot;&gt;Spider-Man-Spec&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;If you have a data validation problem, by all means take a swing at it with the Spec library. I am convinced that the results you will get will be nothing short of spectacular.&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

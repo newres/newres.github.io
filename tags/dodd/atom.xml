@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - DODD</title>
-	<link href="https://www.newresalhaider.com/tags/dodd/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2022-04-05T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/dodd/atom.xml</id>
-	<entry xml:lang="en">
-		<title>Data Oriented Domain Design</title>
-		<published>2022-04-05T00:00:00+00:00</published>
-		<updated>2022-04-05T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/dodd/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/dodd/</id>
-		<content type="html">&lt;p&gt;One of the most difficult parts of developing software for a particular task is understanding the (business) domain in which the software needs to operate. This is due to the fact that software engineers often lack the expertise in complex areas such as health, law, finance, etc in which the software they create needs to solve problems. A similar situation holds for domain experts. For example, while lawyers are by definition well versed in the legal domain, it is not necessarily the case that they are also software engineers. This lack of knowledge can make developing software quite difficult. To continue with our legal example, suppose we want to create an application that represents and searches laws. From the software engineers side, the legal terminology can be quite burdensome to understand and it might not be very clear to them what aspects of it would be important for them to implement. On the other hand, it is important to be able to make it understandable to legal experts, without any software engineering knowledge, what the software is doing in relation to the concepts in their domain.&lt;&#x2F;p&gt;
+    <title> - DODD</title>
+    <link href="https://www.newresalhaider.com/tags/dodd/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-04-05T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/dodd/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Data Oriented Domain Design</title>
+        <published>2022-04-05T00:00:00+00:00</published>
+        <updated>2022-04-05T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/dodd/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/dodd/</id>
+        
+        <content type="html">&lt;p&gt;One of the most difficult parts of developing software for a particular task is understanding the (business) domain in which the software needs to operate. This is due to the fact that software engineers often lack the expertise in complex areas such as health, law, finance, etc in which the software they create needs to solve problems. A similar situation holds for domain experts. For example, while lawyers are by definition well versed in the legal domain, it is not necessarily the case that they are also software engineers. This lack of knowledge can make developing software quite difficult. To continue with our legal example, suppose we want to create an application that represents and searches laws. From the software engineers side, the legal terminology can be quite burdensome to understand and it might not be very clear to them what aspects of it would be important for them to implement. On the other hand, it is important to be able to make it understandable to legal experts, without any software engineering knowledge, what the software is doing in relation to the concepts in their domain.&lt;&#x2F;p&gt;
 &lt;p&gt;Various solutions have been proposed for this problem, such as &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Domain-driven_design&quot;&gt;Domain Driven Design&lt;&#x2F;a&gt; and formalizing the domain using &lt;a href=&quot;https:&#x2F;&#x2F;www.w3.org&#x2F;standards&#x2F;semanticweb&#x2F;ontology&quot;&gt;Linked Data Ontologies&lt;&#x2F;a&gt;.
 These methodologies can be quite complex, which they need to be in order to capture the nuances of the domain and descriptions of what is possible. This makes the important process of domain formalisation often quite daunting. In this article, I will show a very lightweight approach, that can be applied as a starting point towards formalising the domain. The core idea is to use lightweight data notation languages, such as &lt;a href=&quot;https:&#x2F;&#x2F;www.json.org&#x2F;json-en.html&quot;&gt;JSON&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;edn-format&#x2F;edn&quot;&gt;EDN&lt;&#x2F;a&gt; to represent elements of the domain. The elements of these languages, such as the notations for sequences, key and value pairs, etc would then be used as a common language for both the software engineer and domain expert to explain the problem and how the software is used to solve it.&lt;&#x2F;p&gt;
 &lt;p&gt;For the purpose of this article I will call this method Data Oriented Domain Design (DODD). Not coincidentally the subject that we aim to represent are a few elements of the &lt;a href=&quot;https:&#x2F;&#x2F;www.congress.gov&#x2F;bill&#x2F;111th-congress&#x2F;house-bill&#x2F;4173&#x2F;text?r=1&quot;&gt;Dodd-Frank Wall Street Reform and Consumer Protection Act&lt;&#x2F;a&gt;, which we will simply refer as the Dodd-Frank law in this context. &lt;&#x2F;p&gt;
@@ -123,5 +127,6 @@ These methodologies can be quite complex, which they need to be in order to capt
 &lt;p&gt;Another issue is that these lightweight data languages are often designed for the perspective of a software engineer, that most likely is going to utilize them. However with some tooling they could be made more accessible with domain experts, especially as they are relatively straightforward, with fewer elements, compared to more complex representations.&lt;&#x2F;p&gt;
 &lt;p&gt;Nonetheless even with these limitations, Data Oriented Domain Design in which a lightweight data notation language is used to help express examples of a domain to both domain experts and software engineers, can provide a relatively gentle start to modelling the domain through a set of examples. Due to its relative simplicity it could be applied as an initial step, before more &amp;quot;heavyweight&amp;quot; models are brought into the picture. It can provide a great tool for some frank discussions on how a software should function in a particular domain. &lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

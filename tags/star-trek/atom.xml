@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title> - Star Trek</title>
-	<link href="https://www.newresalhaider.com/tags/star-trek/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.newresalhaider.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2020-02-02T00:00:00+00:00</updated>
-	<id>https://www.newresalhaider.com/tags/star-trek/atom.xml</id>
-	<entry xml:lang="en">
-		<title>Darmok in core.logic</title>
-		<published>2020-02-02T00:00:00+00:00</published>
-		<updated>2019-02-02T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/darmok-core-logic/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/darmok-core-logic/</id>
-		<content type="html">&lt;p&gt;One of the greatest Star Trek episodes is titled &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Darmok&quot;&gt;Darmok&lt;&#x2F;a&gt; in &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Star_Trek:_The_Next_Generation&quot;&gt;Star Trek: The Next Generation&lt;&#x2F;a&gt;.  It has the hallmarks of a great Star Trek: TNG episode: a first contact between two civilizations and a dilemma that is not solved by violence but by thinking and understanding.&lt;&#x2F;p&gt;
+    <title> - Star Trek</title>
+    <link href="https://www.newresalhaider.com/tags/star-trek/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-02-02T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/star-trek/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Darmok in core.logic</title>
+        <published>2020-02-02T00:00:00+00:00</published>
+        <updated>2019-02-02T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/darmok-core-logic/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/darmok-core-logic/</id>
+        
+        <content type="html">&lt;p&gt;One of the greatest Star Trek episodes is titled &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Darmok&quot;&gt;Darmok&lt;&#x2F;a&gt; in &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Star_Trek:_The_Next_Generation&quot;&gt;Star Trek: The Next Generation&lt;&#x2F;a&gt;.  It has the hallmarks of a great Star Trek: TNG episode: a first contact between two civilizations and a dilemma that is not solved by violence but by thinking and understanding.&lt;&#x2F;p&gt;
 &lt;p&gt;One of the nicest logic programming languages is &lt;a href=&quot;http:&#x2F;&#x2F;minikanren.org&#x2F;&quot;&gt;miniKanren&lt;&#x2F;a&gt;. This is due to the fact that it is a small, relatively easy to understand &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Logic_programming&quot;&gt;Logic Programming (LP)&lt;&#x2F;a&gt; language and has implementations in many programming languages. This later feature allows for logic programming features to be used in many different environments, as a logic programming &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Domain-specific_language&quot;&gt;Domain-Specific language (DSL)&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
 &lt;p&gt;A popular implementation of miniKanren is the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;clojure&#x2F;core.logic&quot;&gt;core.logic&lt;&#x2F;a&gt; library of the &lt;a href=&quot;https:&#x2F;&#x2F;clojure.org&#x2F;&quot;&gt;Clojure&lt;&#x2F;a&gt; programming language. In this article we aim to introduce miniKanren&#x2F;core.logic by encoding story elements of the Darmok episode of Star Trek: TNG (some spoilers for the episode will follow). &lt;&#x2F;p&gt;
 &lt;p&gt;The episode is based around the fact that the Federation and the Tamarian people aim to establish successful first contact with each other. From the Federation, the crew of the starship Enterprise are sent to the planet El-Adrel where a Tamarian ship awaits them. Unfortunately attempts at communication fail from both sides and lead to some dangerous situations. The difficulty of communication arises from the fact that Tamarians communicate exclusively through allegory. This means that it is not enough to just decipher the words and grammar used in the Tamarian language, but the crew of the Enterprise must also understand the myths and historical events to which these allegories refer to. Within the episode multiple allegories are used by the Tamarians, such as with the phrase &amp;quot;Darmok and Jalad at Tanagra&amp;quot;, that utterly baffle the crew at first. However due to shared dangers and cooperation by the captain of the Enterprise, Picard, and the captain of the Tamarian ship, Darmok, they start to understand each other. In the end a successful first contact is made. This is captured by the newly coined allegory for first contact in the Tamarian language: &amp;quot;Picard and Dathon at El-Adrel&amp;quot;.&lt;&#x2F;p&gt;
@@ -246,14 +250,19 @@
 &lt;p&gt;There you have it, a very quick overview of using core.logic for logic programming. If you would like to experiment further the code used in this article is &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;darmok-core-logic&quot;&gt;available&lt;&#x2F;a&gt;. Here we only scratched the surface of what is possible in a logic programming environment such as core.logic. Feel free to check it out, or any other &lt;a href=&quot;http:&#x2F;&#x2F;minikanren.org&#x2F;#implementations&quot;&gt;miniKanren implementation available in your language&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;I hope that, much like the Darmok episode, this article has expanded your horizons on communicating. Logic programming is a very interesting, and often underutilized programming paradigm. The core.logic&#x2F;miniKanren logic programming language is a great system to get started with it. I hope that this, perhaps first, contact with Logic Programming or core.logic aids you in your future endeavors.&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Prolog and the Price of Peace</title>
-		<published>2019-02-01T00:00:00+00:00</published>
-		<updated>2019-02-04T00:00:00+00:00</updated>
-		<link href="https://www.newresalhaider.com/post/prolog-price-of-peace/" type="text/html"/>
-		<id>https://www.newresalhaider.com/post/prolog-price-of-peace/</id>
-		<content type="html">&lt;p&gt;The use of logic is a common element in Science Fiction. In the Star Trek universe &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Vulcan_(Star_Trek)&quot;&gt;Vulcans&lt;&#x2F;a&gt; are a species that is famously known for aiming to live by logic and reason. Because of this they are often considered masters of these subjects. Yet there was a case in an episode of the Star Trek show &lt;a href=&quot;http:&#x2F;&#x2F;memory-alpha.wikia.com&#x2F;wiki&#x2F;The_Maquis,_Part_II_(episode)&quot;&gt;Deep Space 9&lt;&#x2F;a&gt;, where &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Quark_(Star_Trek)&quot;&gt;Quark&lt;&#x2F;a&gt;, a &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Ferengi&quot;&gt;Ferengi&lt;&#x2F;a&gt;, was able to convince Sakonna, a Vulcan, of the error of her logic and reasoning. &lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Prolog and the Price of Peace</title>
+        <published>2019-02-01T00:00:00+00:00</published>
+        <updated>2019-02-04T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/prolog-price-of-peace/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/prolog-price-of-peace/</id>
+        
+        <content type="html">&lt;p&gt;The use of logic is a common element in Science Fiction. In the Star Trek universe &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Vulcan_(Star_Trek)&quot;&gt;Vulcans&lt;&#x2F;a&gt; are a species that is famously known for aiming to live by logic and reason. Because of this they are often considered masters of these subjects. Yet there was a case in an episode of the Star Trek show &lt;a href=&quot;http:&#x2F;&#x2F;memory-alpha.wikia.com&#x2F;wiki&#x2F;The_Maquis,_Part_II_(episode)&quot;&gt;Deep Space 9&lt;&#x2F;a&gt;, where &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Quark_(Star_Trek)&quot;&gt;Quark&lt;&#x2F;a&gt;, a &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Ferengi&quot;&gt;Ferengi&lt;&#x2F;a&gt;, was able to convince Sakonna, a Vulcan, of the error of her logic and reasoning. &lt;&#x2F;p&gt;
 &lt;p&gt;For this Quark made use of Ferengi philosophy, namely the Third Rule of Acquisition. The Rules of Acquisition are a series of proverbs and guidelines that govern Ferengi society, and notably their business dealings that take a prominent place in their lives. The Third Rule of Acquisition states that &amp;quot;Never spend more for an acquisition than you have to.&amp;quot; By applying this rule to the situation in the episode Quark was able make it clear to Sakonna that the best time broker a peace agreement would be &amp;quot;right now&amp;quot;, as the price of peace is at an all time low. &lt;&#x2F;p&gt;
 &lt;figure&gt;
   &lt;img src=&quot;featured.jpg&quot;  &#x2F;&gt;
@@ -365,5 +374,6 @@
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;Hopefully, much like Quark&#x27;s application of the Third Rule of Acquisition, this intro would have been enough to convince Sakonna of the logic of purchasing peace at the lowest possible price. Similarly, I hope that as a reader, this article gave some insight to the usefulness of Prolog in such scenarios. Next time, you are dealing with a problem domain, that would easily match to a similar scenario of rules, facts and queries, give Prolog a try. It is, after all, a very logical choice.&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>
