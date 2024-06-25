@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Newres Al Haider</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+  <link href="https:&#x2F;&#x2F;www.newresalhaider.com/style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.newresalhaider.com/scripts/menu.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@newresa">
+<meta name="twitter:creator" content="@newresa">
+
+
+<meta name="twitter:title" content="Fellowship of Prolog">
+<meta name="title" property="og:title" content="Fellowship of Prolog" />
+
+
+<meta name="twitter:description" content="Using LLM&#x27;s to write and use Prolog programs, with an example based on The Lord of the Rings.
+">
+<meta name="description" property="og:description" content="Using LLM&#x27;s to write and use Prolog programs, with an example based on The Lord of the Rings.
+" />
+
+
+<meta name="author" content="Newres Al Haider" />
+<meta property="article:author" content="Newres Al Haider">
+<meta property="og:type" content="article" />
+
+<meta property="article:published_time" content="2024-06-25">
+
+
+    
+        <meta property="article:tag" content="AI">
+    
+        <meta property="article:tag" content="LLM">
+    
+        <meta property="article:tag" content="Prolog">
+    
+
+
+    <meta property="article:modified_time" content="2024-06-25">
+
+
+
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/fellowshipofprolog/featured.jpg">
+<meta property="og:image" content="https://www.newresalhaider.com/post/fellowshipofprolog/featured.jpg" />
+
+
+</head>
+
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="title is-3">
+                Newres Al Haider
+            </h1>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="NavbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="NavbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/">
+                <h2 class="subtitle is-5">
+                    Home
+                </h2>
+            </a>
+            <a class="navbar-item" href="/post/">
+                <h2 class="subtitle is-5">
+                    Posts
+                </h2>
+            </a>
+            <a class="navbar-item" href="/project/">
+                <h2 class="subtitle is-5">
+                    Projects
+                </h2>
+            </a>
+            <a class="navbar-item" href="/publication/">
+                <h2 class="subtitle is-5">
+                    Publications
+                </h2>
+            </a>
+        </div>
+    </div>
+</nav>
+  <section class="section">
+    <div class="container">
+      
+
+<h1 class="title">
+    Fellowship of Prolog
+</h1>
+<p class="subtitle"><strong>2024-06-25</strong></p>
+<p><a href="https://en.wikipedia.org/wiki/Logic_programming">Logic programming</a> with <a href="https://en.wikipedia.org/wiki/Prolog">Prolog</a> can be a very effective way to find solutions to a number of problems. Within Prolog one can define a program by describing it with facts (that represent what we know), rules (that show how to derive new knowledge) and queries (that describe what we would like to know). By using queries on a knowledge base of facts and rules we can solve a variety of problems in many domains.</p>
+<p>This approach is quite powerful, but unfortunately Prolog as a programming language is often overlooked. One of the reasons for this is that it can be quite difficult for people without (logic) programming knowledge to break down problems into such terms. Even with experience in Prolog this process can be quite time consuming.</p>
+<p><a href="https://en.wikipedia.org/wiki/Large_language_model">Large Language Models (LLMs)</a>, such as <a href="https://openai.com/chatgpt/">Chat-GPT</a>, can provide an interesting way to tackle this issue. In this article I will aim to show how Chat-GPT (or another LLM) could help create and use Prolog programs to solve problems. For this I will be using &quot;Lord of the Rings&quot; themed logic puzzles.</p>
+<figure class=centeredfig>
+    <img src=featured.jpg>
+    
+    <figcaption>
+        
+        <h4>Characters from the Fellowship of the Ring walking in a single line. This is the basic setup for the logic puzzles used in this article.</h4>
+        
+        
+    </figcaption>
+</figure>
+<p>Let's say we want to describe a situation in which the members of the Fellowship of the Ring are walking down a narrow path. The path is so narrow that no one can walk side by side. Each Fellowship member can only walk in a single line, one after another. The puzzles are based on the idea that given a number of conditions we would like to know in which order the members of the Fellowship are walking.</p>
+<p>First let's start off with a small number of conditions to show off the approach. We assume that only three members of the Fellowship are walking: Legolas, Gimli and Frodo. Our restrictions are that Legolas has to walk before Gimli and Gimli must be next to Frodo (this is the reverse order of what it can be seen in the above figure).</p>
+<!-- The Fellowship at this point consists of Aragorn, Boromir, Legolas, Gimli, Merry, Pippin, Frodo, Sam and Gandalf. -->
+<!-- Aragorn is walking with at least 4 others behind him.
+Merry wants to show his bravery to Pippin, so he walks directly in front of him.
+Gandalf walks ahead of Aragorn.
+Boromir wants to be guided by the ranger, Aragorn, so he walks somewhere behind him.
+Boromor also wants to keep an eye out on the ring bearer, Frodo, so he walks directly behind him.
+Sam is walking with next to at least another Hobbit (Frodo, Merry or Pippin).
+Gimli wants to make sure Legolas does not outshine him, so he walks ahead of him.
+Legolas only has at most two others behind him. -->
+<p>In order to model this puzzle with Prolog, first we need to define the notion of the &quot;single line order&quot; that the Fellowship is walking in. In addition we need to define what terms such as <code>before</code>, <code>ahead</code>, etc mean within the context of this puzzle in Prolog. For one well versed in Prolog this can be a pretty routine task but in this case let's assume little to no Prolog knowledge for the person that aims to solve this puzzle. Instead we can ask Chat-GPT to come up with a translation of this problem to Prolog code. </p>
+<p>The Prolog code that we use in this article could likely be run with any number of Prolog implementations, such as <a href="https://www.swi-prolog.org/">SWI Prolog</a>. For this article we generate code to use with <a href="http://tau-prolog.org/">Tau prolog</a>. The benefit of using Tau prolog is that it can run in the browser and it has an <a href="http://tau-prolog.org/sandbox/">online sandbox</a> available where code can be run without any installation. If one wants to follow along without any setup I highly recommend using this sandbox.</p>
+<!-- If one wants to follow along, while any Prolog implementation would be suitable (such as SWI Prolog), I recommend Tau Prolog as it has an online sandbox available where once could code without any installation.  -->
+<p>To create the Prolog code for the simplified version of the puzzle we ask Chat-GPT the following question: </p>
+<p>&quot;Can you write an example with tau prolog of a logic puzzle in which 3 members of the fellowship need to walk in a single line. Legolas has to be before Gimli and Gimli must be next to Frodo?&quot;</p>
+<p>to which Chat-GPT gives us the code: </p>
+<pre data-lang="pro" style="background-color:#2b303b;color:#c0c5ce;" class="language-pro "><code class="language-pro" data-lang="pro"><span>% Load necessary library
+</span><span>:- </span><span style="color:#8fa1b3;">use_module</span><span>(</span><span style="color:#8fa1b3;">library</span><span>(lists)).
+</span><span>
+</span><span>% Define the predicate to find the order
+</span><span style="color:#8fa1b3;">fellowship_order</span><span>(Order) :-
+</span><span>    </span><span style="color:#bf616a;">Order </span><span>= [_, _, _],  % There are three positions to fill.
+</span><span>    </span><span style="color:#bf616a;">member</span><span>(legolas, Order),
+</span><span>    </span><span style="color:#bf616a;">member</span><span>(gimli, Order),
+</span><span>    </span><span style="color:#bf616a;">member</span><span>(frodo, Order),
+</span><span>    </span><span style="color:#bf616a;">before</span><span>(legolas, gimli, Order),
+</span><span>    </span><span style="color:#bf616a;">next_to</span><span>(gimli, frodo, Order).
+</span><span>
+</span><span>% Helper predicate to check </span><span style="color:#b48ead;">if </span><span>X is before Y in the List
+</span><span style="color:#8fa1b3;">before</span><span>(X, Y, List) :-
+</span><span>    </span><span style="color:#bf616a;">nth0</span><span>(IndexX, List, X),
+</span><span>    </span><span style="color:#bf616a;">nth0</span><span>(IndexY, List, Y),
+</span><span>    </span><span style="color:#bf616a;">IndexX </span><span>&lt; IndexY.
+</span><span>
+</span><span>% Helper predicate to check </span><span style="color:#b48ead;">if </span><span>X is next to Y in the List
+</span><span style="color:#8fa1b3;">next_to</span><span>(X, Y, List) :-
+</span><span>    (   </span><span style="color:#8fa1b3;">nth0</span><span>(IndexX, List, X),
+</span><span>        </span><span style="color:#bf616a;">nth0</span><span>(IndexY, List, Y),
+</span><span>        </span><span style="color:#bf616a;">abs</span><span>(IndexX - IndexY) =:= </span><span style="color:#d08770;">1
+</span><span>    ).
+</span><span>
+</span><span>% Example query to find the order
+</span><span>% ?- </span><span style="color:#8fa1b3;">fellowship_order</span><span>(Order).
+</span></code></pre>
+<!-- Prolog code can be run with any number of Prolog implementations, (such as SWI Prolog) -->
+<p>From this small example we can see the general outline of how such a logic puzzle can be solved with Prolog. Although we are not going to describe in detail the full syntax and semantics a Prolog program, as there are some excellent <a href="https://lpn.swi-prolog.org/lpnpage.php?pageid=online">introductions</a> on this subject, we are going to briefly go over some concepts.</p>
+<p>A Prolog program is a knowledge base in which predicates, such as facts and rules, describe the domain. In our case the knowledge base defines this puzzle based on Lord of the Rings with three predicates: <code>before</code>, <code>next_to</code> and  <code>fellowship_order</code>. The <code>before</code> and <code>next_to</code> predicates express whether for two members in a list are before or next to each others respectively. The <code>X</code>, <code>Y</code> and <code>List</code> arguments expect variables (variable names are capitalized). The <code>fellowship_order</code> uses these predicates to express what is a valid, according to our logic puzzle, order of the members of the Fellowship. The members, such as <code>legolas</code> are atoms (they start with a lower case) and represent these characters in our domain. </p>
+<p>The query, <code>fellowship_order(Order).</code> which was helpfully given to us by Chat-GPT, allows us to gather the valid orders according to the puzzle when querying the above knowledge base. </p>
+<p>We can test this easily by entering the above Prolog code in the Tau Prolog sandbox. After pasting in the program, we can press <code>consult program</code>, which loads the knowledge base. As the goal that we want to query, we can enter <code>fellowship_order(Order).</code>. Doing this will retrieve <code>Order = [legolas,gimli,frodo]</code>, which is a valid answer to the logic puzzle.</p>
+<figure class=centeredfig>
+    <img src=lotrprologsandbox.png>
+    
+    <figcaption>
+        
+        <h4>Consulting the short Prolog example of the logic puzzle.</h4>
+        
+        
+    </figcaption>
+</figure>
+<p>Note that <code>Order = [legolas,frodo,gimli]</code> is a valid answer as well. If we would ask the query again in the Tau Prolog sandbox, we will get this answer instead. If we query for a third (or any subsequent) time, we get a <code>false</code>, which is Prolog's way of denoting that no answer could be found. This is due to Tau Prolog aiming to list all possible answers one by one given our query in this sandbox.</p>
+<p>Now that we have gone over a small example, let's see if this approach can work with a larger puzzle. While we can ask for the full Prolog code for a larger puzzle, in the version of Chat-GPT used at the time of writing, it had some trouble giving us a full and complete working program with lots of restrictions. Instead we can take the small example and add new constraints to it.</p>
+<p>Using this method we can create the following puzzle:</p>
+<!-- Aragorn is walking with at least 4 others behind him.
+Merry wants to show his bravery to Pippin, so he walks directly in front of him.
+Gandalf walks ahead of Aragorn.
+Boromir wants to be guided by the ranger, Aragorn, so he walks somewhere behind him.
+Boromor also wants to keep an eye out on the ring bearer, Frodo, so he walks directly behind him.
+Sam is walking with next to at least another Hobbit (Frodo, Merry or Pippin).
+Gimli wants to make sure Legolas does not outshine him, so he walks ahead of him.
+Legolas only has at most two others behind him.
+
+If we ask Chat-GPT to give an expanded version of this logic puzzle we end up with the following:
+
+```prolog
+% Load necessary library
+:- use_module(library(lists)).
+
+% Define the fellowship list and ensure that Aragorn has at least four others behind him
+fellowship_order(Order) :-
+    Order = [gandalf, _, aragorn, _, _, _, _, _],  % Gandalf walks ahead of Aragorn; Aragorn has at least four behind
+    member(boromir, Order),
+    member(frodo, Order),
+    member(sam, Order),
+    member(merry, Order),
+    member(pippin, Order),
+    member(gimli, Order),
+    member(legolas, Order),
+    length(Order, 8),  % Total members walking
+
+    % Defining relations based on problem statement
+    next_to(merry, pippin, Order),  % Merry walks directly in front of Pippin
+    merry_before_pippin(merry, pippin, Order),
+    before(gandalf, aragorn, Order),
+    after(boromir, aragorn, Order),  % Boromir walks somewhere behind Aragorn
+    directly_behind(boromir, frodo, Order),  % Boromir directly behind Frodo
+    hobbit_neighbor(sam, Order),  % Sam walks next to at least another Hobbit
+    before(gimli, legolas, Order),  % Gimli walks ahead of Legolas
+    at_most_two_behind(legolas, Order).  % Legolas has at most two behind him
+
+% Check if X is directly before Y
+directly_before(X, Y, [X, Y|_]).
+directly_before(X, Y, [_|T]) :-
+    directly_before(X, Y, T).
+
+% Check if X is directly behind Y
+directly_behind(X, Y, List) :-
+    directly_before(Y, X, List).
+
+% Check if X is before Y
+before(X, Y, [X|T]) :-
+    member(Y, T).
+before(X, Y, [_|T]) :-
+    before(X, Y, T).
+
+% Check if X is after Y
+after(X, Y, List) :-
+    before(Y, X, List).
+
+% Merry is directly before Pippin
+merry_before_pippin(merry, pippin, [merry, pippin|_]).
+merry_before_pippin(merry, pippin, [_|T]) :-
+    merry_before_pippin(merry, pippin, T).
+
+% Ensure Sam is next to another hobbit
+hobbit_neighbor(sam, List) :-
+    next_to(sam, frodo, List);
+    next_to(sam, merry, List);
+    next_to(sam, pippin, List).
+
+% Check if X is next to Y
+next_to(X, Y, [X, Y|_]).
+next_to(X, Y, [Y, X|_]).
+next_to(X, Y, [_|T]) :-
+    next_to(X, Y, T).
+
+% Check if a character has at most two others behind them
+at_most_two_behind(X, List) :-
+    reverse(List, RevList),
+    nth0(Index, RevList, X),
+    Index >= 2.
+
+% Example query to find the order
+% ?- fellowship_order(Order).
+```
+ -->
+<!-- We can see this structure in the small example above. After loading in the necessary library for lists, it defines the rules for `before`, `next_to` and what it means to be a valid `fellowship_order`. The query, which it helpfully gives as a comment: `% ?- fellowship_order(Order).` can   -->
+<pre data-lang="pro" style="background-color:#2b303b;color:#c0c5ce;" class="language-pro "><code class="language-pro" data-lang="pro"><span>% Load necessary library
+</span><span>:- </span><span style="color:#8fa1b3;">use_module</span><span>(</span><span style="color:#8fa1b3;">library</span><span>(lists)).
+</span><span>
+</span><span style="color:#8fa1b3;">fellowship_order</span><span>(Order) :-
+</span><span>    </span><span style="color:#bf616a;">Order </span><span>= [ _, _, _, _, _, _, _], 
+</span><span>  	</span><span style="color:#bf616a;">member</span><span>(aragorn, Order),
+</span><span>    </span><span style="color:#bf616a;">member</span><span>(frodo, Order),
+</span><span>    </span><span style="color:#bf616a;">member</span><span>(sam, Order),
+</span><span>    </span><span style="color:#bf616a;">member</span><span>(merry, Order),
+</span><span>    </span><span style="color:#bf616a;">member</span><span>(pippin, Order),
+</span><span>    </span><span style="color:#bf616a;">member</span><span>(gimli, Order),
+</span><span>    </span><span style="color:#bf616a;">member</span><span>(legolas, Order),
+</span><span>
+</span><span>    % Defining relations based </span><span style="color:#d08770;">on</span><span> problem statement
+</span><span>    </span><span style="color:#bf616a;">before</span><span>(aragorn, pippin, Order), % Aragorn walks before Pippin.
+</span><span>    </span><span style="color:#bf616a;">hobbit_neighbor</span><span>(frodo, Order),  % Frodo walks next to at least another Hobbit.
+</span><span>    </span><span style="color:#bf616a;">hobbit_neighbor</span><span>(sam, Order),  % Sam walks next to at least another Hobbit.
+</span><span>    </span><span style="color:#bf616a;">before</span><span>(gimli, legolas, Order),  % Gimli walks ahead of Legolas.
+</span><span>    </span><span style="color:#bf616a;">next_to</span><span>(merry, pippin, Order), % Merry walks next to Pippin.
+</span><span>    </span><span style="color:#bf616a;">after</span><span>(frodo, aragorn, Order). % Frodo walks after Aragorn.
+</span><span>
+</span><span>% Check </span><span style="color:#b48ead;">if </span><span>X is before Y
+</span><span style="color:#8fa1b3;">before</span><span>(X, Y, [X|T]) :-
+</span><span>    </span><span style="color:#bf616a;">member</span><span>(Y, T).
+</span><span style="color:#8fa1b3;">before</span><span>(X, Y, [_|T]) :-
+</span><span>    </span><span style="color:#bf616a;">before</span><span>(X, Y, T).
+</span><span>
+</span><span>% Check </span><span style="color:#b48ead;">if </span><span>X is after Y
+</span><span style="color:#8fa1b3;">after</span><span>(X, Y, List) :-
+</span><span>    </span><span style="color:#bf616a;">before</span><span>(Y, X, List).
+</span><span>    
+</span><span>% Ensure Sam is next to another hobbit
+</span><span style="color:#8fa1b3;">hobbit_neighbor</span><span>(X, List) :-
+</span><span>    </span><span style="color:#bf616a;">next_to</span><span>(X, frodo, List);
+</span><span>    </span><span style="color:#bf616a;">next_to</span><span>(X, sam, List);
+</span><span>    </span><span style="color:#bf616a;">next_to</span><span>(X, merry, List);
+</span><span>    </span><span style="color:#bf616a;">next_to</span><span>(X, pippin, List).
+</span><span>    
+</span><span>% Check </span><span style="color:#b48ead;">if </span><span>X is next to Y
+</span><span style="color:#8fa1b3;">next_to</span><span>(X, Y, [X, Y|_]).
+</span><span style="color:#8fa1b3;">next_to</span><span>(X, Y, [Y, X|_]).
+</span><span style="color:#8fa1b3;">next_to</span><span>(X, Y, [_|T]) :-
+</span><span>    </span><span style="color:#bf616a;">next_to</span><span>(X, Y, T).
+</span><span>    
+</span><span>% Example query to find the order
+</span><span>% ?- </span><span style="color:#8fa1b3;">fellowship_order</span><span>(Order).
+</span></code></pre>
+<p>This puzzle has a number of new types of restrictions and more members of the Fellowship represent, but works the same way as the previous one. If we run it in the sandbox we can get an answer such as <code>Order = [aragorn,frodo,sam,merry,pippin,gimli,legolas]</code> being returned. With an LLM we can even reverse the puzzle creation and get a textual description of the restrictions in the puzzle, as well as the puzzle itself. The following is the answer that ChatGPT returns when asked to describe the above puzzle in words:</p>
+<div class="content">
+<blockquote>
+<p>The Prolog puzzle presented involves arranging members of the Fellowship from &quot;The Lord of the Rings&quot; in a specific order based on given constraints. Here’s a step-by-step description:</p>
+<h4 id="objective">Objective</h4>
+<p>You need to determine the walking order of seven characters: Aragorn, Frodo, Sam, Merry, Pippin, Gimli, and Legolas.</p>
+<h4 id="given-constraints">Given Constraints</h4>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Aragorn walks before Pippin.
+</span><span>    Aragorn must come at some position earlier than Pippin.
+</span><span>
+</span><span>Frodo walks next to at least one other Hobbit.
+</span><span>    Frodo must be adjacent to either Sam, Merry, or Pippin.
+</span><span>
+</span><span>Sam walks next to at least one other Hobbit.
+</span><span>    Sam must also be adjacent to either Frodo, Merry, or Pippin.
+</span><span>
+</span><span>Gimli walks ahead of Legolas.
+</span><span>    Gimli must come at some position earlier than Legolas.
+</span><span>
+</span><span>Merry walks next to Pippin.
+</span><span>    Merry and Pippin must be directly adjacent in either order.
+</span><span>
+</span><span>Frodo walks after Aragorn.
+</span><span>    Frodo must come at some position later than Aragorn.
+</span></code></pre>
+<h4 id="key-definitions">Key Definitions</h4>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Order:
+</span><span>    A list of seven elements representing the walking order of the Fellowship members.
+</span><span>    Example: [aragorn, frodo, sam, merry, pippin, gimli, legolas].
+</span><span>
+</span><span>before/3:
+</span><span>    A predicate that checks if one character (X) appears before another (Y) in a list (Order).
+</span><span>
+</span><span>after/3:
+</span><span>    A predicate that checks if one character (X) appears after another (Y) in a list (Order). It uses the before/3 predicate to establish this relation.
+</span><span>
+</span><span>hobbit_neighbor/2:
+</span><span>    A predicate that checks if a character is next to at least one Hobbit in a list (Order). Hobbits include Frodo, Sam, Merry, and Pippin.
+</span><span>
+</span><span>next_to/3:
+</span><span>    A predicate that checks if two characters are adjacent in a list (Order).
+</span></code></pre>
+<h4 id="solution-mechanism">Solution Mechanism</h4>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>The fellowship_order/1 predicate defines the order and enforces all the constraints using the helper predicates.
+</span><span>The list Order is constrained to have exactly the seven members of the Fellowship.
+</span><span>The member/2 predicate ensures that all characters are included in the Order.
+</span><span>The constraints (before/3, after/3, hobbit_neighbor/2, next_to/3) enforce the relative positions and adjacency as specified.
+</span></code></pre>
+<h4 id="query">Query</h4>
+<p>To find the correct order, you can query:</p>
+<pre data-lang="pro" style="background-color:#2b303b;color:#c0c5ce;" class="language-pro "><code class="language-pro" data-lang="pro"><span>
+</span><span>?- </span><span style="color:#8fa1b3;">fellowship_order</span><span>(Order).
+</span></code></pre>
+<p>This will produce an Order that satisfies all the given constraints.</p>
+<h4 id="summary">Summary</h4>
+<p>This puzzle requires using logical relations to determine the correct sequence of characters while adhering to the given positional constraints. The use of predicates like before/3, after/3, hobbit_neighbor/2, and next_to/3 helps in logically deducing the valid walking order of the characters.</p>
+</blockquote>
+</div>
+<p>Such an approach can give us a very interactive way to evolve our problem description as well as the solution. We can give a text description of new constraints to the LLM, play around with the generated code in the sandbox, and go back to the LLM to refine the descriptions of the problem until we have the right problem statement and the solution. </p>
+<p>In this case the back and forth between the Prolog code and the text can help us further refine the puzzle. A helpful hint if one wants to experiment further: increasing the limit parameter that controls a maximum number of inferences can help to run more complex puzzles in the sandbox. Feel free to try it out with the sandbox!</p>
+<p>I hope you enjoyed this journey into Prolog from LLMs and back again and will consider using Prolog in such a way during your quest to solve other problems as well!</p>
+
+
+    </div>
+  </section>
+</body>
+
+</html>
