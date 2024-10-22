@@ -100,6 +100,10 @@
         <lastmod>2018-01-14</lastmod>
     </url>
     <url>
+        <loc>https://www.newresalhaider.com/post/livebookofoa/</loc>
+        <lastmod>2024-10-22</lastmod>
+    </url>
+    <url>
         <loc>https://www.newresalhaider.com/post/meditations/</loc>
         <lastmod>2021-01-06</lastmod>
     </url>
@@ -261,6 +265,9 @@
         <loc>https://www.newresalhaider.com/tags/dynamic-analysis/</loc>
     </url>
     <url>
+        <loc>https://www.newresalhaider.com/tags/elixir/</loc>
+    </url>
+    <url>
         <loc>https://www.newresalhaider.com/tags/emacs/</loc>
     </url>
     <url>
@@ -283,6 +290,9 @@
     </url>
     <url>
         <loc>https://www.newresalhaider.com/tags/grammars/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/tags/green-lantern/</loc>
     </url>
     <url>
         <loc>https://www.newresalhaider.com/tags/haskell/</loc>
@@ -330,6 +340,9 @@
         <loc>https://www.newresalhaider.com/tags/linked-data/</loc>
     </url>
     <url>
+        <loc>https://www.newresalhaider.com/tags/livebook/</loc>
+    </url>
+    <url>
         <loc>https://www.newresalhaider.com/tags/llm/</loc>
     </url>
     <url>
@@ -337,6 +350,9 @@
     </url>
     <url>
         <loc>https://www.newresalhaider.com/tags/machine-learning/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/tags/notebook/</loc>
     </url>
     <url>
         <loc>https://www.newresalhaider.com/tags/org-mode/</loc>

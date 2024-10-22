@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title> - Notebook</title>
+    <link href="https://www.newresalhaider.com/tags/notebook/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-10-22T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/notebook/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Livebook of Oa</title>
+        <published>2024-10-22T00:00:00+00:00</published>
+        <updated>2024-10-22T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/livebookofoa/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/livebookofoa/</id>
+        
+        <content type="html">&lt;p&gt;Code notebooks, which can provide an interactive combination of code, data, AI, text and visualizations, have seen increasing use in recent years. &lt;a href=&quot;https:&#x2F;&#x2F;livebook.dev&#x2F;&quot;&gt;Livebook&lt;&#x2F;a&gt; is such a notebook environment that has some interesting features to explore. In this article I will write a basic Livebook notebook to show off some these features. This notebook will describe information from the Green Lantern series of comic books. In the Green Lantern series there exists a book called the &lt;code&gt;Book of Oa&lt;&#x2F;code&gt; that contains knowledge about Green Lanterns and it can convey this in a variety of forms. Inspired by this, the notebook in this article will show information about Green Lanterns in a variety of ways: text, code, visualizations and even with some AI applications. &lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=featured.jpg&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;The Book of Oa from the Green Lantern series of comic books. Copyright DC Comics.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;If one wants to follow along with the full source of the notebook presented here it can be found in this &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;newres&#x2F;livebook-of-oa&quot;&gt;repo on GitHub&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
+&lt;p&gt;In order to run Livebook one needs to &lt;a href=&quot;https:&#x2F;&#x2F;livebook.dev&#x2F;#install&quot;&gt;install&lt;&#x2F;a&gt; the Livebook app, either locally or in the cloud. The application is itself a web application that the user, or even multiple users, can connect to. Within the app one can create a new notebook, or open an existing one. &lt;&#x2F;p&gt;
+&lt;p&gt;In a new notebook the first step is usually installing some dependencies for the specific visualizations and AI tasks that we aim to do. Many of these can be added &#x27;on demand&#x27; when we want to create them during the development, but here we just load in all the dependencies we need for the example notebook in one go:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;elixir&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-elixir &quot;&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Mix&lt;&#x2F;span&gt;&lt;span&gt;.install([
+&lt;&#x2F;span&gt;&lt;span&gt;  {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:kino_maplibre&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;~&amp;gt; 0.1.12&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;},
+&lt;&#x2F;span&gt;&lt;span&gt;  {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:kino_vega_lite&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;~&amp;gt; 0.1.11&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;},
+&lt;&#x2F;span&gt;&lt;span&gt;  {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:kino_bumblebee&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;~&amp;gt; 0.5.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;},
+&lt;&#x2F;span&gt;&lt;span&gt;  {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:exla&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;~&amp;gt; 0.7.1&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;}
+&lt;&#x2F;span&gt;&lt;span&gt;],
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;config: &lt;&#x2F;span&gt;&lt;span&gt;[
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;nx: &lt;&#x2F;span&gt;&lt;span&gt;[
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;default_backend: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;EXLA&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Backend&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;default_defn_options: &lt;&#x2F;span&gt;&lt;span&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;compiler: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;EXLA&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;    ]
+&lt;&#x2F;span&gt;&lt;span&gt;  ],
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;system_env: &lt;&#x2F;span&gt;&lt;span&gt;[
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;XLA_TARGET: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cpu&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  ]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In Livebook the main language for code blocks is &lt;a href=&quot;https:&#x2F;&#x2F;elixir-lang.org&#x2F;&quot;&gt;Elixir&lt;&#x2F;a&gt;, a functional programming language in which Livebook itself was written. These code blocks can be evaluated, which in this case results in  the atom&lt;code&gt;:ok&lt;&#x2F;code&gt; being returned, denoting that this setup went well. Atoms in Elixir are constants whose value is their name. They are often used to note the state of an operation, in this case &lt;code&gt;:ok&lt;&#x2F;code&gt; showing success, or distinct values, an example for which we will see later.&lt;&#x2F;p&gt;
+&lt;p&gt;Aside from code blocks, another type of element we can add to these notebooks is text. For example a brief part of the introduction in the notebook contains the following text using Markdown:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot;Green Lanterns are superheroes that are part of an intergalactic law enforcement agency called the Green Lantern Corps. They derive their powers through their Power Rings, which they aim to control through their willpower. The Power Rings give the Green Lanters various powers such as flight, creating forcefields and contructs made for energy.
+The headquarters of the Green Lanterns are on the planet Oa, which is the home planet of the Guardians of the Universe. On the planet there is the Main Power Battery that powers all rings, as well as the Book of Oa (from which the name of this article is derived) which contains the laws and history of the Green Lantern Corps.
+Aside from Markdown, Livebooks can have many other types of content. For example we can create a diagram for the First Appearance of a number of Green Lanterns using the built in support for Mermaid.js.&amp;quot;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;As mentioned previously, there are many other options for different types of content. For example creating diagrams using &lt;a href=&quot;https:&#x2F;&#x2F;mermaid.js.org&#x2F;&quot;&gt;Mermaid.js&lt;&#x2F;a&gt; can be a breeze. The following block creates a diagram of the timelines of the first appearances of some of the Green Lanterns:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;mermaid&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-mermaid &quot;&gt;&lt;code class=&quot;language-mermaid&quot; data-lang=&quot;mermaid&quot;&gt;&lt;span&gt;timeline
+&lt;&#x2F;span&gt;&lt;span&gt;    title First Appearance
+&lt;&#x2F;span&gt;&lt;span&gt;    1959: Hal Jordan
+&lt;&#x2F;span&gt;&lt;span&gt;    1968: Guy Gardner
+&lt;&#x2F;span&gt;&lt;span&gt;    1972: John Stewart
+&lt;&#x2F;span&gt;&lt;span&gt;    1994: Kyle Rayner
+&lt;&#x2F;span&gt;&lt;span&gt;    2012: Simon Baz
+&lt;&#x2F;span&gt;&lt;span&gt;    2014: Jessica Cruz
+&lt;&#x2F;span&gt;&lt;span&gt;    2020: Sojurner Mullein
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=first_appearance.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;A Mermaid.js timeline of the first appearance of Green Lanterns in the comic books that is created with the above code.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;Code blocks can do more than just set up our notebook. For example we can define a struct to describe data relating to a Lantern. &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;elixir&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-elixir &quot;&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;defmodule &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Lantern &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;do
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;defstruct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;name: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;color: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:green&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;sector: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home_town: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;appearances: 0
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;end
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Without diving deep into Elixir semantics, the Lantern struct holds data about the name, color, sector, home town and appearances of a Lantern, with some basic default values. Notably the default value for the color of the Lanterns is green, denoted by the atom &lt;code&gt;:green&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;With these structs we can specify the data of six Green Lanterns from earth, and put them in a list named &lt;code&gt;green_lanterns_from_earth&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;elixir&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-elixir &quot;&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;hal_jordan =  %&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Lantern&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;name: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Hal Jordan&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;sector: 2814&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home_town: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Coast City, California&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;appearances: 5396  &lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;guy_gardner =  %&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Lantern&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;name: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Guy Gardner&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;sector: 2814&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home_town: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Baltimore&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;appearances: 1631 &lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;john_stewart=  %&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Lantern&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;name: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;John Stewart&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;sector: 2814&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home_town: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Detroit, Michigan&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;appearances: 1866&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;kyle_rayner =  %&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Lantern&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;name: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Kyle Rayner&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;sector: 2814&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home_town: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Los Angeles, California&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;appearances: 1696&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;simon_baz =  %&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Lantern&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;name: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Simon Baz&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;sector: 2814&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home_town: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Dearborn, Michigan&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;appearances: 443&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;jessica_cruz=  %&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Lantern&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;name: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Jessica Cruz&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;sector: 2814&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home_town: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Portland, Oregon&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;appearances: 431&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;sojourner_mullein =  %&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Lantern&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;name: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Sojourner Mullein&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;sector: 2814&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home_town: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;New York City, New York&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;appearances: 72&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;green_lanterns_from_earth = [hal_jordan, guy_gardner, john_stewart, kyle_rayner, simon_baz, jessica_cruz, sojourner_mullein]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;As these Green Lanterns all have a hometown on Earth we can also specify the coordinates of these locations.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;elixir&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-elixir &quot;&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;hometown_coordinates = %{
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;coordinates&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; =&amp;gt; [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;37.865894, -122.498055&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;39.299236, -76.609383&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;42.331429, -83.045753&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;34.052235, -118.243683&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;42.322262, -83.176315&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;45.523064, -122.676483&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;40.730610, -73.935242&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;],
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; =&amp;gt; [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Coast City&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Baltimore&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Detroit&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Los Angeles&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Dearborn&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Portland&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;New York City&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The above coordinates can be used to create a visualization of a map marked with the hometowns of the Lanterns. Although this map could be created programmatically, Livebook has the notion of &lt;code&gt;smart cells&lt;&#x2F;code&gt; with which UI components can be rapidly created, without reaching for code. The following map was created using this feature.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=hometown_map.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;A map of the hometowns of the Green Lanterns.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;In addition to Green Lanterns there are also Lanterns of other colors in the comics as well. Thankfully our &lt;code&gt;Lantern&lt;&#x2F;code&gt; struct also allows us to specify these:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;elixir&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-elixir &quot;&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;atrocitus = %&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Lantern&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;name: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Atrocitus&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;color: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:red&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;sector: 666&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;appearances: 321&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;bleez = %&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Lantern&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;name: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Bleez&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;color: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:red&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;sector: 33&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;appearances: 198&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;red_lanterns = [atrocitus, bleez]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We can combine the two lists of Lanterns into one with some Elixir code.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;elixir&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-elixir &quot;&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;lanterns = green_lanterns_from_earth ++ red_lanterns
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now that we have all these lanterns defined, we can create a visualization that lists all lanterns with their respective appearances. The first step towards this to create a data structure combining together the lanterns names, number of appearances and color. The follow code creates this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;elixir&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-elixir &quot;&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;lantern_appearances = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;Enum&lt;&#x2F;span&gt;&lt;span&gt;.reduce(lanterns, %{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;lanterns: &lt;&#x2F;span&gt;&lt;span&gt;[], &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;appearances: &lt;&#x2F;span&gt;&lt;span&gt;[], &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;color: &lt;&#x2F;span&gt;&lt;span&gt;[]}, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn&lt;&#x2F;span&gt;&lt;span&gt; lantern, acc -&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  %{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;lanterns:&lt;&#x2F;span&gt;&lt;span&gt; acc.lanterns ++ [lantern.name],
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;appearances:&lt;&#x2F;span&gt;&lt;span&gt; acc.appearances ++ [lantern.appearances],
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;color:&lt;&#x2F;span&gt;&lt;span&gt; acc.color ++ [lantern.color]
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Which results in the following data when evaluated:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;elixir&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-elixir &quot;&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;%{
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;color: &lt;&#x2F;span&gt;&lt;span&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:green&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:green&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:green&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:green&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:green&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:green&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:green&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:red&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:red&lt;&#x2F;span&gt;&lt;span&gt;],
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;appearances: &lt;&#x2F;span&gt;&lt;span&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5396&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1631&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1866&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1696&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;443&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;431&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;72&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;321&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;198&lt;&#x2F;span&gt;&lt;span&gt;],
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;lanterns: &lt;&#x2F;span&gt;&lt;span&gt;[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Hal Jordan&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Guy Gardner&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;John Stewart&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Kyle Rayner&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Simon Baz&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;   &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Jessica Cruz&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Sojourner Mullein&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Atrocitus&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Bleez&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This data can be used to create our visualization. Instead of using a smart cell, here we programmatically create the chart with the following code:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;elixir&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-elixir &quot;&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;VegaLite&lt;&#x2F;span&gt;&lt;span&gt;.new(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;title: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Lantern Appearances&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;|&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;VegaLite&lt;&#x2F;span&gt;&lt;span&gt;.data_from_values(lantern_appearances, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;only: &lt;&#x2F;span&gt;&lt;span&gt;[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;lanterns&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;appearances&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;color&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;])
+&lt;&#x2F;span&gt;&lt;span&gt;|&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;VegaLite&lt;&#x2F;span&gt;&lt;span&gt;.mark(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:bar&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;|&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;VegaLite&lt;&#x2F;span&gt;&lt;span&gt;.encode_field(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:x&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;lanterns&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;type: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:nominal&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;|&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;VegaLite&lt;&#x2F;span&gt;&lt;span&gt;.encode_field(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:y&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;appearances&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;type: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:quantitative&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;|&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;VegaLite&lt;&#x2F;span&gt;&lt;span&gt;.encode_field(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:color&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;color&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;type: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:nominal&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;title: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Lantern Color&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;scale: &lt;&#x2F;span&gt;&lt;span&gt;[
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;domain: &lt;&#x2F;span&gt;&lt;span&gt;[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;green&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;red&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;],
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;range: &lt;&#x2F;span&gt;&lt;span&gt;[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;green&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;red&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;  ])
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;!-- While the code looks more complex than what we did previously, it is often helpful to start off with a `smart cell` which we can turn into code with a press of a button and then modify it to easily get to the visualization that we want.  --&gt;
+&lt;p&gt;Evaluation of the above the code results in the following bar chart:&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=lantern_appearances.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;A bar chart of the number of lantern appearances in comic books.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;Finally, we can also add some AI functionality to round out our notebook. For example using a smart cell we can add a question answering system with only a few clicks:&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=question_answering.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;A question answering system that can answer who Green Lanterns are based on our textual description.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;Even AI based image generation can be embedded with smart cells. We can use this to generate an image of a Green Lantern power ring.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=generating_ring.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;An image of a Green Lantern power ring that has been generated.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+ 
+&lt;p&gt;Of course this is just a very short glimpse of the things that a Livebook based notebook can do. One feature that is very useful in practice is that Livebook notebooks are saved as &lt;code&gt;livemd&lt;&#x2F;code&gt; files which are a subset of markdown files. This makes them very suitable choice for writing documentation (such as for Github which renders &lt;code&gt;livemd&lt;&#x2F;code&gt; files are markdown) and are easily used with version control. Another feature we did not touch on here is using real-time collaboration on the notebooks when using Livebook.&lt;&#x2F;p&gt;
+&lt;p&gt;Hopefully with this article I helped to shine some light on the nice features of the Livebook environment. Feel free to take a look on &lt;a href=&quot;https:&#x2F;&#x2F;livebook.dev&#x2F;&quot;&gt;Livebook&#x27;s website&lt;&#x2F;a&gt; for more details on using it.  &lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
