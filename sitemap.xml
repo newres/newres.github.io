@@ -28,6 +28,9 @@
         <loc>https://www.newresalhaider.com/post/2024/</loc>
     </url>
     <url>
+        <loc>https://www.newresalhaider.com/post/2025/</loc>
+    </url>
+    <url>
         <loc>https://www.newresalhaider.com/post/accidentalren/</loc>
         <lastmod>2023-10-14</lastmod>
     </url>
@@ -94,6 +97,10 @@
     <url>
         <loc>https://www.newresalhaider.com/post/interlinked-data/</loc>
         <lastmod>2018-02-18</lastmod>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/post/intothematrix/</loc>
+        <lastmod>2025-03-23</lastmod>
     </url>
     <url>
         <loc>https://www.newresalhaider.com/post/introduction/</loc>
@@ -238,6 +245,9 @@
         <loc>https://www.newresalhaider.com/tags/curry/</loc>
     </url>
     <url>
+        <loc>https://www.newresalhaider.com/tags/cyberpunk/</loc>
+    </url>
+    <url>
         <loc>https://www.newresalhaider.com/tags/cyborg/</loc>
     </url>
     <url>
@@ -284,6 +294,9 @@
     </url>
     <url>
         <loc>https://www.newresalhaider.com/tags/functional-programming/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/tags/genai/</loc>
     </url>
     <url>
         <loc>https://www.newresalhaider.com/tags/golang/</loc>
@@ -350,6 +363,9 @@
     </url>
     <url>
         <loc>https://www.newresalhaider.com/tags/machine-learning/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/tags/matrix/</loc>
     </url>
     <url>
         <loc>https://www.newresalhaider.com/tags/notebook/</loc>
@@ -440,6 +456,9 @@
     </url>
     <url>
         <loc>https://www.newresalhaider.com/tags/specs/</loc>
+    </url>
+    <url>
+        <loc>https://www.newresalhaider.com/tags/stability-matrix/</loc>
     </url>
     <url>
         <loc>https://www.newresalhaider.com/tags/stable-diffusion/</loc>
