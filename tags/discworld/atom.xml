@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-    <title> - GenAI</title>
-    <link href="https://www.newresalhaider.com/tags/genai/atom.xml" rel="self" type="application/atom+xml"/>
+    <title> - Discworld</title>
+    <link href="https://www.newresalhaider.com/tags/discworld/atom.xml" rel="self" type="application/atom+xml"/>
     <link href="https://www.newresalhaider.com"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2025-04-12T00:00:00+00:00</updated>
-    <id>https://www.newresalhaider.com/tags/genai/atom.xml</id>
+    <id>https://www.newresalhaider.com/tags/discworld/atom.xml</id>
     <entry xml:lang="en">
         <title>The Great AI&#x27;Tuin</title>
         <published>2025-04-12T00:00:00+00:00</published>
@@ -123,113 +123,6 @@ Small Gods: &amp;quot;A forgotten god and his lone believer confront religious d
 &lt;p&gt;As one can see, the Semantic Web and Turtle format offer powerful ways to structure and connect information. The main drawback used to be that knowledge is often represented in natural language, or other less accessible formats. This made the benefits of such knowledge graphs hard to realize. &lt;&#x2F;p&gt;
 &lt;p&gt;Now, large language models can act as bridges: translating rich, human-authored natural language into structured formats like Turtle. This opens up new opportunities for building precise, interoperable knowledge graphs from books, documentation, or even casual writing. It allows humans or even software systems, to make very precise corrections or queries on this graph, without fear of inaccuracies.&lt;&#x2F;p&gt;
 &lt;p&gt;If you ever have the chance, give this approach using Turtle a go. It can feel quite magical!&lt;&#x2F;p&gt;
-</content>
-        
-    </entry>
-    <entry xml:lang="en">
-        <title>Into the Matrix</title>
-        <published>2025-03-23T00:00:00+00:00</published>
-        <updated>2025-03-23T00:00:00+00:00</updated>
-        <author>
-          <name>Unknown</name>
-        </author>
-        <link rel="alternate" href="https://www.newresalhaider.com/post/intothematrix/" type="text/html"/>
-        <id>https://www.newresalhaider.com/post/intothematrix/</id>
-        
-        <content type="html">&lt;p&gt;Image generation using AI that can run locally on a desktop or even a laptop has seen a tremendous leap in the last few years. When I &lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;post&#x2F;dunes&#x2F;&quot;&gt;first wrote about it&lt;&#x2F;a&gt; after &lt;a href=&quot;https:&#x2F;&#x2F;stability.ai&#x2F;news&#x2F;stable-diffusion-public-release&quot;&gt;the public release of Stable Diffusion&lt;&#x2F;a&gt;, getting everything installed was quite an involved process, involving configuring the right dependencies and terminal commands. This was especially true for those who wanted to experiment with different models (the systems that enable the generation of images from prompts) and front-ends (the user interfaces with which one can interact with the models and its results) that have since been released. &lt;&#x2F;p&gt;
-&lt;p&gt;Thankfully there are now tools, such as &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;LykosAI&#x2F;StabilityMatrix&quot;&gt;Stability Matrix&lt;&#x2F;a&gt;, that make the process of installing and using multiple models and front-ends very straightforward. In this article, I will walk through using Stability matrix to install a new frontend and a model to generate some images of characters as they would exist in a cyberpunk matrix. &lt;&#x2F;p&gt;
-&lt;figure class=centeredfig&gt;
-    &lt;img src=jax.png&gt;
-    
-    &lt;figcaption&gt;
-        
-        &lt;h4&gt;A Cyberpunk protagonist generated using Stability Matrix.&lt;&#x2F;h4&gt;
-        
-        
-    &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt;
-&lt;p&gt;The matrix is a staple concept in the Cyberpunk genre. It refers to a large immersive virtual reality network that users can access, most often through direct neural interfaces. In this virtual reality, data, knowledge, virtual avatars and AI can exist as tangible entities. The concept has been popularized in the book Neuromancer by William Gibson. Since then, it has been a staple in the Cyberpunk genre, appearing in the Matrix movies, the Shadowrun universe, Cyberpunk 2077 and more. In general, the concept is used to explore the effects of increasing digitization on society, human identity, and the implications of AI existing entirely within a virtual world.&lt;&#x2F;p&gt;
-&lt;p&gt;To start, we first need to install Stability Matrix, which can be downloaded from its &lt;a href=&quot;https:&#x2F;&#x2F;lykos.ai&#x2F;&quot;&gt;website&lt;&#x2F;a&gt; or from its &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;LykosAI&#x2F;StabilityMatrix&#x2F;releases&quot;&gt;GitHub releases&lt;&#x2F;a&gt; page. The installation process is pretty straightforward and I highly recommend opting for a portable install. This keeps all data, such as models, within a single directory, making it much easier to transfer everything to a different drive or computer in the future.&lt;&#x2F;p&gt;
-&lt;p&gt;Once the application is installed, the next step is to set up a UI for generating images from prompts. There are multiple front-ends available from the packages menu. For this article, we will use Stable Diffusion WebUI Forge, as it is easy to use and more than sufficient for our very basic image generation use case.&lt;&#x2F;p&gt;
-&lt;figure class=centeredfig&gt;
-    &lt;img src=packages.png&gt;
-    
-    &lt;figcaption&gt;
-        
-        &lt;h4&gt;The packages for the front-end listed that could be installed from Stability Matrix.&lt;&#x2F;h4&gt;
-        
-        
-    &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt;
-&lt;p&gt;We also need a model to generate images. For this we will use the Model Browser to find the right model for our use case. After searching for a model that is fine-tuned to generate cyberpunk imagery, I have settled on using the &lt;code&gt;Splatter Punk - Neon Waves&lt;&#x2F;code&gt; model. Installing it is just a click away.&lt;&#x2F;p&gt;
-&lt;!-- &lt;figure class=centeredfig&gt;
-    &lt;img src=models.png&gt;
-    
-    &lt;figcaption&gt;
-        
-        &lt;h4&gt;A sample of the models one could install&lt;&#x2F;h4&gt;
-        
-        
-    &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt;
- --&gt;
-&lt;figure class=centeredfig&gt;
-    &lt;img src=modelneon.png&gt;
-    
-    &lt;figcaption&gt;
-        
-        &lt;h4&gt;The &amp;#x27;Splatter Punk - Neon Waves&amp;#x27; model used to generate the images.&lt;&#x2F;h4&gt;
-        
-        
-    &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt;
-&lt;p&gt;Now, with both a model and a front-end installed, we can start generating the images that we need. We want to generate pictures for four characters in a Cyberpunk themed world, based on four archetypes common in stories: the Hero, the Friend of the Hero, a Minion&#x2F;Underling, and the Antagonist. While we could manually craft and fine tune the prompts, ChatGPT does a decent job of generating them for these archetypes:&lt;&#x2F;p&gt;
-&lt;figure class=centeredfig&gt;
-    &lt;img src=jax.png&gt;
-    
-    &lt;figcaption&gt;
-        
-        &lt;h4&gt;Jax `Glitch` Varen (The Hero)&lt;&#x2F;h4&gt;
-        
-        
-    &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt;
-&lt;p&gt;&amp;quot;A brooding, determined man standing in a neon-lit alley of a futuristic city, wearing a sleek black jacket with subtle glowing circuitry patterns. His eyes reflect a mix of sadness and determination, and a faint holographic interface hovers around his wrist. The background features towering skyscrapers with digital ads, and rain softly blurs the neon glow. The atmosphere should feel tense and introspective, symbolizing betrayal and a relentless quest for justice.&amp;quot;&lt;&#x2F;p&gt;
-&lt;figure class=centeredfig&gt;
-    &lt;img src=patch.png&gt;
-    
-    &lt;figcaption&gt;
-        
-        &lt;h4&gt;Nova `Patch` Rhee (The Friend)&lt;&#x2F;h4&gt;
-        
-        
-    &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt;
-&lt;p&gt;&amp;quot;A cheerful and energetic woman in her late twenties, standing in a cluttered workshop filled with glowing wires, cybernetic components, and floating holograms. She wears mismatched tech goggles on her forehead, with brightly colored clothes accented by glowing accessories. A small, hovering drone buzzes beside her, reflecting her inventive and playful nature. The setting should be cozy yet chaotic, highlighting her technical genius and hidden vulnerabilities.&amp;quot;&lt;&#x2F;p&gt;
-&lt;figure class=centeredfig&gt;
-    &lt;img src=cipher.png&gt;
-    
-    &lt;figcaption&gt;
-        
-        &lt;h4&gt;Cipher (The Minion&amp;#x2F;Underling)&lt;&#x2F;h4&gt;
-        
-        
-    &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt;
-&lt;p&gt;&amp;quot;A shadowy, humanoid figure made of fragmented code and shifting digital glitches, with piercing, glowing eyes. The body appears semi-transparent, constantly morphing between solid and pixelated forms. The background is a cold, digital void filled with streams of raw data flowing like rivers of light. The mood should be ominous and relentless, emphasizing Cipher’s role as an adaptive enforcer bound by hidden desires for autonomy.&amp;quot;&lt;&#x2F;p&gt;
-&lt;figure class=centeredfig&gt;
-    &lt;img src=elara.png&gt;
-    
-    &lt;figcaption&gt;
-        
-        &lt;h4&gt;Dr. Elara Voss (The Antagonist)&lt;&#x2F;h4&gt;
-        
-        
-    &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt;
-&lt;p&gt;&amp;quot;A powerful, composed woman standing at the center of a vast control room filled with holographic screens and pulsing data streams. She wears a high-collar, futuristic coat with minimalist design elements, her silver hair tied back in a severe style. Her expression is cold and calculating, with a subtle smirk of superiority. Behind her, the Matrix’s digital skyline stretches endlessly, symbolizing her control over the virtual world and her ambition for perfection.&amp;quot;&lt;&#x2F;p&gt;
-&lt;p&gt;The images above were generated using the default parameters with the listed prompts. In fact, the portraits of Jax and Nova were created on the first attempt, while the others were selected from multiple generated images. For this particular model, the positive prompts were mostly sufficient, however adding a negative prompt, such as one to filter out NSFW content, can be useful.&lt;&#x2F;p&gt;
-&lt;p&gt;It has been incredible to see how much better the tooling and the models have become since these locally installable image generation models first were released. In the early days setups usually involved installing and managing many dependencies from the commandline, which is no longer required. Whether for storytelling, concept art, or creative exploration, AI-generated imagery even from a desktop can be just one install away.&lt;&#x2F;p&gt;
 </content>
         
     </entry>

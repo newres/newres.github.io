@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Newres Al Haider</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+  <link href="https:&#x2F;&#x2F;www.newresalhaider.com/style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.newresalhaider.com/scripts/menu.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@newresa">
+<meta name="twitter:creator" content="@newresa">
+
+
+<meta name="twitter:title" content="The Great AI&#x27;Tuin">
+<meta name="title" property="og:title" content="The Great AI&#x27;Tuin" />
+
+
+<meta name="twitter:description" content="Building knowledge graphs with Turtle and LLMs, with a little Discworld magic along the way.
+">
+<meta name="description" property="og:description" content="Building knowledge graphs with Turtle and LLMs, with a little Discworld magic along the way.
+" />
+
+
+<meta name="author" content="Newres Al Haider" />
+<meta property="article:author" content="Newres Al Haider">
+<meta property="og:type" content="article" />
+
+<meta property="article:published_time" content="2025-04-12">
+
+
+    
+        <meta property="article:tag" content="RDF">
+    
+        <meta property="article:tag" content="AI">
+    
+        <meta property="article:tag" content="LLM">
+    
+        <meta property="article:tag" content="Semantic Web">
+    
+        <meta property="article:tag" content="Turtle">
+    
+        <meta property="article:tag" content="Discworld">
+    
+        <meta property="article:tag" content="Neurosymbolic AI">
+    
+        <meta property="article:tag" content="GenAI">
+    
+
+
+    <meta property="article:modified_time" content="2025-04-12">
+
+
+
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/aituin/aituin.png">
+<meta property="og:image" content="https://www.newresalhaider.com/post/aituin/aituin.png" />
+
+
+</head>
+
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="title is-3">
+                Newres Al Haider
+            </h1>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="NavbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="NavbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/">
+                <h2 class="subtitle is-5">
+                    Home
+                </h2>
+            </a>
+            <a class="navbar-item" href="/post/">
+                <h2 class="subtitle is-5">
+                    Posts
+                </h2>
+            </a>
+            <a class="navbar-item" href="/project/">
+                <h2 class="subtitle is-5">
+                    Projects
+                </h2>
+            </a>
+            <a class="navbar-item" href="/publication/">
+                <h2 class="subtitle is-5">
+                    Publications
+                </h2>
+            </a>
+        </div>
+    </div>
+</nav>
+  <section class="section">
+    <div class="container">
+      
+
+<h1 class="title">
+    The Great AI&#x27;Tuin
+</h1>
+<p class="subtitle"><strong>2025-04-12</strong></p>
+<p>The <a href="https://en.wikipedia.org/wiki/Turtle_(syntax)">Turtle language</a>, along with the <a href="https://en.wikipedia.org/wiki/Semantic_Web">Semantic Web</a>, offers a powerful way to represent and work with knowledge across virtually any domain. Unfortunately, it is often overlooked in practice due to several reasons: limited tooling, unfamiliarity with Semantic Web concepts, and the fact that much knowledge still exists in less structured formats, such as natural language. </p>
+<p>However, in the age of large language models (LLMs) this does not have to be the case anymore. We finally have a way to bridge that gap between unstructured language and structured knowledge. Turtle in particular is very well suited for the structured knowledge representation. In this article I will demonstrate how LLMs can be used to translate natural language texts into the Turtle format and why this might be beneficial. To make this fun, I will use some examples derived from the <a href="https://en.wikipedia.org/wiki/Discworld">Discworld series of books</a> by <a href="https://en.wikipedia.org/wiki/Terry_Pratchett">Terry Pratchett</a>. The Discworld books, which I highly recommend, are a series of fantasy novels often with satirical themes set in Discworld. Discworld is flat, resting upon the back of four elephants who in turn stand on a gigantic spacefaring turtle, named the Great A'Tuin. It alludes to the <a href="https://en.wikipedia.org/wiki/World_Turtle">World Turtle</a> myth, which makes it a very apt topic to talk about when explaining the uses of the Turtle language.</p>
+<figure class=centeredfig>
+    <img src=aituin.png>
+    
+    <figcaption>
+        
+        <h4>A depiction of the Great A&#x27;Tuin that carries the elephants that carry Discworld. Due to the limitations of image generation only three of the four elephants that carry Discworld are shown, the fourth is on a coffee break. 😃</h4>
+        
+        
+    </figcaption>
+</figure>
+<p>Before diving into examples, let’s briefly look at what the Turtle language actually is. Turtle (short for Terse RDF Triple Language) is a compact, readable format for expressing information as triples: subject–predicate–object statements. It’s part of the RDF (Resource Description Framework) family, designed for describing relationships between entities in a way that’s both machine readable and human friendly.</p>
+<p>A triple might look like this:</p>
+<pre data-lang="turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-turtle "><code class="language-turtle" data-lang="turtle"><span>:book1 </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">title </span><span>&quot;</span><span style="color:#a3be8c;">Small Gods</span><span>&quot; .
+</span></code></pre>
+<p>This reads as: book1 has the title &quot;Small Gods&quot;. Of course in most cases we would like to describe multiple facts that we might be interested in, such as the genre of the book, a textual summary of it, etc, for which we use multiple triples. These triples could then create a rich knowledge graph of information that enables both humans and software to understand and reason about a domain.</p>
+<p>In particular Turtle excels at:</p>
+<p>📌 Formalizing concepts (e.g., by description of the book we mean it having a title, a creator, etc)</p>
+<p>🔗 Connecting related information (e.g., all books in a series)</p>
+<p>🔍 Supporting precise structured queries (e.g., “find all books belonging to the crime genre”)</p>
+<p>🧠 Enabling inference and integration with other data sources (e.g., use a commonly used definition of describing a book)</p>
+<p>Now, let’s see how this works in practice with a Discworld based example. First we describe some information both with natural language and with Turtle and go over the differences. We start with the descriptions of three Discworld books in natural language, in this case generated by ChatGPT:</p>
+<p>The Colour of Magic: &quot;A bumbling wizard and a naive tourist embark on a chaotic journey across the Disc, in the book that kicks off the Discworld series.&quot;
+Guards! Guards!: &quot;A ragtag city watch uncovers a dangerous conspiracy involving dragons and secret societies, all while stumbling toward reluctant heroism.&quot;
+Small Gods: &quot;A forgotten god and his lone believer confront religious dogma, power, and philosophical questions in a deeply thoughtful standalone story.&quot;</p>
+<p>Given the information in this article about the Discworld series of books and these description we can represent this information with the Turtle language as follows (also generated by an LLM from the previous text):</p>
+<pre data-lang="turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-turtle "><code class="language-turtle" data-lang="turtle"><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">dct: </span><span style="color:#d08770;">&lt;http://purl.org/dc/terms/&gt;</span><span> .
+</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">ex: </span><span style="color:#d08770;">&lt;http://example.org/book/&gt;</span><span> .
+</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">schema: </span><span style="color:#d08770;">&lt;http://schema.org/&gt;</span><span> .
+</span><span>
+</span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">colour_of_magic </span><span style="color:#b48ead;">a </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">Book </span><span>;
+</span><span>    </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">title </span><span>&quot;</span><span style="color:#a3be8c;">The Colour of Magic</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">creator </span><span>&quot;</span><span style="color:#a3be8c;">Terry Pratchett</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">isPartOf </span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">discworld_series </span><span>;
+</span><span>    </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">description </span><span>&quot;</span><span style="color:#a3be8c;">A bumbling wizard and a naive tourist embark on a chaotic journey across the Disc, in the book that kicks off the Discworld series</span><span style="color:#96b5b4;">.</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">genre </span><span>&quot;</span><span style="color:#a3be8c;">fantasy</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">parody</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">adventure</span><span>&quot; .
+</span><span>
+</span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">guards_guards </span><span style="color:#b48ead;">a </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">Book </span><span>;
+</span><span>    </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">title </span><span>&quot;</span><span style="color:#a3be8c;">Guards! Guards!</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">creator </span><span>&quot;</span><span style="color:#a3be8c;">Terry Pratchett</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">isPartOf </span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">discworld_series </span><span>;
+</span><span>    </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">description </span><span>&quot;</span><span style="color:#a3be8c;">A ragtag city watch uncovers a dangerous conspiracy involving dragons and secret societies, all while stumbling toward reluctant heroism</span><span style="color:#96b5b4;">.</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">genre </span><span>&quot;</span><span style="color:#a3be8c;">satire</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">crime</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">dragons</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">power structures</span><span>&quot; .
+</span><span>
+</span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">small_gods </span><span style="color:#b48ead;">a </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">Book </span><span>;
+</span><span>    </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">title </span><span>&quot;</span><span style="color:#a3be8c;">Small Gods</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">creator </span><span>&quot;</span><span style="color:#a3be8c;">Terry Pratchett</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">isPartOf </span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">discworld_series </span><span>;
+</span><span>    </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">description </span><span>&quot;</span><span style="color:#a3be8c;">A forgotten god and his lone believer confront religious dogma, power, and philosophical questions in a deeply thoughtful standalone story</span><span style="color:#96b5b4;">.</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">genre </span><span>&quot;</span><span style="color:#a3be8c;">faith</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">philosophy</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">belief</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">satire</span><span>&quot; .
+</span><span>
+</span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">discworld_series </span><span style="color:#b48ead;">a </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">BookSeries </span><span>;
+</span><span>    </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">title </span><span>&quot;</span><span style="color:#a3be8c;">Discworld</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">creator </span><span>&quot;</span><span style="color:#a3be8c;">Terry Pratchett</span><span>&quot; .
+</span></code></pre>
+<p>Now lets go over the elements of the Turtle representation here:</p>
+<p>As mentioned before, each line in Turtle expresses a triple: a simple fact linking a subject to an object via a predicate (or property). For instance:</p>
+<pre data-lang="turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-turtle "><code class="language-turtle" data-lang="turtle"><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">colour_of_magic </span><span style="color:#b48ead;">a </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">Book </span><span>;
+</span></code></pre>
+<p>This says that ex:colour_of_magic (our identifier for the book) is a schema:Book: a class from the Schema.org vocabulary. The <code>a</code> is shorthand for <code>rdf:type</code>, indicating class membership. This is a common pattern in RDF and one of the ways Turtle stays concise and readable. The Turtle syntax also has the nice feature is that if we would have a series of triples such as: </p>
+<pre data-lang="turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-turtle "><code class="language-turtle" data-lang="turtle"><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">discworld_series </span><span style="color:#b48ead;">a </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">BookSeries </span><span>;
+</span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">discworld_series </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">title </span><span>&quot;</span><span style="color:#a3be8c;">Discworld</span><span>&quot; ;
+</span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">discworld_series </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">creator </span><span>&quot;</span><span style="color:#a3be8c;">Terry Pratchett</span><span>&quot; .
+</span><span>```turtle
+</span><span>
+</span><span>that have </span><span style="color:#b48ead;">a</span><span> common subject, we do not have to repeat ourselves and can use the </span><span style="color:#ebcb8b;">shorthand:
+</span><span>
+</span><span>```turtle
+</span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">discworld_series </span><span style="color:#b48ead;">a </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">BookSeries </span><span>;
+</span><span>    </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">title </span><span>&quot;</span><span style="color:#a3be8c;">Discworld</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">creator </span><span>&quot;</span><span style="color:#a3be8c;">Terry Pratchett</span><span>&quot; .
+</span></code></pre>
+<p>The identifiers that make use of the prefixes are actually full URLs, such as <code>http://example.org/book/colour_of_magic</code>. In Turtle you can use prefixes to keep things short and tidy. The prefixes, and what they stand for, are given at the start of the Turtle definition:</p>
+<pre data-lang="turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-turtle "><code class="language-turtle" data-lang="turtle"><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">dct: </span><span style="color:#d08770;">&lt;http://purl.org/dc/terms/&gt;</span><span> .
+</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">ex: </span><span style="color:#d08770;">&lt;http://example.org/book/&gt;</span><span> .
+</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">schema: </span><span style="color:#d08770;">&lt;http://schema.org/&gt;</span><span> .
+</span></code></pre>
+<p>Here the <code>ex</code> prefix is something we devised for this example, but the other prefixes refer to vocabularies that already exist that we could use: <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/">Dublin Core</a> and <a href="https://schema.org/">Schema.org</a>. This allows us to not reinvent the wheel and make use of the fact that there already exist vocabularies for describing books, creators of things, etc. This is a big benefit for interoperability that you normally do not get out of the box with many other formalisms (such as JSON). Any tool already existing that uses these common vocabularies would be compatible with our small RDF description using these prefixes.</p>
+<p>Speaking of tooling, as mentioned previously, the set of triples creates a knowledge graph of interconnected information within a domain. We can also visualize this as a graph:</p>
+<figure class=centeredfig>
+    <img src=discworldgraph.png>
+    
+    <figcaption>
+        
+        <h4>A graph visualization of the Turtle description of the Discworld books.</h4>
+        
+        
+    </figcaption>
+</figure>
+<p>The key aspect that Turtle enables, especially in a world of LLMs, is allows us to be very precise and explicit with the semantics that we are describing. For example if we would just say we have a description of the Discworld books, it could be very unclear exactly what is included: the description, author, date of publishing, genres, etc. If we instead have a Turtle representation of the information, even if generated initially by an LLM, both humans as well as software can precisely check what information we describe and what we do not.</p>
+<p>This explicitness is what allows us to do very precise queries on the semantics. Using <a href="https://en.wikipedia.org/wiki/SPARQL">SPARQL</a>, a query language for these type of knowledge graphs, we can find the book that has crime as part of its genre definition:</p>
+<pre data-lang="SPARQL" style="background-color:#2b303b;color:#c0c5ce;" class="language-SPARQL "><code class="language-SPARQL" data-lang="SPARQL"><span>PREFIX schema: &lt;http://schema.org/&gt;
+</span><span>PREFIX ex: &lt;http://example.org/book/&gt;
+</span><span>
+</span><span>SELECT ?bookTitle WHERE {
+</span><span>  ?book schema:genre &quot;crime&quot; ;
+</span><span>        dct:title ?bookTitle .
+</span><span>}
+</span></code></pre>
+<p>This query would return: </p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&quot;Guards! Guards!&quot;
+</span></code></pre>
+<p>This query would work even if we have lot more of these book definitions, without the potential for hallucinations or inaccuracies that sometimes occur when using LLMs and natural language.</p>
+<p>As one can see, the Semantic Web and Turtle format offer powerful ways to structure and connect information. The main drawback used to be that knowledge is often represented in natural language, or other less accessible formats. This made the benefits of such knowledge graphs hard to realize. </p>
+<p>Now, large language models can act as bridges: translating rich, human-authored natural language into structured formats like Turtle. This opens up new opportunities for building precise, interoperable knowledge graphs from books, documentation, or even casual writing. It allows humans or even software systems, to make very precise corrections or queries on this graph, without fear of inaccuracies.</p>
+<p>If you ever have the chance, give this approach using Turtle a go. It can feel quite magical!</p>
+
+
+    </div>
+  </section>
+</body>
+
+</html>
