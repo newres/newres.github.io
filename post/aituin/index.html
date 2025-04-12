@@ -173,22 +173,19 @@ Small Gods: &quot;A forgotten god and his lone believer confront religious dogma
 <pre data-lang="turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-turtle "><code class="language-turtle" data-lang="turtle"><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">discworld_series </span><span style="color:#b48ead;">a </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">BookSeries </span><span>;
 </span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">discworld_series </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">title </span><span>&quot;</span><span style="color:#a3be8c;">Discworld</span><span>&quot; ;
 </span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">discworld_series </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">creator </span><span>&quot;</span><span style="color:#a3be8c;">Terry Pratchett</span><span>&quot; .
-</span><span>```turtle
-</span><span>
-</span><span>that have </span><span style="color:#b48ead;">a</span><span> common subject, we do not have to repeat ourselves and can use the </span><span style="color:#ebcb8b;">shorthand:
-</span><span>
-</span><span>```turtle
-</span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">discworld_series </span><span style="color:#b48ead;">a </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">BookSeries </span><span>;
+</span></code></pre>
+<p>that have a common subject, we do not have to repeat ourselves and can use the shorthand:</p>
+<pre data-lang="turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-turtle "><code class="language-turtle" data-lang="turtle"><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">discworld_series </span><span style="color:#b48ead;">a </span><span style="color:#ebcb8b;">schema:</span><span style="color:#bf616a;">BookSeries </span><span>;
 </span><span>    </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">title </span><span>&quot;</span><span style="color:#a3be8c;">Discworld</span><span>&quot; ;
 </span><span>    </span><span style="color:#ebcb8b;">dct:</span><span style="color:#bf616a;">creator </span><span>&quot;</span><span style="color:#a3be8c;">Terry Pratchett</span><span>&quot; .
 </span></code></pre>
-<p>The identifiers that make use of the prefixes are actually full URLs, such as <code>http://example.org/book/colour_of_magic</code>. In Turtle you can use prefixes to keep things short and tidy. The prefixes, and what they stand for, are given at the start of the Turtle definition:</p>
+<p>The identifiers that make use of the prefixes are actually full URIs, such as <code>http://example.org/book/colour_of_magic</code>. In Turtle you can use prefixes to keep things short and tidy. The prefixes, and what they stand for, are given at the start of the Turtle definition:</p>
 <pre data-lang="turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-turtle "><code class="language-turtle" data-lang="turtle"><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">dct: </span><span style="color:#d08770;">&lt;http://purl.org/dc/terms/&gt;</span><span> .
 </span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">ex: </span><span style="color:#d08770;">&lt;http://example.org/book/&gt;</span><span> .
 </span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">schema: </span><span style="color:#d08770;">&lt;http://schema.org/&gt;</span><span> .
 </span></code></pre>
 <p>Here the <code>ex</code> prefix is something we devised for this example, but the other prefixes refer to vocabularies that already exist that we could use: <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/">Dublin Core</a> and <a href="https://schema.org/">Schema.org</a>. This allows us to not reinvent the wheel and make use of the fact that there already exist vocabularies for describing books, creators of things, etc. This is a big benefit for interoperability that you normally do not get out of the box with many other formalisms (such as JSON). Any tool already existing that uses these common vocabularies would be compatible with our small RDF description using these prefixes.</p>
-<p>Speaking of tooling, as mentioned previously, the set of triples creates a knowledge graph of interconnected information within a domain. We can also visualize this as a graph:</p>
+<p>Speaking of tooling, as mentioned previously, the set of triples creates a knowledge graph of interconnected information within a domain. We can also visualize this as a graph, for example using the <a href="https://issemantic.net/rdf-visualizer">isSemantic RDF Visualizer</a>:</p>
 <figure class=centeredfig>
     <img src=discworldgraph.png>
     
@@ -201,7 +198,7 @@ Small Gods: &quot;A forgotten god and his lone believer confront religious dogma
 </figure>
 <p>The key aspect that Turtle enables, especially in a world of LLMs, is allows us to be very precise and explicit with the semantics that we are describing. For example if we would just say we have a description of the Discworld books, it could be very unclear exactly what is included: the description, author, date of publishing, genres, etc. If we instead have a Turtle representation of the information, even if generated initially by an LLM, both humans as well as software can precisely check what information we describe and what we do not.</p>
 <p>This explicitness is what allows us to do very precise queries on the semantics. Using <a href="https://en.wikipedia.org/wiki/SPARQL">SPARQL</a>, a query language for these type of knowledge graphs, we can find the book that has crime as part of its genre definition:</p>
-<pre data-lang="SPARQL" style="background-color:#2b303b;color:#c0c5ce;" class="language-SPARQL "><code class="language-SPARQL" data-lang="SPARQL"><span>PREFIX schema: &lt;http://schema.org/&gt;
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>PREFIX schema: &lt;http://schema.org/&gt;
 </span><span>PREFIX ex: &lt;http://example.org/book/&gt;
 </span><span>
 </span><span>SELECT ?bookTitle WHERE {
