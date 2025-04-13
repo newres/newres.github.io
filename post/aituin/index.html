@@ -199,17 +199,17 @@ Small Gods: &quot;A forgotten god and his lone believer confront religious dogma
 <p>The key aspect that Turtle enables, especially in a world of LLMs, is allows us to be very precise and explicit with the semantics that we are describing. For example if we would just say we have a description of the Discworld books, it could be very unclear exactly what is included: the description, author, date of publishing, genres, etc. If we instead have a Turtle representation of the information, even if generated initially by an LLM, both humans as well as software can precisely check what information we describe and what we do not.</p>
 <p>This explicitness is what allows us to do very precise queries on the semantics. Using <a href="https://en.wikipedia.org/wiki/SPARQL">SPARQL</a>, a query language for these type of knowledge graphs, we can find the book that has crime as part of its genre definition:</p>
 <pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>PREFIX schema: &lt;http://schema.org/&gt;
-</span><span>PREFIX ex: &lt;http://example.org/book/&gt;
+</span><span>PREFIX dct: &lt;http://purl.org/dc/terms/&gt;
 </span><span>
 </span><span>SELECT ?bookTitle WHERE {
 </span><span>  ?book schema:genre &quot;crime&quot; ;
 </span><span>        dct:title ?bookTitle .
 </span><span>}
 </span></code></pre>
-<p>This query would return: </p>
+<p>This query would return the following when run on our knowledge graph: </p>
 <pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&quot;Guards! Guards!&quot;
 </span></code></pre>
-<p>This query would work even if we have lot more of these book definitions, without the potential for hallucinations or inaccuracies that sometimes occur when using LLMs and natural language.</p>
+<p>Such queries would work even if we have lot more of these book definitions, without the potential for hallucinations or inaccuracies that sometimes occur when using LLMs and natural language.</p>
 <p>As one can see, the Semantic Web and Turtle format offer powerful ways to structure and connect information. The main drawback used to be that knowledge is often represented in natural language, or other less accessible formats. This made the benefits of such knowledge graphs hard to realize. </p>
 <p>Now, large language models can act as bridges: translating rich, human-authored natural language into structured formats like Turtle. This opens up new opportunities for building precise, interoperable knowledge graphs from books, documentation, or even casual writing. It allows humans or even software systems, to make very precise corrections or queries on this graph, without fear of inaccuracies.</p>
 <p>If you ever have the chance, give this approach using Turtle a go. It can feel quite magical!</p>
