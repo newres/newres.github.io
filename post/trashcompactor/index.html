@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Newres Al Haider</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+  <link href="https:&#x2F;&#x2F;www.newresalhaider.com/style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.newresalhaider.com/scripts/menu.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@newresa">
+<meta name="twitter:creator" content="@newresa">
+
+
+<meta name="twitter:title" content="Escaping the Compactor with Linked Data">
+<meta name="title" property="og:title" content="Escaping the Compactor with Linked Data" />
+
+
+<meta name="twitter:description" content="Explaining JSON-LD Linked Data compacting and expanding with an example from Star Wars.
+">
+<meta name="description" property="og:description" content="Explaining JSON-LD Linked Data compacting and expanding with an example from Star Wars.
+" />
+
+
+<meta name="author" content="Newres Al Haider" />
+<meta property="article:author" content="Newres Al Haider">
+<meta property="og:type" content="article" />
+
+<meta property="article:published_time" content="2025-05-17">
+
+
+    
+        <meta property="article:tag" content="Semantic Web">
+    
+        <meta property="article:tag" content="Linked Data">
+    
+        <meta property="article:tag" content="JSON-LD">
+    
+        <meta property="article:tag" content="Star Wars">
+    
+
+
+    <meta property="article:modified_time" content="2025-05-17">
+
+
+
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/trashcompactor/featured.png">
+<meta property="og:image" content="https://www.newresalhaider.com/post/trashcompactor/featured.png" />
+
+
+</head>
+
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="title is-3">
+                Newres Al Haider
+            </h1>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="NavbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="NavbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/">
+                <h2 class="subtitle is-5">
+                    Home
+                </h2>
+            </a>
+            <a class="navbar-item" href="/post/">
+                <h2 class="subtitle is-5">
+                    Posts
+                </h2>
+            </a>
+            <a class="navbar-item" href="/project/">
+                <h2 class="subtitle is-5">
+                    Projects
+                </h2>
+            </a>
+            <a class="navbar-item" href="/publication/">
+                <h2 class="subtitle is-5">
+                    Publications
+                </h2>
+            </a>
+        </div>
+    </div>
+</nav>
+  <section class="section">
+    <div class="container">
+      
+
+<h1 class="title">
+    Escaping the Compactor with Linked Data
+</h1>
+<p class="subtitle"><strong>2025-05-17</strong></p>
+<p>If you ever need to represent knowledge in a way that's easy for both humans and machines to understand, while working seamlessly with existing <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> tools and libraries, <a href="https://en.wikipedia.org/wiki/JSON-LD">JSON-LD</a> has you covered. JSON-LD, short for JavaScript Object Notation for <a href="https://en.wikipedia.org/wiki/Linked_data">Linked Data</a>, allows you to express knowledge as a graph in any domain. A good example is how <a href="https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data">Google</a> is utilizing Linked Data to very precisely list information, such as recipes, book descriptions, events, products, and more.</p>
+<p>One great feature of JSON-LD is its built-in support for <code>compacting</code> and <code>expanding</code> the representations of knowledge.</p>
+<ul>
+<li>➡️⬅️ Compacting makes the data easier for humans to read by shortening and simplifying the structure.</li>
+<li>⬅️➡️ Expanding restructures the data to be more explicit and uniform, making it easier for machines to process.
+<br><br></li>
+</ul>
+<p>To show how these concepts work in practice I will illustrate it with an example from Star Wars. Given that we are talking about compacting and expanding, let's represent the characters in the iconic trash compactor scene from Star Wars using JSON-LD. For those unfamiliar with the scene, it starts with the protagonists, Luke, Han, Leia and Chewbacca falling into a trash compactor during an escape. As the walls begin to close in to crush the garbage, with the characters stuck in it, they frantically search for a way to stop the process. In the end they manage to deactivate the compactor by contacting the two droids, C-3PO and R2-D2, who manage to shut it down just in time.</p>
+<figure class=centeredfig>
+    <img src=featured.png>
+    
+    <figcaption>
+        
+        <h4>The trash compactor scene. Iconic enough to have its own Lego set. Copyright Lego</h4>
+        
+        
+    </figcaption>
+</figure>
+<p>We'll start by describing the characters who fall into the compactor in a compacted JSON-LD format.
+(If you want to follow along and experiment yourself, <a href="https://json-ld.org/playground/">JSON-LD Playground</a> is a great online tool for trying out Linked Data!)</p>
+<p>Here's the compacted JSON-LD:</p>
+<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">@context</span><span>&quot;: {
+</span><span>    &quot;</span><span style="color:#a3be8c;">schema</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">http://schema.org/</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">schema:name</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">member</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">schema:member</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">Person</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">schema:Person</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">schema:url</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">description</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">schema:description</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">birthPlace</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">schema:birthPlace</span><span>&quot;
+</span><span>  },
+</span><span>  &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">http://example.org/starwars-ld</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">The Star Wars Trash Compactor Scene</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">member</span><span>&quot;: [
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Person</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Han Solo</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://en.wikipedia.org/wiki/Han_Solo</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">description</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">A roguish smuggler and captain of the Millennium Falcon.</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">birthPlace</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Corellia</span><span>&quot;
+</span><span>    },
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Person</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Luke Skywalker</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://en.wikipedia.org/wiki/Luke_Skywalker</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">description</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">A farm boy from Tatooine thrust into the fight against the Empire.</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">birthPlace</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Polis Massa</span><span>&quot;
+</span><span>    },
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Person</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Leia Organa</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://en.wikipedia.org/wiki/Princess_Leia</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">description</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">A princess of Alderaan and an important member of the Rebel Alliance.</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">birthPlace</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Polis Massa</span><span>&quot;
+</span><span>    },
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Person</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Chewbacca</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://en.wikipedia.org/wiki/Chewbacca</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">description</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">A loyal Wookiee warrior and co-pilot of the Millennium Falcon.</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">birthPlace</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Kashyyyk</span><span>&quot;
+</span><span>    }
+</span><span>  ]
+</span><span>}
+</span><span>
+</span></code></pre>
+<p>This representation, which also is a valid JSON, gives the names, a small description and the birthplace for each of the characters. One place where it differs from a regular JSON representation is that it uses the @context section to link to a common terminology in <a href="https://schema.org/">Schema.org</a>. This allows for software that can make use of such common vocabularies to precisely interpret the exact meaning in our description, without the need to guess and potentially hallucinate its meaning.</p>
+<p>In order to unambiguously represent each concept Linked Data tend to use full URIs, such as <code>http://schema.org/name</code>, but reading full URIs each time would be quite exhausting for a human reader. Instead, in this compacted form, the context and prefixes it makes easy for human readers to go understand the JSON-LD file, without ever losing the context.</p>
+<p>For machines however, it can be easier to interpret the information that every identifier is written out fully, such as <code>http://schema.org/name</code> as opposed to <code>name</code>.  For this we can <code>expand</code> our JSON-LD document.</p>
+<p>The expanded version is as follows: </p>
+<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>[
+</span><span>  {
+</span><span>    &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">http://example.org/starwars-ld</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">http://schema.org/member</span><span>&quot;: [
+</span><span>      {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot;: [
+</span><span>          &quot;</span><span style="color:#a3be8c;">http://schema.org/Person</span><span>&quot;
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/birthPlace</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Corellia</span><span>&quot;
+</span><span>          }
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/description</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">A charming smuggler and captain of the Millennium Falcon.</span><span>&quot;
+</span><span>          }
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/name</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Han Solo</span><span>&quot;
+</span><span>          }
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/url</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://en.wikipedia.org/wiki/Han_Solo</span><span>&quot;
+</span><span>          }
+</span><span>        ]
+</span><span>      },
+</span><span>      {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot;: [
+</span><span>          &quot;</span><span style="color:#a3be8c;">http://schema.org/Person</span><span>&quot;
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/birthPlace</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Polis Massa</span><span>&quot;
+</span><span>          }
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/description</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">A young Jedi learning the ways of the Force.</span><span>&quot;
+</span><span>          }
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/name</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Luke Skywalker</span><span>&quot;
+</span><span>          }
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/url</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://en.wikipedia.org/wiki/Luke_Skywalker</span><span>&quot;
+</span><span>          }
+</span><span>        ]
+</span><span>      },
+</span><span>      {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot;: [
+</span><span>          &quot;</span><span style="color:#a3be8c;">http://schema.org/Person</span><span>&quot;
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/birthPlace</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Polis Massa</span><span>&quot;
+</span><span>          }
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/description</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">A fearless princess and leader of the Rebel Alliance.</span><span>&quot;
+</span><span>          }
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/name</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Leia Organa</span><span>&quot;
+</span><span>          }
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/url</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://en.wikipedia.org/wiki/Princess_Leia</span><span>&quot;
+</span><span>          }
+</span><span>        ]
+</span><span>      },
+</span><span>      {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot;: [
+</span><span>          &quot;</span><span style="color:#a3be8c;">http://schema.org/Person</span><span>&quot;
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/birthPlace</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Kashyyyk</span><span>&quot;
+</span><span>          }
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/description</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">A loyal Wookiee warrior and Han Solo&#39;s co-pilot.</span><span>&quot;
+</span><span>          }
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/name</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Chewbacca</span><span>&quot;
+</span><span>          }
+</span><span>        ],
+</span><span>        &quot;</span><span style="color:#a3be8c;">http://schema.org/url</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://en.wikipedia.org/wiki/Chewbacca</span><span>&quot;
+</span><span>          }
+</span><span>        ]
+</span><span>      }
+</span><span>    ],
+</span><span>    &quot;</span><span style="color:#a3be8c;">http://schema.org/name</span><span>&quot;: [
+</span><span>      {
+</span><span>        &quot;</span><span style="color:#a3be8c;">@value</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">The Star Wars Trash Compactor Scene</span><span>&quot;
+</span><span>      }
+</span><span>    ]
+</span><span>  }
+</span><span>]
+</span></code></pre>
+<p>Much like for our heroes in the movie, from a software's perspective, it is good that things are expanded. Any software can now precisely see the exact URI links, such as <code>http://schema.org/Person</code>, without doing a lookup in the context and the prefixes each time. Of course for us humans it looks very verbose, but we can always compact it back, though hopefully after our heroes have escaped.</p>
+<p>As bonus, JSON-LD also have a representation that is <code>flattened</code>.  This collects all entities into a single list and gives each one an explicit @id.
+This is useful when you want everything neatly indexed and separated:</p>
+<p>Flattened: </p>
+<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">@context</span><span>&quot;: {
+</span><span>    &quot;</span><span style="color:#a3be8c;">schema</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">http://schema.org/</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">schema:name</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">member</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">schema:member</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">Person</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">schema:Person</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">schema:url</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">description</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">schema:description</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">birthPlace</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">schema:birthPlace</span><span>&quot;
+</span><span>  },
+</span><span>  &quot;</span><span style="color:#a3be8c;">@graph</span><span>&quot;: [
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">_:b0</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Person</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">birthPlace</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Corellia</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">description</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">A charming smuggler and captain of the Millennium Falcon.</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Han Solo</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://en.wikipedia.org/wiki/Han_Solo</span><span>&quot;
+</span><span>    },
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">_:b1</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Person</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">birthPlace</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Polis Massa</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">description</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">A young Jedi learning the ways of the Force.</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Luke Skywalker</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://en.wikipedia.org/wiki/Luke_Skywalker</span><span>&quot;
+</span><span>    },
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">_:b2</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Person</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">birthPlace</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Polis Massa</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">description</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">A fearless princess and leader of the Rebel Alliance.</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Leia Organa</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://en.wikipedia.org/wiki/Princess_Leia</span><span>&quot;
+</span><span>    },
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">_:b3</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">@type</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Person</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">birthPlace</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Kashyyyk</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">description</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">A loyal Wookiee warrior and Han Solo&#39;s co-pilot.</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Chewbacca</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://en.wikipedia.org/wiki/Chewbacca</span><span>&quot;
+</span><span>    },
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">http://example.org/starwars-ld</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">member</span><span>&quot;: [
+</span><span>        {
+</span><span>          &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">_:b0</span><span>&quot;
+</span><span>        },
+</span><span>        {
+</span><span>          &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">_:b1</span><span>&quot;
+</span><span>        },
+</span><span>        {
+</span><span>          &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">_:b2</span><span>&quot;
+</span><span>        },
+</span><span>        {
+</span><span>          &quot;</span><span style="color:#a3be8c;">@id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">_:b3</span><span>&quot;
+</span><span>        }
+</span><span>      ],
+</span><span>      &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">The Star Wars Trash Compactor Scene</span><span>&quot;
+</span><span>    }
+</span><span>  ]
+</span><span>}
+</span></code></pre>
+<p>Here each character gets their own node with an ID, and the relationships (&quot;members of the scene&quot;) are made by pointing to these IDs.</p>
+<p>JSON-LD offers a versatile toolkit for compacting, expanding, or flattening data, enabling you to organize knowledge with clarity and precision for both humans and machines!
+Just as the Star Wars heroes narrowly escaped the trash compactor, well-structured data can save your systems from collapsing under the weight of complexity.</p>
+
+
+    </div>
+  </section>
+</body>
+
+</html>
