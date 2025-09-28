@@ -4,8 +4,467 @@
     <link href="https://www.newresalhaider.com/post/atom.xml" rel="self" type="application/atom+xml"/>
     <link href="https://www.newresalhaider.com/post/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <updated>2025-05-17T00:00:00+00:00</updated>
+    <updated>2025-09-28T00:00:00+00:00</updated>
     <id>https://www.newresalhaider.com/post/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Gathering Rust</title>
+        <published>2025-09-28T00:00:00+00:00</published>
+        <updated>2025-09-28T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/gatheringrust/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/gatheringrust/</id>
+        
+        <content type="html">&lt;p&gt;When it comes to learning a new programming language, I’ve found that building a small, practical program is one of the best ways to get started. Recently I began exploring &lt;a href=&quot;https:&#x2F;&#x2F;www.rust-lang.org&#x2F;&quot;&gt;Rust&lt;&#x2F;a&gt;, and to get a feel for the language I decided to write a tool based on a game I was playing at the time: &lt;a href=&quot;https:&#x2F;&#x2F;magic.wizards.com&#x2F;en&#x2F;mtgarena&quot;&gt;Magic: The Gathering Arena (Arena)&lt;&#x2F;a&gt;. The game’s log files contain a lot of information, including records of the cards I had used, but not in an easily readable way. I wanted to build a tool that could extract that data. This article describes how I approached the project using Rust.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=featured.jpg&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;An image of a cybernetic flower with rust. The language was actually named after the fungus and not the oxidation reaction, though for the image both could apply. &lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;I wanted to learn Rust because of its strong focus on safety and performance, as well as the growing ecosystem around it. Frameworks like &lt;a href=&quot;https:&#x2F;&#x2F;v2.tauri.app&#x2F;&quot;&gt;Tauri&lt;&#x2F;a&gt; and even &lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;&quot;&gt;Zola&lt;&#x2F;a&gt; with which this site is generated are written in Rust. Rust’s ownership model and lifetimes can seem tricky at first glance, so I was looking for a small, manageable project that would give me some hands-on experience without being overwhelming. Parsing game log files felt like the right balance of practical and approachable.&lt;&#x2F;p&gt;
+&lt;p&gt;In Arena, two players play against each other with decks made of collectible cards. There is a huge list of cards available, with evocative names such as &amp;quot;Lightning Bolt&amp;quot; and &amp;quot;Serra Angel&amp;quot;, that could make up a deck. In general the decks you play are based on the cards available in your collection, so it is nice to look over it, and craft the deck you want to play. Unfortunately while you can go over your collection in the game client, there is no easy way to export your set of cards from it. &lt;&#x2F;p&gt;
+&lt;p&gt;This is where the game log of Arena comes in. The log emits a huge number of events, many of which could be analyzed by external tools. While it doesn’t currently include an event for all the cards in your collection, it does show all the cards used in each deck. To make things a bit more tricky, it uses an internal Arena specific card ID to identify the cards, as opposed to the card names more familiar to players. Given these challenges, my goal was straightforward: take an MTG Arena log and turn it into a clear, human-readable list of the cards I have, including their names.&lt;&#x2F;p&gt;
+&lt;p&gt;We can structure the code for this application into two main parts. First, we have some data structures to hold the information gathered from the logs, the mapping of arena IDs to names, and the output that we like to show. Second, we have some functions that read the information in from the files, gather the card information from the logs, match this information with the mappings and finally write the output to a file. In addition, we will have unit tests to ensure that the functions work as expected.&lt;&#x2F;p&gt;
+&lt;p&gt;With the code structure in mind, let’s walk through the source code of the application, which fits neatly in a single file.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;serde::{Deserialize, Serialize};
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;serde_json::{Deserializer, Value};
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;std::collections::{HashMap, HashSet};
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;std::fs::{write, File};
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;std::io::{BufRead, BufReader};
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;As is usual in many other languages we start by listing our imports first. The &lt;code&gt;serde&lt;&#x2F;code&gt; framework allows for easy mapping of Rust data structures to other formats. As we are aiming to serialize the extracted information into JSON files we are going to use &lt;code&gt;serde_json&lt;&#x2F;code&gt;, which is an implementation of &lt;code&gt;serde&lt;&#x2F;code&gt; for the JSON format. We also have imports from the standard library that we for generic data structures and file writing&#x2F;reading.&lt;&#x2F;p&gt;
+&lt;p&gt;The next part of the code are the data structures that can represent the information in the log file. &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Data structures for the parts of the log that has information about the decks and cards in them.
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;(Serialize, Deserialize, Debug, Default)]
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serde&lt;&#x2F;span&gt;&lt;span&gt;(rename_all = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;PascalCase&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;DecksWrapper {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;decks&lt;&#x2F;span&gt;&lt;span&gt;: HashMap&amp;lt;String, Deck&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;(Serialize, Deserialize, Debug, Default)]
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serde&lt;&#x2F;span&gt;&lt;span&gt;(rename_all = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;PascalCase&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;Deck {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;main_deck&lt;&#x2F;span&gt;&lt;span&gt;: Vec&amp;lt;CardEntry&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sideboard&lt;&#x2F;span&gt;&lt;span&gt;: Vec&amp;lt;CardEntry&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;reduced_sideboard&lt;&#x2F;span&gt;&lt;span&gt;: Vec&amp;lt;CardEntry&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;command_zone&lt;&#x2F;span&gt;&lt;span&gt;: Vec&amp;lt;CardEntry&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;companions&lt;&#x2F;span&gt;&lt;span&gt;: Vec&amp;lt;CardEntry&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;(Serialize, Deserialize, Debug, Default, Clone, PartialEq)]
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serde&lt;&#x2F;span&gt;&lt;span&gt;(rename_all = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;camelCase&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;card_id&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u64&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;quantity&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The data structures that we use are defined here using Rust structs. They are made up of either primitive types such as &lt;code&gt;card_id&lt;&#x2F;code&gt; and &lt;code&gt;quantity&lt;&#x2F;code&gt;, or collections of other structs such as &lt;code&gt;main_deck&lt;&#x2F;code&gt; and &lt;code&gt;sideboard&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;In addition, we add attributes to our structs. For example, &lt;code&gt;#[derive(Serialize, Deserialize, Debug, Default)]&lt;&#x2F;code&gt; lets us automatically serialize and deserialize the structs, print them with Debug, and construct default values. The &lt;code&gt;#[serde(rename_all = &amp;quot;PascalCase&amp;quot;)]&lt;&#x2F;code&gt; attribute tells Serde how to map between Rust’s convention of snake_case field names (e.g. main_deck) and the PascalCase keys used in the Arena log JSON (e.g. MainDeck).&lt;&#x2F;p&gt;
+&lt;p&gt;To illustrate with a minimal example, assume we have the following fragment in the JSON logs:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;json&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-json &quot;&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;MainDeck&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: [
+&lt;&#x2F;span&gt;&lt;span&gt;                { &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cardId&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1001&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;quantity&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2 &lt;&#x2F;span&gt;&lt;span&gt;},
+&lt;&#x2F;span&gt;&lt;span&gt;                { &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cardId&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1002&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;quantity&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3 &lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;],
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This would map to a concrete Rust value such as:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; deck1 = Deck {
+&lt;&#x2F;span&gt;&lt;span&gt;            main_deck: vec![
+&lt;&#x2F;span&gt;&lt;span&gt;                CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;                    card_id:  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1001&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                    quantity: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                },
+&lt;&#x2F;span&gt;&lt;span&gt;                CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;                    card_id: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1002&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                    quantity: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                },
+&lt;&#x2F;span&gt;&lt;span&gt;            ],
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; assuming other fields exist and are empty
+&lt;&#x2F;span&gt;&lt;span&gt;            ..Default::default()
+&lt;&#x2F;span&gt;&lt;span&gt;        };
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We’ll see this in action in one of the unit tests later.&lt;&#x2F;p&gt;
+&lt;p&gt;Next up are the remaining data structures that we’ll use for representing the full card collection, as well as general card information from &lt;a href=&quot;https:&#x2F;&#x2F;scryfall.com&#x2F;&quot;&gt;Scryfall&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Data structure that represents how many of each card we have available based on the decks.
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;(Serialize, Deserialize, Debug, Default)]
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serde&lt;&#x2F;span&gt;&lt;span&gt;(rename_all = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;camelCase&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;CardCollection {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cards&lt;&#x2F;span&gt;&lt;span&gt;: Vec&amp;lt;CardEntry&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Data structures for Scryfall (general card knowledge) information
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;(Serialize, Deserialize, Debug, Default)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ScryfallData {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cards&lt;&#x2F;span&gt;&lt;span&gt;: Vec&amp;lt;ScryfallCard&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;(Serialize, Deserialize, Debug, Default)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ScryfallCard {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;arena_id&lt;&#x2F;span&gt;&lt;span&gt;: Option&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u64&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;: String,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;With these additional structs in place, we now have everything we need to represent both the decks pulled from the Arena logs and the more general card information from Scryfall. But representation alone isn’t enough: we also need a way to process the raw decks into something useful.&lt;&#x2F;p&gt;
+&lt;p&gt;That’s where the CardCollection implementation comes in. This type acts as a bridge between individual deck data and the overall view of a player’s collection. By aggregating card entries across decks, we can answer questions like “How many copies of this card do I actually own?” or “Which Arena IDs are present in my collection?”&lt;&#x2F;p&gt;
+&lt;p&gt;The following impl block shows how we can construct a CardCollection from a DecksWrapper, as well as provide some helper methods for querying it:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Implementation that can derive the card collection from the decks. 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;CardCollection {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;from_decks_wrapper&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;decks_wrapper&lt;&#x2F;span&gt;&lt;span&gt;: DecksWrapper) -&amp;gt; CardCollection {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;std::collections::HashMap;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let mut&lt;&#x2F;span&gt;&lt;span&gt; card_map: HashMap&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u64&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; = HashMap::new();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt; deck in decks_wrapper.decks.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;values&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt; entry in &amp;amp;deck.main_deck {
+&lt;&#x2F;span&gt;&lt;span&gt;                *card_map.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;entry&lt;&#x2F;span&gt;&lt;span&gt;(entry.card_id).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;or_insert&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) += entry.quantity;
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt; entry in &amp;amp;deck.sideboard {
+&lt;&#x2F;span&gt;&lt;span&gt;                *card_map.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;entry&lt;&#x2F;span&gt;&lt;span&gt;(entry.card_id).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;or_insert&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) += entry.quantity;
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt; entry in &amp;amp;deck.reduced_sideboard {
+&lt;&#x2F;span&gt;&lt;span&gt;                *card_map.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;entry&lt;&#x2F;span&gt;&lt;span&gt;(entry.card_id).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;or_insert&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) += entry.quantity;
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt; entry in &amp;amp;deck.command_zone {
+&lt;&#x2F;span&gt;&lt;span&gt;                *card_map.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;entry&lt;&#x2F;span&gt;&lt;span&gt;(entry.card_id).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;or_insert&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) += entry.quantity;
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt; entry in &amp;amp;deck.companions {
+&lt;&#x2F;span&gt;&lt;span&gt;                *card_map.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;entry&lt;&#x2F;span&gt;&lt;span&gt;(entry.card_id).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;or_insert&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) += entry.quantity;
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; cards = card_map
+&lt;&#x2F;span&gt;&lt;span&gt;            .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;into_iter&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;            .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;map&lt;&#x2F;span&gt;&lt;span&gt;(|(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;card_id&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;quantity&lt;&#x2F;span&gt;&lt;span&gt;)| CardEntry { card_id, quantity })
+&lt;&#x2F;span&gt;&lt;span&gt;            .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;collect&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        CardCollection { cards }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;pub fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;get_arena_ids&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; HashSet&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u64&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.cards.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;iter&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;map&lt;&#x2F;span&gt;&lt;span&gt;(|&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;entry&lt;&#x2F;span&gt;&lt;span&gt;| entry.card_id).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;collect&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;search_with_id&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;card_id&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u64&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; found_entry = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.cards.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;iter&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;find&lt;&#x2F;span&gt;&lt;span&gt;(|&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;c&lt;&#x2F;span&gt;&lt;span&gt;| c.card_id == card_id).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;cloned&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; found_entry {
+&lt;&#x2F;span&gt;&lt;span&gt;            Some(result) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; result,
+&lt;&#x2F;span&gt;&lt;span&gt;            None =&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;                    card_id: card_id,
+&lt;&#x2F;span&gt;&lt;span&gt;                    quantity: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                }
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The CardCollection implementation is where we actually make use of the deck data. Let’s go through each method in turn:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;from_decks_wrapper
+This function takes all of the decks inside a DecksWrapper and combines them into a single CardCollection. It does so by walking through every zone of every deck (main_deck, sideboard, etc.), summing the quantities for each card ID into a HashMap&amp;lt;u64, u32&amp;gt;. Once all the decks are processed, that map is converted back into a list of CardEntry values.
+In short, it turns lots of decks with overlapping cards into one unified collection with aggregated counts.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;get_arena_ids
+Sometimes we don’t need the full card entries, just the set of card IDs that appear in the collection. This helper method collects all the card_ids into a HashSet&lt;u64&gt;. Using a HashSet here is efficient because it guarantees uniqueness — we only care whether a card ID exists, not how many times it occurs.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;search_with_id
+This is a small convenience function for looking up a specific card by its Arena ID. If the card exists in the collection, it returns the corresponding CardEntry. If not, it returns a default CardEntry with the given card_id and a quantity of 0.
+This approach avoids dealing with Option&lt;CardEntry&gt; on the caller side, at the cost of always producing a value — even if it represents “zero copies.”&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Together, these methods make CardCollection the workhorse of the program: it gives us an aggregated view of what cards we have and lets us easily query or transform that data.&lt;&#x2F;p&gt;
+&lt;p&gt;So far, we’ve been working with data structures and helper methods that assume we already have the deck data in memory. But of course, the whole point of this tool is to read the Arena log and extract that information automatically. The parse_decks_from_log function is responsible for this: it scans through the log file line by line, looks for entries that contain deck data, and deserializes the first one it finds into a CardCollection.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Takes a log file and aims to extract a cardcollection from it.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;parse_decks_from_log&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;P: AsRef&amp;lt;std::path::Path&amp;gt;&amp;gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;path&lt;&#x2F;span&gt;&lt;span&gt;: P) -&amp;gt; Option&amp;lt;CardCollection&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; file = File::open(path).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;ok&lt;&#x2F;span&gt;&lt;span&gt;()?;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; reader = BufReader::new(file);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt; line in reader.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;lines&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;flatten&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; line.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;contains&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Decks&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;) {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if let &lt;&#x2F;span&gt;&lt;span&gt;Ok(decks) = serde_json::from_str::&amp;lt;DecksWrapper&amp;gt;(&amp;amp;line) {
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;Some(CardCollection::from_decks_wrapper(decks));
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    None
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This function ties everything together by connecting the raw log file to the structured data we’ve been working with. A couple of details are worth pointing out:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Return type Option&lt;CardCollection&gt;
+We use Option because it’s possible that the log file doesn’t contain any deck data at all. In that case, the function cleanly returns None instead of panicking. When a deck is found, we wrap it in Some and return it.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;? operator for error handling
+The expression File::open(path).ok()? is a compact way of saying: try to open the file, and if that fails, return None immediately. This avoids cluttering the function with explicit match statements while still being safe.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Finding deck data
+The function looks for lines containing &amp;quot;Decks&amp;quot; because that’s how Arena includes the relevant JSON in its log. Once such a line is found, we attempt to deserialize it into a DecksWrapper.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;One section, multiple decks
+Each log file has only one &amp;quot;Decks&amp;quot; section, but that section may describe several different decks at once. That’s why DecksWrapper contains a HashMap&amp;lt;String, Deck&amp;gt; — the keys are deck identifiers, and the values are the deck lists themselves. Since there’s only ever one &amp;quot;Decks&amp;quot; section, we can safely return after parsing it.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;With this in place, we now have a straightforward path:&lt;&#x2F;p&gt;
+&lt;p&gt;Open the Arena log.&lt;&#x2F;p&gt;
+&lt;p&gt;Parse out the &amp;quot;Decks&amp;quot; section.&lt;&#x2F;p&gt;
+&lt;p&gt;Turn it into a CardCollection that we can query and extend later.&lt;&#x2F;p&gt;
+&lt;p&gt;Next, we need a way to extract the Scryfall information into in-memory structs, similar to how we did it with the Arena logs. Scryfall provides both online APIs and bulk data files. For our purposes, using the bulk files is simpler and more reliable than hitting the API repeatedly.&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;code&gt;extract_arena_cards&lt;&#x2F;code&gt; function reads a Scryfall JSON file and filters it down to only the cards that exist in our collection of Arena IDs. It works as follows:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;extract_arena_cards&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;P: AsRef&amp;lt;std::path::Path&amp;gt;&amp;gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;path&lt;&#x2F;span&gt;&lt;span&gt;: P,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;arena_ids&lt;&#x2F;span&gt;&lt;span&gt;: &amp;amp;HashSet&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u64&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; Vec&amp;lt;ScryfallCard&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; file = File::open(path).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Failed to open Scryfall file&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; reader = BufReader::new(file);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Deserialize as a stream of JSON values
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; stream = Deserializer::from_reader(reader).into_iter::&amp;lt;Value&amp;gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let mut&lt;&#x2F;span&gt;&lt;span&gt; cards = Vec::new();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Iterate over each element in the stream, handling Result&amp;lt;Value, Error&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt; result in stream {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; result {
+&lt;&#x2F;span&gt;&lt;span&gt;            Ok(value) =&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Check if value is an array, and proceed accordingly
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; value {
+&lt;&#x2F;span&gt;&lt;span&gt;                    Value::Array(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;ref&lt;&#x2F;span&gt;&lt;span&gt; array) =&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;                        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Iterate over each element of the array
+&lt;&#x2F;span&gt;&lt;span&gt;                        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt; element in array {
+&lt;&#x2F;span&gt;&lt;span&gt;                            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Process each element (card) in the array
+&lt;&#x2F;span&gt;&lt;span&gt;                            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; json_str = serde_json::to_string_pretty(&amp;amp;element)
+&lt;&#x2F;span&gt;&lt;span&gt;                                .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Failed to convert JSON to string&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;                            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Directly use u64 for arena_id
+&lt;&#x2F;span&gt;&lt;span&gt;                            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if let &lt;&#x2F;span&gt;&lt;span&gt;Some(arena_id) = element.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;get&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;arena_id&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;and_then&lt;&#x2F;span&gt;&lt;span&gt;(|&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;v&lt;&#x2F;span&gt;&lt;span&gt;| v.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;as_u64&lt;&#x2F;span&gt;&lt;span&gt;())
+&lt;&#x2F;span&gt;&lt;span&gt;                            {
+&lt;&#x2F;span&gt;&lt;span&gt;                                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; arena_ids.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;contains&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;arena_id) {
+&lt;&#x2F;span&gt;&lt;span&gt;                                    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Try parsing the card into the struct
+&lt;&#x2F;span&gt;&lt;span&gt;                                    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match &lt;&#x2F;span&gt;&lt;span&gt;serde_json::from_value::&amp;lt;ScryfallCard&amp;gt;(element.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;clone&lt;&#x2F;span&gt;&lt;span&gt;()) {
+&lt;&#x2F;span&gt;&lt;span&gt;                                        Ok(card) =&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;                                            cards.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;push&lt;&#x2F;span&gt;&lt;span&gt;(card);
+&lt;&#x2F;span&gt;&lt;span&gt;                                        }
+&lt;&#x2F;span&gt;&lt;span&gt;                                        Err(e) =&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;                                            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Print out the error and the value that failed to parse
+&lt;&#x2F;span&gt;&lt;span&gt;                                            println!(
+&lt;&#x2F;span&gt;&lt;span&gt;                                                &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Failed to parse card with arena_id &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{:?}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;                                                arena_id, e
+&lt;&#x2F;span&gt;&lt;span&gt;                                            );
+&lt;&#x2F;span&gt;&lt;span&gt;                                            println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Failed card data: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, json_str);
+&lt;&#x2F;span&gt;&lt;span&gt;                                        }
+&lt;&#x2F;span&gt;&lt;span&gt;                                    }
+&lt;&#x2F;span&gt;&lt;span&gt;                                }
+&lt;&#x2F;span&gt;&lt;span&gt;                            }
+&lt;&#x2F;span&gt;&lt;span&gt;                        }
+&lt;&#x2F;span&gt;&lt;span&gt;                    }
+&lt;&#x2F;span&gt;&lt;span&gt;                    _ =&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;                        println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;The provided JSON is not an array&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;                    }
+&lt;&#x2F;span&gt;&lt;span&gt;                }
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;            Err(e) =&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Handle the error case for the result from the deserializer
+&lt;&#x2F;span&gt;&lt;span&gt;                println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Error deserializing JSON: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{:?}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, e);
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    cards
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The function works by taking the path to a Scryfall JSON file along with a set of Arena IDs that we want to include. It reads the file as a stream of JSON values, which is especially useful for large bulk datasets because it avoids loading everything into memory at once. As it iterates over each JSON element, the function checks whether the card has an arena_id and whether that ID is part of our collection. If it is, the element is deserialized into a ScryfallCard struct and added to the output vector.&lt;&#x2F;p&gt;
+&lt;p&gt;Errors during deserialization are handled gracefully: the function prints both the error and the raw JSON that caused it, allowing us to debug any problematic entries without stopping the entire process. By filtering and deserializing only the relevant cards, this approach ensures that we keep memory usage low and produce a clean, usable dataset for further processing or analysis.&lt;&#x2F;p&gt;
+&lt;p&gt;Once we’ve extracted and filtered the relevant Scryfall cards, the next step is to persist this data so it can be easily inspected, shared, or used by other parts of our program. The save_cards_to_file function does exactly that: it takes a slice of ScryfallCard structs and writes them to a JSON file in a human-readable format.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;save_cards_to_file&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;P: AsRef&amp;lt;std::path::Path&amp;gt;&amp;gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;path&lt;&#x2F;span&gt;&lt;span&gt;: P, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cards&lt;&#x2F;span&gt;&lt;span&gt;: &amp;amp;[ScryfallCard]) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; json = serde_json::to_string_pretty(&amp;amp;cards).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Failed to serialize cards.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(path, json).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Failed to write to file.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Internally, it uses serde_json::to_string_pretty to convert the vector of cards into nicely formatted JSON. Then it writes that string to the specified file path. This simple helper encapsulates the serialization and file writing in one place, so we don’t have to repeat these steps every time we want to save card data.&lt;&#x2F;p&gt;
+&lt;p&gt;With all the building blocks in place — parsing Arena logs, aggregating decks into a CardCollection, extracting relevant Scryfall cards, and saving them to a file — we are ready to see everything in action. The main function ties these pieces together into a complete workflow, turning raw log files and bulk data into a clean, usable card collection.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Step 1: Parse the log file and collect card collection information from available decks.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; deck_file = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;input-files&#x2F;Player.log&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Example log file path
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; card_collection = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;parse_decks_from_log&lt;&#x2F;span&gt;&lt;span&gt;(deck_file) {
+&lt;&#x2F;span&gt;&lt;span&gt;        Some(collection) =&amp;gt; collection,
+&lt;&#x2F;span&gt;&lt;span&gt;        None =&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;            println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Failed to parse decks from the log.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    };
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Step 2: Gather all the arena card IDs from the collection.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; arena_ids: HashSet&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u64&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; = card_collection.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;get_arena_ids&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Step 3: Extract the Scryfall cards that match the arena IDs
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; scryfall_file = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;input-files&#x2F;scryfall.json&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Example Scryfall data file path
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; scryfall_cards = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;extract_arena_cards&lt;&#x2F;span&gt;&lt;span&gt;(scryfall_file, &amp;amp;arena_ids);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Step 4: Save the filtered Scryfall cards to a file
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; output_file = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;collection_output.json&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Example output file path
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;save_cards_to_file&lt;&#x2F;span&gt;&lt;span&gt;(output_file, &amp;amp;scryfall_cards);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(
+&lt;&#x2F;span&gt;&lt;span&gt;        &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Successfully extracted and saved &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt; different cards.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;        scryfall_cards.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;    );
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The main function follows a clear sequence. First, it parses the Arena log and builds a CardCollection from the available decks. Next, it collects all the unique Arena IDs from that collection. Then, it extracts the corresponding Scryfall cards from the bulk JSON file, filtering only the relevant cards. Finally, it saves the resulting collection to a JSON file, ready for inspection or further analysis. By structuring the workflow this way, each helper function is small and focused, while the main function orchestrates the full process in an easy-to-follow manner.&lt;&#x2F;p&gt;
+&lt;p&gt;With the main function, we’ve shown how all the pieces come together to parse Arena logs, enrich the data with Scryfall information, and save the resulting collection. But how can we be sure that each part works correctly? Even in a small project, writing a few unit tests is a good way to verify that our code behaves as expected. The next section demonstrates testing key functionality: parsing decks from JSON, aggregating cards into a CardCollection, and checking that card lookups with search_with_id return the correct results.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cfg&lt;&#x2F;span&gt;&lt;span&gt;(test)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;mod &lt;&#x2F;span&gt;&lt;span&gt;tests {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;std::collections::HashMap;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use crate&lt;&#x2F;span&gt;&lt;span&gt;::CardCollection;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use super&lt;&#x2F;span&gt;&lt;span&gt;::CardEntry;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use super&lt;&#x2F;span&gt;&lt;span&gt;::Deck;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use super&lt;&#x2F;span&gt;&lt;span&gt;::DecksWrapper;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    #[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test_decks_wrapper_parsing&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; json_data = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;r&lt;&#x2F;span&gt;&lt;span&gt;#&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;        {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;            &amp;quot;Decks&amp;quot;: {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;                &amp;quot;abc123&amp;quot;: {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;                    &amp;quot;MainDeck&amp;quot;: [
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;                        { &amp;quot;cardId&amp;quot;: 1001, &amp;quot;quantity&amp;quot;: 2 },
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;                        { &amp;quot;cardId&amp;quot;: 1002, &amp;quot;quantity&amp;quot;: 3 }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;                    ],
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;                    &amp;quot;Sideboard&amp;quot;: [],
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;                    &amp;quot;ReducedSideboard&amp;quot;: [],
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;                    &amp;quot;CommandZone&amp;quot;: [],
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;                    &amp;quot;Companions&amp;quot;: [],
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;                    &amp;quot;CardSkins&amp;quot;: []
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;                }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;            }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;        }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;#;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; parsed: Result&amp;lt;DecksWrapper, _&amp;gt; = serde_json::from_str(json_data);
+&lt;&#x2F;span&gt;&lt;span&gt;        assert!(parsed.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;is_ok&lt;&#x2F;span&gt;&lt;span&gt;(), &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Failed to parse DecksWrapper&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; decks_wrapper = parsed.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;unwrap&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; deck = decks_wrapper.decks.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;get&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;abc123&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;expect&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Deck not found&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        assert_eq!(deck.main_deck.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;        assert_eq!(deck.main_deck[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;].card_id, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1001&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;        assert_eq!(deck.main_deck[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;].quantity, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    #[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test_card_collection_creation&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; deck1 = Deck {
+&lt;&#x2F;span&gt;&lt;span&gt;            main_deck: vec![
+&lt;&#x2F;span&gt;&lt;span&gt;                CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;                    card_id: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                    quantity: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                },
+&lt;&#x2F;span&gt;&lt;span&gt;                CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;                    card_id: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                    quantity: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                },
+&lt;&#x2F;span&gt;&lt;span&gt;            ],
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; assuming other fields exist and are empty
+&lt;&#x2F;span&gt;&lt;span&gt;            ..Default::default()
+&lt;&#x2F;span&gt;&lt;span&gt;        };
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; deck2 = Deck {
+&lt;&#x2F;span&gt;&lt;span&gt;            main_deck: vec![
+&lt;&#x2F;span&gt;&lt;span&gt;                CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;                    card_id: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                    quantity: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                },
+&lt;&#x2F;span&gt;&lt;span&gt;                CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;                    card_id: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                    quantity: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                },
+&lt;&#x2F;span&gt;&lt;span&gt;            ],
+&lt;&#x2F;span&gt;&lt;span&gt;            ..Default::default()
+&lt;&#x2F;span&gt;&lt;span&gt;        };
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; decks_wrapper: DecksWrapper = DecksWrapper {
+&lt;&#x2F;span&gt;&lt;span&gt;            decks: (HashMap::from([
+&lt;&#x2F;span&gt;&lt;span&gt;                (String::from(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;00001&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;), deck1),
+&lt;&#x2F;span&gt;&lt;span&gt;                (String::from(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;00002&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;), deck2),
+&lt;&#x2F;span&gt;&lt;span&gt;            ])),
+&lt;&#x2F;span&gt;&lt;span&gt;        };
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; card_collection = CardCollection::from_decks_wrapper(decks_wrapper);
+&lt;&#x2F;span&gt;&lt;span&gt;        assert_eq!(card_collection.cards.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;        assert_eq!(
+&lt;&#x2F;span&gt;&lt;span&gt;            card_collection.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;search_with_id&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;),
+&lt;&#x2F;span&gt;&lt;span&gt;            CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;                card_id: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                quantity: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;        );
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    #[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test_search_with_id_found&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; collection = CardCollection {
+&lt;&#x2F;span&gt;&lt;span&gt;            cards: vec![
+&lt;&#x2F;span&gt;&lt;span&gt;                CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;                    card_id: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;101&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                    quantity: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                },
+&lt;&#x2F;span&gt;&lt;span&gt;                CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;                    card_id: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;202&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                    quantity: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                },
+&lt;&#x2F;span&gt;&lt;span&gt;            ],
+&lt;&#x2F;span&gt;&lt;span&gt;        };
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; result = collection.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;search_with_id&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;101&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;        assert_eq!(result.card_id, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;101&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;        assert_eq!(result.quantity, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    #[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test_search_with_id_not_found&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; collection = CardCollection {
+&lt;&#x2F;span&gt;&lt;span&gt;            cards: vec![
+&lt;&#x2F;span&gt;&lt;span&gt;                CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;                    card_id: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;101&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                    quantity: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                },
+&lt;&#x2F;span&gt;&lt;span&gt;                CardEntry {
+&lt;&#x2F;span&gt;&lt;span&gt;                    card_id: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;202&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                    quantity: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                },
+&lt;&#x2F;span&gt;&lt;span&gt;            ],
+&lt;&#x2F;span&gt;&lt;span&gt;        };
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; result = collection.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;search_with_id&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;999&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;        assert_eq!(result.card_id, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;999&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;        assert_eq!(result.quantity, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Default case
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This small project has been a fun way to dive into Rust. From parsing Arena logs to matching cards with Scryfall data, each step gave me hands-on experience with structs, collections, serialization, and basic file handling. I hope it also highlights the value of writing small, focused functions and a few tests for them. This makes even a modest tool feel solid and reliable.&lt;&#x2F;p&gt;
+&lt;p&gt;Beyond the technical details, it’s rewarding to see raw log files transformed into a structured, human-readable collection of cards. While this tool is simple, it illustrates how Rust can help you approach a problem methodically, building up a workflow from small, composable pieces. And with plenty of room for new features or experiments, using Rust ensures that you will always have a winning hand.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
     <entry xml:lang="en">
         <title>Escaping the Compactor with Linked Data</title>
         <published>2025-05-17T00:00:00+00:00</published>

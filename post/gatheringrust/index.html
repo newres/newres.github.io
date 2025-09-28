@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Newres Al Haider</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+  <link href="https:&#x2F;&#x2F;www.newresalhaider.com/style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.newresalhaider.com/scripts/menu.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@newresa">
+<meta name="twitter:creator" content="@newresa">
+
+
+<meta name="twitter:title" content="Gathering Rust">
+<meta name="title" property="og:title" content="Gathering Rust" />
+
+
+<meta name="twitter:description" content="Exploring the Rust programming language through creating a log extractor for Magic The Gathering: Arena online trading card game.
+">
+<meta name="description" property="og:description" content="Exploring the Rust programming language through creating a log extractor for Magic The Gathering: Arena online trading card game.
+" />
+
+
+<meta name="author" content="Newres Al Haider" />
+<meta property="article:author" content="Newres Al Haider">
+<meta property="og:type" content="article" />
+
+<meta property="article:published_time" content="2025-09-28">
+
+
+    
+        <meta property="article:tag" content="Rust">
+    
+        <meta property="article:tag" content="Magic The Gathering">
+    
+
+
+    <meta property="article:modified_time" content="2025-09-28">
+
+
+
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/gatheringrust/featured.jpg">
+<meta property="og:image" content="https://www.newresalhaider.com/post/gatheringrust/featured.jpg" />
+
+
+</head>
+
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="title is-3">
+                Newres Al Haider
+            </h1>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="NavbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="NavbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/">
+                <h2 class="subtitle is-5">
+                    Home
+                </h2>
+            </a>
+            <a class="navbar-item" href="/post/">
+                <h2 class="subtitle is-5">
+                    Posts
+                </h2>
+            </a>
+            <a class="navbar-item" href="/project/">
+                <h2 class="subtitle is-5">
+                    Projects
+                </h2>
+            </a>
+            <a class="navbar-item" href="/publication/">
+                <h2 class="subtitle is-5">
+                    Publications
+                </h2>
+            </a>
+        </div>
+    </div>
+</nav>
+  <section class="section">
+    <div class="container">
+      
+
+<h1 class="title">
+    Gathering Rust
+</h1>
+<p class="subtitle"><strong>2025-09-28</strong></p>
+<p>When it comes to learning a new programming language, I’ve found that building a small, practical program is one of the best ways to get started. Recently I began exploring <a href="https://www.rust-lang.org/">Rust</a>, and to get a feel for the language I decided to write a tool based on a game I was playing at the time: <a href="https://magic.wizards.com/en/mtgarena">Magic: The Gathering Arena (Arena)</a>. The game’s log files contain a lot of information, including records of the cards I had used, but not in an easily readable way. I wanted to build a tool that could extract that data. This article describes how I approached the project using Rust.</p>
+<figure class=centeredfig>
+    <img src=featured.jpg>
+    
+    <figcaption>
+        
+        <h4>An image of a cybernetic flower with rust. The language was actually named after the fungus and not the oxidation reaction, though for the image both could apply. </h4>
+        
+        
+    </figcaption>
+</figure>
+<p>I wanted to learn Rust because of its strong focus on safety and performance, as well as the growing ecosystem around it. Frameworks like <a href="https://v2.tauri.app/">Tauri</a> and even <a href="https://www.getzola.org/">Zola</a> with which this site is generated are written in Rust. Rust’s ownership model and lifetimes can seem tricky at first glance, so I was looking for a small, manageable project that would give me some hands-on experience without being overwhelming. Parsing game log files felt like the right balance of practical and approachable.</p>
+<p>In Arena, two players play against each other with decks made of collectible cards. There is a huge list of cards available, with evocative names such as &quot;Lightning Bolt&quot; and &quot;Serra Angel&quot;, that could make up a deck. In general the decks you play are based on the cards available in your collection, so it is nice to look over it, and craft the deck you want to play. Unfortunately while you can go over your collection in the game client, there is no easy way to export your set of cards from it. </p>
+<p>This is where the game log of Arena comes in. The log emits a huge number of events, many of which could be analyzed by external tools. While it doesn’t currently include an event for all the cards in your collection, it does show all the cards used in each deck. To make things a bit more tricky, it uses an internal Arena specific card ID to identify the cards, as opposed to the card names more familiar to players. Given these challenges, my goal was straightforward: take an MTG Arena log and turn it into a clear, human-readable list of the cards I have, including their names.</p>
+<p>We can structure the code for this application into two main parts. First, we have some data structures to hold the information gathered from the logs, the mapping of arena IDs to names, and the output that we like to show. Second, we have some functions that read the information in from the files, gather the card information from the logs, match this information with the mappings and finally write the output to a file. In addition, we will have unit tests to ensure that the functions work as expected.</p>
+<p>With the code structure in mind, let’s walk through the source code of the application, which fits neatly in a single file.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>serde::{Deserialize, Serialize};
+</span><span style="color:#b48ead;">use </span><span>serde_json::{Deserializer, Value};
+</span><span style="color:#b48ead;">use </span><span>std::collections::{HashMap, HashSet};
+</span><span style="color:#b48ead;">use </span><span>std::fs::{write, File};
+</span><span style="color:#b48ead;">use </span><span>std::io::{BufRead, BufReader};
+</span></code></pre>
+<p>As is usual in many other languages we start by listing our imports first. The <code>serde</code> framework allows for easy mapping of Rust data structures to other formats. As we are aiming to serialize the extracted information into JSON files we are going to use <code>serde_json</code>, which is an implementation of <code>serde</code> for the JSON format. We also have imports from the standard library that we for generic data structures and file writing/reading.</p>
+<p>The next part of the code are the data structures that can represent the information in the log file. </p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Data structures for the parts of the log that has information about the decks and cards in them.
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Serialize, Deserialize, Debug, Default)]
+</span><span>#[</span><span style="color:#bf616a;">serde</span><span>(rename_all = &quot;</span><span style="color:#a3be8c;">PascalCase</span><span>&quot;)]
+</span><span style="color:#b48ead;">struct </span><span>DecksWrapper {
+</span><span>    </span><span style="color:#bf616a;">decks</span><span>: HashMap&lt;String, Deck&gt;,
+</span><span>}
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Serialize, Deserialize, Debug, Default)]
+</span><span>#[</span><span style="color:#bf616a;">serde</span><span>(rename_all = &quot;</span><span style="color:#a3be8c;">PascalCase</span><span>&quot;)]
+</span><span style="color:#b48ead;">struct </span><span>Deck {
+</span><span>    </span><span style="color:#bf616a;">main_deck</span><span>: Vec&lt;CardEntry&gt;,
+</span><span>    </span><span style="color:#bf616a;">sideboard</span><span>: Vec&lt;CardEntry&gt;,
+</span><span>    </span><span style="color:#bf616a;">reduced_sideboard</span><span>: Vec&lt;CardEntry&gt;,
+</span><span>    </span><span style="color:#bf616a;">command_zone</span><span>: Vec&lt;CardEntry&gt;,
+</span><span>    </span><span style="color:#bf616a;">companions</span><span>: Vec&lt;CardEntry&gt;,
+</span><span>}
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Serialize, Deserialize, Debug, Default, Clone, PartialEq)]
+</span><span>#[</span><span style="color:#bf616a;">serde</span><span>(rename_all = &quot;</span><span style="color:#a3be8c;">camelCase</span><span>&quot;)]
+</span><span style="color:#b48ead;">struct </span><span>CardEntry {
+</span><span>    </span><span style="color:#bf616a;">card_id</span><span>: </span><span style="color:#b48ead;">u64</span><span>,
+</span><span>    </span><span style="color:#bf616a;">quantity</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
+</span><span>}
+</span></code></pre>
+<p>The data structures that we use are defined here using Rust structs. They are made up of either primitive types such as <code>card_id</code> and <code>quantity</code>, or collections of other structs such as <code>main_deck</code> and <code>sideboard</code>.</p>
+<p>In addition, we add attributes to our structs. For example, <code>#[derive(Serialize, Deserialize, Debug, Default)]</code> lets us automatically serialize and deserialize the structs, print them with Debug, and construct default values. The <code>#[serde(rename_all = &quot;PascalCase&quot;)]</code> attribute tells Serde how to map between Rust’s convention of snake_case field names (e.g. main_deck) and the PascalCase keys used in the Arena log JSON (e.g. MainDeck).</p>
+<p>To illustrate with a minimal example, assume we have the following fragment in the JSON logs:</p>
+<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>&quot;</span><span style="color:#a3be8c;">MainDeck</span><span>&quot;: [
+</span><span>                { &quot;</span><span style="color:#a3be8c;">cardId</span><span>&quot;: </span><span style="color:#d08770;">1001</span><span>, &quot;</span><span style="color:#a3be8c;">quantity</span><span>&quot;: </span><span style="color:#d08770;">2 </span><span>},
+</span><span>                { &quot;</span><span style="color:#a3be8c;">cardId</span><span>&quot;: </span><span style="color:#d08770;">1002</span><span>, &quot;</span><span style="color:#a3be8c;">quantity</span><span>&quot;: </span><span style="color:#d08770;">3 </span><span>}
+</span><span>],
+</span></code></pre>
+<p>This would map to a concrete Rust value such as:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span> </span><span style="color:#b48ead;">let</span><span> deck1 = Deck {
+</span><span>            main_deck: vec![
+</span><span>                CardEntry {
+</span><span>                    card_id:  </span><span style="color:#d08770;">1001</span><span>,
+</span><span>                    quantity: </span><span style="color:#d08770;">2</span><span>,
+</span><span>                },
+</span><span>                CardEntry {
+</span><span>                    card_id: </span><span style="color:#d08770;">1002</span><span>,
+</span><span>                    quantity: </span><span style="color:#d08770;">3</span><span>,
+</span><span>                },
+</span><span>            ],
+</span><span>            </span><span style="color:#65737e;">// assuming other fields exist and are empty
+</span><span>            ..Default::default()
+</span><span>        };
+</span><span>
+</span></code></pre>
+<p>We’ll see this in action in one of the unit tests later.</p>
+<p>Next up are the remaining data structures that we’ll use for representing the full card collection, as well as general card information from <a href="https://scryfall.com/">Scryfall</a>.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Data structure that represents how many of each card we have available based on the decks.
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Serialize, Deserialize, Debug, Default)]
+</span><span>#[</span><span style="color:#bf616a;">serde</span><span>(rename_all = &quot;</span><span style="color:#a3be8c;">camelCase</span><span>&quot;)]
+</span><span style="color:#b48ead;">struct </span><span>CardCollection {
+</span><span>    </span><span style="color:#bf616a;">cards</span><span>: Vec&lt;CardEntry&gt;,
+</span><span>}
+</span><span>
+</span><span style="color:#65737e;">// Data structures for Scryfall (general card knowledge) information
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Serialize, Deserialize, Debug, Default)]
+</span><span style="color:#b48ead;">struct </span><span>ScryfallData {
+</span><span>    </span><span style="color:#bf616a;">cards</span><span>: Vec&lt;ScryfallCard&gt;,
+</span><span>}
+</span><span>
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Serialize, Deserialize, Debug, Default)]
+</span><span style="color:#b48ead;">struct </span><span>ScryfallCard {
+</span><span>    </span><span style="color:#bf616a;">arena_id</span><span>: Option&lt;</span><span style="color:#b48ead;">u64</span><span>&gt;,
+</span><span>    </span><span style="color:#bf616a;">name</span><span>: String,
+</span><span>}
+</span></code></pre>
+<p>With these additional structs in place, we now have everything we need to represent both the decks pulled from the Arena logs and the more general card information from Scryfall. But representation alone isn’t enough: we also need a way to process the raw decks into something useful.</p>
+<p>That’s where the CardCollection implementation comes in. This type acts as a bridge between individual deck data and the overall view of a player’s collection. By aggregating card entries across decks, we can answer questions like “How many copies of this card do I actually own?” or “Which Arena IDs are present in my collection?”</p>
+<p>The following impl block shows how we can construct a CardCollection from a DecksWrapper, as well as provide some helper methods for querying it:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Implementation that can derive the card collection from the decks. 
+</span><span style="color:#b48ead;">impl </span><span>CardCollection {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">from_decks_wrapper</span><span>(</span><span style="color:#bf616a;">decks_wrapper</span><span>: DecksWrapper) -&gt; CardCollection {
+</span><span>        </span><span style="color:#b48ead;">use </span><span>std::collections::HashMap;
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">let mut</span><span> card_map: HashMap&lt;</span><span style="color:#b48ead;">u64</span><span>, </span><span style="color:#b48ead;">u32</span><span>&gt; = HashMap::new();
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">for</span><span> deck in decks_wrapper.decks.</span><span style="color:#96b5b4;">values</span><span>() {
+</span><span>            </span><span style="color:#b48ead;">for</span><span> entry in &amp;deck.main_deck {
+</span><span>                *card_map.</span><span style="color:#96b5b4;">entry</span><span>(entry.card_id).</span><span style="color:#96b5b4;">or_insert</span><span>(</span><span style="color:#d08770;">0</span><span>) += entry.quantity;
+</span><span>            }
+</span><span>
+</span><span>            </span><span style="color:#b48ead;">for</span><span> entry in &amp;deck.sideboard {
+</span><span>                *card_map.</span><span style="color:#96b5b4;">entry</span><span>(entry.card_id).</span><span style="color:#96b5b4;">or_insert</span><span>(</span><span style="color:#d08770;">0</span><span>) += entry.quantity;
+</span><span>            }
+</span><span>
+</span><span>            </span><span style="color:#b48ead;">for</span><span> entry in &amp;deck.reduced_sideboard {
+</span><span>                *card_map.</span><span style="color:#96b5b4;">entry</span><span>(entry.card_id).</span><span style="color:#96b5b4;">or_insert</span><span>(</span><span style="color:#d08770;">0</span><span>) += entry.quantity;
+</span><span>            }
+</span><span>
+</span><span>            </span><span style="color:#b48ead;">for</span><span> entry in &amp;deck.command_zone {
+</span><span>                *card_map.</span><span style="color:#96b5b4;">entry</span><span>(entry.card_id).</span><span style="color:#96b5b4;">or_insert</span><span>(</span><span style="color:#d08770;">0</span><span>) += entry.quantity;
+</span><span>            }
+</span><span>
+</span><span>            </span><span style="color:#b48ead;">for</span><span> entry in &amp;deck.companions {
+</span><span>                *card_map.</span><span style="color:#96b5b4;">entry</span><span>(entry.card_id).</span><span style="color:#96b5b4;">or_insert</span><span>(</span><span style="color:#d08770;">0</span><span>) += entry.quantity;
+</span><span>            }
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">let</span><span> cards = card_map
+</span><span>            .</span><span style="color:#96b5b4;">into_iter</span><span>()
+</span><span>            .</span><span style="color:#96b5b4;">map</span><span>(|(</span><span style="color:#bf616a;">card_id</span><span>, </span><span style="color:#bf616a;">quantity</span><span>)| CardEntry { card_id, quantity })
+</span><span>            .</span><span style="color:#96b5b4;">collect</span><span>();
+</span><span>
+</span><span>        CardCollection { cards }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">get_arena_ids</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; HashSet&lt;</span><span style="color:#b48ead;">u64</span><span>&gt; {
+</span><span>        </span><span style="color:#bf616a;">self</span><span>.cards.</span><span style="color:#96b5b4;">iter</span><span>().</span><span style="color:#96b5b4;">map</span><span>(|</span><span style="color:#bf616a;">entry</span><span>| entry.card_id).</span><span style="color:#96b5b4;">collect</span><span>()
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">search_with_id</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">card_id</span><span>: </span><span style="color:#b48ead;">u64</span><span>) -&gt; CardEntry {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> found_entry = </span><span style="color:#bf616a;">self</span><span>.cards.</span><span style="color:#96b5b4;">iter</span><span>().</span><span style="color:#96b5b4;">find</span><span>(|</span><span style="color:#bf616a;">c</span><span>| c.card_id == card_id).</span><span style="color:#96b5b4;">cloned</span><span>();
+</span><span>        </span><span style="color:#b48ead;">match</span><span> found_entry {
+</span><span>            Some(result) =&gt; </span><span style="color:#b48ead;">return</span><span> result,
+</span><span>            None =&gt; {
+</span><span>                </span><span style="color:#b48ead;">return</span><span> CardEntry {
+</span><span>                    card_id: card_id,
+</span><span>                    quantity: </span><span style="color:#d08770;">0</span><span>,
+</span><span>                }
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>The CardCollection implementation is where we actually make use of the deck data. Let’s go through each method in turn:</p>
+<ul>
+<li>
+<p>from_decks_wrapper
+This function takes all of the decks inside a DecksWrapper and combines them into a single CardCollection. It does so by walking through every zone of every deck (main_deck, sideboard, etc.), summing the quantities for each card ID into a HashMap&lt;u64, u32&gt;. Once all the decks are processed, that map is converted back into a list of CardEntry values.
+In short, it turns lots of decks with overlapping cards into one unified collection with aggregated counts.</p>
+</li>
+<li>
+<p>get_arena_ids
+Sometimes we don’t need the full card entries, just the set of card IDs that appear in the collection. This helper method collects all the card_ids into a HashSet<u64>. Using a HashSet here is efficient because it guarantees uniqueness — we only care whether a card ID exists, not how many times it occurs.</p>
+</li>
+<li>
+<p>search_with_id
+This is a small convenience function for looking up a specific card by its Arena ID. If the card exists in the collection, it returns the corresponding CardEntry. If not, it returns a default CardEntry with the given card_id and a quantity of 0.
+This approach avoids dealing with Option<CardEntry> on the caller side, at the cost of always producing a value — even if it represents “zero copies.”</p>
+</li>
+</ul>
+<p>Together, these methods make CardCollection the workhorse of the program: it gives us an aggregated view of what cards we have and lets us easily query or transform that data.</p>
+<p>So far, we’ve been working with data structures and helper methods that assume we already have the deck data in memory. But of course, the whole point of this tool is to read the Arena log and extract that information automatically. The parse_decks_from_log function is responsible for this: it scans through the log file line by line, looks for entries that contain deck data, and deserializes the first one it finds into a CardCollection.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Takes a log file and aims to extract a cardcollection from it.
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">parse_decks_from_log</span><span>&lt;P: AsRef&lt;std::path::Path&gt;&gt;(</span><span style="color:#bf616a;">path</span><span>: P) -&gt; Option&lt;CardCollection&gt; {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> file = File::open(path).</span><span style="color:#96b5b4;">ok</span><span>()?;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> reader = BufReader::new(file);
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">for</span><span> line in reader.</span><span style="color:#96b5b4;">lines</span><span>().</span><span style="color:#96b5b4;">flatten</span><span>() {
+</span><span>        </span><span style="color:#b48ead;">if</span><span> line.</span><span style="color:#96b5b4;">contains</span><span>(&quot;</span><span style="color:#96b5b4;">\&quot;</span><span style="color:#a3be8c;">Decks</span><span style="color:#96b5b4;">\&quot;</span><span>&quot;) {
+</span><span>            </span><span style="color:#b48ead;">if let </span><span>Ok(decks) = serde_json::from_str::&lt;DecksWrapper&gt;(&amp;line) {
+</span><span>                </span><span style="color:#b48ead;">return </span><span>Some(CardCollection::from_decks_wrapper(decks));
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    None
+</span><span>}
+</span></code></pre>
+<p>This function ties everything together by connecting the raw log file to the structured data we’ve been working with. A couple of details are worth pointing out:</p>
+<ul>
+<li>
+<p>Return type Option<CardCollection>
+We use Option because it’s possible that the log file doesn’t contain any deck data at all. In that case, the function cleanly returns None instead of panicking. When a deck is found, we wrap it in Some and return it.</p>
+</li>
+<li>
+<p>? operator for error handling
+The expression File::open(path).ok()? is a compact way of saying: try to open the file, and if that fails, return None immediately. This avoids cluttering the function with explicit match statements while still being safe.</p>
+</li>
+<li>
+<p>Finding deck data
+The function looks for lines containing &quot;Decks&quot; because that’s how Arena includes the relevant JSON in its log. Once such a line is found, we attempt to deserialize it into a DecksWrapper.</p>
+</li>
+<li>
+<p>One section, multiple decks
+Each log file has only one &quot;Decks&quot; section, but that section may describe several different decks at once. That’s why DecksWrapper contains a HashMap&lt;String, Deck&gt; — the keys are deck identifiers, and the values are the deck lists themselves. Since there’s only ever one &quot;Decks&quot; section, we can safely return after parsing it.</p>
+</li>
+</ul>
+<p>With this in place, we now have a straightforward path:</p>
+<p>Open the Arena log.</p>
+<p>Parse out the &quot;Decks&quot; section.</p>
+<p>Turn it into a CardCollection that we can query and extend later.</p>
+<p>Next, we need a way to extract the Scryfall information into in-memory structs, similar to how we did it with the Arena logs. Scryfall provides both online APIs and bulk data files. For our purposes, using the bulk files is simpler and more reliable than hitting the API repeatedly.</p>
+<p>The <code>extract_arena_cards</code> function reads a Scryfall JSON file and filters it down to only the cards that exist in our collection of Arena IDs. It works as follows:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">extract_arena_cards</span><span>&lt;P: AsRef&lt;std::path::Path&gt;&gt;(
+</span><span>    </span><span style="color:#bf616a;">path</span><span>: P,
+</span><span>    </span><span style="color:#bf616a;">arena_ids</span><span>: &amp;HashSet&lt;</span><span style="color:#b48ead;">u64</span><span>&gt;,
+</span><span>) -&gt; Vec&lt;ScryfallCard&gt; {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> file = File::open(path).</span><span style="color:#96b5b4;">expect</span><span>(&quot;</span><span style="color:#a3be8c;">Failed to open Scryfall file</span><span>&quot;);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> reader = BufReader::new(file);
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Deserialize as a stream of JSON values
+</span><span>    </span><span style="color:#b48ead;">let</span><span> stream = Deserializer::from_reader(reader).into_iter::&lt;Value&gt;();
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> cards = Vec::new();
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Iterate over each element in the stream, handling Result&lt;Value, Error&gt;
+</span><span>    </span><span style="color:#b48ead;">for</span><span> result in stream {
+</span><span>        </span><span style="color:#b48ead;">match</span><span> result {
+</span><span>            Ok(value) =&gt; {
+</span><span>                </span><span style="color:#65737e;">// Check if value is an array, and proceed accordingly
+</span><span>                </span><span style="color:#b48ead;">match</span><span> value {
+</span><span>                    Value::Array(</span><span style="color:#b48ead;">ref</span><span> array) =&gt; {
+</span><span>                        </span><span style="color:#65737e;">// Iterate over each element of the array
+</span><span>                        </span><span style="color:#b48ead;">for</span><span> element in array {
+</span><span>                            </span><span style="color:#65737e;">// Process each element (card) in the array
+</span><span>                            </span><span style="color:#b48ead;">let</span><span> json_str = serde_json::to_string_pretty(&amp;element)
+</span><span>                                .</span><span style="color:#96b5b4;">expect</span><span>(&quot;</span><span style="color:#a3be8c;">Failed to convert JSON to string</span><span>&quot;);
+</span><span>
+</span><span>                            </span><span style="color:#65737e;">// Directly use u64 for arena_id
+</span><span>                            </span><span style="color:#b48ead;">if let </span><span>Some(arena_id) = element.</span><span style="color:#96b5b4;">get</span><span>(&quot;</span><span style="color:#a3be8c;">arena_id</span><span>&quot;).</span><span style="color:#96b5b4;">and_then</span><span>(|</span><span style="color:#bf616a;">v</span><span>| v.</span><span style="color:#96b5b4;">as_u64</span><span>())
+</span><span>                            {
+</span><span>                                </span><span style="color:#b48ead;">if</span><span> arena_ids.</span><span style="color:#96b5b4;">contains</span><span>(&amp;arena_id) {
+</span><span>                                    </span><span style="color:#65737e;">// Try parsing the card into the struct
+</span><span>                                    </span><span style="color:#b48ead;">match </span><span>serde_json::from_value::&lt;ScryfallCard&gt;(element.</span><span style="color:#96b5b4;">clone</span><span>()) {
+</span><span>                                        Ok(card) =&gt; {
+</span><span>                                            cards.</span><span style="color:#96b5b4;">push</span><span>(card);
+</span><span>                                        }
+</span><span>                                        Err(e) =&gt; {
+</span><span>                                            </span><span style="color:#65737e;">// Print out the error and the value that failed to parse
+</span><span>                                            println!(
+</span><span>                                                &quot;</span><span style="color:#a3be8c;">Failed to parse card with arena_id </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">: </span><span style="color:#d08770;">{:?}</span><span>&quot;,
+</span><span>                                                arena_id, e
+</span><span>                                            );
+</span><span>                                            println!(&quot;</span><span style="color:#a3be8c;">Failed card data: </span><span style="color:#d08770;">{}</span><span>&quot;, json_str);
+</span><span>                                        }
+</span><span>                                    }
+</span><span>                                }
+</span><span>                            }
+</span><span>                        }
+</span><span>                    }
+</span><span>                    _ =&gt; {
+</span><span>                        println!(&quot;</span><span style="color:#a3be8c;">The provided JSON is not an array</span><span>&quot;);
+</span><span>                    }
+</span><span>                }
+</span><span>            }
+</span><span>            Err(e) =&gt; {
+</span><span>                </span><span style="color:#65737e;">// Handle the error case for the result from the deserializer
+</span><span>                println!(&quot;</span><span style="color:#a3be8c;">Error deserializing JSON: </span><span style="color:#d08770;">{:?}</span><span>&quot;, e);
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    cards
+</span><span>}
+</span></code></pre>
+<p>The function works by taking the path to a Scryfall JSON file along with a set of Arena IDs that we want to include. It reads the file as a stream of JSON values, which is especially useful for large bulk datasets because it avoids loading everything into memory at once. As it iterates over each JSON element, the function checks whether the card has an arena_id and whether that ID is part of our collection. If it is, the element is deserialized into a ScryfallCard struct and added to the output vector.</p>
+<p>Errors during deserialization are handled gracefully: the function prints both the error and the raw JSON that caused it, allowing us to debug any problematic entries without stopping the entire process. By filtering and deserializing only the relevant cards, this approach ensures that we keep memory usage low and produce a clean, usable dataset for further processing or analysis.</p>
+<p>Once we’ve extracted and filtered the relevant Scryfall cards, the next step is to persist this data so it can be easily inspected, shared, or used by other parts of our program. The save_cards_to_file function does exactly that: it takes a slice of ScryfallCard structs and writes them to a JSON file in a human-readable format.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">save_cards_to_file</span><span>&lt;P: AsRef&lt;std::path::Path&gt;&gt;(</span><span style="color:#bf616a;">path</span><span>: P, </span><span style="color:#bf616a;">cards</span><span>: &amp;[ScryfallCard]) {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> json = serde_json::to_string_pretty(&amp;cards).</span><span style="color:#96b5b4;">expect</span><span>(&quot;</span><span style="color:#a3be8c;">Failed to serialize cards.</span><span>&quot;);
+</span><span>    </span><span style="color:#96b5b4;">write</span><span>(path, json).</span><span style="color:#96b5b4;">expect</span><span>(&quot;</span><span style="color:#a3be8c;">Failed to write to file.</span><span>&quot;);
+</span><span>}
+</span></code></pre>
+<p>Internally, it uses serde_json::to_string_pretty to convert the vector of cards into nicely formatted JSON. Then it writes that string to the specified file path. This simple helper encapsulates the serialization and file writing in one place, so we don’t have to repeat these steps every time we want to save card data.</p>
+<p>With all the building blocks in place — parsing Arena logs, aggregating decks into a CardCollection, extracting relevant Scryfall cards, and saving them to a file — we are ready to see everything in action. The main function ties these pieces together into a complete workflow, turning raw log files and bulk data into a clean, usable card collection.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Step 1: Parse the log file and collect card collection information from available decks.
+</span><span>    </span><span style="color:#b48ead;">let</span><span> deck_file = &quot;</span><span style="color:#a3be8c;">input-files/Player.log</span><span>&quot;; </span><span style="color:#65737e;">// Example log file path
+</span><span>    </span><span style="color:#b48ead;">let</span><span> card_collection = </span><span style="color:#b48ead;">match </span><span style="color:#96b5b4;">parse_decks_from_log</span><span>(deck_file) {
+</span><span>        Some(collection) =&gt; collection,
+</span><span>        None =&gt; {
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Failed to parse decks from the log.</span><span>&quot;);
+</span><span>            </span><span style="color:#b48ead;">return</span><span>;
+</span><span>        }
+</span><span>    };
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Step 2: Gather all the arena card IDs from the collection.
+</span><span>    </span><span style="color:#b48ead;">let</span><span> arena_ids: HashSet&lt;</span><span style="color:#b48ead;">u64</span><span>&gt; = card_collection.</span><span style="color:#96b5b4;">get_arena_ids</span><span>();
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Step 3: Extract the Scryfall cards that match the arena IDs
+</span><span>    </span><span style="color:#b48ead;">let</span><span> scryfall_file = &quot;</span><span style="color:#a3be8c;">input-files/scryfall.json</span><span>&quot;; </span><span style="color:#65737e;">// Example Scryfall data file path
+</span><span>    </span><span style="color:#b48ead;">let</span><span> scryfall_cards = </span><span style="color:#96b5b4;">extract_arena_cards</span><span>(scryfall_file, &amp;arena_ids);
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Step 4: Save the filtered Scryfall cards to a file
+</span><span>    </span><span style="color:#b48ead;">let</span><span> output_file = &quot;</span><span style="color:#a3be8c;">collection_output.json</span><span>&quot;; </span><span style="color:#65737e;">// Example output file path
+</span><span>    </span><span style="color:#96b5b4;">save_cards_to_file</span><span>(output_file, &amp;scryfall_cards);
+</span><span>
+</span><span>    println!(
+</span><span>        &quot;</span><span style="color:#a3be8c;">Successfully extracted and saved </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> different cards.</span><span>&quot;,
+</span><span>        scryfall_cards.</span><span style="color:#96b5b4;">len</span><span>()
+</span><span>    );
+</span><span>}
+</span></code></pre>
+<p>The main function follows a clear sequence. First, it parses the Arena log and builds a CardCollection from the available decks. Next, it collects all the unique Arena IDs from that collection. Then, it extracts the corresponding Scryfall cards from the bulk JSON file, filtering only the relevant cards. Finally, it saves the resulting collection to a JSON file, ready for inspection or further analysis. By structuring the workflow this way, each helper function is small and focused, while the main function orchestrates the full process in an easy-to-follow manner.</p>
+<p>With the main function, we’ve shown how all the pieces come together to parse Arena logs, enrich the data with Scryfall information, and save the resulting collection. But how can we be sure that each part works correctly? Even in a small project, writing a few unit tests is a good way to verify that our code behaves as expected. The next section demonstrates testing key functionality: parsing decks from JSON, aggregating cards into a CardCollection, and checking that card lookups with search_with_id return the correct results.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">cfg</span><span>(test)]
+</span><span style="color:#b48ead;">mod </span><span>tests {
+</span><span>    </span><span style="color:#b48ead;">use </span><span>std::collections::HashMap;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">use crate</span><span>::CardCollection;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">use super</span><span>::CardEntry;
+</span><span>    </span><span style="color:#b48ead;">use super</span><span>::Deck;
+</span><span>    </span><span style="color:#b48ead;">use super</span><span>::DecksWrapper;
+</span><span>
+</span><span>    #[</span><span style="color:#bf616a;">test</span><span>]
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">test_decks_wrapper_parsing</span><span>() {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> json_data = </span><span style="color:#b48ead;">r</span><span>#&quot;
+</span><span style="color:#a3be8c;">        {
+</span><span style="color:#a3be8c;">            &quot;Decks&quot;: {
+</span><span style="color:#a3be8c;">                &quot;abc123&quot;: {
+</span><span style="color:#a3be8c;">                    &quot;MainDeck&quot;: [
+</span><span style="color:#a3be8c;">                        { &quot;cardId&quot;: 1001, &quot;quantity&quot;: 2 },
+</span><span style="color:#a3be8c;">                        { &quot;cardId&quot;: 1002, &quot;quantity&quot;: 3 }
+</span><span style="color:#a3be8c;">                    ],
+</span><span style="color:#a3be8c;">                    &quot;Sideboard&quot;: [],
+</span><span style="color:#a3be8c;">                    &quot;ReducedSideboard&quot;: [],
+</span><span style="color:#a3be8c;">                    &quot;CommandZone&quot;: [],
+</span><span style="color:#a3be8c;">                    &quot;Companions&quot;: [],
+</span><span style="color:#a3be8c;">                    &quot;CardSkins&quot;: []
+</span><span style="color:#a3be8c;">                }
+</span><span style="color:#a3be8c;">            }
+</span><span style="color:#a3be8c;">        }
+</span><span style="color:#a3be8c;">        </span><span>&quot;#;
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">let</span><span> parsed: Result&lt;DecksWrapper, _&gt; = serde_json::from_str(json_data);
+</span><span>        assert!(parsed.</span><span style="color:#96b5b4;">is_ok</span><span>(), &quot;</span><span style="color:#a3be8c;">Failed to parse DecksWrapper</span><span>&quot;);
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">let</span><span> decks_wrapper = parsed.</span><span style="color:#96b5b4;">unwrap</span><span>();
+</span><span>        </span><span style="color:#b48ead;">let</span><span> deck = decks_wrapper.decks.</span><span style="color:#96b5b4;">get</span><span>(&quot;</span><span style="color:#a3be8c;">abc123</span><span>&quot;).</span><span style="color:#96b5b4;">expect</span><span>(&quot;</span><span style="color:#a3be8c;">Deck not found</span><span>&quot;);
+</span><span>
+</span><span>        assert_eq!(deck.main_deck.</span><span style="color:#96b5b4;">len</span><span>(), </span><span style="color:#d08770;">2</span><span>);
+</span><span>        assert_eq!(deck.main_deck[</span><span style="color:#d08770;">0</span><span>].card_id, </span><span style="color:#d08770;">1001</span><span>);
+</span><span>        assert_eq!(deck.main_deck[</span><span style="color:#d08770;">0</span><span>].quantity, </span><span style="color:#d08770;">2</span><span>);
+</span><span>    }
+</span><span>
+</span><span>    #[</span><span style="color:#bf616a;">test</span><span>]
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">test_card_collection_creation</span><span>() {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> deck1 = Deck {
+</span><span>            main_deck: vec![
+</span><span>                CardEntry {
+</span><span>                    card_id: </span><span style="color:#d08770;">1</span><span>,
+</span><span>                    quantity: </span><span style="color:#d08770;">2</span><span>,
+</span><span>                },
+</span><span>                CardEntry {
+</span><span>                    card_id: </span><span style="color:#d08770;">2</span><span>,
+</span><span>                    quantity: </span><span style="color:#d08770;">3</span><span>,
+</span><span>                },
+</span><span>            ],
+</span><span>            </span><span style="color:#65737e;">// assuming other fields exist and are empty
+</span><span>            ..Default::default()
+</span><span>        };
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">let</span><span> deck2 = Deck {
+</span><span>            main_deck: vec![
+</span><span>                CardEntry {
+</span><span>                    card_id: </span><span style="color:#d08770;">1</span><span>,
+</span><span>                    quantity: </span><span style="color:#d08770;">1</span><span>,
+</span><span>                },
+</span><span>                CardEntry {
+</span><span>                    card_id: </span><span style="color:#d08770;">3</span><span>,
+</span><span>                    quantity: </span><span style="color:#d08770;">4</span><span>,
+</span><span>                },
+</span><span>            ],
+</span><span>            ..Default::default()
+</span><span>        };
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">let</span><span> decks_wrapper: DecksWrapper = DecksWrapper {
+</span><span>            decks: (HashMap::from([
+</span><span>                (String::from(&quot;</span><span style="color:#a3be8c;">00001</span><span>&quot;), deck1),
+</span><span>                (String::from(&quot;</span><span style="color:#a3be8c;">00002</span><span>&quot;), deck2),
+</span><span>            ])),
+</span><span>        };
+</span><span>        </span><span style="color:#b48ead;">let</span><span> card_collection = CardCollection::from_decks_wrapper(decks_wrapper);
+</span><span>        assert_eq!(card_collection.cards.</span><span style="color:#96b5b4;">len</span><span>(), </span><span style="color:#d08770;">3</span><span>);
+</span><span>        assert_eq!(
+</span><span>            card_collection.</span><span style="color:#96b5b4;">search_with_id</span><span>(</span><span style="color:#d08770;">1</span><span>),
+</span><span>            CardEntry {
+</span><span>                card_id: </span><span style="color:#d08770;">1</span><span>,
+</span><span>                quantity: </span><span style="color:#d08770;">3
+</span><span>            }
+</span><span>        );
+</span><span>    }
+</span><span>
+</span><span>    #[</span><span style="color:#bf616a;">test</span><span>]
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">test_search_with_id_found</span><span>() {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> collection = CardCollection {
+</span><span>            cards: vec![
+</span><span>                CardEntry {
+</span><span>                    card_id: </span><span style="color:#d08770;">101</span><span>,
+</span><span>                    quantity: </span><span style="color:#d08770;">4</span><span>,
+</span><span>                },
+</span><span>                CardEntry {
+</span><span>                    card_id: </span><span style="color:#d08770;">202</span><span>,
+</span><span>                    quantity: </span><span style="color:#d08770;">2</span><span>,
+</span><span>                },
+</span><span>            ],
+</span><span>        };
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">let</span><span> result = collection.</span><span style="color:#96b5b4;">search_with_id</span><span>(</span><span style="color:#d08770;">101</span><span>);
+</span><span>        assert_eq!(result.card_id, </span><span style="color:#d08770;">101</span><span>);
+</span><span>        assert_eq!(result.quantity, </span><span style="color:#d08770;">4</span><span>);
+</span><span>    }
+</span><span>
+</span><span>    #[</span><span style="color:#bf616a;">test</span><span>]
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">test_search_with_id_not_found</span><span>() {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> collection = CardCollection {
+</span><span>            cards: vec![
+</span><span>                CardEntry {
+</span><span>                    card_id: </span><span style="color:#d08770;">101</span><span>,
+</span><span>                    quantity: </span><span style="color:#d08770;">4</span><span>,
+</span><span>                },
+</span><span>                CardEntry {
+</span><span>                    card_id: </span><span style="color:#d08770;">202</span><span>,
+</span><span>                    quantity: </span><span style="color:#d08770;">2</span><span>,
+</span><span>                },
+</span><span>            ],
+</span><span>        };
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">let</span><span> result = collection.</span><span style="color:#96b5b4;">search_with_id</span><span>(</span><span style="color:#d08770;">999</span><span>);
+</span><span>        assert_eq!(result.card_id, </span><span style="color:#d08770;">999</span><span>);
+</span><span>        assert_eq!(result.quantity, </span><span style="color:#d08770;">0</span><span>); </span><span style="color:#65737e;">// Default case
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>This small project has been a fun way to dive into Rust. From parsing Arena logs to matching cards with Scryfall data, each step gave me hands-on experience with structs, collections, serialization, and basic file handling. I hope it also highlights the value of writing small, focused functions and a few tests for them. This makes even a modest tool feel solid and reliable.</p>
+<p>Beyond the technical details, it’s rewarding to see raw log files transformed into a structured, human-readable collection of cards. While this tool is simple, it illustrates how Rust can help you approach a problem methodically, building up a workflow from small, composable pieces. And with plenty of room for new features or experiments, using Rust ensures that you will always have a winning hand.</p>
+
+
+    </div>
+  </section>
+</body>
+
+</html>

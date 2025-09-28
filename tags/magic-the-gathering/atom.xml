@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-    <title> - Rust</title>
-    <link href="https://www.newresalhaider.com/tags/rust/atom.xml" rel="self" type="application/atom+xml"/>
+    <title> - Magic The Gathering</title>
+    <link href="https://www.newresalhaider.com/tags/magic-the-gathering/atom.xml" rel="self" type="application/atom+xml"/>
     <link href="https://www.newresalhaider.com"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2025-09-28T00:00:00+00:00</updated>
-    <id>https://www.newresalhaider.com/tags/rust/atom.xml</id>
+    <id>https://www.newresalhaider.com/tags/magic-the-gathering/atom.xml</id>
     <entry xml:lang="en">
         <title>Gathering Rust</title>
         <published>2025-09-28T00:00:00+00:00</published>
@@ -462,134 +462,6 @@ Each log file has only one &amp;quot;Decks&amp;quot; section, but that section m
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;This small project has been a fun way to dive into Rust. From parsing Arena logs to matching cards with Scryfall data, each step gave me hands-on experience with structs, collections, serialization, and basic file handling. I hope it also highlights the value of writing small, focused functions and a few tests for them. This makes even a modest tool feel solid and reliable.&lt;&#x2F;p&gt;
 &lt;p&gt;Beyond the technical details, it’s rewarding to see raw log files transformed into a structured, human-readable collection of cards. While this tool is simple, it illustrates how Rust can help you approach a problem methodically, building up a workflow from small, composable pieces. And with plenty of room for new features or experiments, using Rust ensures that you will always have a winning hand.&lt;&#x2F;p&gt;
-</content>
-        
-    </entry>
-    <entry xml:lang="en">
-        <title>The Art of Choosing a Programming Language</title>
-        <published>2018-03-18T00:00:00+00:00</published>
-        <updated>2018-03-18T00:00:00+00:00</updated>
-        <author>
-          <name>Unknown</name>
-        </author>
-        <link rel="alternate" href="https://www.newresalhaider.com/post/art-of-choosing-language/" type="text/html"/>
-        <id>https://www.newresalhaider.com/post/art-of-choosing-language/</id>
-        
-        <content type="html">&lt;p&gt;Programmers, like professionals in other fields, are passionate about their tools. One of the main elements in the toolbox of coders are programming languages. They allow their users to express solutions through code to tackle a large variety of problems in many domains. &lt;&#x2F;p&gt;
-&lt;p&gt;Programming is also an art, as described in the article by Donald Knuth titled &lt;a href=&quot;http:&#x2F;&#x2F;www.paulgraham.com&#x2F;knuth.html&quot;&gt;Computer Programming as an Art&lt;&#x2F;a&gt; and in certain aspects of programming languages can be seen as art styles.&lt;&#x2F;p&gt;
-&lt;p&gt;As can be expected with many things that people are passionate about, whether viewed as a tool or an art style, coders can bond or argue about programming languages. Like philosophers of old, these discussions can go quite into depth, but to the outsider the arguments made or the sentiments behind them can be quite opaque. &lt;&#x2F;p&gt;
-&lt;figure class=centeredfig&gt;
-    &lt;img src=schoolofathens.jpg&gt;
-    
-    &lt;figcaption&gt;
-        
-        &lt;h4&gt;If programming languages existed back then, I am sure they would be a hotly argued topic. School of Athens by Raphael&lt;&#x2F;h4&gt;
-        
-        
-    &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt;
-&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2018&#x2F;art-of-choosing-language&#x2F;schoolofathens.jpg&quot; title=&quot;If programming languages existed back then, I am sure they would be a hotly argued topic.&quot; caption=&quot;School of Athens by Raphael&quot;&gt;}} --&gt;
-&lt;p&gt;Here I hope to shed some light to the casual observer on what makes programmers passionate about these languages and why some prefer one over the other. Such analysis can be quite subjective, and very much dependent on the writers experiences and preferences, but I will try my best to give an impartial overview.&lt;&#x2F;p&gt;
-&lt;p&gt;In theory many general purpose programming languages are capable of doing the same things. The most commonly used programming languages are Turing complete, meaning that they can all simulate the workings of any Turing machine. Without getting into the full description of what a Turing machine is, for the reader unfamiliar with the concept, this means that any of the languages can express programs for similar tasks.&lt;&#x2F;p&gt;
-&lt;p&gt;There are thousands of programming languages. Some older, and going back to the 50s, 60s and 70s and with considerable use still. Others have been released as recently as the last 10 years, and have gained considerable following. Given as I have mentioned that theoretically all these languages can do the same things, one could wonder why new languages are designed.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;history&quot;&gt;History&lt;&#x2F;h2&gt;
-&lt;p&gt;Historically, the original computers were instructed by a pure machine language, for example 0s and 1s. Writing programs this way can be tedious and error prone, and the results code can be very difficult to read. This is one of reasons why assembly languages were created. These are languages that are still very much tied into the instruction set of a particular machine, but in a more human readable form, where symbolic names are given for machine instructions. These would be then translated to the pure machine language, to instruct the machine.&lt;&#x2F;p&gt;
-&lt;p&gt;While reading and writing programs becomes easier this way, using assembly languages still has disadvantages. First, these languages are still very much tied to the hardware. Different instruction architectures can mean that a program for the same goal would have to be written differently for each architecture. Second, for many the instructions that one has to write this way are still very low level. The argument is made that with a better set of abstractions over assembly, programs can be written in a better way. A program written with such abstractions could be translated, compiled, to the required machine code specific for the required architecture.&lt;&#x2F;p&gt;
-&lt;p&gt;The question of which abstractions need to be utilized is at the heart of why there are so many different programming languages. People have different ideas on what these abstractions might be, what the benefits and drawbacks of applying them are. This is at the heart of why people design and use newer programming languages. In the following sections we go through some of the aspects on these abstractions.&lt;&#x2F;p&gt;
-&lt;figure class=centeredfig&gt;
-    &lt;img src=pyramids.jpg&gt;
-    
-    &lt;figcaption&gt;
-        
-        &lt;h4&gt;Much like with ancients wonders of next to a modern city, with programming languages old also gives rise to the new, and often co-exists with it. The Giza Pyramids © Robbster1983&lt;&#x2F;h4&gt;
-        
-        
-    &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt;
-&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2018&#x2F;art-of-choosing-language&#x2F;pyramids.jpg&quot; title=&quot;Much like with ancients wonders of next to a modern city, with programming languages old also gives rise to the new, and often co-exists with it .&quot; caption=&quot;The Giza Pyramids © Robbster1983&quot;&gt;}} --&gt;
-&lt;h2 id=&quot;paradigms-and-style&quot;&gt;Paradigms and Style&lt;&#x2F;h2&gt;
-&lt;p&gt;As mentioned before, there are different opinions on how programs could be constructed. There are various subjects about on which people have opinions about: how the code is organized and how it is executed, among other elements. This is very much similar to how art styles function. For example the same subject can be painted in two differing styles.&lt;&#x2F;p&gt;
-&lt;figure class=centeredfig&gt;
-    &lt;img src=last-supper-da-vinci.jpg&gt;
-    
-    &lt;figcaption&gt;
-        
-        &lt;h4&gt;The Last Supper (Leonardo da Vinci) one of the most famous Renaissance style paintings.&lt;&#x2F;h4&gt;
-        
-        
-    &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt;
-&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2018&#x2F;art-of-choosing-language&#x2F;last-supper-da-vinci.jpg&quot; title=&quot;The Last Supper (Leonardo da Vinci) one of the most famous Renaissance style paintings.&quot; &gt;}} --&gt;
-&lt;figure class=centeredfig&gt;
-    &lt;img src=last-supper-tintoretto.jpg&gt;
-    
-    &lt;figcaption&gt;
-        
-        &lt;h4&gt;The Last Supper (Tintoretto) depicts the same subject but in a Mannerist, proto-Baroque style.&lt;&#x2F;h4&gt;
-        
-        
-    &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt;
-&lt;!-- {{&lt; figure src=&quot;&#x2F;img&#x2F;post&#x2F;2018&#x2F;art-of-choosing-language&#x2F;last-supper-tintoretto.jpg&quot; title=&quot;The Last Supper (Tintoretto) depicts the same subject but in a Mannerist, proto-Baroque style.&quot; &gt;}} --&gt;
-&lt;p&gt;Programming languages can be be classified on the different styles, &lt;em&gt;programming paradigms&lt;&#x2F;em&gt; based on the common elements in the approaches.  Some paradigms include:&lt;&#x2F;p&gt;
-&lt;h3 id=&quot;imperative&quot;&gt;Imperative&lt;&#x2F;h3&gt;
-&lt;p&gt;Imperative code can be seen as a set of commands for the computer to perform. This type of paradigm matches very strongly with how computer hardware is working, as nearly all computer hardware is designed the execute machine language, which is in itself is written in imperative style. &lt;&#x2F;p&gt;
-&lt;h3 id=&quot;procedural&quot;&gt;Procedural&lt;&#x2F;h3&gt;
-&lt;p&gt;One of the ways one can structure a program is to group together a series of commands. These groups, &lt;em&gt;procedures&lt;&#x2F;em&gt;, can then be called, used or reused as a single entity.&lt;&#x2F;p&gt;
-&lt;h3 id=&quot;object-oriented&quot;&gt;Object-Oriented&lt;&#x2F;h3&gt;
-&lt;p&gt;Object oriented code uses the notion of &lt;em&gt;objects&lt;&#x2F;em&gt; to organize code. An object is an encapsulation of related state and behavior. For example, consider a software that needs to represent a vehicle. The elements of the state that describe the object, such as &lt;em&gt;colour&lt;&#x2F;em&gt; and &lt;em&gt;make&lt;&#x2F;em&gt;, are called attributes.  Various functionality related to the object, such as calculating the price of the car, are called methods. These concepts allow reuse, as the objects for a car and a motorcycle can share functionality. &lt;&#x2F;p&gt;
-&lt;h3 id=&quot;declarative&quot;&gt;Declarative&lt;&#x2F;h3&gt;
-&lt;p&gt;In declarative programming, one describes, or more aptly declares what the problem is as opposed to detailing the steps on how to solve it. This contrasts with imperative programming, where one gives the instructions on how to solve it directly. &lt;&#x2F;p&gt;
-&lt;h3 id=&quot;functional&quot;&gt;Functional&lt;&#x2F;h3&gt;
-&lt;p&gt;Functional programming is one form of declarative programming where programs are constructed using &lt;em&gt;functions&lt;&#x2F;em&gt;, which are analogous and inspired by to mathematical functions. The intention is that these functions are ideally side effect free: their output is dependent solely on their input. This can make code easier to understand and allows for easier use of code written this way. &lt;&#x2F;p&gt;
-&lt;h3 id=&quot;logic&quot;&gt;Logic&lt;&#x2F;h3&gt;
-&lt;p&gt;The logic paradigm is based around expressing code as a set of logical axioms. These axioms can then be used as a from of knowledge base to derive new knowledge and query. The programs themselves then can be posed as a query in this system. For example, if the knowledge is defined with the axioms &amp;quot;Tweety is a bird&amp;quot; and &amp;quot;Birds are animals&amp;quot;, the system should be able to answer the queries: &amp;quot;Is Tweety and animal?&amp;quot;. &lt;&#x2F;p&gt;
-&lt;p&gt;A language can focus on supporting a particular paradigm heavily or have a strong preference for it. For example &lt;a href=&quot;https:&#x2F;&#x2F;www.haskell.org&#x2F;&quot;&gt;Haskell&lt;&#x2F;a&gt; or &lt;a href=&quot;https:&#x2F;&#x2F;clojure.org&#x2F;&quot;&gt;Clojure&lt;&#x2F;a&gt; lean quite heavily on the functional paradigm, while &lt;a href=&quot;http:&#x2F;&#x2F;www.swi-prolog.org&#x2F;&quot;&gt;Prolog&lt;&#x2F;a&gt; is one of the main logic programming languages. Others, provide an explicit merge of various methodologies, such as &lt;a href=&quot;https:&#x2F;&#x2F;www.scala-lang.org&#x2F;&quot;&gt;Scala&lt;&#x2F;a&gt; that combines elements of object orientation and functional programming.&lt;&#x2F;p&gt;
-&lt;p&gt;Preference for a particular language can go beyond the programming paradigms used. Syntax, the structure of how code is written, can matter quite a bit for person&#x27;s view on a particular language. For example &lt;a href=&quot;https:&#x2F;&#x2F;www.python.org&#x2F;&quot;&gt;Python&lt;&#x2F;a&gt; uses indentation for managing the control flow of the code, as opposed to symbols in other languages.&lt;&#x2F;p&gt;
-&lt;p&gt;Such preference can go even beyond the actual code itself to the tools one uses to write. While any text editor for editing text can often suffice, people can have differing expectations with regards to integrated development environments (IDEs) or other tools to edit and analyze the code. The lack or existence of specific tooling can also be a factor when deciding between languages.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;available-code-and-libraries&quot;&gt;Available Code and Libraries&lt;&#x2F;h2&gt;
-&lt;p&gt;Most coding is done with a particular purpose in mind, and it is rarely the case that the programmer can build everything from the ground up for such a task. In order to build interesting programs, one has to utilize existing knowledge, much like someone would utilize knowledge in a library to come to new insights.&lt;&#x2F;p&gt;
-&lt;figure class=centeredfig&gt;
-    &lt;img src=bibliotheca-alexandrina.jpg&gt;
-    
-    &lt;figcaption&gt;
-        
-        &lt;h4&gt;The Bibliotheca Alexandrina. Photo © Carsten Whimster licensed under CC BY 3.0 https:&amp;#x2F;&amp;#x2F;creativecommons.org&amp;#x2F;licenses&amp;#x2F;by&amp;#x2F;3.0&amp;#x2F;&lt;&#x2F;h4&gt;
-        
-        
-    &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt;
-&lt;!-- &lt;figure&gt;
-  &lt;img src=&quot;bibliotheca-alexandrina.jpg&quot;  &#x2F;&gt;
-  &lt;figcaption&gt;
-      &lt;h4&gt;The Bibliotheca Alexandrina. Photo © Carsten Whimster licensed under &lt;a href =&quot;https:&#x2F;&#x2F;creativecommons.org&#x2F;licenses&#x2F;by&#x2F;3.0&#x2F;&quot;&gt; CC BY 3.0 &lt;&#x2F;a&gt;.&lt;&#x2F;h4&gt;
-  &lt;&#x2F;figcaption&gt;
-&lt;&#x2F;figure&gt; --&gt;
-&lt;p&gt;Existing code can be used as a foundation from which the program can be built. Roughly speaking existing code comes in three main forms. It is either being part of the language (often called the standard library of the language), some external libraries extending the language for a particular purpose, or an existing code base of the application that one can improve upon.&lt;&#x2F;p&gt;
-&lt;p&gt;The standard library contains various functionality included with the language itself. For example ways of manipulating files, various connection protocols, support for certain file formats, etc. Of course it is very much helpful if particular support for a certain feature that aims to use is already available with the language itself. This means less code to write and connect. On the other hand there is also some tension with regards to including too many features in the standard library, especially if certain parts of it become outdated, which enlarges the language and makes it more unwieldy. &lt;&#x2F;p&gt;
-&lt;p&gt;The external libraries that one can use in a language can also influence the choice of a language. Certain languages have a lot of library support for specific tasks. For example &lt;a href=&quot;https:&#x2F;&#x2F;www.python.org&#x2F;&quot;&gt;Python&lt;&#x2F;a&gt; has a large and active following in the Data Science community. Other languages have a lot of support for many different tasks simply due their age and user base such as &lt;a href=&quot;https:&#x2F;&#x2F;www.java.com&#x2F;en&#x2F;&quot;&gt;Java&lt;&#x2F;a&gt;. By using libraries one does not need to implement certain features from scratch but can reuse existing work and focus on their specific problem at hand.&lt;&#x2F;p&gt;
-&lt;p&gt;Finally, not all development starts from scratch, often one has to make additions or improvement to an existing program, in which case the choice of the language has already been made. While a rewrite of the code can often be tempting, linking between two code programming languages is not always trivial. It is often a good idea to continue with an existing language.&lt;&#x2F;p&gt;
-&lt;p&gt;There are some exceptions to this as some languages have been designed with the ground up to inter-operate with other languages. A good example of this is &lt;a href=&quot;https:&#x2F;&#x2F;clojure.org&#x2F;&quot;&gt;Clojure&lt;&#x2F;a&gt; has great interop with &lt;a href=&quot;https:&#x2F;&#x2F;www.java.com&#x2F;en&#x2F;&quot;&gt;Java&lt;&#x2F;a&gt; and&#x2F;or &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;JavaScript&quot;&gt;JavaScript&lt;&#x2F;a&gt;. This allows it to leverage existing libraries already written, and makes it much more attractive to use. &lt;&#x2F;p&gt;
-&lt;h2 id=&quot;existing-knowledge&quot;&gt;Existing Knowledge&lt;&#x2F;h2&gt;
-&lt;p&gt;Writing code is rarely trivial, and neither is learning new programming languages. Although previous experience helps, especially when dealing with languages with known paradigms, due to slight or large differences it can take a while to get used to the new language and libraries. With constantly looming deadlines and pressure to deliver, it can make sense to minimize the work that needs to be done. It is perfectly valid to work with a language that one already knows.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;curiosity&quot;&gt;Curiosity&lt;&#x2F;h2&gt;
-&lt;p&gt;On the other hand learning a new language, especially in a new paradigm or other innovative features, can be quite interesting. It not only allows for work on existing code written in the new language but it also gives insights in how to program which is beneficial as a programmer in general no matter what language he is using.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;speed&quot;&gt;Speed&lt;&#x2F;h2&gt;
-&lt;p&gt;As mentioned earlier, commonly used programming languages are abstractions over machine code that can do more of less the same thing computationally. What abstractions are used however can influence the speed of executing the program, as well as the time of translating the code in the programming language to machine code. &lt;&#x2F;p&gt;
-&lt;p&gt;A common abstraction that can influence the speed of executing the program is how memory is managed. During the running of a program certain information needs to be stored. A way to do this is to allocate space in the computers memory, keep it around while needed and remove it afterwards. This latter portion, can be quite difficult to manage manually, as if one does it prematurely the program might crash or have other bugs. Not removing it would fill the memory with garbage, which makes the program use up more and more memory till it crashes.&lt;&#x2F;p&gt;
-&lt;p&gt;A solution to these problems is automatic garbage collection: a way for the computer to automatically manage and clean up memory. While this is a good solution in many cases, this process comes with an overhead, and can be unpredictable when the time and resource consuming cleanup happens. In most cases this overhead is trivial to pay for eliminating a whole suite of potential bugs. However in certain scenarios, such as real-time high performance games, it could be too much to pay.&lt;&#x2F;p&gt;
-&lt;p&gt;The other issue of speed, translating the code from the programming language to machine code, can also be a consideration. Development requires making changes to code and checking whether the changes work. If the process of getting feedback takes a long time, due to these translations, it can destroy a programmers productivity. &lt;a href=&quot;https:&#x2F;&#x2F;golang.org&#x2F;&quot;&gt;Golang&lt;&#x2F;a&gt; is a language that is explicitly designed for fast compilation.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;safety&quot;&gt;Safety&lt;&#x2F;h2&gt;
-&lt;p&gt;Safety is in many cases the flip side to the speed argument. Certain abstractions cost you in speed but provide you with safety in return. Different languages tend to make different trade-offs with this regard. For example one of the relatively new languages, &lt;a href=&quot;https:&#x2F;&#x2F;www.rust-lang.org&#x2F;en-US&#x2F;&quot;&gt;Rust&lt;&#x2F;a&gt; aims at focus on zero cost abstractions: abstractions with little to no run-time performance penalty.&lt;&#x2F;p&gt;
-&lt;p&gt;One contentious aspect of safety is the use of type systems. Types allow the coder to specify various categories, such as numbers, persons, cars, etc as well as their requirements to be fulfilled within the context of the program. Types can be checked both statically, before the system is run, or dynamically, during the running of the program. Some people swear by very expressive type systems: where types can specify very detailed features of the things the program wants to represent. This then can be used for checking code for correctness, both before and during the running of a program, as well as documentation. On the other hand type checking is not free: it can make translating the compilation into machine code a much slower process. Some people also consider the writing and checking of types themselves very cumbersome during initial development, where quick iteration can be slowed down by specifying detailed types.&lt;&#x2F;p&gt;
-&lt;p&gt;There is a whole spectrum of possible stances with regards to type systems. For example, certain languages such as &lt;a href=&quot;https:&#x2F;&#x2F;www.haskell.org&#x2F;&quot;&gt;Haskell&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;www.idris-lang.org&#x2F;&quot;&gt;Idris&lt;&#x2F;a&gt; are designed from the ground up with very expressive type systems that are statically checked. Others, for example &lt;a href=&quot;https:&#x2F;&#x2F;www.dartlang.org&#x2F;&quot;&gt;Dart&lt;&#x2F;a&gt; which started off as having optional types but adds mandatory types in the latest iteration to help with tooling, take a more balanced approach. &lt;a href=&quot;https:&#x2F;&#x2F;golang.org&#x2F;&quot;&gt;Golang&lt;&#x2F;a&gt; explicitly has a static, but minimalist, type system that allows for fast compilation.  There are also languages, such as &lt;a href=&quot;https:&#x2F;&#x2F;clojure.org&#x2F;&quot;&gt;Clojure&lt;&#x2F;a&gt; that instead of static types, use contract systems to ensure safety at run-time and allow for documentation and testing.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;deployment&quot;&gt;Deployment&lt;&#x2F;h2&gt;
-&lt;p&gt;While most general purpose programming languages can be made to run in all environments, they are not always available. In certain environments, such as mobile or on the web, only specific languages are supported. For example on Android &lt;a href=&quot;https:&#x2F;&#x2F;www.java.com&#x2F;en&#x2F;&quot;&gt;Java&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;www.java.com&#x2F;en&#x2F;&quot;&gt;Kotlin&lt;&#x2F;a&gt; are officially supported, while on the web &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;JavaScript&quot;&gt;JavaScript&lt;&#x2F;a&gt; is the current Lingua Franca of the web. This means that it can be quite a herculean effort to make other languages work in such environments, and going with the most supported option is easier. &lt;&#x2F;p&gt;
-&lt;p&gt;The way certain languages can get around on this hindrance is by using the more commonly supported language as the target to translate into. For example &lt;a href=&quot;https:&#x2F;&#x2F;clojurescript.org&#x2F;&quot;&gt;ClojureScript&lt;&#x2F;a&gt; compiles into &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;JavaScript&quot;&gt;JavaScript&lt;&#x2F;a&gt;. And in some cases, other developers have made the effort to get frameworks up and running that allow the use of a different language, such as the use of &lt;a href=&quot;https:&#x2F;&#x2F;facebook.github.io&#x2F;react-native&#x2F;&quot;&gt;React Native&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;flutter.io&#x2F;&quot;&gt;Flutter&lt;&#x2F;a&gt; that allow the use of &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;JavaScript&quot;&gt;JavaScript&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;www.dartlang.org&#x2F;&quot;&gt;Dart&lt;&#x2F;a&gt; respectively to develop mobile applications. &lt;&#x2F;p&gt;
-&lt;h2 id=&quot;the-team-and-beyond&quot;&gt;The Team and Beyond&lt;&#x2F;h2&gt;
-&lt;p&gt;One final aspect of choosing a programming language, which can be surprisingly significant, is which language is beneficial to the team, as opposed to an individual developer. Different teams bring different expertise to the table, and while most professionals are often quite willing and able to use a new language if it is most suited to the task at hand, this can still be a cost that might be better spent on developing the application. From an employers perspective it can also often be beneficial to stick to more commonly used languages as it can be easier to find future employees versed in the language used. On the other hand, there are many professionals that would be quite willing to jump on the chance of using the latest programming languages, in which case the choice for a newer or more niche language can be a competitive advantage from a recruiting perspective.&lt;&#x2F;p&gt;
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h1&gt;
-&lt;p&gt;I hope this article gave some insight on why programmers pick and argue about programming languages. Despite all the various differences and arguments it is also very important to note, that great software has been written in many different languages, that is both excellent code and solves important problems. And while picking the right tool for the job is an important, it can be just an aspect of the art of solving problems with code.&lt;&#x2F;p&gt;
 </content>
         
     </entry>
