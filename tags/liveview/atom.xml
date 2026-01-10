@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title> - LiveView</title>
+    <link href="https://www.newresalhaider.com/tags/liveview/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-01-10T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/liveview/atom.xml</id>
+    <entry xml:lang="en">
+        <title>They LiveView</title>
+        <published>2026-01-10T00:00:00+00:00</published>
+        <updated>2026-01-10T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/theyliveview/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/theyliveview/</id>
+        
+        <content type="html">&lt;p&gt;Creating interactive web experiences can quickly get complicated. Often, you’re juggling a front-end in one language and a back-end in another, all while figuring out how they communicate. &lt;a href=&quot;https:&#x2F;&#x2F;hexdocs.pm&#x2F;phoenix_live_view&#x2F;welcome.html&quot;&gt;LiveViews&lt;&#x2F;a&gt; offer a simpler alternative: you can build rich, interactive pages entirely from the back-end. LiveView keeps the server and browser efficiently in sync, letting you focus on the user experience rather than worrying about updating the interface in real time. In this article, I will show how this works with a small example LiveView inspired by the John Carpenter movie &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;They_Live&quot;&gt;They Live&lt;&#x2F;a&gt;. In the movie, the protagonist uses a pair of sunglasses to see which humans are actually aliens. In our LiveView, you can toggle sunglasses on or off to reveal the hidden aliens.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=featured.jpg&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;An alien reflected in sunglasses, image inspired by the classic They Live movie poster.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;LiveView is a solution to the problem of how to organize code to create rich, fast, interactive user experiences in the browser. In the past, the view in the browser (i.e., an HTML page) was rendered entirely on the server. This approach is straightforward to organize, since all the code runs in one place and can often be written in a single language. The downside is that pages are static once rendered. Every time the user interacts with the page, the system has to send the interaction to the server, have the server process it, and then generate a whole new page to send back to the browser. This makes even small interactions slow and cumbersome. &lt;&#x2F;p&gt;
+&lt;p&gt;Later, developers moved toward the modern model of giving the front-end a much larger role, often using a JavaScript framework to build single-page applications. This allows for dynamic, real-time interactions, but introduces complexity, including multiple languages, duplicated state, and the need to manage communication between client and server. LiveView offers a middle path. It enables developers to build rich, interactive experiences while keeping most of the code on the server. The server handles updates and LiveView automatically pushes them to the browser. While LiveView relies on a persistent backend connection, for many apps this is a small price to pay since most real-world applications already need a backend for databases, authentication, or business logic. As we will see later in this article, LiveView ensures that this communication is done very efficiently. The result is pages that are interactive, fast, and much simpler to maintain.&lt;&#x2F;p&gt;
+&lt;p&gt;The best way to learn how things work is with a hands-on example, so let&#x27;s create our first LiveView. Although there are &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;liveviews&#x2F;liveviews&quot;&gt;many implementations inspired by it&lt;&#x2F;a&gt;, the original is part of the &lt;a href=&quot;https:&#x2F;&#x2F;www.phoenixframework.org&#x2F;&quot;&gt;Phoenix web application framework&lt;&#x2F;a&gt; written in the &lt;a href=&quot;https:&#x2F;&#x2F;elixir-lang.org&#x2F;&quot;&gt;Elixir programming language&lt;&#x2F;a&gt;. Assuming Phoenix is installed (see the &lt;a href=&quot;https:&#x2F;&#x2F;hexdocs.pm&#x2F;phoenix&#x2F;installation.html&quot;&gt;install instructions&lt;&#x2F;a&gt; for details) we can create and run a new Phoenix project with LiveView by running a few commands from the terminal.&lt;&#x2F;p&gt;
+&lt;p&gt;To get started, we will create a new Phoenix project from the command line. Nowadays, LiveView ships with Phoenix by default, no extra install is needed. Since our example does not need a database, we can also skip setting up the database library Ecto (using the &lt;code&gt;-no-ecto&lt;&#x2F;code&gt; flag).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;mix phx.new they_live --no-ecto
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This will create a new Phoenix project in the &lt;code&gt;they_live&lt;&#x2F;code&gt; directory. Next we can navigate to created directory and start the Phoenix application.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;cd they_live
+&lt;&#x2F;span&gt;&lt;span&gt;mix phx.server
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;After being asked to fetch the dependencies, we should now have a Phoenix app up and running. With a browser we can navigate to its main endpoint (e.g. http:&#x2F;&#x2F;localhost:4000&#x2F;).&lt;&#x2F;p&gt;
+&lt;p&gt;Next, we are going to add an endpoint under &lt;code&gt;&#x2F;sunglasses&lt;&#x2F;code&gt; with our LiveView.&lt;&#x2F;p&gt;
+&lt;p&gt;Create a new file at &lt;code&gt;lib&#x2F;they_live_web&#x2F;live&#x2F;sunglasses_live.ex&lt;&#x2F;code&gt; where the module of our LiveView will be:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;elixir&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-elixir &quot;&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;defmodule &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;TheyLiveWeb&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;SunglassesLive &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;do
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;TheyLiveWeb&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:live_view
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;mount&lt;&#x2F;span&gt;&lt;span&gt;(_params, _session, socket) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;do
+&lt;&#x2F;span&gt;&lt;span&gt;    people = [
+&lt;&#x2F;span&gt;&lt;span&gt;      %{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;id: 1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;type: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:human&lt;&#x2F;span&gt;&lt;span&gt;},
+&lt;&#x2F;span&gt;&lt;span&gt;      %{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;id: 2&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;type: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:alien&lt;&#x2F;span&gt;&lt;span&gt;},
+&lt;&#x2F;span&gt;&lt;span&gt;      %{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;id: 3&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;type: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:human&lt;&#x2F;span&gt;&lt;span&gt;},
+&lt;&#x2F;span&gt;&lt;span&gt;      %{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;id: 4&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;type: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:human&lt;&#x2F;span&gt;&lt;span&gt;},
+&lt;&#x2F;span&gt;&lt;span&gt;      %{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;id: 5&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;type: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:alien&lt;&#x2F;span&gt;&lt;span&gt;},
+&lt;&#x2F;span&gt;&lt;span&gt;      %{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;id: 6&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;type: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:human&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;    ]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:ok&lt;&#x2F;span&gt;&lt;span&gt;, assign(socket, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;sunglasses: false&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;people:&lt;&#x2F;span&gt;&lt;span&gt; people)}
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;end
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;handle_event&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;toggle_sunglasses&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, _value, socket) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;do
+&lt;&#x2F;span&gt;&lt;span&gt;    {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:noreply&lt;&#x2F;span&gt;&lt;span&gt;, update(socket, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:sunglasses&lt;&#x2F;span&gt;&lt;span&gt;, &amp;amp;(!&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;))}
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;end
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;render&lt;&#x2F;span&gt;&lt;span&gt;(assigns) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;do
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;~H&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;    &amp;lt;h1&amp;gt;They Live View 👓&amp;lt;&#x2F;h1&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;    &amp;lt;button phx-click=&amp;quot;toggle_sunglasses&amp;quot;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;      &amp;lt;%= if @sunglasses do %&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;        ( 😎 Sunglasses On )
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;      &amp;lt;% else %&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;        ( 👓 Sunglasses Off )
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;      &amp;lt;% end %&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;    &amp;lt;&#x2F;button&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;    &amp;lt;p&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;      &amp;lt;%= if @sunglasses do %&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;        You can see the aliens now!
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;      &amp;lt;% else %&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;        Everything looks normal.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;      &amp;lt;% end %&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;    &amp;lt;&#x2F;p&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;    &amp;lt;div style=&amp;quot;margin-top: 1rem; font-size: 2rem;&amp;quot;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;      &amp;lt;span
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;        :for={person &amp;lt;- @people}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;        :key={person.id}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;        style=&amp;quot;margin-right: 0.5rem;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;      &amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;        &amp;lt;%= if person.type == :alien and @sunglasses do %&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;          👽
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;        &amp;lt;% else %&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;          🙂
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;        &amp;lt;% end %&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;      &amp;lt;&#x2F;span&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;    &amp;lt;&#x2F;div&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;end
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;end
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Next, add a route in the file &lt;code&gt;lib&#x2F;they_live_web&#x2F;router.ex&lt;&#x2F;code&gt;. This can be done by entering the following route:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;elixir&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-elixir &quot;&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;live &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;sunglasses&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;SunglassesLive
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;under the main route, so we will have in the file&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;elixir&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-elixir &quot;&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span&gt;    get &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;PageController&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:home
+&lt;&#x2F;span&gt;&lt;span&gt;    live &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;sunglasses&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;SunglassesLive
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now visiting &lt;code&gt;http:&#x2F;&#x2F;localhost:4000&#x2F;sunglasses&lt;&#x2F;code&gt; will show us our LiveView.  We should see the following initially:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;They Live View 👓
+&lt;&#x2F;span&gt;&lt;span&gt;( 👓 Sunglasses Off )
+&lt;&#x2F;span&gt;&lt;span&gt;Everything looks normal.
+&lt;&#x2F;span&gt;&lt;span&gt;🙂 🙂 🙂 🙂 🙂 🙂 
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;And after pressing the button (i.e. clicking on anything between the brackets) we put on the sunglasses and reveal the aliens:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;They Live View 👓
+&lt;&#x2F;span&gt;&lt;span&gt;( 😎 Sunglasses On )
+&lt;&#x2F;span&gt;&lt;span&gt;You can see the aliens now!
+&lt;&#x2F;span&gt;&lt;span&gt;🙂 👽 🙂 🙂 👽 🙂 
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now that we have our working LiveView, let’s go over all the code in this module to better understand what a LiveView does.&lt;&#x2F;p&gt;
+&lt;p&gt;The top-level portion defines a module &lt;code&gt;TheyLiveWeb.SunglassesLive&lt;&#x2F;code&gt; and specifies it to be a LiveView:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;elixir&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-elixir &quot;&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;defmodule &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;TheyLiveWeb&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;SunglassesLive &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;do
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;TheyLiveWeb&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:live_view
+&lt;&#x2F;span&gt;&lt;span&gt;  ...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;end
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This line brings in all the LiveView functionality. It marks this module as a special kind of page that can maintain state on the server and update the browser in real time.&lt;&#x2F;p&gt;
+&lt;p&gt;Inside the module there are three main parts: a mount function, a handle_event function, and a render function. These are the core pieces of a LiveView. At a high level, a LiveView is a server-side process that starts from an initial state, receives and handles events from the browser, updates its state, and then renders any updates.&lt;&#x2F;p&gt;
+&lt;p&gt;The key responsibilities of these functions are:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;mount&lt;&#x2F;strong&gt; sets the initial state when the page loads.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;handle_event&lt;&#x2F;strong&gt; updates the state in response to user actions.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;render&lt;&#x2F;strong&gt; describes what the page should look like based on the current state.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;
+&lt;p&gt;Let’s go over each one in more detail:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;mount&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;This function runs when the page first loads. It sets up the initial state of the LiveView. In our example, we define people (a list of humans and aliens) and sunglasses (whether the sunglasses are on or off). This state lives on the server and is the “source of truth” for the page. Everything that is rendered to the front end is derived from these values.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;handle_event&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;This function responds to user actions. When the user clicks the sunglasses button, this function is called. It updates the state by flipping sunglasses on or off. After the state changes, LiveView automatically re-renders the parts of the page that need updating. You do not have to write any JavaScript or manually manipulate the page.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;render&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;This function defines what the page should look like based on the current state. In our example:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The button changes text depending on whether sunglasses are on.&lt;&#x2F;li&gt;
+&lt;li&gt;A message tells the user if aliens are visible.&lt;&#x2F;li&gt;
+&lt;li&gt;The row of emoji shows humans, with aliens revealed among them when the sunglasses are on.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;
+&lt;p&gt;Whenever the state changes, LiveView calls the render function again, compares it to the previous render, and sends only what actually needs to change to the browser. This keeps interactions fast and smooth and avoids sending a full HTML page back each time.&lt;&#x2F;p&gt;
+&lt;p&gt;You can see this in action in the browser’s console or network logs. LiveView maintains a persistent WebSocket connection between the browser and server. When you toggle the sunglasses, the server does not resend the entire page. For example, the page heading They Live View 👓 is never sent again. Only the button label, the explanatory text, and the emoji row are updated. In the latest LiveView version (1.1 onwards), even the human emojis in the row remain untouched, so only the aliens are updated. Here is a literal fragment of the update payload sent over the wire:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;js&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-js &quot;&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: {
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;    ( 😎 Sunglasses On )&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\n  &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;],
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;    You can see the aliens now!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\n  &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;],
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;      👽&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\n    &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;LiveView is even smart enough to figure out that you only need one patch for the alien emoji, which is applied in multiple positions in the emoji row.&lt;&#x2F;p&gt;
+&lt;p&gt;Of course, this is just a small example. LiveView with Phoenix can do much more: nested components, forms, real-time notifications, presence tracking, and hooks (escape hatches for when you really need JavaScript). Phoenix comes with &lt;a href=&quot;https:&#x2F;&#x2F;tailwindcss.com&#x2F;&quot;&gt;Tailwind&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;daisyui.com&#x2F;?lang=en&quot;&gt;DaisyUI&lt;&#x2F;a&gt; integration out of the gate so you can get started with nicely styled components. You can build rich, interactive applications without getting bogged down managing a separate front-end framework and its communication with the server.&lt;&#x2F;p&gt;
+&lt;p&gt;With LiveView, you can get things done, keep your pages interactive, and still have time to chew bubblegum (as long as you are not out of gum).&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
