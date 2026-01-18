@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Newres Al Haider</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+  <link href="https:&#x2F;&#x2F;www.newresalhaider.com/style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.newresalhaider.com/scripts/menu.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@newresa">
+<meta name="twitter:creator" content="@newresa">
+
+
+<meta name="twitter:title" content="Will AI Get Rid of this Turbulent Priest?">
+<meta name="title" property="og:title" content="Will AI Get Rid of this Turbulent Priest?" />
+
+
+<meta name="twitter:description" content="From medieval misunderstandings to modern AI: why precision matters and how the Semantic Web can help.
+">
+<meta name="description" property="og:description" content="From medieval misunderstandings to modern AI: why precision matters and how the Semantic Web can help.
+" />
+
+
+<meta name="author" content="Newres Al Haider" />
+<meta property="article:author" content="Newres Al Haider">
+<meta property="og:type" content="article" />
+
+<meta property="article:published_time" content="2026-01-16">
+
+
+    
+        <meta property="article:tag" content="AI">
+    
+        <meta property="article:tag" content="GenAI">
+    
+        <meta property="article:tag" content="Semantic Web">
+    
+        <meta property="article:tag" content="LLM">
+    
+        <meta property="article:tag" content="Linked Data">
+    
+        <meta property="article:tag" content="Turtle">
+    
+        <meta property="article:tag" content="RDF">
+    
+
+
+    <meta property="article:modified_time" content="2026-01-16">
+
+
+
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/turbulentpriest/featured.png">
+<meta property="og:image" content="https://www.newresalhaider.com/post/turbulentpriest/featured.png" />
+
+
+</head>
+
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="title is-3">
+                Newres Al Haider
+            </h1>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="NavbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="NavbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/">
+                <h2 class="subtitle is-5">
+                    Home
+                </h2>
+            </a>
+            <a class="navbar-item" href="/post/">
+                <h2 class="subtitle is-5">
+                    Posts
+                </h2>
+            </a>
+            <a class="navbar-item" href="/project/">
+                <h2 class="subtitle is-5">
+                    Projects
+                </h2>
+            </a>
+            <a class="navbar-item" href="/publication/">
+                <h2 class="subtitle is-5">
+                    Publications
+                </h2>
+            </a>
+        </div>
+    </div>
+</nav>
+  <section class="section">
+    <div class="container">
+      
+
+<h1 class="title">
+    Will AI Get Rid of this Turbulent Priest?
+</h1>
+<p class="subtitle"><strong>2026-01-16</strong></p>
+<p>In the age of <a href="https://en.wikipedia.org/wiki/Generative_artificial_intelligence">generative AI (GenAI)</a>, being precise matters more than ever. <a href="https://en.wikipedia.org/wiki/Large_language_model">Large Language Models (LLMs)</a>, for example Copilot or ChatGPT, are usually helpful, but they also eagerly fill in gaps we did not intend to leave. This becomes especially true when we interact with AI using natural language. While plain language makes these systems feel accessible, it also creates space for misinterpretations. An ambiguous request can quickly turn into an unwanted action.</p>
+<figure class=centeredfig>
+    <img src=featured.png>
+    
+    <figcaption>
+        
+        <h4>A priest pondering a dilemma with cybernetic symbols behind him.</h4>
+        
+        
+    </figcaption>
+</figure>
+<p>One infamous example of an unintended request comes from medieval England. <a href="https://en.wikipedia.org/wiki/Henry_II_of_England">Henry II</a> was locked in a long-running quarrel with <a href="https://en.wikipedia.org/wiki/Thomas_Becket">Thomas Becket</a>, the Archbishop of Canterbury, over whether clergy accused of crimes could be tried in royal courts rather than church courts. Conflict and frustration had been building for some time when Henry reportedly asked, <a href="https://en.wikipedia.org/wiki/Will_no_one_rid_me_of_this_turbulent_priest%3F">“Will no one rid me of this turbulent priest?”</a>. It was not meant as an order, but it was heard as one. Four knights took the statement literally, travelled to Canterbury, and after confronting Becket, killed him. The consequences were profound, turning Becket into a martyr and compelling Henry to perform public penance.</p>
+<p>Hopefully, when using natural language with generative AI, a misinterpretation leads to nothing close to what happened with Henry II and Becket. Nonetheless, we should remain cautious. Even small misunderstandings can result in wasted work, incorrect decisions, or unintended changes. Fortunately, there are ways to reduce this risk. Instead of relying solely on natural language, we can use more formal and explicit approaches. In particular, techniques from the <a href="https://en.wikipedia.org/wiki/Semantic_Web">Semantic Web</a>, including the <a href="https://en.wikipedia.org/wiki/Turtle_(syntax)">Turtle</a> language for data representation and the <a href="https://en.wikipedia.org/wiki/SPARQL">SPARQL</a> query language, help encode both data and questions in a precise way. In this article, I will show how these techniques can produce more reliable results with GenAI than relying on LLMs alone.</p>
+<p>To get started, let’s describe a scenario that echoes the earlier historical story. Imagine we have a small dataset of priests, with each priest having an attitude and a status attribute. Father Aidan is calm and active, Father Benedict is calm and suspended, while Father Cuthbert is troublesome and active. Now suppose we ask a GenAI system, “Can you get rid of the turbulent priest?” What would it do?</p>
+<p>There are at least two scenarios where the query could lead to unintended changes to the dataset. First, which priest is the turbulent one here? Based on the historical example, we would think this is the troublesome one. However, picking the suspended priest would also be a possible interpretation. The second possible misinterpretation is what we mean by “get rid of.” Thankfully, none of the likely possibilities here are as macabre as death, but we could either remove the priest from the dataset, or, if a priest is currently active, make them suspended.</p>
+<p>We can actually pose this scenario as a natural language prompt to see what the answer could be:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>You are given a small dataset describing priests. Each priest has an attitude and a status. 
+</span><span>
+</span><span>Father Aidan has a calm attitude and is active.
+</span><span>Father Benedict has a calm attitude and is suspended.
+</span><span>Father Cuthbert has a troublesome attitude and is active.
+</span><span>
+</span><span>Based on this information, can you get rid of the turbulent priest?
+</span></code></pre>
+<p>As a small test this prompt was posed to both ChatGPT and Copilot, using their free versions:</p>
+<p>ChatGPT's answer:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Yep 🙂 — the turbulent priest is the one with the troublesome attitude.
+</span><span>
+</span><span>From the data:
+</span><span>
+</span><span>Father Aidan → calm, active
+</span><span>
+</span><span>Father Benedict → calm, suspended
+</span><span>
+</span><span>Father Cuthbert → troublesome, active
+</span><span>
+</span><span>So the turbulent priest is Father Cuthbert.
+</span><span>“Getting rid of” him, based on the pattern you already have, would mean suspending Father Cuthbert (i.e., removing him from the active group).
+</span><span>
+</span><span>In short: suspend Father Cuthbert and the turbulence is gone.
+</span></code></pre>
+<p>ChatGPT has identified the mapping between “turbulent” and “troublesome” by singling out Father Cuthbert, and suggests resolving the issue by suspending him.</p>
+<p>Copilot's answer:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Ah, a classic little logic puzzle dressed up in medieval robes.
+</span><span>
+</span><span>You’ve given three priests, each with an attitude and a status. The question asks whether we can “get rid of the turbulent priest,” which is a playful nod to the phrase associated with Thomas Becket — but here it’s just about identifying which priest fits the description.
+</span><span>
+</span><span>From your dataset:
+</span><span>
+</span><span>    Father Aidan — calm, active
+</span><span>
+</span><span>    Father Benedict — calm, suspended
+</span><span>
+</span><span>    Father Cuthbert — troublesome, active
+</span><span>
+</span><span>If “turbulent” corresponds to “troublesome,” then the turbulent priest is Father Cuthbert.
+</span><span>
+</span><span>So yes — based on the information, the one to remove from the dataset is Father Cuthbert.
+</span><span>
+</span><span>If you want to take the puzzle further — filtering, categorizing, or turning this into a rule-based system — I’m happy to explore that with you.
+</span></code></pre>
+<p>Copilot recognizes the historical reference and singles out Father Cuthbert, but comes to a different conclusion by wanting to remove him from the dataset.</p>
+<p>As a disclaimer, these answers can be quite dependent on what exact model was used, any additional context that was not gathered from the prompt, and other factors. The key takeaway, however, is that there is no single correct answer here. The prompt leaves both the meaning of “turbulent” and the action implied by “get rid of” open to interpretation. While the consequences in this example are far less dramatic than in the historical case, the underlying problem is the same. An ambiguous request forces the system to guess, and that guess can lead to unintended outcomes. In a world where generative AI tools become more integrated into workflows, the risks and consequences of ambiguity can be significant. </p>
+<p>One way to reduce ambiguity and make intentions explicit is to use Semantic Web technologies. These tools allow us to encode both the data and the questions we ask in a precise and machine-readable way. For example, the Turtle language can represent the attributes of each priest in a structured format, while SPARQL queries let us specify exactly what action we want to perform. By defining both the meaning of “troublesome” and the desired outcome in a formal way, we remove the guesswork that a natural language prompt requires. This approach provides a more reliable path to the results we intend, even when working with generative AI.</p>
+<p>Turtle is a simple, human-readable language used in the Semantic Web to describe knowledge as a graph. It expresses facts about entities and their relationships in a way that computers can process unambiguously. In this example, we use Turtle to represent the three priests with two attributes, attitude and status.</p>
+<pre data-lang="turtle" style="background-color:#2b303b;color:#c0c5ce;" class="language-turtle "><code class="language-turtle" data-lang="turtle"><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">ex: </span><span style="color:#d08770;">&lt;http://example.org/priest#&gt;</span><span> .
+</span><span style="color:#b48ead;">@prefix </span><span style="color:#ebcb8b;">rdf: </span><span style="color:#d08770;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span> .
+</span><span>
+</span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">FatherAidan
+</span><span>    </span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">attitude </span><span>&quot;</span><span style="color:#a3be8c;">calm</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">status </span><span>&quot;</span><span style="color:#a3be8c;">active</span><span>&quot; .
+</span><span>
+</span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">FatherBenedict
+</span><span>    </span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">attitude </span><span>&quot;</span><span style="color:#a3be8c;">calm</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">status </span><span>&quot;</span><span style="color:#a3be8c;">suspended</span><span>&quot; .
+</span><span>
+</span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">FatherCuthbert
+</span><span>    </span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">attitude </span><span>&quot;</span><span style="color:#a3be8c;">troublesome</span><span>&quot; ;
+</span><span>    </span><span style="color:#ebcb8b;">ex:</span><span style="color:#bf616a;">status </span><span>&quot;</span><span style="color:#a3be8c;">active</span><span>&quot; .
+</span><span>
+</span></code></pre>
+<p>The dataset does not include any instructions or actions. It only records the state of each priest.</p>
+<p>SPARQL is a query language for Semantic Web data, such as the Turtle example above. It allows us to retrieve, manipulate, or update facts in a dataset. We can manipulate the dataset in very precise ways using SPARQL. For example, we can retrieve, using a SPARQL SELECT query, only the priest(s) with the troublesome attitude from the dataset. If there were more than one, this would return all of them.</p>
+<pre data-lang="sparql" style="background-color:#2b303b;color:#c0c5ce;" class="language-sparql "><code class="language-sparql" data-lang="sparql"><span>PREFIX ex: &lt;http://example.org/priest#&gt;
+</span><span>
+</span><span>SELECT ?priest
+</span><span>WHERE {
+</span><span>    ?priest ex:attitude &quot;troublesome&quot; ;
+</span><span>            ex:status &quot;active&quot; .
+</span><span>}
+</span></code></pre>
+<p>This query finds the priest whose attitude is troublesome and status is active. In our dataset, this returns Father Cuthbert (<code>ex:FatherCuthbert</code> to be precise). This mirrors the “historical” interpretation from the LLM example, where the system inferred that the turbulent priest was the one with a troublesome attitude.</p>
+<p>Alternatively, we can also have a query that interprets a turbulent priest as the one who is suspended. This shows another plausible interpretation if “turbulent” were mapped to the already suspended status.</p>
+<pre data-lang="sparql" style="background-color:#2b303b;color:#c0c5ce;" class="language-sparql "><code class="language-sparql" data-lang="sparql"><span>PREFIX ex: &lt;http://example.org/priest#&gt;
+</span><span>
+</span><span>SELECT ?priest
+</span><span>WHERE {
+</span><span>    ?priest ex:status &quot;suspended&quot; .
+</span><span>}
+</span></code></pre>
+<p>This query selects the priest who is currently suspended, which in our dataset is Father Benedict. Using different criteria allows us to see how interpretation can change the outcome even with the same dataset.</p>
+<p>Finally, the action implied by “get rid of the troublesome priest” can be represented in a CONSTRUCT query, producing a new graph where the troublesome priest (in historical interpretation) is marked as suspended.</p>
+<pre data-lang="sparql" style="background-color:#2b303b;color:#c0c5ce;" class="language-sparql "><code class="language-sparql" data-lang="sparql"><span>PREFIX ex: &lt;http://example.org/priest#&gt;
+</span><span>
+</span><span>CONSTRUCT {
+</span><span>    ?priest ex:attitude ?attitude ;
+</span><span>            ex:status ?newStatus .
+</span><span>}
+</span><span>WHERE {
+</span><span>    ?priest ex:attitude ?attitude ;
+</span><span>            ex:status ?status .
+</span><span>    BIND(
+</span><span>        IF(?attitude = &quot;troublesome&quot; &amp;&amp; ?status = &quot;active&quot;, &quot;suspended&quot;, ?status) 
+</span><span>        AS ?newStatus
+</span><span>    )
+</span><span>}
+</span></code></pre>
+<p>This query creates a new Turtle dataset in which any priest who is troublesome and active has their status changed to suspended. All other priests retain their original attributes. By defining both the condition and the action explicitly, this approach removes the ambiguity that exists when using natural language alone.</p>
+<p>Of course there can be many other interesting queries devised, especially if one expands upon the dataset. Universidad De Chile has a really nice Semantic Web <a href="https://rdfplayground.dcc.uchile.cl/">playground</a> that one can use to experiment. Try writing to expand the dataset with an entry for a priest that is both troublesome and suspended and/or write a query that returns only the priests that are both active and calm.</p>
+<p>A huge benefit of evaluating these SPARQL queries, in a system such as those in the playground, is that they are precise and unambiguous. Each query specifies exactly which priests meet the criteria, and the result is fully determined by the dataset and the query itself. There is no guessing about what “turbulent” means or what action should be taken. This precision is in stark contrast to natural language prompts used with generative AI, where small ambiguities can lead to multiple interpretations and unintended results.</p>
+<p>That said, the addition of generative AI opens up some interesting possibilities and can make the benefits of Semantic Web technologies much more accessible. For example, instead of having to write a SPARQL query by hand, one can ask an LLM to generate a natural language description of the action or even produce a draft query from a plain-language request. This combination allows users to leverage the precision of the Semantic Web while interacting in a more intuitive, natural way.</p>
+<p>For example, when asking an LLM to write a SPARQL query for finding all priests who are calm and suspended, the model can produce a query like this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>PREFIX ex: &lt;http://example.org/priest#&gt;
+</span><span>
+</span><span>SELECT ?priest
+</span><span>WHERE {
+</span><span>    ?priest ex:attitude &quot;calm&quot; ;
+</span><span>            ex:status &quot;suspended&quot; .
+</span><span>}
+</span></code></pre>
+<p>By combining generative AI with Semantic Web technologies, we can enjoy the best of both worlds: the intuitive ease of natural language and the precision of structured data. Ambiguities that could trip up an LLM alone are eliminated when the intent is clearly expressed in a Turtle graph and queried with SPARQL. With the right tools, we can keep our data well-behaved and avoid any turbulent issues from arising.</p>
+
+
+    </div>
+  </section>
+</body>
+
+</html>
