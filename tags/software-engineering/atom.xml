@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title> - Software Engineering</title>
+    <link href="https://www.newresalhaider.com/tags/software-engineering/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-02-15T00:00:00+00:00</updated>
+    <id>https://www.newresalhaider.com/tags/software-engineering/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Falsehoods AI Believes About Names</title>
+        <published>2026-02-15T00:00:00+00:00</published>
+        <updated>2026-02-15T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/post/falsehoodsainames/" type="text/html"/>
+        <id>https://www.newresalhaider.com/post/falsehoodsainames/</id>
+        
+        <content type="html">&lt;p&gt;Names are a key aspect of one’s identity. Too many people have dealt with software systems where entering their name does not go quite right. A character is rejected. The order feels wrong. A name is truncated, reformatted, or “corrected” into something else entirely. While these may seem like small elements within the software, they can have big consequences for the person whose name is misrepresented. People with accented characters in their names often find systems rejecting them outright. Hyphenated names can be split incorrectly, creating mismatched records. Even simple truncation of long names can force repeated corrections on official documents or forms. For anyone affected, what seems like a small software quirk can quickly turn into a real headache.&lt;&#x2F;p&gt;
+&lt;figure class=centeredfig&gt;
+    &lt;img src=featured.png&gt;
+    
+    &lt;figcaption&gt;
+        
+        &lt;h4&gt;Illustration of an AI-like figure and a software engineer sitting together, with floating fields representing first and last name data around them.&lt;&#x2F;h4&gt;
+        
+        
+    &lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;This problem is not new. In 2010, Patrick McKenzie’s blog post titled &lt;a href=&quot;https:&#x2F;&#x2F;www.kalzumeus.com&#x2F;2010&#x2F;06&#x2F;17&#x2F;falsehoods-programmers-believe-about-names&#x2F;&quot;&gt;“Falsehoods Programmers Believe About Names”&lt;&#x2F;a&gt; describes 40 incorrect assumptions software engineers commonly make about names. They relate to various aspects of a name such as how many names could a person have, what characters can be used, when their names are assigned and more. Here is a small selection of them:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;1, People have exactly one canonical full name.
+&lt;&#x2F;span&gt;&lt;span&gt;6, People’s names fit within a certain defined amount of space.
+&lt;&#x2F;span&gt;&lt;span&gt;7, People’s names do not change.
+&lt;&#x2F;span&gt;&lt;span&gt;9, People’s names are written in ASCII.
+&lt;&#x2F;span&gt;&lt;span&gt;32, People’s names are assigned at birth.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Each of these assumptions has some examples that prove them wrong. For assumption 1, a name can change at marriage among other occasions. For assumption 32, there are cultures such as Iceland where a name is not assigned at birth but within &lt;a href=&quot;https:&#x2F;&#x2F;www.remitly.com&#x2F;blog&#x2F;lifestyle-culture&#x2F;iceland-naming-laws&#x2F;&quot;&gt;6 months&lt;&#x2F;a&gt;. See this &lt;a href=&quot;https:&#x2F;&#x2F;shinesolutions.com&#x2F;2018&#x2F;01&#x2F;08&#x2F;falsehoods-programmers-believe-about-names-with-examples&#x2F;&quot;&gt;blog post by Tony Rodgers&lt;&#x2F;a&gt; for more examples that disprove these assumptions.&lt;&#x2F;p&gt;
+&lt;p&gt;In an age where GenAI is at nearly every programmer&#x27;s fingertips, one could expect that these assumptions are not likely to be made again. In fact when we ask the AI to create an API for names it should be likely it avoids most, if not all, of these pitfalls. We could test this by asking an answer for a prompt such as the following:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Design a general-purpose API for storing and manipulating human names.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;It gives an answer, containing the following data model:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;json&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-json &quot;&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;id&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;uuid&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;given_names&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;John&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Michael&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;],
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;family_names&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Doe&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;],
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;prefix&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Dr.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;suffix&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Jr.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;preferred_name&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Johnny&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;nicknames&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Jack&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;],
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;display_name&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Dr. John Michael Doe Jr.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;locale&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;en-US&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;metadata&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: {
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;gender_hint&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;male&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;transliterations&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: {
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;jp&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;ジョン・マイケル・ドー&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This gets a surprising amount of things right. The model supports multiple given and family names, recognizes prefixes and suffixes, allows for nicknames and preferred names, and even accounts for locale-specific formatting and transliterations. Some assumptions still sneak in: using fields like &lt;code&gt;given_names&lt;&#x2F;code&gt; and &lt;code&gt;family_names&lt;&#x2F;code&gt; implies a “first and last” structure, which does not apply universally.&lt;&#x2F;p&gt;
+&lt;p&gt;Even with a very short, simple prompt, the AI can avoid many common pitfalls identified in McKenzie’s essay. It demonstrates that when names are the explicit focus, generative AI can synthesize decades of lessons from software design and produce a thoughtful, flexible API.&lt;&#x2F;p&gt;
+&lt;p&gt;So now we’re good, right? With AI handling names this well, it seems like the old mistakes that software engineers made might finally be behind us. Surely, AI can just get it right, every time.&lt;&#x2F;p&gt;
+&lt;p&gt;Unfortunately, things get less rosy when names are only an implicit part of the prompt or the system is not focused on them. When the AI has to reason about names as just one piece of a larger design, its attention to detail can slip, and many of the same assumptions that humans make quietly return.&lt;&#x2F;p&gt;
+&lt;p&gt;To show this process let&#x27;s ask the following prompt: &lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Design an API for an application where users can talk about books they have read.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Each user has their own account, with their name, personal details, and a history of books they have read and discussed.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;The API should support typical operations such as user registration, profile management, posting comments, and viewing discussions.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Return the API design with data models and example endpoints.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This will give us, among other things, a data model as follows.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;json&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-json &quot;&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;id&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;uuid&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;username&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;string&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;email&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;string&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;displayName&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;string&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;bio&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;string&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;avatarUrl&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;string&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;createdAt&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;datetime&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;updatedAt&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;datetime&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The resulting data model has quite a few differences from the previous example. The name representation here is a lot more simplified. It has fields like &lt;code&gt;displayName&lt;&#x2F;code&gt;, &lt;code&gt;username&lt;&#x2F;code&gt; for this purpose. Notice that there is no separate handling for multiple given or family names, prefixes, suffixes, nicknames, or locale-specific formatting. Sometimes this is not always a bad thing, having no separate given and family names, prevents cultural and local specific assumptions about names creep into the representation. Nonetheless, it is clear that when names are not the main focus, the model tends to abstract a lot more.&lt;&#x2F;p&gt;
+&lt;p&gt;While these are very basic examples, they highlight how much the choice of prompt can shape the structure of the code, even with the myriad examples and domain knowledge an AI model has at its fingertips. Of course, any potential design issues could be resolved by further prompting or refinement, but this also underscores why human judgment remains important. A knowledgeable software engineer in the loop can push back, ask the right questions, and name the issues as they arise, ensuring the software is built with the right abstractions.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-    <title> - List of posts</title>
-    <link href="https://www.newresalhaider.com/post/atom.xml" rel="self" type="application/atom+xml"/>
-    <link href="https://www.newresalhaider.com/post/"/>
+    <title></title>
+    <link href="https://www.newresalhaider.com/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.newresalhaider.com"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2026-02-15T00:00:00+00:00</updated>
-    <id>https://www.newresalhaider.com/post/atom.xml</id>
+    <id>https://www.newresalhaider.com/atom.xml</id>
     <entry xml:lang="en">
         <title>Falsehoods AI Believes About Names</title>
         <published>2026-02-15T00:00:00+00:00</published>
@@ -2009,6 +2009,29 @@ at_most_two_behind(X, List) :-
 &lt;&#x2F;figure&gt;
 &lt;p&gt;However interestingly enough the trained model has trouble recognizing actual renaissance (or baroque) paintings. The famous picture of the &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;The_Last_Supper_(Leonardo)&quot;&gt;Last Supper&lt;&#x2F;a&gt; by Da Vinci got classified as &amp;quot;regular&amp;quot;, just as &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Judith_Beheading_Holofernes_(Caravaggio)&quot;&gt;Judith Beheading Holofernes&lt;&#x2F;a&gt; by Caravaggio. &lt;&#x2F;p&gt;
 &lt;p&gt;It would be interesting to hypothesize and investigate why this could be the case. Although they might be similar in art style, the paintings and the photos in the subreddit as well as the generated photos might differ in other aspects, such as the subject matter. The learning process is likely needing additional data, as 135 photos might be too low for a well fine tuned model. We could for example use exiting renaissance or baroque art to bolster the dataset. We could also investigate data augmentation to improve the training set.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>A Linked Data Based Advanced Credit Rationale</title>
+        <published>2023-06-23T00:00:00+00:00</published>
+        <updated>2023-06-23T00:00:00+00:00</updated>
+        <author>
+          <name>Newres Al Haider</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/publication/linked-data-adcr/" type="text/html"/>
+        <id>https://www.newresalhaider.com/publication/linked-data-adcr/</id>
+        
+        <content type="html">&lt;h1 id=&quot;abstract&quot;&gt;Abstract&lt;&#x2F;h1&gt;
+&lt;p&gt;&amp;quot;A credit rationale forms an integral part of the credit granting and credit decision making process. Historically such credit rationales were written as a natural language document. This meant that automated handling of the meaning, i.e.: semantics, of such documents by machines was too complex to be done with sufficient accuracy. As a consequence, the creation and verification of a credit rationale is a time consuming and manual process. The solution that we propose is to create a Linked Data based credit rationale that we call the Advanced Credit Rationale (AdCR). Linked Data can ensure that the semantics in the credit rationale are both human and machine understandable. This enables the automated checking of the credit rationale for potential regulatory issues, as well as semantic based querying over a whole portfolio of such credit rationales. An issue that often hinders the use of a Linked Data based approach is that the creation of the knowledge graph can be challenging for domain experts. In this work we propose an approach that facilitates the creation of a credit rationale that is based on a Linked Data knowledge graph. We evaluate this approach with a prototype. We also demonstrate that with this approach the creation of a Linked Data based credit rationale should not take more time than a natural language based credit rationale. In addition we show that the structures that a Linked Data based credit rationale provides are generally seen as helpful.&amp;quot;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;authors&quot;&gt;Authors&lt;&#x2F;h1&gt;
+&lt;p&gt;Newres Al Haider, Keng Ng, Ali Hashmi, Lauma Veidemane, Diederik Schut &lt;&#x2F;p&gt;
+&lt;h1 id=&quot;presented-at&quot;&gt;Presented at&lt;&#x2F;h1&gt;
+&lt;p&gt;1st Workshop of Knowledge Graphs for Semantics-driven Systems Engineering (KG4SDSE) 
+A Workshop at CAiSE2023 
+&lt;a href=&quot;https:&#x2F;&#x2F;link.springer.com&#x2F;chapter&#x2F;10.1007&#x2F;978-3-031-34985-0_11&quot;&gt;Appears in Advanced Information Systems Engineering Workshops. CAiSE 2023. Lecture Notes in Business Information Processing, vol 482&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;related-project&quot;&gt;Related Project&lt;&#x2F;h1&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;project&#x2F;legal-banking-compliance&#x2F;&quot;&gt;Legal Banking Compliance&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 </content>
         
     </entry>
@@ -4092,6 +4115,28 @@ We use this information to create a navigation test, as once the right icon has 
         
     </entry>
     <entry xml:lang="en">
+        <title>Solving Financial Regulatory Compliance Using Software Contracts</title>
+        <published>2019-09-11T00:00:00+00:00</published>
+        <updated>2019-09-11T00:00:00+00:00</updated>
+        <author>
+          <name>Newres Al Haider</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/publication/solving-compliance-software-contracts/" type="text/html"/>
+        <id>https://www.newresalhaider.com/publication/solving-compliance-software-contracts/</id>
+        
+        <content type="html">&lt;h1 id=&quot;abstract&quot;&gt;Abstract&lt;&#x2F;h1&gt;
+&lt;p&gt;&amp;quot;Semantic Web technologies have shown to have great potential in many different domains, to facilitate knowledge representation, exchange and reasoning, in a formal and yet both human and machine understandable way. In particular, within the health domain, they enable knowledge integration and understanding by explicitly defining and linking concepts and relationships using ontologies to information within clinical knowledge bases. This additional metadata also allows for automated decision support and semantic based analytics to be implemented, that facilitate improved healthcare at a lower cost. Unfortunately many existing datasets in healthcare environments are still stored in relational databases, as opposed to using semantic technologies. Due to this, the link with explicit metadata is often lacking or non-existent. Furthermore, both the databases and the clinical terminologies can be considerably large, making the mapping and subsequent uses of the information a difficult process. In a full fledged decision support system the level and accuracy of the mapping can greatly influence the effectiveness of any subsequent analysis and decision support tasks. This is especially true in clinical scenarios, where very large and complex sets of terms need to be mapped to relational databases. In this paper we aim to provide a general approach for interlinking relational data with clinical ontology based metadata that allows for a fine grade evaluation, with respect to the mapping&#x27;s impact on analytics. We evaluate our approach by mapping information from clinical terminologies, such as SNOMED CT, to a large laboratory dataset contained in a relational database, with the goal of creating a full fledged, semantically enabled, analytics and decision support system.&amp;quot;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;authors&quot;&gt;Authors&lt;&#x2F;h1&gt;
+&lt;p&gt;Newres Al Haider, Dilhan Thilakarathne, Joost Bosman&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;presented-at&quot;&gt;Presented at&lt;&#x2F;h1&gt;
+&lt;p&gt;22ND INTERNATIONAL CONFERENCE ON APPLICATIONS OF DECLARATIVE PROGRAMMING AND KNOWLEDGE MANAGEMENT Declare 19
+&lt;a href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1909.08965&quot;&gt;Link&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;related-project&quot;&gt;Related Project&lt;&#x2F;h1&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;project&#x2F;legal-banking-compliance&#x2F;&quot;&gt;Legal Banking Compliance&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
         <title>Aesopica, Part 5: Blank Nodes</title>
         <published>2019-06-08T00:00:00+00:00</published>
         <updated>2019-10-06T00:00:00+00:00</updated>
@@ -5532,6 +5577,198 @@ We use this information to create a navigation test, as once the right icon has 
         <id>https://www.newresalhaider.com/post/introduction/</id>
         
         <content type="html">&lt;p&gt;Welcome to the first post on my blog on which hopefully many will follow. My intention is to write about knowledge representation, reasoning, AI and coding, in an easily digestible but in depth-way.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Legal Regulatory Compliance Within The Financial Domain.</title>
+        <published>2017-12-31T00:00:00+00:00</published>
+        <updated>2017-12-31T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/project/legal-banking-compliance/" type="text/html"/>
+        <id>https://www.newresalhaider.com/project/legal-banking-compliance/</id>
+        
+        <content type="html">&lt;p&gt;Regulatory compliance is the goal of an organization to ensure it complies with all the relevant policies, regulations and laws. Failure to comply can have grave consequences for an organization, with huge fines and penalties being imposed. Regulatory pressure has been increasing over the years, with new and more complex regulation being enacted. This is especially true for the financial sector, where in the wake of the financial crisis, new policies and laws where enacted, both internal and external, to prevent a similar crisis happening in the future.&lt;&#x2F;p&gt;
+&lt;p&gt;These new and changing policies and laws give a huge challenge for financial organizations. These issues get compounded by fact that in a global world, internal, national and international regulations create an interwoven set of rules that need to be interpreted and applied on various financial products and services. Ensuring this compliance, is a time and expertise intensive task that often needs to be done manually. Automating these tasks is a huge challenge due to the fact that more traditional techniques are often ill equipped to tackle such an ever changing and complex domain in a way that is transparent to the domain experts and regulators.&lt;&#x2F;p&gt;
+&lt;p&gt;In this project, the goal is to find innovative techniques and solutions to the issue of regulatory compliance in the legal and financial domain.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Smart Industry Software</title>
+        <published>2017-12-30T00:00:00+00:00</published>
+        <updated>2017-12-30T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/project/innius/" type="text/html"/>
+        <id>https://www.newresalhaider.com/project/innius/</id>
+        
+        <content type="html">&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;innius.com&quot;&gt;innius&lt;&#x2F;a&gt; is a powerful smart industry software platform for industrial machine manufacturers and industrial machine users. &lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Ontology Enabled Clinical Software</title>
+        <published>2017-12-29T00:00:00+00:00</published>
+        <updated>2017-12-29T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/project/clinical-semantics/" type="text/html"/>
+        <id>https://www.newresalhaider.com/project/clinical-semantics/</id>
+        
+        <content type="html">&lt;p&gt;The time of clinical health professionals is incredibly valuable. Software can alleviate the burden of physicians, nursers and other health experts and allow them to provide better, more effective health care to patients. &lt;&#x2F;p&gt;
+&lt;p&gt;Creating, maintaining and using software in clinical environments is a difficult process. Not only it is paramount that such software needs to be correct, it has to have an understanding of highly domain specific knowledge about clinical processes in order to provide beneficial support to health professionals.&lt;&#x2F;p&gt;
+&lt;p&gt;Semantic Web technologies, in particular anthologies enable better clinical software. Ontologies allow for a formal and explicit way to model knowledge that is understandable for both clinicians and machines alike. &lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Semantic Aware Software Analysis</title>
+        <published>2017-12-22T00:00:00+00:00</published>
+        <updated>2017-12-22T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/project/semantic-software-analysis/" type="text/html"/>
+        <id>https://www.newresalhaider.com/project/semantic-software-analysis/</id>
+        
+        <content type="html">&lt;p&gt;Software bugs and errors have a monumental negative impact on society. Not only can they have huge monetary cost, ranging into billions of dollars annually in the United States alone, but in some cases can even lead to disasters that lead to the loss of life. Preventing such issues from happening requires a large amount of effort in designing and maintaining software. &lt;&#x2F;p&gt;
+&lt;p&gt;However designing and maintaining error free software remains a difficult problem. Not only is software getting more complex, its correct functioning often depends on highly specific domain knowledge of its purpose and its environment. Therefor manually checking the correctness of the software is expensive in both time and available expertise.&lt;&#x2F;p&gt;
+&lt;p&gt;A potential solution that was proposed for this is using machine understandable domain knowledge to help automate software maintenance tasks. Formal ontologies have been proposed and used in various fields to make domain knowledge explicit and usable for both humans and software. In particular during my thesis work, titled &amp;quot;An Ontology Based Framework for Specification Mining and Dynamic Program Analysis&amp;quot;, the use of ontologies to help understand the working of a running program were successfully explored. In particular it was shown that for a category of bugs, general ontologies such as WordNet, can be used find issues issues from program traces.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Integrating Existing Large Scale Medical Laboratory Data into the Semantic Web Framework</title>
+        <published>2014-10-27T00:00:00+00:00</published>
+        <updated>2014-10-27T00:00:00+00:00</updated>
+        <author>
+          <name>Newres Al Haider</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/publication/medical-data-semantic/" type="text/html"/>
+        <id>https://www.newresalhaider.com/publication/medical-data-semantic/</id>
+        
+        <content type="html">&lt;h1 id=&quot;abstract&quot;&gt;Abstract&lt;&#x2F;h1&gt;
+&lt;p&gt;&amp;quot;Semantic Web technologies have shown to have great potential in many different domains, to facilitate knowledge representation, exchange and reasoning, in a formal and yet both human and machine understandable way. In particular, within the health domain, they enable knowledge integration and understanding by explicitly defining and linking concepts and relationships using ontologies to information within clinical knowledge bases. This additional metadata also allows for automated decision support and semantic based analytics to be implemented, that facilitate improved healthcare at a lower cost. Unfortunately many existing datasets in healthcare environments are still stored in relational databases, as opposed to using semantic technologies. Due to this, the link with explicit metadata is often lacking or non-existent. Furthermore, both the databases and the clinical terminologies can be considerably large, making the mapping and subsequent uses of the information a difficult process. In a full fledged decision support system the level and accuracy of the mapping can greatly influence the effectiveness of any subsequent analysis and decision support tasks. This is especially true in clinical scenarios, where very large and complex sets of terms need to be mapped to relational databases. In this paper we aim to provide a general approach for interlinking relational data with clinical ontology based metadata that allows for a fine grade evaluation, with respect to the mapping&#x27;s impact on analytics. We evaluate our approach by mapping information from clinical terminologies, such as SNOMED CT, to a large laboratory dataset contained in a relational database, with the goal of creating a full fledged, semantically enabled, analytics and decision support system.&amp;quot;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;authors&quot;&gt;Authors&lt;&#x2F;h1&gt;
+&lt;p&gt;Newres Al Haider, Samina Abidi,  William Van Woensel, Syed SR Abid&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;appeared&quot;&gt;Appeared&lt;&#x2F;h1&gt;
+&lt;p&gt;In 2014 IEEE International Conference on Big Data (Big Data)
+&lt;a href=&quot;http:&#x2F;&#x2F;ieeexplore.ieee.org&#x2F;abstract&#x2F;document&#x2F;7004338&#x2F;&quot;&gt;Link&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;related-project&quot;&gt;Related Project&lt;&#x2F;h1&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;project&#x2F;clinical-semantics&#x2F;&quot;&gt;Clinical Semantics&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>A Cross-Platform Benchmark Framework for Mobile Semantic Web Reasoning Engines</title>
+        <published>2014-10-19T00:00:00+00:00</published>
+        <updated>2014-10-19T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/publication/benchmark-framework/" type="text/html"/>
+        <id>https://www.newresalhaider.com/publication/benchmark-framework/</id>
+        
+        <content type="html">&lt;h1 id=&quot;abstract&quot;&gt;Abstract&lt;&#x2F;h1&gt;
+&lt;p&gt;&amp;quot;Semantic Web technologies are used in a variety of domains for their ability to facilitate data integration, as well as enabling expressive, standards-based reasoning. Deploying Semantic Web reasoning processes directly on mobile devices has a number of advantages, including robustness to connectivity loss, more timely results, and reduced infrastructure requirements. At the same time, a number of challenges arise as well, related to mobile platform heterogeneity and limited computing resources. To tackle these challenges, it should be possible to benchmark mobile reasoning performance across different mobile platforms, with rule- and datasets of varying scale and complexity and existing reasoning process flows. To deal with the current heterogeneity of rule formats, a uniform rule- and data-interface on top of mobile reasoning engines should be provided as well. In this paper, we present a cross-platform benchmark framework that supplies 1) a generic, standards-based Semantic Web layer on top of existing mobile reasoning engines; and 2) a benchmark engine to investigate and compare mobile reasoning performance.&amp;quot;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;authors&quot;&gt;Authors&lt;&#x2F;h1&gt;
+&lt;p&gt;William Van Woensel, Newres Al Haider, Ahmad Marwan Ahmad, Syed SR Abidi&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;appeared&quot;&gt;Appeared&lt;&#x2F;h1&gt;
+&lt;p&gt;In WODA &#x27;10 Proceedings of the Eighth International Workshop on Dynamic Analysis &lt;a href=&quot;https:&#x2F;&#x2F;web.cs.dal.ca&#x2F;~woensel&#x2F;paper&#x2F;A%20Cross-Platform%20Benchmark%20Framework%20for%20Mobile%20Semantic%20Web%20Reasoning%20Engines.pdf&quot;&gt;Link&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;related-project&quot;&gt;Related Project&lt;&#x2F;h1&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;project&#x2F;clinical-semantics&#x2F;&quot;&gt;Clinical Semantics&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>A Comparison of Mobile Rule Engines for Reasoning on Semantic Web Based Health Data</title>
+        <published>2014-08-11T00:00:00+00:00</published>
+        <updated>2014-08-11T00:00:00+00:00</updated>
+        <author>
+          <name>William Van Woensel</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/publication/comparison-mobile-rule-engines/" type="text/html"/>
+        <id>https://www.newresalhaider.com/publication/comparison-mobile-rule-engines/</id>
+        
+        <content type="html">&lt;h1 id=&quot;abstract&quot;&gt;Abstract&lt;&#x2F;h1&gt;
+&lt;p&gt;&amp;quot;Semantic Web technology is used extensively in the health domain, due to its ability to specify expressive, domain-specific data, as well as its capacity to facilitate data integration between heterogeneous, health-related sources. In the health domain, mobile devices are an essential part of patient self-management approaches, where local clinical decision support is applied to ensure that patients receive timely clinical findings. Currently, increases in mobile device capabilities have enabled the deployment of Semantic Web technologies on mobile platforms, enabling the consumption of rich, semantically described health data. To make this semantic health data available to local decision support as well, Semantic Web reasoning should be deployed on mobile platforms. However, there is currently a lack of software solutions and performance analysis of mobile, Semantic Web reasoning engines. This paper presents and compares the mobile benchmarks of 4 reasoning engines, applied on a dataset and rule set for patients with A trial Fibrillation (AF). In particular, these benchmarks investigate the scalability of the mobile reasoning processes, and study reasoning performance for different process flows in decision support. For the purpose of these benchmarks, we extended a number of existing rule engines and RDF stores with Semantic Web reasoning capabilities.&amp;quot;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;authors&quot;&gt;Authors&lt;&#x2F;h1&gt;
+&lt;p&gt;William Van Woensel, Newres Al Haider, Patrice C Roy, Ahmad Marwan Ahmad, Syed SR Abidi&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;appeared&quot;&gt;Appeared&lt;&#x2F;h1&gt;
+&lt;p&gt;publication = &amp;quot;In Proceedings of the 2014 IEEE&#x2F;WIC&#x2F;ACM International Joint Conferences on Web Intelligence (WI) and Intelligent Agent Technologies (IAT)-Volume 01&amp;quot;
+&lt;a href=&quot;https:&#x2F;&#x2F;dl.acm.org&#x2F;citation.cfm?id=2682782&quot;&gt;Link&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;related-project&quot;&gt;Related Project&lt;&#x2F;h1&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;project&#x2F;clinical-semantics&#x2F;&quot;&gt;Clinical Semantics&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Towards Guideline Compliant Clinical Decision Support System Integration in Smart and Mobile Environments: Formalizing and Using Clinical Guidelines For Diagnosing Sleep Apnea</title>
+        <published>2014-06-18T00:00:00+00:00</published>
+        <updated>2014-06-18T00:00:00+00:00</updated>
+        <author>
+          <name>Patrice C Roy</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/publication/towards-cdss-mobile/" type="text/html"/>
+        <id>https://www.newresalhaider.com/publication/towards-cdss-mobile/</id>
+        
+        <content type="html">&lt;h1 id=&quot;abstract&quot;&gt;Abstract&lt;&#x2F;h1&gt;
+&lt;p&gt;&amp;quot;Assistive technologies in smart environments were developed in order to maintain and improve the quality of life of people with dementia or other health problems. In order to provide adequate support at the opportune moment, it is necessary to deploy ambient services, such as activity recognition and assistance planning. Clinical Decision Support Systems (CDSS) that implement clinical guidelines, allow for the right clinical decisions, such as diagnoses and treatment choices, to be made automatically based on patient data and other health information. While data derived from smart home services can be used in these CDSS, smart homes can be used to provide services related to clinical decisions. Mobile devices can be used in conjunction with the smart home services and a remote CDSS for sending notifications or retrieve data from wearable or built-in sensors. However, in a context where smart homes interacts with a remote CDSS, we must take into account mobility (e.g. outdoors, work), failure tolerance (e.g. connection issues with remote CDSS) and privacy concerns in order to provide minimum quality of service. Thus, CDSS must be locally deployed as a smart home service and on a mobile device. In this paper we investigate a scenario where due to the above mentioned reasons a clinical guideline compliant CDSS needs to be deployed on a mobile device and as a smart home service, where clinical data can come from either the patient (manual input) or the smart home and mobile sensors. In particular we focus on implementing and evaluating a guideline for the diagnosis of sleep apnea. Sleep apnea diagnosis is a well-suited task for this purpose as attributes for the execution of the guideline could be collected both from the patient and sensor data inside or outside the smart home environment. In order to illustrate the feasibility of CDSS as smart home service and on mobile device, the Sleep Apnea CDSS is validated on an Android smartphone and show promising results.&amp;quot;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;authors&quot;&gt;Authors&lt;&#x2F;h1&gt;
+&lt;p&gt;Patrice C Roy, Newres Al Haider, William Van Woensel, Ahmad Marwan Ahmad, Syed SR Abidi&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;appeared&quot;&gt;Appeared&lt;&#x2F;h1&gt;
+&lt;p&gt;In The Twenty-Eighth AAAI Conference on Artificial Intelligence (AAAI-14), Québec City, Canada
+&lt;a href=&quot;http:&#x2F;&#x2F;www.aaai.org&#x2F;ocs&#x2F;index.php&#x2F;WS&#x2F;AAAIW14&#x2F;paper&#x2F;download&#x2F;8828&#x2F;8376&quot;&gt;Link&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;related-project&quot;&gt;Related Project&lt;&#x2F;h1&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;project&#x2F;clinical-semantics&#x2F;&quot;&gt;Clinical Semantics&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Execution Trace Exploration and Analysis using Ontologies</title>
+        <published>2011-09-27T00:00:00+00:00</published>
+        <updated>2011-09-27T00:00:00+00:00</updated>
+        <author>
+          <name>Newres Al Haider</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/publication/execution-trace-analysis/" type="text/html"/>
+        <id>https://www.newresalhaider.com/publication/execution-trace-analysis/</id>
+        
+        <content type="html">&lt;h1 id=&quot;abstract&quot;&gt;Abstract&lt;&#x2F;h1&gt;
+&lt;p&gt;&amp;quot;Dynamic analysis is the analysis of the properties of a running program. In order to perform dynamic analysis, information about the running program is often collected through execution traces. Exploring and analyzing these traces can be an issue due to their size and that knowledge of a human expert is often needed to derive the required conclusions. In this paper we provide a framework in which the semantics of execution traces, as well as that of dynamic analyses, are formally represented through ontologies. In this framework the exploration and analysis of the traces is enabled through semantic queries, and enhanced further through automated reasoning on the ontologies. We will also provide ontologies to represent traces and some basic dynamic analysis techniques, along with semantic queries that enable these techniques. Finally we will illustrate our approach through an example.&amp;quot;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;authors&quot;&gt;Authors&lt;&#x2F;h1&gt;
+&lt;p&gt;Newres Al Haider, Benoit Gaudin, John Murphy&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;appeared&quot;&gt;Appeared&lt;&#x2F;h1&gt;
+&lt;p&gt;In RV &#x27;11 International Conference on Runtime Verification
+&lt;a href=&quot;https:&#x2F;&#x2F;www.researchgate.net&#x2F;profile&#x2F;Joshua_Taylor2&#x2F;publication&#x2F;236133160_Software_Analysis_in_the_Semantic_Web&#x2F;links&#x2F;5491a3b40cf269b0486167ff.pdf&quot;&gt;Link&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;related-project&quot;&gt;Related Project&lt;&#x2F;h1&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;project&#x2F;semantic-software-analysis&#x2F;&quot;&gt;Semantic Software Analysis&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>An Approach for Modeling Dynamic Analysis using Ontologies</title>
+        <published>2010-07-12T00:00:00+00:00</published>
+        <updated>2010-07-12T00:00:00+00:00</updated>
+        <author>
+          <name>Newres Al Haider</name>
+        </author>
+        <link rel="alternate" href="https://www.newresalhaider.com/publication/approach-da-ontologies/" type="text/html"/>
+        <id>https://www.newresalhaider.com/publication/approach-da-ontologies/</id>
+        
+        <content type="html">&lt;h1 id=&quot;abstract&quot;&gt;Abstract&lt;&#x2F;h1&gt;
+&lt;p&gt;&amp;quot;In this paper we present the possibility of using an ontology based framework in order to model Dynamic Analysis techniques. This work relies on similar ideas applied to the case of Static Analysis, in which ontologies are used to represent some knowledge about the programs to be analyzed. In the approach proposed in this paper we describe how ontologies can be applied to Dynamic Analysis by modeling both the information collected from the system, as well as some requirements about the type of analysis to be performed. Both of these ontologies can be designed by integrating ontologies previously defined during the software development cycle, allowing for re-usability. Finally, these ontologies make it possible to reason about concepts related to Dynamic Analysis and offer tools that facilitate automation. This paper presents the main ideas of the proposed approach and illustrates them with an example related to Frequency Spectrum Analysis.&amp;quot;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;authors&quot;&gt;Authors&lt;&#x2F;h1&gt;
+&lt;p&gt;Newres Al Haider, Benoit Gaudin, Paddy Nixon&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;appeared&quot;&gt;Appeared&lt;&#x2F;h1&gt;
+&lt;p&gt;&amp;quot;In WODA &#x27;10 Proceedings of the Eighth International Workshop on Dynamic Analysis&amp;quot;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;related-project&quot;&gt;Related Project&lt;&#x2F;h1&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.newresalhaider.com&#x2F;project&#x2F;semantic-software-analysis&#x2F;&quot;&gt;Semantic Software Analysis&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 </content>
         
     </entry>

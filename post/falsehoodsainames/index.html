@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Newres Al Haider</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+  <link href="https:&#x2F;&#x2F;www.newresalhaider.com/style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.newresalhaider.com/scripts/menu.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@newresa">
+<meta name="twitter:creator" content="@newresa">
+
+
+<meta name="twitter:title" content="Falsehoods AI Believes About Names">
+<meta name="title" property="og:title" content="Falsehoods AI Believes About Names" />
+
+
+<meta name="twitter:description" content="Why having a software engineer in the loop still matters.
+">
+<meta name="description" property="og:description" content="Why having a software engineer in the loop still matters.
+" />
+
+
+<meta name="author" content="Newres Al Haider" />
+<meta property="article:author" content="Newres Al Haider">
+<meta property="og:type" content="article" />
+
+<meta property="article:published_time" content="2026-02-15">
+
+
+    
+        <meta property="article:tag" content="AI">
+    
+        <meta property="article:tag" content="GenAI">
+    
+        <meta property="article:tag" content="Software Engineering">
+    
+
+
+    <meta property="article:modified_time" content="2026-02-15">
+
+
+
+<meta property="twitter:image" content="https://www.newresalhaider.com/post/falsehoodsainames/featured.png">
+<meta property="og:image" content="https://www.newresalhaider.com/post/falsehoodsainames/featured.png" />
+
+
+</head>
+
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="title is-3">
+                Newres Al Haider
+            </h1>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="NavbarMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="NavbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/">
+                <h2 class="subtitle is-5">
+                    Home
+                </h2>
+            </a>
+            <a class="navbar-item" href="/post/">
+                <h2 class="subtitle is-5">
+                    Posts
+                </h2>
+            </a>
+            <a class="navbar-item" href="/project/">
+                <h2 class="subtitle is-5">
+                    Projects
+                </h2>
+            </a>
+            <a class="navbar-item" href="/publication/">
+                <h2 class="subtitle is-5">
+                    Publications
+                </h2>
+            </a>
+        </div>
+    </div>
+</nav>
+  <section class="section">
+    <div class="container">
+      
+
+<h1 class="title">
+    Falsehoods AI Believes About Names
+</h1>
+<p class="subtitle"><strong>2026-02-15</strong></p>
+<p>Names are a key aspect of one’s identity. Too many people have dealt with software systems where entering their name does not go quite right. A character is rejected. The order feels wrong. A name is truncated, reformatted, or “corrected” into something else entirely. While these may seem like small elements within the software, they can have big consequences for the person whose name is misrepresented. People with accented characters in their names often find systems rejecting them outright. Hyphenated names can be split incorrectly, creating mismatched records. Even simple truncation of long names can force repeated corrections on official documents or forms. For anyone affected, what seems like a small software quirk can quickly turn into a real headache.</p>
+<figure class=centeredfig>
+    <img src=featured.png>
+    
+    <figcaption>
+        
+        <h4>Illustration of an AI-like figure and a software engineer sitting together, with floating fields representing first and last name data around them.</h4>
+        
+        
+    </figcaption>
+</figure>
+<p>This problem is not new. In 2010, Patrick McKenzie’s blog post titled <a href="https://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/">“Falsehoods Programmers Believe About Names”</a> describes 40 incorrect assumptions software engineers commonly make about names. They relate to various aspects of a name such as how many names could a person have, what characters can be used, when their names are assigned and more. Here is a small selection of them:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>1, People have exactly one canonical full name.
+</span><span>6, People’s names fit within a certain defined amount of space.
+</span><span>7, People’s names do not change.
+</span><span>9, People’s names are written in ASCII.
+</span><span>32, People’s names are assigned at birth.
+</span></code></pre>
+<p>Each of these assumptions has some examples that prove them wrong. For assumption 1, a name can change at marriage among other occasions. For assumption 32, there are cultures such as Iceland where a name is not assigned at birth but within <a href="https://www.remitly.com/blog/lifestyle-culture/iceland-naming-laws/">6 months</a>. See this <a href="https://shinesolutions.com/2018/01/08/falsehoods-programmers-believe-about-names-with-examples/">blog post by Tony Rodgers</a> for more examples that disprove these assumptions.</p>
+<p>In an age where GenAI is at nearly every programmer's fingertips, one could expect that these assumptions are not likely to be made again. In fact when we ask the AI to create an API for names it should be likely it avoids most, if not all, of these pitfalls. We could test this by asking an answer for a prompt such as the following:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Design a general-purpose API for storing and manipulating human names.
+</span></code></pre>
+<p>It gives an answer, containing the following data model:</p>
+<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">uuid</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">given_names</span><span>&quot;: [&quot;</span><span style="color:#a3be8c;">John</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">Michael</span><span>&quot;],
+</span><span>  &quot;</span><span style="color:#a3be8c;">family_names</span><span>&quot;: [&quot;</span><span style="color:#a3be8c;">Doe</span><span>&quot;],
+</span><span>  &quot;</span><span style="color:#a3be8c;">prefix</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Dr.</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">suffix</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Jr.</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">preferred_name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Johnny</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">nicknames</span><span>&quot;: [&quot;</span><span style="color:#a3be8c;">Jack</span><span>&quot;],
+</span><span>  &quot;</span><span style="color:#a3be8c;">display_name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Dr. John Michael Doe Jr.</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">locale</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">en-US</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">metadata</span><span>&quot;: {
+</span><span>    &quot;</span><span style="color:#a3be8c;">gender_hint</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">male</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">transliterations</span><span>&quot;: {
+</span><span>      &quot;</span><span style="color:#a3be8c;">jp</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">ジョン・マイケル・ドー</span><span>&quot;
+</span><span>    }
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>This gets a surprising amount of things right. The model supports multiple given and family names, recognizes prefixes and suffixes, allows for nicknames and preferred names, and even accounts for locale-specific formatting and transliterations. Some assumptions still sneak in: using fields like <code>given_names</code> and <code>family_names</code> implies a “first and last” structure, which does not apply universally.</p>
+<p>Even with a very short, simple prompt, the AI can avoid many common pitfalls identified in McKenzie’s essay. It demonstrates that when names are the explicit focus, generative AI can synthesize decades of lessons from software design and produce a thoughtful, flexible API.</p>
+<p>So now we’re good, right? With AI handling names this well, it seems like the old mistakes that software engineers made might finally be behind us. Surely, AI can just get it right, every time.</p>
+<p>Unfortunately, things get less rosy when names are only an implicit part of the prompt or the system is not focused on them. When the AI has to reason about names as just one piece of a larger design, its attention to detail can slip, and many of the same assumptions that humans make quietly return.</p>
+<p>To show this process let's ask the following prompt: </p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Design an API for an application where users can talk about books they have read.
+</span><span>
+</span><span>Each user has their own account, with their name, personal details, and a history of books they have read and discussed.
+</span><span>
+</span><span>The API should support typical operations such as user registration, profile management, posting comments, and viewing discussions.
+</span><span>
+</span><span>Return the API design with data models and example endpoints.
+</span></code></pre>
+<p>This will give us, among other things, a data model as follows.</p>
+<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">uuid</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">username</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">string</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">email</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">string</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">displayName</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">string</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">bio</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">string</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">avatarUrl</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">string</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">createdAt</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">datetime</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">updatedAt</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">datetime</span><span>&quot;
+</span><span>}
+</span></code></pre>
+<p>The resulting data model has quite a few differences from the previous example. The name representation here is a lot more simplified. It has fields like <code>displayName</code>, <code>username</code> for this purpose. Notice that there is no separate handling for multiple given or family names, prefixes, suffixes, nicknames, or locale-specific formatting. Sometimes this is not always a bad thing, having no separate given and family names, prevents cultural and local specific assumptions about names creep into the representation. Nonetheless, it is clear that when names are not the main focus, the model tends to abstract a lot more.</p>
+<p>While these are very basic examples, they highlight how much the choice of prompt can shape the structure of the code, even with the myriad examples and domain knowledge an AI model has at its fingertips. Of course, any potential design issues could be resolved by further prompting or refinement, but this also underscores why human judgment remains important. A knowledgeable software engineer in the loop can push back, ask the right questions, and name the issues as they arise, ensuring the software is built with the right abstractions.</p>
+
+
+    </div>
+  </section>
+</body>
+
+</html>
